@@ -1,0 +1,8 @@
+{
+  "name": "cs-ai-mastery-github-sync",
+  "private": true,
+  "version": "5.18.2",
+  "engines": {
+    "node": ">=20"
+  }
+}
