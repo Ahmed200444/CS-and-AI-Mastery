@@ -1,27 +1,28 @@
 [build]
   publish = "."
   functions = "netlify/functions"
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF . ':(exclude)student-code/**'"
 
 [[redirects]]
   from = "/api/github/authorize"
   to = "/.netlify/functions/github-authorize"
   status = 200
-
 [[redirects]]
   from = "/api/github/callback"
   to = "/.netlify/functions/github-callback"
   status = 200
-
 [[redirects]]
   from = "/api/github/status"
   to = "/.netlify/functions/github-status"
   status = 200
-
 [[redirects]]
   from = "/api/github/sync"
   to = "/.netlify/functions/github-sync"
   status = 200
-
+[[redirects]]
+  from = "/api/github/file"
+  to = "/.netlify/functions/github-file"
+  status = 200
 [[redirects]]
   from = "/api/github/disconnect"
   to = "/.netlify/functions/github-disconnect"

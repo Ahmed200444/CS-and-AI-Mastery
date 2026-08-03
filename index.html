@@ -4,7 +4,7 @@
   Course count is dynamic and derived from coursedata.length. The platform covers
   foundations through production AI, plus the original SQL/Python tracks, plus the
   Computer Engineering & Systems category added in v5.4.0.
-  Current release: v5.18.2 -- canonical version source is window.PLATFORM_META.version
+  Current release: v5.19.0 -- canonical version source is window.PLATFORM_META.version
   (see near the top of the document). See the in-app changelog (hub footer) for the
   full, up-to-date release history. The v1.0.0 entry below is retained as historical
   record only; it does not reflect the current course count or feature set.
@@ -1369,7 +1369,7 @@
   @media(max-width:520px){.ghs-connect-row{grid-template-columns:1fr}.ghs-connect-row .ghs-btn{width:100%}.ghs-quickbar{flex-wrap:wrap}.ghs-qbody{flex-basis:100%}.ghs-qbtn{flex:1}.ghs-draft-top{flex-direction:column}.ghs-actions .ghs-btn{flex:1}}
 
 </style>
-</head>
+<link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#0b1220"><link rel="apple-touch-icon" href="/icon.svg"></head>
 <body>
 <a href="#" class="skip-link" data-act="cxSkipToMain()">Skip to main content</a>
 <script>
@@ -1635,6 +1635,15 @@ document.addEventListener('click', function(e){
 
     <p class="hub-foot">Pick a track and dive in. Every button on this page does something real — every exercise, query, and check was run and verified against the actual engine before you ever see it.</p>
 
+    <details class="hub-changelog">
+      <summary>v5.19.0</summary>
+      <div class="hub-changelog-body">
+        <p><b>v5.19.0 &mdash; complete GitHub workflow and offline code workspace</b></p>
+        <p>Upgraded Code Vault with automatic post-action syncing, offline retry, editor-level save/sync status, meaningful course/lesson file paths, search, rename/move, remote delete, conflict detection, portfolio favorites, README generation, and expanded sync history.</p>
+        <p>Added installable PWA support with a web manifest and service worker. Netlify is configured to skip deployments when a commit changes only <code>student-code/</code>, preventing normal exercise syncs from rebuilding the website.</p>
+        <p>No course, lesson, exercise, quiz, project, route, prerequisite, relationship, AI Engineer Path order, or existing learning progress was changed.</p>
+      </div>
+    </details>
     <details class="hub-changelog">
       <summary>v5.18.2</summary>
       <div class="hub-changelog-body">
@@ -19426,235 +19435,61 @@ updateProgress();
 </script>
 
 
-<!-- ============ MODULE: CODE VAULT & GITHUB SYNC (v5.18.1) ============ -->
-<div class="cx-app ghs-app" id="githubSyncTrack" style="display:none">
-  <div class="cx-wrap" id="githubSyncView"></div>
-</div>
-<div class="ghs-quickbar" id="ghsQuickBar" role="status" aria-live="polite">
-  <div class="ghs-qbody"><div class="ghs-qpath" id="ghsQuickPath">Code draft</div><div class="ghs-qstatus" id="ghsQuickStatus">Saved locally</div></div>
-  <button type="button" class="ghs-qbtn" data-act="ghsDownloadActive()">Download</button>
-  <button type="button" class="ghs-qbtn primary" data-act="ghsSyncActive()">Sync</button>
-  <button type="button" class="ghs-qbtn" data-act="showTrack('githubsync')">Open vault</button>
-</div>
+<!-- ============ MODULE: CODE VAULT & GITHUB SYNC (v5.19.0) ============ -->
+<div class="cx-app ghs-app" id="githubSyncTrack" style="display:none"><div class="cx-wrap" id="githubSyncView"></div></div>
+<div class="ghs-quickbar" id="ghsQuickBar" role="status" aria-live="polite"><div class="ghs-qbody"><div class="ghs-qpath" id="ghsQuickPath">Code draft</div><div class="ghs-qstatus" id="ghsQuickStatus">Saved locally</div></div><button type="button" class="ghs-qbtn" data-act="ghsDownloadActive()">Download</button><button type="button" class="ghs-qbtn primary" data-act="ghsSyncActive()">Sync</button><button type="button" class="ghs-qbtn" data-act="showTrack('githubsync')">Open vault</button></div>
 <div class="ghs-toast" id="ghsToast" role="status" aria-live="polite"></div>
 <script>
 (function(){
-  var DRAFT_KEY='csai_code_vault_v1';
-  var CONFIG_KEY='csai_github_sync_config_v1';
-  var QUEUE_KEY='csai_github_sync_queue_v1';
-  var HISTORY_KEY='csai_github_sync_history_v1';
-  var lastEditor=null, saveTimers={}, syncTimer=null, scanTimer=null, toastTimer=null;
-  var remote={backend:false,connected:false,user:null,repositories:[],installUrl:null,csrf:null,error:null};
-
-  function esc(v){return String(v==null?'':v).replace(/[&<>\"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c];});}
-  function jsonGet(k,f){try{var v=localStorage.getItem(k);return v?JSON.parse(v):f;}catch(e){return f;}}
-  function jsonSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true;}catch(e){return false;}}
-  function cfg(){return Object.assign({repo:'',repoInput:'',branch:'main',baseFolder:'cs-ai-mastery',autoSync:1,syncOnRun:1},jsonGet(CONFIG_KEY,{}));}
-  function parseRepoLink(v){
-    var raw=String(v||'').trim();if(!raw)return null;
-    raw=raw.replace(/^git@github\.com:/i,'').replace(/^https?:\/\/(?:www\.)?github\.com\//i,'').replace(/^github\.com\//i,'').split(/[?#]/)[0].replace(/\.git$/i,'').replace(/^\/+|\/+$/g,'');
-    var p=raw.split('/').filter(Boolean);if(p.length!==2||!/^[A-Za-z0-9_.-]+$/.test(p[0])||!/^[A-Za-z0-9_.-]+$/.test(p[1]))return null;
-    return p[0]+'/'+p[1];
-  }
-  function repoMeta(full){return (remote.repositories||[]).find(function(r){return String(r.full_name).toLowerCase()===String(full||'').toLowerCase();})||null;}
-  function repoAccessible(full){return !!repoMeta(full);}
-  function drafts(){var d=jsonGet(DRAFT_KEY,{});return d&&typeof d==='object'&&!Array.isArray(d)?d:{};}
-  function queue(){var q=jsonGet(QUEUE_KEY,[]);return Array.isArray(q)?q:[];}
-  function hist(){var h=jsonGet(HISTORY_KEY,[]);return Array.isArray(h)?h:[];}
-  function slug(v){return String(v||'code').toLowerCase().replace(/&/g,' and ').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,70)||'code';}
-  function safeFolder(v){return String(v||'cs-ai-mastery').replace(/\\/g,'/').split('/').map(slug).filter(Boolean).join('/')||'cs-ai-mastery';}
-  function hash(v){var h=2166136261;for(var i=0;i<v.length;i++){h^=v.charCodeAt(i);h+=(h<<1)+(h<<4)+(h<<7)+(h<<8)+(h<<24);}return (h>>>0).toString(36);}
-  function currentRoute(){
-    if(!window.TRACK_REGISTRY)return 'workspace';
-    for(var r in window.TRACK_REGISTRY){var e=window.TRACK_REGISTRY[r],el=document.getElementById(e.containerId);if(el&&getComputedStyle(el).display!=='none')return r;}
-    return 'workspace';
-  }
-  function isCodeEditor(el){
-    if(!el||el.tagName!=='TEXTAREA')return false;
-    var label=((el.getAttribute('aria-label')||'')+' '+(el.getAttribute('placeholder')||'')).toLowerCase();
-    if(/reasoning|type a question|description|what did you learn|achievement summary|resume|reflection/.test(label))return false;
-    if(/code editor|sql query editor|html editor|css editor|javascript editor|git command/.test(label))return true;
-    var c=el.className||'';
-    if(/(^|\s)(py|wd-edit|cx-runbox-edit|cx-pm-edit|editor)(\s|$)/.test(c))return true;
-    return false;
-  }
-  function languageFor(el,route,title){
-    var label=((el.getAttribute('aria-label')||'')+' '+title).toLowerCase();
-    if(/sql/.test(label)||route==='sql')return {name:'SQL',ext:'sql'};
-    if(/html/.test(label))return {name:'HTML',ext:'html'};
-    if(/css/.test(label))return {name:'CSS',ext:'css'};
-    if(/javascript|\bjs\b/.test(label))return {name:'JavaScript',ext:'js'};
-    if(/git command|linux|shell|bash/.test(label)||route==='gitlab'||route==='linuxtrack')return {name:'Shell',ext:'sh'};
-    if((el.className||'').indexOf('py')>=0||/python/.test(label)||['python','oop','aiml','dltrack','pytorchtrack','hftrack','mlopstrack','dataengineeringtrack'].indexOf(route)>=0)return {name:'Python',ext:'py'};
-    return {name:'Code',ext:'txt'};
-  }
-  function editorContext(el){
-    var route=currentRoute();
-    var box=el.closest('.cx-lesson,.cx-ex,.cx-proj,.cx-pm,.task-card,.lesson-card,.exercise-card,.cell,.card,section,article,main')||el.parentElement;
-    var heading=box&&box.querySelector('h1,h2,h3,h4,.title,.cx-lesson-h,.cx-ex-h');
-    var title=heading?heading.textContent.trim():(el.id||'Code draft');
-    title=title.replace(/\s+/g,' ').slice(0,120)||'Code draft';
-    var routeEl=window.TRACK_REGISTRY&&window.TRACK_REGISTRY[route]?document.getElementById(window.TRACK_REGISTRY[route].containerId):null;
-    var all=routeEl?Array.prototype.filter.call(routeEl.querySelectorAll('textarea'),isCodeEditor):[];
-    var idx=Math.max(0,all.indexOf(el));
-    var source=route+'::'+(el.id||('editor-'+idx));
-    var lang=languageFor(el,route,title);
-    var name=slug(title);
-    if(!el.id&&idx>0)name+='-'+(idx+1);
-    var relative=slug(route)+'/'+name+'.'+lang.ext;
-    return {id:hash(source),source:source,route:route,title:title,language:lang.name,ext:lang.ext,relativePath:relative};
-  }
-  function strongSecret(text){
-    var rules=[
-      {re:/github_pat_[A-Za-z0-9_]{20,}/,name:'GitHub token'},
-      {re:/gh[pousr]_[A-Za-z0-9]{20,}/,name:'GitHub token'},
-      {re:/sk-[A-Za-z0-9_-]{20,}/,name:'API key'},
-      {re:/AKIA[0-9A-Z]{16}/,name:'AWS access key'},
-      {re:/AIza[0-9A-Za-z_-]{30,}/,name:'Google API key'},
-      {re:/-----BEGIN [A-Z ]*PRIVATE KEY-----/,name:'private key'}
-    ];
-    for(var i=0;i<rules.length;i++)if(rules[i].re.test(text))return rules[i].name;
-    return null;
-  }
-  function fullPath(rec){var c=cfg();return safeFolder(c.baseFolder)+'/'+rec.relativePath;}
-  function saveEditor(el,reason,shouldQueue){
-    if(!isCodeEditor(el))return null;
-    var ctx=editorContext(el), all=drafts(), prev=all[ctx.id]||{};
-    var rec=Object.assign({},prev,ctx,{content:el.value,updatedAt:new Date().toISOString(),lastReason:reason||'edit'});
-    rec.secretWarning=strongSecret(rec.content)||null;
-    all[ctx.id]=rec; jsonSet(DRAFT_KEY,all);
-    el.setAttribute('data-ghs-id',ctx.id); lastEditor=el;
-    updateQuick(rec,shouldQueue?'Queued for GitHub':'Saved locally');
-    if(shouldQueue)enqueue(ctx.id);
-    if(currentRoute()==='githubsync')render();
-    return rec;
-  }
-  function scheduleSave(el){
-    var ctx=editorContext(el);clearTimeout(saveTimers[ctx.id]);
-    saveTimers[ctx.id]=setTimeout(function(){saveEditor(el,'edit',false);},350);
-  }
-  function maybeRestore(el){
-    if(!isCodeEditor(el)||el.getAttribute('data-ghs-bound')==='1')return;
-    el.setAttribute('data-ghs-bound','1');
-    var ctx=editorContext(el), d=drafts()[ctx.id];
-    el.setAttribute('data-ghs-id',ctx.id);
-    if(d&&typeof d.content==='string'&&(el.value===''||el.value===el.defaultValue)){
-      el.value=d.content;
-      try{el.dispatchEvent(new Event('input',{bubbles:true}));}catch(e){}
-    }
-  }
-  function scan(){Array.prototype.forEach.call(document.querySelectorAll('textarea'),maybeRestore);}
-  function scheduleScan(){clearTimeout(scanTimer);scanTimer=setTimeout(scan,80);}
-  function updateQuick(rec,status){
-    var bar=document.getElementById('ghsQuickBar');if(!bar||!rec)return;
-    document.getElementById('ghsQuickPath').textContent=fullPath(rec);
-    document.getElementById('ghsQuickStatus').textContent=rec.secretWarning?('Sync blocked: '+rec.secretWarning):status;
-    bar.classList.add('show');
-  }
-  function toast(msg){var el=document.getElementById('ghsToast');if(!el)return;el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){el.classList.remove('show');},3200);}
-  function enqueue(id){
-    var q=queue();if(q.indexOf(id)<0)q.push(id);jsonSet(QUEUE_KEY,q);
-    var c=cfg();if(c.autoSync&&c.syncOnRun){clearTimeout(syncTimer);syncTimer=setTimeout(flushQueue,1800);}
-  }
-  function api(path,opts){
-    opts=opts||{};opts.credentials='same-origin';opts.headers=Object.assign({'Accept':'application/json'},opts.headers||{});
-    if(remote.csrf)opts.headers['X-CSAI-CSRF']=remote.csrf;
-    return fetch(path,opts).then(function(r){return r.text().then(function(t){var j={};try{j=t?JSON.parse(t):{};}catch(e){}if(!r.ok){var er=new Error(j.error||('Request failed ('+r.status+')'));er.status=r.status;throw er;}return j;});});
-  }
-  function refreshStatus(silent){
-    return api('/api/github/status').then(function(st){
-      remote={backend:true,connected:!!st.connected,user:st.user||null,repositories:st.repositories||[],installUrl:st.installUrl||null,csrf:st.csrf||null,error:null};
-      if(st.connected)flushQueue();
-      render();return st;
-    }).catch(function(e){
-      remote={backend:false,connected:false,user:null,repositories:[],installUrl:null,csrf:null,error:e.message};
-      render();if(!silent)toast('Local Code Vault is active. GitHub sync needs the hosted backend.');
-      return null;
-    });
-  }
-  function syncRecord(rec){
-    var c=cfg();
-    if(!remote.connected) return Promise.reject(new Error('Connect GitHub first.'));
-    if(!c.repo) return Promise.reject(new Error('Paste a GitHub repository link first.'));
-    if(remote.repositories.length&&!repoAccessible(c.repo)) return Promise.reject(new Error('This GitHub App does not have access to '+c.repo+'. Use Allow repository access first.'));
-    if(rec.secretWarning) return Promise.reject(new Error('Sync blocked because the draft appears to contain a '+rec.secretWarning+'.'));
-    var parts=c.repo.split('/');if(parts.length!==2)return Promise.reject(new Error('Choose a valid repository.'));
-    return api('/api/github/sync',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({owner:parts[0],repo:parts[1],branch:c.branch||'main',path:fullPath(rec),content:rec.content,message:'Update '+rec.title+' from CS & AI Mastery'})}).then(function(res){
-      var all=drafts();if(all[rec.id]){all[rec.id].lastSyncedAt=new Date().toISOString();all[rec.id].lastCommitUrl=res.commitUrl||null;all[rec.id].lastSyncState=res.unchanged?'unchanged':'synced';jsonSet(DRAFT_KEY,all);}
-      var h=hist();h.unshift({at:new Date().toISOString(),title:rec.title,path:fullPath(rec),commitUrl:res.commitUrl||null,state:res.unchanged?'unchanged':'synced'});jsonSet(HISTORY_KEY,h.slice(0,30));
-      return res;
-    });
-  }
-  function flushQueue(){
-    if(!remote.connected)return Promise.resolve();
-    var q=queue();if(!q.length)return Promise.resolve();
-    var all=drafts(), id=q[0], rec=all[id];
-    if(!rec){q.shift();jsonSet(QUEUE_KEY,q);return flushQueue();}
-    return syncRecord(rec).then(function(res){
-      q=queue().filter(function(x){return x!==id;});jsonSet(QUEUE_KEY,q);toast(res.unchanged?'Already up to date on GitHub.':'Synced to GitHub.');render();return flushQueue();
-    }).catch(function(e){toast(e.message);render();});
-  }
-  function download(rec){
-    if(!rec)return;var b=new Blob([rec.content],{type:'text/plain;charset=utf-8'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=rec.relativePath.split('/').pop();document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u);},800);
-  }
-  function render(){
-    var view=document.getElementById('githubSyncView');if(!view)return;
-    var c=cfg(), all=drafts(), ids=Object.keys(all).sort(function(a,b){return String(all[b].updatedAt).localeCompare(String(all[a].updatedAt));});
-    var q=queue(), h=hist(), meta=c.repo?repoMeta(c.repo):null, accessOk=!remote.connected||!c.repo||!!meta;
-    var statusTitle,statusText,statusClass='';
-    if(remote.connected&&c.repo&&accessOk){statusTitle='Ready to sync to '+esc(c.repo);statusText='Connected as '+esc(remote.user&&remote.user.login||'GitHub user')+'. Run, Check, Submit, or press Sync to update this repository.';statusClass='ok';}
-    else if(remote.connected&&c.repo&&!accessOk){statusTitle='Repository access is not enabled';statusText='GitHub is connected, but the app cannot access '+esc(c.repo)+' yet. Allow access to that repository, then refresh.';statusClass='warn';}
-    else if(remote.connected){statusTitle='GitHub connected';statusText='Paste the repository link where your platform code should be saved.';statusClass='ok';}
-    else if(remote.backend){statusTitle='Paste your repository link';statusText='Then press Connect GitHub. You approve access on GitHub once; no password or token is stored in this page.';statusClass='warn';}
-    else{statusTitle='Local code saving is ready';statusText='Paste your repository link now. The downloaded HTML saves drafts locally; GitHub authorization activates from the hosted website.';}
-    var inputValue=c.repoInput||(c.repo?('https://github.com/'+c.repo):'');
-    var repoState='';
-    if(c.repo&&remote.connected&&accessOk)repoState='<div class="ghs-repo-state ok">&#10003; Repository selected: '+esc(c.repo)+(meta&&meta.default_branch?' · default branch '+esc(meta.default_branch):'')+'</div>';
-    else if(c.repo&&remote.connected&&!accessOk)repoState='<div class="ghs-repo-state warn">This connection cannot access '+esc(c.repo)+' yet.</div>';
-    else if(c.repo)repoState='<div class="ghs-repo-state">Saved repository: '+esc(c.repo)+'. Authorization is still required before syncing.</div>';
-    var draftHtml=ids.length?ids.map(function(id){var d=all[id],pending=q.indexOf(id)>=0,st=d.secretWarning?'Blocked':pending?'Pending':d.lastSyncedAt?'Synced':'Local';return '<div class="ghs-draft"><div class="ghs-draft-top"><div><div class="ghs-draft-title">'+esc(d.title)+'</div><div class="ghs-draft-path">'+esc(fullPath(d))+'</div><div class="ghs-draft-meta">'+esc(d.language)+' · updated '+esc(new Date(d.updatedAt).toLocaleString())+(d.secretWarning?' · sync blocked: '+esc(d.secretWarning):'')+'</div></div><span class="ghs-pill '+(st==='Synced'?'ok':st==='Pending'?'pending':'')+'">'+st+'</span></div><div class="ghs-actions"><button class="ghs-btn" data-act="ghsDownloadDraft(\''+id+'\')">Download</button><button class="ghs-btn primary" data-act="ghsSyncDraft(\''+id+'\')" '+(!remote.connected||!c.repo||!accessOk||d.secretWarning?'disabled':'')+'>Sync now</button><button class="ghs-btn danger" data-act="ghsDeleteDraft(\''+id+'\')">Delete local</button></div></div>';}).join(''):'<div class="ghs-empty">Focus any real code editor and start typing. It will appear here automatically.</div>';
-    var historyHtml=h.length?'<ul class="ghs-history">'+h.map(function(x){return '<li><b>'+esc(x.state==='unchanged'?'Already current':'Synced')+':</b> '+esc(x.path)+'<br>'+esc(new Date(x.at).toLocaleString())+(x.commitUrl?' · <a href="'+esc(x.commitUrl)+'" target="_blank" rel="noopener">open commit</a>':'')+'</li>';}).join('')+'</ul>':'<div class="ghs-empty">No GitHub sync history yet.</div>';
-    var connectLabel=remote.connected?'Use this repository':'Connect GitHub';
-    var accessButton=remote.connected&&!accessOk&&remote.installUrl?'<button class="ghs-btn" data-act="ghsInstallApp()">Allow repository access</button>':'';
-    var accountButtons=remote.connected?'<button class="ghs-btn" data-act="ghsRefresh()">Refresh</button><button class="ghs-btn danger" data-act="ghsDisconnect()">Disconnect</button>':'';
-    view.innerHTML='<div class="cx-top"><button type="button" class="cx-back" data-act="showTrack(\'hub\')">&larr; Home</button></div><div class="ghs-hero"><div class="ghs-hero-icon">&#128025;</div><div><h1>Code Vault &amp; GitHub Sync</h1><p>Write code here, paste one GitHub repository link, and sync without VS Code. Drafts always save locally first.</p></div></div>'+ 
-      '<div class="ghs-grid"><div><div class="ghs-card"><div class="ghs-status"><span class="ghs-dot '+statusClass+'"></span><div style="min-width:0;flex:1"><h2>'+statusTitle+'</h2><div class="ghs-muted">'+statusText+'</div>'+repoState+'<div class="ghs-connect-row"><div class="ghs-field"><label for="ghsRepoUrl">GitHub repository link</label><input id="ghsRepoUrl" inputmode="url" autocomplete="url" value="'+esc(inputValue)+'" placeholder="https://github.com/your-name/your-repository" data-input="ghsSaveRepoLink()"></div><button class="ghs-btn primary" data-act="ghsConnectRepo()">'+connectLabel+'</button></div><div class="ghs-actions">'+accessButton+accountButtons+'</div></div></div><label class="ghs-check"><input type="checkbox" id="ghsAuto" '+(c.autoSync?'checked':'')+' data-change="ghsSaveSettings()">Automatically queue the active code file after Run, Check, Submit, Execute, Test, or Verify.</label><details class="ghs-advanced"><summary>Advanced settings</summary><div class="ghs-field"><label for="ghsBranch">Branch</label><input id="ghsBranch" value="'+esc(c.branch||'main')+'" data-input="ghsSaveSettings()"></div><div class="ghs-field"><label for="ghsFolder">Folder inside the repository</label><input id="ghsFolder" value="'+esc(c.baseFolder||'cs-ai-mastery')+'" data-input="ghsSaveSettings()"></div></details><div class="ghs-note">Security: GitHub credentials stay in an encrypted, HttpOnly server cookie. The HTML and localStorage never receive your GitHub token. Strong token/private-key patterns are blocked from sync.</div></div>'+ 
-      '<div class="ghs-card"><div class="ghs-draft-top"><div><h2>Local code drafts</h2><div class="ghs-muted">'+ids.length+' saved file'+(ids.length===1?'':'s')+' · '+q.length+' pending sync</div></div><div class="ghs-actions"><button class="ghs-btn" data-act="ghsExportAll()" '+(!ids.length?'disabled':'')+'>Export all</button><button class="ghs-btn primary" data-act="ghsSyncAll()" '+(!remote.connected||!c.repo||!accessOk||!ids.length?'disabled':'')+'>Sync all</button></div></div><div class="ghs-list" style="margin-top:12px">'+draftHtml+'</div></div></div>'+ 
-      '<div><div class="ghs-card"><h2>How it works</h2><div class="ghs-muted">1. Paste the repository link. 2. Press Connect GitHub and approve access. 3. Keep coding in this platform; Run, Check, Submit, or Sync updates the chosen repository.</div><div class="ghs-note">When this file is opened directly from Downloads, code saving and downloads work locally. Secure GitHub authorization requires the hosted copy because a GitHub secret must never be embedded in a downloadable HTML file.</div></div><div class="ghs-card"><h2>Recent sync history</h2>'+historyHtml+'</div></div></div>';
-  }
-
-  window._githubSyncBoot=function(){render();refreshStatus(true);scheduleScan();};
-  window.ghsRefresh=function(){refreshStatus(false);};
-  window.ghsConnect=function(){window.ghsConnectRepo();};
-  window.ghsSaveRepoLink=function(){var c=cfg(),el=document.getElementById('ghsRepoUrl');if(el)c.repoInput=el.value.trim();jsonSet(CONFIG_KEY,c);};
-  window.ghsConnectRepo=function(){
-    var c=cfg(),el=document.getElementById('ghsRepoUrl'),raw=el?el.value:c.repoInput,full=parseRepoLink(raw);
-    if(!full){toast('Paste a valid GitHub repository link, such as https://github.com/name/repository');return;}
-    c.repo=full;c.repoInput='https://github.com/'+full;var meta=repoMeta(full);if(meta)c.branch=meta.default_branch||c.branch||'main';jsonSet(CONFIG_KEY,c);
-    if(remote.connected){render();if(repoAccessible(full))toast('Repository selected: '+full);else toast('GitHub is connected, but repository access must be allowed first.');return;}
-    if(remote.backend){location.href='/api/github/authorize';return;}
-    render();toast('Repository saved. Open the hosted website to authorize GitHub; local drafts continue saving now.');
-  };
-  window.ghsInstallApp=function(){if(remote.installUrl)window.open(remote.installUrl,'_blank','noopener');};
-  window.ghsDisconnect=function(){if(!confirm('Disconnect GitHub from this browser session? Local code drafts will stay on this device.'))return;api('/api/github/disconnect',{method:'POST'}).then(function(){remote.connected=false;remote.user=null;remote.repositories=[];render();toast('GitHub disconnected.');}).catch(function(e){toast(e.message);});};
-  window.ghsSaveSettings=function(){var c=cfg(),b=document.getElementById('ghsBranch'),f=document.getElementById('ghsFolder'),a=document.getElementById('ghsAuto'),u=document.getElementById('ghsRepoUrl');if(b)c.branch=b.value.trim()||'main';if(f)c.baseFolder=safeFolder(f.value);if(a)c.autoSync=a.checked?1:0;if(u)c.repoInput=u.value.trim();jsonSet(CONFIG_KEY,c);scheduleScan();};
-  window.ghsRepoChanged=function(){window.ghsConnectRepo();};
-  window.ghsDownloadDraft=function(id){download(drafts()[id]);};
-  window.ghsDeleteDraft=function(id){var all=drafts(),d=all[id];if(!d||!confirm('Delete the local draft "'+d.title+'"? This does not delete anything from GitHub.'))return;delete all[id];jsonSet(DRAFT_KEY,all);jsonSet(QUEUE_KEY,queue().filter(function(x){return x!==id;}));render();toast('Local draft deleted.');};
-  window.ghsSyncDraft=function(id){var d=drafts()[id];if(!d)return;syncRecord(d).then(function(r){jsonSet(QUEUE_KEY,queue().filter(function(x){return x!==id;}));render();toast(r.unchanged?'Already up to date on GitHub.':'Synced to GitHub.');}).catch(function(e){toast(e.message);});};
-  window.ghsSyncAll=function(){var ids=Object.keys(drafts());jsonSet(QUEUE_KEY,ids);flushQueue();render();};
-  window.ghsExportAll=function(){var all=drafts(),payload={format:'cs-ai-mastery-code-vault',version:1,exportedAt:new Date().toISOString(),files:Object.keys(all).map(function(id){var d=all[id];return {path:fullPath(d),language:d.language,content:d.content,updatedAt:d.updatedAt};})};var b=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='cs-ai-mastery-code-'+payload.exportedAt.slice(0,10)+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u);},800);};
-  window.ghsDownloadActive=function(){if(lastEditor)download(saveEditor(lastEditor,'manual-download',false));else toast('Focus a code editor first.');};
-  window.ghsSyncActive=function(){if(!lastEditor){toast('Focus a code editor first.');return;}var d=saveEditor(lastEditor,'manual-sync',false);syncRecord(d).then(function(r){render();toast(r.unchanged?'Already up to date on GitHub.':'Synced to GitHub.');}).catch(function(e){toast(e.message);});};
-
-  document.addEventListener('focusin',function(e){if(isCodeEditor(e.target)){lastEditor=e.target;maybeRestore(e.target);var d=saveEditor(e.target,'focus',false);updateQuick(d,'Saved locally');}});
-  document.addEventListener('input',function(e){if(isCodeEditor(e.target)){lastEditor=e.target;scheduleSave(e.target);}});
-  document.addEventListener('blur',function(e){if(isCodeEditor(e.target))saveEditor(e.target,'blur',false);},true);
-  document.addEventListener('click',function(e){var t=e.target.closest('[data-act]');if(!t||!lastEditor)return;var act=(t.getAttribute('data-act')||'').toLowerCase();if(/run|check|submit|save|execute|test|verify|compile/.test(act)){setTimeout(function(){var c=cfg();saveEditor(lastEditor,'action',!!c.autoSync);},0);}});
-  var obs=new MutationObserver(scheduleScan);if(document.documentElement)obs.observe(document.documentElement,{childList:true,subtree:true});
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){scan();refreshStatus(true);});else{scan();refreshStatus(true);}
+var DK='csai_code_vault_v2',CK='csai_github_sync_config_v2',QK='csai_github_sync_queue_v2',HK='csai_github_sync_history_v2';
+var lastEditor=null,saveTimers={},draining=false,scanTimer=null,toastTimer=null,remote={backend:false,connected:false,user:null,repositories:[],installUrl:null,csrf:null,error:null};
+function esc(v){return String(v==null?'':v).replace(/[&<>\"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c];});}
+function get(k,f){try{var x=localStorage.getItem(k);return x?JSON.parse(x):f;}catch(e){return f;}}
+function set(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true;}catch(e){return false;}}
+function cfg(){return Object.assign({repo:'',repoInput:'',branch:'main',baseFolder:'student-code',autoSync:1,syncOnRun:1},get(CK,{}));}
+function drafts(){var d=get(DK,{});return d&&typeof d==='object'&&!Array.isArray(d)?d:{};}
+function queue(){var q=get(QK,[]);return Array.isArray(q)?q:[];}
+function hist(){var h=get(HK,[]);return Array.isArray(h)?h:[];}
+function slug(v){return String(v||'code').toLowerCase().replace(/&/g,' and ').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,72)||'code';}
+function safeFolder(v){return String(v||'student-code').replace(/\\/g,'/').split('/').map(slug).filter(Boolean).join('/')||'student-code';}
+function hash(v){var h=2166136261;for(var i=0;i<v.length;i++){h^=v.charCodeAt(i);h+=(h<<1)+(h<<4)+(h<<7)+(h<<8)+(h<<24);}return (h>>>0).toString(36);}
+function parseRepoLink(v){var raw=String(v||'').trim();if(!raw)return null;raw=raw.replace(/^git@github\.com:/i,'').replace(/^https?:\/\/(?:www\.)?github\.com\//i,'').replace(/^github\.com\//i,'').split(/[?#]/)[0].replace(/\.git$/i,'').replace(/^\/+|\/+$/g,'');var p=raw.split('/').filter(Boolean);return p.length===2&&p.every(function(x){return /^[A-Za-z0-9_.-]+$/.test(x);})?p[0]+'/'+p[1]:null;}
+function repoMeta(full){return (remote.repositories||[]).find(function(r){return String(r.full_name).toLowerCase()===String(full||'').toLowerCase();})||null;}
+function currentRoute(){if(!window.TRACK_REGISTRY)return'workspace';for(var r in window.TRACK_REGISTRY){var e=window.TRACK_REGISTRY[r],el=document.getElementById(e.containerId);if(el&&getComputedStyle(el).display!=='none')return r;}return'workspace';}
+function isCodeEditor(el){if(!el||el.tagName!=='TEXTAREA')return false;var label=((el.getAttribute('aria-label')||'')+' '+(el.getAttribute('placeholder')||'')).toLowerCase();if(/reasoning|question|description|reflection|resume|achievement/.test(label))return false;if(/code|query|html|css|javascript|python|shell|command/.test(label))return true;return /(^|\s)(py|wd-edit|cx-runbox-edit|cx-pm-edit|editor)(\s|$)/.test(el.className||'');}
+function langFor(el,route,title){var s=((el.getAttribute('aria-label')||'')+' '+title+' '+route).toLowerCase();if(/sql/.test(s))return['SQL','sql'];if(/html/.test(s))return['HTML','html'];if(/css/.test(s))return['CSS','css'];if(/javascript|\bjs\b/.test(s))return['JavaScript','js'];if(/shell|bash|linux|git command/.test(s))return['Shell','sh'];return['Python','py'];}
+function context(el){var route=currentRoute(),box=el.closest('.cx-lesson,.cx-ex,.cx-proj,.cx-pm,.task-card,.lesson-card,.exercise-card,.cell,.card,section,article,main')||el.parentElement,h=box&&box.querySelector('h1,h2,h3,h4,.title,.cx-lesson-h,.cx-ex-h'),title=(h?h.textContent.trim():(el.id||'Code draft')).replace(/\s+/g,' ').slice(0,120)||'Code draft',all=Array.prototype.filter.call((window.TRACK_REGISTRY&&window.TRACK_REGISTRY[route]?document.getElementById(window.TRACK_REGISTRY[route].containerId):document).querySelectorAll('textarea'),isCodeEditor),idx=Math.max(0,all.indexOf(el)),source=route+'::'+(el.id||('editor-'+idx)),l=langFor(el,route,title),name=slug(title)+(idx>0?'-'+(idx+1):'');return{id:hash(source),source:source,route:route,title:title,language:l[0],ext:l[1],relativePath:slug(route)+'/'+name+'.'+l[1]};}
+function fullPath(r){return safeFolder(cfg().baseFolder)+'/'+r.relativePath;}
+function secret(text){var a=[[/github_pat_[A-Za-z0-9_]{20,}/,'GitHub token'],[/gh[pousr]_[A-Za-z0-9]{20,}/,'GitHub token'],[/sk-[A-Za-z0-9_-]{20,}/,'API key'],[/AKIA[0-9A-Z]{16}/,'AWS key'],[/-----BEGIN [A-Z ]*PRIVATE KEY-----/,'private key']];for(var i=0;i<a.length;i++)if(a[i][0].test(text))return a[i][1];return null;}
+function toast(m){var el=document.getElementById('ghsToast');if(!el)return;el.textContent=m;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){el.classList.remove('show');},2600);}
+function quick(r,s){var b=document.getElementById('ghsQuickBar');if(!b)return;b.classList.add('show');document.getElementById('ghsQuickPath').textContent=fullPath(r);document.getElementById('ghsQuickStatus').textContent=s;var ed=lastEditor;if(ed){var wrap=ed.parentElement;if(wrap&&!wrap.querySelector('.ghs-editor-state')){var x=document.createElement('div');x.className='ghs-editor-state';wrap.appendChild(x);}var x2=wrap&&wrap.querySelector('.ghs-editor-state');if(x2)x2.textContent=s;}}
+function enqueue(id){var q=queue();if(q.indexOf(id)<0)q.push(id);set(QK,q);if(navigator.onLine&&remote.connected&&cfg().autoSync)setTimeout(drain,120);}
+function save(el,reason,doQueue){if(!isCodeEditor(el))return null;var c=context(el),d=drafts(),p=d[c.id]||{},r=Object.assign({},p,c,{content:el.value,updatedAt:new Date().toISOString(),lastReason:reason||'edit'});r.secretWarning=secret(r.content)||null;d[c.id]=r;set(DK,d);el.dataset.ghsId=c.id;lastEditor=el;quick(r,doQueue?'Queued for GitHub':'Saved locally');if(doQueue)enqueue(c.id);if(currentRoute()==='githubsync')render();return r;}
+function schedule(el){var c=context(el);clearTimeout(saveTimers[c.id]);saveTimers[c.id]=setTimeout(function(){save(el,'edit',false);},350);}
+function api(url,opt){opt=opt||{};opt.headers=Object.assign({'Content-Type':'application/json'},opt.headers||{});if(remote.csrf)opt.headers['X-CSAI-CSRF']=remote.csrf;return fetch(url,opt).then(function(r){return r.json().catch(function(){return{};}).then(function(d){if(!r.ok){var e=new Error(d.error||('Request failed '+r.status));e.status=r.status;e.data=d;throw e;}return d;});});}
+function refreshStatus(silent){return api('/api/github/status').then(function(d){remote=Object.assign(remote,d,{backend:true,error:null});if(!silent)toast(d.connected?'GitHub connected':'GitHub not connected');render();return d;}).catch(function(e){remote.backend=false;remote.error=e.message;render();});}
+function syncOne(id){var d=drafts(),r=d[id],c=cfg(),repo=parseRepoLink(c.repo);if(!r||!repo||!remote.connected)return Promise.reject(new Error('Connect GitHub and choose a repository first.'));if(r.secretWarning)return Promise.reject(new Error('Sync blocked: '+r.secretWarning));quick(r,'Syncing…');return api('/api/github/sync',{method:'POST',body:JSON.stringify({owner:repo.split('/')[0],repo:repo.split('/')[1],branch:c.branch,path:fullPath(r),content:r.content,message:(r.remoteSha?'Update ':'Add ')+r.title+' from CS & AI Mastery',baseSha:r.remoteSha||null})}).then(function(x){d=drafts();r=d[id]||r;r.remoteSha=x.contentSha||r.remoteSha;r.syncedAt=new Date().toISOString();r.syncedHash=hash(r.content);d[id]=r;set(DK,d);var h=hist();h.unshift({state:x.unchanged?'unchanged':'synced',path:fullPath(r),at:r.syncedAt,commitUrl:x.commitUrl||null});set(HK,h.slice(0,100));var q=queue().filter(function(v){return v!==id;});set(QK,q);quick(r,'Synced to GitHub ✓');render();return x;}).catch(function(e){quick(r,e.status===409?'Conflict — review needed':'Sync failed — Retry');if(e.status===409){d=drafts();r=d[id]||r;r.conflict=e.data||{error:e.message};d[id]=r;set(DK,d);render();}throw e;});}
+function drain(){if(draining||!navigator.onLine||!remote.connected)return;var q=queue();if(!q.length)return;draining=true;var p=Promise.resolve();q.slice().forEach(function(id){p=p.then(function(){return syncOne(id).catch(function(){return null;});});});p.finally(function(){draining=false;});}
+function scan(){document.querySelectorAll('textarea').forEach(function(el){if(!isCodeEditor(el)||el.dataset.ghsBound)return;el.dataset.ghsBound='1';var c=context(el),d=drafts()[c.id];if(d&&typeof d.content==='string'&&!el.value)el.value=d.content;el.addEventListener('input',function(){lastEditor=el;schedule(el);});el.addEventListener('focus',function(){lastEditor=el;var r=drafts()[context(el).id]||context(el);quick(r,r.syncedAt?'GitHub synced ✓':'Saved locally');});});}
+function render(){var v=document.getElementById('githubSyncView');if(!v)return;var d=drafts(),ids=Object.keys(d),c=cfg(),q=queue(),h=hist(),term=(window._ghsSearch||'').toLowerCase(),shown=ids.filter(function(id){var r=d[id];return !term||[r.title,r.relativePath,r.language,r.route].join(' ').toLowerCase().indexOf(term)>=0;});var cards=shown.length?shown.map(function(id){var r=d[id],status=r.conflict?'Conflict':(r.syncedAt&&r.syncedHash===hash(r.content)?'Synced':'Local'),fav=r.favorite?'★':'☆';return '<div class="ghs-item"><div><b>'+esc(r.title)+'</b><div class="ghs-muted">'+esc(fullPath(r))+' · '+esc(r.language)+' · '+esc(status)+'</div></div><div class="ghs-actions"><button class="ghs-btn" data-act="ghsFavorite(\''+id+'\')">'+fav+'</button><button class="ghs-btn" data-act="ghsRename(\''+id+'\')">Rename/move</button><button class="ghs-btn" data-act="ghsReadme(\''+id+'\')">README</button><button class="ghs-btn primary" data-act="ghsSyncOne(\''+id+'\')">'+(r.conflict?'Resolve':'Sync now')+'</button><button class="ghs-btn" data-act="ghsRemoteDelete(\''+id+'\')">Delete</button></div></div>';}).join(''):'<div class="ghs-empty">No matching drafts.</div>';
+var history=h.length?'<ul class="ghs-history">'+h.slice(0,30).map(function(x){return '<li><b>'+esc(x.state)+':</b> '+esc(x.path)+' · '+esc(new Date(x.at).toLocaleString())+(x.commitUrl?' · <a href="'+esc(x.commitUrl)+'" target="_blank">open commit</a>':'')+'</li>';}).join('')+'</ul>':'<div class="ghs-empty">No GitHub sync history yet.</div>';
+var connected=remote.connected&&c.repo;v.innerHTML='<div class="cx-top"><button class="cx-back" data-act="showTrack(\'hub\')">← Home</button></div><div class="ghs-hero"><div class="ghs-hero-icon">🐙</div><div><h1>Code Vault & GitHub Sync</h1><p>Automatic sync, offline retry, conflict protection, meaningful filenames, project search, portfolio favorites, README generation, and GitHub file management.</p></div></div><div class="ghs-grid"><div class="ghs-card"><h2>'+(remote.connected?'Ready to sync':'Connect GitHub')+'</h2><label>GitHub repository link<input id="ghsRepo" value="'+esc(c.repoInput||c.repo)+'"></label><button class="ghs-btn primary" data-act="ghsUseRepo()">Use this repository</button> '+(remote.connected?'<button class="ghs-btn" data-act="ghsDisconnect()">Disconnect</button>':'<a class="ghs-btn primary" href="/api/github/authorize">Connect GitHub</a>')+'<details><summary>Advanced settings</summary><label>Branch<input id="ghsBranch" value="'+esc(c.branch)+'"></label><label>Folder inside repository<input id="ghsFolder" value="'+esc(c.baseFolder)+'"></label><label><input id="ghsAuto" type="checkbox" '+(c.autoSync?'checked':'')+'> Auto-sync after Run/Check/Submit</label></details></div><div class="ghs-card"><h2>Recent sync history</h2>'+history+'</div></div><div class="ghs-card"><div class="ghs-draft-top"><div><h2>Local code drafts</h2><div class="ghs-muted">'+ids.length+' saved · '+q.length+' pending · '+(navigator.onLine?'online':'offline')+'</div></div><div class="ghs-actions"><input aria-label="Search drafts" placeholder="Search code…" value="'+esc(window._ghsSearch||'')+'" oninput="window._ghsSearch=this.value;window._githubSyncBoot()"><button class="ghs-btn" data-act="ghsExportAll()">Export all</button><button class="ghs-btn primary" data-act="ghsSyncAll()" '+(!connected?'disabled':'')+'>Sync all</button></div></div><div class="ghs-list">'+cards+'</div></div><div class="ghs-card"><h2>Portfolio-ready work</h2><div class="ghs-muted">Star drafts to build a portfolio list. README generation creates a companion Markdown file with title, language, purpose, run instructions, and learning notes.</div></div>';}
+window._githubSyncBoot=function(){render();refreshStatus(true);scan();drain();};
+window.ghsUseRepo=function(){var c=cfg(),inp=document.getElementById('ghsRepo'),r=parseRepoLink(inp&&inp.value);if(!r)return toast('Paste a valid GitHub repository link.');c.repo=r;c.repoInput=inp.value;c.branch=(document.getElementById('ghsBranch')||{}).value||'main';c.baseFolder=(document.getElementById('ghsFolder')||{}).value||'student-code';c.autoSync=(document.getElementById('ghsAuto')||{}).checked?1:0;set(CK,c);render();toast('Repository settings saved.');};
+window.ghsSyncOne=function(id){syncOne(id).catch(function(e){toast(e.message);});};window.ghsSyncAll=function(){Object.keys(drafts()).forEach(enqueue);drain();};window.ghsSyncActive=function(){if(lastEditor){var r=save(lastEditor,'manual',true);syncOne(r.id).catch(function(e){toast(e.message);});}else toast('Focus a code editor first.');};
+window.ghsDownloadActive=function(){if(!lastEditor)return toast('Focus a code editor first.');var r=save(lastEditor,'download',false),a=document.createElement('a');a.href=URL.createObjectURL(new Blob([r.content],{type:'text/plain'}));a.download=r.relativePath.split('/').pop();a.click();URL.revokeObjectURL(a.href);};
+window.ghsExportAll=function(){var d=drafts(),blob=new Blob([JSON.stringify(d,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='cs-ai-mastery-code-vault.json';a.click();URL.revokeObjectURL(a.href);};
+window.ghsRename=function(id){var d=drafts(),r=d[id],n=prompt('New path inside student-code:',r.relativePath);if(!n)return;r.relativePath=n.replace(/^\/+|\.\./g,'');d[id]=r;set(DK,d);render();};
+window.ghsFavorite=function(id){var d=drafts();d[id].favorite=!d[id].favorite;set(DK,d);render();};
+window.ghsReadme=function(id){var d=drafts(),r=d[id],rid=id+'-readme',path=r.relativePath.replace(/\.[^.]+$/,'')+'/README.md';d[rid]={id:rid,source:r.source+'::readme',route:r.route,title:r.title+' README',language:'Markdown',ext:'md',relativePath:path,content:'# '+r.title+'\n\n## Purpose\nDescribe what this exercise or project does.\n\n## Language\n'+r.language+'\n\n## How to run\nAdd the command or steps here.\n\n## What I learned\n- Add your key learning points.\n',updatedAt:new Date().toISOString()};set(DK,d);render();toast('README draft created.');};
+window.ghsRemoteDelete=function(id){var d=drafts(),r=d[id];if(!confirm('Delete this draft locally and from GitHub if it exists?'))return;var c=cfg(),repo=parseRepoLink(c.repo);var finish=function(){delete d[id];set(DK,d);render();};if(!repo||!remote.connected){finish();return;}api('/api/github/file',{method:'DELETE',body:JSON.stringify({owner:repo.split('/')[0],repo:repo.split('/')[1],branch:c.branch,path:fullPath(r),sha:r.remoteSha||null})}).then(finish).catch(function(e){toast(e.message);});};
+window.ghsDisconnect=function(){api('/api/github/disconnect',{method:'POST'}).then(function(){remote.connected=false;render();});};
+window.addEventListener('online',function(){toast('Back online — syncing queued work.');drain();});window.addEventListener('offline',function(){toast('Offline — work will stay local and sync later.');});
+document.addEventListener('input',function(e){if(isCodeEditor(e.target)){lastEditor=e.target;schedule(e.target);}});document.addEventListener('blur',function(e){if(isCodeEditor(e.target))save(e.target,'blur',false);},true);document.addEventListener('click',function(e){var t=e.target.closest('[data-act]');if(!t||!lastEditor)return;var a=(t.getAttribute('data-act')||'').toLowerCase();if(/run|check|submit|save|execute|test|verify|compile/.test(a))setTimeout(function(){var c=cfg();save(lastEditor,'action',!!c.autoSync);},0);});
+var mo=new MutationObserver(function(){clearTimeout(scanTimer);scanTimer=setTimeout(scan,100);});mo.observe(document.documentElement,{childList:true,subtree:true});if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){scan();refreshStatus(true);});else{scan();refreshStatus(true);}if('serviceWorker'in navigator&&location.protocol.indexOf('http')===0)navigator.serviceWorker.register('/sw.js').catch(function(){});
 })();
 </script>
+
 
 <script>
 var TRACK_REGISTRY = {
