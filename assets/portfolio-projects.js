@@ -30,6 +30,7 @@
   };
 
   const NORMALIZE = value => String(value || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  const SLUGIFY = value => String(value || '').trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
   const TRACK_ALIASES = [
     ['machinelearning', ['machinelearning', 'ml']], ['deeplearning', ['deeplearning']],
     ['generativeai', ['generativeai', 'genai']], ['systemdesign', ['systemdesign']],
@@ -88,7 +89,6 @@
     existing?.remove();
     injectStyles();
     const [name, description] = PROJECTS[track];
-    const slug = track.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
     const section = document.createElement('section');
     section.id = 'portfolio-projects-panel';
     section.className = 'portfolio-projects-panel';
@@ -102,7 +102,7 @@
         <article class="portfolio-project-card"><h3>Portfolio project: ${name}</h3><ul><li>Write a professional README</li><li>Explain architecture and trade-offs</li><li>Include setup and demo evidence</li><li>Prepare to explain it in an interview</li></ul></article>
       </div>
       <p><strong>GitHub destination</strong></p>
-      <div class="portfolio-project-path">portfolio/${slug}/${NORMALIZE(name).replace(/[^a-z0-9]+/g,'-') || 'project'}/</div>
+      <div class="portfolio-project-path">portfolio/${SLUGIFY(track)}/${SLUGIFY(name)}/</div>
       <div class="portfolio-project-actions"><a href="portfolio/README.md" target="_blank" rel="noopener">View project roadmap</a><a href="portfolio/PROJECT_TEMPLATE.md" target="_blank" rel="noopener">Open project template</a></div>
     `;
     findHost().appendChild(section);
