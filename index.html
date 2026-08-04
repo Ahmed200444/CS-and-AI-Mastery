@@ -5438,8 +5438,7 @@ if math.isclose(0.1 + 0.2, 0.3):</pre></div>
         + 'try{\n' + js + '\n}catch(e){console.log("Error: "+e.message);}'
         + '})();<\/script>';
     var srcdoc = '<!doctype html><html><head><meta charset="utf-8"><style>'+css+'</style></head><body>'
-      + html + jsBlock + '  <script defer src="assets/portfolio-projects.js"></script>
-</body></html>';
+      + html + jsBlock + '</body></html>';
     frame.srcdoc = srcdoc;
   };
 
@@ -23075,5 +23074,6 @@ _RESULT_REVIEW = json.dumps(_result)
 
 </script>
 
+  <script defer src="assets/portfolio-projects.js"></script>
 </body>
 </html>
