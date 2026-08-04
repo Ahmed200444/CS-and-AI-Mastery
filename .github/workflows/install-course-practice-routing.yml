@@ -1,0 +1,63 @@
+name: Install course-aware practice routing
+
+on:
+  push:
+    branches:
+      - feature/course-practice-folders
+    paths:
+      - assets/course-practice-routing.js
+      - .github/workflows/install-course-practice-routing.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    if: "!contains(github.event.head_commit.message, '[skip routing install]')"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out feature branch
+        uses: actions/checkout@v4
+        with:
+          ref: feature/course-practice-folders
+          fetch-depth: 0
+
+      - name: Add course routing loader before final body tag
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('index.html')
+          if not path.exists():
+              raise SystemExit('index.html was not found')
+
+          html = path.read_text(encoding='utf-8')
+          loader = '<script defer src="assets/course-practice-routing.js"></script>'
+
+          html = html.replace('  ' + loader + '\n', '')
+          html = html.replace(loader + '\n', '')
+          html = html.replace(loader, '')
+
+          marker = '</body>'
+          position = html.rfind(marker)
+          if position < 0:
+              raise SystemExit('Could not find the final </body>; no changes were made.')
+
+          html = html[:position] + '  ' + loader + '\n' + html[position:]
+          path.write_text(html, encoding='utf-8')
+          print('Course-aware practice routing loader installed.')
+          PY
+
+      - name: Remove one-time installer and commit
+        run: |
+          rm -f .github/workflows/install-course-practice-routing.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html .github/workflows/install-course-practice-routing.yml
+          if git diff --cached --quiet; then
+            echo "No integration change needed."
+            exit 0
+          fi
+          git commit -m "Integrate automatic course practice folders [skip routing install]"
+          git push origin feature/course-practice-folders
