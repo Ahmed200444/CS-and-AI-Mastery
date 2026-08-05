@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ByteDance 2027 AI Engineer Prep | CS & AI Mastery</title>
+  <style>
+    :root{--bg:#f6f8fb;--surface:#fff;--text:#132238;--muted:#5c6b7a;--border:#dbe3ec;--accent:#1463ff;--good:#147d4e;--warn:#a85d00}
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
+    header{background:linear-gradient(135deg,#10243f,#173d75);color:#fff;padding:42px 20px}.wrap{max-width:1100px;margin:auto}.eyebrow{font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:.78rem;opacity:.8}
+    h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.05;margin:.5rem 0 1rem}h2{margin-top:0}.lead{max-width:800px;font-size:1.08rem;opacity:.9}
+    nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}a.btn{display:inline-block;padding:10px 15px;border-radius:10px;text-decoration:none;font-weight:750;background:#fff;color:#153662}.btn.secondary{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55)}
+    main{padding:28px 20px 60px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:0 4px 18px rgba(17,37,62,.05)}
+    .status{display:inline-flex;padding:4px 9px;border-radius:999px;font-size:.78rem;font-weight:800}.enough{background:#e5f6ee;color:var(--good)}.supplement{background:#fff0d8;color:var(--warn)}.priority{background:#e9f0ff;color:#174fae}
+    section{margin-top:26px}.course{border-left:4px solid var(--accent)}.course h3{margin:.1rem 0 .4rem}.course p{color:var(--muted)}ul,ol{padding-left:1.25rem}.lesson-list li{margin:.3rem 0}
+    table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden}th,td{text-align:left;padding:12px;border-bottom:1px solid var(--border);vertical-align:top}th{background:#eef3f9}.note{padding:16px;border-radius:14px;background:#edf4ff;border:1px solid #cddfff}
+    code{background:#edf1f6;padding:2px 5px;border-radius:5px}.phase{counter-reset:item}.checklist label{display:block;margin:.45rem 0}.footer-note{color:var(--muted);font-size:.92rem;margin-top:30px}
+    @media(prefers-color-scheme:dark){:root{--bg:#0f1720;--surface:#17212c;--text:#edf3f8;--muted:#bdc8d2;--border:#344352;--accent:#72a4ff}.status.enough{background:#123b2c}.status.supplement{background:#4a3212}.status.priority{background:#1d3760}th{background:#202d3a}code{background:#263442}.note{background:#172b45;border-color:#31567e}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Internship readiness audit</div>
+    <h1>ByteDance AI Application Development Engineer — 2027</h1>
+    <p class="lead">A focused study path for Job Code A251905A: software engineering, DSA, backend services, LLM systems, RAG, tool calling, agent orchestration, reliability, and one procurement-agent capstone.</p>
+    <nav><a class="btn" href="./#hub">Back to Learning Hub</a><a class="btn secondary" href="#order">Study order</a><a class="btn secondary" href="#capstone">Capstone</a></nav>
+  </div>
+</header>
+<main class="wrap">
+  <section class="note"><strong>Audit result:</strong> the platform already has the main foundations. The largest internship-specific gaps were a single OA-focused DSA sequence, production backend reliability, function/tool calling, agent state and memory, agent evaluation, and a procurement capstone. The gap lessons below complete those areas without replacing your existing courses.</section>
+
+  <section>
+    <h2>Course-by-course audit</h2>
+    <div class="grid">
+      <article class="card course"><span class="status enough">Foundation present</span><h3>Python + OOP</h3><p>Enough to continue. Keep practising functions, collections, classes, exceptions, modules, JSON, typing, and clean code while doing projects.</p></article>
+      <article class="card course"><span class="status supplement">Gap pack added</span><h3>DSA + Problem Solving</h3><p>Needs OA-style pattern practice and timed mixed sets, not only explanations of individual structures.</p></article>
+      <article class="card course"><span class="status enough">Foundation present</span><h3>Git, Debugging, Testing, SWE</h3><p>Core coverage is useful. The supplement adds reliability patterns expected in services and agent systems.</p></article>
+      <article class="card course"><span class="status supplement">Gap pack added</span><h3>SQL + APIs + Backend</h3><p>Needs business-logic layering, transactions, idempotency, async jobs, retries, permissions, and integration testing.</p></article>
+      <article class="card course"><span class="status enough">Foundation present</span><h3>ML + Deep Learning + Transformers</h3><p>Enough for this application-engineering role once you understand embeddings, inference, evaluation, and model limitations.</p></article>
+      <article class="card course"><span class="status supplement">Gap pack added</span><h3>LLMs + RAG</h3><p>Needs structured outputs, tool schemas, grounded-answer evaluation, reranking, security, cost, and latency trade-offs.</p></article>
+      <article class="card course"><span class="status priority">Highest priority</span><h3>AI Agents</h3><p>Planning, tools, memory, state, stopping conditions, human approval, tracing, and evaluation directly match the role.</p></article>
+      <article class="card course"><span class="status supplement">Gap pack added</span><h3>Deployment + Docker + System Design</h3><p>Needs a practical System AI Harness view: observability, safe execution, failure recovery, and scalable workflows.</p></article>
+    </div>
+  </section>
+
+  <section id="order">
+    <h2>Recommended study order</h2>
+    <table>
+      <thead><tr><th>Phase</th><th>Courses</th><th>Move on when…</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Python review → OOP</td><td>You can write a small program with classes, validation, exceptions, and tests.</td></tr>
+        <tr><td>2</td><td>DSA → Problem Solving</td><td>You can solve common easy problems independently and explain time complexity.</td></tr>
+        <tr><td>3</td><td>Git → Debugging → Testing → SWE</td><td>You can use branches, diagnose a bug, and protect the fix with tests.</td></tr>
+        <tr><td>4</td><td>SQL → APIs → Backend</td><td>You can build a tested CRUD service with validation and a database.</td></tr>
+        <tr><td>5</td><td>ML basics → Deep Learning basics → Transformers</td><td>You understand training vs inference, embeddings, attention, and evaluation.</td></tr>
+        <tr><td>6</td><td>LLMs → RAG</td><td>You can build a cited document assistant and measure answer quality.</td></tr>
+        <tr><td>7</td><td>AI Agents</td><td>You can build a stateful agent that calls tools safely and stops reliably.</td></tr>
+        <tr><td>8</td><td>Deployment → Docker → System Design</td><td>You can deploy, monitor, explain, and defend the architecture.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Added gap lessons</h2>
+    <div class="grid">
+      <article class="card"><h3>DSA Online Assessment Pack</h3><ol class="lesson-list"><li>Big-O and choosing a data structure</li><li>Arrays, strings, hash maps, and sets</li><li>Two pointers and sliding window</li><li>Stacks, queues, and monotonic patterns</li><li>Binary search and interval problems</li><li>Trees, heaps, and graph traversal</li><li>Recursion, backtracking, and basic DP</li><li>Timed mixed assessment and review</li></ol></article>
+      <article class="card"><h3>Production Backend Pack</h3><ol class="lesson-list"><li>Service, repository, and domain layers</li><li>Request validation and typed schemas</li><li>Transactions and consistent data flows</li><li>Authentication, authorization, and permissions</li><li>Timeouts, retries, and exponential backoff</li><li>Idempotency and duplicate-request safety</li><li>Async jobs and workflow state</li><li>Unit, integration, and contract testing</li></ol></article>
+      <article class="card"><h3>LLM + RAG Engineering Pack</h3><ol class="lesson-list"><li>Prompt contracts and structured outputs</li><li>Embeddings and similarity search</li><li>Chunking strategies and metadata filters</li><li>Hybrid retrieval and reranking</li><li>Citations and grounded responses</li><li>RAG evaluation datasets and metrics</li><li>Prompt injection and data-access boundaries</li><li>Latency, cost, caching, and fallbacks</li></ol></article>
+      <article class="card"><h3>Agent Engineering Pack</h3><ol class="lesson-list"><li>Tool/function schemas and validation</li><li>Planning versus deterministic workflows</li><li>State, short-term memory, and durable memory</li><li>Multi-step reasoning and routing</li><li>Stopping conditions and loop prevention</li><li>Human approval for sensitive actions</li><li>Tracing, replay, and agent evaluation</li><li>System AI Harness architecture</li></ol></article>
+    </div>
+  </section>
+
+  <section>
+    <h2>Practice requirements</h2>
+    <div class="grid">
+      <article class="card"><h3>DSA target</h3><p>Complete about <strong>45–60 well-understood problems</strong>: mostly easy, then selected medium problems. Record the pattern, complexity, mistake, and improved solution.</p></article>
+      <article class="card"><h3>Engineering target</h3><p>Build one normal backend service before the agent capstone. Include SQL, validation, tests, logging, and a clean README.</p></article>
+      <article class="card"><h3>AI target</h3><p>Build one small RAG app and one tool-calling demo before combining everything into a larger agent system.</p></article>
+    </div>
+  </section>
+
+  <section id="capstone">
+    <h2>Required capstone: Procurement Agent + System AI Harness</h2>
+    <div class="card">
+      <p>Build a Python service that receives a purchase request, checks required information, retrieves procurement policy, compares approved suppliers, checks budget, requests human approval, and records every action.</p>
+      <h3>Core tools</h3>
+      <ul><li><code>search_suppliers()</code></li><li><code>read_procurement_policy()</code></li><li><code>compare_quotes()</code></li><li><code>check_budget()</code></li><li><code>create_purchase_request()</code></li><li><code>get_approval_status()</code></li></ul>
+      <h3>Required engineering evidence</h3>
+      <div class="checklist">
+        <label>□ FastAPI service with typed request/response models</label><label>□ SQL database and clear data model</label><label>□ RAG over procurement policy documents with citations</label><label>□ Tool calling with argument validation</label><label>□ Agent state and explicit stopping conditions</label><label>□ Human approval before actions that change data</label><label>□ Timeouts, retries, idempotency, and error handling</label><label>□ Unit and integration tests</label><label>□ Logs/traces and a small evaluation set</label><label>□ README, architecture diagram, screenshots, and demo</label>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Interview readiness checks</h2>
+    <div class="grid">
+      <article class="card"><h3>Coding</h3><p>Explain the brute-force idea, improve it, state time/space complexity, test edge cases, and write readable code.</p></article>
+      <article class="card"><h3>Software engineering</h3><p>Explain layers, data flow, testing strategy, reliability, permissions, trade-offs, and how failures are handled.</p></article>
+      <article class="card"><h3>AI systems</h3><p>Explain RAG, tool calling, agent state, memory, evaluation, prompt injection, hallucinations, cost, and latency.</p></article>
+      <article class="card"><h3>Project ownership</h3><p>Explain what you personally built, the hardest bug, alternatives considered, measurable results, and the next improvement.</p></article>
+    </div>
+  </section>
+
+  <p class="footer-note">This page is an additive internship-preparation layer. It does not modify the GitHub OAuth connection, repository selection, saved practice files, or existing course progress.</p>
+</main>
+</body>
+</html>
