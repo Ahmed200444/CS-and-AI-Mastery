@@ -121,11 +121,101 @@
 
   const themeStyles = document.createElement('style');
   themeStyles.textContent = `
-    html[data-theme="dark"], html[data-theme="dark"] body { color-scheme: dark; background:#101720 !important; color:#edf3f8 !important; }
-    html[data-theme="dark"] body, html[data-theme="dark"] main, html[data-theme="dark"] section, html[data-theme="dark"] article { background-color:#101720; }
-    html[data-theme="dark"] .card, html[data-theme="dark"] [class*="card"], html[data-theme="dark"] [class*="panel"], html[data-theme="dark"] [class*="lesson"] { background-color:#17212c; color:#edf3f8; border-color:#344352; }
-    html[data-theme="dark"] h1, html[data-theme="dark"] h2, html[data-theme="dark"] h3, html[data-theme="dark"] h4, html[data-theme="dark"] p, html[data-theme="dark"] li, html[data-theme="dark"] label { color:inherit; }
-    html[data-theme="dark"] input, html[data-theme="dark"] textarea, html[data-theme="dark"] select { background:#111b25; color:#edf3f8; border-color:#455464; }
+    html[data-theme="dark"] { color-scheme: dark; background:#0d141c !important; }
+    html[data-theme="dark"] body,
+    html[data-theme="dark"] #app,
+    html[data-theme="dark"] #root,
+    html[data-theme="dark"] main,
+    html[data-theme="dark"] .app,
+    html[data-theme="dark"] .page,
+    html[data-theme="dark"] .course-page,
+    html[data-theme="dark"] .course-shell,
+    html[data-theme="dark"] .course-layout,
+    html[data-theme="dark"] .content,
+    html[data-theme="dark"] .main-content,
+    html[data-theme="dark"] .lesson-content {
+      background:#0d141c !important;
+      color:#edf3f8 !important;
+    }
+
+    html[data-theme="dark"] aside,
+    html[data-theme="dark"] nav,
+    html[data-theme="dark"] header,
+    html[data-theme="dark"] footer,
+    html[data-theme="dark"] .sidebar,
+    html[data-theme="dark"] .course-sidebar,
+    html[data-theme="dark"] [class*="sidebar"],
+    html[data-theme="dark"] [class*="navigation"] {
+      background:#111b25 !important;
+      color:#edf3f8 !important;
+      border-color:#2d3a47 !important;
+    }
+
+    html[data-theme="dark"] section,
+    html[data-theme="dark"] article,
+    html[data-theme="dark"] .card,
+    html[data-theme="dark"] [class*="card"],
+    html[data-theme="dark"] [class*="panel"],
+    html[data-theme="dark"] [class*="lesson"],
+    html[data-theme="dark"] [class*="module"],
+    html[data-theme="dark"] [class*="section"],
+    html[data-theme="dark"] [class*="progress"] {
+      background-color:#17212c !important;
+      color:#edf3f8 !important;
+      border-color:#344352 !important;
+    }
+
+    html[data-theme="dark"] h1,
+    html[data-theme="dark"] h2,
+    html[data-theme="dark"] h3,
+    html[data-theme="dark"] h4,
+    html[data-theme="dark"] h5,
+    html[data-theme="dark"] h6,
+    html[data-theme="dark"] p,
+    html[data-theme="dark"] li,
+    html[data-theme="dark"] span,
+    html[data-theme="dark"] label,
+    html[data-theme="dark"] strong,
+    html[data-theme="dark"] small,
+    html[data-theme="dark"] a {
+      color:#edf3f8;
+    }
+
+    html[data-theme="dark"] .muted,
+    html[data-theme="dark"] [class*="muted"],
+    html[data-theme="dark"] [class*="subtitle"],
+    html[data-theme="dark"] [class*="description"] {
+      color:#b7c3cf !important;
+    }
+
+    html[data-theme="dark"] button,
+    html[data-theme="dark"] input,
+    html[data-theme="dark"] textarea,
+    html[data-theme="dark"] select {
+      background:#111b25;
+      color:#edf3f8;
+      border-color:#455464;
+    }
+
+    html[data-theme="dark"] pre,
+    html[data-theme="dark"] code,
+    html[data-theme="dark"] .code-editor,
+    html[data-theme="dark"] [class*="code"] {
+      background:#0b1118;
+      color:#f4f7fa;
+      border-color:#344352;
+    }
+
+    html[data-theme="dark"] table,
+    html[data-theme="dark"] th,
+    html[data-theme="dark"] td {
+      background:#131d27;
+      color:#edf3f8;
+      border-color:#344352;
+    }
+
+    html[data-theme="dark"] hr { border-color:#2d3a47; }
+    html[data-theme="dark"] svg { color:inherit; }
     html[data-theme="light"], html[data-theme="light"] body { color-scheme: light; }
   `;
   document.head.appendChild(themeStyles);
