@@ -74,6 +74,85 @@
 
   const THEME_KEY = 'cs-ai-mastery-theme';
 
+  const themeStyles = document.createElement('style');
+  themeStyles.textContent = `
+    html[data-theme="dark"], html[data-theme="dark"] body { color-scheme:dark; background:#0f1720 !important; color:#edf3f8 !important; }
+    html[data-theme="dark"] body,
+    html[data-theme="dark"] #app,
+    html[data-theme="dark"] main,
+    html[data-theme="dark"] aside,
+    html[data-theme="dark"] nav,
+    html[data-theme="dark"] header,
+    html[data-theme="dark"] footer,
+    html[data-theme="dark"] section,
+    html[data-theme="dark"] article { background-color:#0f1720 !important; color:#edf3f8 !important; }
+    html[data-theme="dark"] .theme-force-surface { background-color:#17212c !important; background-image:none !important; color:#edf3f8 !important; border-color:#344352 !important; }
+    html[data-theme="dark"] .theme-force-page { background-color:#0f1720 !important; background-image:none !important; color:#edf3f8 !important; }
+    html[data-theme="dark"] .theme-force-text { color:#edf3f8 !important; }
+    html[data-theme="dark"] .theme-force-muted { color:#c8d3dc !important; }
+    html[data-theme="dark"] input,
+    html[data-theme="dark"] textarea,
+    html[data-theme="dark"] select { background:#111b25 !important; color:#edf3f8 !important; border-color:#455464 !important; }
+    html[data-theme="dark"] table,
+    html[data-theme="dark"] th,
+    html[data-theme="dark"] td { color:#edf3f8 !important; border-color:#344352 !important; }
+    html[data-theme="light"], html[data-theme="light"] body { color-scheme:light; }
+  `;
+  document.head.appendChild(themeStyles);
+
+  function rgbParts(value) {
+    const match = String(value || '').match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/i);
+    return match ? match.slice(1, 4).map(Number) : null;
+  }
+
+  function luminance(rgb) {
+    if (!rgb) return null;
+    return (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000;
+  }
+
+  function scanThemeTargets() {
+    if (!document.body) return;
+    const dark = document.documentElement.dataset.theme === 'dark';
+    const structural = document.querySelectorAll('body, main, aside, nav, header, footer, section, article, div, form, fieldset');
+    structural.forEach(element => {
+      element.classList.remove('theme-force-surface', 'theme-force-page');
+      if (!dark) return;
+      if (element.closest('pre, code, .code-editor, [class*="editor"], [class*="terminal"]')) return;
+      const style = getComputedStyle(element);
+      const lum = luminance(rgbParts(style.backgroundColor));
+      if (lum !== null && lum > 205) {
+        const isPageLike = element === document.body || element.matches('main, aside, nav, header, footer') || element.clientWidth > innerWidth * 0.75;
+        element.classList.add(isPageLike ? 'theme-force-page' : 'theme-force-surface');
+      }
+    });
+
+    document.querySelectorAll('h1,h2,h3,h4,h5,h6,p,span,a,li,label,strong,small').forEach(element => {
+      element.classList.remove('theme-force-text', 'theme-force-muted');
+      if (!dark || element.closest('pre, code, .code-editor, [class*="editor"], [class*="terminal"]')) return;
+      const style = getComputedStyle(element);
+      const lum = luminance(rgbParts(style.color));
+      if (lum !== null && lum < 125) element.classList.add('theme-force-text');
+      else if (lum !== null && lum < 175) element.classList.add('theme-force-muted');
+    });
+  }
+
+  let scanTimer;
+  function scheduleThemeScan() {
+    clearTimeout(scanTimer);
+    scanTimer = setTimeout(scanThemeTargets, 40);
+  }
+
+  function updateThemeButtons(dark) {
+    document.querySelectorAll('button, [role="button"]').forEach(button => {
+      const text = clean(button.textContent);
+      if (text === 'dark' || text === 'light' || text.includes('dark mode') || text.includes('light mode')) {
+        button.textContent = dark ? '☀️ Light' : '🌙 Dark';
+        button.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+        button.setAttribute('aria-pressed', String(dark));
+      }
+    });
+  }
+
   function applyTheme(theme) {
     const dark = theme === 'dark';
     const root = document.documentElement;
@@ -87,15 +166,10 @@
     }
     localStorage.setItem(THEME_KEY, theme);
     localStorage.setItem('theme', theme);
-
-    document.querySelectorAll('button, [role="button"]').forEach(button => {
-      const text = clean(button.textContent);
-      if (text === 'dark' || text === 'light' || text.includes('dark mode') || text.includes('light mode')) {
-        button.textContent = dark ? '☀️ Light' : '🌙 Dark';
-        button.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
-        button.setAttribute('aria-pressed', String(dark));
-      }
-    });
+    updateThemeButtons(dark);
+    scheduleThemeScan();
+    setTimeout(scanThemeTargets, 250);
+    setTimeout(scanThemeTargets, 1000);
   }
 
   function currentTheme() {
@@ -119,110 +193,21 @@
     applyTheme(currentTheme() === 'dark' ? 'light' : 'dark');
   }, true);
 
-  const themeStyles = document.createElement('style');
-  themeStyles.textContent = `
-    html[data-theme="dark"] { color-scheme: dark; background:#0d141c !important; }
-    html[data-theme="dark"] body,
-    html[data-theme="dark"] #app,
-    html[data-theme="dark"] #root,
-    html[data-theme="dark"] main,
-    html[data-theme="dark"] .app,
-    html[data-theme="dark"] .page,
-    html[data-theme="dark"] .course-page,
-    html[data-theme="dark"] .course-shell,
-    html[data-theme="dark"] .course-layout,
-    html[data-theme="dark"] .content,
-    html[data-theme="dark"] .main-content,
-    html[data-theme="dark"] .lesson-content {
-      background:#0d141c !important;
-      color:#edf3f8 !important;
-    }
+  const observer = new MutationObserver(() => {
+    if (document.documentElement.dataset.theme === 'dark') scheduleThemeScan();
+  });
 
-    html[data-theme="dark"] aside,
-    html[data-theme="dark"] nav,
-    html[data-theme="dark"] header,
-    html[data-theme="dark"] footer,
-    html[data-theme="dark"] .sidebar,
-    html[data-theme="dark"] .course-sidebar,
-    html[data-theme="dark"] [class*="sidebar"],
-    html[data-theme="dark"] [class*="navigation"] {
-      background:#111b25 !important;
-      color:#edf3f8 !important;
-      border-color:#2d3a47 !important;
-    }
+  function start() {
+    applyTheme(localStorage.getItem(THEME_KEY) || localStorage.getItem('theme') || 'light');
+    observer.observe(document.body, { childList:true, subtree:true, attributes:true, attributeFilter:['class','style'] });
+  }
 
-    html[data-theme="dark"] section,
-    html[data-theme="dark"] article,
-    html[data-theme="dark"] .card,
-    html[data-theme="dark"] [class*="card"],
-    html[data-theme="dark"] [class*="panel"],
-    html[data-theme="dark"] [class*="lesson"],
-    html[data-theme="dark"] [class*="module"],
-    html[data-theme="dark"] [class*="section"],
-    html[data-theme="dark"] [class*="progress"] {
-      background-color:#17212c !important;
-      color:#edf3f8 !important;
-      border-color:#344352 !important;
-    }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else start();
 
-    html[data-theme="dark"] h1,
-    html[data-theme="dark"] h2,
-    html[data-theme="dark"] h3,
-    html[data-theme="dark"] h4,
-    html[data-theme="dark"] h5,
-    html[data-theme="dark"] h6,
-    html[data-theme="dark"] p,
-    html[data-theme="dark"] li,
-    html[data-theme="dark"] span,
-    html[data-theme="dark"] label,
-    html[data-theme="dark"] strong,
-    html[data-theme="dark"] small,
-    html[data-theme="dark"] a {
-      color:#edf3f8;
-    }
-
-    html[data-theme="dark"] .muted,
-    html[data-theme="dark"] [class*="muted"],
-    html[data-theme="dark"] [class*="subtitle"],
-    html[data-theme="dark"] [class*="description"] {
-      color:#b7c3cf !important;
-    }
-
-    html[data-theme="dark"] button,
-    html[data-theme="dark"] input,
-    html[data-theme="dark"] textarea,
-    html[data-theme="dark"] select {
-      background:#111b25;
-      color:#edf3f8;
-      border-color:#455464;
-    }
-
-    html[data-theme="dark"] pre,
-    html[data-theme="dark"] code,
-    html[data-theme="dark"] .code-editor,
-    html[data-theme="dark"] [class*="code"] {
-      background:#0b1118;
-      color:#f4f7fa;
-      border-color:#344352;
-    }
-
-    html[data-theme="dark"] table,
-    html[data-theme="dark"] th,
-    html[data-theme="dark"] td {
-      background:#131d27;
-      color:#edf3f8;
-      border-color:#344352;
-    }
-
-    html[data-theme="dark"] hr { border-color:#2d3a47; }
-    html[data-theme="dark"] svg { color:inherit; }
-    html[data-theme="light"], html[data-theme="light"] body { color-scheme: light; }
-  `;
-  document.head.appendChild(themeStyles);
-
-  const savedTheme = localStorage.getItem(THEME_KEY) || localStorage.getItem('theme') || 'light';
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => applyTheme(savedTheme));
-  else applyTheme(savedTheme);
+  window.addEventListener('hashchange', () => {
+    setTimeout(() => applyTheme(currentTheme()), 60);
+  });
 
   window.CSAIMasteryPracticeFolder = { currentTrack: detectTrack, routePath };
   window.CSAIMasteryTheme = { apply: applyTheme, current: currentTheme };
