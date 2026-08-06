@@ -31,3 +31,77 @@
   document.readyState==='loading'?document.addEventListener('DOMContentLoaded',start):start();window.addEventListener('hashchange',()=>setTimeout(()=>apply(current()),80));
   window.CSAIMasteryPracticeFolder={currentTrack:detectTrack,routePath};window.CSAIMasteryTheme={apply,current};
 })();
+
+(() => {
+  'use strict';
+  const esc=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+  let courseData=null;
+  function courses(){
+    if(courseData)return courseData;
+    try{courseData=JSON.parse(document.getElementById('coursedata')?.textContent||'[]')}catch(error){courseData=[];console.error('[CS AI Mastery] Extended lesson data failed',error)}
+    return courseData;
+  }
+  function activeCourse(){
+    const route=location.hash.replace(/^#/,'');
+    return courses().find(course=>course.linked===route)||null;
+  }
+  function currentLesson(course,card){
+    const title=(card.querySelector('h2')?.textContent||'').trim();
+    return (course?.lessons||[]).find(lesson=>(lesson.title||'').trim()===title)||null;
+  }
+  function list(value){return Array.isArray(value)?value.filter(Boolean):value?[value]:[]}
+  function challenge(course,lesson){
+    const exercise=(course.exercises||[]).find(item=>item.lessonId===lesson.id)||(course.exercises||[])[0];
+    return exercise?.prompt||`Build a small example that uses ${lesson.title}, test one normal case and one edge case, then explain the result.`;
+  }
+  function interview(course,lesson){
+    const concepts=list(lesson.concepts);
+    const first=concepts[0]||lesson.title;
+    const second=concepts[1]||'the main trade-off';
+    return [
+      `Explain ${first} in simple words and give one practical example.`,
+      `What mistake is most likely when applying ${lesson.title}, and how would you detect it?`,
+      `How would you compare two approaches using ${second}, correctness, readability and performance?`
+    ];
+  }
+  function addStyles(){
+    if(document.getElementById('cr-depth-style'))return;
+    const style=document.createElement('style');
+    style.id='cr-depth-style';
+    style.textContent=`.cr-depth{margin-top:22px;display:grid;gap:14px}.cr-depth-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.cr-depth-box{padding:15px;border:1px solid var(--border,#d7dee7);border-radius:12px;background:rgba(127,127,127,.07)}.cr-depth-box h3{margin:0 0 9px}.cr-depth-box p,.cr-depth-box li{line-height:1.65}.cr-depth-callout{border-left:4px solid #6d7ff2}.cr-depth-check{list-style:none;padding:0}.cr-depth-check li{padding:7px 0 7px 27px;position:relative}.cr-depth-check li:before{content:'□';position:absolute;left:0;font-weight:900;color:#168a67}.cr-depth details{border:1px solid var(--border,#d7dee7);border-radius:12px;padding:13px 15px;background:rgba(127,127,127,.05)}.cr-depth summary{font-weight:850;cursor:pointer}.cr-depth textarea{width:100%;min-height:90px;margin-top:10px;padding:10px;border:1px solid var(--border,#c8d1dc);border-radius:9px;background:transparent;color:inherit;font:inherit;box-sizing:border-box}html[data-theme=dark] .cr-depth-box,html[data-theme=dark] .cr-depth details{background:#111b25!important;border-color:#344352!important}@media(max-width:760px){.cr-depth-grid{grid-template-columns:1fr}.cr-depth-box{padding:13px}.cr-depth-box p,.cr-depth-box li{font-size:.92rem}}`;
+    document.head.appendChild(style);
+  }
+  function enhance(card){
+    if(card.dataset.depthExpanded==='true')return;
+    const course=activeCourse();
+    const lesson=course&&currentLesson(course,card);
+    if(!course||!lesson)return;
+    card.dataset.depthExpanded='true';
+    const concepts=list(lesson.concepts);
+    const objectives=list(lesson.objectives);
+    const mistakes=list(lesson.commonMistakes||lesson.commonMistake);
+    const industry=list(course.industryUsage).map(item=>typeof item==='string'?item:`${item.company?item.company+': ':''}${item.usage||''}`);
+    const checks=[
+      `I can explain ${lesson.title} without reading the lesson.`,
+      concepts[0]?`I can identify when ${concepts[0]} should be used.`:'I can identify when this technique should be used.',
+      'I can predict one likely failure or edge case.',
+      'I can complete the guided task without revealing the solution.',
+      'I can explain the trade-off in an interview answer.'
+    ];
+    const reasoning=[
+      objectives[0]||`State the exact result ${lesson.title} should produce.`,
+      concepts[0]?`Identify the role of ${concepts[0]} in the solution.`:'Identify the important inputs, rules and constraints.',
+      concepts[1]?`Connect ${concepts[1]} to the first concept and trace the flow.`:'Trace the process from input to output.',
+      mistakes[0]?`Test specifically for this failure: ${mistakes[0]}`:'Test a normal case, an edge case and an invalid case.',
+      'Explain why the final approach is correct and what it costs.'
+    ];
+    const section=document.createElement('section');
+    section.className='cr-depth';
+    section.innerHTML=`<div class="cr-depth-grid"><div class="cr-depth-box"><h3>Deep dive: how the parts connect</h3><ol>${reasoning.map(item=>`<li>${esc(item)}</li>`).join('')}</ol></div><div class="cr-depth-box cr-depth-callout"><h3>Decision checklist</h3><ul><li>What is the required input and output?</li><li>Which constraint changes the best approach?</li><li>What state or data must be tracked?</li><li>What can fail, and how should failure be handled?</li><li>How will you prove the result is correct?</li></ul></div></div><div class="cr-depth-grid"><div class="cr-depth-box"><h3>Debugging scenario</h3><p>Assume your solution works for the example but fails on a larger or unusual input. Reproduce the smallest failing case, inspect the first incorrect value, check each assumption, and add a regression test before changing the code.</p>${mistakes.length?`<p><b>Start by checking:</b> ${esc(mistakes.join(' • '))}</p>`:''}</div><div class="cr-depth-box"><h3>Independent challenge</h3><p>${esc(challenge(course,lesson))}</p><p><b>Extension:</b> improve readability, handle one extra edge case, and describe time or resource cost.</p></div></div><details><summary>Interview practice</summary><ol>${interview(course,lesson).map(item=>`<li>${esc(item)}</li>`).join('')}</ol><textarea aria-label="Interview answer notes" placeholder="Write your answer in your own words..."></textarea></details><details><summary>Real-world connection</summary><p>${esc(industry[0]||course.careerApplications||`${lesson.title} supports practical work in ${course.title}.`)}</p><p>Describe what could go wrong in production and what logging, validation, testing or monitoring would make the system safer.</p></details><div class="cr-depth-box"><h3>Mastery checklist</h3><ul class="cr-depth-check">${checks.map(item=>`<li>${esc(item)}</li>`).join('')}</ul></div>`;
+    const footer=card.querySelector('.cr-foot');
+    footer?card.insertBefore(section,footer):card.appendChild(section);
+  }
+  function scan(){addStyles();document.querySelectorAll('.cr-card').forEach(enhance)}
+  function start(){scan();new MutationObserver(()=>requestAnimationFrame(scan)).observe(document.body,{childList:true,subtree:true});window.addEventListener('hashchange',()=>setTimeout(scan,100))}
+  document.readyState==='loading'?document.addEventListener('DOMContentLoaded',start):start();
+})();
