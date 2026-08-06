@@ -1,206 +1,275 @@
 (() => {
   'use strict';
 
-  const C = {
-    'git-github': {name:'Git & GitHub', lessons:[
-      ['Repositories and the Git workflow','Understand working directory, staging area, commits, and why Git records snapshots rather than simply saving files.','Create a repository, stage one file, commit it, then inspect the history.'],
-      ['Branches','Use branches to develop safely without changing the stable version of a project.','Create a feature branch, make a change, and switch between branches.'],
-      ['Merging and conflicts','Combine branches and resolve conflicts when two changes affect the same lines.','Create a small conflict and resolve it manually.'],
-      ['Remote repositories','Connect local Git to GitHub using remotes, push, pull, and fetch.','Push a branch and pull a remote update.'],
-      ['Pull requests and reviews','Use pull requests to explain, review, test, and merge changes.','Open a PR with a useful title, summary, and testing notes.'],
-      ['Professional Git habits','Write clear commits, protect secrets, use .gitignore, tags, releases, and safe recovery commands.','Clean a short commit history and create a tagged release.'] ], project:'Publish a small project through a branch, pull request, review checklist, and release.'},
-    linux:{name:'Linux & Command Line', lessons:[
-      ['Terminal fundamentals','Learn commands, arguments, flags, paths, and how the shell interprets what you type.','Navigate a practice folder using pwd, ls, and cd.'],
-      ['Files and directories','Create, copy, move, inspect, and remove files safely.','Use mkdir, touch, cp, mv, cat, and rm on sample files.'],
-      ['Search and text processing','Find files and search text with find, grep, pipes, and redirection.','Search log files and save matching lines to a new file.'],
-      ['Permissions and processes','Understand users, chmod, running processes, signals, and background jobs.','Change a script permission and inspect a running process.'],
-      ['Environment and packages','Use environment variables, PATH, package managers, and virtual environments.','Create a Python environment and install a package.'],
-      ['Bash scripting and SSH','Automate commands with variables, conditions, loops, scripts, and basic remote access.','Write a backup script and explain an SSH connection.'] ], project:'Build a command-line system health and backup toolkit.'},
-    dsa:{name:'Data Structures & Algorithms', lessons:[
-      ['Complexity and arrays','Measure time and space complexity and understand array access, updates, and traversal.','Compare two array solutions and state their Big-O complexity.'],
-      ['Hash maps and sets','Use fast key lookup for counting, duplicates, complements, and grouping.','Solve Two Sum and a frequency-count problem.'],
-      ['Two pointers and sliding window','Process ranges efficiently without checking every possible pair or subarray.','Solve one two-pointer and one fixed-window problem.'],
-      ['Stacks, queues, and linked lists','Model last-in-first-out, first-in-first-out, and node-based sequences.','Validate brackets and implement a simple queue.'],
-      ['Trees, heaps, and graphs','Traverse hierarchical and connected data using BFS and DFS.','Traverse a tree and find a shortest unweighted path.'],
-      ['Recursion and dynamic programming','Break problems into repeated smaller states and store reusable results.','Solve a memoized staircase or coin-change problem.'] ], project:'Create an algorithm toolkit with tested solutions and complexity explanations.'},
-    'problem-solving':{name:'Problem Solving', lessons:[
-      ['Understand the problem','Translate wording into inputs, outputs, constraints, and examples.','Rewrite a problem as a precise specification.'],
-      ['Break it into steps','Decompose a large problem into small testable operations.','Write pseudocode before coding.'],
-      ['Choose a pattern','Recognize counting, lookup, traversal, window, recursion, and state patterns.','Match ten prompts to likely patterns.'],
-      ['Handle edge cases','Identify empty input, duplicates, boundaries, invalid values, and large cases.','Create an edge-case checklist for a function.'],
-      ['Test and debug reasoning','Trace variables, test assumptions, and isolate the first incorrect step.','Dry-run a failing case in a table.'],
-      ['Improve the solution','Compare correctness, readability, performance, and maintainability.','Refactor a working but unclear solution.'] ], project:'Build a collection of solved problems with pseudocode, tests, and reflections.'},
-    debugging:{name:'Debugging', lessons:[
-      ['Reproduce the bug','Create a reliable minimal case before changing code.','Turn a vague report into exact reproduction steps.'],
-      ['Read errors and traces','Interpret exception types, messages, stack traces, and failing lines.','Explain a Python traceback.'],
-      ['Inspect program state','Use prints, logging, breakpoints, watches, and variable inspection.','Locate the first wrong variable value.'],
-      ['Form and test hypotheses','Change one thing at a time and use evidence instead of guessing.','Write three hypotheses and tests for a bug.'],
-      ['Debug APIs and data flows','Inspect requests, responses, status codes, schemas, and transformations.','Diagnose a malformed JSON response.'],
-      ['Prevent regressions','Add a test that fails before the fix and passes afterward.','Create a regression test for a corrected bug.'] ], project:'Complete a bug-investigation lab with reports, fixes, and regression tests.'},
-    testing:{name:'Software Testing', lessons:[
-      ['Testing mindset','Understand why tests provide confidence rather than proving software is perfect.','Identify the most important behaviors to test.'],
-      ['Unit tests','Test one function or class independently with clear arrange-act-assert structure.','Write tests for normal and boundary cases.'],
-      ['Fixtures and mocks','Prepare reusable data and replace external dependencies safely.','Mock an API response in a test.'],
-      ['Integration tests','Check whether components such as API, database, and services work together.','Test a complete request flow.'],
-      ['Error and edge-case testing','Verify failures, invalid inputs, exceptions, and unusual boundaries.','Create a negative-test table.'],
-      ['Coverage and CI','Use coverage intelligently and run tests automatically on every change.','Design a basic GitHub Actions test workflow.'] ], project:'Build and test a small Python service with unit and integration coverage.'},
-    'software-engineering':{name:'Software Engineering Fundamentals', lessons:[
-      ['Requirements','Turn user needs into functional requirements, constraints, and acceptance criteria.','Write requirements for a small feature.'],
-      ['Modular design','Separate responsibilities into understandable components and interfaces.','Split a large script into modules.'],
-      ['Clean code','Use clear names, small functions, consistent style, and useful documentation.','Refactor unclear code without changing behavior.'],
-      ['Error handling and reliability','Validate inputs, handle failures, log useful context, and avoid silent errors.','Design failure behavior for a service.'],
-      ['Collaboration workflow','Use issues, branches, reviews, documentation, and version control effectively.','Plan a feature from issue to merge.'],
-      ['Trade-offs and maintenance','Balance speed, quality, complexity, performance, and future change.','Compare two designs and justify one.'] ], project:'Deliver a production-style feature case study from requirements through tests and review.'},
-    apis:{name:'APIs', lessons:[
-      ['HTTP and client-server basics','Understand clients, servers, requests, responses, URLs, endpoints, headers, and bodies.','Label every part of a sample HTTP request.'],
-      ['HTTP methods','Use GET to read, POST to create, PUT/PATCH to update, and DELETE to remove resources.','Choose the correct method for ten scenarios.'],
-      ['Status codes','Interpret successful, client-error, and server-error responses.','Match common status codes to situations.'],
-      ['JSON and validation','Send structured request bodies and validate required fields and types.','Create and validate a JSON purchase request.'],
-      ['Authentication','Understand API keys, bearer tokens, sessions, permissions, and safe secret storage.','Add a mock Authorization header correctly.'],
-      ['Errors, rate limits, and pagination','Handle failures, retries, limits, timeouts, and multi-page data.','Write logic for a paginated, rate-limited endpoint.'] ], project:'Build and document a reliable REST API client and a small API service.'},
-    'backend-development':{name:'Backend Development', lessons:[
-      ['Backend architecture','Understand routes, controllers, services, repositories, databases, and external systems.','Draw the flow of one request.'],
-      ['Building REST services','Create endpoints, parse requests, validate data, and return consistent responses.','Build CRUD endpoints with FastAPI.'],
-      ['Databases and persistence','Store, query, update, and relate application data safely.','Connect an API to a small SQL database.'],
-      ['Authentication and authorization','Identify users and control which actions each role may perform.','Protect an admin-only endpoint.'],
-      ['Reliability and observability','Add logging, error handling, timeouts, retries, and health checks.','Diagnose a failed service request.'],
-      ['Testing and deployment readiness','Test routes and services and prepare configuration for deployment.','Write API tests and a production checklist.'] ], project:'Build a tested task-management or procurement backend API.'},
-    databases:{name:'Databases', lessons:[
-      ['Data modeling','Turn real entities and relationships into tables, keys, and constraints.','Design a procurement schema.'],
-      ['Normalization','Reduce duplication and update problems while keeping queries practical.','Normalize a messy table.'],
-      ['Indexes','Understand how indexes speed reads and affect writes and storage.','Choose indexes for common queries.'],
-      ['Transactions','Use atomicity, consistency, isolation, and durability for safe multi-step operations.','Design a purchase-and-payment transaction.'],
-      ['Query planning','Read execution plans and identify scans, joins, and bottlenecks.','Compare two query plans.'],
-      ['Database reliability','Handle migrations, backups, concurrency, permissions, and recovery.','Create a safe migration plan.'] ], project:'Create an application data layer with schema, migrations, indexes, and transactions.'},
-    'computer-networks':{name:'Computer Networks', lessons:[
-      ['Network layers','Understand how application data travels through protocols and network layers.','Trace a web request from browser to server.'],
-      ['IP, ports, and routing','Understand addresses, ports, routers, private networks, and NAT.','Explain how a client reaches a server port.'],
-      ['DNS','Learn how names are translated into addresses and how caching affects results.','Trace a DNS lookup.'],
-      ['TCP and UDP','Compare reliable connections with lightweight datagrams.','Choose TCP or UDP for common applications.'],
-      ['HTTP and TLS','Connect networking concepts to web requests and encrypted communication.','Explain the stages of an HTTPS connection.'],
-      ['Diagnostics','Use ping, traceroute, nslookup/dig, curl, and connection tools.','Diagnose a simulated connectivity failure.'] ], project:'Build a network diagnostic toolkit and troubleshooting report.'},
-    'web-development':{name:'Web Development', lessons:[
-      ['HTML structure','Create semantic, accessible page structure using meaningful elements.','Build a simple structured page.'],
-      ['CSS layout and responsive design','Use the box model, flexbox, grid, and media queries.','Create a responsive card layout.'],
-      ['JavaScript fundamentals','Use variables, functions, arrays, objects, events, and DOM updates.','Build an interactive form.'],
-      ['State and data','Manage UI state and display data returned from APIs.','Render a list from JSON.'],
-      ['Accessibility and UX','Use labels, keyboard support, focus, contrast, and clear feedback.','Audit a form for accessibility.'],
-      ['Testing and deployment','Test behavior, handle errors, optimize assets, and deploy a site.','Deploy a small app and verify it on mobile.'] ], project:'Build a responsive portfolio web application connected to an API.'},
-    'machine-learning':{name:'Machine Learning', lessons:[
-      ['ML problem framing','Distinguish classification, regression, clustering, and recommendation problems.','Frame a business problem as an ML task.'],
-      ['Data preparation','Clean data, encode features, handle missing values, and split datasets correctly.','Prepare a small tabular dataset.'],
-      ['Core models','Understand linear models, trees, nearest neighbors, and ensembles.','Train and compare two baseline models.'],
-      ['Evaluation','Use suitable metrics, validation, confusion matrices, and error analysis.','Evaluate a classifier beyond accuracy.'],
-      ['Overfitting and improvement','Use regularization, cross-validation, feature work, and tuning.','Diagnose an overfitting model.'],
-      ['Inference and reproducibility','Save preprocessing and models and reproduce predictions reliably.','Create a simple inference script.'] ], project:'Build an evaluated prediction system with a reproducible inference pipeline.'},
-    'deep-learning':{name:'Deep Learning', lessons:[
-      ['Neural network foundations','Understand layers, weights, activations, forward passes, and learned representations.','Calculate the shape through a small network.'],
-      ['Loss and optimization','Use loss functions, gradients, backpropagation, and optimizers.','Explain one training step.'],
-      ['PyTorch workflow','Use tensors, datasets, DataLoaders, modules, optimizers, and training loops.','Train a small PyTorch network.'],
-      ['Regularization','Use dropout, normalization, augmentation, and early stopping.','Improve an overfitting model.'],
-      ['CNNs and sequence models','Understand architectures for images and sequential data.','Choose an architecture for a task.'],
-      ['Evaluation and debugging','Track metrics, inspect failures, and diagnose unstable training.','Debug a training curve.'] ], project:'Train and evaluate a PyTorch classifier with documented experiments.'},
-    transformers:{name:'Transformers', lessons:[
-      ['Embeddings and tokens','Represent discrete tokens as vectors that models can process.','Inspect tokenization and embedding shapes.'],
-      ['Attention intuition','Understand queries, keys, values, and weighted information gathering.','Work through a tiny attention example.'],
-      ['Self-attention and masking','Model relationships within a sequence and control which positions can attend.','Compare encoder and causal masks.'],
-      ['Transformer blocks','Combine attention, feed-forward layers, residual connections, and normalization.','Trace data through one block.'],
-      ['Encoder and decoder models','Understand BERT-style, GPT-style, and encoder-decoder architectures.','Choose a model family for a task.'],
-      ['Fine-tuning and evaluation','Adapt pretrained models and measure quality, cost, and failure modes.','Plan a fine-tuning experiment.'] ], project:'Create a transformer exploration notebook and fine-tuned text model.'},
-    'hugging-face':{name:'Hugging Face', lessons:[
-      ['Hub and model cards','Find models and understand licenses, intended use, limitations, and files.','Evaluate two model cards.'],
-      ['Tokenizers','Load tokenizers and understand truncation, padding, and special tokens.','Tokenize a batch correctly.'],
-      ['Pipelines and inference','Run pretrained models and interpret structured outputs.','Build a simple inference pipeline.'],
-      ['Datasets','Load, transform, split, and batch datasets.','Prepare a dataset for training.'],
-      ['Trainer and fine-tuning','Configure training, evaluation, checkpoints, and metrics.','Fine-tune a small model.'],
-      ['Sharing and reproducibility','Save, document, and share models responsibly.','Write a model card for your result.'] ], project:'Fine-tune and document a transformer model with reproducible evaluation.'},
-    'generative-ai':{name:'Generative AI', lessons:[
-      ['Generative modeling','Understand how generative systems learn distributions and create new samples.','Compare discriminative and generative tasks.'],
-      ['Autoencoders and VAEs','Learn latent representations, reconstruction, sampling, and the VAE objective.','Build or analyze a simple VAE.'],
-      ['GANs','Understand generator-discriminator training, instability, and evaluation.','Trace a GAN training step.'],
-      ['Diffusion models','Understand adding noise, denoising, conditioning, and sampling.','Explain a diffusion sampling process.'],
-      ['Prompted generation','Control text and image generation using instructions, examples, and constraints.','Improve a weak prompt systematically.'],
-      ['Evaluation and safety','Measure quality, diversity, hallucination, bias, and misuse risks.','Create an evaluation rubric.'] ], project:'Build a small generative-model studio with evaluation and documentation.'},
-    llms:{name:'Large Language Models', lessons:[
-      ['LLM foundations','Understand tokens, next-token prediction, context, parameters, and inference.','Explain what happens after sending a prompt.'],
-      ['Prompt engineering','Use clear instructions, examples, roles, constraints, and decomposition.','Improve prompts for three tasks.'],
-      ['Structured outputs','Make models produce validated JSON or schema-constrained responses.','Parse and validate a model response.'],
-      ['Model APIs','Call models, handle streaming, configuration, errors, cost, and latency.','Build a small LLM API client.'],
-      ['Evaluation','Create test cases and score correctness, usefulness, safety, and consistency.','Build a small evaluation set.'],
-      ['Guardrails and production concerns','Handle hallucinations, prompt injection, privacy, limits, and fallbacks.','Design safe behavior for a business assistant.'] ], project:'Build an evaluated LLM application with structured outputs and safeguards.'},
-    rag:{name:'Retrieval-Augmented Generation', lessons:[
-      ['Why RAG','Understand how retrieval supplies external knowledge and reduces unsupported answers.','Identify when RAG is appropriate.'],
-      ['Document processing','Load, clean, split, and attach metadata to documents.','Design chunks for a policy document.'],
-      ['Embeddings and vector search','Represent meaning as vectors and retrieve similar chunks.','Run or trace a similarity search.'],
-      ['Retrieval quality','Use filters, hybrid search, reranking, and query rewriting.','Improve a weak retrieval result.'],
-      ['Answer generation and citations','Build grounded prompts and show evidence for claims.','Generate an answer with cited sources.'],
-      ['RAG evaluation','Measure retrieval recall, answer correctness, faithfulness, latency, and cost.','Create a RAG evaluation dataset.'] ], project:'Build a cited knowledge-base assistant with retrieval and answer evaluation.'},
-    'ai-agents':{name:'AI Agents', lessons:[
-      ['Agent foundations','Understand goals, state, observations, actions, and the agent loop.','Diagram a simple agent cycle.'],
-      ['Tool and function calling','Define tools with clear schemas, validate arguments, and return results.','Create tools for supplier search and budget checks.'],
-      ['Planning and routing','Break goals into steps and select the right tool or specialist.','Plan a multi-step procurement task.'],
-      ['Memory and state','Store short-term workflow state and carefully selected long-term memory.','Design an agent state object.'],
-      ['Reliability and guardrails','Use approvals, permissions, retries, timeouts, stopping conditions, and injection defenses.','Handle a failing or unsafe tool call.'],
-      ['Evaluation and observability','Trace decisions and measure task success, tool accuracy, cost, latency, and safety.','Build an agent test suite.'] ], project:'Build a procurement agent with RAG, tools, state, approvals, tests, and traces.'},
-    'model-deployment':{name:'Model Deployment', lessons:[
-      ['Inference services','Wrap a model in a reliable API with validated inputs and outputs.','Create a prediction endpoint.'],
-      ['Packaging dependencies','Pin versions, separate configuration, and make environments reproducible.','Prepare deployment requirements.'],
-      ['Performance','Measure latency, throughput, memory, batching, caching, and model size.','Profile an inference request.'],
-      ['Reliability','Use health checks, timeouts, retries, fallbacks, and graceful failures.','Design failure handling.'],
-      ['Monitoring','Track technical metrics, model quality, drift, errors, and usage.','Create a monitoring plan.'],
-      ['Release strategy','Use versions, staged rollouts, rollback, and model governance.','Plan a safe model update.'] ], project:'Deploy a monitored ML or LLM inference service.'},
-    docker:{name:'Docker', lessons:[
-      ['Containers and images','Understand images, containers, layers, registries, and isolation.','Run and inspect a container.'],
-      ['Dockerfiles','Build reproducible images using FROM, WORKDIR, COPY, RUN, and CMD.','Write a Dockerfile for a Python API.'],
-      ['Volumes and networking','Persist data and connect services securely.','Connect an API and database container.'],
-      ['Compose','Define and run multi-service applications.','Create a Compose file.'],
-      ['Security and optimization','Use small images, non-root users, secrets, and efficient layers.','Improve an unsafe Dockerfile.'],
-      ['Debugging containers','Inspect logs, processes, ports, files, and health checks.','Diagnose a container startup failure.'] ], project:'Containerize an AI application with health checks and multiple services.'},
-    cloud:{name:'Cloud Fundamentals', lessons:[
-      ['Cloud concepts','Understand compute, storage, networking, managed services, regions, and shared responsibility.','Map an app to cloud components.'],
-      ['Identity and secrets','Use roles, least privilege, secret managers, and secure configuration.','Design service permissions.'],
-      ['Deploying services','Deploy web APIs and background jobs using managed or virtualized compute.','Plan an API deployment.'],
-      ['Storage and databases','Choose object, block, file, relational, or NoSQL storage.','Select storage for several workloads.'],
-      ['Observability and reliability','Use logs, metrics, alerts, redundancy, backups, and recovery.','Create an operations checklist.'],
-      ['Cost and scaling','Estimate usage, autoscale responsibly, cache, and control spending.','Compare two deployment options.'] ], project:'Deploy an observable AI service with secure configuration and cost notes.'},
-    'system-design':{name:'System Design', lessons:[
-      ['Requirements and constraints','Clarify users, features, scale, latency, consistency, security, and cost.','Write requirements for an AI procurement platform.'],
-      ['High-level architecture','Divide systems into clients, APIs, services, data stores, queues, and external dependencies.','Draw a high-level design.'],
-      ['Data and communication','Choose schemas, APIs, synchronous calls, events, and queues.','Design a purchase-request flow.'],
-      ['Scaling and caching','Handle load using horizontal scaling, caching, partitioning, and asynchronous work.','Identify likely bottlenecks.'],
-      ['Reliability and security','Plan redundancy, retries, idempotency, permissions, auditing, and disaster recovery.','Design safe tool execution.'],
-      ['AI system design','Combine LLMs, RAG, agents, evaluations, guardrails, monitoring, and human approval.','Design a production AI agent architecture.'] ], project:'Create and present a GenAI solution architecture with trade-offs and failure handling.'}
-  };
+  let courseCache = null;
+  let routeCourse = null;
 
-  const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const completedKey = slug => `cs-ai-full-lessons-${slug}`;
-  const getDone = slug => new Set(JSON.parse(localStorage.getItem(completedKey(slug)) || '[]'));
-  const saveDone = (slug,set) => localStorage.setItem(completedKey(slug), JSON.stringify([...set]));
-
-  function courseRoot(){ return document.querySelector('main') || document.querySelector('[role="main"]') || document.body; }
-  function render(slug){
-    const cfg=C[slug], root=courseRoot();
-    const old=document.getElementById('full-study-track');
-    if(old) old.remove();
-    if(!cfg || ['python','sql','oop'].includes(slug) || !root) return;
-    const done=getDone(slug);
-    const box=document.createElement('section');
-    box.id='full-study-track'; box.dataset.track=slug;
-    box.innerHTML=`<div class="fst-head"><div><div class="fst-kicker">COMPLETE STUDY TRACK</div><h2>${esc(cfg.name)} — Lessons, Practice & Project</h2><p>Study the lessons in order, complete each practice task, then continue to the interactive labs already on this page.</p></div><div class="fst-progress"><strong>${done.size}/${cfg.lessons.length}</strong><span>lessons complete</span></div></div><div class="fst-lessons">${cfg.lessons.map((l,i)=>`<details class="fst-lesson" ${i===0?'open':''}><summary><span class="fst-num">${String(i+1).padStart(2,'0')}</span><span>${esc(l[0])}</span><label><input type="checkbox" data-lesson="${i}" ${done.has(i)?'checked':''}> Done</label></summary><div class="fst-body"><h4>Explanation</h4><p>${esc(l[1])}</p><h4>Practice</h4><p>${esc(l[2])}</p></div></details>`).join('')}</div><div class="fst-after"><div><h3>Exercises</h3><p>Complete the existing interactive tasks below this study track. Repeat any task you cannot explain without looking at the solution.</p></div><div><h3>Quick quiz</h3><p>After the lessons, explain the main concepts aloud and answer the course quiz before marking the track complete.</p></div><div><h3>Final GitHub project</h3><p>${esc(cfg.project)}</p><code>student-code/practice/${esc(slug)}/</code></div></div>`;
-    const heading=[...root.querySelectorAll('h1,h2')].find(h=>h.textContent.toLowerCase().includes(cfg.name.toLowerCase().split(' ')[0]));
-    const anchor=heading ? (heading.closest('section,article') || heading.parentElement) : root.firstElementChild;
-    if(anchor && anchor.parentNode===root) anchor.insertAdjacentElement('afterend',box); else root.insertBefore(box,root.firstChild);
-    box.addEventListener('change',e=>{ if(!e.target.matches('[data-lesson]'))return; const s=getDone(slug),n=Number(e.target.dataset.lesson); e.target.checked?s.add(n):s.delete(n); saveDone(slug,s); box.querySelector('.fst-progress strong').textContent=`${s.size}/${cfg.lessons.length}`; });
+  function courses(){
+    if(courseCache) return courseCache;
+    try {
+      const node = document.getElementById('coursedata');
+      courseCache = node ? (JSON.parse(node.textContent) || []) : [];
+    } catch (error) {
+      console.error('[CS AI Mastery] Could not parse course lesson data', error);
+      courseCache = [];
+    }
+    return courseCache;
   }
 
-  const style=document.createElement('style'); style.textContent=`
-  #full-study-track{margin:28px 0;padding:24px;border:1px solid #d7dee7;border-radius:18px;background:#f8fafc;color:#15202b;font-family:inherit}
-  .fst-head{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;margin-bottom:18px}.fst-kicker{font-size:12px;letter-spacing:.14em;font-weight:800;color:#17649a}.fst-head h2{margin:6px 0 8px;font-size:clamp(24px,3vw,38px)}.fst-head p{margin:0;max-width:760px;line-height:1.6}.fst-progress{min-width:120px;text-align:center;padding:14px;border-radius:14px;background:#162433;color:white}.fst-progress strong{display:block;font-size:24px}.fst-progress span{font-size:12px}.fst-lessons{display:grid;gap:10px}.fst-lesson{border:1px solid #d7dee7;border-radius:12px;background:white;overflow:hidden}.fst-lesson summary{display:grid;grid-template-columns:48px 1fr auto;gap:12px;align-items:center;padding:15px;cursor:pointer;font-weight:800}.fst-num{color:#17649a;font-size:18px}.fst-lesson label{font-size:13px;font-weight:600}.fst-body{padding:0 20px 18px 75px;border-top:1px solid #edf0f4}.fst-body h4{margin:16px 0 5px;color:#17649a}.fst-body p{margin:0;line-height:1.65}.fst-after{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}.fst-after>div{padding:16px;border-radius:12px;background:#eaf2f8}.fst-after h3{margin:0 0 8px}.fst-after p{line-height:1.5}.fst-after code{display:block;overflow:auto;padding:8px;background:#162433;color:white;border-radius:7px}
-  html[data-theme="dark"] #full-study-track{background:#111b25!important;color:#edf3f8!important;border-color:#344352!important}html[data-theme="dark"] .fst-lesson{background:#17212c!important;border-color:#344352!important}html[data-theme="dark"] .fst-body{border-color:#344352!important}html[data-theme="dark"] .fst-after>div{background:#17212c!important;color:#edf3f8!important}
-  @media(max-width:760px){.fst-head{display:block}.fst-progress{margin-top:14px}.fst-after{grid-template-columns:1fr}.fst-lesson summary{grid-template-columns:40px 1fr}.fst-lesson label{grid-column:2}.fst-body{padding-left:20px}}
-  `; document.head.appendChild(style);
+  function courseForRoute(route){
+    if(!routeCourse){
+      routeCourse = {};
+      courses().forEach(course => { if(course.linked) routeCourse[course.linked] = course; });
+    }
+    return routeCourse[route] || null;
+  }
 
-  let last=''; function refresh(){const slug=window.CSAIMasteryPracticeFolder?.currentTrack?.(); if(slug!==last || !document.getElementById('full-study-track')){last=slug||'';render(slug);}}
-  const start=()=>{refresh();new MutationObserver(()=>setTimeout(refresh,30)).observe(document.body,{childList:true,subtree:true});window.addEventListener('hashchange',()=>setTimeout(refresh,80));};
-  document.readyState==='loading'?document.addEventListener('DOMContentLoaded',start):start();
+  function canonicalLessonEscape(value){
+    return String(value==null?'':value).replace(/[&<>"']/g,function(ch){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch];
+    });
+  }
+  function canonicalLessonList(value){
+    if(Array.isArray(value))return value.filter(Boolean);
+    return value ? [String(value)] : [];
+  }
+  function canonicalLessonProgress(courseId){
+    var key='courses_progress_v1',all={};
+    try{all=JSON.parse(localStorage.getItem(key)||'{}')||{};}catch(e){all={};}
+    if(!all[courseId])all[courseId]={lessons:{},exercises:{},quiz:{},projects:{}};
+    if(!all[courseId].lessons)all[courseId].lessons={};
+    return {key:key,all:all,course:all[courseId]};
+  }
+  function canonicalLessonSave(state){
+    try{localStorage.setItem(state.key,JSON.stringify(state.all));}catch(e){}
+  }
+  function ensureCanonicalLessonStyles(){
+    if(document.getElementById('canonicalTrackLessonsStyle'))return;
+    var style=document.createElement('style');
+    style.id='canonicalTrackLessonsStyle';
+    style.textContent=`
+      .canonical-track-switch{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:12px 0 10px}
+      .canonical-track-switch button{border:1px solid var(--border,#344052);background:transparent;color:inherit;border-radius:9px;padding:9px 8px;font:inherit;font-weight:800;cursor:pointer}
+      .canonical-track-switch button.active{background:var(--accent,#3b82f6);color:#fff;border-color:transparent}
+      .canonical-lesson-side-nav{display:grid;gap:5px;max-height:46vh;overflow:auto;padding-right:3px}
+      .canonical-lesson-side-nav button{display:flex;align-items:flex-start;gap:8px;width:100%;text-align:left;border:0;background:transparent;color:inherit;border-radius:8px;padding:8px;font:inherit;cursor:pointer}
+      .canonical-lesson-side-nav button:hover,.canonical-lesson-side-nav button.active{background:rgba(127,127,127,.13)}
+      .canonical-lesson-side-nav button.done .canonical-lesson-side-number{background:#168a67;color:#fff}
+      .canonical-lesson-side-number{display:inline-grid;place-items:center;flex:0 0 28px;height:24px;border-radius:7px;background:rgba(127,127,127,.16);font-size:.76rem;font-weight:900}
+      .canonical-practice-nav-hidden,.canonical-practice-main-hidden,.canonical-lessons-hidden{display:none!important}
+      .canonical-course-lessons{display:block;max-width:1000px;margin:0 auto;padding:4px 0 32px}
+      .canonical-lessons-hero{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;padding:22px;border:1px solid var(--border,#d7dee7);border-radius:16px;background:var(--panel,#fff);margin-bottom:16px}
+      .canonical-lessons-kicker{font-size:.76rem;font-weight:900;letter-spacing:.1em;color:var(--accent,#187b63)}
+      .canonical-lessons-hero h1{margin:5px 0 7px;font-size:clamp(1.45rem,2.8vw,2.15rem)}
+      .canonical-lessons-hero p{margin:0;line-height:1.6;color:var(--sub,#687487)}
+      .canonical-lessons-progress{min-width:132px;text-align:center;padding:12px;border-radius:12px;background:rgba(22,138,103,.1)}
+      .canonical-lessons-progress strong{display:block;font-size:1.35rem;color:#168a67}
+      .canonical-lessons-progress span{font-size:.8rem}
+      .canonical-lesson-card{border:1px solid var(--border,#d7dee7);border-radius:16px;background:var(--panel,#fff);padding:22px}
+      .canonical-lesson-card-head{display:flex;justify-content:space-between;gap:15px;align-items:flex-start;border-bottom:1px solid var(--border,#d7dee7);padding-bottom:14px;margin-bottom:16px}
+      .canonical-lesson-number{font-size:.78rem;font-weight:900;letter-spacing:.08em;color:var(--accent,#187b63)}
+      .canonical-lesson-card h2{margin:4px 0 0;font-size:1.55rem}
+      .canonical-lesson-done{border:1px solid var(--border,#c8d1dc);background:transparent;color:inherit;border-radius:10px;padding:9px 12px;font:inherit;font-weight:800;cursor:pointer;white-space:nowrap}
+      .canonical-lesson-done.done{background:#168a67;color:#fff;border-color:#168a67}
+      .canonical-lesson-section{margin-top:18px}
+      .canonical-lesson-section h3{font-size:1rem;margin:0 0 8px}
+      .canonical-lesson-section p,.canonical-lesson-section li{line-height:1.7}
+      .canonical-lesson-section ul{margin:0;padding-left:20px}
+      .canonical-lesson-example{margin:9px 0 0;padding:15px;border-radius:11px;background:#111827;color:#f5f7fb;overflow:auto;white-space:pre-wrap;font:500 .9rem/1.55 ui-monospace,SFMono-Regular,Menlo,monospace}
+      .canonical-lesson-note{padding:13px 15px;border-radius:11px;background:rgba(127,127,127,.1)}
+      .canonical-lesson-concepts{display:flex;flex-wrap:wrap;gap:7px}
+      .canonical-lesson-concepts span{padding:6px 9px;border-radius:999px;background:rgba(59,130,246,.12);font-size:.82rem;font-weight:750}
+      .canonical-lesson-footer{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:22px;padding-top:15px;border-top:1px solid var(--border,#d7dee7)}
+      .canonical-lesson-footer button{border:1px solid var(--border,#c8d1dc);background:transparent;color:inherit;border-radius:10px;padding:9px 12px;font:inherit;font-weight:800;cursor:pointer}
+      .canonical-lesson-footer .primary{background:var(--accent,#3b82f6);color:#fff;border-color:transparent}
+      html[data-theme="dark"] .canonical-lessons-hero,html[data-theme="dark"] .canonical-lesson-card{background:#17212c!important;color:#edf3f8!important;border-color:#344352!important}
+      @media(max-width:760px){.canonical-lessons-hero{display:block}.canonical-lessons-progress{margin-top:12px}.canonical-lesson-card-head{display:block}.canonical-lesson-done{margin-top:12px}.canonical-lesson-footer{flex-wrap:wrap}}
+    `;
+    document.head.appendChild(style);
+  }
+  function canonicalTrackHasNativeLessons(course,side){
+    if(['python','sql','oop','dsa'].indexOf(course.id)!==-1)return true;
+    return Array.prototype.some.call(side.querySelectorAll('h4'),function(h){
+      return /^lessons?$/i.test((h.textContent||'').trim());
+    });
+  }
+  window.ensureCanonicalTrackLessons=function(route,containerId){
+    var course=courseForRoute(route),container=document.getElementById(containerId);
+    if(!course||!container||!course.lessons||!course.lessons.length)return;
+    var side=container.querySelector('.side,.sidebar'),main=container.querySelector('main,.main');
+    if(!side||!main||canonicalTrackHasNativeLessons(course,side))return;
+
+    ensureCanonicalLessonStyles();
+
+    var existing=container.querySelector('[data-canonical-course-lessons="'+course.id+'"]');
+    if(existing)return;
+
+    var sorted=course.lessons.map(function(l,i){return {lesson:l,originalIndex:i};})
+      .sort(function(a,b){
+        var av=a.lesson.displayOrder!=null?a.lesson.displayOrder:a.originalIndex;
+        var bv=b.lesson.displayOrder!=null?b.lesson.displayOrder:b.originalIndex;
+        return av-bv;
+      });
+    var state=canonicalLessonProgress(course.id);
+    var viewKey='canonical_course_surface_v1',viewState={};
+    try{viewState=JSON.parse(localStorage.getItem(viewKey)||'{}')||{};}catch(e){viewState={};}
+    var currentIndex=0;
+
+    var switcher=document.createElement('div');
+    switcher.className='canonical-track-switch';
+    switcher.innerHTML='<button type="button" data-canonical-view="lessons">Lessons</button><button type="button" data-canonical-view="practice">Practice Lab</button>';
+
+    var lessonNav=document.createElement('div');
+    lessonNav.className='canonical-lesson-side-nav';
+    lessonNav.setAttribute('aria-label',course.title+' lesson list');
+
+    var brand=side.querySelector('.brand');
+    if(brand&&brand.parentNode){
+      brand.parentNode.insertBefore(switcher,brand.nextSibling);
+      switcher.parentNode.insertBefore(lessonNav,switcher.nextSibling);
+    }else{
+      side.appendChild(switcher);
+      side.appendChild(lessonNav);
+    }
+
+    var sideChildren=Array.prototype.slice.call(side.children);
+    var practiceStart=sideChildren.findIndex(function(el){return el.tagName==='H4';});
+    var practiceNavNodes=practiceStart>=0?sideChildren.slice(practiceStart).filter(function(el){return el!==switcher&&el!==lessonNav;}):[];
+
+    var practiceMainNodes=Array.prototype.slice.call(main.children);
+    var lessonPanel=document.createElement('section');
+    lessonPanel.className='canonical-course-lessons';
+    lessonPanel.setAttribute('data-canonical-course-lessons',course.id);
+    main.insertBefore(lessonPanel,main.firstChild);
+
+    function isDone(lesson){
+      return !!(state.course.lessons&&state.course.lessons[lesson.id]);
+    }
+    function completedCount(){
+      return sorted.filter(function(item){return isDone(item.lesson);}).length;
+    }
+    function renderNav(){
+      lessonNav.innerHTML=sorted.map(function(item,index){
+        var lesson=item.lesson,done=isDone(lesson);
+        return '<button type="button" class="'+(done?'done ':'')+(index===currentIndex?'active':'')+'" data-canonical-lesson-index="'+index+'">'
+          +'<span class="canonical-lesson-side-number">'+(done?'✓':String(index+1).padStart(2,'0'))+'</span>'
+          +'<span>'+canonicalLessonEscape(lesson.title||('Lesson '+(index+1)))+'</span></button>';
+      }).join('');
+    }
+    function renderLesson(index){
+      currentIndex=Math.max(0,Math.min(sorted.length-1,index));
+      var lesson=sorted[currentIndex].lesson;
+      var explanation=lesson.explain||lesson.explanation||'This lesson is ready for study, but its explanation has not been added yet.';
+      var examples=canonicalLessonList(lesson.example||lesson.examples);
+      var objectives=canonicalLessonList(lesson.objectives);
+      var concepts=canonicalLessonList(lesson.concepts);
+      var mistakes=canonicalLessonList(lesson.commonMistakes||lesson.commonMistake);
+      var relevance=lesson.careerRelevance||lesson.whyItMatters||'This topic supports the practical work and interview questions in this course.';
+      var done=isDone(lesson);
+      var details='';
+      if(objectives.length)details+='<div class="canonical-lesson-section"><h3>What you will learn</h3><ul>'+objectives.map(function(x){return '<li>'+canonicalLessonEscape(x)+'</li>';}).join('')+'</ul></div>';
+      details+='<div class="canonical-lesson-section"><h3>Explanation</h3><p>'+canonicalLessonEscape(explanation).replace(/\n/g,'<br>')+'</p></div>';
+      if(examples.length)details+='<div class="canonical-lesson-section"><h3>Example</h3>'+examples.map(function(x){return '<pre class="canonical-lesson-example">'+canonicalLessonEscape(x)+'</pre>';}).join('')+'</div>';
+      if(concepts.length)details+='<div class="canonical-lesson-section"><h3>Key concepts</h3><div class="canonical-lesson-concepts">'+concepts.map(function(x){return '<span>'+canonicalLessonEscape(x)+'</span>';}).join('')+'</div></div>';
+      if(mistakes.length)details+='<div class="canonical-lesson-section canonical-lesson-note"><h3>Common mistake</h3><p>'+mistakes.map(canonicalLessonEscape).join('<br>')+'</p></div>';
+      details+='<div class="canonical-lesson-section canonical-lesson-note"><h3>Why it matters</h3><p>'+canonicalLessonEscape(relevance)+'</p></div>';
+
+      lessonPanel.innerHTML='<div class="canonical-lessons-hero"><div><div class="canonical-lessons-kicker">LESSONS</div><h1>'+canonicalLessonEscape(course.title)+'</h1><p>Study the concepts first, then open the existing practice lab.</p></div><div class="canonical-lessons-progress"><strong>'+completedCount()+'/'+sorted.length+'</strong><span>lessons complete</span></div></div>'
+        +'<article class="canonical-lesson-card"><div class="canonical-lesson-card-head"><div><div class="canonical-lesson-number">LESSON '+String(currentIndex+1).padStart(2,'0')+' OF '+String(sorted.length).padStart(2,'0')+'</div><h2>'+canonicalLessonEscape(lesson.title||('Lesson '+(currentIndex+1)))+'</h2></div><button type="button" class="canonical-lesson-done '+(done?'done':'')+'" data-canonical-mark-done>'+(done?'✓ Completed':'Mark lesson complete')+'</button></div>'
+        +details
+        +'<div class="canonical-lesson-footer"><button type="button" data-canonical-prev '+(currentIndex===0?'disabled':'')+'>← Previous</button><button type="button" class="primary" data-canonical-practice>Open Practice Lab</button><button type="button" data-canonical-next '+(currentIndex===sorted.length-1?'disabled':'')+'>Next →</button></div></article>';
+      renderNav();
+    }
+    function saveView(mode){
+      viewState[course.id]=mode;
+      try{localStorage.setItem(viewKey,JSON.stringify(viewState));}catch(e){}
+    }
+    function showMode(mode){
+      mode=mode==='practice'?'practice':'lessons';
+      lessonPanel.hidden=mode!=='lessons';
+      lessonNav.hidden=mode!=='lessons';
+      lessonPanel.classList.toggle('canonical-lessons-hidden',mode!=='lessons');
+      lessonNav.classList.toggle('canonical-lessons-hidden',mode!=='lessons');
+      practiceNavNodes.forEach(function(node){node.classList.toggle('canonical-practice-nav-hidden',mode==='lessons');});
+      practiceMainNodes.forEach(function(node){node.classList.toggle('canonical-practice-main-hidden',mode==='lessons');});
+      Array.prototype.forEach.call(switcher.querySelectorAll('[data-canonical-view]'),function(btn){
+        btn.classList.toggle('active',btn.getAttribute('data-canonical-view')===mode);
+        btn.setAttribute('aria-pressed',btn.getAttribute('data-canonical-view')===mode?'true':'false');
+      });
+      saveView(mode);
+    }
+
+    switcher.addEventListener('click',function(event){
+      var button=event.target.closest('[data-canonical-view]');
+      if(button)showMode(button.getAttribute('data-canonical-view'));
+    });
+    lessonNav.addEventListener('click',function(event){
+      var button=event.target.closest('[data-canonical-lesson-index]');
+      if(!button)return;
+      renderLesson(Number(button.getAttribute('data-canonical-lesson-index')));
+      try{main.scrollTo({top:0,behavior:'smooth'});}catch(e){}
+    });
+    lessonPanel.addEventListener('click',function(event){
+      if(event.target.closest('[data-canonical-prev]'))renderLesson(currentIndex-1);
+      if(event.target.closest('[data-canonical-next]'))renderLesson(currentIndex+1);
+      if(event.target.closest('[data-canonical-practice]'))showMode('practice');
+      if(event.target.closest('[data-canonical-mark-done]')){
+        var lesson=sorted[currentIndex].lesson;
+        var wasDone=isDone(lesson);
+        if(wasDone)delete state.course.lessons[lesson.id];
+        else state.course.lessons[lesson.id]=true;
+        canonicalLessonSave(state);
+        if(!wasDone&&window.cxLogActivity)window.cxLogActivity('lessons',1);
+        renderLesson(currentIndex);
+      }
+    });
+
+    renderLesson(0);
+    showMode(viewState[course.id]||'lessons');
+  };
+
+  function installForRoute(route){
+    const registry = window.TRACK_REGISTRY;
+    const entry = registry && registry[route];
+    if(!entry) return;
+    window.ensureCanonicalTrackLessons(route, entry.containerId);
+  }
+
+  function activeRoute(){
+    const registry = window.TRACK_REGISTRY;
+    if(!registry) return null;
+    for(const route in registry){
+      const entry = registry[route];
+      const element = document.getElementById(entry.containerId);
+      if(element && getComputedStyle(element).display !== 'none') return route;
+    }
+    return null;
+  }
+
+  function hookRouter(){
+    if(typeof window.showTrack === 'function' && !window.showTrack.__canonicalLessonsHooked){
+      const original = window.showTrack;
+      const hooked = function(name){
+        const result = original.apply(this, arguments);
+        setTimeout(() => installForRoute(name), 0);
+        return result;
+      };
+      hooked.__canonicalLessonsHooked = true;
+      window.showTrack = hooked;
+    }
+    const route = activeRoute();
+    if(route) installForRoute(route);
+  }
+
+  function start(){
+    hookRouter();
+    window.addEventListener('hashchange', () => setTimeout(hookRouter, 0));
+    new MutationObserver(() => {
+      clearTimeout(start.timer);
+      start.timer = setTimeout(hookRouter, 20);
+    }).observe(document.body, {childList:true, subtree:true});
+  }
+
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, {once:true});
+  else start();
 })();
