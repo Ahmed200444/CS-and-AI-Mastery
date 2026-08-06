@@ -2,6 +2,9 @@
   "name": "cs-ai-mastery-github-sync",
   "private": true,
   "version": "5.19.1",
+  "scripts": {
+    "test": "node tests/github-integration-contract.test.js"
+  },
   "engines": {
     "node": ">=20"
   }
