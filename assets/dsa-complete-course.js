@@ -33,22 +33,54 @@
     ['Pattern selection and interview workflow','Translate the prompt into inputs, constraints, edge cases, and likely patterns. Start with a correct approach, test it, then improve it.','Classify twenty prompts by likely pattern and explain each choice.','Memorizing solutions without learning the signals that identify a pattern.','Walk through clarification, brute force, optimization, correctness, and complexity.']
   ];
 
-  const esc = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+  const esc = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[char]));
   const storageKey = 'cs-ai-dsa-complete-lessons';
   const getDone = () => new Set(JSON.parse(localStorage.getItem(storageKey) || '[]'));
 
-  function active(){ return window.CSAIMasteryPracticeFolder?.currentTrack?.() === 'dsa'; }
+  function active(){
+    if (window.CSAIMasteryPracticeFolder?.currentTrack?.() === 'dsa') return true;
+    const text = `${location.hash} ${location.pathname} ${document.title} ${document.body?.innerText || ''}`.toLowerCase();
+    return text.includes('dsa algorithm lab') ||
+      text.includes('data structures & algorithms') ||
+      text.includes('data structures and algorithms');
+  }
+
+  function findLabRoot(){
+    const headings = [...document.querySelectorAll('h1,h2,h3,h4,strong')];
+    const heading = headings.find(node => /dsa\s*algorithm\s*lab/i.test(node.textContent || ''));
+    if (!heading) return null;
+    let root = heading.parentElement;
+    while (root && root !== document.body) {
+      const text = root.innerText || '';
+      if (/Problems/i.test(text) && /Two Sum/i.test(text) && root.querySelector('button')) return root;
+      root = root.parentElement;
+    }
+    return heading.parentElement;
+  }
+
+  function ensureMount(){
+    let mount = document.getElementById('full-study-track');
+    if (mount) return mount;
+    const lab = findLabRoot();
+    if (!lab?.parentElement) return null;
+    mount = document.createElement('section');
+    mount.id = 'full-study-track';
+    mount.dataset.track = 'dsa';
+    mount.setAttribute('aria-label', 'DSA lessons');
+    lab.parentElement.insertBefore(mount, lab);
+    return mount;
+  }
 
   function render(){
     if(!active()) return;
-    const current = document.getElementById('full-study-track');
+    const current = ensureMount();
     if(!current || current.dataset.dsaComplete === 'true') return;
     const done = getDone();
     const section = document.createElement('section');
     section.id = 'full-study-track';
     section.dataset.track = 'dsa';
     section.dataset.dsaComplete = 'true';
-    section.innerHTML = `<div class="fst-head"><div><div class="fst-kicker">COMPLETE CONCEPT-FIRST DSA COURSE</div><h2>Data Structures & Algorithms — ${MODULES.length} Lessons</h2><p>Learn the concept and pattern first, practise it, study the common mistake, then answer the interview question.</p></div><div class="fst-progress"><strong>${done.size}/${MODULES.length}</strong><span>lessons complete</span></div></div><div class="dsa-sections"><button data-dsa-view="all" class="active">All lessons</button><button data-dsa-view="foundation">Foundations</button><button data-dsa-view="linear">Linear structures</button><button data-dsa-view="trees">Trees & graphs</button><button data-dsa-view="advanced">Algorithms & advanced</button></div><div class="fst-lessons">${MODULES.map((m,i)=>`<details class="fst-lesson" data-dsa-index="${i}" ${i===0?'open':''}><summary><span class="fst-num">${String(i+1).padStart(2,'0')}</span><span>${esc(m[0])}</span><label><input type="checkbox" data-dsa-done="${i}" ${done.has(i)?'checked':''}> Done</label></summary><div class="fst-body"><h4>Explanation</h4><p>${esc(m[1])}</p><h4>Practice</h4><p>${esc(m[2])}</p><div class="fst-note fst-mistake"><strong>Common mistake</strong><span>${esc(m[3])}</span></div><div class="fst-note fst-career"><strong>Interview check</strong><span>${esc(m[4])}</span></div></div></details>`).join('')}</div><div class="fst-after"><div><h3>Exercise progression</h3><p>Complete easy, medium, debugging, and timed exercises after each topic. Explain the pattern before coding.</p></div><div><h3>Final assessment</h3><p>Solve a mixed set without topic labels, test edge cases, and state time and space complexity.</p></div><div><h3>GitHub project</h3><p>Build a tested DSA interview toolkit with topic folders, explanations, brute-force and optimized versions, complexity notes, and a progress README.</p><code>student-code/practice/dsa/</code></div></div>`;
+    section.innerHTML = `<div class="fst-head"><div><div class="fst-kicker">LESSONS</div><h2>Data Structures & Algorithms — ${MODULES.length} Lessons</h2><p>Learn each concept and pattern before opening the exercise lab below.</p></div><div class="fst-progress"><strong>${done.size}/${MODULES.length}</strong><span>lessons complete</span></div></div><div class="dsa-sections"><button data-dsa-view="all" class="active">All lessons</button><button data-dsa-view="foundation">Foundations</button><button data-dsa-view="linear">Linear structures</button><button data-dsa-view="trees">Trees & graphs</button><button data-dsa-view="advanced">Algorithms & advanced</button></div><div class="fst-lessons">${MODULES.map((m,i)=>`<details class="fst-lesson" data-dsa-index="${i}" ${i===0?'open':''}><summary><span class="fst-num">${String(i+1).padStart(2,'0')}</span><span>${esc(m[0])}</span><label><input type="checkbox" data-dsa-done="${i}" ${done.has(i)?'checked':''}> Done</label></summary><div class="fst-body"><h4>Explanation</h4><p>${esc(m[1])}</p><h4>Practice</h4><p>${esc(m[2])}</p><div class="fst-note fst-mistake"><strong>Common mistake</strong><span>${esc(m[3])}</span></div><div class="fst-note fst-career"><strong>Interview check</strong><span>${esc(m[4])}</span></div></div></details>`).join('')}</div><div class="fst-after"><div><h3>Exercises</h3><p>Use the DSA Algorithm Lab below after completing the related lesson.</p></div><div><h3>Final assessment</h3><p>Solve a mixed set without topic labels, test edge cases, and state time and space complexity.</p></div><div><h3>GitHub project</h3><p>Build a tested DSA interview toolkit with explanations, brute-force and optimized versions, complexity notes, and a progress README.</p><code>student-code/practice/dsa/</code></div></div>`;
     current.replaceWith(section);
     section.addEventListener('change', event => {
       if(!event.target.matches('[data-dsa-done]')) return;
@@ -71,7 +103,7 @@
   }
 
   const style=document.createElement('style');
-  style.textContent=`.dsa-sections{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}.dsa-sections button{border:1px solid #b8c7d4;background:transparent;color:inherit;border-radius:999px;padding:8px 12px;font:inherit;font-weight:700;cursor:pointer}.dsa-sections button.active{background:#17649a;color:#fff;border-color:#17649a}html[data-theme="dark"] .dsa-sections button{border-color:#536473}html[data-theme="dark"] .dsa-sections button.active{background:#2f85bd;border-color:#2f85bd}`;
+  style.textContent=`#full-study-track[data-dsa-complete="true"]{margin:0 0 28px}.fst-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin:0 0 18px;padding:20px;border:1px solid #d8e1e8;border-radius:14px;background:#fff}.fst-kicker{font-size:.78rem;font-weight:800;letter-spacing:.09em;color:#087664}.fst-head h2{margin:5px 0 7px}.fst-head p{margin:0}.fst-progress{min-width:110px;text-align:center;padding:10px 12px;border-radius:12px;background:#eef8f6}.fst-progress strong{display:block;font-size:1.25rem;color:#087664}.fst-progress span{font-size:.8rem}.fst-lessons{display:grid;gap:10px}.fst-lesson{border:1px solid #d8e1e8;border-radius:12px;background:#fff;overflow:hidden}.fst-lesson summary{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;font-weight:700}.fst-lesson summary>span:nth-child(2){flex:1}.fst-lesson summary label{font-size:.85rem;font-weight:600}.fst-num{display:inline-grid;place-items:center;min-width:34px;height:28px;border-radius:8px;background:#eef8f6;color:#087664}.fst-body{padding:0 16px 16px}.fst-body h4{margin:14px 0 5px}.fst-body p{margin:0 0 10px}.fst-note{display:grid;grid-template-columns:130px 1fr;gap:10px;margin-top:10px;padding:11px 12px;border-radius:9px;background:#f6f8fa}.fst-mistake strong{color:#a3452e}.fst-career strong{color:#17649a}.fst-after{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}.fst-after>div{padding:16px;border:1px solid #d8e1e8;border-radius:12px;background:#fff}.fst-after h3{margin:0 0 7px}.dsa-sections{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}.dsa-sections button{border:1px solid #b8c7d4;background:transparent;color:inherit;border-radius:999px;padding:8px 12px;font:inherit;font-weight:700;cursor:pointer}.dsa-sections button.active{background:#17649a;color:#fff;border-color:#17649a}html[data-theme="dark"] .fst-head,html[data-theme="dark"] .fst-lesson,html[data-theme="dark"] .fst-after>div{background:#17212c!important;color:#edf3f8!important;border-color:#344352!important}html[data-theme="dark"] .fst-progress,html[data-theme="dark"] .fst-num,html[data-theme="dark"] .fst-note{background:#111b25!important}html[data-theme="dark"] .dsa-sections button{border-color:#536473}html[data-theme="dark"] .dsa-sections button.active{background:#2f85bd;border-color:#2f85bd}@media(max-width:800px){.fst-head{display:block}.fst-progress{margin-top:12px}.fst-after{grid-template-columns:1fr}.fst-note{grid-template-columns:1fr}.fst-lesson summary{align-items:flex-start;flex-wrap:wrap}}`;
   document.head.appendChild(style);
   const start=()=>{render();new MutationObserver(()=>setTimeout(render,25)).observe(document.body,{childList:true,subtree:true});window.addEventListener('hashchange',()=>setTimeout(render,100));};
   document.readyState==='loading'?document.addEventListener('DOMContentLoaded',start):start();
