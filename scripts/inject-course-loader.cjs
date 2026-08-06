@@ -2,8 +2,10 @@ const fs = require('fs');
 const path = require('path');
 
 const indexPath = path.join(process.cwd(), 'index.html');
-const loaderPath = '/assets/course-practice-routing.js?v=20260807-1';
+const loaderPath = '/assets/course-practice-routing.js?v=20260807-2';
+const guardPath = '/assets/course-route-visibility-guard.js?v=20260807-1';
 const loaderTag = `<script type="module" src="${loaderPath}"></script>`;
+const guardTag = `<script src="${guardPath}"></script>`;
 const catalogStyleId = 'catalog-select-visibility-fix';
 const catalogStyle = `<style id="${catalogStyleId}">
 /* Keep native select menus readable in both dark and light browser themes. */
@@ -44,7 +46,8 @@ function numericOrder(course) {
   ];
   for (const value of candidates) {
     if (typeof value === 'number' && Number.isFinite(value)) return value;
-    const parsed = Number.parseFloat(String(value == null ? '' : value).match(/\d+(?:\.\d+)?/)?.[0]);
+    const match = String(value == null ? '' : value).match(/\d+(?:\.\d+)?/);
+    const parsed = Number.parseFloat(match ? match[0] : '');
     if (Number.isFinite(parsed)) return parsed;
   }
   return Number.POSITIVE_INFINITY;
@@ -133,29 +136,38 @@ if (closingHead >= 0) {
 }
 
 // Keep the source file untouched in GitHub. This only patches the deploy copy.
-// Remove older direct loader tags so each deploy has exactly one current loader.
+// Remove older direct loader/guard tags so each deploy has exactly one current copy.
 html = html.replace(
   /<script[^>]*src=["']\/assets\/course-practice-routing\.js[^"']*["'][^>]*><\/script>\s*/gi,
   ''
 );
+html = html.replace(
+  /<script[^>]*src=["']\/assets\/course-route-visibility-guard\.js[^"']*["'][^>]*><\/script>\s*/gi,
+  ''
+);
 
 const closingBody = html.toLowerCase().lastIndexOf('</body>');
+const runtimeTags = `${loaderTag}\n${guardTag}`;
 if (closingBody >= 0) {
-  html = `${html.slice(0, closingBody)}${loaderTag}\n${html.slice(closingBody)}`;
+  html = `${html.slice(0, closingBody)}${runtimeTags}\n${html.slice(closingBody)}`;
 } else {
-  html += `\n${loaderTag}\n`;
+  html += `\n${runtimeTags}\n`;
 }
 
 fs.writeFileSync(indexPath, html, 'utf8');
 
 const result = fs.readFileSync(indexPath, 'utf8');
 const loaderMatches = result.match(/\/assets\/course-practice-routing\.js/g) || [];
+const guardMatches = result.match(/\/assets\/course-route-visibility-guard\.js/g) || [];
 const styleMatches = result.match(new RegExp(`id=["']${catalogStyleId}["']`, 'g')) || [];
 if (loaderMatches.length !== 1) {
   throw new Error(`Expected exactly one course loader, found ${loaderMatches.length}`);
+}
+if (guardMatches.length !== 1) {
+  throw new Error(`Expected exactly one course route guard, found ${guardMatches.length}`);
 }
 if (styleMatches.length !== 1) {
   throw new Error(`Expected exactly one catalog select style, found ${styleMatches.length}`);
 }
 
-console.log(`Injected ${loaderPath} and catalog fixes into deploy copy of index.html`);
+console.log(`Injected ${loaderPath}, ${guardPath}, and catalog fixes into deploy copy of index.html`);
