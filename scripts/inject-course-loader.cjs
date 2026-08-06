@@ -4,8 +4,10 @@ const path = require('path');
 const indexPath = path.join(process.cwd(), 'index.html');
 const loaderPath = '/assets/course-practice-routing.js?v=20260807-2';
 const guardPath = '/assets/course-route-visibility-guard.js?v=20260807-2';
+const catalogPath = '/assets/catalog-recovery.js?v=20260807-1';
 const loaderTag = `<script type="module" src="${loaderPath}"></script>`;
 const guardTag = `<script src="${guardPath}"></script>`;
+const catalogTag = `<script src="${catalogPath}"></script>`;
 const catalogStyleId = 'catalog-select-visibility-fix';
 const catalogStyle = `<style id="${catalogStyleId}">
 /* Keep native select menus readable in both dark and light browser themes. */
@@ -136,7 +138,7 @@ if (closingHead >= 0) {
 }
 
 // Keep the source file untouched in GitHub. This only patches the deploy copy.
-// Remove older direct loader/guard tags so each deploy has exactly one current copy.
+// Remove older direct runtime tags so each deploy has exactly one current copy.
 html = html.replace(
   /<script[^>]*src=["']\/assets\/course-practice-routing\.js[^"']*["'][^>]*><\/script>\s*/gi,
   ''
@@ -145,9 +147,13 @@ html = html.replace(
   /<script[^>]*src=["']\/assets\/course-route-visibility-guard\.js[^"']*["'][^>]*><\/script>\s*/gi,
   ''
 );
+html = html.replace(
+  /<script[^>]*src=["']\/assets\/catalog-recovery\.js[^"']*["'][^>]*><\/script>\s*/gi,
+  ''
+);
 
 const closingBody = html.toLowerCase().lastIndexOf('</body>');
-const runtimeTags = `${loaderTag}\n${guardTag}`;
+const runtimeTags = `${loaderTag}\n${guardTag}\n${catalogTag}`;
 if (closingBody >= 0) {
   html = `${html.slice(0, closingBody)}${runtimeTags}\n${html.slice(closingBody)}`;
 } else {
@@ -159,6 +165,7 @@ fs.writeFileSync(indexPath, html, 'utf8');
 const result = fs.readFileSync(indexPath, 'utf8');
 const loaderMatches = result.match(/\/assets\/course-practice-routing\.js/g) || [];
 const guardMatches = result.match(/\/assets\/course-route-visibility-guard\.js/g) || [];
+const catalogMatches = result.match(/\/assets\/catalog-recovery\.js/g) || [];
 const styleMatches = result.match(new RegExp(`id=["']${catalogStyleId}["']`, 'g')) || [];
 if (loaderMatches.length !== 1) {
   throw new Error(`Expected exactly one course loader, found ${loaderMatches.length}`);
@@ -166,8 +173,11 @@ if (loaderMatches.length !== 1) {
 if (guardMatches.length !== 1) {
   throw new Error(`Expected exactly one course route guard, found ${guardMatches.length}`);
 }
+if (catalogMatches.length !== 1) {
+  throw new Error(`Expected exactly one catalog recovery script, found ${catalogMatches.length}`);
+}
 if (styleMatches.length !== 1) {
   throw new Error(`Expected exactly one catalog select style, found ${styleMatches.length}`);
 }
 
-console.log(`Injected ${loaderPath}, ${guardPath}, and catalog fixes into deploy copy of index.html`);
+console.log(`Injected ${loaderPath}, ${guardPath}, ${catalogPath}, and catalog fixes into deploy copy of index.html`);
