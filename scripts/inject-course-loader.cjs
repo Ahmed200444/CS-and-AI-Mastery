@@ -2,9 +2,10 @@ const fs = require('fs');
 const path = require('path');
 
 const indexPath = path.join(process.cwd(), 'index.html');
+const catalogDataPath = path.join(process.cwd(), 'assets', 'catalog-data.json');
 const loaderPath = '/assets/course-practice-routing.js?v=20260807-2';
 const guardPath = '/assets/course-route-visibility-guard.js?v=20260807-2';
-const catalogPath = '/assets/catalog-recovery.js?v=20260807-1';
+const catalogPath = '/assets/catalog-recovery.js?v=20260807-2';
 const loaderTag = `<script type="module" src="${loaderPath}"></script>`;
 const guardTag = `<script src="${guardPath}"></script>`;
 const catalogTag = `<script src="${catalogPath}"></script>`;
@@ -99,7 +100,6 @@ function sortCoursesByLearningOrder(courses, categories) {
     }
   }
 
-  // Preserve every course even if legacy prerequisite data contains a cycle.
   if (ordered.length !== courses.length) {
     const included = new Set(ordered.map(course => course.id));
     ordered.push(...courses.filter(course => !included.has(course.id)).sort(baseCompare));
@@ -108,24 +108,28 @@ function sortCoursesByLearningOrder(courses, categories) {
   return ordered;
 }
 
-// Sort the deployed catalog into a prerequisite-safe learning sequence while
-// preserving the existing category order and stable order for ties.
 const courseData = readJsonScript('coursedata');
 const categoryData = readJsonScript('categorydata');
-if (courseData) {
-  const orderedCourses = sortCoursesByLearningOrder(
-    courseData.value,
-    categoryData ? categoryData.value : []
-  );
-  const safeJson = JSON.stringify(orderedCourses).replace(/<\//g, '<\\/');
-  html = html.replace(
-    courseData.re,
-    `${courseData.match[1]}${safeJson}${courseData.match[3]}`
-  );
-  console.log(`Ordered ${orderedCourses.length} courses by prerequisites and roadmap order`);
+if (!courseData || !Array.isArray(courseData.value) || courseData.value.length === 0) {
+  throw new Error('Cannot build catalog: coursedata is missing or empty');
 }
 
-// Remove any prior copy before inserting the current dropdown visibility fix.
+const categories = categoryData && Array.isArray(categoryData.value) ? categoryData.value : [];
+const orderedCourses = sortCoursesByLearningOrder(courseData.value, categories);
+const safeJson = JSON.stringify(orderedCourses).replace(/<\//g, '<\\/');
+html = html.replace(
+  courseData.re,
+  `${courseData.match[1]}${safeJson}${courseData.match[3]}`
+);
+
+fs.mkdirSync(path.dirname(catalogDataPath), { recursive: true });
+fs.writeFileSync(
+  catalogDataPath,
+  JSON.stringify({ courses: orderedCourses, categories }),
+  'utf8'
+);
+console.log(`Ordered and exported ${orderedCourses.length} catalog courses`);
+
 html = html.replace(
   new RegExp(`<style\\b[^>]*\\bid=["']${catalogStyleId}["'][^>]*>[\\s\\S]*?<\\/style>\\s*`, 'gi'),
   ''
@@ -137,8 +141,6 @@ if (closingHead >= 0) {
   html = `${catalogStyle}\n${html}`;
 }
 
-// Keep the source file untouched in GitHub. This only patches the deploy copy.
-// Remove older direct runtime tags so each deploy has exactly one current copy.
 html = html.replace(
   /<script[^>]*src=["']\/assets\/course-practice-routing\.js[^"']*["'][^>]*><\/script>\s*/gi,
   ''
@@ -167,17 +169,14 @@ const loaderMatches = result.match(/\/assets\/course-practice-routing\.js/g) || 
 const guardMatches = result.match(/\/assets\/course-route-visibility-guard\.js/g) || [];
 const catalogMatches = result.match(/\/assets\/catalog-recovery\.js/g) || [];
 const styleMatches = result.match(new RegExp(`id=["']${catalogStyleId}["']`, 'g')) || [];
-if (loaderMatches.length !== 1) {
-  throw new Error(`Expected exactly one course loader, found ${loaderMatches.length}`);
-}
-if (guardMatches.length !== 1) {
-  throw new Error(`Expected exactly one course route guard, found ${guardMatches.length}`);
-}
-if (catalogMatches.length !== 1) {
-  throw new Error(`Expected exactly one catalog recovery script, found ${catalogMatches.length}`);
-}
-if (styleMatches.length !== 1) {
-  throw new Error(`Expected exactly one catalog select style, found ${styleMatches.length}`);
+const generatedCatalog = JSON.parse(fs.readFileSync(catalogDataPath, 'utf8'));
+
+if (loaderMatches.length !== 1) throw new Error(`Expected exactly one course loader, found ${loaderMatches.length}`);
+if (guardMatches.length !== 1) throw new Error(`Expected exactly one course route guard, found ${guardMatches.length}`);
+if (catalogMatches.length !== 1) throw new Error(`Expected exactly one catalog recovery script, found ${catalogMatches.length}`);
+if (styleMatches.length !== 1) throw new Error(`Expected exactly one catalog select style, found ${styleMatches.length}`);
+if (!Array.isArray(generatedCatalog.courses) || generatedCatalog.courses.length !== orderedCourses.length) {
+  throw new Error('Generated catalog data does not match coursedata');
 }
 
-console.log(`Injected ${loaderPath}, ${guardPath}, ${catalogPath}, and catalog fixes into deploy copy of index.html`);
+console.log(`Injected ${loaderPath}, ${guardPath}, ${catalogPath}, and generated ${catalogDataPath}`);
