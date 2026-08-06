@@ -3,7 +3,7 @@ const path = require('path');
 
 const indexPath = path.join(process.cwd(), 'index.html');
 const loaderPath = '/assets/course-practice-routing.js?v=20260807-2';
-const guardPath = '/assets/course-route-visibility-guard.js?v=20260807-1';
+const guardPath = '/assets/course-route-visibility-guard.js?v=20260807-2';
 const loaderTag = `<script type="module" src="${loaderPath}"></script>`;
 const guardTag = `<script src="${guardPath}"></script>`;
 const catalogStyleId = 'catalog-select-visibility-fix';
