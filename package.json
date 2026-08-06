@@ -1,7 +1,7 @@
 {
   "name": "cs-ai-mastery-github-sync",
   "private": true,
-  "version": "5.18.2",
+  "version": "5.19.1",
   "engines": {
     "node": ">=20"
   }
