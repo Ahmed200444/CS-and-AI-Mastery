@@ -38,6 +38,7 @@ function obviousPythonMissingSetup(code){
   });
 }
 function classify(pre){
+  if(pre.dataset.referenceOnly==='true')return 'reference';
   var code=pre.textContent||'';
   if(hasPlaceholder(code))return 'reference';
   if(isShell(code))return 'reference';
@@ -46,7 +47,7 @@ function classify(pre){
   return 'candidate';
 }
 
-/* Only this one lesson gets a content replacement. Other examples keep their own content. */
+/* Only Big-O gets a replacement. Every other lesson keeps its own example. */
 var BIG_O_EXAMPLE=`nums = [10, 20, 30, 40]\n\n# O(n): one pass through the list\nlinear_steps = 0\nfor x in nums:\n    linear_steps = linear_steps + 1\n\n# O(n^2): one full pass for every item\nquadratic_steps = 0\nfor i in nums:\n    for j in nums:\n        quadratic_steps = quadratic_steps + 1\n\nprint("Number of items:", len(nums))\nprint("O(n) loop steps:", linear_steps)\nprint("O(n^2) loop steps:", quadratic_steps)`;
 
 function audit(){
@@ -54,6 +55,7 @@ function audit(){
   examples.forEach(function(pre){
     if(courseId==='dsa'&&lessonTitle(pre)==='big o notation'){
       pre.textContent=BIG_O_EXAMPLE;
+      delete pre.dataset.referenceOnly;
       pre.dataset.runnableExample='true';
       pre.dataset.exampleAudit='complete';
       return;
