@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const indexPath = path.join(process.cwd(), 'index.html');
-const assetPath = '/assets/course-theme-toggle.js?v=20260807-1';
+const assetPath = '/assets/course-theme-toggle.js?v=20260807-2';
 const tag = `<script src="${assetPath}"></script>`;
 
 if (!fs.existsSync(indexPath)) throw new Error(`Cannot find ${indexPath}`);
