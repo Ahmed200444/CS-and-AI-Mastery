@@ -48,9 +48,11 @@ function ariaFor(theme){ return theme==='dark'?'Switch to light mode':'Switch to
 function updateButton(button){
   if(!button)return;
   var theme=currentTheme();
-  button.textContent=labelFor(theme);
-  button.setAttribute('aria-label',ariaFor(theme));
-  button.setAttribute('title',ariaFor(theme));
+  var label=labelFor(theme);
+  var aria=ariaFor(theme);
+  if(button.textContent!==label)button.textContent=label;
+  if(button.getAttribute('aria-label')!==aria)button.setAttribute('aria-label',aria);
+  if(button.getAttribute('title')!==aria)button.setAttribute('title',aria);
   button.setAttribute('aria-pressed',theme==='dark'?'true':'false');
 }
 
