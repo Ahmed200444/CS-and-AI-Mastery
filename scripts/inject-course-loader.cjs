@@ -3,12 +3,15 @@ const path = require('path');
 
 const indexPath = path.join(process.cwd(), 'index.html');
 const catalogDataPath = path.join(process.cwd(), 'assets', 'catalog-data.json');
+const courseDataDir = path.join(process.cwd(), 'assets', 'course-data');
 const loaderPath = '/assets/course-practice-routing.js?v=20260807-2';
 const guardPath = '/assets/course-route-visibility-guard.js?v=20260807-2';
 const catalogPath = '/assets/catalog-recovery.js?v=20260807-3';
+const viewerPath = '/assets/catalog-course-viewer.js?v=20260807-1';
 const loaderTag = `<script type="module" src="${loaderPath}"></script>`;
 const guardTag = `<script src="${guardPath}"></script>`;
 const catalogTag = `<script src="${catalogPath}"></script>`;
+const viewerTag = `<script src="${viewerPath}"></script>`;
 const catalogStyleId = 'catalog-select-visibility-fix';
 const catalogStyle = `<style id="${catalogStyleId}">
 .cx-select { color-scheme: dark; }
@@ -117,17 +120,26 @@ html = html.replace(courseData.re, `${courseData.match[1]}${safeJson}${courseDat
 const lightweightCourses = orderedCourses.map(catalogSummary);
 fs.mkdirSync(path.dirname(catalogDataPath), { recursive: true });
 fs.writeFileSync(catalogDataPath, JSON.stringify({ courses: lightweightCourses, categories }), 'utf8');
-console.log(`Ordered ${orderedCourses.length} courses and exported lightweight mobile catalog data`);
+
+fs.rmSync(courseDataDir, { recursive: true, force: true });
+fs.mkdirSync(courseDataDir, { recursive: true });
+for (const course of orderedCourses) {
+  if (!course || typeof course.id !== 'string' || !/^[A-Za-z0-9._-]+$/.test(course.id)) {
+    throw new Error(`Unsafe or missing course id: ${course && course.id}`);
+  }
+  fs.writeFileSync(path.join(courseDataDir, `${course.id}.json`), JSON.stringify(course), 'utf8');
+}
+console.log(`Ordered ${orderedCourses.length} courses; exported lightweight catalog plus ${orderedCourses.length} full course files`);
 
 html = html.replace(new RegExp(`<style\\b[^>]*\\bid=["']${catalogStyleId}["'][^>]*>[\\s\\S]*?<\\/style>\\s*`, 'gi'), '');
 const closingHead = html.toLowerCase().lastIndexOf('</head>');
 html = closingHead >= 0 ? `${html.slice(0, closingHead)}${catalogStyle}\n${html.slice(closingHead)}` : `${catalogStyle}\n${html}`;
 
-for (const asset of ['course-practice-routing', 'course-route-visibility-guard', 'catalog-recovery']) {
+for (const asset of ['course-practice-routing', 'course-route-visibility-guard', 'catalog-recovery', 'catalog-course-viewer']) {
   html = html.replace(new RegExp(`<script[^>]*src=["']\\/assets\\/${asset}\\.js[^"']*["'][^>]*><\\/script>\\s*`, 'gi'), '');
 }
 const closingBody = html.toLowerCase().lastIndexOf('</body>');
-const runtimeTags = `${loaderTag}\n${guardTag}\n${catalogTag}`;
+const runtimeTags = `${loaderTag}\n${guardTag}\n${catalogTag}\n${viewerTag}`;
 html = closingBody >= 0 ? `${html.slice(0, closingBody)}${runtimeTags}\n${html.slice(closingBody)}` : `${html}\n${runtimeTags}\n`;
 fs.writeFileSync(indexPath, html, 'utf8');
 
@@ -136,7 +148,14 @@ const generatedCatalog = JSON.parse(fs.readFileSync(catalogDataPath, 'utf8'));
 if ((result.match(/\/assets\/course-practice-routing\.js/g) || []).length !== 1) throw new Error('Expected exactly one course loader');
 if ((result.match(/\/assets\/course-route-visibility-guard\.js/g) || []).length !== 1) throw new Error('Expected exactly one course route guard');
 if ((result.match(/\/assets\/catalog-recovery\.js/g) || []).length !== 1) throw new Error('Expected exactly one catalog recovery script');
+if ((result.match(/\/assets\/catalog-course-viewer\.js/g) || []).length !== 1) throw new Error('Expected exactly one direct course viewer');
 if ((result.match(new RegExp(`id=["']${catalogStyleId}["']`, 'g')) || []).length !== 1) throw new Error('Expected exactly one catalog select style');
 if (!Array.isArray(generatedCatalog.courses) || generatedCatalog.courses.length !== orderedCourses.length) throw new Error('Generated catalog data does not match coursedata');
 if (generatedCatalog.courses.some(course => Object.prototype.hasOwnProperty.call(course, 'lessons'))) throw new Error('Catalog data is not lightweight');
-console.log(`Injected ${catalogPath}; lightweight catalog contains ${generatedCatalog.courses.length} courses`);
+for (const course of orderedCourses) {
+  const fullPath = path.join(courseDataDir, `${course.id}.json`);
+  if (!fs.existsSync(fullPath)) throw new Error(`Missing generated course file: ${course.id}`);
+  const full = JSON.parse(fs.readFileSync(fullPath, 'utf8'));
+  if (!full || full.id !== course.id) throw new Error(`Invalid generated course file: ${course.id}`);
+}
+console.log(`Injected direct viewer; generated ${generatedCatalog.courses.length} catalog entries and ${orderedCourses.length} course files`);
