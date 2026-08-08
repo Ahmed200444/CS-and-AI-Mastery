@@ -54,5 +54,7 @@ function enhance(){
  return true;
 }
 function start(){enhance();setTimeout(enhance,250);setTimeout(enhance,800);setTimeout(enhance,1600)}
+window.addEventListener('csai-review-updated',function(){setTimeout(enhance,20)});
+window.addEventListener('storage',function(e){if(e.key===STORAGE)setTimeout(enhance,20)});
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
