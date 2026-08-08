@@ -7,5 +7,12 @@
   },
   "engines": {
     "node": ">=20"
+  },
+  "dependencies": {
+    "@gameguild/emception-browser": "3.8.0",
+    "emception": "3.8.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.1"
   }
 }

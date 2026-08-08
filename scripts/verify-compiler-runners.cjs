@@ -1,0 +1,25 @@
+const fs=require('fs');
+const path=require('path');
+const root=process.cwd(),problems=[];
+function read(p){return fs.readFileSync(path.join(root,p),'utf8');}
+const pkg=JSON.parse(read('package.json'));
+const netlify=read('netlify.toml');
+const example=read('assets/example-learning-tools.js');
+const bundlePath=path.join(root,'assets','emception-browser-bundle.js');
+if(pkg.dependencies?.['@gameguild/emception-browser']!=='3.8.0')problems.push('missing pinned @gameguild/emception-browser 3.8.0 dependency');
+if(pkg.dependencies?.emception!=='3.8.0')problems.push('missing pinned emception 3.8.0 dependency');
+if(pkg.devDependencies?.esbuild!=='0.28.1')problems.push('missing pinned esbuild 0.28.1 dependency');
+if(!fs.existsSync(bundlePath)||fs.statSync(bundlePath).size<1000)problems.push('local Emception browser bundle was not built');
+if(/@gameguild\/emception-browser@3\.8\.0\/\+esm/.test(example))problems.push('broken jsDelivr +esm loader is still present');
+if(!/emception-browser-bundle\.js/.test(example))problems.push('example runner does not use local Emception bundle');
+if(!/verifyCppCompiler/.test(example)||!/CSAI_CPP_OK/.test(example))problems.push('C++ smoke compile/run check is missing');
+if(!/assert 6 \* 7 == 42/.test(example))problems.push('Python runtime smoke test is missing');
+if(!/async function runPython/.test(example)||!/async function runCpp\(/.test(example))problems.push('Python/C++ run functions are missing');
+const b=netlify.indexOf('node scripts/build-local-cpp-runner.cjs');
+const p=netlify.indexOf('node scripts/patch-example-cpp-runner.cjs');
+const s=netlify.indexOf('node --check assets/example-learning-tools.js');
+const a=netlify.indexOf('node scripts/audit-language-example-syntax.cjs');
+const v=netlify.indexOf('node scripts/verify-compiler-runners.cjs');
+if(!(b>=0&&p>b&&s>p&&a>s&&v>a))problems.push('Netlify compiler build/patch/audit/verify order is incorrect');
+if(problems.length)throw new Error('Compiler runner verification failed:\n'+problems.join('\n'));
+console.log('Compiler runner verification passed: local C++ adapter, runtime smoke tests, Python/C++ runners, and generated-example syntax audit are wired.');
