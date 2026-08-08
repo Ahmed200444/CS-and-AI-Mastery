@@ -37,10 +37,19 @@ function extension(task){
   if(primaryMode()==='cpp')return'cpp';
   return'txt';
 }
+function languageFolder(ext){
+  if(ext==='cpp')return'C++';
+  if(ext==='py')return'Python';
+  if(ext==='js')return'JavaScript';
+  if(ext==='sql')return'SQL';
+  if(ext==='html')return'HTML';
+  return'Other';
+}
 function titleFor(task){return String(task.getAttribute('data-title')||task.querySelector('.oa-prompt h3')?.textContent||task.querySelector('h3')?.textContent||'exercise').trim();}
 function exercisePath(task){
   var title=titleFor(task);
-  return 'student-code/practice/'+slug(courseId)+'/'+slug(title)+'.'+extension(task);
+  var ext=extension(task);
+  return 'student-code/'+languageFolder(ext)+'/'+slug(courseId)+'/'+slug(title)+'.'+ext;
 }
 function messageNode(task){
   var n=task.querySelector('[data-msg]');
@@ -77,8 +86,9 @@ async function publish(task,button){
   var content=String(editor&&editor.value||'').trimEnd();
   if(!content){show(task,'Write your solution first.','err');return;}
   var title=titleFor(task);
-  var path=exercisePath(task);
   var ext=extension(task);
+  var folder=languageFolder(ext);
+  var path=exercisePath(task);
   var old=button.textContent;
   button.disabled=true;button.textContent='Publishing…';show(task,'Publishing '+path+'…','');
   try{
@@ -88,7 +98,7 @@ async function publish(task,button){
     var r=await fetch(FILE_URL,{
       method:'POST',credentials:'same-origin',
       headers:{'Content-Type':'application/json','X-CSAI-CSRF':d.csrf},
-      body:JSON.stringify({repository:repository,path:path,content:content+'\n',message:'Update '+title+' ('+ext+') from CS & AI Mastery'})
+      body:JSON.stringify({repository:repository,path:path,content:content+'\n',message:'Update '+title+' ('+folder+') from CS & AI Mastery'})
     });
     var result=await r.json().catch(function(){return{};});
     if(!r.ok)throw new Error(result.error||'GitHub publish failed');
