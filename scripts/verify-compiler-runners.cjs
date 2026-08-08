@@ -5,6 +5,7 @@ function read(p){return fs.readFileSync(path.join(root,p),'utf8');}
 const pkg=JSON.parse(read('package.json'));
 const netlify=read('netlify.toml');
 const example=read('assets/example-learning-tools.js');
+const bundler=read('scripts/build-local-cpp-runner.cjs');
 const bundlePath=path.join(root,'assets','emception-browser-bundle.js');
 if(pkg.dependencies?.['@gameguild/emception-browser']!=='3.8.0')problems.push('missing pinned @gameguild/emception-browser 3.8.0 dependency');
 if(pkg.dependencies?.emception!=='3.8.0')problems.push('missing pinned emception 3.8.0 dependency');
@@ -15,6 +16,10 @@ if(!/emception-browser-bundle\.js/.test(example))problems.push('example runner d
 if(!/verifyCppCompiler/.test(example)||!/CSAI_CPP_OK/.test(example))problems.push('C++ smoke compile/run check is missing');
 if(!/assert 6 \* 7 == 42/.test(example))problems.push('Python runtime smoke test is missing');
 if(!/async function runPython/.test(example)||!/async function runCpp\(/.test(example))problems.push('Python/C++ run functions are missing');
+if(!/['"]\.py['"]\s*:\s*['"]text['"]/.test(bundler))problems.push('esbuild .py text loader is missing');
+if(!/filter:\s*\/\\\?raw\$\//.test(bundler))problems.push('esbuild ?raw resolver is missing');
+if(!/namespace:\s*['"]csai-raw-text['"]/.test(bundler)||!/loader:\s*['"]text['"]/.test(bundler))problems.push('raw import text loader is missing');
+if(!/subprocess_shim\\\.py\\\?raw|subprocess_shim\\\.py/.test(bundler))problems.push('raw Python shim post-build guard is missing');
 const b=netlify.indexOf('node scripts/build-local-cpp-runner.cjs');
 const p=netlify.indexOf('node scripts/patch-example-cpp-runner.cjs');
 const s=netlify.indexOf('node --check assets/example-learning-tools.js');
@@ -22,4 +27,4 @@ const a=netlify.indexOf('node scripts/audit-language-example-syntax.cjs');
 const v=netlify.indexOf('node scripts/verify-compiler-runners.cjs');
 if(!(b>=0&&p>b&&s>p&&a>s&&v>a))problems.push('Netlify compiler build/patch/audit/verify order is incorrect');
 if(problems.length)throw new Error('Compiler runner verification failed:\n'+problems.join('\n'));
-console.log('Compiler runner verification passed: local C++ adapter, runtime smoke tests, Python/C++ runners, and generated-example syntax audit are wired.');
+console.log('Compiler runner verification passed: local C++ adapter, raw .py imports, runtime smoke tests, Python/C++ runners, and generated-example syntax audit are wired.');
