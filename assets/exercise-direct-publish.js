@@ -4,31 +4,53 @@
 var STATUS_URL='/api/github/status';
 var FILE_URL='/api/github/file';
 var STORE_KEY='csai-github-preferred-repo';
+var LANGUAGE_KEY='csai-primary-language-v1';
 var dataNode=document.getElementById('csai-assessment-data');
 var DATA={};
 try{DATA=dataNode?JSON.parse(dataNode.textContent||'{}'):{};}catch(e){DATA={};}
 var courseId=String(DATA.courseId||'course');
 
 function slug(v){return String(v||'practice').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'practice';}
+function pad(n){return String(Math.max(1,Number(n)||1)).padStart(2,'0');}
+function primaryMode(){try{return localStorage.getItem(LANGUAGE_KEY)||'python';}catch(e){return'python';}}
+function looksCpp(code){return /#include\s*[<"]|\bstd::|\bcout\s*<<|\bcin\s*>>|\bvector\s*</.test(code)||/\bint\s+main\s*\(/.test(code);}
 function extension(task){
   var select=task.querySelector('[data-lang]');
-  var lang=select&&select.value;
+  var lang=select&&String(select.value||'').toLowerCase();
+  if(lang==='cpp'||lang==='c++')return'cpp';
   if(lang==='python')return'py';
   if(lang==='javascript')return'js';
   if(lang==='sql')return'sql';
   if(lang==='html')return'html';
+
   var label=task.querySelector('[data-file-label]');
-  var m=label&&String(label.textContent||'').match(/\.([a-z0-9]+)$/i);
-  if(m)return m[1].toLowerCase();
+  var m=label&&String(label.textContent||'').match(/\.([a-z0-9+]+)$/i);
+  if(m){var ext=m[1].toLowerCase();if(ext==='cpp'||ext==='cc'||ext==='cxx')return'cpp';return ext;}
+
   var editor=task.querySelector('[data-editor]');
   var code=String(editor&&editor.value||'');
-  if(/\b(def|class|import|from)\b/.test(code))return'py';
+  if(looksCpp(code))return'cpp';
+  if(/\b(def|class|import|from)\b/.test(code)||/^\s*print\s*\(/m.test(code))return'py';
   if(/\b(SELECT|INSERT|UPDATE|DELETE|CREATE TABLE)\b/i.test(code))return'sql';
   if(/\b(const|let|function|=>)\b/.test(code))return'js';
   if(/<[a-z][\s\S]*>/i.test(code))return'html';
+
+  if(primaryMode()==='cpp')return'cpp';
   return'txt';
 }
-function titleFor(task){return task.getAttribute('data-title')||task.querySelector('.oa-prompt h3')?.textContent||'practice';}
+function titleFor(task){return String(task.getAttribute('data-title')||task.querySelector('.oa-prompt h3')?.textContent||task.querySelector('h3')?.textContent||'exercise').trim();}
+function exerciseOrder(task){
+  var explicit=Number(task.getAttribute('data-exercise-order'));
+  if(Number.isFinite(explicit)&&explicit>0)return explicit;
+  var tasks=Array.from(document.querySelectorAll('.assessment-stack .oa-task'));
+  var index=tasks.indexOf(task);
+  return index>=0?index+1:1;
+}
+function exercisePath(task){
+  var title=titleFor(task);
+  var order=exerciseOrder(task);
+  return 'student-code/practice/'+slug(courseId)+'/'+pad(order)+'-'+slug(title)+'.'+extension(task);
+}
 function messageNode(task){
   var n=task.querySelector('[data-msg]');
   if(n)return n;
@@ -64,7 +86,7 @@ async function publish(task,button){
   var content=String(editor&&editor.value||'').trimEnd();
   if(!content){show(task,'Write your solution first.','err');return;}
   var title=titleFor(task);
-  var path='student-code/practice/'+slug(courseId)+'/'+slug(title)+'.'+extension(task);
+  var path=exercisePath(task);
   var old=button.textContent;
   button.disabled=true;button.textContent='Publishing…';show(task,'Publishing '+path+'…','');
   try{
@@ -74,7 +96,7 @@ async function publish(task,button){
     var r=await fetch(FILE_URL,{
       method:'POST',credentials:'same-origin',
       headers:{'Content-Type':'application/json','X-CSAI-CSRF':d.csrf},
-      body:JSON.stringify({repository:repository,path:path,content:content+'\n',message:'Update '+path.split('/').pop()+' from CS & AI Mastery'})
+      body:JSON.stringify({repository:repository,path:path,content:content+'\n',message:'Update exercise '+pad(exerciseOrder(task))+' — '+title+' from CS & AI Mastery'})
     });
     var result=await r.json().catch(function(){return{};});
     if(!r.ok)throw new Error(result.error||'GitHub publish failed');
