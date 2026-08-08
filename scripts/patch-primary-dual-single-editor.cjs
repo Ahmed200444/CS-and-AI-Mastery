@@ -1,0 +1,10 @@
+const fs=require('fs');
+const path=require('path');
+const file=path.join(process.cwd(),'assets','primary-language-mode.js');
+if(!fs.existsSync(file))throw new Error('primary-language-mode.js missing');
+let src=fs.readFileSync(file,'utf8');
+const active="if(mode==='dual')makeDual(task,state)";
+if(src.includes(active))src=src.replace(active,"/* Dual intentionally uses the same single editor. */");
+if(src.includes(active))throw new Error('Active Dual second-editor call still present');
+fs.writeFileSync(file,src,'utf8');
+console.log('Patched Dual mode to keep one exercise editor.');
