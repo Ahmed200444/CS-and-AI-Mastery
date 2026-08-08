@@ -51,11 +51,35 @@ function ensureRun(task,toolbar){
   return keep;
 }
 
-function normalizeTask(task){
+function ensurePublish(task,toolbar){
+  var buttons=task.querySelectorAll('[data-publish]');
+  var publish=one(buttons);
+  if(!publish){
+    publish=document.createElement('button');
+    publish.type='button';
+    publish.className='oa-btn publish';
+    publish.setAttribute('data-publish','');
+    publish.textContent='Publish to GitHub';
+    toolbar.appendChild(publish);
+  }
+  removeOthers(task.querySelectorAll('[data-publish]'),publish);
+  publish.classList.add('oa-btn','publish');
+  publish.textContent='Publish to GitHub';
+  return publish;
+}
+
+function appendInOrder(toolbar,buttons){
+  buttons.filter(Boolean).forEach(function(btn){
+    if(btn.parentNode!==toolbar||toolbar.lastElementChild!==btn)toolbar.appendChild(btn);
+  });
+}
+
+function normalizeTask(task,index){
   var toolbar=task.querySelector('.oa-toolbar')||task.querySelector('.oa-response-actions');
   if(!toolbar)return;
   toolbar.classList.remove('oa-response-actions');
   toolbar.classList.add('oa-toolbar');
+  task.setAttribute('data-exercise-order',String(index+1));
 
   var run=ensureRun(task,toolbar);
   var submit=one(task.querySelectorAll('[data-submit],[data-mark]'),function(n){return n.hasAttribute('data-submit')});
@@ -64,15 +88,14 @@ function normalizeTask(task){
   if(reset){reset.classList.add('oa-btn');reset.textContent='Reset'}
   var reveal=one(task.querySelectorAll('[data-reveal-solution]'));
   if(reveal){reveal.classList.add('oa-btn','reveal');if(!/hide/i.test(reveal.textContent))reveal.textContent='Reveal solution'}
-  var publish=one(task.querySelectorAll('[data-publish]'));
-  if(publish){publish.classList.add('oa-btn','publish');publish.textContent='Publish to GitHub'}
+  var publish=ensurePublish(task,toolbar);
 
-  [run,submit,reset,reveal,publish].forEach(function(btn){if(btn)toolbar.appendChild(btn)});
+  appendInOrder(toolbar,[run,submit,reset,reveal,publish]);
 
   var msg=task.querySelector('[data-msg]');
   if(msg){
     msg.classList.add('csai-toolbar-status');
-    toolbar.parentNode.insertBefore(msg,toolbar.nextSibling);
+    if(msg.previousElementSibling!==toolbar)toolbar.insertAdjacentElement('afterend',msg);
   }
   task.dataset.finalToolbar='1';
 }
@@ -98,5 +121,4 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 setTimeout(run,150);
 setTimeout(run,500);
 setTimeout(run,1200);
-new MutationObserver(function(){setTimeout(run,0)}).observe(document.documentElement,{childList:true,subtree:true});
 })();
