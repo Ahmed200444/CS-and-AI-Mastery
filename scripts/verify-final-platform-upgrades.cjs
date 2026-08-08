@@ -5,9 +5,13 @@ const root=process.cwd();
 const coursesDir=path.join(root,'courses');
 const indexPath=path.join(root,'index.html');
 const languageAssetPath=path.join(root,'assets','primary-language-mode.js');
+const toolbarAssetPath=path.join(root,'assets','final-exercise-toolbar.js');
+const publishAssetPath=path.join(root,'assets','exercise-direct-publish.js');
 if(!fs.existsSync(coursesDir))throw new Error('courses directory is missing');
 if(!fs.existsSync(indexPath))throw new Error('index.html is missing');
 if(!fs.existsSync(languageAssetPath))throw new Error('primary-language-mode.js is missing');
+if(!fs.existsSync(toolbarAssetPath))throw new Error('final-exercise-toolbar.js is missing');
+if(!fs.existsSync(publishAssetPath))throw new Error('exercise-direct-publish.js is missing');
 
 const files=fs.readdirSync(coursesDir).filter(name=>name.endsWith('.html'));
 if(files.length!==54)throw new Error(`Final upgrade verification expected 54 course pages, found ${files.length}`);
@@ -58,8 +62,29 @@ const languageChecks=[
 ];
 for(const [label,re] of languageChecks){if(!re.test(langAsset))problems.push(`primary-language-mode.js: missing ${label}`);}
 
+const toolbarAsset=fs.readFileSync(toolbarAssetPath,'utf8');
+const toolbarChecks=[
+  ['missing publish-button creation',/function ensurePublish\(task,toolbar\)/],
+  ['Publish to GitHub label',/publish\.textContent='Publish to GitHub'/],
+  ['duplicate publish removal',/removeOthers\(task\.querySelectorAll\('\[data-publish\]'\),publish\)/],
+  ['exercise ordering metadata',/data-exercise-order/]
+];
+for(const [label,re] of toolbarChecks){if(!re.test(toolbarAsset))problems.push(`final-exercise-toolbar.js: missing ${label}`);}
+
+const publishAsset=fs.readFileSync(publishAssetPath,'utf8');
+const publishChecks=[
+  ['C++ .cpp support',/return'cpp'/],
+  ['Python .py support',/return'py'/],
+  ['C++ code detection',/function looksCpp\(code\)/],
+  ['exact exercise path builder',/function exercisePath\(task\)/],
+  ['number + title filename',/pad\(order\)\+'-'\+slug\(title\)/],
+  ['per-exercise commit message',/Update exercise /],
+  ['direct GitHub file API',/FILE_URL='\/api\/github\/file'/]
+];
+for(const [label,re] of publishChecks){if(!re.test(publishAsset))problems.push(`exercise-direct-publish.js: missing ${label}`);}
+
 if(problems.length){
-  throw new Error('Final platform upgrade verification failed:\n'+problems.slice(0,60).join('\n'));
+  throw new Error('Final platform upgrade verification failed:\n'+problems.slice(0,80).join('\n'));
 }
 
 const report={
@@ -77,6 +102,8 @@ const report={
     'C++ for-loop teaching shows normal, range-based, and iterator approaches with deep execution explanations',
     'Loop-related Reveal solution/answer panels receive the three C++ alternatives in C++ or Dual mode',
     'Assessment-style practice across every course',
+    'Every assessment exercise receives exactly one Publish to GitHub button even when an earlier layer omitted it',
+    'Exercise GitHub filenames include exercise order + exact exercise title and preserve language extension such as .py or .cpp',
     'One unified Run / Check action per assessment task',
     'Submit, Reset, Reveal solution, and Publish to GitHub controls',
     'Direct per-exercise GitHub publishing without leaving the course',
