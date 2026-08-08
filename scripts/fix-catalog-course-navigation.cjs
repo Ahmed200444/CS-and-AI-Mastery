@@ -1,0 +1,12 @@
+const fs=require('fs');
+const path=require('path');
+const file=path.join(process.cwd(),'assets','catalog-recovery.js');
+if(!fs.existsSync(file))throw new Error('catalog-recovery.js missing');
+let src=fs.readFileSync(file,'utf8');
+const old="var id=b.getAttribute('data-scr-course');remove();if(typeof window.cxOpen==='function')window.cxOpen(id)";
+const replacement="var id=b.getAttribute('data-scr-course');var safe=String(id||'').replace(/[^A-Za-z0-9._-]/g,'');if(!safe)return;var url='/courses/'+encodeURIComponent(safe)+'.html';x.preventDefault();x.stopPropagation();location.assign(url);return";
+if(src.includes(old))src=src.replace(old,replacement);
+if(src.includes(old))throw new Error('Catalog still removes itself before course navigation');
+if(!src.includes("location.assign(url);return"))throw new Error('Direct static catalog navigation patch missing');
+fs.writeFileSync(file,src,'utf8');
+console.log('Catalog course navigation now keeps the catalog covered until static-page navigation begins.');
