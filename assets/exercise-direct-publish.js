@@ -4,38 +4,49 @@
 var STATUS_URL='/api/github/status';
 var FILE_URL='/api/github/file';
 var STORE_KEY='csai-github-preferred-repo';
-var LANGUAGE_KEY='csai-primary-language-v1';
 var dataNode=document.getElementById('csai-assessment-data');
 var DATA={};
 try{DATA=dataNode?JSON.parse(dataNode.textContent||'{}'):{};}catch(e){DATA={};}
 var courseId=String(DATA.courseId||'course');
 
 function slug(v){return String(v||'practice').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'practice';}
-function primaryMode(){try{return localStorage.getItem(LANGUAGE_KEY)||'python';}catch(e){return'python';}}
 function looksCpp(code){return /#include\s*[<"]|\bstd::|\bcout\s*<<|\bcin\s*>>|\bvector\s*</.test(code)||/\bint\s+main\s*\(/.test(code);}
-function extension(task){
+function languageLabel(lang){return lang==='cpp'?'C++':lang==='python'?'Python':lang==='javascript'?'JavaScript':lang==='sql'?'SQL':lang==='html'?'HTML':'Other';}
+function extForLanguage(lang){return lang==='cpp'?'cpp':lang==='python'?'py':lang==='javascript'?'js':lang==='sql'?'sql':lang==='html'?'html':'txt';}
+function selectedLanguage(task){
+  var mode=String(task.getAttribute('data-csai-active-language')||'').toLowerCase();
+  if(mode==='cpp')return'cpp';
+  if(mode==='python')return'python';
+  if(mode==='dual'){
+    var dual=String(task.getAttribute('data-csai-dual-publish-language')||'').toLowerCase();
+    return dual==='cpp'?'cpp':'python';
+  }
   var select=task.querySelector('[data-lang]');
   var lang=select&&String(select.value||'').toLowerCase();
-  if(lang==='cpp'||lang==='c++')return'cpp';
-  if(lang==='python')return'py';
-  if(lang==='javascript')return'js';
-  if(lang==='sql')return'sql';
-  if(lang==='html')return'html';
-
-  var label=task.querySelector('[data-file-label]');
-  var m=label&&String(label.textContent||'').match(/\.([a-z0-9+]+)$/i);
-  if(m){var ext=m[1].toLowerCase();if(ext==='cpp'||ext==='cc'||ext==='cxx')return'cpp';return ext;}
-
+  if(lang==='c++')lang='cpp';
+  if(['cpp','python','javascript','sql','html'].includes(lang))return lang;
   var editor=task.querySelector('[data-editor]');
   var code=String(editor&&editor.value||'');
   if(looksCpp(code))return'cpp';
-  if(/\b(def|class|import|from)\b/.test(code)||/^\s*print\s*\(/m.test(code))return'py';
+  if(/\b(def|class|import|from)\b/.test(code)||/^\s*print\s*\(/m.test(code))return'python';
   if(/\b(SELECT|INSERT|UPDATE|DELETE|CREATE TABLE)\b/i.test(code))return'sql';
-  if(/\b(const|let|function|=>)\b/.test(code))return'js';
+  if(/\b(const|let|function|=>)\b/.test(code))return'javascript';
   if(/<[a-z][\s\S]*>/i.test(code))return'html';
-
-  if(primaryMode()==='cpp')return'cpp';
-  return'txt';
+  return'text';
+}
+function editorFor(task,lang){
+  if(lang==='cpp'){
+    var dualCpp=task.querySelector('[data-dual-cpp-editor]');
+    if(dualCpp)return dualCpp;
+  }
+  return task.querySelector('[data-editor]');
+}
+function extension(task,lang){
+  if(lang)return extForLanguage(lang);
+  var label=task.querySelector('[data-file-label]');
+  var m=label&&String(label.textContent||'').match(/\.([a-z0-9+]+)$/i);
+  if(m){var ext=m[1].toLowerCase();if(ext==='cpp'||ext==='cc'||ext==='cxx')return'cpp';return ext;}
+  return extForLanguage(selectedLanguage(task));
 }
 function languageFolder(ext){
   if(ext==='cpp')return'C++';
@@ -46,9 +57,9 @@ function languageFolder(ext){
   return'Other';
 }
 function titleFor(task){return String(task.getAttribute('data-title')||task.querySelector('.oa-prompt h3')?.textContent||task.querySelector('h3')?.textContent||'exercise').trim();}
-function exercisePath(task){
+function exercisePath(task,lang){
   var title=titleFor(task);
-  var ext=extension(task);
+  var ext=extension(task,lang);
   return 'student-code/'+languageFolder(ext)+'/'+slug(courseId)+'/'+slug(title)+'.'+ext;
 }
 function messageNode(task){
@@ -67,6 +78,22 @@ function show(task,text,kind){
   n.style.color=kind==='ok'?'#16805b':kind==='err'?'#d65363':'';
   n.style.fontWeight=kind?'800':'';
 }
+function refreshPublishLabel(task){
+  if(String(task.getAttribute('data-csai-active-language')||'').toLowerCase()!=='dual')return;
+  var button=task.querySelector('[data-publish]');
+  if(!button||button.disabled)return;
+  var lang=selectedLanguage(task);
+  button.textContent='Publish '+languageLabel(lang)+' to GitHub';
+}
+function rememberDualEditor(target){
+  if(!target||!target.matches)return;
+  var task=target.closest('.oa-task');if(!task)return;
+  if(String(task.getAttribute('data-csai-active-language')||'').toLowerCase()!=='dual')return;
+  if(target.matches('[data-dual-cpp-editor]'))task.setAttribute('data-csai-dual-publish-language','cpp');
+  else if(target.matches('textarea[data-editor]:not(.oa-answer)'))task.setAttribute('data-csai-dual-publish-language','python');
+  else return;
+  refreshPublishLabel(task);
+}
 async function status(){
   var r=await fetch(STATUS_URL,{credentials:'same-origin',cache:'no-store'});
   var d=await r.json().catch(function(){return{};});
@@ -82,13 +109,14 @@ function chooseRepo(d){
   return found&&found.full_name;
 }
 async function publish(task,button){
-  var editor=task.querySelector('[data-editor]');
+  var lang=selectedLanguage(task);
+  var editor=editorFor(task,lang);
   var content=String(editor&&editor.value||'').trimEnd();
-  if(!content){show(task,'Write your solution first.','err');return;}
+  if(!content){show(task,'Write your '+languageLabel(lang)+' solution first.','err');return;}
   var title=titleFor(task);
-  var ext=extension(task);
+  var ext=extension(task,lang);
   var folder=languageFolder(ext);
-  var path=exercisePath(task);
+  var path=exercisePath(task,lang);
   var old=button.textContent;
   button.disabled=true;button.textContent='Publishing…';show(task,'Publishing '+path+'…','');
   try{
@@ -103,11 +131,15 @@ async function publish(task,button){
     var result=await r.json().catch(function(){return{};});
     if(!r.ok)throw new Error(result.error||'GitHub publish failed');
     button.textContent='Published ✓';show(task,'Published ✓  '+path,'ok');
-    setTimeout(function(){button.textContent=old;button.disabled=false;},1800);
+    setTimeout(function(){button.textContent=old;button.disabled=false;refreshPublishLabel(task);},1800);
   }catch(error){
-    button.textContent=old;button.disabled=false;show(task,error.message||String(error),'err');
+    button.textContent=old;button.disabled=false;refreshPublishLabel(task);show(task,error.message||String(error),'err');
   }
 }
+
+document.addEventListener('input',function(e){rememberDualEditor(e.target);},true);
+document.addEventListener('csai-language-mode-change',function(){setTimeout(function(){document.querySelectorAll('.oa-task').forEach(refreshPublishLabel);},80);});
+setTimeout(function(){document.querySelectorAll('.oa-task').forEach(refreshPublishLabel);},600);
 
 document.addEventListener('click',function(e){
   var button=e.target.closest&&e.target.closest('[data-publish]');
