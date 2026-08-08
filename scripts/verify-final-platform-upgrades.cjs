@@ -66,8 +66,7 @@ const toolbarAsset=fs.readFileSync(toolbarAssetPath,'utf8');
 const toolbarChecks=[
   ['missing publish-button creation',/function ensurePublish\(task,toolbar\)/],
   ['Publish to GitHub label',/publish\.textContent='Publish to GitHub'/],
-  ['duplicate publish removal',/removeOthers\(task\.querySelectorAll\('\[data-publish\]'\),publish\)/],
-  ['exercise ordering metadata',/data-exercise-order/]
+  ['duplicate publish removal',/removeOthers\(task\.querySelectorAll\('\[data-publish\]'\),publish\)/]
 ];
 for(const [label,re] of toolbarChecks){if(!re.test(toolbarAsset))problems.push(`final-exercise-toolbar.js: missing ${label}`);}
 
@@ -77,11 +76,12 @@ const publishChecks=[
   ['Python .py support',/return'py'/],
   ['C++ code detection',/function looksCpp\(code\)/],
   ['exact exercise path builder',/function exercisePath\(task\)/],
-  ['number + title filename',/pad\(order\)\+'-'\+slug\(title\)/],
-  ['per-exercise commit message',/Update exercise /],
+  ['title-only filename without exercise numbering',/slug\(title\)\+'\.'\+extension\(task\)/],
+  ['language-aware commit message',/Update '\+title\+' \('\+ext\+'\) from CS & AI Mastery/],
   ['direct GitHub file API',/FILE_URL='\/api\/github\/file'/]
 ];
 for(const [label,re] of publishChecks){if(!re.test(publishAsset))problems.push(`exercise-direct-publish.js: missing ${label}`);}
+if(/pad\(order\)|\d{2}-'\+slug\(title\)/.test(publishAsset))problems.push('exercise-direct-publish.js: numbered exercise filenames must not return');
 
 if(problems.length){
   throw new Error('Final platform upgrade verification failed:\n'+problems.slice(0,80).join('\n'));
@@ -103,7 +103,8 @@ const report={
     'Loop-related Reveal solution/answer panels receive the three C++ alternatives in C++ or Dual mode',
     'Assessment-style practice across every course',
     'Every assessment exercise receives exactly one Publish to GitHub button even when an earlier layer omitted it',
-    'Exercise GitHub filenames include exercise order + exact exercise title and preserve language extension such as .py or .cpp',
+    'Exercise GitHub filenames use the exact exercise title without public numbering and preserve language extensions such as .py or .cpp',
+    'Python and C++ solutions for the same exercise can coexist as matching title files with different extensions',
     'One unified Run / Check action per assessment task',
     'Submit, Reset, Reveal solution, and Publish to GitHub controls',
     'Direct per-exercise GitHub publishing without leaving the course',
