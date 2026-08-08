@@ -20,7 +20,8 @@ const required=[
   '/assets/assessment-expanded-descriptions.js',
   '/assets/exercise-direct-publish.js',
   '/assets/universal-run-output.js',
-  '/assets/final-exercise-toolbar.js'
+  '/assets/final-exercise-toolbar.js',
+  '/assets/course-project-workspace.js'
 ];
 
 const problems=[];
@@ -31,6 +32,8 @@ for(const file of files){
   }
   if(!/data-theme-toggle/.test(html))problems.push(`${file}: missing course theme toggle`);
   if(!/course-page-meta/.test(html))problems.push(`${file}: missing course metadata/progress layer`);
+  if(!/csai-project-data/.test(html))problems.push(`${file}: missing embedded project workspace data`);
+  if(!/<h2>Projects<\/h2>/i.test(html))problems.push(`${file}: missing Projects section`);
 }
 
 const index=fs.readFileSync(indexPath,'utf8');
@@ -38,7 +41,7 @@ if(!index.includes('/assets/catalog-filter-controls.js'))problems.push('index.ht
 if(!/csai-static-course-navigation|cxOpen/.test(index))problems.push('index.html: missing static course navigation');
 
 if(problems.length){
-  throw new Error('Final platform upgrade verification failed:\n'+problems.slice(0,40).join('\n'));
+  throw new Error('Final platform upgrade verification failed:\n'+problems.slice(0,50).join('\n'));
 }
 
 const report={
@@ -48,11 +51,14 @@ const report={
   guarantees:[
     'Runnable lesson examples with output where browser execution is valid',
     'Evergreen Mastery Labs with multiple examples and step-by-step explanations',
+    'Evergreen location guidance at the top of every course',
     'Assessment-style practice across every course',
     'One unified Run / Check action per assessment task',
     'Submit, Reset, Reveal solution, and Publish to GitHub controls',
     'Direct per-exercise GitHub publishing without leaving the course',
     'Expanded task descriptions and revealed-answer explanations',
+    'Runnable/checkable project workspaces with Output on every course project/capstone',
+    'Direct project publishing to GitHub without leaving the course',
     'Light/Dark course theme support',
     'Catalog filters and static fast course navigation'
   ]
