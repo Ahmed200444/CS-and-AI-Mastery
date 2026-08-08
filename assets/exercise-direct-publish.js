@@ -11,7 +11,6 @@ try{DATA=dataNode?JSON.parse(dataNode.textContent||'{}'):{};}catch(e){DATA={};}
 var courseId=String(DATA.courseId||'course');
 
 function slug(v){return String(v||'practice').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'practice';}
-function pad(n){return String(Math.max(1,Number(n)||1)).padStart(2,'0');}
 function primaryMode(){try{return localStorage.getItem(LANGUAGE_KEY)||'python';}catch(e){return'python';}}
 function looksCpp(code){return /#include\s*[<"]|\bstd::|\bcout\s*<<|\bcin\s*>>|\bvector\s*</.test(code)||/\bint\s+main\s*\(/.test(code);}
 function extension(task){
@@ -39,17 +38,9 @@ function extension(task){
   return'txt';
 }
 function titleFor(task){return String(task.getAttribute('data-title')||task.querySelector('.oa-prompt h3')?.textContent||task.querySelector('h3')?.textContent||'exercise').trim();}
-function exerciseOrder(task){
-  var explicit=Number(task.getAttribute('data-exercise-order'));
-  if(Number.isFinite(explicit)&&explicit>0)return explicit;
-  var tasks=Array.from(document.querySelectorAll('.assessment-stack .oa-task'));
-  var index=tasks.indexOf(task);
-  return index>=0?index+1:1;
-}
 function exercisePath(task){
   var title=titleFor(task);
-  var order=exerciseOrder(task);
-  return 'student-code/practice/'+slug(courseId)+'/'+pad(order)+'-'+slug(title)+'.'+extension(task);
+  return 'student-code/practice/'+slug(courseId)+'/'+slug(title)+'.'+extension(task);
 }
 function messageNode(task){
   var n=task.querySelector('[data-msg]');
@@ -87,6 +78,7 @@ async function publish(task,button){
   if(!content){show(task,'Write your solution first.','err');return;}
   var title=titleFor(task);
   var path=exercisePath(task);
+  var ext=extension(task);
   var old=button.textContent;
   button.disabled=true;button.textContent='Publishing…';show(task,'Publishing '+path+'…','');
   try{
@@ -96,7 +88,7 @@ async function publish(task,button){
     var r=await fetch(FILE_URL,{
       method:'POST',credentials:'same-origin',
       headers:{'Content-Type':'application/json','X-CSAI-CSRF':d.csrf},
-      body:JSON.stringify({repository:repository,path:path,content:content+'\n',message:'Update exercise '+pad(exerciseOrder(task))+' — '+title+' from CS & AI Mastery'})
+      body:JSON.stringify({repository:repository,path:path,content:content+'\n',message:'Update '+title+' ('+ext+') from CS & AI Mastery'})
     });
     var result=await r.json().catch(function(){return{};});
     if(!r.ok)throw new Error(result.error||'GitHub publish failed');
