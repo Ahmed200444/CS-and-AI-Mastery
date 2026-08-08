@@ -13,6 +13,7 @@ if(files.length!==54)throw new Error(`Final upgrade verification expected 54 cou
 const required=[
   '/assets/lesson-example-runner.js',
   '/assets/evergreen-learning-engine.js',
+  '/assets/evergreen-review-navigation.js',
   '/assets/assessment-practice.js',
   '/assets/assessment-layout-fix.js',
   '/assets/universal-reveal-solutions.js',
@@ -51,6 +52,7 @@ const report={
   guarantees:[
     'Runnable lesson examples with output where browser execution is valid',
     'Evergreen Mastery Labs with multiple examples and step-by-step explanations',
+    'Evergreen review badge shows whether lessons are due and opens the correct Mastery Lab',
     'Evergreen location guidance at the top of every course',
     'Assessment-style practice across every course',
     'One unified Run / Check action per assessment task',
