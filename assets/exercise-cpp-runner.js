@@ -2,7 +2,8 @@
 const CLIENT_URL='/assets/emception-vite/cpp-client.mjs?v=20260809-5';
 const WORKER_URL='/assets/emception-vite/cpp-toolchain-worker.mjs?v=20260809-5';
 const MANIFEST_URL='https://cdn.jsdelivr.net/npm/emception@3.8.0/cdn/manifest.json';
-let clientPromise=null,runnerPromise=null,orchestrator=null,worker=null,active=null,seq=0;
+const RECYCLE_AFTER_RUNS=2;
+let clientPromise=null,runnerPromise=null,orchestrator=null,worker=null,active=null,seq=0,completedRuns=0;
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function absolute(p){return new URL(p,location.href).href;}
 function isCpp(task){
@@ -15,9 +16,10 @@ function output(task){return task?.querySelector('[data-output]');}
 function progress(out,text){if(out)out.textContent=String(text||'Working…');}
 function timeout(promise,ms,message){return new Promise((resolve,reject)=>{let done=false;const t=setTimeout(()=>{if(done)return;done=true;reject(new Error(message));},ms);Promise.resolve(promise).then(v=>{if(done)return;done=true;clearTimeout(t);resolve(v);},e=>{if(done)return;done=true;clearTimeout(t);reject(e);});});}
 async function paint(){await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));}
-async function reset(){const old=orchestrator,w=worker;orchestrator=null;worker=null;runnerPromise=null;try{await old?.dispose?.(new Error('C++ exercise runner reset'));}catch(e){}try{w?.terminate();}catch(e){}}
+async function reset(){const old=orchestrator,w=worker;orchestrator=null;worker=null;runnerPromise=null;completedRuns=0;try{await old?.dispose?.(new Error('C++ exercise runner reset'));}catch(e){}try{w?.terminate();}catch(e){}}
 async function client(){if(!clientPromise)clientPromise=import(absolute(CLIENT_URL)).then(mod=>{if(typeof mod?.WorkerOrchestrator!=='function'||typeof mod?.workerTransport!=='function')throw new Error('C++ worker client did not load correctly.');return mod;});return clientPromise;}
 async function runner(out){
+  if(completedRuns>=RECYCLE_AFTER_RUNS)await reset();
   if(orchestrator)return orchestrator;
   if(!runnerPromise)runnerPromise=(async()=>{progress(out,'Loading the C++ compiler…');const mod=await client(),w=new Worker(absolute(WORKER_URL),{type:'module',name:'csai-exercise-cpp'}),orch=new mod.WorkerOrchestrator(mod.workerTransport(w),{onTransportError:error=>console.error('[C++ exercise runner]',error)});worker=w;orchestrator=orch;try{await timeout(orch.boot(MANIFEST_URL,{origin:location.origin}),45000,'The C++ compiler took too long to initialize.');return orch;}catch(e){await reset();throw e;}})();
   try{return await runnerPromise;}catch(e){runnerPromise=null;throw e;}
@@ -30,7 +32,7 @@ async function execute(button,task){
   await paint();
   try{
     const orch=await runner(out);if(active!==token)return;
-    const stamp=Date.now().toString(36)+Math.random().toString(36).slice(2,6),src=`/home/user/exercise-${stamp}.cpp`,obj=`/home/user/exercise-${stamp}.o`,wasm=`/home/user/exercise-${stamp}.wasm`;
+    const src='/home/user/exercise-current.cpp',obj='/home/user/exercise-current.o',wasm='/home/user/exercise-current.wasm';
     await orch.writeFile(src,new TextEncoder().encode(code));
     progress(out,'Compiling your C++…');
     const compile=await timeout(orch.run('clang++',['clang++','-x','c++','-std=c++17','--target=wasm32-unknown-emscripten','--sysroot=/usr','-isystem','/usr/include/compat',src,'-c','-o',obj]),45000,'C++ compilation timed out.');
@@ -41,6 +43,7 @@ async function execute(button,task){
     progress(out,'Running your C++…');
     const result=await timeout(orch.run('wasi-run',['wasi-run',wasm]),20000,'C++ execution timed out.'),text=String(result?.stdout||'')+String(result?.stderr||'');
     out.innerHTML=`<span class="${result?.exitCode===0?'ok':'bad'}">${result?.exitCode===0?'Run complete':'Run error'}</span>\n${esc(text||'(no output — add cout)')}`;
+    if(result?.exitCode===0)completedRuns++;
   }catch(e){const message=String(e?.message||e);out.innerHTML=`<span class="bad">Runner error</span>\n${esc(message)}`;if(/timeout|worker|transport|initialize|boot/i.test(message))await reset();}
   finally{if(active===token)active=null;button.disabled=false;}
 }
