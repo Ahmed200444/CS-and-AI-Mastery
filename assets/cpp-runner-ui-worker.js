@@ -32,9 +32,9 @@ async function getClient(){
 async function compileSource(orch,src,out,outNode){
  var obj=out+'.o';
  progress(outNode,'Compiling your C++…');
- // Use Emception's native clang++ tool directly. -x c++ makes the language explicit,
- // so the compiler can never interpret these generated examples as C.
- var compileArgv=['clang++',src,'-x','c++','-std=c++17','--target=wasm32-unknown-emscripten','--sysroot=/usr','-isystem','/usr/include/compat','-c','-o',obj];
+ // Use Emception's native clang++ tool directly. Put -x c++ before the input file
+ // so Clang explicitly treats every generated example as C++ instead of inferring it.
+ var compileArgv=['clang++','-x','c++','-std=c++17','--target=wasm32-unknown-emscripten','--sysroot=/usr','-isystem','/usr/include/compat',src,'-c','-o',obj];
  var compile=await timeout(orch.run('clang++',compileArgv),45000,'Your C++ compilation took too long. Please press Run example to retry.');
  if(!compile||compile.exitCode!==0)throw new Error(toolError(compile,'C++ compilation failed.'));
 
