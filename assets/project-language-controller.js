@@ -3,7 +3,8 @@ const FLEXIBLE_IDS=['dsa','problem-solving','oop','algorithms','data-structures'
 const CLIENT_URL='/assets/emception-vite/cpp-client.mjs?v=20260809-5';
 const WORKER_URL='/assets/emception-vite/cpp-toolchain-worker.mjs?v=20260809-5';
 const MANIFEST_URL='https://cdn.jsdelivr.net/npm/emception@3.8.0/cdn/manifest.json';
-let clientPromise=null,runnerPromise=null,orchestrator=null,worker=null,queued=false;
+const RECYCLE_AFTER_RUNS=2;
+let clientPromise=null,runnerPromise=null,orchestrator=null,worker=null,queued=false,completedRuns=0;
 const clean=v=>String(v??'').trim();
 const slug=v=>clean(v).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'project';
 function meta(){try{return JSON.parse(document.getElementById('course-page-meta')?.textContent||'{}')||{};}catch(e){return{};}}
@@ -44,8 +45,9 @@ function queue(){if(queued)return;queued=true;requestAnimationFrame(()=>{queued=
 function absolute(p){return new URL(p,location.href).href;}
 function timeout(p,ms,msg){return new Promise((resolve,reject)=>{let done=false;const t=setTimeout(()=>{if(done)return;done=true;reject(new Error(msg));},ms);Promise.resolve(p).then(v=>{if(done)return;done=true;clearTimeout(t);resolve(v);},e=>{if(done)return;done=true;clearTimeout(t);reject(e);});});}
 async function getClient(){if(!clientPromise)clientPromise=import(absolute(CLIENT_URL));return clientPromise;}
-async function resetRunner(){const o=orchestrator,w=worker;orchestrator=null;worker=null;runnerPromise=null;try{await o?.dispose?.(new Error('reset'));}catch(e){}try{w?.terminate();}catch(e){}}
+async function resetRunner(){const o=orchestrator,w=worker;orchestrator=null;worker=null;runnerPromise=null;completedRuns=0;try{await o?.dispose?.(new Error('reset'));}catch(e){}try{w?.terminate();}catch(e){}}
 async function getRunner(out){
+  if(completedRuns>=RECYCLE_AFTER_RUNS)await resetRunner();
   if(orchestrator)return orchestrator;
   if(!runnerPromise)runnerPromise=(async()=>{out.textContent='Loading the C++ compiler…';const mod=await getClient();if(typeof mod.WorkerOrchestrator!=='function')throw new Error('C++ worker client did not load.');const w=new Worker(absolute(WORKER_URL),{type:'module',name:'csai-project-cpp'}),orch=new mod.WorkerOrchestrator(mod.workerTransport(w));worker=w;orchestrator=orch;try{await timeout(orch.boot(MANIFEST_URL,{origin:location.origin}),45000,'The C++ compiler took too long to initialize.');return orch;}catch(e){await resetRunner();throw e;}})();
   try{return await runnerPromise;}catch(e){runnerPromise=null;throw e;}
@@ -54,7 +56,7 @@ async function runCpp(card,button){
   const editor=card.querySelector('[data-project-editor]'),out=card.querySelector('[data-project-output]');if(!editor||!out)return;
   button.disabled=true;out.textContent='Preparing C++…';
   try{
-    const orch=await getRunner(out),stamp=Date.now().toString(36)+Math.random().toString(36).slice(2,6),src=`/home/user/project-${stamp}.cpp`,obj=`/home/user/project-${stamp}.o`,wasm=`/home/user/project-${stamp}.wasm`;
+    const orch=await getRunner(out),src='/home/user/project-current.cpp',obj='/home/user/project-current.o',wasm='/home/user/project-current.wasm';
     await orch.writeFile(src,new TextEncoder().encode(editor.value));
     out.textContent='Compiling your C++…';
     const compile=await timeout(orch.run('clang++',['clang++','-x','c++','-std=c++17','--target=wasm32-unknown-emscripten','--sysroot=/usr','-isystem','/usr/include/compat',src,'-c','-o',obj]),45000,'C++ compilation timed out.');
@@ -65,6 +67,7 @@ async function runCpp(card,button){
     out.textContent='Running your C++…';
     const result=await timeout(orch.run('wasi-run',['wasi-run',wasm]),20000,'C++ execution timed out.'),text=String(result?.stdout||'')+String(result?.stderr||'');
     out.innerHTML=`<span class="${result?.exitCode===0?'ok':'bad'}">${result?.exitCode===0?'Run complete':'Run error'}</span>\n${text||'(no output)'}`;
+    if(result?.exitCode===0)completedRuns++;
   }catch(e){out.innerHTML=`<span class="bad">Runner error</span>\n${String(e?.message||e)}`;if(/timeout|worker|initialize|boot/i.test(String(e?.message||e)))await resetRunner();}
   finally{button.disabled=false;}
 }
