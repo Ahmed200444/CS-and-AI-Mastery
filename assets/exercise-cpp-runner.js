@@ -4,13 +4,21 @@ const WORKER_URL='/assets/emception-vite/cpp-toolchain-worker.mjs?v=20260809-5';
 const MANIFEST_URL='https://cdn.jsdelivr.net/npm/emception@3.8.0/cdn/manifest.json';
 const RECYCLE_AFTER_RUNS=2;
 let clientPromise=null,runnerPromise=null,orchestrator=null,worker=null,active=null,seq=0,completedRuns=0;
-const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c]));
 function absolute(p){return new URL(p,location.href).href;}
+function looksCpp(code){return /#include\s*[<"]|\bstd::|\bcout\s*<<|\bcin\s*>>|\bvector\s*</.test(String(code||''))||/\bint\s+main\s*\(/.test(String(code||''));}
+function looksPython(code){return /(^|\n)\s*(def\s+|class\s+|from\s+|import\s+|for\s+\w+\s+in\s+|while\s+.+:|if\s+.+:|elif\s+.+:|print\s*\()/.test(String(code||''))||/\brange\s*\(|\blen\s*\(/.test(String(code||''));}
 function isCpp(task){
-  const editor=task?.querySelector('textarea[data-editor]:not(.oa-answer)');
-  const hint=[task?.getAttribute('data-csai-editor-language'),task?.querySelector('[data-lang]')?.value].filter(Boolean).join(' ').toLowerCase();
-  const code=String(editor?.value||'');
-  return /cpp|c\+\+/.test(hint)||/#include\s*[<"]|\bstd::|\bcout\s*<<|\bint\s+main\s*\(/.test(code);
+  const editor=task?.querySelector('textarea[data-editor]:not(.oa-answer)'),code=String(editor?.value||'');
+  const activeMode=String(task?.getAttribute('data-csai-active-language')||'').toLowerCase();
+  if(activeMode==='python')return false;
+  if(activeMode==='cpp')return true;
+  if(activeMode==='dual')return looksCpp(code)&&!looksPython(code);
+  const selected=String(task?.querySelector('[data-lang]')?.value||'').toLowerCase();
+  if(selected==='python')return false;
+  if(selected==='cpp'||selected==='c++')return true;
+  const tagged=String(task?.getAttribute('data-csai-editor-language')||'').toLowerCase();
+  return tagged==='cpp'&&looksCpp(code)&&!looksPython(code);
 }
 function output(task){return task?.querySelector('[data-output]');}
 function progress(out,text){if(out)out.textContent=String(text||'Working…');}
