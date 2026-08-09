@@ -58,3 +58,16 @@ jobs:
           test "$(grep -l '/assets/evergreen-example-diversity.js' courses/*.html | wc -l)" -eq 54
           ! grep -Eiq 'CS[[:space:]]*&[[:space:]]*AI[[:space:]]*Mastery[[:space:]]+v[0-9]+\.[0-9]+\.[0-9]+' index.html
           echo 'All 54 generated courses contain the final quality layer.'
+
+      - name: Install Chromium smoke-test runtime
+        run: |
+          npm install --no-save --no-audit --no-fund playwright
+          npx playwright install --with-deps chromium
+
+      - name: Browser-smoke all 54 courses
+        shell: bash
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/csai-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          node scripts/browser-platform-smoke.cjs
