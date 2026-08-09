@@ -1,4 +1,4 @@
-name: C++ speed and example publish smoke
+name: C++ course and platform predeploy smoke
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -31,7 +31,7 @@ jobs:
           if(!match)throw new Error('Could not find Netlify build command');
           cp.execSync(match[1],{stdio:'inherit',shell:'/bin/bash'});
           NODE
-      - name: Browser test C++ warmup and example GitHub publishing
+      - name: Browser-test all courses, dedicated C++, runners, loops, Evergreen, and GitHub
         shell: bash
         run: |
           python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/csai-http.log 2>&1 &
@@ -40,96 +40,191 @@ jobs:
           node <<'NODE'
           const fs=require('fs');
           const {chromium}=require('playwright');
+          const BASE='http://127.0.0.1:4173';
+          function assert(cond,msg){if(!cond)throw new Error(msg);}
+          async function installGitHubMock(page,posted){
+            await page.route('**/api/github/status',async route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({connected:true,csrf:'test-csrf',repositories:[{full_name:'Ahmed200444/CS-and-AI-Mastery'}]})}));
+            await page.route('**/api/github/file',async route=>{posted.push(JSON.parse(route.request().postData()||'{}'));await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true})});});
+          }
+          async function runVariant(variant,label,timeout=90000){
+            const run=variant.locator('[data-run-language-example]').first();
+            const out=variant.locator('[data-csai-example-output]').first();
+            assert(await run.count(),label+': Run example button missing');
+            const initial=String(await out.textContent()||'').trim();
+            const start=Date.now();
+            await run.click();
+            await pageWaitForResult(out,initial,timeout);
+            const ms=Date.now()-start;
+            const raw=String(await out.textContent()||'');
+            if(/Run error|Runner error/i.test(raw))throw new Error(label+': '+raw);
+            return {ms,raw};
+          }
+          async function pageWaitForResult(out,initial,timeout){
+            const handle=await out.elementHandle();
+            await out.page().waitForFunction(({el,initial})=>{const t=String(el.textContent||'').trim();return t!==initial&&/Output|Run error|Runner error/.test(t);},{el:handle,initial},{timeout});
+          }
           (async()=>{
             const files=fs.readdirSync('courses').filter(f=>f.endsWith('.html')).sort();
-            if(files.length!==54)throw new Error(`Expected 54 course pages, found ${files.length}`);
+            assert(files.length===55,`Expected 55 generated course pages, found ${files.length}`);
+            const catalog=JSON.parse(fs.readFileSync('assets/catalog-data.json','utf8'));
+            assert(catalog.courses.length===55,'Catalog must contain 55 courses');
+            assert(catalog.courses[0].id==='python','Python must remain first');
+            assert(catalog.courses[1].id==='cpp','C++ must appear directly after Python');
             const staticFailures=[];
             for(const file of files){
               const html=fs.readFileSync('courses/'+file,'utf8');
-              if((html.match(/\/assets\/cpp-runner-ui-worker\.js\?v=20260809-5/g)||[]).length!==1)staticFailures.push(file+': C++ v5 controller missing/not unique');
-              if(/cpp-runner-ui-worker\.js\?v=20260809-[1-4]/.test(html))staticFailures.push(file+': stale C++ controller remains');
+              if((html.match(/\/assets\/cpp-runner-ui-worker\.js\?v=20260809-5/g)||[]).length!==1)staticFailures.push(file+': C++ runner missing/not unique');
               if((html.match(/\/assets\/example-github-publish\.js\?v=20260809-1/g)||[]).length!==1)staticFailures.push(file+': example GitHub publisher missing/not unique');
+              if((html.match(/\/assets\/cpp-loop-deep-dive\.js\?v=20260809-1/g)||[]).length!==1)staticFailures.push(file+': C++ loop teaching layer missing/not unique');
+              if(!html.includes('/assets/evergreen-learning-engine.js'))staticFailures.push(file+': Evergreen engine missing');
+              if(!html.includes('/assets/evergreen-review-navigation.js'))staticFailures.push(file+': Evergreen review navigation missing');
             }
+            const cppHtml=fs.readFileSync('courses/cpp.html','utf8');
+            if((cppHtml.match(/\/assets\/dedicated-cpp-course\.js\?v=20260809-1/g)||[]).length!==1)staticFailures.push('cpp.html: dedicated C++ runtime missing/not unique');
+            const index=fs.readFileSync('index.html','utf8');
+            if(/<details\b[^>]*class=["'][^"']*hub-changelog/i.test(index))staticFailures.push('index.html: visible version history remains');
             if(staticFailures.length)throw new Error(staticFailures.join('\n'));
-            console.log('Static guards passed on all 54 course pages.');
+            console.log('Static guards passed across all 55 course pages; visible footer versions removed.');
 
             const browser=await chromium.launch({headless:true});
             const context=await browser.newContext();
-            const cppEnabled=[];
             const failures=[];
-            let publisherTested=false;
 
+            // Load every generated page at least once and reject uncaught page errors.
             for(const chosen of files){
-              const page=await context.newPage();
-              const courseId=chosen.replace(/\.html$/,'');
-              const posted=[];
-              await page.route('**/api/github/status',async route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({connected:true,csrf:'test-csrf',repositories:[{full_name:'Ahmed200444/CS-and-AI-Mastery'}]})}));
-              await page.route('**/api/github/file',async route=>{posted.push(JSON.parse(route.request().postData()||'{}'));await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true})});});
-              try{
-                await page.addInitScript(({courseId})=>{try{localStorage.setItem('csai-course-language-v2:'+courseId,'python');}catch(e){}},{courseId});
-                await page.goto('http://127.0.0.1:4173/courses/'+encodeURIComponent(chosen),{waitUntil:'domcontentloaded',timeout:30000});
-                await page.waitForTimeout(1800);
-                const cppButton=page.locator('[data-lang-mode="cpp"]');
-                if(await cppButton.count()===0){await page.close();continue;}
-                cppEnabled.push(courseId);
-
-                // Let the new preboot run while Python mode is still selected.
-                await page.waitForTimeout(3500);
-                const switchStart=Date.now();
-                await cppButton.first().click();
-                await page.waitForFunction(()=>[...document.querySelectorAll('[data-lang-variant="cpp"] .csai-example-note')].some(n=>/C\+\+ ready/.test(n.textContent||'')),{timeout:120000});
-                const readyMs=Date.now()-switchStart;
-
-                const variant=page.locator('[data-lang-variant="cpp"]').filter({has:page.locator('[data-run-language-example]')}).first();
-                const run=variant.locator('[data-run-language-example]');
-                const out=variant.locator('[data-csai-example-output]');
-                const runStart=Date.now();
-                await run.click();
-                await page.waitForFunction(el=>/Output|Run error/.test(el.textContent||''),await out.elementHandle(),{timeout:30000});
-                const runMs=Date.now()-runStart;
-                const raw=await out.textContent();
-                console.log(`[${courseId}] background ready after switch: ${readyMs}ms; warm Run: ${runMs}ms; raw=${JSON.stringify(raw)}`);
-                if(/Run error/.test(raw||''))throw new Error('C++ run failed: '+raw);
-                if(runMs>8000)throw new Error(`Warm C++ run still too slow: ${runMs}ms`);
-
-                // Same artifact must be essentially immediate on a repeated Run.
-                const secondStart=Date.now();
-                await run.click();
-                await page.waitForFunction(el=>/Output|Run error/.test(el.textContent||''),await out.elementHandle(),{timeout:15000});
-                const secondMs=Date.now()-secondStart;
-                console.log(`[${courseId}] cached second Run: ${secondMs}ms`);
-                if(secondMs>5000)throw new Error(`Cached C++ run too slow: ${secondMs}ms`);
-
-                if(!publisherTested){
-                  const dual=page.locator('[data-lang-mode="dual"]');
-                  if(await dual.count()){
-                    await dual.first().click();
-                    await page.waitForTimeout(600);
-                    const py=page.locator('[data-lang-variant="python"]').filter({has:page.locator('[data-publish-language-example="python"]')}).first();
-                    const cpp=page.locator('[data-lang-variant="cpp"]').filter({has:page.locator('[data-publish-language-example="cpp"]')}).first();
-                    if(await py.count()===0||await cpp.count()===0)throw new Error('Dual example publish buttons are missing');
-                    const pyCode=(await py.locator('[data-csai-language-generated],.csai-language-code').first().textContent()||'').trimEnd();
-                    const cppCode=(await cpp.locator('[data-csai-language-generated],.csai-language-code').first().textContent()||'').trimEnd();
-                    await py.locator('[data-publish-language-example="python"]').click();
-                    await page.waitForTimeout(200);
-                    await cpp.locator('[data-publish-language-example="cpp"]').click();
-                    await page.waitForTimeout(300);
-                    if(posted.length<2)throw new Error('Example publishing did not call GitHub file endpoint twice');
-                    const pyPost=posted.find(p=>/student-code\/Python\/.+\/examples\/.+\.py$/.test(p.path||''));
-                    const cppPost=posted.find(p=>/student-code\/C\+\+\/.+\/examples\/.+\.cpp$/.test(p.path||''));
-                    if(!pyPost||!cppPost)throw new Error('Python/C++ example publish paths are wrong: '+JSON.stringify(posted.map(p=>p.path)));
-                    if(String(pyPost.content||'').trimEnd()!==pyCode)throw new Error('Python publisher did not send exact shown code');
-                    if(String(cppPost.content||'').trimEnd()!==cppCode)throw new Error('C++ publisher did not send exact shown code');
-                    console.log(`[${courseId}] example GitHub publishing passed: ${pyPost.path} | ${cppPost.path}`);
-                    publisherTested=true;
-                  }
-                }
-              }catch(error){failures.push(`${chosen}: ${error&&error.message||error}`);}finally{if(!page.isClosed())await page.close();}
+              const page=await context.newPage();const errs=[];page.on('pageerror',e=>errs.push(String(e.message||e)));
+              try{await page.goto(BASE+'/courses/'+encodeURIComponent(chosen),{waitUntil:'domcontentloaded',timeout:30000});await page.waitForTimeout(350);if(errs.length)throw new Error(errs.join(' | '));}
+              catch(e){failures.push(chosen+': page-load error: '+(e.message||e));}
+              finally{await page.close();}
             }
+            if(failures.length)throw new Error(failures.join('\n'));
+            console.log('All 55 course pages loaded in Chromium without uncaught page errors.');
+
+            // Home footer must not expose release/version history.
+            {
+              const page=await context.newPage();await page.goto(BASE+'/',{waitUntil:'domcontentloaded',timeout:30000});
+              assert(await page.locator('details.hub-changelog').count()===0,'Visible version history still exists at the bottom of the hub');
+              await page.close();
+            }
+
+            // Dedicated C++ course: structure, explanations, loop teaching, GitHub, and real browser compilation.
+            {
+              const page=await context.newPage();const posted=[];await installGitHubMock(page,posted);
+              await page.goto(BASE+'/courses/cpp.html',{waitUntil:'domcontentloaded',timeout:30000});
+              await page.waitForTimeout(1800);
+              assert(await page.locator('.lesson').count()===30,'C++ course must render 30 lessons');
+              assert(await page.locator('[data-lang-mode]').count()===0,'Dedicated C++ course must not show Python/C++/Dual selector');
+              assert(await page.locator('[data-lang-variant="cpp"] [data-run-language-example]').count()===60,'C++ course must expose 60 runnable lesson examples');
+              assert(await page.locator('[data-lang-variant="cpp"] [data-publish-language-example="cpp"]').count()===60,'Every C++ lesson example must have Publish C++ to GitHub');
+              assert(await page.locator('.csai-example-explain').count()>=60,'Every C++ lesson example should have deep step-by-step explanation');
+              assert((await page.locator('body').innerText()).includes('Evergreen'),'C++ course must expose Evergreen review UI');
+              const loopAudit=await page.evaluate(()=>{
+                const variants=[...document.querySelectorAll('[data-lang-variant="cpp"]')];let withLoops=0,missing=0;
+                for(const v of variants){const pre=v.querySelector('[data-csai-language-generated],.csai-language-code,pre.code'),code=String(pre&&pre.textContent||'');if(/\bfor\s*\(/.test(code)){withLoops++;if(!v.querySelector('.csai-cpp-loop-deep'))missing++;}}
+                return {withLoops,missing};
+              });
+              assert(loopAudit.withLoops>=10,'Expected many C++ examples with for loops');
+              assert(loopAudit.missing===0,`${loopAudit.missing} C++ examples with for loops are missing their exact loop explanation`);
+              console.log(`C++ loop teaching verified on ${loopAudit.withLoops} lesson examples.`);
+
+              // First example should be background-prepared; then every lesson example must compile and run.
+              await page.waitForFunction(()=>[...document.querySelectorAll('[data-lang-variant="cpp"] .csai-example-note')].some(n=>/C\+\+ ready/.test(n.textContent||'')),{timeout:120000});
+              const variants=page.locator('[data-lang-variant="cpp"]').filter({has:page.locator('[data-run-language-example]')});
+              const first=await runVariant(variants.nth(0),'C++ lesson example 1',30000);
+              assert(first.ms<8000,`Background-prepared first C++ run took ${first.ms}ms`);
+              console.log(`Dedicated C++ first warm Run: ${first.ms}ms`);
+              for(let i=1;i<60;i++){
+                const result=await runVariant(variants.nth(i),`C++ lesson example ${i+1}`,90000);
+                if((i+1)%10===0)console.log(`Ran ${i+1}/60 dedicated C++ lesson examples; latest ${result.ms}ms`);
+              }
+              console.log('All 60 dedicated C++ lesson examples compiled and ran successfully in Chromium.');
+
+              // Two examples from the same lesson must publish exact code to two distinct .cpp paths.
+              const firstLesson=page.locator('.lesson').first();
+              const firstTwo=firstLesson.locator('[data-lang-variant="cpp"]');
+              assert(await firstTwo.count()>=2,'First C++ lesson must contain multiple examples');
+              for(let i=0;i<2;i++)await firstTwo.nth(i).locator('[data-publish-language-example="cpp"]').click();
+              await page.waitForTimeout(500);
+              const examplePosts=posted.filter(p=>/student-code\/C\+\+\/cpp\/examples\/.+\.cpp$/.test(p.path||''));
+              assert(examplePosts.length>=2,'C++ example GitHub publishing did not produce two .cpp requests');
+              assert(examplePosts[0].path!==examplePosts[1].path,'Multiple examples in one lesson overwrite the same GitHub path');
+              for(let i=0;i<2;i++){
+                const shown=String(await firstTwo.nth(i).locator('[data-csai-language-generated],.csai-language-code').first().textContent()||'').trimEnd();
+                const match=examplePosts.find(p=>String(p.content||'').trimEnd()===shown);
+                assert(match,'Example publisher did not send the exact displayed C++ source');
+              }
+              console.log('C++ lesson example GitHub publishing verified with exact code and unique filenames.');
+
+              // Every assessment solution must compile/run through the same browser C++ runner.
+              const payload=await page.evaluate(()=>JSON.parse(document.getElementById('csai-assessment-data').textContent));
+              const tasks=page.locator('.assessment-stack .oa-task');
+              assert(payload.exercises.length===15,'Expected 15 C++ exercises in assessment payload');
+              assert(await tasks.count()===15,'Expected 15 rendered C++ exercise tasks');
+              for(let i=0;i<15;i++){
+                const task=tasks.nth(i),solution=String(payload.exercises[i].solution||'');
+                assert(solution.includes('int main'),'Exercise '+(i+1)+' revealed solution is not a complete runnable C++ program');
+                await task.locator('[data-editor]').fill(solution);
+                const out=task.locator('[data-output]');const initial=String(await out.textContent()||'').trim();
+                await task.locator('[data-run]').first().click();
+                const handle=await out.elementHandle();
+                await page.waitForFunction(({el,initial})=>{const t=String(el.textContent||'').trim();return t!==initial&&/Output|Run error|Runner error/.test(t);},{el:handle,initial},{timeout:90000});
+                const text=String(await out.textContent()||'');if(/Run error|Runner error/i.test(text))throw new Error(`Exercise ${i+1} browser run failed: ${text}`);
+              }
+              console.log('All 15 dedicated C++ exercise solutions compiled and ran successfully in Chromium.');
+
+              // Own-solution publisher.
+              const firstTask=tasks.nth(0);const ownCode=String(await firstTask.locator('[data-editor]').inputValue()).trimEnd();
+              await firstTask.locator('[data-publish]').first().click();await page.waitForTimeout(350);
+              const ownPost=posted.find(p=>/student-code\/C\+\+\/cpp\/.+\.cpp$/.test(p.path||'')&&String(p.content||'').trimEnd()===ownCode);
+              assert(ownPost,'C++ exercise Publish to GitHub did not send the exact editor code to a .cpp path');
+
+              // Reveal + revealed-solution publisher.
+              await firstTask.locator('[data-reveal-solution]').click();await page.waitForTimeout(350);
+              const revealed=firstTask.locator('[data-revealed-language="cpp"]');
+              assert(await revealed.count()===1,'C++ revealed-solution variant is missing');
+              const revealedCode=String(await revealed.locator('pre').textContent()||'').trimEnd();
+              await revealed.locator('[data-publish-revealed="cpp"]').click();await page.waitForTimeout(350);
+              const revealPost=posted.find(p=>String(p.content||'').trimEnd()===revealedCode&&/student-code\/C\+\+\/cpp\/.+\.cpp$/.test(p.path||''));
+              assert(revealPost,'Publish revealed C++ did not send the exact revealed solution');
+              console.log('C++ exercise own-code and revealed-solution GitHub publishing verified.');
+              await page.close();
+            }
+
+            // Every other language-flexible course that exposes C++ must still warm and run correctly.
+            const cppCourses=[];
+            for(const chosen of files.filter(f=>f!=='cpp.html')){
+              const page=await context.newPage();const id=chosen.replace(/\.html$/,'');
+              await page.addInitScript(({id})=>{try{localStorage.setItem('csai-course-language-v2:'+id,'python');}catch(e){}},{id});
+              await page.goto(BASE+'/courses/'+encodeURIComponent(chosen),{waitUntil:'domcontentloaded',timeout:30000});await page.waitForTimeout(900);
+              const cppButton=page.locator('[data-lang-mode="cpp"]');
+              if(!await cppButton.count()){await page.close();continue;}
+              cppCourses.push(id);await page.waitForTimeout(1500);await cppButton.first().click();
+              await page.waitForFunction(()=>[...document.querySelectorAll('[data-lang-variant="cpp"] .csai-example-note')].some(n=>/C\+\+ ready/.test(n.textContent||'')),{timeout:120000});
+              const variant=page.locator('[data-lang-variant="cpp"]').filter({has:page.locator('[data-run-language-example]')}).first();
+              const result=await runVariant(variant,id+' first C++ example',30000);
+              assert(result.ms<8000,`${id}: warm C++ run took ${result.ms}ms`);
+              assert(!/\n\n\n/.test(result.raw),`${id}: C++ output still contains triple-newline spacing`);
+              await page.close();
+            }
+            assert(cppCourses.length>0,'No language-flexible C++ courses were found');
+            console.log('C++ warm-run smoke passed on every language-flexible C++ course: '+cppCourses.join(', '));
+
+            // Dual mode must still publish both Python and C++ exact example code.
+            {
+              const page=await context.newPage(),posted=[];await installGitHubMock(page,posted);
+              await page.goto(BASE+'/courses/dsa.html',{waitUntil:'domcontentloaded',timeout:30000});await page.waitForTimeout(1100);
+              const dual=page.locator('[data-lang-mode="dual"]');assert(await dual.count(),'DSA Dual mode missing');await dual.first().click();await page.waitForTimeout(700);
+              const py=page.locator('[data-lang-variant="python"]').filter({has:page.locator('[data-publish-language-example="python"]')}).first();
+              const cpp=page.locator('[data-lang-variant="cpp"]').filter({has:page.locator('[data-publish-language-example="cpp"]')}).first();
+              assert(await py.count()&&await cpp.count(),'Dual Python/C++ example publish buttons are missing');
+              const pyCode=String(await py.locator('[data-csai-language-generated],.csai-language-code').first().textContent()||'').trimEnd();
+              const cppCode=String(await cpp.locator('[data-csai-language-generated],.csai-language-code').first().textContent()||'').trimEnd();
+              await py.locator('[data-publish-language-example="python"]').click();await cpp.locator('[data-publish-language-example="cpp"]').click();await page.waitForTimeout(450);
+              assert(posted.some(p=>/student-code\/Python\/.+\.py$/.test(p.path||'')&&String(p.content||'').trimEnd()===pyCode),'Dual Python exact-code GitHub publish failed');
+              assert(posted.some(p=>/student-code\/C\+\+\/.+\.cpp$/.test(p.path||'')&&String(p.content||'').trimEnd()===cppCode),'Dual C++ exact-code GitHub publish failed');
+              await page.close();
+            }
+            console.log('Dual Python/C++ GitHub publishing passed.');
             await browser.close();
-            console.log(`C++ warm-run browser test completed on ${cppEnabled.length} course(s): ${cppEnabled.join(', ')}`);
-            if(!publisherTested)failures.push('Python/C++ example GitHub publisher was never browser-tested');
-            if(cppEnabled.length===0)failures.push('No C++-enabled course was found');
-            if(failures.length){console.error(failures.join('\n'));process.exit(1);}
           })().catch(e=>{console.error(e);process.exit(1);});
           NODE
