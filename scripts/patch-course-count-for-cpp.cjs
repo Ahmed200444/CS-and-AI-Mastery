@@ -3,11 +3,19 @@ const path=require('path');
 
 const root=process.cwd();
 const indexPath=path.join(root,'index.html');
-const html=fs.readFileSync(indexPath,'utf8');
-const m=html.match(/<script\b[^>]*\bid=["']coursedata["'][^>]*>([\s\S]*?)<\/script>/i);
+let html=fs.readFileSync(indexPath,'utf8');
+const re=/(<script\b[^>]*\bid=["']coursedata["'][^>]*>)([\s\S]*?)(<\/script>)/i;
+const m=html.match(re);
 if(!m)throw new Error('coursedata missing while updating course-count guards');
-const courses=JSON.parse(m[1]);
-const expected=Array.isArray(courses)?courses.length:0;
+const courses=JSON.parse(m[2]);
+const cpp=Array.isArray(courses)?courses.find(c=>c&&c.id==='cpp'):null;
+if(!cpp)throw new Error('Dedicated C++ course is missing before course-count migration');
+cpp.category='foundations';
+delete cpp.linked;
+const safe=JSON.stringify(courses).replace(/<\//g,'<\\/');
+html=html.replace(re,`${m[1]}${safe}${m[3]}`);
+fs.writeFileSync(indexPath,html,'utf8');
+const expected=courses.length;
 if(expected!==55)throw new Error(`Expected C++ migration to produce 55 source courses, found ${expected}`);
 
 const scriptsDir=path.join(root,'scripts');
@@ -31,7 +39,7 @@ for(const name of files){
   [/\ball 54 course pages\b/g,'all 55 course pages'],
   [/\bon 54 pages\b/g,'on 55 pages']
  ];
- for(const [re,to] of reps){const old=s;s=s.replace(re,to);if(s!==old)replacements++;}
+ for(const [pattern,to] of reps){const old=s;s=s.replace(pattern,to);if(s!==old)replacements++;}
  if(s!==before){fs.writeFileSync(full,s,'utf8');changed++;}
 }
-console.log(`Course-count migration guard prepared ${expected} courses; patched ${changed} build/verifier scripts across ${replacements} assertion/text pattern groups.`);
+console.log(`C++ metadata normalized; course-count migration prepared ${expected} courses and patched ${changed} build/verifier scripts across ${replacements} assertion/text pattern groups.`);
