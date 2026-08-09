@@ -85,7 +85,7 @@ const base=process.env.CSAI_SMOKE_BASE||'http://127.0.0.1:4173';
         await editor.focus();
         await page.keyboard.press('End');
         await page.keyboard.press('Enter');
-        const value=await editor.inputValue();
+        let value=await editor.inputValue();
         assert(value.endsWith('\n    '),`${file}: Python smart Enter did not indent four spaces`);
         await page.keyboard.type('pass');
         await page.keyboard.press('Control+A');
@@ -95,6 +95,20 @@ const base=process.env.CSAI_SMOKE_BASE||'http://127.0.0.1:4173';
         await page.keyboard.press('Shift+Tab');
         const untabbed=await editor.inputValue();
         assert(!untabbed.startsWith('    if True:'),`${file}: Shift+Tab did not outdent the selection`);
+
+        await editor.fill('if True:\n    if True:\n        pass\n        else:');
+        value=await editor.inputValue();
+        assert(value.endsWith('\n    else:'),`${file}: Python else did not dedent exactly one level`);
+        await editor.focus();
+        await page.keyboard.press('End');
+        await page.keyboard.press('Enter');
+        value=await editor.inputValue();
+        assert(value.endsWith('\n        '),`${file}: Python else body did not indent one level`);
+
+        await editor.evaluate(el=>el.setAttribute('data-language','javascript'));
+        await editor.fill('if (ready) {\n    console.log("ok");\n    }');
+        value=await editor.inputValue();
+        assert(value.endsWith('\n}'),`${file}: JavaScript closing brace did not dedent one level`);
         editorChecked=true;
       }
 
