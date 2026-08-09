@@ -1,0 +1,10 @@
+const fs=require('fs');
+const path=require('path');
+const file=path.join(process.cwd(),'assets','practice-publish-completer.js');
+let s=fs.readFileSync(file,'utf8');
+s=s.replace("var FLEXIBLE=['dsa','problem-solving','oop','algorithms','data-structures'];","var FLEXIBLE=['cpp','dsa','problem-solving','oop','algorithms','data-structures'];");
+s=s.replace("function cppSolution(task){var text=(titleFor(task)+' '+promptFor(task)).toLowerCase();","function cppSolution(task,panel){var pre=panel&&panel.querySelector('pre'),raw=String(pre&&pre.textContent||'').trim();if(raw&&looksCpp(raw))return raw;var text=(titleFor(task)+' '+promptFor(task)).toLowerCase();");
+s=s.replace("var py=pythonSolution(task,panel),cpp=cppSolution(task);","var py=pythonSolution(task,panel),cpp=cppSolution(task,panel);");
+if(!/FLEXIBLE=\['cpp'/.test(s)||!/function cppSolution\(task,panel\)/.test(s)||!/cppSolution\(task,panel\)/.test(s))throw new Error('Dedicated C++ revealed-solution publishing patch incomplete');
+fs.writeFileSync(file,s,'utf8');
+console.log('Dedicated C++ revealed solutions now support Use in editor + Publish revealed C++ using the exact course solution.');
