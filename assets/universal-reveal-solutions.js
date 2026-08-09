@@ -229,6 +229,7 @@ function insertSolution(task,item,index){
 }
 
 function normalizeResponseTask(task,item,index){
+ if(task.querySelector('.oa-answer')){task.setAttribute('data-response-task','1');return;}
  if(task.querySelector('.oa-editorbar'))return;
  task.classList.add('response-normalized');
  var work=task.querySelector('.oa-work'),editor=task.querySelector('[data-editor]');if(!work||!editor)return;
