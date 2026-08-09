@@ -33,8 +33,11 @@ const requiredUi=[
  ['link timeout',/30000,'Your C\+\+ link step took too long/],
  ['run timeout',/20000,'Your C\+\+ program took too long to run/],
  ['artifact cache',/artifactPromises=Object\.create\(null\),artifacts=Object\.create\(null\)/],
+ ['preboot before C++ selection',/function prebootCompiler\(\)/],
+ ['preboot only on C++-capable courses',/function courseSupportsCpp\(\)/],
+ ['preboot starts during page reading',/setTimeout\(prebootCompiler,350\)/],
  ['background warmup scheduler',/function scheduleBackgroundWarmup\(delay\)/],
- ['background compiler boot',/getRunner\(null\)/],
+ ['background compiler boot',/prebootCompiler\(\)/],
  ['background artifact preparation',/ensureArtifact\(code,null\)/],
  ['warmup on C++ or Dual selection',/data-lang-mode=\\?"cpp\\?"\],\[data-lang-mode=\\?"dual\\?"\]/],
  ['warmup note',/Preparing C\+\+ in background/],
@@ -73,4 +76,4 @@ const inject=netlify.indexOf('node scripts/inject-cpp-responsive-runner.cjs');
 const verify=netlify.indexOf('node scripts/verify-cpp-responsive-runner.cjs');
 if(!(build>=0&&clientCheck>build&&workerCheck>clientCheck&&uiCheck>workerCheck&&inject>uiCheck&&verify>inject))problems.push('Netlify does not build, syntax-check, inject, then verify the direct C++ runner in order');
 if(problems.length)throw new Error('Responsive C++ runner verification failed:\n'+problems.slice(0,120).join('\n'));
-console.log('Responsive C++ runner verification passed: C++ compiler background warmup, artifact reuse, explicit clang++ compilation, direct wasm-ld linking, and wasi-run execution are wired on all 54 course pages.');
+console.log('Responsive C++ runner verification passed: prebooted/background-warmed C++ compiler, artifact reuse, explicit clang++ compilation, direct wasm-ld linking, and wasi-run execution are wired on all 54 course pages.');
