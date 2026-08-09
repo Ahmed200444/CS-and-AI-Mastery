@@ -23,6 +23,8 @@ function enhanceLessonCards(){
   button.classList.add('csai-example-run');
   button.textContent='▶ Run example';
   var label=toolbar.querySelector('.lesson-run-lang');if(label)label.textContent='C++';
+  var ready=toolbar.querySelector('.csai-example-note');
+  if(!ready){ready=document.createElement('span');ready.className='csai-example-note';ready.textContent='C++ compiler warming in background…';toolbar.appendChild(ready);}
   out.setAttribute('data-csai-example-output','');
   out.classList.add('csai-example-output');
  });
