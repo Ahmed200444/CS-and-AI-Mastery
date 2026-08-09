@@ -1,40 +1,72 @@
-# CS & AI Mastery v5.18.2 — GitHub connection setup (browser-only workflow)
+# CS & AI Mastery — GitHub connection setup
 
-You do not need VS Code. The platform works locally immediately; secure GitHub sync needs hosting.
+The learning platform works as a static site. Secure GitHub publishing uses the included Netlify functions, so GitHub credentials never need to be placed in browser code.
 
-## 1. Put this folder in a GitHub repository
-Use GitHub.com in your browser: create a repository, choose **Add file → Upload files**, and upload everything in this bundle.
+## 1. Host the repository on GitHub
+
+Push or upload this repository to GitHub. Keep the included `netlify.toml`, `netlify/functions/`, `assets/`, and `scripts/` directories intact because the production build and GitHub integration depend on them.
 
 ## 2. Create a GitHub App
-On GitHub.com, open **Settings → Developer settings → GitHub Apps → New GitHub App**.
+
+On GitHub, open **Settings → Developer settings → GitHub Apps → New GitHub App**.
 
 Use:
+
 - Homepage URL: your Netlify site URL
 - Callback URL: `https://YOUR-SITE.netlify.app/api/github/callback`
 - Request user authorization during installation: enabled
 - Repository permissions: **Contents: Read and write**
-- Metadata: Read-only (automatic)
-- Installation: Only on this account
+- Metadata: Read-only
+- Installation: only the account/repositories you intend to use
 
-After creating it, copy the **Client ID**, generate a **Client secret**, and note the app slug from its URL. Install the app on only the repository you want the platform to use.
+After creating the app, copy the **Client ID**, create a **Client secret**, and note the app slug. Install the app only on repositories that should be available to the platform.
 
-## 3. Deploy on Netlify
-In Netlify's browser dashboard choose **Add new site → Import an existing project → GitHub**, select the repository, and deploy. No build command is required.
+## 3. Deploy with Netlify
 
-Add these environment variables in Netlify:
-- `SITE_URL` = your final Netlify site URL
+In Netlify choose **Add new site → Import an existing project → GitHub** and select this repository. The production build command and function directory are already defined in `netlify.toml`; do not replace them with a blank custom build.
+
+Add these environment variables:
+
+- `SITE_URL` = the final HTTPS site origin, with no trailing slash
 - `GITHUB_CLIENT_ID` = GitHub App Client ID
-- `GITHUB_CLIENT_SECRET` = GitHub App Client secret
-- `GITHUB_APP_SLUG` = the app slug
-- `SESSION_SECRET` = a long random value (at least 32 characters)
+- `GITHUB_CLIENT_SECRET` = GitHub App client secret
+- `GITHUB_APP_SLUG` = GitHub App slug
+- `SESSION_SECRET` = a long random value of at least 32 characters
 
-Redeploy after adding them.
+Redeploy after setting or changing environment variables.
 
-## 4. Connect
-Open the hosted platform, choose **Code Vault & GitHub Sync**, paste the repository link, and press **Connect GitHub**. Approve access once on GitHub. After that, the platform uses the default `main` branch and `cs-ai-mastery` folder unless you open Advanced settings and change them.
+## 4. Connect GitHub from the platform
+
+Open the deployed platform and use **Code Vault & GitHub Sync → Connect GitHub**. Complete the GitHub authorization flow once, then select the repository you want to use.
+
+### Learner portfolio publishing
+
+Exercises, lesson examples, and course projects use separate controls:
+
+- **Publish to GitHub** creates the code file.
+- **Add a README** creates the README only after the matching code exists.
+
+Files under `student-code/` are **create-once**. If the target code or README already exists, the platform reports that it is already published and does not overwrite it or create another commit. This is intentional so revisiting a lesson cannot silently replace earlier work.
+
+The broader Code Vault sync flow remains separate from these create-once learner portfolio items.
 
 ## Security design
-- No GitHub password, token, client secret, or private key is stored in the HTML or localStorage.
-- The user token is encrypted into an HttpOnly, Secure cookie and is unavailable to page JavaScript.
-- The GitHub App can be installed on one selected repository with only Contents read/write.
-- Strong secret patterns are blocked before upload.
+
+- GitHub access tokens and client secrets are never stored in the HTML or localStorage.
+- The user session is encrypted and stored in an HttpOnly, Secure cookie unavailable to page JavaScript.
+- Write requests require the session CSRF token and the expected site origin.
+- Repository file paths are validated server-side.
+- Common high-risk secret patterns are blocked before browser publishing.
+- The service worker does not cache `/api/` or Netlify function responses.
+- System-level lesson commands are simulated/validated in the browser rather than executed against a real machine or cloud account.
+
+## Local checks
+
+With Node.js 20 or newer installed:
+
+```bash
+npm install
+npm test
+```
+
+The production build and GitHub Actions quality gate run additional course-generation and platform verification checks.
