@@ -42,7 +42,7 @@ if(/createEmception\(/.test(example))problems.push('legacy DOM-dependent createE
 if(!/dedicated toolchain Worker controller/.test(example))problems.push('example tools do not delegate C++ to the dedicated controller');
 if(!/assert 6 \* 7 == 42/.test(example))problems.push('Python runtime smoke test is missing');
 if(!/async function runPython/.test(example))problems.push('Python runner function is missing');
-if(!/legacy createEmception browser-facade path/.test(patcher))problems.push('patcher does not guard against legacy C++ browser facade');
+if(!/createEmception\\\(/.test(patcher)||!/legacy createEmception browser-facade path/i.test(patcher))problems.push('patcher does not guard against legacy C++ browser facade');
 
 const b=netlify.indexOf('node scripts/build-local-cpp-runner.cjs');
 const p=netlify.indexOf('node scripts/patch-example-cpp-runner.cjs');
