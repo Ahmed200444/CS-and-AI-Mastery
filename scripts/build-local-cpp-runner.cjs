@@ -49,11 +49,14 @@ const path=require('path');
         formats:['es'],
         fileName:()=> 'cpp-toolchain-worker.mjs'
       },
-      rollupOptions:{output:{
-        entryFileNames:'cpp-toolchain-worker.mjs',
-        chunkFileNames:'worker-chunks/[name]-[hash].js',
-        assetFileNames:'worker-assets/[name]-[hash][extname]'
-      }}
+      rollupOptions:{
+        treeshake:false,
+        output:{
+          entryFileNames:'cpp-toolchain-worker.mjs',
+          chunkFileNames:'worker-chunks/[name]-[hash].js',
+          assetFileNames:'worker-assets/[name]-[hash][extname]'
+        }
+      }
     }
   });
 
