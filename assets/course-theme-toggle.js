@@ -89,6 +89,10 @@ function currentTrackContainer(){
 }
 
 function courseVisible(){
+  // Generated /courses/*.html pages are already direct course views. Their
+  // metadata node is the stable marker, so the theme control must remain
+  // available even though there is no legacy hash-routed track container.
+  if(document.getElementById('course-page-meta'))return true;
   var direct=document.getElementById('csai-direct-course-view');
   if(direct){
     var directStyle=getComputedStyle(direct);
