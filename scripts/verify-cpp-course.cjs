@@ -52,10 +52,10 @@ if(page.includes('data-lang-mode="python"')||page.includes('data-lang-mode="dual
 if(!/"defaultLanguage":"cpp"/.test(page))problems.push('C++ assessment payload is not natively configured for C++');
 
 const loop=fs.readFileSync(path.join(root,'assets','cpp-loop-deep-dive.js'),'utf8');
-if(!/What if I used a different loop\?/.test(loop))problems.push('C++ loop-alternative teaching panel is missing');
-if(!/Initialization/.test(loop)||!/Condition/.test(loop)||!/Update/.test(loop))problems.push('C++ normal for-loop component explanation is incomplete');
-if(!/Range-based/.test(loop)||!/iterator-based/.test(loop))problems.push('C++ loop alternatives do not cover range-based and iterator loops');
-if(!/Nested-loop note/.test(loop))problems.push('nested for-loop explanation is missing');
+if(!/What if I used a different loop\?/i.test(loop))problems.push('C++ loop-alternative teaching panel is missing');
+if(!/Initialization/i.test(loop)||!/Condition/i.test(loop)||!/Update/i.test(loop))problems.push('C++ normal for-loop component explanation is incomplete');
+if(!/range-based/i.test(loop)||!/iterator-based/i.test(loop))problems.push('C++ loop alternatives do not cover range-based and iterator loops');
+if(!/Nested-loop note/i.test(loop))problems.push('nested for-loop explanation is missing');
 
 const dedicated=fs.readFileSync(path.join(root,'assets','dedicated-cpp-course.js'),'utf8');
 if(!/data-csai-active-language','cpp'/.test(dedicated))problems.push('dedicated assessment does not force C++ language identity');
