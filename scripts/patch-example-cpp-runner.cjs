@@ -4,9 +4,9 @@ const file=path.join(process.cwd(),'assets','example-learning-tools.js');
 let s=fs.readFileSync(file,'utf8');
 
 const oldImport="var EMCEPTION_IMPORT='https://cdn.jsdelivr.net/npm/@gameguild/emception-browser@3.8.0/+esm';";
-const newImport="var EMCEPTION_BUNDLE='/assets/emception-browser-bundle.js?v=20260809-2';";
+const newImport="var EMCEPTION_BUNDLE='/assets/emception-vite/emception-browser-bundle.mjs?v=20260809-4';";
 if(s.includes(oldImport))s=s.replace(oldImport,newImport);
-else if(!s.includes('EMCEPTION_BUNDLE'))throw new Error('Could not locate old Emception +esm import');
+else if(!s.includes('EMCEPTION_BUNDLE'))throw new Error('Could not locate old Emception import');
 
 const oldGet="async function getEmception(){if(!emceptionPromise){emceptionPromise=(async function(){var mod=await import(EMCEPTION_IMPORT);if(!mod||typeof mod.createEmception!=='function')throw new Error('C++ compiler module did not load');return mod.createEmception({manifestUrl:EMCEPTION_MANIFEST,tty:'none'});})();}return emceptionPromise;}";
 const newGet=`var cppSmokePromise=null;
@@ -28,9 +28,10 @@ async function verifyCppCompiler(em){
 }
 async function getEmception(){
  if(!emceptionPromise){emceptionPromise=(async function(){
-  await loadScript(EMCEPTION_BUNDLE,function(){return !!(window.CSAIEmceptionBundle&&typeof window.CSAIEmceptionBundle.createEmception==='function');});
-  if(!window.CSAIEmceptionBundle||typeof window.CSAIEmceptionBundle.createEmception!=='function')throw new Error('Local C++ compiler adapter did not load');
-  var em=await window.CSAIEmceptionBundle.createEmception({manifestUrl:EMCEPTION_MANIFEST,tty:'none'});
+  var bundleUrl=new URL(EMCEPTION_BUNDLE,window.location.href).href;
+  var mod=await import(bundleUrl);
+  if(!mod||typeof mod.createEmception!=='function')throw new Error('Local C++ compiler module did not load');
+  var em=await mod.createEmception({tty:'none'});
   await verifyCppCompiler(em);
   return em;
  })();}
@@ -43,7 +44,8 @@ const pyNeedle="pyInstance=await window.loadPyodide();return pyInstance";
 if(s.includes(pyNeedle))s=s.replace(pyNeedle,"pyInstance=await window.loadPyodide();pyInstance.runPython('assert 6 * 7 == 42');return pyInstance");
 
 if(s.includes('/@gameguild/emception-browser@3.8.0/+esm'))throw new Error('Broken jsDelivr +esm C++ import is still present');
-if(!s.includes('emception-browser-bundle.js'))throw new Error('Local C++ bundle path was not installed');
+if(!s.includes('emception-vite/emception-browser-bundle.mjs'))throw new Error('Local C++ ES-module path was not installed');
+if(!s.includes('new URL(EMCEPTION_BUNDLE,window.location.href).href'))throw new Error('Absolute C++ module URL guard was not installed');
 if(!s.includes('verifyCppCompiler'))throw new Error('C++ compiler smoke test was not installed');
 fs.writeFileSync(file,s,'utf8');
-console.log('Patched example runner to use locally bundled Emception with Python/C++ runtime smoke tests.');
+console.log('Patched example runner to dynamically import the Vite-built Emception ES module with Python/C++ runtime smoke tests.');

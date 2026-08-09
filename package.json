@@ -13,6 +13,7 @@
     "emception": "3.8.0"
   },
   "devDependencies": {
-    "esbuild": "0.28.1"
+    "esbuild": "0.28.1",
+    "vite": "6.4.3"
   }
 }

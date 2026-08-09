@@ -1,50 +1,49 @@
 const fs=require('fs');
 const path=require('path');
-const esbuild=require('esbuild');
-
-const rawTextPlugin={
-  name:'csai-raw-text-imports',
-  setup(build){
-    build.onResolve({filter:/\?raw$/},args=>{
-      const clean=args.path.replace(/\?raw$/,'');
-      let resolved;
-      if(clean.startsWith('.')||clean.startsWith('/')){
-        resolved=path.resolve(args.resolveDir||process.cwd(),clean);
-      }else{
-        resolved=require.resolve(clean,{paths:[args.resolveDir||process.cwd()]});
-      }
-      return {path:resolved,namespace:'csai-raw-text'};
-    });
-    build.onLoad({filter:/.*/,namespace:'csai-raw-text'},async args=>({
-      contents:await fs.promises.readFile(args.path,'utf8'),
-      loader:'text',
-      resolveDir:path.dirname(args.path)
-    }));
-  }
-};
 
 (async()=>{
   const root=process.cwd();
-  const out=path.join(root,'assets','emception-browser-bundle.js');
-  fs.mkdirSync(path.dirname(out),{recursive:true});
-  await esbuild.build({
-    entryPoints:[path.join(root,'scripts','emception-browser-entry.js')],
-    outfile:out,
-    bundle:true,
-    platform:'browser',
-    format:'iife',
-    globalName:'CSAIEmceptionBundle',
-    target:['es2020'],
-    minify:true,
-    sourcemap:false,
-    logLevel:'warning',
-    loader:{
-      '.py':'text'
-    },
-    plugins:[rawTextPlugin]
+  const outDir=path.join(root,'assets','emception-vite');
+  const out=path.join(outDir,'emception-browser-bundle.mjs');
+  fs.rmSync(outDir,{recursive:true,force:true});
+  fs.mkdirSync(outDir,{recursive:true});
+
+  const {build}=await import('vite');
+  await build({
+    configFile:false,
+    root,
+    publicDir:false,
+    logLevel:'warn',
+    build:{
+      outDir,
+      emptyOutDir:true,
+      target:'es2020',
+      sourcemap:false,
+      minify:'esbuild',
+      lib:{
+        entry:path.join(root,'scripts','emception-browser-entry.js'),
+        formats:['es'],
+        fileName:()=> 'emception-browser-bundle.mjs'
+      },
+      rollupOptions:{
+        output:{
+          entryFileNames:'emception-browser-bundle.mjs',
+          chunkFileNames:'chunks/[name]-[hash].js',
+          assetFileNames:'assets/[name]-[hash][extname]'
+        }
+      }
+    }
   });
+
+  if(!fs.existsSync(out))throw new Error('Vite did not create the local Emception ES-module bundle');
   const built=fs.readFileSync(out,'utf8');
-  if(!/createEmception/.test(built))throw new Error('Bundled C++ browser runner does not expose createEmception');
-  if(/subprocess_shim\.py\?raw/.test(built))throw new Error('Raw Python shim import was not bundled as text');
-  console.log(`Built local Emception browser adapter (${Math.round(fs.statSync(out).size/1024)} KiB) with raw .py text support.`);
+  if(built.length<1000)throw new Error('Local Emception browser module is unexpectedly small');
+  if(!/createEmception/.test(built))throw new Error('Local Emception browser module does not expose createEmception');
+  if(/var\s+import_meta\s*=\s*\{\s*\}/.test(built))throw new Error('C++ browser module erased import.meta and would create invalid URLs');
+  if(/\?raw(?:['"`]|\b)/.test(built))throw new Error('C++ browser module still contains an unresolved ?raw import');
+  if(/new URL\(\s*(?:''|""|undefined|void 0)\s*,/.test(built))throw new Error('C++ browser module contains an invalid URL base/input');
+
+  const emitted=[];
+  (function walk(dir){for(const name of fs.readdirSync(dir)){const p=path.join(dir,name),st=fs.statSync(p);if(st.isDirectory())walk(p);else emitted.push(path.relative(outDir,p));}})(outDir);
+  console.log(`Built Emception with Vite as a native ES module. Emitted ${emitted.length} runtime file(s): ${emitted.slice(0,8).join(', ')}${emitted.length>8?' …':''}`);
 })().catch(err=>{console.error(err);process.exit(1);});
