@@ -8,7 +8,7 @@ var clientPromise=null,orchestrator=null,toolWorker=null,runnerPromise=null,acti
 var artifactPromises=Object.create(null),artifacts=Object.create(null);
 var warmTimer=0,backgroundRunning=false,backgroundKey='',backgroundPromise=null,prebootStarted=false,firstPrewarmStarted=false,scrollTimer=0;
 
-function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c];});}
 function cppVariant(button){return button&&button.closest?button.closest('[data-lang-variant="cpp"]'):null;}
 function outputFor(variant){return variant&&variant.querySelector('[data-csai-example-output]');}
 function codeFor(variant){var pre=variant&&variant.querySelector('[data-csai-language-generated],.csai-language-code');return String(pre&&pre.textContent||'');}
@@ -37,15 +37,26 @@ function refreshNotes(){
   else setVariantNote(variant,'C++ compiler warming in background…');
  });
 }
+function actuallyVisibleForWarmup(button,variant){
+ if(!button||!variant)return false;
+ var details=variant.closest&&variant.closest('details');
+ if(details&&!details.open)return false;
+ try{var style=getComputedStyle(variant);if(style.display==='none'||style.visibility==='hidden')return false;}catch(e){}
+ // getClientRects() also catches hidden ancestors (including closed disclosure content),
+ // which getComputedStyle(variant) alone does not reliably detect.
+ try{if(!button.getClientRects().length)return false;}catch(e){return false;}
+ var r=button.getBoundingClientRect();
+ if(!r.width&&!r.height)return false;
+ if(r.bottom<-400||r.top>(window.innerHeight||800)*1.8)return false;
+ return true;
+}
 function nearestUnpreparedButton(allowHiddenFirst){
  var buttons=allCppButtons().filter(function(button){var code=codeFor(cppVariant(button)),key=codeKey(code);return code.trim()&&!artifacts[key]&&!artifactPromises[key];});
  if(!buttons.length)return null;
  var best=null,bestDistance=Infinity;
  buttons.forEach(function(button){
-  var variant=cppVariant(button);if(!variant)return;
-  try{var style=getComputedStyle(variant);if(style.display==='none'||style.visibility==='hidden')return;}catch(e){}
+  var variant=cppVariant(button);if(!actuallyVisibleForWarmup(button,variant))return;
   var r=button.getBoundingClientRect();
-  if(r.bottom<-400||r.top>(window.innerHeight||800)*1.8)return;
   var distance=Math.abs(r.top-Math.min((window.innerHeight||800)*0.35,300));
   if(distance<bestDistance){best=button;bestDistance=distance;}
  });
