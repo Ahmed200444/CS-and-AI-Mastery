@@ -6,9 +6,10 @@ if(!fs.existsSync(dir))throw new Error('courses directory is missing');
 const tags=[
   '<script src="/assets/github-portfolio-controls.js?v=20260809-1"></script>',
   '<script src="/assets/smart-code-editor.js?v=20260809-1"></script>',
-  '<script src="/assets/universal-safe-output.js?v=20260809-1"></script>'
+  '<script src="/assets/universal-safe-output.js?v=20260809-1"></script>',
+  '<script src="/assets/evergreen-example-diversity.js?v=20260809-1"></script>'
 ].join('\n')+'\n';
-const remove=/<script[^>]*src=["']\/assets\/(?:github-portfolio-controls|smart-code-editor|universal-safe-output)\.js[^"']*["'][^>]*><\/script>\s*/gi;
+const remove=/<script[^>]*src=["']\/assets\/(?:github-portfolio-controls|smart-code-editor|universal-safe-output|evergreen-example-diversity)\.js[^"']*["'][^>]*><\/script>\s*/gi;
 const anchors=[
   /<script[^>]*src=["']\/assets\/exercise-direct-publish\.js[^"']*["'][^>]*><\/script>/i,
   /<script[^>]*src=["']\/assets\/dual-single-editor-publish\.js[^"']*["'][^>]*><\/script>/i,
