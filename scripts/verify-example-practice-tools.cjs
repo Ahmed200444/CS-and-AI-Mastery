@@ -21,10 +21,14 @@ const checks=[
  ['C++ native clang++ compile',cppController,/orch\.run\('clang\+\+',compileArgv\)/],
  ['C++ explicit language mode',cppController,/-x','c\+\+','-std=c\+\+17/],
  ['C++ direct wasm-ld link',cppController,/orch\.run\('wasm-ld',linkArgv\)/],
+ ['C++ background warmup',cppController,/function scheduleBackgroundWarmup\(delay\)/],
+ ['C++ precompiled artifact cache',cppController,/function ensureArtifact\(code,outNode\)/],
+ ['C++ background status',cppController,/Preparing C\+\+ in background/],
+ ['C++ ready status',cppController,/C\+\+ ready/],
  ['C++ compile progress',cppController,/Compiling your C\+\+/],
  ['C++ link progress',cppController,/Linking your C\+\+/],
  ['C++ standalone WASM output',cppController,/\.wasm'/],
- ['C++ WASI execution',cppController,/orch\.run\('wasi-run',\['wasi-run',out\]\)/],
+ ['C++ WASI execution',cppController,/artifact\.orch\.run\('wasi-run',\['wasi-run',artifact\.out\]\)/],
  ['C++ output path',cppController,/Output/],
  ['example output UI',example,/data-csai-example-output/],
  ['normal beginner C++ for-loop explanation',example,/Normal for loop|Normal for-loop/],
@@ -53,7 +57,8 @@ else{
    const html=fs.readFileSync(path.join(dir,name),'utf8');
    if(!html.includes('/assets/example-learning-tools.js?v=20260809-1'))problems.push(`${name}: missing example learning tools`);
    if(!html.includes('/assets/practice-publish-completer.js?v=20260809-1'))problems.push(`${name}: missing practice publishing tools`);
-   if(!html.includes('/assets/cpp-runner-ui-worker.js?v=20260809-4'))problems.push(`${name}: missing native clang++ C++ toolchain controller`);
+   if(!html.includes('/assets/cpp-runner-ui-worker.js?v=20260809-5'))problems.push(`${name}: missing background-warming native clang++ C++ toolchain controller`);
+   if(/cpp-runner-ui-worker\.js\?v=20260809-[1-4]/.test(html))problems.push(`${name}: stale C++ controller cache version remains`);
  }
 }
 const syntaxExample=netlify.indexOf('node --check assets/example-learning-tools.js');
@@ -63,4 +68,4 @@ const cppInject=netlify.indexOf('node scripts/inject-cpp-responsive-runner.cjs')
 const verify=netlify.indexOf('node scripts/verify-example-practice-tools.cjs');
 if(!(syntaxExample>=0&&syntaxPractice>syntaxExample&&inject>syntaxPractice&&cppInject>inject&&verify>cppInject))problems.push('Netlify build order does not syntax-check and inject example/practice/C++ tools before verification');
 if(problems.length)throw new Error('Example/practice verification failed:\n'+problems.slice(0,120).join('\n'));
-console.log('Example/practice verification passed: Python run/output, native clang++/wasm-ld/WASI C++ execution, GitHub publishing, revealed-solution publishing, and 54-page injection are wired.');
+console.log('Example/practice verification passed: Python run/output, background-warmed native clang++/wasm-ld/WASI C++ execution, GitHub publishing, revealed-solution publishing, and 54-page injection are wired.');
