@@ -26,4 +26,4 @@ const r=netlify.indexOf('scripts/inject-dual-single-editor-publish.cjs');
 const v=netlify.indexOf('scripts/verify-dual-single-editor-publish.cjs');
 if(!(p>=0&&q>p&&r>q&&v>r))problems.push('netlify.toml build order does not guarantee patch -> syntax check -> Dual injection -> Dual verification');
 if(problems.length)throw new Error('Dual single-editor verification failed:\n'+problems.slice(0,100).join('\n'));
-console.log('Dual single-editor verification passed: one editor, two explicit publish buttons, exact Python/C++ routes, mismatch protection, and 54-page injection.');
+console.log('Dual single-editor verification passed: one editor, two explicit publish buttons, exact Python/C++ routes, mismatch protection, and 55-page injection.');
