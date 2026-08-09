@@ -17,6 +17,17 @@ try{
   const errors=[];page.on('pageerror',e=>errors.push(String(e.message||e)));
   await page.goto(`${BASE}/courses/dsa.html`,{waitUntil:'domcontentloaded',timeout:10000});
   await page.waitForTimeout(1000);
+  report.payload=await page.evaluate(()=>{
+    try{
+      const data=JSON.parse(document.getElementById('csai-assessment-data')?.textContent||'{}');
+      const item=(data.exercises||[]).find(x=>x&&x.id==='dsa_ex4')||null;
+      return {
+        item:item?{id:item.id,title:item.title,type:item.type,prompt:item.prompt||item.description||'',starter:item.starter||null,solution:item.solution||null}:null,
+        structured:data.structured?.dsa_ex4||null,
+        defaultLanguage:data.defaultLanguage||null
+      };
+    }catch(error){return {error:String(error?.message||error)};}
+  });
   const task=page.locator('.oa-task').nth(3);
   assert(await task.count(),'DSA task 4 is missing');
   report.task=await task.evaluate(el=>({
@@ -32,6 +43,10 @@ try{
   report.pageErrors=errors;
   fs.writeFileSync('routing-regression-report.json',JSON.stringify(report,null,2));
   assert.equal(errors.length,0,`DSA page error: ${errors[0]||''}`);
+  assert(report.payload.item,'dsa_ex4 is missing from embedded assessment data');
+  assert.equal(report.payload.item.title,'Array vs linked list trade-off','Unexpected embedded dsa_ex4 title');
+  assert.equal(report.payload.item.type,'scenario-analysis',`dsa_ex4 payload was not classified as conceptual: ${JSON.stringify(report.payload.item)}`);
+  assert.equal(report.payload.structured,null,'Conceptual dsa_ex4 must not have structured coding tests');
   assert.equal(report.task.title,'Array vs linked list trade-off','Unexpected DSA task 4 title');
   assert.equal(report.task.responseTask,'1','Conceptual DSA task must stay marked as a response task');
   assert.equal(report.task.responseTextarea,true,'Conceptual DSA task must keep its response textarea');
