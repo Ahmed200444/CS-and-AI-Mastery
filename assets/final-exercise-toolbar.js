@@ -77,13 +77,23 @@ function appendInOrder(toolbar,buttons){
 function normalizeTask(task,index){
   var toolbar=task.querySelector('.oa-toolbar')||task.querySelector('.oa-response-actions');
   if(!toolbar)return;
+  var responseTask=task.dataset.responseTask==='1'||!!task.querySelector('textarea.oa-answer');
+  if(responseTask)task.dataset.responseTask='1';
   toolbar.classList.remove('oa-response-actions');
   toolbar.classList.add('oa-toolbar');
   task.setAttribute('data-exercise-order',String(index+1));
 
-  var run=ensureRun(task,toolbar);
+  var run=null;
+  if(responseTask){
+    removeOthers(task.querySelectorAll('[data-run],[data-universal-run],[data-compare]'),null);
+  }else{
+    run=ensureRun(task,toolbar);
+  }
   var submit=one(task.querySelectorAll('[data-submit],[data-mark]'),function(n){return n.hasAttribute('data-submit')});
-  if(submit){submit.classList.add('oa-btn','submit');submit.textContent='Submit solution'}
+  if(submit){
+    submit.classList.add('oa-btn','submit');
+    submit.textContent=responseTask&&submit.hasAttribute('data-mark')?'Mark complete':'Submit solution';
+  }
   var reset=one(task.querySelectorAll('[data-reset]'));
   if(reset){reset.classList.add('oa-btn');reset.textContent='Reset'}
   var reveal=one(task.querySelectorAll('[data-reveal-solution]'));
