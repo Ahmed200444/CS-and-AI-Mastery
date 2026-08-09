@@ -6,9 +6,9 @@ var TOOLCHAIN_WORKER_URL='/assets/emception-vite/cpp-toolchain-worker.mjs?v=2026
 var MANIFEST_URL='https://cdn.jsdelivr.net/npm/emception@3.8.0/cdn/manifest.json';
 var clientPromise=null,orchestrator=null,toolWorker=null,runnerPromise=null,active=null,seq=0;
 var artifactPromises=Object.create(null),artifacts=Object.create(null);
-var warmTimer=0,warmAttempted=false,backgroundRunning=false,backgroundKey='';
+var warmTimer=0,warmAttempted=false,backgroundRunning=false,backgroundKey='',prebootStarted=false;
 
-function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c];});}
+function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function cppVariant(button){return button&&button.closest?button.closest('[data-lang-variant="cpp"]'):null;}
 function outputFor(variant){return variant&&variant.querySelector('[data-csai-example-output]');}
 function codeFor(variant){var pre=variant&&variant.querySelector('[data-csai-language-generated],.csai-language-code');return String(pre&&pre.textContent||'');}
@@ -24,6 +24,7 @@ function cppModeRequested(){
  if(activeMode){var a=activeMode.getAttribute('data-lang-mode');return a==='cpp'||a==='dual';}
  try{var m=localStorage.getItem('csai-course-language-v2:'+courseId());return m==='cpp'||m==='dual';}catch(e){return false;}
 }
+function courseSupportsCpp(){return !!document.querySelector('[data-lang-mode="cpp"],[data-lang-mode="dual"]');}
 function setWarmNote(text){document.querySelectorAll('[data-lang-variant="cpp"] .csai-example-note').forEach(function(note){if(note.textContent!==text)note.textContent=text;});}
 function firstWarmButton(){
  var buttons=Array.from(document.querySelectorAll('[data-lang-variant="cpp"] [data-run-language-example]'));
@@ -42,7 +43,7 @@ async function resetRunner(){
  var old=orchestrator,w=toolWorker;
  orchestrator=null;toolWorker=null;runnerPromise=null;
  artifactPromises=Object.create(null);artifacts=Object.create(null);
- backgroundRunning=false;backgroundKey='';warmAttempted=false;
+ backgroundRunning=false;backgroundKey='';warmAttempted=false;prebootStarted=false;
  try{if(old&&typeof old.dispose==='function')await old.dispose(new Error('C++ runner reset'));}catch(e){}
  try{if(w)w.terminate();}catch(e){}
 }
@@ -87,6 +88,13 @@ async function getRunner(outNode){
  })();}
  try{return await runnerPromise;}catch(error){runnerPromise=null;throw error;}
 }
+function prebootCompiler(){
+ if(prebootStarted||orchestrator||runnerPromise||!courseSupportsCpp()||document.visibilityState==='hidden')return;
+ prebootStarted=true;
+ // Start the expensive compiler boot while the learner is reading the course, even before C++ is selected.
+ // It stays in the dedicated Worker, so the UI thread remains responsive and C++ mode opens warm instead of cold.
+ getRunner(null).catch(function(error){prebootStarted=false;console.warn('[C++ runner] background preboot skipped:',error&&error.message||error);});
+}
 async function ensureArtifact(code,outNode){
  var key=codeKey(code);
  if(artifacts[key])return artifacts[key];
@@ -105,8 +113,7 @@ async function ensureArtifact(code,outNode){
 function scheduleBackgroundWarmup(delay){
  if(warmAttempted||warmTimer||backgroundRunning||active||!cppModeRequested()||document.visibilityState==='hidden')return;
  setWarmNote('Preparing C++ in background…');
- // Start the compiler boot immediately in its Worker; do not wait for the learner to press Run.
- getRunner(null).then(function(){if(!backgroundRunning)setWarmNote('C++ compiler ready — preparing this example…');}).catch(function(error){setWarmNote('C++ will prepare when you press Run');console.warn('[C++ runner] background boot skipped:',error&&error.message||error);});
+ prebootCompiler();
  warmTimer=setTimeout(function(){
   warmTimer=0;
   if(warmAttempted||backgroundRunning||active||!cppModeRequested()||document.visibilityState==='hidden')return;
@@ -150,15 +157,15 @@ document.addEventListener('click',function(event){
  event.preventDefault();event.stopPropagation();if(event.stopImmediatePropagation)event.stopImmediatePropagation();
  runCode(button,variant);
 },true);
-document.addEventListener('pointerdown',function(event){var b=event.target&&event.target.closest&&event.target.closest('[data-lang-mode="cpp"],[data-lang-mode="dual"]');if(b)getRunner(null).catch(function(){});},true);
+document.addEventListener('pointerdown',function(event){var b=event.target&&event.target.closest&&event.target.closest('[data-lang-mode="cpp"],[data-lang-mode="dual"]');if(b)prebootCompiler();},true);
 document.addEventListener('click',function(event){
  var modeButton=event.target&&event.target.closest&&event.target.closest('[data-lang-mode]');if(!modeButton)return;
  var mode=modeButton.getAttribute('data-lang-mode');if(mode==='cpp'||mode==='dual')setTimeout(function(){scheduleBackgroundWarmup(80);},20);
 },true);
 window.addEventListener('csai-language-controller-applied',function(event){var mode=event&&event.detail&&event.detail.mode;if(mode==='cpp'||mode==='dual')scheduleBackgroundWarmup(100);});
-document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')scheduleBackgroundWarmup(100);});
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(function(){scheduleBackgroundWarmup(100);},150);},{once:true});else setTimeout(function(){scheduleBackgroundWarmup(100);},150);
-setTimeout(function(){scheduleBackgroundWarmup(100);},800);
-setTimeout(function(){scheduleBackgroundWarmup(100);},1800);
+document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible'){prebootCompiler();scheduleBackgroundWarmup(100);}});
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(prebootCompiler,350);setTimeout(function(){scheduleBackgroundWarmup(100);},500);},{once:true});else{setTimeout(prebootCompiler,350);setTimeout(function(){scheduleBackgroundWarmup(100);},500);}
+setTimeout(prebootCompiler,1100);
+setTimeout(function(){scheduleBackgroundWarmup(100);},1500);
 window.addEventListener('pagehide',function(){active=null;if(warmTimer)clearTimeout(warmTimer);warmTimer=0;resetRunner();});
 })();
