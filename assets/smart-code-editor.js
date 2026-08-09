@@ -3,6 +3,7 @@
 
 var INDENT='    ';
 var SELECTOR='textarea[data-editor],textarea[data-project-editor],textarea[data-evergreen-code],textarea[data-dual-cpp-editor],textarea.project-editor,textarea.evergreen-editor';
+var FOCUS_SELECTOR=SELECTOR.split(',').map(function(s){return s+':focus';}).join(',');
 
 function isEditor(el){return !!(el&&el.matches&&el.matches(SELECTOR));}
 function lineStart(value,pos){return value.lastIndexOf('\n',Math.max(0,pos-1))+1;}
@@ -27,7 +28,8 @@ function setValue(el,value,start,end){
   el.value=value;
   el.selectionStart=start;
   el.selectionEnd=end==null?start:end;
-  el.dispatchEvent(new Event('input',{bubbles:true}));
+  el.setAttribute('data-csai-smart-editing','1');
+  try{el.dispatchEvent(new Event('input',{bubbles:true}));}finally{el.removeAttribute('data-csai-smart-editing');}
 }
 function indentSelection(el,outdent){
   var value=el.value,start=el.selectionStart,end=el.selectionEnd;
@@ -53,23 +55,18 @@ function smartEnter(el,event){
   var base=leading(current),lang=language(el),indent=base;
 
   if(lang==='python'){
-    if(/^(elif\b|else\s*:|except\b|finally\s*:)/.test(trimmed)&&base.length>=INDENT.length){
-      base=base.slice(0,-INDENT.length);
-    }
-    if(/:\s*(#.*)?$/.test(trimmed))indent=base+INDENT;else indent=base;
+    if(/:\s*(#.*)?$/.test(trimmed))indent=base+INDENT;
   }else if(lang==='cpp'||lang==='javascript'||lang==='java'||lang==='c'){
-    if(/}\s*$/.test(trimmed)&&base.length>=INDENT.length)base=base.slice(0,-INDENT.length);
     if(/{\s*$/.test(trimmed)){
       var rest=after.slice(0,lineEnd(after,0));
       if(/^\s*}/.test(rest)){
         event.preventDefault();
-        var insertion='\n'+base+INDENT+'\n'+base;
-        var next=before+insertion+after;
-        setValue(el,next,before.length+1+base.length+INDENT.length);
+        var pairInsertion='\n'+base+INDENT+'\n'+base;
+        setValue(el,before+pairInsertion+after,before.length+1+base.length+INDENT.length);
         return true;
       }
       indent=base+INDENT;
-    }else indent=base;
+    }
   }
 
   event.preventDefault();
@@ -77,22 +74,37 @@ function smartEnter(el,event){
   setValue(el,before+insertion+after,before.length+insertion.length);
   return true;
 }
+function replaceCurrentLine(el,match,nextLine){
+  var pos=el.selectionStart,value=el.value,start=lineStart(value,pos),end=lineEnd(value,pos),line=value.slice(start,end);
+  if(!match(line))return false;
+  var changed=nextLine(line);
+  if(changed===line)return false;
+  var delta=line.length-changed.length;
+  setValue(el,value.slice(0,start)+changed+value.slice(end),Math.max(start,pos-delta));
+  return true;
+}
 function dedentKeyword(el){
-  if(language(el)!=='python')return;
-  var pos=el.selectionStart,value=el.value,start=lineStart(value,pos),end=lineEnd(value,pos);
-  var line=value.slice(start,end),m=line.match(/^(\s+)(elif\b.*:|else\s*:|except\b.*:|finally\s*:)(\s*(?:#.*)?)$/);
-  if(!m)return;
-  var spaces=m[1].replace(/\t/g,INDENT);
-  if(spaces.length<INDENT.length)return;
-  var nextLine=spaces.slice(0,-INDENT.length)+m[2]+m[3];
-  var delta=line.length-nextLine.length;
-  setValue(el,value.slice(0,start)+nextLine+value.slice(end),Math.max(start,pos-delta));
+  if(language(el)!=='python')return false;
+  return replaceCurrentLine(el,function(line){return /^(\s+)(elif\b.*:|else\s*:|except\b.*:|finally\s*:)(\s*(?:#.*)?)$/.test(line);},function(line){
+    var m=line.match(/^(\s+)(elif\b.*:|else\s*:|except\b.*:|finally\s*:)(\s*(?:#.*)?)$/);
+    var spaces=m[1].replace(/\t/g,INDENT);
+    if(spaces.length<INDENT.length)return line;
+    return spaces.slice(0,-INDENT.length)+m[2]+m[3];
+  });
+}
+function dedentClosingBrace(el){
+  var lang=language(el);if(lang!=='cpp'&&lang!=='javascript'&&lang!=='java'&&lang!=='c')return false;
+  return replaceCurrentLine(el,function(line){return /^\s+}[;,]?\s*$/.test(line);},function(line){
+    var m=line.match(/^(\s+)(}[;,]?\s*)$/);if(!m)return line;
+    var spaces=m[1].replace(/\t/g,INDENT);if(spaces.length<INDENT.length)return line;
+    return spaces.slice(0,-INDENT.length)+m[2];
+  });
 }
 function addStyle(){
   if(document.getElementById('csai-smart-code-editor-style'))return;
   var s=document.createElement('style');s.id='csai-smart-code-editor-style';s.textContent=`
 ${SELECTOR}{tab-size:4;background-image:repeating-linear-gradient(to right,transparent 0,transparent calc(4ch - 1px),rgba(135,155,180,.10) calc(4ch - 1px),rgba(135,155,180,.10) 4ch);background-position:13px 0}
-${SELECTOR}:focus{background-image:repeating-linear-gradient(to right,transparent 0,transparent calc(4ch - 1px),rgba(135,155,180,.17) calc(4ch - 1px),rgba(135,155,180,.17) 4ch)}
+${FOCUS_SELECTOR}{background-image:repeating-linear-gradient(to right,transparent 0,transparent calc(4ch - 1px),rgba(135,155,180,.17) calc(4ch - 1px),rgba(135,155,180,.17) 4ch)}
 `;
   document.head.appendChild(s);
 }
@@ -111,6 +123,9 @@ document.addEventListener('keydown',function(event){
   if(event.key==='Enter')smartEnter(el,event);
 },true);
 
-document.addEventListener('input',function(event){var el=event.target;if(isEditor(el))dedentKeyword(el);},true);
+document.addEventListener('input',function(event){
+  var el=event.target;if(!isEditor(el)||el.getAttribute('data-csai-smart-editing')==='1')return;
+  if(!dedentKeyword(el))dedentClosingBrace(el);
+},true);
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',addStyle,{once:true});else addStyle();
 })();
