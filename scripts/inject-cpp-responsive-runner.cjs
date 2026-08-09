@@ -8,9 +8,10 @@ if(files.length!==54)throw new Error(`Expected 54 course pages, found ${files.le
 const staleTags=[
  '<script src="/assets/cpp-runner-ui-worker.js?v=20260809-1"></script>',
  '<script src="/assets/cpp-runner-ui-worker.js?v=20260809-2"></script>',
- '<script src="/assets/cpp-runner-ui-worker.js?v=20260809-3"></script>'
+ '<script src="/assets/cpp-runner-ui-worker.js?v=20260809-3"></script>',
+ '<script src="/assets/cpp-runner-ui-worker.js?v=20260809-4"></script>'
 ];
-const tag='<script src="/assets/cpp-runner-ui-worker.js?v=20260809-4"></script>';
+const tag='<script src="/assets/cpp-runner-ui-worker.js?v=20260809-5"></script>';
 let changed=0;
 for(const name of files){
  const file=path.join(dir,name);let html=fs.readFileSync(file,'utf8');
@@ -28,4 +29,4 @@ for(const name of files){
  if(!html.includes(tag))throw new Error(`${name}: direct C++ runner controller missing`);
  for(const stale of staleTags)if(html.includes(stale))throw new Error(`${name}: stale C++ runner controller cache version remains`);
 }
-console.log(`Injected native clang++ C++ controller into ${changed} course page(s); verified ${files.length}.`);
+console.log(`Injected background-warming native clang++ C++ controller into ${changed} course page(s); verified ${files.length}.`);
