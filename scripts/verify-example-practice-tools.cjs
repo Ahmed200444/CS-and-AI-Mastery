@@ -18,8 +18,10 @@ const checks=[
  ['C++ direct runner controller',cppController,/WorkerOrchestrator/],
  ['C++ official toolchain worker entry',workerEntry,/@gameguild\/emception-browser\/worker/],
  ['C++ core worker client',clientEntry,/WorkerOrchestrator[\s\S]*workerTransport/],
- ['C++ compiler smoke test',cppController,/CSAI_CPP_OK/],
- ['C++ compile progress',cppController,/Compiling C\+\+/],
+ ['C++ correct em++ argv0',cppController,/var argv=\['em\+\+',src,'-std=c\+\+17','-O0','-sSTANDALONE_WASM=1','-o',out\]/],
+ ['C++ compile progress',cppController,/Compiling your C\+\+/],
+ ['C++ standalone WASM output',cppController,/\.wasm'/],
+ ['C++ WASI execution',cppController,/orch\.run\('wasi-run',\['wasi-run',out\]\)/],
  ['C++ output path',cppController,/Output/],
  ['example output UI',example,/data-csai-example-output/],
  ['normal beginner C++ for-loop explanation',example,/Normal for loop|Normal for-loop/],
@@ -36,6 +38,8 @@ const checks=[
 ];
 for(const [label,src,re] of checks)if(!re.test(src))problems.push('missing '+label);
 if(/createEmception\(/.test(example))problems.push('legacy DOM-dependent C++ compiler path remains in example tools');
+if(/CSAI_CPP_OK|smokeTest\(/.test(cppController))problems.push('redundant C++ smoke compilation remains');
+if(/orch\.run\(['"]clang['"]/.test(cppController))problems.push('plain clang fallback remains in C++ controller');
 const dir=path.join(root,'courses');
 if(!fs.existsSync(dir))problems.push('courses directory missing');
 else{
@@ -45,7 +49,7 @@ else{
    const html=fs.readFileSync(path.join(dir,name),'utf8');
    if(!html.includes('/assets/example-learning-tools.js?v=20260809-1'))problems.push(`${name}: missing example learning tools`);
    if(!html.includes('/assets/practice-publish-completer.js?v=20260809-1'))problems.push(`${name}: missing practice publishing tools`);
-   if(!html.includes('/assets/cpp-runner-ui-worker.js?v=20260809-2'))problems.push(`${name}: missing direct C++ toolchain controller`);
+   if(!html.includes('/assets/cpp-runner-ui-worker.js?v=20260809-3'))problems.push(`${name}: missing corrected C++ toolchain controller`);
  }
 }
 const syntaxExample=netlify.indexOf('node --check assets/example-learning-tools.js');
@@ -55,4 +59,4 @@ const cppInject=netlify.indexOf('node scripts/inject-cpp-responsive-runner.cjs')
 const verify=netlify.indexOf('node scripts/verify-example-practice-tools.cjs');
 if(!(syntaxExample>=0&&syntaxPractice>syntaxExample&&inject>syntaxPractice&&cppInject>inject&&verify>cppInject))problems.push('Netlify build order does not syntax-check and inject example/practice/C++ tools before verification');
 if(problems.length)throw new Error('Example/practice verification failed:\n'+problems.slice(0,120).join('\n'));
-console.log('Example/practice verification passed: Python run/output, direct C++ toolchain Worker, GitHub publishing, revealed-solution publishing, and 54-page injection are wired.');
+console.log('Example/practice verification passed: Python run/output, corrected single-pass C++ em++/WASI execution, GitHub publishing, revealed-solution publishing, and 54-page injection are wired.');
