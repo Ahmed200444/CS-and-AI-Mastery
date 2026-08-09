@@ -61,6 +61,14 @@ function starterFromSolution(item,lang){
   if(inline&&/debug/i.test(String(item&&item.type||'')))return inline[1];
   return undefined;
 }
+function isConceptualExercise(item){
+  const type=norm(item&&item.type);
+  const text=norm(`${item&&item.title||''} ${item&&item.prompt||item&&item.description||''}`);
+  if(/scenario|short answer|reflection|analysis/.test(type)&&!/debug|code/.test(type))return true;
+  const explicitlyCoding=/\b(write|implement|fix|debug|return|function|class|query|sql|script|code|program|algorithm|compile|build)\b/.test(text);
+  if(explicitlyCoding)return false;
+  return /\b(trade off|trade offs|compare|comparison|explain|describe|justify|pros|cons|advantages|disadvantages|difference|differences|when would|why choose|which would you choose)\b/.test(text);
+}
 
 const exdata=readJsonScript('exdata');
 const exById=new Map(exdata.map(x=>[x.id,x]));
@@ -99,7 +107,7 @@ function dsaConfig(ex){
   return {language:'python',starter:ex.starter||'',fname:ex.funcName||null,tests_py:testsPy,hint:Array.isArray(ex.hints)?ex.hints[0]:'',solution:ex.solution||''};
 }
 
-let injected=0;
+let injected=0,conceptual=0;
 for(const file of fs.readdirSync(coursesDir).filter(f=>f.endsWith('.html'))){
   const id=file.replace(/\.html$/,'');
   const dataPath=path.join(courseDataDir,`${id}.json`);
@@ -108,8 +116,9 @@ for(const file of fs.readdirSync(coursesDir).filter(f=>f.endsWith('.html'))){
   const lang=defaultLanguage(id);
   const items=(Array.isArray(course.exercises)?course.exercises:[]).map((item,index)=>{
     const copy={...item};
+    if(isConceptualExercise(copy)){copy.type='scenario-analysis';conceptual++;}
     const starter=starterFromSolution(copy,lang);
-    if(starter&&!copy.starter)copy.starter=starter;
+    if(starter&&!copy.starter&&!isConceptualExercise(copy))copy.starter=starter;
     if(lang==='text')copy.type='scenario-analysis';
     return copy;
   });
@@ -141,4 +150,4 @@ for(const file of fs.readdirSync(coursesDir).filter(f=>f.endsWith('.html'))){
 }
 
 if(injected!==54)throw new Error(`Expected to enhance 54 course pages, enhanced ${injected}`);
-console.log(`Injected assessment-style practice + GitHub publishing into ${injected} static course pages.`);
+console.log(`Injected assessment-style practice + GitHub publishing into ${injected} static course pages; ${conceptual} conceptual exercises normalized to response tasks.`);
