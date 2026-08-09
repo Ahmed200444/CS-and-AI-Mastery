@@ -3,7 +3,7 @@
   "private": true,
   "version": "5.20.0",
   "scripts": {
-    "test": "node tests/github-integration-contract.test.js && node tests/release-quality.test.js"
+    "test": "node tests/github-integration-contract.test.js && node tests/release-quality.test.js && node tests/portfolio-solutions.test.js"
   },
   "engines": {
     "node": ">=20"
