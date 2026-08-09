@@ -1,0 +1,29 @@
+name: C++ runner predeploy check
+
+on:
+  push:
+    branches:
+      - fix/cpp-direct-toolchain-worker
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Run exact Netlify build command
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const cp = require('child_process');
+          const text = fs.readFileSync('netlify.toml', 'utf8');
+          const match = text.match(/command = "([^"]+)"/);
+          if (!match) throw new Error('Could not find Netlify build command');
+          cp.execSync(match[1], { stdio: 'inherit', shell: '/bin/bash' });
+          NODE
