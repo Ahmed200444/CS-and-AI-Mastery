@@ -4,7 +4,6 @@ var STATUS_URL='/api/github/status';
 var FILE_URL='/api/github/file';
 var STORE_KEY='csai-github-preferred-repo';
 
-function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function slug(v){return String(v||'example').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'example';}
 function meta(){try{var n=document.getElementById('course-page-meta');return n?JSON.parse(n.textContent||'{}'):{};}catch(e){return{};}}
 function courseId(){var m=meta();return slug(m.id||location.pathname.split('/').pop()||'course');}
@@ -13,11 +12,11 @@ function languageLabel(lang){return lang==='cpp'?'C++':'Python';}
 function folder(lang){return lang==='cpp'?'C++':'Python';}
 function extension(lang){return lang==='cpp'?'cpp':'py';}
 function codeFor(variant){var pre=variant.querySelector('[data-csai-language-generated],.csai-language-code');return String(pre&&pre.textContent||'').trimEnd();}
+function cleanTitle(text){return String(text||'').replace(/\s+/g,' ').trim().replace(/^(?:lesson\s*)?\d+\s*[:.)-]?\s*/i,'').trim()||'example';}
 function lessonTitle(variant){
  var lesson=variant.closest('.lesson,details,[data-lesson]');
  var h=lesson&&lesson.querySelector('summary .title,summary h2,summary h3,summary,h2,h3');
- var text=String(h&&h.textContent||variant.getAttribute('data-example-title')||'example').replace(/\s+/g,' ').trim();
- return text||'example';
+ return cleanTitle(h&&h.textContent||variant.getAttribute('data-example-title')||'example');
 }
 function examplePath(variant,lang){return 'student-code/'+folder(lang)+'/'+courseId()+'/examples/'+slug(lessonTitle(variant))+'-example.'+extension(lang);}
 async function status(){
