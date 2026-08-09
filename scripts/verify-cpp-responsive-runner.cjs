@@ -3,42 +3,48 @@ const path=require('path');
 const root=process.cwd(),problems=[];
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const ui=read('assets/cpp-runner-ui-worker.js');
-const worker=read('assets/cpp-example-runner-worker.mjs');
+const clientEntry=read('scripts/cpp-emception-client-entry.js');
+const workerEntry=read('scripts/cpp-toolchain-worker-entry.js');
 const netlify=read('netlify.toml');
+
 const requiredUi=[
- ['dedicated module Worker',/new Worker\(url,\{type:'module',name:'csai-cpp-runner'\}\)/],
+ ['direct core client module',/cpp-client\.mjs\?v=20260809-5/],
+ ['direct toolchain worker module',/cpp-toolchain-worker\.mjs\?v=20260809-5/],
+ ['core client dynamic import',/import\(absolute\(CLIENT_URL\)\)/],
+ ['direct toolchain Worker',/new Worker\(absolute\(TOOLCHAIN_WORKER_URL\),\{type:'module',name:'csai-emception-toolchain'\}\)/],
+ ['WorkerOrchestrator construction',/new mod\.WorkerOrchestrator\(mod\.workerTransport\(worker\)/],
+ ['worker boot',/orch\.boot\(MANIFEST_URL,\{origin:window\.location\.origin\}\)/],
+ ['VFS write',/orch\.writeFile/],
+ ['C++ run',/orch\.run/],
  ['capture interception',/data-run-language-example[\s\S]*stopImmediatePropagation/],
  ['C++ variant scoping',/data-lang-variant=\\?"cpp\\?"/],
- ['persistent worker reuse',/if\(worker\)return worker/],
- ['single active C++ run guard',/if\(pending\.size\)/],
- ['progress handling',/data\.type==='progress'/],
- ['timeout recovery',/120000/],
- ['worker termination recovery',/w\.terminate\(\)/]
+ ['persistent runner reuse',/if\(orchestrator&&smokeDone\)return orchestrator/],
+ ['single active run guard',/if\(active\)/],
+ ['compiler smoke test',/CSAI_CPP_OK/],
+ ['initialization timeout',/90000/],
+ ['compile timeout',/45000/],
+ ['run timeout',/30000/],
+ ['reset recovery',/resetRunner/]
 ];
 for(const [label,re] of requiredUi)if(!re.test(ui))problems.push('UI controller missing '+label);
-const requiredWorker=[
- ['local Emception module',/emception-vite\/emception-browser-bundle\.mjs/],
- ['createEmception',/createEmception/],
- ['background message API',/self\.addEventListener\('message'/],
- ['serialized queue',/queue\s*=\s*queue\.then/],
- ['compiler smoke test',/CSAI_CPP_OK/],
- ['C++17 compile',/-std=c\+\+17/],
- ['progress reporting',/post\('progress'/]
-];
-for(const [label,re] of requiredWorker)if(!re.test(worker))problems.push('Worker missing '+label);
-if(/\bwindow\b|\bdocument\b/.test(worker))problems.push('C++ compiler worker depends on window/document and may block or fail outside the UI thread');
+if(/cpp-example-runner-worker\.mjs/.test(ui))problems.push('UI still references the broken outer Worker layer');
+if(/createEmception/.test(ui))problems.push('UI still uses the DOM-dependent createEmception facade');
+if(!/WorkerOrchestrator/.test(clientEntry)||!/workerTransport/.test(clientEntry))problems.push('core client entry is incomplete');
+if(!/@gameguild\/emception-browser\/worker/.test(workerEntry))problems.push('toolchain entry does not use the package worker export');
+
 const dir=path.join(root,'courses');
 if(!fs.existsSync(dir))problems.push('courses directory missing');
 else{
  const files=fs.readdirSync(dir).filter(x=>x.endsWith('.html'));
  if(files.length!==54)problems.push(`expected 54 course pages, found ${files.length}`);
- for(const name of files){const html=fs.readFileSync(path.join(dir,name),'utf8');if(!html.includes('/assets/cpp-runner-ui-worker.js?v=20260809-1'))problems.push(`${name}: missing responsive C++ runner controller`);}
+ for(const name of files){const html=fs.readFileSync(path.join(dir,name),'utf8');if(!html.includes('/assets/cpp-runner-ui-worker.js?v=20260809-2'))problems.push(`${name}: missing direct C++ runner controller`);if(html.includes('/assets/cpp-runner-ui-worker.js?v=20260809-1'))problems.push(`${name}: stale C++ controller cache version remains`);}
 }
 const build=netlify.indexOf('node scripts/build-local-cpp-runner.cjs');
-const workerCheck=netlify.indexOf('node --check assets/cpp-example-runner-worker.mjs');
+const clientCheck=netlify.indexOf('node --check assets/emception-vite/cpp-client.mjs');
+const workerCheck=netlify.indexOf('node --check assets/emception-vite/cpp-toolchain-worker.mjs');
 const uiCheck=netlify.indexOf('node --check assets/cpp-runner-ui-worker.js');
 const inject=netlify.indexOf('node scripts/inject-cpp-responsive-runner.cjs');
 const verify=netlify.indexOf('node scripts/verify-cpp-responsive-runner.cjs');
-if(!(build>=0&&workerCheck>build&&uiCheck>workerCheck&&inject>uiCheck&&verify>inject))problems.push('Netlify does not syntax-check, inject, then verify the responsive C++ runner in order');
+if(!(build>=0&&clientCheck>build&&workerCheck>clientCheck&&uiCheck>workerCheck&&inject>uiCheck&&verify>inject))problems.push('Netlify does not build, syntax-check, inject, then verify the direct C++ runner in order');
 if(problems.length)throw new Error('Responsive C++ runner verification failed:\n'+problems.slice(0,120).join('\n'));
-console.log('Responsive C++ runner verification passed: heavy compiler work is isolated in a persistent module worker with progress, timeout recovery, and 54-page injection.');
+console.log('Responsive C++ runner verification passed: direct WorkerOrchestrator client controls the dedicated Emception toolchain Worker with no outer DOM-dependent Worker layer.');
