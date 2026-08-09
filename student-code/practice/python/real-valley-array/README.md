@@ -19,11 +19,6 @@ Check whether an array strictly decreases to an interior minimum and then strict
 
 ## How to use
 
-Import `solution` and pass it a list of comparable values.
-
-```python
-from importlib import import_module
-# Or copy/import the function in your normal Python project.
-```
+Load the file in Python, then call `solution(numbers)` with a list of comparable values. Try normal valleys as well as flat, increasing-only, decreasing-only, and short inputs.
 
 The implementation runs in one pass after the initial length check and uses constant extra state.
