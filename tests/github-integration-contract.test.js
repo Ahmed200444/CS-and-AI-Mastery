@@ -5,6 +5,8 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const netlifyToml = fs.readFileSync(path.join(root, 'netlify.toml'), 'utf8');
 
+// All server endpoints must stay routable even when a specific browser surface
+// does not call every endpoint directly.
 const endpoints = [
   'authorize',
   'callback',
@@ -28,12 +30,20 @@ const integrationPath = path.join(root, 'assets', 'github-integration.js');
 assert.ok(fs.existsSync(integrationPath), 'Missing browser GitHub integration module');
 
 const integrationSource = fs.readFileSync(integrationPath, 'utf8');
-for (const endpoint of ['status', 'sync', 'file', 'disconnect']) {
+for (const endpoint of ['authorize', 'status', 'file']) {
   assert.ok(
     integrationSource.includes(`/api/github/${endpoint}`),
     `Browser integration no longer references /api/github/${endpoint}`,
   );
 }
+assert.ok(
+  integrationSource.includes("'X-CSAI-CSRF'"),
+  'Browser file publishing no longer sends the CSRF token',
+);
+assert.ok(
+  !/access[_-]?token/i.test(integrationSource),
+  'Browser GitHub integration must not contain or handle an access token',
+);
 
 const indexSource = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 assert.ok(
