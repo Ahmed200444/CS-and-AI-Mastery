@@ -1,5 +1,25 @@
 const {json,gh,session,csrfOk,strongSecret,safePath}=require('./_shared');
 
+function canonicalPortfolioPath(input){
+  const p=String(input||'');
+  const rules=[
+    [/^student-code\/practice\/python\/(?:fizzbuzz|fizz-buzz)\/(?:fizzbuzz|fizz-buzz)\.py$/i,'student-code/practice/python/fizzbuzz/fizzbuzz.py'],
+    [/^student-code\/practice\/python\/(?:fizzbuzz|fizz-buzz)\/README\.md$/i,'student-code/practice/python/fizzbuzz/README.md'],
+    [/^student-code\/practice\/python\/(?:real-)?second-largest(?:-distinct)?\/(?:real-)?second-largest(?:-distinct)?\.py$/i,'student-code/practice/python/real-second-largest-distinct/real-second-largest-distinct.py'],
+    [/^student-code\/practice\/python\/(?:real-)?second-largest(?:-distinct)?\/README\.md$/i,'student-code/practice/python/real-second-largest-distinct/README.md'],
+    [/^student-code\/practice\/python\/(?:real-)?valley-array\/(?:real-)?valley-array\.py$/i,'student-code/practice/python/real-valley-array/real-valley-array.py'],
+    [/^student-code\/practice\/python\/(?:real-)?valley-array\/README\.md$/i,'student-code/practice/python/real-valley-array/README.md'],
+    [/^student-code\/practice\/dsa\/(?:dsa-)?two-sum\/(?:dsa-)?two-sum\.py$/i,'student-code/practice/dsa/two-sum/dsa-two-sum.py'],
+    [/^student-code\/practice\/dsa\/(?:dsa-)?two-sum\/README\.md$/i,'student-code/practice/dsa/two-sum/README.md'],
+    [/^student-code\/practice\/oop\/(?:oop-)?point\/(?:oop-)?point\.py$/i,'student-code/practice/oop/oop-point/oop-point.py'],
+    [/^student-code\/practice\/oop\/(?:oop-)?point\/README\.md$/i,'student-code/practice/oop/oop-point/README.md'],
+    [/^student-code\/practice\/oop\/(?:oop-)?(?:counter-state|bank-account-state)\/(?:oop-)?(?:counter-state|bank-account-state)\.py$/i,'student-code/practice/oop/oop-counter-state/oop-counter-state.py'],
+    [/^student-code\/practice\/oop\/(?:oop-)?(?:counter-state|bank-account-state)\/README\.md$/i,'student-code/practice/oop/oop-counter-state/README.md']
+  ];
+  for(const [pattern,target] of rules) if(pattern.test(p)) return target;
+  return p;
+}
+
 exports.handler=async(event)=>{
   try{
     if(event.httpMethod!=='POST') return json(405,{error:'Method not allowed.'});
@@ -13,7 +33,7 @@ exports.handler=async(event)=>{
     const repository=String(body.repository||'').trim();
     if(!/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(repository)) return json(400,{error:'Invalid repository.'},headersCookie);
 
-    const path=safePath(body.path);
+    let path=canonicalPortfolioPath(safePath(body.path));
     const content=String(body.content??'');
     if(!content.trim()) return json(400,{error:'The file is empty.'},headersCookie);
     if(Buffer.byteLength(content,'utf8')>900000) return json(413,{error:'File is too large to publish from the browser.'},headersCookie);
@@ -25,10 +45,10 @@ exports.handler=async(event)=>{
     const branch=String(body.branch||repoInfo.default_branch||'main').trim();
     const encoded=p=>p.split('/').map(encodeURIComponent).join('/');
 
-    // A README can depend on its matching code file. This keeps the portfolio
-    // hierarchy honest and prevents an orphan README from being published first.
+    // A README can depend on its matching code file. Canonicalization keeps old
+    // and new lesson title slugs pointed at the same reviewed portfolio item.
     if(body.requirePath){
-      const required=safePath(body.requirePath);
+      const required=canonicalPortfolioPath(safePath(body.requirePath));
       try{
         await gh(`/repos/${owner}/${repo}/contents/${encoded(required)}?ref=${encodeURIComponent(branch)}`,s.accessToken);
       }catch(error){
