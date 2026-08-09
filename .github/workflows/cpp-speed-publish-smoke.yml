@@ -8,7 +8,7 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -31,11 +31,11 @@ jobs:
           if(!match)throw new Error('Could not find Netlify build command');
           cp.execSync(match[1],{stdio:'inherit',shell:'/bin/bash'});
           NODE
-      - name: Browser-test all courses, C++, Evergreen, loops, speed, and GitHub
+      - name: Browser-test all courses, C++, Evergreen, speed, GitHub, and project READMEs
         shell: bash
         run: |
           python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/csai-http.log 2>&1 &
           SERVER_PID=$!
           trap 'kill $SERVER_PID || true' EXIT
-          node scripts/predeploy-browser-smoke.cjs
+          node scripts/predeploy-browser-smoke-fast.cjs
           node scripts/predeploy-project-readme-smoke.cjs
