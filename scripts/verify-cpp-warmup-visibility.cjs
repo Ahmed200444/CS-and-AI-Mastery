@@ -8,5 +8,10 @@ if(!/if\(details&&!details\.open\)return false/.test(src))problems.push('closed 
 if(!/button\.getClientRects\(\)\.length/.test(src))problems.push('hidden-ancestor layout guard missing');
 if(!/if\(!actuallyVisibleForWarmup\(button,variant\)\)return/.test(src))problems.push('nearest warmup selection does not use the visibility guard');
 if(!/return best\|\|\(allowHiddenFirst\?buttons\[0\]:null\)/.test(src))problems.push('first-example fallback was lost');
+if(!/document\.addEventListener\('toggle'/.test(src))problems.push('lesson-open toggle listener is missing');
+if(!/details\.tagName!==['"]DETAILS['"]\|\|!details\.open/.test(src))problems.push('lesson-open warmup does not require an opened details element');
+if(!/details\.querySelector\('\[data-lang-variant=\\?['"]cpp\\?['"]\] \[data-run-language-example\]'\)/.test(src))problems.push('lesson-open warmup is not scoped to C++ example lessons');
+if(!/prepareButtonInBackground\(target\)/.test(src))problems.push('opened lesson does not directly prioritize its visible C++ example');
+if(!/scheduleBackgroundWarmup\(20\)/.test(src))problems.push('opened lesson has no fallback warmup scheduling');
 if(problems.length)throw new Error('C++ warmup visibility verification failed:\n'+problems.join('\n'));
-console.log('C++ warmup visibility guard passed: closed/hidden lesson examples cannot steal background compilation from the example the learner is viewing.');
+console.log('C++ warmup visibility guard passed: closed/hidden examples cannot steal compilation, and opening a lesson immediately prioritizes its visible C++ example.');
