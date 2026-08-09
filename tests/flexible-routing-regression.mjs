@@ -13,7 +13,37 @@ await ready();
 const browser=await chromium.launch({headless:true});
 const report={};
 try{
-  const page=await browser.newPage();
+  const context=await browser.newContext();
+  await context.addInitScript(()=>{
+    window.__csaiMutationStacks=[];
+    const targetRelated=(el,value='')=>{
+      try{
+        if(String(value||'').includes('dsa_ex4')||String(value||'').includes('Array vs linked list trade-off'))return true;
+        if(!el||el.nodeType!==1)return false;
+        if(el.getAttribute?.('data-task')==='dsa_ex4'||el.getAttribute?.('data-title')==='Array vs linked list trade-off')return true;
+        return !!el.closest?.('[data-task="dsa_ex4"]');
+      }catch(e){return false;}
+    };
+    const log=(kind,el,value)=>{
+      if(!targetRelated(el,value))return;
+      try{window.__csaiMutationStacks.push({kind,tag:el?.tagName||null,task:el?.getAttribute?.('data-task')||el?.closest?.('[data-task]')?.getAttribute?.('data-task')||null,value:String(value||'').slice(0,500),stack:new Error(kind).stack});}catch(e){}
+    };
+    const inner=Object.getOwnPropertyDescriptor(Element.prototype,'innerHTML');
+    if(inner?.get&&inner?.set)Object.defineProperty(Element.prototype,'innerHTML',{configurable:true,enumerable:inner.enumerable,get:inner.get,set:function(value){log('innerHTML',this,value);return inner.set.call(this,value);}});
+    const originalInsert=Element.prototype.insertAdjacentHTML;
+    Element.prototype.insertAdjacentHTML=function(position,text){log('insertAdjacentHTML',this,text);return originalInsert.call(this,position,text);};
+    const originalReplaceChildren=Element.prototype.replaceChildren;
+    Element.prototype.replaceChildren=function(...nodes){log('replaceChildren',this,nodes.map(n=>n?.outerHTML||n?.textContent||String(n)).join(' '));return originalReplaceChildren.apply(this,nodes);};
+    const originalAppend=Element.prototype.append;
+    Element.prototype.append=function(...nodes){log('append',this,nodes.map(n=>n?.outerHTML||n?.textContent||String(n)).join(' '));return originalAppend.apply(this,nodes);};
+    const originalAppendChild=Node.prototype.appendChild;
+    Node.prototype.appendChild=function(node){log('appendChild',this,node?.outerHTML||node?.textContent||'');return originalAppendChild.call(this,node);};
+    const originalReplaceWith=Element.prototype.replaceWith;
+    Element.prototype.replaceWith=function(...nodes){log('replaceWith',this,nodes.map(n=>n?.outerHTML||n?.textContent||String(n)).join(' '));return originalReplaceWith.apply(this,nodes);};
+    const originalRemove=Element.prototype.remove;
+    Element.prototype.remove=function(){log('remove',this,this.outerHTML||'');return originalRemove.call(this);};
+  });
+  const page=await context.newPage();
   const errors=[];page.on('pageerror',e=>errors.push(String(e.message||e)));
   await page.goto(`${BASE}/courses/dsa.html`,{waitUntil:'domcontentloaded',timeout:10000});
   await page.waitForTimeout(1000);
@@ -28,6 +58,8 @@ try{
       };
     }catch(error){return {error:String(error?.message||error)};}
   });
+  report.scripts=await page.evaluate(()=>[...document.scripts].map(s=>s.src||'(inline)').filter(Boolean));
+  report.mutationStacks=await page.evaluate(()=>window.__csaiMutationStacks||[]);
   const task=page.locator('.oa-task').nth(3);
   assert(await task.count(),'DSA task 4 is missing');
   report.task=await task.evaluate(el=>({
@@ -35,6 +67,7 @@ try{
     task:el.getAttribute('data-task'),
     responseTask:el.getAttribute('data-response-task'),
     responseTextarea:!!el.querySelector('textarea.oa-answer'),
+    editorOuterHTML:el.querySelector('textarea')?.outerHTML||null,
     runCount:el.querySelectorAll('[data-run],[data-universal-run],[data-compare]').length,
     actionText:[...el.querySelectorAll('button')].map(b=>String(b.textContent||'').trim()),
     publishCount:el.querySelectorAll('[data-final-publish],[data-publish]').length,
@@ -48,7 +81,7 @@ try{
   assert.equal(report.payload.item.type,'scenario-analysis',`dsa_ex4 payload was not classified as conceptual: ${JSON.stringify(report.payload.item)}`);
   assert.equal(report.payload.structured,null,'Conceptual dsa_ex4 must not have structured coding tests');
   assert.equal(report.task.title,'Array vs linked list trade-off','Unexpected DSA task 4 title');
-  assert.equal(report.task.responseTask,'1','Conceptual DSA task must stay marked as a response task');
+  assert.equal(report.task.responseTask,'1',`Conceptual DSA task must stay marked as a response task. Mutation stacks: ${JSON.stringify(report.mutationStacks.slice(-8))}`);
   assert.equal(report.task.responseTextarea,true,'Conceptual DSA task must keep its response textarea');
   assert.equal(report.task.runCount,0,'Conceptual response task must not have a Run/Check button');
   assert(report.task.actionText.some(t=>/mark complete/i.test(t)),'Conceptual response task must keep Mark complete');
