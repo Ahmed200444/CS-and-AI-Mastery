@@ -1,0 +1,12 @@
+const fs=require('fs');
+const path=require('path');
+const file=path.join(process.cwd(),'assets','cpp-runner-ui-worker.js');
+let s=fs.readFileSync(file,'utf8');
+const oldMode=`function cppModeRequested(){\n var activeMode=document.querySelector('[data-lang-mode].active');`;
+if(s.includes(oldMode))s=s.replace(oldMode,`function cppModeRequested(){\n if(courseId()==='cpp')return true;\n var activeMode=document.querySelector('[data-lang-mode].active');`);
+const oldSupport=`function courseSupportsCpp(){return !!document.querySelector('[data-lang-mode="cpp"],[data-lang-mode="dual"]');}`;
+if(s.includes(oldSupport))s=s.replace(oldSupport,`function courseSupportsCpp(){return courseId()==='cpp'||!!document.querySelector('[data-lang-mode="cpp"],[data-lang-mode="dual"]');}`);
+if(!/function cppModeRequested\(\)\{\s*if\(courseId\(\)==='cpp'\)return true;/.test(s))throw new Error('Dedicated C++ mode request patch missing');
+if(!/function courseSupportsCpp\(\)\{return courseId\(\)==='cpp'\|\|/.test(s))throw new Error('Dedicated C++ preboot support patch missing');
+fs.writeFileSync(file,s,'utf8');
+console.log('Dedicated C++ course now preboots and background-prepares its compiler/examples without a language selector.');
