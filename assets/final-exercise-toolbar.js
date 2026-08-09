@@ -68,9 +68,16 @@ function ensurePublish(task,toolbar){
   return publish;
 }
 
-function appendInOrder(toolbar,buttons){
-  buttons.filter(Boolean).forEach(function(btn){
-    if(btn.parentNode!==toolbar||toolbar.lastElementChild!==btn)toolbar.appendChild(btn);
+function toolbarUnit(node,toolbar){
+  if(!node)return null;
+  var unit=node.closest&&node.closest('.csai-final-publish-row');
+  if(unit&&unit.parentNode===toolbar)return unit;
+  return node;
+}
+function appendInOrder(toolbar,nodes){
+  nodes.filter(Boolean).forEach(function(node){
+    var unit=toolbarUnit(node,toolbar);
+    if(unit.parentNode!==toolbar||toolbar.lastElementChild!==unit)toolbar.appendChild(unit);
   });
 }
 
