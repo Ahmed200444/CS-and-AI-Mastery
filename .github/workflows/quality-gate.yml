@@ -1,0 +1,25 @@
+name: Quality Gate
+on:
+  pull_request:
+  push:
+    branches: [upgrade/final-9-5-audit, main]
+jobs:
+  full-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+      - name: Run repository contracts
+        run: npm test
+      - name: Run the exact Netlify production build command
+        run: |
+          node <<'NODE'
+          const fs=require('fs');const {execSync}=require('child_process');
+          const toml=fs.readFileSync('netlify.toml','utf8');const match=toml.match(/^\s*command\s*=\s*"([^"]+)"/m);
+          if(!match)throw new Error('Netlify build command not found');execSync(match[1],{stdio:'inherit',shell:'/bin/bash',env:process.env});
+          NODE

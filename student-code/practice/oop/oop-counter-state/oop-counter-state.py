@@ -11,12 +11,10 @@ class BankAccount:
 
 
 def run_ops(ops):
-    acct = BankAccount()
-
-    for op, amt in ops:
-        if op == 'deposit':
-            acct.deposit(amt)
-        else:
-            acct.withdraw(amt)
-
-    return acct.balance
+    account = BankAccount()
+    for operation, amount in ops:
+        if operation == "deposit":
+            account.deposit(amount)
+        elif operation == "withdraw":
+            account.withdraw(amount)
+    return account.balance
