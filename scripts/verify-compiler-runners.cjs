@@ -19,13 +19,23 @@ if(!/WorkerOrchestrator/.test(clientEntry)||!/workerTransport/.test(clientEntry)
 if(!/@gameguild\/emception-browser\/worker/.test(workerEntry))problems.push('dedicated Emception worker export is not used');
 if(!/cpp-emception-client-entry\.js/.test(bundler)||!/cpp-toolchain-worker-entry\.js/.test(bundler))problems.push('bundler does not build both direct C++ entries');
 if(!/formats:\s*\[['"]es['"]\]/.test(bundler))problems.push('C++ assets are not emitted as native ES modules');
-if(!/DOM globals/.test(bundler)||!/\\bdocument\\b\|\\bwindow\\b/.test(bundler))problems.push('bundler does not reject DOM globals in C++ worker assets');
-for(const [label,p] of [['client',clientPath],['toolchain worker',workerPath]]){
- if(!fs.existsSync(p)||fs.statSync(p).size<1000){problems.push(`built C++ ${label} is missing or unexpectedly small`);continue;}
- const built=fs.readFileSync(p,'utf8');
- if(/\bdocument\b|\bwindow\b/.test(built))problems.push(`built C++ ${label} contains DOM globals`);
- if(/\?raw(?:['"`]|\b)/.test(built))problems.push(`built C++ ${label} contains unresolved ?raw imports`);
- if(/var\s+import_meta\s*=\s*\{\s*\}/.test(built))problems.push(`built C++ ${label} erased import.meta`);
+if(!/C\+\+ RPC client unexpectedly contains DOM globals/.test(bundler))problems.push('bundler does not reject DOM globals in the page-side C++ RPC client');
+if(!/Worker message runtime/.test(bundler))problems.push('bundler does not validate the dedicated toolchain Worker runtime');
+
+if(!fs.existsSync(clientPath)||fs.statSync(clientPath).size<1000)problems.push('built C++ client is missing or unexpectedly small');
+else{
+ const built=fs.readFileSync(clientPath,'utf8');
+ if(/\bdocument\b|\bwindow\b/.test(built))problems.push('built C++ RPC client contains DOM globals');
+ if(/\?raw(?:['"`]|\b)/.test(built))problems.push('built C++ RPC client contains unresolved ?raw imports');
+ if(/var\s+import_meta\s*=\s*\{\s*\}/.test(built))problems.push('built C++ RPC client erased import.meta');
+ if(!/WorkerOrchestrator/.test(built)||!/workerTransport/.test(built))problems.push('built C++ RPC client does not expose WorkerOrchestrator/workerTransport');
+}
+if(!fs.existsSync(workerPath)||fs.statSync(workerPath).size<1000)problems.push('built C++ toolchain worker is missing or unexpectedly small');
+else{
+ const built=fs.readFileSync(workerPath,'utf8');
+ if(!/(?:onmessage|addEventListener\([^)]*message|postMessage)/.test(built))problems.push('built C++ toolchain worker does not contain a Worker message runtime');
+ if(/\?raw(?:['"`]|\b)/.test(built))problems.push('built C++ toolchain worker contains unresolved ?raw imports');
+ if(/var\s+import_meta\s*=\s*\{\s*\}/.test(built))problems.push('built C++ toolchain worker erased import.meta');
 }
 if(/@gameguild\/emception-browser@3\.8\.0\/\+esm/.test(example))problems.push('broken jsDelivr +esm loader is still present');
 if(/createEmception\(/.test(example))problems.push('legacy DOM-dependent createEmception path is still present');
@@ -41,4 +51,4 @@ const a=netlify.indexOf('node scripts/audit-language-example-syntax.cjs');
 const v=netlify.indexOf('node scripts/verify-compiler-runners.cjs');
 if(!(b>=0&&p>b&&s>p&&a>s&&v>a))problems.push('Netlify compiler build/patch/audit/verify order is incorrect');
 if(problems.length)throw new Error('Compiler runner verification failed:\n'+problems.join('\n'));
-console.log('Compiler runner verification passed: Python smoke test + DOM-free core client + dedicated Emception toolchain worker are wired.');
+console.log('Compiler runner verification passed: Python smoke test + DOM-free RPC client + official dedicated Emception toolchain Worker are wired.');
