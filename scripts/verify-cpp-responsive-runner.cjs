@@ -30,7 +30,7 @@ const requiredUi=[
  ['correct WASI argv0 and program path',/artifact\.orch\.run\('wasi-run',\['wasi-run',artifact\.out\]\)/],
  ['initialization timeout',/45000,'The C\+\+ compiler took too long to initialize/],
  ['compile timeout',/45000,'Your C\+\+ compilation took too long/],
- ['link timeout',/30000,'Your C\+\+ link step took too long/],
+ ['background link allowance',/60000,'Your C\+\+ link step took too long/],
  ['run timeout',/20000,'Your C\+\+ program took too long to run/],
  ['artifact cache',/artifactPromises=Object\.create\(null\),artifacts=Object\.create\(null\)/],
  ['preboot before C++ selection',/function prebootCompiler\(\)/],
@@ -64,7 +64,7 @@ const dir=path.join(root,'courses');
 if(!fs.existsSync(dir))problems.push('courses directory missing');
 else{
  const files=fs.readdirSync(dir).filter(x=>x.endsWith('.html'));
- if(files.length!==54)problems.push(`expected 54 course pages, found ${files.length}`);
+ if(files.length!==55)problems.push(`expected 55 course pages, found ${files.length}`);
  for(const name of files){
   const html=fs.readFileSync(path.join(dir,name),'utf8');
   if(!html.includes('/assets/cpp-runner-ui-worker.js?v=20260809-5'))problems.push(`${name}: missing prewarmed native clang++ C++ runner controller`);
@@ -79,4 +79,4 @@ const inject=netlify.indexOf('node scripts/inject-cpp-responsive-runner.cjs');
 const verify=netlify.indexOf('node scripts/verify-cpp-responsive-runner.cjs');
 if(!(build>=0&&clientCheck>build&&workerCheck>clientCheck&&uiCheck>workerCheck&&inject>uiCheck&&verify>inject))problems.push('Netlify does not build, syntax-check, inject, then verify the direct C++ runner in order');
 if(problems.length)throw new Error('Responsive C++ runner verification failed:\n'+problems.slice(0,120).join('\n'));
-console.log('Responsive C++ runner verification passed: compiler preboot, exact-example prewarm/cache, normalized output spacing, explicit clang++ compilation, direct wasm-ld linking, and wasi-run execution are wired on all 54 course pages.');
+console.log('Responsive C++ runner verification passed: compiler preboot, exact-example prewarm/cache, normalized output spacing, explicit clang++ compilation, direct wasm-ld linking, and wasi-run execution are wired on all 55 course pages.');
