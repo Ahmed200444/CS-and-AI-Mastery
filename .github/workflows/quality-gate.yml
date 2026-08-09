@@ -38,6 +38,9 @@ jobs:
       - name: Verify theme and sub-second static course interaction
         run: npm run certify:theme
 
+      - name: Verify flexible Python routing regression
+        run: node tests/flexible-routing-regression.mjs
+
       - name: Click-test the complete generated learning platform
         run: npm run certify:browser
 
@@ -53,6 +56,7 @@ jobs:
             browser-certification-report.json
             cpp-workspace-certification-report.json
             theme-certification-report.json
+            routing-regression-report.json
           if-no-files-found: ignore
 
       - name: Verify live Netlify deployment
