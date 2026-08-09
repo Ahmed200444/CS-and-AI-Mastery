@@ -17,3 +17,7 @@ if(src.includes(broken)){
 }else{
   throw new Error('Expected project workspace validation block was not found; refusing an unsafe automatic rewrite.');
 }
+
+// Keep the project workspace patch in the same pre-injection build stage so every
+// generated course receives C++ project running plus code + README GitHub publishing.
+require('./patch-project-readme-publishing.cjs');
