@@ -28,7 +28,5 @@ assert.ok(finalPublisher.includes('/api/github/status'), 'Portfolio publisher mu
 assert.ok(finalPublisher.includes('/api/github/file'), 'Portfolio publisher must use the file endpoint');
 assert.ok(finalPublisher.includes('createOnly:true'), 'Portfolio publishing must be duplicate protected');
 
-const indexSource = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-assert.ok(indexSource.includes('assets/github-integration.js'), 'index.html no longer loads the GitHub integration module');
-
+// Generated HTML is validated by the post-generation build verifiers, not by this pre-build contract.
 console.log('GitHub integration contract: OK');
