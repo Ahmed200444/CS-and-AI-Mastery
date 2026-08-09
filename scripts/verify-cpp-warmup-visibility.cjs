@@ -13,5 +13,7 @@ if(!/details\.tagName!==['"]DETAILS['"]\|\|!details\.open/.test(src))problems.pu
 if(!/details\.querySelector\('\[data-lang-variant=\\?['"]cpp\\?['"]\] \[data-run-language-example\]'\)/.test(src))problems.push('lesson-open warmup is not scoped to C++ example lessons');
 if(!/prepareButtonInBackground\(target\)/.test(src))problems.push('opened lesson does not directly prioritize its visible C++ example');
 if(!/scheduleBackgroundWarmup\(20\)/.test(src))problems.push('opened lesson has no fallback warmup scheduling');
-if(problems.length)throw new Error('C++ warmup visibility verification failed:\n'+problems.join('\n'));
-console.log('C++ warmup visibility guard passed: closed/hidden examples cannot steal compilation, and opening a lesson immediately prioritizes its visible C++ example.');
+if(/toolWorker=worker;orchestrator=orch;/.test(src))problems.push('runner exposes orchestrator before boot completes');
+if(!/await timeout\(orch\.boot[\s\S]*?orchestrator=orch;refreshNotes\(\);return orch;/.test(src))problems.push('runner does not expose orchestrator only after boot completion');
+if(problems.length)throw new Error('C++ warmup visibility/boot verification failed:\n'+problems.join('\n'));
+console.log('C++ warmup guard passed: hidden examples cannot steal compilation, opened lessons are prioritized, and concurrent warmups wait for compiler boot.');
