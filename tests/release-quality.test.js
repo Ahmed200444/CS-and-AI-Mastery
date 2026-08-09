@@ -13,6 +13,15 @@ assert(backend.includes("path.startsWith('student-code/')"),'student-code must b
 assert(backend.includes('alreadyExists:true'),'duplicate publish must return alreadyExists');
 assert(backend.includes('body.requirePath'),'README dependency guard is missing');
 assert(backend.includes("error:'Publish the code first.'"),'README-before-code message is missing');
+assert(backend.includes('canonicalPortfolioPath'),'migrated item canonicalization is missing');
+for(const canonical of [
+ 'student-code/practice/python/fizzbuzz/fizzbuzz.py',
+ 'student-code/practice/python/real-second-largest-distinct/real-second-largest-distinct.py',
+ 'student-code/practice/python/real-valley-array/real-valley-array.py',
+ 'student-code/practice/dsa/two-sum/dsa-two-sum.py',
+ 'student-code/practice/oop/oop-counter-state/oop-counter-state.py',
+ 'student-code/practice/oop/oop-point/oop-point.py'
+])assert(backend.includes(canonical),`backend canonical path missing: ${canonical}`);
 
 const sw=read('sw.js');
 assert(sw.includes("url.pathname.startsWith('/api/')"),'service worker must exclude /api/');
@@ -28,11 +37,14 @@ assert(portfolio.includes('student-code/examples/'),'example publishing is missi
 assert(portfolio.includes('student-code/projects/'),'project publishing is missing');
 assert(portfolio.includes('Add a README'),'README control is missing');
 assert(portfolio.includes('requirePath'),'README creation must require code first');
+assert(portfolio.includes('[data-publish]'),'legacy exercise publish actions are not intercepted');
+assert(portfolio.includes('[data-dual-publish-language]'),'dual-language publish actions are not intercepted');
 
 const editor=read('assets/smart-code-editor.js');
-assert(editor.includes('Shift')||editor.includes('event.shiftKey'),'Shift+Tab support is missing');
+assert(editor.includes('event.shiftKey'),'Shift+Tab support is missing');
 assert(editor.includes('elif\\b|else'),'Python branch dedent support is missing');
 assert(editor.includes("event.key==='Enter'"),'smart Enter behavior is missing');
+assert(editor.includes("/{\\s*$/.test(trimmed)"),'brace indentation support is missing');
 
 const safe=read('assets/universal-safe-output.js');
 for(const word of ['Git','Docker','Cloud / infrastructure','Networking','Shell / Linux'])assert(safe.includes(word),`safe output is missing ${word}`);
@@ -87,5 +99,10 @@ const netlify=read('netlify.toml');
 assert(netlify.includes('inject-final-quality-layer.cjs'),'production build does not inject the final quality layer');
 assert(netlify.includes('remove-public-version.cjs'),'production build does not remove the public version label');
 assert(netlify.includes('npm test'),'production build must run the repository tests');
+
+const workflow=read('.github/workflows/platform-quality-gate.yml');
+assert(workflow.includes("'release/**'"),'quality gate must run on release branches');
+assert(workflow.includes('Run exact production build'),'quality gate must execute the production build');
+assert(workflow.includes("-eq 54"),'quality gate must verify all 54 generated course pages');
 
 console.log('Release-quality contract passed.');
