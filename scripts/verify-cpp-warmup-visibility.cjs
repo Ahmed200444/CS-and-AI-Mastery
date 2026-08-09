@@ -11,9 +11,12 @@ if(!/return best\|\|\(allowHiddenFirst\?buttons\[0\]:null\)/.test(src))problems.
 if(!/document\.addEventListener\('toggle'/.test(src))problems.push('lesson-open toggle listener is missing');
 if(!/details\.tagName!==['"]DETAILS['"]\|\|!details\.open/.test(src))problems.push('lesson-open warmup does not require an opened details element');
 if(!/details\.querySelector\('\[data-lang-variant=\\?['"]cpp\\?['"]\] \[data-run-language-example\]'\)/.test(src))problems.push('lesson-open warmup is not scoped to C++ example lessons');
-if(!/prepareButtonInBackground\(target\)/.test(src))problems.push('opened lesson does not directly prioritize its visible C++ example');
+if(!/pendingWarmButton=target/.test(src))problems.push('opened lesson is not queued ahead of generic background work');
+if(!/var next=pendingWarmButton;pendingWarmButton=null/.test(src))problems.push('background completion does not consume the opened-lesson priority');
+if(!/if\(!nd\|\|nd\.open\)prepareButtonInBackground\(next\)/.test(src))problems.push('queued lesson example is not checked/restarted after current background compile');
+if(!/prepareButtonInBackground\(target\)/.test(src))problems.push('idle opened lesson does not immediately prepare its C++ example');
 if(!/scheduleBackgroundWarmup\(20\)/.test(src))problems.push('opened lesson has no fallback warmup scheduling');
 if(/toolWorker=worker;orchestrator=orch;/.test(src))problems.push('runner exposes orchestrator before boot completes');
 if(!/await timeout\(orch\.boot[\s\S]*?orchestrator=orch;refreshNotes\(\);return orch;/.test(src))problems.push('runner does not expose orchestrator only after boot completion');
-if(problems.length)throw new Error('C++ warmup visibility/boot verification failed:\n'+problems.join('\n'));
-console.log('C++ warmup guard passed: hidden examples cannot steal compilation, opened lessons are prioritized, and concurrent warmups wait for compiler boot.');
+if(problems.length)throw new Error('C++ warmup visibility/boot/priority verification failed:\n'+problems.join('\n'));
+console.log('C++ warmup guard passed: hidden examples cannot steal compilation, opened lessons are queued first, and concurrent warmups wait for compiler boot.');
