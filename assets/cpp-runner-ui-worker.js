@@ -8,7 +8,7 @@ var clientPromise=null,orchestrator=null,toolWorker=null,runnerPromise=null,acti
 var artifactPromises=Object.create(null),artifacts=Object.create(null);
 var warmTimer=0,warmAttempted=false,backgroundRunning=false,backgroundKey='';
 
-function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c];});}
 function cppVariant(button){return button&&button.closest?button.closest('[data-lang-variant="cpp"]'):null;}
 function outputFor(variant){return variant&&variant.querySelector('[data-csai-example-output]');}
 function codeFor(variant){var pre=variant&&variant.querySelector('[data-csai-language-generated],.csai-language-code');return String(pre&&pre.textContent||'');}
@@ -24,6 +24,7 @@ function cppModeRequested(){
  if(activeMode){var a=activeMode.getAttribute('data-lang-mode');return a==='cpp'||a==='dual';}
  try{var m=localStorage.getItem('csai-course-language-v2:'+courseId());return m==='cpp'||m==='dual';}catch(e){return false;}
 }
+function setWarmNote(text){document.querySelectorAll('[data-lang-variant="cpp"] .csai-example-note').forEach(function(note){if(note.textContent!==text)note.textContent=text;});}
 function firstWarmButton(){
  var buttons=Array.from(document.querySelectorAll('[data-lang-variant="cpp"] [data-run-language-example]'));
  if(!buttons.length)return null;
@@ -41,7 +42,7 @@ async function resetRunner(){
  var old=orchestrator,w=toolWorker;
  orchestrator=null;toolWorker=null;runnerPromise=null;
  artifactPromises=Object.create(null);artifacts=Object.create(null);
- backgroundRunning=false;backgroundKey='';
+ backgroundRunning=false;backgroundKey='';warmAttempted=false;
  try{if(old&&typeof old.dispose==='function')await old.dispose(new Error('C++ runner reset'));}catch(e){}
  try{if(w)w.terminate();}catch(e){}
 }
@@ -103,18 +104,19 @@ async function ensureArtifact(code,outNode){
 }
 function scheduleBackgroundWarmup(delay){
  if(warmAttempted||warmTimer||backgroundRunning||active||!cppModeRequested()||document.visibilityState==='hidden')return;
+ setWarmNote('Preparing C++ in background…');
+ // Start the compiler boot immediately in its Worker; do not wait for the learner to press Run.
+ getRunner(null).then(function(){if(!backgroundRunning)setWarmNote('C++ compiler ready — preparing this example…');}).catch(function(error){setWarmNote('C++ will prepare when you press Run');console.warn('[C++ runner] background boot skipped:',error&&error.message||error);});
  warmTimer=setTimeout(function(){
   warmTimer=0;
   if(warmAttempted||backgroundRunning||active||!cppModeRequested()||document.visibilityState==='hidden')return;
   var button=firstWarmButton(),variant=cppVariant(button),code=codeFor(variant);if(!button||!variant||!code.trim())return;
-  var key=codeKey(code);if(artifacts[key]||artifactPromises[key])return;
+  var key=codeKey(code);if(artifacts[key]||artifactPromises[key]){setWarmNote('C++ ready');return;}
   warmAttempted=true;backgroundRunning=true;backgroundKey=key;
-  // Prepare the exact first C++ example silently in the dedicated Worker while the learner reads.
-  // When Run is pressed later, the already-linked WASM can execute immediately instead of cold-compiling first.
-  ensureArtifact(code,null).catch(function(error){console.warn('[C++ runner] background preparation skipped:',error&&error.message||error);}).finally(function(){if(backgroundKey===key){backgroundRunning=false;backgroundKey='';}});
+  // Prepare the exact nearest C++ example silently in the dedicated Worker while the learner reads.
+  // Pressing Run later reuses this already-linked WASM instead of cold-compiling first.
+  ensureArtifact(code,null).then(function(){setWarmNote('C++ ready');}).catch(function(error){setWarmNote('C++ will prepare when you press Run');console.warn('[C++ runner] background preparation skipped:',error&&error.message||error);}).finally(function(){if(backgroundKey===key){backgroundRunning=false;backgroundKey='';}});
  },Math.max(0,delay||0));
- // Booting only loads the small manifest/client and happens off the main thread. The heavy compile is delayed above.
- getRunner(null).catch(function(error){console.warn('[C++ runner] background boot skipped:',error&&error.message||error);});
 }
 async function runCode(button,variant){
  var outNode=outputFor(variant),code=codeFor(variant);if(!outNode||!code.trim())return;
@@ -123,7 +125,7 @@ async function runCode(button,variant){
  var key=codeKey(code),token='cpp-'+(++seq);active=token;button.disabled=true;button.textContent='Running C++…';
  try{
   // If the background worker is preparing this exact example, reuse that same compile/link promise.
-  // If it was preparing a different example, cancel that low-priority work so the user's click wins.
+  // If it was preparing a different example, cancel that low-priority work so the learner's click wins.
   if(backgroundRunning&&backgroundKey&&backgroundKey!==key&&!artifacts[key])await resetRunner();
   if(artifactPromises[key]&&!artifacts[key])progress(outNode,'Finishing background C++ preparation…');
   var artifact=await ensureArtifact(code,artifactPromises[key]?null:outNode);
@@ -148,14 +150,15 @@ document.addEventListener('click',function(event){
  event.preventDefault();event.stopPropagation();if(event.stopImmediatePropagation)event.stopImmediatePropagation();
  runCode(button,variant);
 },true);
+document.addEventListener('pointerdown',function(event){var b=event.target&&event.target.closest&&event.target.closest('[data-lang-mode="cpp"],[data-lang-mode="dual"]');if(b)getRunner(null).catch(function(){});},true);
 document.addEventListener('click',function(event){
  var modeButton=event.target&&event.target.closest&&event.target.closest('[data-lang-mode]');if(!modeButton)return;
- var mode=modeButton.getAttribute('data-lang-mode');if(mode==='cpp'||mode==='dual')setTimeout(function(){scheduleBackgroundWarmup(500);},80);
+ var mode=modeButton.getAttribute('data-lang-mode');if(mode==='cpp'||mode==='dual')setTimeout(function(){scheduleBackgroundWarmup(80);},20);
 },true);
-window.addEventListener('csai-language-controller-applied',function(event){var mode=event&&event.detail&&event.detail.mode;if(mode==='cpp'||mode==='dual')scheduleBackgroundWarmup(650);});
-document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')scheduleBackgroundWarmup(500);});
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(function(){scheduleBackgroundWarmup(650);},250);},{once:true});else setTimeout(function(){scheduleBackgroundWarmup(650);},250);
-setTimeout(function(){scheduleBackgroundWarmup(650);},1400);
-setTimeout(function(){scheduleBackgroundWarmup(650);},3000);
+window.addEventListener('csai-language-controller-applied',function(event){var mode=event&&event.detail&&event.detail.mode;if(mode==='cpp'||mode==='dual')scheduleBackgroundWarmup(100);});
+document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')scheduleBackgroundWarmup(100);});
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(function(){scheduleBackgroundWarmup(100);},150);},{once:true});else setTimeout(function(){scheduleBackgroundWarmup(100);},150);
+setTimeout(function(){scheduleBackgroundWarmup(100);},800);
+setTimeout(function(){scheduleBackgroundWarmup(100);},1800);
 window.addEventListener('pagehide',function(){active=null;if(warmTimer)clearTimeout(warmTimer);warmTimer=0;resetRunner();});
 })();
