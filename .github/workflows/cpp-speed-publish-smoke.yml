@@ -8,7 +8,7 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -31,10 +31,12 @@ jobs:
           if(!match)throw new Error('Could not find Netlify build command');
           cp.execSync(match[1],{stdio:'inherit',shell:'/bin/bash'});
           NODE
-      - name: Diagnose second C++ loop example warmup
+      - name: Browser-test all courses, C++, Evergreen, speed, GitHub, and project READMEs
         shell: bash
         run: |
           python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/csai-http.log 2>&1 &
           SERVER_PID=$!
           trap 'kill $SERVER_PID || true' EXIT
-          node scripts/predeploy-cpp-loop-alt-debug.cjs
+          node scripts/predeploy-cpp-lesson16-regression.cjs
+          node scripts/predeploy-browser-smoke-fast.cjs
+          node scripts/predeploy-project-readme-smoke.cjs
