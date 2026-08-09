@@ -10,6 +10,7 @@ const requiredUi=[
  ['capture interception',/data-run-language-example[\s\S]*stopImmediatePropagation/],
  ['C++ variant scoping',/data-lang-variant=\\?"cpp\\?"/],
  ['persistent worker reuse',/if\(worker\)return worker/],
+ ['single active C++ run guard',/if\(pending\.size\)/],
  ['progress handling',/data\.type==='progress'/],
  ['timeout recovery',/120000/],
  ['worker termination recovery',/w\.terminate\(\)/]

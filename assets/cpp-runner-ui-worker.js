@@ -35,14 +35,13 @@ function ensureWorker(){
 }
 function run(button,variant){
  var out=outputFor(variant),code=codeFor(variant);if(!out||!code.trim())return;
+ if(pending.size){setProgress(out,'Another C++ example is already running. Wait for it to finish, then press Run example.');return;}
  var id='cpp-ui-'+(++seq),w;
  try{w=ensureWorker();}catch(error){render(out,'Run error',error.message||String(error),true);return;}
  button.disabled=true;button.textContent='Loading C++…';setProgress(out,'Starting the C++ compiler in the background…');
  var timer=setTimeout(function(){
-  var item=pending.get(id);if(!item)return;
-  pending.delete(id);item.button.disabled=false;item.button.textContent='▶ Run example';
-  try{w.terminate();}catch(e){}worker=null;
-  render(item.out,'Run error','The C++ compiler took too long, so it was safely restarted. The page stayed responsive; press Run example to try again.',true);
+  if(!pending.has(id))return;
+  stopWorker('The C++ compiler took too long, so it was safely restarted. The page stayed responsive; press Run example to try again.');
  },120000);
  pending.set(id,{button:button,out:out,timer:timer});
  w.postMessage({type:'run',id:id,code:code});
