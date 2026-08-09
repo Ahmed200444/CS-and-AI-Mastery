@@ -111,7 +111,7 @@ try{
         if(i===0){
           if(hasPython){await mode(page,'python');await editor.fill('if True:');await editor.press('End');await editor.press('Enter');assert((await editor.inputValue()).endsWith('\n    '),`${file}: Python Enter indentation failed`);}
           if(hasCpp){await mode(page,'cpp');await editor.fill('int main() {');await editor.press('End');await editor.press('Enter');assert((await editor.inputValue()).endsWith('\n    '),`${file}: C++ Enter indentation failed`);}
-          await editor.fill('x');await editor.press('Tab');assert((await editor.inputValue()).startsWith('    '),`${file}: Tab indentation failed`);await editor.press('Shift+Tab');assert(!(await editor.inputValue()).startsWith('    '),`${file}: Shift+Tab indentation failed`);
+          await editor.fill('x');await editor.press('Home');await editor.press('Tab');assert((await editor.inputValue()).startsWith('    '),`${file}: Tab indentation failed`);await editor.press('Shift+Tab');assert(!(await editor.inputValue()).startsWith('    '),`${file}: Shift+Tab indentation failed`);
         }
         const cases=[];if(hasPython)cases.push('python');if(hasCpp)cases.push('cpp');if(!cases.length)cases.push(null);
         for(const l of cases){if(l)await mode(page,l);const text=await clickAndObserve(run,await out.count()?out:null,`${file} task ${i+1} ${l||'default'}`,l==='cpp'?60000:30000);assert(!badInfrastructure(text),`${file} task ${i+1} ${l} runner infrastructure failed`);metrics.exerciseRuns++;}
