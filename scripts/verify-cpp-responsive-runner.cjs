@@ -26,12 +26,20 @@ const requiredUi=[
  ['direct wasm-ld call',/orch\.run\('wasm-ld',linkArgv\)/],
  ['C++ standard library link',/-lc\+\+-noexcept/],
  ['C++ ABI link',/-lc\+\+abi-noexcept/],
- ['standalone WASM output',/out='\/home\/user\/csai-'\+stamp\+'\.wasm'/],
- ['correct WASI argv0 and program path',/orch\.run\('wasi-run',\['wasi-run',out\]\)/],
+ ['standalone WASM output',/out=base\+'\.wasm'/],
+ ['correct WASI argv0 and program path',/artifact\.orch\.run\('wasi-run',\['wasi-run',artifact\.out\]\)/],
  ['initialization timeout',/45000,'The C\+\+ compiler took too long to initialize/],
  ['compile timeout',/45000,'Your C\+\+ compilation took too long/],
  ['link timeout',/30000,'Your C\+\+ link step took too long/],
  ['run timeout',/20000,'Your C\+\+ program took too long to run/],
+ ['artifact cache',/artifactPromises=Object\.create\(null\),artifacts=Object\.create\(null\)/],
+ ['background warmup scheduler',/function scheduleBackgroundWarmup\(delay\)/],
+ ['background compiler boot',/getRunner\(null\)/],
+ ['background artifact preparation',/ensureArtifact\(code,null\)/],
+ ['warmup on C++ or Dual selection',/data-lang-mode=\\?"cpp\\?"\],\[data-lang-mode=\\?"dual\\?"\]/],
+ ['warmup note',/Preparing C\+\+ in background/],
+ ['ready note',/C\+\+ ready/],
+ ['reuse background compile on click',/artifactPromises\[key\]/],
  ['reset recovery',/resetRunner/]
 ];
 for(const [label,re] of requiredUi)if(!re.test(ui))problems.push('UI controller missing '+label);
@@ -53,8 +61,8 @@ else{
  if(files.length!==54)problems.push(`expected 54 course pages, found ${files.length}`);
  for(const name of files){
   const html=fs.readFileSync(path.join(dir,name),'utf8');
-  if(!html.includes('/assets/cpp-runner-ui-worker.js?v=20260809-4'))problems.push(`${name}: missing native clang++ C++ runner controller`);
-  if(html.includes('/assets/cpp-runner-ui-worker.js?v=20260809-1')||html.includes('/assets/cpp-runner-ui-worker.js?v=20260809-2')||html.includes('/assets/cpp-runner-ui-worker.js?v=20260809-3'))problems.push(`${name}: stale C++ controller cache version remains`);
+  if(!html.includes('/assets/cpp-runner-ui-worker.js?v=20260809-5'))problems.push(`${name}: missing background-warming native clang++ C++ runner controller`);
+  if(/cpp-runner-ui-worker\.js\?v=20260809-[1-4]/.test(html))problems.push(`${name}: stale C++ controller cache version remains`);
  }
 }
 const build=netlify.indexOf('node scripts/build-local-cpp-runner.cjs');
@@ -65,4 +73,4 @@ const inject=netlify.indexOf('node scripts/inject-cpp-responsive-runner.cjs');
 const verify=netlify.indexOf('node scripts/verify-cpp-responsive-runner.cjs');
 if(!(build>=0&&clientCheck>build&&workerCheck>clientCheck&&uiCheck>workerCheck&&inject>uiCheck&&verify>inject))problems.push('Netlify does not build, syntax-check, inject, then verify the direct C++ runner in order');
 if(problems.length)throw new Error('Responsive C++ runner verification failed:\n'+problems.slice(0,120).join('\n'));
-console.log('Responsive C++ runner verification passed: explicit clang++ C++ compilation, direct wasm-ld linking, and wasi-run execution are wired on all 54 course pages.');
+console.log('Responsive C++ runner verification passed: C++ compiler background warmup, artifact reuse, explicit clang++ compilation, direct wasm-ld linking, and wasi-run execution are wired on all 54 course pages.');
