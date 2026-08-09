@@ -6,7 +6,7 @@ var TOOLCHAIN_WORKER_URL='/assets/emception-vite/cpp-toolchain-worker.mjs?v=2026
 var MANIFEST_URL='https://cdn.jsdelivr.net/npm/emception@3.8.0/cdn/manifest.json';
 var clientPromise=null,orchestrator=null,toolWorker=null,runnerPromise=null,active=null,seq=0;
 
-function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c];});}
 function cppVariant(button){return button&&button.closest?button.closest('[data-lang-variant="cpp"]'):null;}
 function outputFor(variant){return variant&&variant.querySelector('[data-csai-example-output]');}
 function codeFor(variant){var pre=variant&&variant.querySelector('[data-csai-language-generated],.csai-language-code');return String(pre&&pre.textContent||'');}
@@ -14,6 +14,7 @@ function render(out,label,text,error){if(!out)return;out.innerHTML='<span class=
 function progress(out,text){if(out)out.textContent=String(text||'Working…');}
 function absolute(path){return new URL(path,window.location.href).href;}
 function timeout(promise,ms,message){return new Promise(function(resolve,reject){var done=false,t=setTimeout(function(){if(done)return;done=true;reject(new Error(message));},ms);Promise.resolve(promise).then(function(value){if(done)return;done=true;clearTimeout(t);resolve(value);},function(error){if(done)return;done=true;clearTimeout(t);reject(error);});});}
+function toolError(result,fallback){return String(result&&result.stderr||'')||String(result&&result.stdout||'')||fallback;}
 
 async function resetRunner(){
  var old=orchestrator,w=toolWorker;
@@ -29,14 +30,21 @@ async function getClient(){
  return clientPromise;
 }
 async function compileSource(orch,src,out,outNode){
+ var obj=out+'.o';
  progress(outNode,'Compiling your C++…');
- // Emception ToolRunner treats argv[0] as the executable name and passes argv.slice(1)
- // to the underlying WASM process. Keep "em++" at argv[0] so the .cpp source is not dropped.
- var argv=['em++',src,'-std=c++17','-O0','-sSTANDALONE_WASM=1','-o',out];
- var result=await timeout(orch.run('em++',argv),60000,'Your C++ compilation took too long. Please press Run example to retry.');
- if(result&&result.exitCode===0)return result;
- var message=String(result&&result.stderr||'')||String(result&&result.stdout||'')||'C++ compilation failed.';
- throw new Error(message);
+ // Use Emception's native clang++ tool directly. -x c++ makes the language explicit,
+ // so the compiler can never interpret these generated examples as C.
+ var compileArgv=['clang++',src,'-x','c++','-std=c++17','--target=wasm32-unknown-emscripten','--sysroot=/usr','-isystem','/usr/include/compat','-c','-o',obj];
+ var compile=await timeout(orch.run('clang++',compileArgv),45000,'Your C++ compilation took too long. Please press Run example to retry.');
+ if(!compile||compile.exitCode!==0)throw new Error(toolError(compile,'C++ compilation failed.'));
+
+ progress(outNode,'Linking your C++…');
+ // Emception's own ninja bypass links C++ objects this way because clang++ cannot
+ // spawn wasm-ld inside the WASM sandbox. Calling wasm-ld directly is faster and reliable.
+ var linkArgv=['wasm-ld',obj,'-o',out,'-L/usr/lib/emscripten/cache-lib/wasm32-emscripten','-lc++-noexcept','-lc++abi-noexcept','-lc','-ldlmalloc','-lcompiler_rt','--entry=main','--export=__wasm_call_ctors','--allow-undefined'];
+ var link=await timeout(orch.run('wasm-ld',linkArgv),30000,'Your C++ link step took too long. Please press Run example to retry.');
+ if(!link||link.exitCode!==0)throw new Error(toolError(link,'C++ linking failed.'));
+ return link;
 }
 async function getRunner(outNode){
  if(orchestrator)return orchestrator;
@@ -49,7 +57,7 @@ async function getRunner(outNode){
   });
   toolWorker=worker;orchestrator=orch;
   try{
-   await timeout(orch.boot(MANIFEST_URL,{origin:window.location.origin}),60000,'The C++ compiler took too long to initialize.');
+   await timeout(orch.boot(MANIFEST_URL,{origin:window.location.origin}),45000,'The C++ compiler took too long to initialize.');
    return orch;
   }catch(error){await resetRunner();throw error;}
  })();}
@@ -66,7 +74,6 @@ async function runCode(button,variant){
   await orch.writeFile(src,new TextEncoder().encode(code));
   await compileSource(orch,src,out,outNode);
   progress(outNode,'Running your C++…');
-  // wasi-run also expects its own argv[0], followed by the compiled .wasm path.
   var result=await timeout(orch.run('wasi-run',['wasi-run',out]),20000,'Your C++ program took too long to run.');
   var text=String(result&&result.stdout||'')+String(result&&result.stderr||'');
   render(outNode,result&&result.exitCode===0?'Output':'Run error',text||'(no output)',!result||result.exitCode!==0);
