@@ -3,6 +3,7 @@ const path=require('path');
 const root=process.cwd(),problems=[];
 function read(p){return fs.readFileSync(path.join(root,p),'utf8');}
 const example=read('assets/example-learning-tools.js');
+const examplePublish=read('assets/example-github-publish.js');
 const cppController=read('assets/cpp-runner-ui-worker.js');
 const clientEntry=read('scripts/cpp-emception-client-entry.js');
 const workerEntry=read('scripts/cpp-toolchain-worker-entry.js');
@@ -15,6 +16,13 @@ const checks=[
  ['Python example runner',example,/async function runPython/],
  ['Python runtime smoke test',example,/assert 6 \* 7 == 42/],
  ['C++ dedicated-controller handoff',example,/dedicated toolchain Worker controller/],
+ ['example Python/C++ GitHub buttons',examplePublish,/Publish ['"]\+languageLabel\(lang\)\+['"] to GitHub/],
+ ['example exact displayed-code publishing',examplePublish,/function codeFor\(variant\)[\s\S]*textContent/],
+ ['example Python extension',examplePublish,/lang==='cpp'\?'cpp':'py'/],
+ ['example language folders',examplePublish,/lang==='cpp'\?'C\+\+':'Python'/],
+ ['example GitHub endpoint',examplePublish,/FILE_URL='\/api\/github\/file'/],
+ ['example CSRF publishing',examplePublish,/X-CSAI-CSRF/],
+ ['example semantic path',examplePublish,/student-code\/'\+folder\(lang\)\+'\/'\+courseId\(\)\+'\/examples\/'/],
  ['C++ direct runner controller',cppController,/WorkerOrchestrator/],
  ['C++ official toolchain worker entry',workerEntry,/@gameguild\/emception-browser\/worker/],
  ['C++ core worker client',clientEntry,/WorkerOrchestrator[\s\S]*workerTransport/],
@@ -56,16 +64,18 @@ else{
  for(const name of files){
    const html=fs.readFileSync(path.join(dir,name),'utf8');
    if(!html.includes('/assets/example-learning-tools.js?v=20260809-1'))problems.push(`${name}: missing example learning tools`);
+   if(!html.includes('/assets/example-github-publish.js?v=20260809-1'))problems.push(`${name}: missing Python/C++ example GitHub publisher`);
    if(!html.includes('/assets/practice-publish-completer.js?v=20260809-1'))problems.push(`${name}: missing practice publishing tools`);
    if(!html.includes('/assets/cpp-runner-ui-worker.js?v=20260809-5'))problems.push(`${name}: missing background-warming native clang++ C++ toolchain controller`);
    if(/cpp-runner-ui-worker\.js\?v=20260809-[1-4]/.test(html))problems.push(`${name}: stale C++ controller cache version remains`);
  }
 }
 const syntaxExample=netlify.indexOf('node --check assets/example-learning-tools.js');
+const syntaxExamplePublish=netlify.indexOf('node --check assets/example-github-publish.js');
 const syntaxPractice=netlify.indexOf('node --check assets/practice-publish-completer.js');
 const inject=netlify.indexOf('node scripts/inject-example-practice-tools.cjs');
 const cppInject=netlify.indexOf('node scripts/inject-cpp-responsive-runner.cjs');
 const verify=netlify.indexOf('node scripts/verify-example-practice-tools.cjs');
-if(!(syntaxExample>=0&&syntaxPractice>syntaxExample&&inject>syntaxPractice&&cppInject>inject&&verify>cppInject))problems.push('Netlify build order does not syntax-check and inject example/practice/C++ tools before verification');
+if(!(syntaxExample>=0&&syntaxExamplePublish>syntaxExample&&syntaxPractice>syntaxExamplePublish&&inject>syntaxPractice&&cppInject>inject&&verify>cppInject))problems.push('Netlify build order does not syntax-check and inject example GitHub/practice/C++ tools before verification');
 if(problems.length)throw new Error('Example/practice verification failed:\n'+problems.slice(0,120).join('\n'));
-console.log('Example/practice verification passed: Python run/output, background-warmed native clang++/wasm-ld/WASI C++ execution, GitHub publishing, revealed-solution publishing, and 54-page injection are wired.');
+console.log('Example/practice verification passed: Python/C++ example publishing, Python run/output, background-warmed native clang++/wasm-ld/WASI C++ execution, practice publishing, revealed-solution publishing, and 54-page injection are wired.');
