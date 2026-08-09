@@ -1,0 +1,145 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import {spawn} from 'node:child_process';
+import {setTimeout as sleep} from 'node:timers/promises';
+import {chromium} from 'playwright';
+
+const ROOT=process.cwd(),PORT=4173,BASE=`http://127.0.0.1:${PORT}`,UI_BUDGET_MS=1000;
+const courses=fs.readdirSync(path.join(ROOT,'courses')).filter(f=>f.endsWith('.html')).sort();
+assert.equal(courses.length,54,'Expected 54 generated course pages');
+const server=spawn('python3',['-m','http.server',String(PORT),'--bind','127.0.0.1'],{cwd:ROOT,stdio:['ignore','ignore','inherit']});
+async function waitServer(){for(let i=0;i<40;i++){try{const r=await fetch(BASE);if(r.ok)return;}catch(e){}await sleep(100);}throw new Error('Local certification server did not start');}
+const metrics={courses:0,courseLoads:[],themeClicks:0,languageClicks:0,exampleRuns:0,exerciseRuns:0,projectRuns:0,resetClicks:0,revealClicks:0,submitClicks:0,publishClicks:0,readmeClicks:0,githubRequests:0,maxUiFeedbackMs:0,runnerDurations:[],pageErrors:[]};
+const published=new Set(),githubBodies=[];
+function languageFrom(code,hint=''){
+  const h=String(hint).toLowerCase(),c=String(code||'');
+  if(/cpp|c\+\+/.test(h)||/#include\s*[<"]|\bstd::|\bcout\s*<<|\bint\s+main\s*\(/.test(c))return'cpp';
+  if(/python|\bpy\b/.test(h)||/(^|\n)\s*(def\s+|class\s+|from\s+|import\s+|for\s+\w+\s+in\s+|print\s*\()/.test(c))return'python';
+  return'other';
+}
+function badInfrastructure(text){return /runner error|could not start|does not have a browser runner|compiler module did not load|worker client did not load/i.test(String(text||''));}
+async function timedClick(locator,label){
+  const start=performance.now();await locator.click({timeout:5000});const ms=performance.now()-start;
+  metrics.maxUiFeedbackMs=Math.max(metrics.maxUiFeedbackMs,ms);
+  assert(ms<UI_BUDGET_MS,`${label} click handler took ${ms.toFixed(1)} ms before returning`);
+  return ms;
+}
+async function clickAndObserve(button,output,label,maxCompletion=50000){
+  const before=output?await output.textContent().catch(()=>null):null,start=performance.now();
+  await button.click({timeout:5000});
+  if(output){
+    await output.waitFor({state:'visible',timeout:UI_BUDGET_MS}).catch(()=>{});
+    const selector=await output.evaluate(el=>{if(!el.id)el.id='csai-cert-output-'+Math.random().toString(36).slice(2);return '#'+CSS.escape(el.id)});
+    await button.page().waitForFunction(({selector,before})=>{const out=document.querySelector(selector);return out&&String(out.textContent||'')!==String(before||'');},{selector,before},{timeout:UI_BUDGET_MS}).catch(()=>{});
+    const feedback=performance.now()-start;metrics.maxUiFeedbackMs=Math.max(metrics.maxUiFeedbackMs,feedback);
+    assert(feedback<UI_BUDGET_MS,`${label} did not show feedback within 1 second`);
+  }
+  const deadline=Date.now()+maxCompletion;
+  while(Date.now()<deadline&&await button.isDisabled().catch(()=>false))await sleep(100);
+  assert(!(await button.isDisabled().catch(()=>false)),`${label} stayed busy too long`);
+  const total=performance.now()-start;metrics.runnerDurations.push({label,ms:Math.round(total)});
+  const text=output?await output.textContent().catch(()=> ''):'';
+  assert(!badInfrastructure(text),`${label} infrastructure failure: ${String(text).slice(0,300)}`);
+  return text;
+}
+async function mode(page,name){
+  const b=page.locator(`[data-lang-mode="${name}"]`).first();
+  if(!await b.count()||!await b.isVisible().catch(()=>false))return false;
+  await timedClick(b,`${name} language mode`);metrics.languageClicks++;
+  await page.waitForTimeout(70);
+  return true;
+}
+async function setEditor(editor,code){await editor.fill(code);await editor.dispatchEvent('input');await editor.page().waitForTimeout(20);}
+function minimal(lang){return lang==='cpp'?'#include <iostream>\nusing namespace std;\nint main(){ cout << "cert-ok" << endl; return 0; }\n':'print("cert-ok")\n';}
+async function publishPair(root,label){
+  const pub=root.locator('[data-final-publish]').first(),readme=root.locator('[data-final-readme]').first();
+  if(!await pub.count()||!await pub.isVisible().catch(()=>false))return;
+  await timedClick(pub,`${label} publish`);metrics.publishClicks++;
+  const status=root.locator('.csai-final-publish-status').first();
+  await status.waitFor({state:'visible',timeout:1000}).catch(()=>{});
+  const statusHandle=await status.elementHandle();
+  await root.page().waitForFunction(el=>/Published|Already published|Connect GitHub|error/i.test(el?.textContent||''),statusHandle,{timeout:3000}).catch(()=>{});
+  assert(!/error|connect github/i.test(await status.textContent()||''),`${label} publish did not succeed`);
+  assert(await readme.count(),`${label} is missing Add a README`);
+  await timedClick(readme,`${label} README`);metrics.readmeClicks++;
+  await root.page().waitForFunction(el=>/README (added|already added)/i.test(el?.textContent||''),statusHandle,{timeout:3000});
+}
+await waitServer();
+const browser=await chromium.launch({headless:true});
+try{
+  for(const file of courses){
+    const context=await browser.newContext(),page=await context.newPage(),pageErrors=[];
+    page.on('pageerror',e=>pageErrors.push(String(e.message||e)));
+    await page.route('**/api/github/status',async route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({connected:true,csrf:'cert-csrf',repositories:[{full_name:'Ahmed200444/CS-and-AI-Mastery'}],user:{login:'Ahmed200444'}})}));
+    await page.route('**/api/github/file',async route=>{
+      metrics.githubRequests++;const body=JSON.parse(route.request().postData()||'{}');githubBodies.push({course:file,...body});
+      assert.equal(body.createOnly,true,`${file}: portfolio writes must be create-only`);
+      assert(/^student-code\/(practice|examples|projects)\//.test(body.path),`${file}: invalid portfolio path ${body.path}`);
+      if(/\.py$/.test(body.path))assert(body.path.includes('/python/'),`${file}: Python file is not in /python/: ${body.path}`);
+      if(/\.cpp$/.test(body.path))assert(body.path.includes('/cpp/'),`${file}: C++ file is not in /cpp/: ${body.path}`);
+      if(body.path.endsWith('/README.md')){
+        assert(body.requirePath,`${file}: README is missing requirePath`);
+        assert(path.posix.dirname(body.requirePath)===path.posix.dirname(body.path),`${file}: README is not beside its exact code file`);
+        assert(published.has(body.requirePath),`${file}: README attempted before code`);
+        assert(String(body.content).includes('## Task')&&String(body.content).includes('## Solution')&&String(body.content).includes('**Language:**'),`${file}: README content is too generic`);
+      }
+      const exists=published.has(body.path);if(!exists)published.add(body.path);
+      await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,alreadyExists:exists,path:body.path,commit:exists?null:'cert'})});
+    });
+    const start=performance.now();await page.goto(`${BASE}/courses/${file}`,{waitUntil:'domcontentloaded',timeout:10000});await page.locator('body').waitFor({state:'visible',timeout:1000});const loadMs=performance.now()-start;
+    metrics.courseLoads.push({file,ms:Math.round(loadMs)});assert(loadMs<UI_BUDGET_MS,`${file}: local course load took ${loadMs.toFixed(1)} ms`);
+    const h1=page.locator('h1').first();assert(await h1.count(),`${file}: no H1; possible raw/blank page`);
+    const bodyStart=(await page.locator('body').innerText()).slice(0,500);assert(!/^\s*(?:\(function|\(\(\)=>|const\s+\w+\s*=|var\s+\w+\s*=)/.test(bodyStart),`${file}: looks like a raw JavaScript page`);
+    await page.waitForTimeout(200);
+    const theme=page.locator('[data-course-theme-toggle]').first();if(await theme.count()&&await theme.isVisible().catch(()=>false)){await timedClick(theme,`${file} theme`);metrics.themeClicks++;}
+    const hasPython=await mode(page,'python'),hasCpp=await mode(page,'cpp'),hasDual=await mode(page,'dual');if(hasPython)await mode(page,'python');
+
+    const exampleButtons=page.locator('[data-run-language-example],[data-run-example],[data-evergreen-run]');
+    for(let i=0;i<await exampleButtons.count();i++){
+      const b=exampleButtons.nth(i);if(!await b.isVisible().catch(()=>false))continue;
+      const info=await b.evaluate(el=>{const root=el.closest('[data-lang-variant],.lesson-run-card,.evergreen-example,.csai-example,.csai-example-card,article,section')||el.parentElement;const code=root?.querySelector('[data-csai-language-generated],.csai-language-code,pre code,pre')?.textContent||'';const hint=root?.getAttribute('data-lang-variant')||root?.dataset?.language||'';const out=root?.querySelector('[data-csai-example-output],[data-output],.lesson-run-output,.evergreen-output,.csai-example-output');if(out&&!out.id)out.id='cert-example-out-'+Math.random().toString(36).slice(2);return{code,hint,out:out?'#'+CSS.escape(out.id):null};});
+      const l=languageFrom(info.code,info.hint);if(l!=='python'&&l!=='cpp')continue;
+      const out=info.out?page.locator(info.out):null,text=await clickAndObserve(b,out,`${file} example ${i+1} ${l}`,l==='cpp'?60000:30000);
+      assert(!/run error|compilation failed|traceback/i.test(text),`${file} example ${i+1} ${l} failed: ${text.slice(0,300)}`);metrics.exampleRuns++;
+    }
+
+    const tasks=page.locator('.oa-task');
+    for(let i=0;i<await tasks.count();i++){
+      const task=tasks.nth(i),editor=task.locator('textarea[data-editor]:not(.oa-answer)').first(),run=task.locator('[data-run],[data-universal-run]').first(),out=task.locator('[data-output]').first();
+      if(await editor.count()&&await run.count()){
+        if(i===0){
+          if(hasPython){await mode(page,'python');await editor.fill('if True:');await editor.press('End');await editor.press('Enter');assert((await editor.inputValue()).endsWith('\n    '),`${file}: Python Enter indentation failed`);}
+          if(hasCpp){await mode(page,'cpp');await editor.fill('int main() {');await editor.press('End');await editor.press('Enter');assert((await editor.inputValue()).endsWith('\n    '),`${file}: C++ Enter indentation failed`);}
+          await editor.fill('x');await editor.press('Tab');assert((await editor.inputValue()).startsWith('    '),`${file}: Tab indentation failed`);await editor.press('Shift+Tab');assert(!(await editor.inputValue()).startsWith('    '),`${file}: Shift+Tab indentation failed`);
+        }
+        const cases=[];if(hasPython)cases.push('python');if(hasCpp)cases.push('cpp');if(!cases.length)cases.push(null);
+        for(const l of cases){if(l)await mode(page,l);const text=await clickAndObserve(run,await out.count()?out:null,`${file} task ${i+1} ${l||'default'}`,l==='cpp'?60000:30000);assert(!badInfrastructure(text),`${file} task ${i+1} ${l} runner infrastructure failed`);metrics.exerciseRuns++;}
+        if(hasDual){await mode(page,'dual');for(const l of ['python','cpp']){await setEditor(editor,minimal(l));const text=await clickAndObserve(run,await out.count()?out:null,`${file} task ${i+1} dual-${l}`,l==='cpp'?60000:30000);assert(!badInfrastructure(text),`${file} task ${i+1} dual-${l} runner infrastructure failed`);metrics.exerciseRuns++;}}
+        const reset=task.locator('[data-reset]').first();if(await reset.count()){await timedClick(reset,`${file} task ${i+1} reset`);metrics.resetClicks++;}
+        const reveal=task.locator('[data-reveal-solution]').first();if(await reveal.count()&&await reveal.isVisible().catch(()=>false)){await timedClick(reveal,`${file} task ${i+1} reveal`);metrics.revealClicks++;}
+        const submit=task.locator('[data-submit],[data-mark]').first();if(await submit.count()){await timedClick(submit,`${file} task ${i+1} submit`);metrics.submitClicks++;}
+        if(hasPython){await mode(page,'python');await setEditor(editor,minimal('python'));await publishPair(task,`${file} task ${i+1} python`);}
+        if(hasCpp){await mode(page,'cpp');await setEditor(editor,minimal('cpp'));await publishPair(task,`${file} task ${i+1} cpp`);}
+        if(!hasPython&&!hasCpp)await publishPair(task,`${file} task ${i+1}`);
+        if(hasDual){await mode(page,'dual');await setEditor(editor,minimal('python'));await publishPair(task,`${file} task ${i+1} dual-python`);await setEditor(editor,minimal('cpp'));await publishPair(task,`${file} task ${i+1} dual-cpp`);}
+      }
+    }
+
+    const projects=page.locator('.project-card');
+    for(let i=0;i<await projects.count();i++){
+      const card=projects.nth(i),select=card.locator('[data-project-lang]').first(),editor=card.locator('[data-project-editor]').first(),run=card.locator('[data-project-run]').first(),out=card.locator('[data-project-output]').first();
+      const options=await select.count()?await select.locator('option').evaluateAll(opts=>opts.map(o=>o.value)):[];
+      const langs=hasCpp&&options.includes('cpp')&&options.includes('python')?['python','cpp']:[await select.inputValue().catch(()=>null)].filter(Boolean);
+      for(const l of langs){await select.selectOption(l);await page.waitForTimeout(30);if(l==='python'||l==='cpp')await setEditor(editor,minimal(l));const text=await clickAndObserve(run,await out.count()?out:null,`${file} project ${i+1} ${l}`,l==='cpp'?60000:30000);assert(!badInfrastructure(text),`${file} project ${i+1} ${l} runner infrastructure failed`);metrics.projectRuns++;await publishPair(card,`${file} project ${i+1} ${l}`);}
+      const reset=card.locator('[data-project-reset]').first();if(await reset.count()){await timedClick(reset,`${file} project ${i+1} reset`);metrics.resetClicks++;}
+    }
+
+    const exampleRows=page.locator('.csai-example-actions');
+    for(let i=0;i<await exampleRows.count();i++){const row=exampleRows.nth(i);if(await row.locator('[data-final-publish]').count())await publishPair(row,`${file} example-publish ${i+1}`);}
+    metrics.courses++;metrics.pageErrors.push(...pageErrors.map(error=>({file,error})));assert.equal(pageErrors.length,0,`${file}: browser page error: ${pageErrors[0]||''}`);await context.close();
+  }
+  for(const body of githubBodies)if(body.path?.endsWith('/README.md'))assert(body.requirePath&&path.posix.dirname(body.requirePath)===path.posix.dirname(body.path),`README/code folder mismatch: ${body.path}`);
+  assert(metrics.githubRequests>0,'No GitHub publishing requests were exercised');assert(metrics.maxUiFeedbackMs<UI_BUDGET_MS,`Maximum UI response ${metrics.maxUiFeedbackMs.toFixed(1)} ms exceeded 1 second`);
+  fs.writeFileSync('browser-certification-report.json',JSON.stringify(metrics,null,2));console.log(JSON.stringify(metrics,null,2));console.log('Full browser certification passed.');
+}finally{await browser.close().catch(()=>{});server.kill('SIGTERM');}

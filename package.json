@@ -3,7 +3,10 @@
   "private": true,
   "version": "5.19.1",
   "scripts": {
-    "test": "node tests/github-integration-contract.test.js && node tests/final-quality-contract.test.js"
+    "test": "node tests/github-integration-contract.test.js && node tests/final-quality-contract.test.js",
+    "certify:code": "node scripts/certify-generated-runnable-code.cjs",
+    "certify:browser": "node tests/browser-certification.mjs",
+    "certify:live": "node tests/live-site-smoke.mjs"
   },
   "engines": {"node": ">=20"},
   "dependencies": {
@@ -12,6 +15,7 @@
   },
   "devDependencies": {
     "esbuild": "0.28.1",
+    "playwright": "1.62.1",
     "vite": "6.4.3"
   }
 }
