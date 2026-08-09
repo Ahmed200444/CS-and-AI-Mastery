@@ -1,0 +1,80 @@
+name: C++ browser smoke
+
+on:
+  push:
+    branches:
+      - fix/cpp-force-cxx-fast-path
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install project dependencies
+        run: npm install --no-audit --no-fund
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+      - name: Run exact Netlify build command
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const cp=require('child_process');
+          const text=fs.readFileSync('netlify.toml','utf8');
+          const match=text.match(/command = "([^"]+)"/);
+          if(!match)throw new Error('Could not find Netlify build command');
+          cp.execSync(match[1],{stdio:'inherit',shell:'/bin/bash'});
+          NODE
+      - name: Browser C++ compile and run smoke test
+        shell: bash
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/csai-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          node <<'NODE'
+          const fs=require('fs');
+          const path=require('path');
+          const {chromium}=require('playwright');
+          (async()=>{
+            const files=fs.readdirSync('courses').filter(f=>f.endsWith('.html'));
+            const chosen=files.find(f=>{
+              const h=fs.readFileSync(path.join('courses',f),'utf8');
+              return h.includes('data-lang-variant="cpp"')&&h.includes('data-run-language-example');
+            });
+            if(!chosen)throw new Error('No generated course page with runnable C++ example found');
+            console.log('Testing C++ example on',chosen);
+            const browser=await chromium.launch({headless:true});
+            const page=await browser.newPage();
+            page.on('console',m=>console.log('[browser]',m.type(),m.text()));
+            page.on('pageerror',e=>console.log('[pageerror]',e.message));
+            await page.goto('http://127.0.0.1:4173/courses/'+encodeURIComponent(chosen),{waitUntil:'domcontentloaded'});
+            const result=await page.evaluate(async()=>{
+              const variants=[...document.querySelectorAll('[data-lang-variant="cpp"]')];
+              const variant=variants.find(v=>v.querySelector('[data-run-language-example]')&&/iostream|cout|vector|string/.test(v.textContent||''))||variants.find(v=>v.querySelector('[data-run-language-example]'));
+              if(!variant)throw new Error('No runnable C++ variant found in browser');
+              const button=variant.querySelector('[data-run-language-example]');
+              const out=variant.querySelector('[data-csai-example-output]');
+              if(!button||!out)throw new Error('C++ run button/output pair missing');
+              button.click();
+              const start=Date.now();
+              while(Date.now()-start<150000){
+                const text=String(out.textContent||'');
+                if(/Run error|Output/.test(text))return {text,ms:Date.now()-start};
+                await new Promise(r=>setTimeout(r,500));
+              }
+              return {text:String(out.textContent||''),ms:Date.now()-start,timeout:true};
+            });
+            console.log('C++ browser result after '+result.ms+'ms:\n'+result.text);
+            await browser.close();
+            if(result.timeout)throw new Error('Browser C++ run timed out');
+            if(/Run error/.test(result.text))throw new Error('Browser C++ run failed: '+result.text);
+            if(/invalid argument ['"]-std=c\+\+17['"] not allowed with ['"]C['"]/.test(result.text))throw new Error('C/C++ language-mode regression remains');
+            if(!/Output/.test(result.text))throw new Error('C++ example did not produce a successful Output result');
+          })().catch(e=>{console.error(e);process.exit(1);});
+          NODE
