@@ -218,9 +218,10 @@ function insertSolution(task,item,index){
  if(task.querySelector('[data-reveal-solution]'))return;
  var toolbar=task.querySelector('.oa-toolbar')||task.querySelector('.oa-response-actions');
  if(!toolbar)return;
- var publish=toolbar.querySelector('[data-publish]');
+ var publish=toolbar.querySelector('[data-publish]'),anchor=publish;
+ while(anchor&&anchor.parentNode!==toolbar)anchor=anchor.parentNode;
  var btn=document.createElement('button');btn.type='button';btn.className='oa-btn reveal';btn.setAttribute('data-reveal-solution','');btn.textContent='Reveal solution';
- if(publish)toolbar.insertBefore(btn,publish);else toolbar.appendChild(btn);
+ if(anchor)toolbar.insertBefore(btn,anchor);else toolbar.appendChild(btn);
  var panel=document.createElement('div');panel.className='oa-solution';panel.hidden=true;panel.setAttribute('data-solution-panel','');
  var sol=solutionFor(item,index,task),lang=languageFor(task),codeLike=lang!=='text'&&(/\n/.test(sol)||/^(def |class |SELECT |INSERT |UPDATE |DELETE |CREATE |const |let |function |<)/i.test(sol.trim()));
  panel.innerHTML='<div class="oa-solution-head"><span>Easiest solution</span><span style="font-size:.72rem;color:var(--muted)">beginner-friendly</span></div>'+(codeLike?'<pre>'+esc(sol)+'</pre>':'<div class="plain">'+esc(sol)+'</div>');
