@@ -35,13 +35,16 @@ const requiredUi=[
  ['artifact cache',/artifactPromises=Object\.create\(null\),artifacts=Object\.create\(null\)/],
  ['preboot before C++ selection',/function prebootCompiler\(\)/],
  ['preboot only on C++-capable courses',/function courseSupportsCpp\(\)/],
- ['preboot starts during page reading',/setTimeout\(prebootCompiler,350\)/],
+ ['preboot starts during page reading',/setTimeout\(prebootCompiler,250\)/],
+ ['prewarm first example before selection',/function prewarmFirstExample\(\)/],
+ ['per-example background preparation',/function prepareButtonInBackground\(button\)/],
  ['background warmup scheduler',/function scheduleBackgroundWarmup\(delay\)/],
- ['background compiler boot',/prebootCompiler\(\)/],
  ['background artifact preparation',/ensureArtifact\(code,null\)/],
  ['warmup on C++ or Dual selection',/data-lang-mode=\\?"cpp\\?"\],\[data-lang-mode=\\?"dual\\?"\]/],
- ['warmup note',/Preparing C\+\+ in background/],
- ['ready note',/C\+\+ ready/],
+ ['per-example warmup note',/Preparing this C\+\+ example in background/],
+ ['per-example ready note',/setVariantNote\(variant,'C\+\+ ready'\)/],
+ ['scroll-ahead warmup',/window\.addEventListener\('scroll'[\s\S]*scheduleBackgroundWarmup/],
+ ['output newline normalization',/function normalizeCppOutput\(text\)[\s\S]*replace\(\/\\n\\n\\n\/g,'\\n'\)/],
  ['reuse background compile on click',/artifactPromises\[key\]/],
  ['reset recovery',/resetRunner/]
 ];
@@ -64,7 +67,7 @@ else{
  if(files.length!==54)problems.push(`expected 54 course pages, found ${files.length}`);
  for(const name of files){
   const html=fs.readFileSync(path.join(dir,name),'utf8');
-  if(!html.includes('/assets/cpp-runner-ui-worker.js?v=20260809-5'))problems.push(`${name}: missing background-warming native clang++ C++ runner controller`);
+  if(!html.includes('/assets/cpp-runner-ui-worker.js?v=20260809-5'))problems.push(`${name}: missing prewarmed native clang++ C++ runner controller`);
   if(/cpp-runner-ui-worker\.js\?v=20260809-[1-4]/.test(html))problems.push(`${name}: stale C++ controller cache version remains`);
  }
 }
@@ -76,4 +79,4 @@ const inject=netlify.indexOf('node scripts/inject-cpp-responsive-runner.cjs');
 const verify=netlify.indexOf('node scripts/verify-cpp-responsive-runner.cjs');
 if(!(build>=0&&clientCheck>build&&workerCheck>clientCheck&&uiCheck>workerCheck&&inject>uiCheck&&verify>inject))problems.push('Netlify does not build, syntax-check, inject, then verify the direct C++ runner in order');
 if(problems.length)throw new Error('Responsive C++ runner verification failed:\n'+problems.slice(0,120).join('\n'));
-console.log('Responsive C++ runner verification passed: prebooted/background-warmed C++ compiler, artifact reuse, explicit clang++ compilation, direct wasm-ld linking, and wasi-run execution are wired on all 54 course pages.');
+console.log('Responsive C++ runner verification passed: compiler preboot, exact-example prewarm/cache, normalized output spacing, explicit clang++ compilation, direct wasm-ld linking, and wasi-run execution are wired on all 54 course pages.');
