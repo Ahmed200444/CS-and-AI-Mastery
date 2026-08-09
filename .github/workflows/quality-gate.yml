@@ -35,15 +35,24 @@ jobs:
       - name: Install Chromium for browser certification
         run: npx playwright install --with-deps chromium
 
+      - name: Verify theme and sub-second static course interaction
+        run: npm run certify:theme
+
       - name: Click-test the complete generated learning platform
         run: npm run certify:browser
 
-      - name: Upload browser certification report
+      - name: Compile and execute every C++-enabled workspace
+        run: npm run certify:cpp
+
+      - name: Upload certification reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: browser-certification
-          path: browser-certification-report.json
+          path: |
+            browser-certification-report.json
+            cpp-workspace-certification-report.json
+            theme-certification-report.json
           if-no-files-found: ignore
 
       - name: Verify live Netlify deployment
