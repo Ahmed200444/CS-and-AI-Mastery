@@ -1,0 +1,10 @@
+const fs=require('fs');
+const path=require('path');
+const file=path.join(process.cwd(),'assets','example-github-publish.js');
+let s=fs.readFileSync(file,'utf8');
+const old="function examplePath(variant,lang){return 'student-code/'+folder(lang)+'/'+courseId()+'/examples/'+slug(lessonTitle(variant))+'-example.'+extension(lang);}";
+const replacement="function examplePath(variant,lang){var lesson=variant.closest('.lesson,details,[data-lesson]'),siblings=lesson?Array.from(lesson.querySelectorAll('[data-lang-variant=\\\"'+lang+'\\\"]')):[],same=siblings.filter(function(v){return !!codeFor(v);}),index=Math.max(0,same.indexOf(variant))+1,suffix=same.length>1?'-example-'+index:'-example';return 'student-code/'+folder(lang)+'/'+courseId()+'/examples/'+slug(lessonTitle(variant))+suffix+'.'+extension(lang);}";
+if(s.includes(old))s=s.replace(old,replacement);
+if(!/same\.length>1\?'-example-'\+index:'-example'/.test(s))throw new Error('Unique example GitHub path patch missing');
+fs.writeFileSync(file,s,'utf8');
+console.log('Multiple examples in one lesson now publish to unique semantic GitHub filenames instead of overwriting each other.');
