@@ -51,8 +51,9 @@ function details(button){
   const pre=root?.querySelector('[data-csai-language-generated],.csai-language-code,pre code,pre');
   const code=clean(editor?.value??pre?.textContent);
   const title=clean(root?.dataset.title||root?.getAttribute('data-title')||root?.querySelector('h2,h3,h4,.title,.exercise-title,.project-title')?.textContent||button.dataset.title||(example?'Example':project?'Project':'Practice'));
+  const responseTask=!!root?.querySelector('textarea.oa-answer')||root?.getAttribute('data-response-task')==='1';
   const activeLanguage=clean(root?.getAttribute('data-csai-editor-language')||root?.dataset.projectLanguage||root?.querySelector('[data-project-lang],[data-lang]')?.value||button.dataset.language||editor?.dataset.language||root?.dataset.language||root?.getAttribute('data-lang-variant')||pre?.className);
-  const extension=ext(code,activeLanguage),language=languageFolder(extension),item=slug(title);
+  const extension=responseTask?'txt':ext(code,activeLanguage),language=languageFolder(extension),item=slug(title);
   const course=courseInfo(),base=`student-code/${kind}/${course.id}/${item}/${language}`;
   const filename=kind==='examples'?`example.${extension}`:`solution.${extension}`;
   const description=exactText(root,['.oa-prompt p','.project-head p','[data-project-description]','.project-description','.exercise-description','.description']);
@@ -127,8 +128,8 @@ async function publish(button,isReadme){
 }
 function pair(existing,kind){
   if(!existing||existing.dataset.finalPublishReady)return existing;
-  existing.dataset.finalPublishReady='1';existing.dataset.finalKind=kind;existing.setAttribute('data-final-publish','');
-  for(const attr of ['data-publish','data-project-publish','data-dual-publish-language'])existing.removeAttribute(attr);
+  existing.dataset.finalPublishReady='1';existing.dataset.finalKind=kind;existing.setAttribute('data-final-publish','');existing.setAttribute('data-publish','');
+  for(const attr of ['data-project-publish','data-dual-publish-language'])existing.removeAttribute(attr);
   existing.textContent='Publish to GitHub';
   let row=existing.closest('.csai-final-publish-row');
   if(!row){row=document.createElement('span');row.className='csai-final-publish-row';existing.parentNode?.insertBefore(row,existing);row.appendChild(existing);}
