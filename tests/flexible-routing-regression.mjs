@@ -52,7 +52,7 @@ try{
     await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,alreadyExists:false,path:body.path,commit:'routing-cert'})});
   });
   await page.goto(`${BASE}/courses/dsa.html`,{waitUntil:'domcontentloaded',timeout:10000});
-  await page.waitForTimeout(1000);
+  await page.waitForTimeout(1200);
   report.payload=await page.evaluate(()=>{
     try{
       const data=JSON.parse(document.getElementById('csai-assessment-data')?.textContent||'{}');
@@ -77,8 +77,13 @@ try{
     runCount:el.querySelectorAll('[data-run],[data-universal-run],[data-compare]').length,
     actionText:[...el.querySelectorAll('button')].map(b=>String(b.textContent||'').trim()),
     publishCount:el.querySelectorAll('[data-final-publish],[data-publish]').length,
+    publishElements:[...el.querySelectorAll('[data-final-publish],[data-publish]')].map(node=>({tag:node.tagName,classes:String(node.className||''),text:String(node.textContent||'').trim(),final:node.hasAttribute('data-final-publish'),legacy:node.hasAttribute('data-publish'),parentClass:String(node.parentElement?.className||''),parentTag:node.parentElement?.tagName||'',outerHTML:node.outerHTML})),
+    toolbarHTML:el.querySelector('.oa-toolbar,.oa-response-actions')?.outerHTML||null,
     readmeCount:el.querySelectorAll('[data-final-readme]').length
   }));
+  report.pageErrors=errors;
+  fs.writeFileSync('routing-regression-report.json',JSON.stringify(report,null,2));
+
   assert.equal(errors.length,0,`DSA page error: ${errors[0]||''}`);
   assert(report.payload.item,'dsa_ex4 is missing from embedded assessment data');
   assert.equal(report.payload.item.title,'Array vs linked list trade-off','Unexpected embedded dsa_ex4 title');
@@ -89,7 +94,7 @@ try{
   assert.equal(report.task.responseTextarea,true,'Conceptual DSA task must keep its response textarea');
   assert.equal(report.task.runCount,0,'Conceptual response task must not have a Run/Check button');
   assert(report.task.actionText.some(t=>/mark complete/i.test(t)),'Conceptual response task must keep Mark complete');
-  assert.equal(report.task.publishCount,1,'Conceptual response task must have exactly one Publish button');
+  assert.equal(report.task.publishCount,1,`Conceptual response task must have exactly one Publish button. Found: ${JSON.stringify(report.task.publishElements)}`);
   assert.equal(report.task.readmeCount,1,'Conceptual response task must have exactly one README button');
 
   const answer=task.locator('textarea.oa-answer');
