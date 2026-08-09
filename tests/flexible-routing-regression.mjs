@@ -45,6 +45,12 @@ try{
   });
   const page=await context.newPage();
   const errors=[];page.on('pageerror',e=>errors.push(String(e.message||e)));
+  const githubRequests=[];
+  await page.route('**/api/github/status',async route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({connected:true,csrf:'routing-csrf',repositories:[{full_name:'Ahmed200444/CS-and-AI-Mastery'}],user:{login:'Ahmed200444'}})}));
+  await page.route('**/api/github/file',async route=>{
+    const body=JSON.parse(route.request().postData()||'{}');githubRequests.push(body);
+    await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,alreadyExists:false,path:body.path,commit:'routing-cert'})});
+  });
   await page.goto(`${BASE}/courses/dsa.html`,{waitUntil:'domcontentloaded',timeout:10000});
   await page.waitForTimeout(1000);
   report.payload=await page.evaluate(()=>{
@@ -73,8 +79,6 @@ try{
     publishCount:el.querySelectorAll('[data-final-publish],[data-publish]').length,
     readmeCount:el.querySelectorAll('[data-final-readme]').length
   }));
-  report.pageErrors=errors;
-  fs.writeFileSync('routing-regression-report.json',JSON.stringify(report,null,2));
   assert.equal(errors.length,0,`DSA page error: ${errors[0]||''}`);
   assert(report.payload.item,'dsa_ex4 is missing from embedded assessment data');
   assert.equal(report.payload.item.title,'Array vs linked list trade-off','Unexpected embedded dsa_ex4 title');
@@ -85,6 +89,26 @@ try{
   assert.equal(report.task.responseTextarea,true,'Conceptual DSA task must keep its response textarea');
   assert.equal(report.task.runCount,0,'Conceptual response task must not have a Run/Check button');
   assert(report.task.actionText.some(t=>/mark complete/i.test(t)),'Conceptual response task must keep Mark complete');
-  assert(report.task.publishCount>=1,'Conceptual response task must remain publishable');
+  assert.equal(report.task.publishCount,1,'Conceptual response task must have exactly one Publish button');
+  assert.equal(report.task.readmeCount,1,'Conceptual response task must have exactly one README button');
+
+  const answer=task.locator('textarea.oa-answer');
+  await answer.fill('A linked list fits better because front insertion can be O(1) and random index access is not required.');
+  const publish=task.locator('[data-final-publish]').first(),readme=task.locator('[data-final-readme]').first(),status=task.locator('.csai-final-publish-status').first();
+  await publish.click();
+  await page.waitForFunction(()=>/Published|Already published/.test(document.querySelector('[data-task="dsa_ex4"] .csai-final-publish-status')?.textContent||''),null,{timeout:3000});
+  await readme.click();
+  await page.waitForFunction(()=>/README (added|already added)/.test(document.querySelector('[data-task="dsa_ex4"] .csai-final-publish-status')?.textContent||''),null,{timeout:3000});
+  assert.equal(githubRequests.length,2,`Expected code + README requests, got ${githubRequests.length}`);
+  const codeReq=githubRequests[0],readmeReq=githubRequests[1],expectedCode='student-code/practice/dsa/array-vs-linked-list-trade-off/text/solution.txt',expectedReadme='student-code/practice/dsa/array-vs-linked-list-trade-off/text/README.md';
+  assert.equal(codeReq.path,expectedCode,`Conceptual response published to wrong path: ${codeReq.path}`);
+  assert.equal(codeReq.createOnly,true,'Conceptual response code must be create-only');
+  assert.equal(readmeReq.path,expectedReadme,`Conceptual response README published to wrong path: ${readmeReq.path}`);
+  assert.equal(readmeReq.requirePath,expectedCode,'Conceptual response README must require its exact text file');
+  assert(String(readmeReq.content).includes('**Language:** Text'),'Conceptual response README must identify Text language');
+  report.githubRequests=githubRequests;
+  report.finalStatus=await status.textContent();
+  report.pageErrors=errors;
+  fs.writeFileSync('routing-regression-report.json',JSON.stringify(report,null,2));
   console.log('Flexible-language/response-task routing regression passed.');
 }finally{await browser.close().catch(()=>{});server.kill('SIGTERM');}
