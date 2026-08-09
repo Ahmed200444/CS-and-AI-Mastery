@@ -6,6 +6,7 @@ const courseDir = path.join(process.cwd(), 'assets', 'course-data');
 
 const INTERNSHIP_SEQUENCE = [
   ['python'],
+  ['cpp', 'c++', 'c plus plus'],
   ['dsa', 'data structures and algorithms', 'data structures & algorithms'],
   ['problem solving', 'problem-solving'],
   ['oop', 'object oriented programming', 'object-oriented programming'],
@@ -40,8 +41,9 @@ const INTERNSHIP_SEQUENCE = [
 function normalize(value) {
   return String(value || '')
     .toLowerCase()
+    .replace(/\+/g, ' plus ')
     .replace(/&/g, ' and ')
-    .replace(/[^a-z0-9+#]+/g, ' ')
+    .replace(/[^a-z0-9#]+/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
 }
@@ -122,11 +124,12 @@ if (ordered.length !== fullCourses.length) {
 const orderedSummaries = ordered.map(course => summariesById.get(course.id).course);
 if (orderedSummaries.length !== catalog.courses.length) throw new Error('Internship ordering lost catalog courses');
 if (normalize(orderedSummaries[0]?.title) !== 'python') throw new Error('Internship catalog must start with Python');
+if (normalize(orderedSummaries[1]?.title) !== 'c plus plus') throw new Error('C++ must follow Python in the programming foundations order');
 
 catalog.courses = orderedSummaries;
 catalog.ordering = {
   mode: 'bytedance-internship-prep',
-  description: 'ByteDance AI application development internship preparation order; prerequisites are respected automatically.'
+  description: 'Programming foundations (Python and C++) followed by ByteDance AI application development internship preparation; prerequisites are respected automatically.'
 };
 fs.writeFileSync(catalogPath, JSON.stringify(catalog), 'utf8');
 
