@@ -1,0 +1,12 @@
+const fs=require('fs');
+const path=require('path');
+const src=fs.readFileSync(path.join(process.cwd(),'assets','cpp-runner-ui-worker.js'),'utf8');
+const problems=[];
+if(!/function actuallyVisibleForWarmup\(button,variant\)/.test(src))problems.push('missing actual-visibility warmup guard');
+if(!/variant\.closest&&variant\.closest\('details'\)/.test(src))problems.push('closed lesson details are not excluded');
+if(!/if\(details&&!details\.open\)return false/.test(src))problems.push('closed details guard missing');
+if(!/button\.getClientRects\(\)\.length/.test(src))problems.push('hidden-ancestor layout guard missing');
+if(!/if\(!actuallyVisibleForWarmup\(button,variant\)\)return/.test(src))problems.push('nearest warmup selection does not use the visibility guard');
+if(!/return best\|\|\(allowHiddenFirst\?buttons\[0\]:null\)/.test(src))problems.push('first-example fallback was lost');
+if(problems.length)throw new Error('C++ warmup visibility verification failed:\n'+problems.join('\n'));
+console.log('C++ warmup visibility guard passed: closed/hidden lesson examples cannot steal background compilation from the example the learner is viewing.');
