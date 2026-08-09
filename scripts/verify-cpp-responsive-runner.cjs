@@ -20,7 +20,7 @@ const requiredUi=[
  ['persistent runner reuse',/if\(orchestrator\)return orchestrator/],
  ['single active run guard',/if\(active\)/],
  ['native clang++ call',/orch\.run\('clang\+\+',compileArgv\)/],
- ['explicit C++ language',/compileArgv=\['clang\+\+',src,'-x','c\+\+','-std=c\+\+17'/],
+ ['explicit C++ language before source',/compileArgv=\['clang\+\+','-x','c\+\+','-std=c\+\+17'[\s\S]*src,'-c','-o',obj\]/],
  ['WASM target',/--target=wasm32-unknown-emscripten/],
  ['Emscripten sysroot',/--sysroot=\/usr/],
  ['direct wasm-ld call',/orch\.run\('wasm-ld',linkArgv\)/],
@@ -39,6 +39,7 @@ if(/cpp-example-runner-worker\.mjs/.test(ui))problems.push('UI still references 
 if(/createEmception/.test(ui))problems.push('UI still uses the DOM-dependent createEmception facade');
 if(/orch\.run\('em\+\+'/.test(ui)||/var argv=\['em\+\+'/.test(ui))problems.push('UI still uses the slow Python em++ driver');
 if(/orch\.run\('clang',/.test(ui))problems.push('UI still contains the wrong plain-clang C fallback');
+if(/compileArgv=\['clang\+\+',src,'-x','c\+\+'/.test(ui))problems.push('UI puts -x c++ after the source file, where Clang cannot apply it');
 if(/CSAI_CPP_OK|smokeTest\(/.test(ui))problems.push('UI still performs a redundant throwaway C++ smoke compilation');
 if(!/Emception's native clang\+\+ tool directly/.test(ui))problems.push('UI does not document the explicit C++ compiler path');
 if(!/Emception's own ninja bypass links C\+\+ objects this way/.test(ui))problems.push('UI does not document the direct wasm-ld linking rationale');
