@@ -73,7 +73,7 @@ assets/                 Browser learning/runtime modules
 netlify/functions/      GitHub OAuth and publishing API
 scripts/                Course generation, injection, audit, and verification tools
 student-code/           Published practice/examples/projects
- tests/                  Automated contract and release-quality checks
+tests/                  Automated contract and release-quality checks
 index.html               Main application shell
 netlify.toml             Production build and Netlify routing
 ```
