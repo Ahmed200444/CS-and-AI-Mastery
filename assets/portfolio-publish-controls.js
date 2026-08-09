@@ -19,13 +19,18 @@ function ext(code,hint=''){
   hint=hint.toLowerCase();
   if(/c\+\+|cpp/.test(hint)||/#include\s*</.test(code)||/\bint\s+main\s*\(/.test(code))return'cpp';
   if(/python|\bpy\b/.test(hint)||/^\s*(def |from |import |class )/m.test(code)||/\bprint\s*\(/.test(code))return'py';
+  if(/javascript|\bjs\b/.test(hint)||/\b(const|let|function)\b|=>/.test(code))return'js';
+  if(/\b(shell|bash|sh)\b/.test(hint)||/^#!.*\b(?:ba)?sh\b/m.test(code))return'sh';
+  if(/\bjson\b/.test(hint))return'json';
   if(/sql/.test(hint)||/\b(select|insert|update|create table)\b/i.test(code))return'sql';
   if(/html/.test(hint)||/<[a-z][\s\S]*>/i.test(code))return'html';
-  if(/javascript|\bjs\b/.test(hint)||/\b(const|let|function)\b|=>/.test(code))return'js';
   return'txt';
 }
 function languageFolder(extension){
-  return {py:'python',cpp:'cpp',js:'javascript',sql:'sql',html:'html',txt:'text'}[extension]||extension;
+  return {py:'python',cpp:'cpp',js:'javascript',sh:'shell',json:'json',sql:'sql',html:'html',txt:'text'}[extension]||extension;
+}
+function languageLabel(language){
+  return {cpp:'C++',javascript:'JavaScript',shell:'Shell',json:'JSON',sql:'SQL',html:'HTML',python:'Python',text:'Text'}[language]||language.charAt(0).toUpperCase()+language.slice(1);
 }
 function containerFor(button){
   return button.closest('[data-project],.project-card,[data-task],.oa-task,.csai-example-card,.csai-example,[data-lang-variant],.evergreen-example,.lesson-run-card,section,article')||button.parentElement;
@@ -59,12 +64,15 @@ function runLine(d){
   if(d.extension==='py')return`python ${f}`;
   if(d.extension==='js')return`node ${f}`;
   if(d.extension==='cpp')return`g++ ${f} -std=c++17 -O2 -o app && ./app`;
+  if(d.extension==='sh')return`bash ${f}`;
   if(d.extension==='html')return'Open the HTML file in a browser.';
   if(d.extension==='sql')return'Run the SQL in the CS & AI Mastery SQL runner or a compatible SQL database.';
-  return'Open the file with the appropriate tool for its language.';
+  if(d.extension==='json')return'Validate or open the JSON file with the tool used by this project.';
+  return'Open the file with the appropriate tool for its content.';
 }
 function codeStructure(d){
   const code=d.code,notes=[];
+  if(!['py','cpp','js','sql'].includes(d.extension))return notes;
   const functions=[...code.matchAll(d.extension==='py'?/^\s*def\s+([A-Za-z_]\w*)\s*\(/gm:/\b(?:[A-Za-z_]\w*[\s:*&]+)+([A-Za-z_]\w*)\s*\([^;{}]*\)\s*\{/g)].map(m=>m[1]).filter(Boolean);
   const classes=[...code.matchAll(/\bclass\s+([A-Za-z_]\w*)/g)].map(m=>m[1]);
   if(functions.length)notes.push(`Defines function${functions.length>1?'s':''}: ${[...new Set(functions)].map(x=>'`'+x+'`').join(', ')}.`);
@@ -76,13 +84,17 @@ function codeStructure(d){
   if(/\bprint\s*\(|\bcout\s*<</.test(code))notes.push('Writes a result to the program output.');
   return notes;
 }
+function reviewChecklist(d){
+  if(['txt','json','sh'].includes(d.extension))return '1. Re-read the task and requirements.\n2. Check each line/configuration choice against those requirements.\n3. Validate or run it with the appropriate tool when possible.\n4. Test a failure, boundary, or configuration edge case relevant to the project.';
+  return '1. Re-read the task above and identify the required input, processing, and output.\n2. Trace the code from top to bottom and follow each branch or loop with a small example.\n3. Run it and compare the output with the requirement.\n4. Test an edge case before considering the exercise complete.';
+}
 function readme(d){
   const type=d.kind==='projects'?'Project':d.kind==='examples'?'Example':'Practice / Exercise';
   const task=d.description||'Use the course prompt for this item as the source of truth for the task.';
   const req=d.requirements.length?`\n## Requirements\n${d.requirements.map(x=>`- ${x}`).join('\n')}\n`:'';
   const structure=codeStructure(d);
   const structureText=structure.length?`\n## What the program does structurally\n${structure.map(x=>`- ${x}`).join('\n')}\n`:'';
-  return `# ${d.title}\n\n**Course:** ${d.course.title}  \n**Type:** ${type}  \n**Language:** ${d.language==='cpp'?'C++':d.language[0].toUpperCase()+d.language.slice(1)}\n\n## Task\n\n${task}\n${req}\n## Solution\n\nThe solution for this exact item and language is stored in \`${d.codePath.split('/').pop()}\`. The Python and C++ versions of the same exercise are kept in separate language folders so neither version overwrites the other.\n${structureText}\n## How to run\n\n\`\`\`bash\n${runLine(d)}\n\`\`\`\n\n## Review checklist\n\n1. Re-read the task above and identify the required input, processing, and output.\n2. Trace the code from top to bottom and follow each branch or loop with a small example.\n3. Run it and compare the output with the requirement.\n4. Test an edge case before considering the exercise complete.\n\nGenerated from the exact CS & AI Mastery item and code selected when **Add a README** was pressed.\n`;
+  return `# ${d.title}\n\n**Course:** ${d.course.title}  \n**Type:** ${type}  \n**Language:** ${languageLabel(d.language)}\n\n## Task\n\n${task}\n${req}\n## Solution\n\nThe solution for this exact item and language is stored in \`${d.codePath.split('/').pop()}\`. Other language versions of this item are kept in their own language folders, so one version never overwrites another.\n${structureText}\n## How to run\n\n\`\`\`bash\n${runLine(d)}\n\`\`\`\n\n## Review checklist\n\n${reviewChecklist(d)}\n\nGenerated from the exact CS & AI Mastery item and code selected when **Add a README** was pressed.\n`;
 }
 async function status(){
   if(!statusPromise)statusPromise=fetch(STATUS_URL,{credentials:'same-origin'}).then(async r=>{const d=await r.json();if(!r.ok)throw new Error(d.error||'GitHub status failed');return d}).catch(e=>{statusPromise=null;throw e});
