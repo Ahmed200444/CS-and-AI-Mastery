@@ -80,4 +80,4 @@ const cppInject=netlify.indexOf('node scripts/inject-cpp-responsive-runner.cjs')
 const verify=netlify.indexOf('node scripts/verify-example-practice-tools.cjs');
 if(!(syntaxExample>=0&&syntaxExamplePublish>syntaxExample&&syntaxPractice>syntaxExamplePublish&&inject>syntaxPractice&&cppInject>inject&&verify>cppInject))problems.push('Netlify build order does not syntax-check and inject example GitHub/practice/C++ tools before verification');
 if(problems.length)throw new Error('Example/practice verification failed:\n'+problems.slice(0,120).join('\n'));
-console.log('Example/practice verification passed: Python/C++ example publishing, Python run/output, prewarmed native clang++/wasm-ld/WASI C++ execution, normalized C++ output spacing, practice publishing, revealed-solution publishing, and 54-page injection are wired.');
+console.log('Example/practice verification passed: Python/C++ example publishing, Python run/output, prewarmed native clang++/wasm-ld/WASI C++ execution, normalized C++ output spacing, practice publishing, revealed-solution publishing, and 55-page injection are wired.');
