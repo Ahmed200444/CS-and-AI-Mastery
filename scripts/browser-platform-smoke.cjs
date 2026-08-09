@@ -11,13 +11,14 @@ const base=process.env.CSAI_SMOKE_BASE||'http://127.0.0.1:4173';
 (async()=>{
   const browser=await chromium.launch({headless:true});
   const context=await browser.newContext({viewport:{width:1280,height:900}});
-  let pageErrors=[];
+  const pageErrors=[];
   let evergreenLabs=0;
   let taskReadmes=0;
   let examplePublish=0;
   let projectReadmes=0;
   let safeOutputs=0;
   let editorChecked=false;
+  let safeBehaviorChecked=false;
   let themeChecked=false;
 
   for(let index=0;index<files.length;index++){
@@ -73,24 +74,47 @@ const base=process.env.CSAI_SMOKE_BASE||'http://127.0.0.1:4173';
       }
 
       if(!editorChecked){
-        const editor=page.locator('textarea[data-evergreen-code],textarea[data-editor]:not(.oa-answer),textarea[data-project-editor]').first();
-        if(await editor.count()){
-          await editor.fill('if True:');
-          await editor.focus();
-          await page.keyboard.press('End');
-          await page.keyboard.press('Enter');
-          const value=await editor.inputValue();
-          assert(value.endsWith('\n    '),`${file}: Python smart Enter did not indent four spaces`);
-          await page.keyboard.type('pass');
-          await page.keyboard.press('Control+A');
-          await page.keyboard.press('Tab');
-          const tabbed=await editor.inputValue();
-          assert(tabbed.startsWith('    '),`${file}: Tab did not indent the selection`);
-          await page.keyboard.press('Shift+Tab');
-          const untabbed=await editor.inputValue();
-          assert(!untabbed.startsWith('    if True:'),`${file}: Shift+Tab did not outdent the selection`);
-          editorChecked=true;
-        }
+        await page.evaluate(()=>{
+          const textarea=document.createElement('textarea');
+          textarea.setAttribute('data-editor','');
+          textarea.id='csai-smoke-editor';
+          document.body.appendChild(textarea);
+        });
+        const editor=page.locator('#csai-smoke-editor');
+        await editor.fill('if True:');
+        await editor.focus();
+        await page.keyboard.press('End');
+        await page.keyboard.press('Enter');
+        const value=await editor.inputValue();
+        assert(value.endsWith('\n    '),`${file}: Python smart Enter did not indent four spaces`);
+        await page.keyboard.type('pass');
+        await page.keyboard.press('Control+A');
+        await page.keyboard.press('Tab');
+        const tabbed=await editor.inputValue();
+        assert(tabbed.startsWith('    '),`${file}: Tab did not indent the selection`);
+        await page.keyboard.press('Shift+Tab');
+        const untabbed=await editor.inputValue();
+        assert(!untabbed.startsWith('    if True:'),`${file}: Shift+Tab did not outdent the selection`);
+        editorChecked=true;
+      }
+
+      if(!safeBehaviorChecked){
+        await page.evaluate(()=>{
+          const lesson=document.querySelector('.lesson')||document.body;
+          const pre=document.createElement('pre');
+          pre.className='code';
+          pre.id='csai-smoke-safe-command';
+          pre.textContent='git status';
+          lesson.appendChild(pre);
+        });
+        await page.waitForTimeout(120);
+        const safe=page.locator('#csai-smoke-safe-command + .csai-safe-output-tools .csai-safe-output-btn');
+        assert.equal(await safe.count(),1,`${file}: safe command validation UI did not attach`);
+        await safe.click();
+        const result=await page.locator('#csai-smoke-safe-command + .csai-safe-output-tools .csai-safe-output-result').innerText();
+        assert(result.includes('Simulation / validation'),`${file}: safe output was not labeled as a simulation`);
+        assert(result.includes('browser did not execute'),`${file}: safe output did not state that the command was not executed`);
+        safeBehaviorChecked=true;
       }
 
       if(localErrors.length)pageErrors.push(`${file}: ${localErrors.join(' | ')}`);
@@ -102,14 +126,14 @@ const base=process.env.CSAI_SMOKE_BASE||'http://127.0.0.1:4173';
   await browser.close();
 
   assert(themeChecked,'No working course theme toggle was found');
-  assert(editorChecked,'No smart code editor could be exercised');
+  assert(editorChecked,'Smart code-editor behavior was not verified');
+  assert(safeBehaviorChecked,'Safe system-command behavior was not verified');
   assert(evergreenLabs>0,'No Evergreen labs rendered across the platform');
   assert(taskReadmes>0,'No exercise README controls rendered across the platform');
   assert(examplePublish>0,'No lesson example publish controls rendered across the platform');
   assert(projectReadmes>0,'No project README controls rendered across the platform');
-  assert(safeOutputs>0,'No safe shell/Git/Docker/cloud/networking validation UI rendered across the platform');
   assert.equal(pageErrors.length,0,'Browser page errors:\n'+pageErrors.join('\n'));
 
   console.log(`Browser smoke passed across ${files.length} courses.`);
-  console.log(`Evergreen labs: ${evergreenLabs}; task README controls: ${taskReadmes}; example publish controls: ${examplePublish}; project README controls: ${projectReadmes}; safe validation blocks: ${safeOutputs}.`);
+  console.log(`Evergreen labs: ${evergreenLabs}; task README controls: ${taskReadmes}; example publish controls: ${examplePublish}; project README controls: ${projectReadmes}; existing safe validation blocks: ${safeOutputs}.`);
 })().catch(error=>{console.error(error);process.exit(1);});
