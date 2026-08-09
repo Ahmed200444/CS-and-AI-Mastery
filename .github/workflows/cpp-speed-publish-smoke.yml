@@ -38,3 +38,4 @@ jobs:
           SERVER_PID=$!
           trap 'kill $SERVER_PID || true' EXIT
           node scripts/predeploy-browser-smoke.cjs
+          node scripts/predeploy-project-readme-smoke.cjs
