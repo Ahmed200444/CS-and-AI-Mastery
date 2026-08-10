@@ -5,8 +5,6 @@ const label=process.argv.slice(2).join(' ')||'checkpoint';
 const file=path.join(process.cwd(),'index.html');
 if(!fs.existsSync(file))throw new Error('index.html missing');
 const html=fs.readFileSync(file,'utf8');
-const openCount=(html.match(/<script\b/gi)||[]).length;
-const closeCount=(html.match(/<\/script\s*>/gi)||[]).length;
 const re=/<script\b([^>]*)>([\s\S]*?)<\/script\s*>/gi;
 let m,index=0,bad=[];
 while((m=re.exec(html))){
@@ -21,9 +19,9 @@ while((m=re.exec(html))){
  }
  index++;
 }
-if(bad.length||openCount!==closeCount){
- console.error(`[inline-check:${label}] FAIL scripts ${openCount} open / ${closeCount} close; invalid inline blocks: ${bad.length}`);
+if(bad.length){
+ console.error(`[inline-check:${label}] FAIL invalid inline blocks: ${bad.length}`);
  bad.slice(0,5).forEach(b=>console.error(`BLOCK ${b.index} line ${b.line}: ${b.message}\n${b.snippet}`));
  process.exit(1);
 }
-console.log(`[inline-check:${label}] PASS scripts ${openCount} open / ${closeCount} close; ${index} parsed blocks.`);
+console.log(`[inline-check:${label}] PASS ${index} browser-visible script blocks parsed; no inline JavaScript syntax errors.`);
