@@ -15,7 +15,8 @@ req('Dual-language pages must auto-trigger Python warm-up',/data-adaptive-mode="
 req('Runner CDN preconnect must be installed',/rel='preconnect'/.test(guard)&&/cdn\.jsdelivr\.net/.test(guard));
 req('C++ runner must reuse one orchestrator',/if\(orchestrator\)return orchestrator/.test(cpp));
 req('C++ runner must reuse one in-flight boot promise',/if\(!runnerPromise\)/.test(cpp)&&/return await runnerPromise/.test(cpp));
-req('C++ must auto-prewarm when course content supports it',/function autoPrewarmIfSupported\(\)/.test(cpp)&&/prewarm\('course-auto'\)/.test(cpp));
+req('C++ must detect supported course content',/function cppCapable\(root\)/.test(cpp)&&/data-adaptive-mode="cpp"/.test(cpp)&&/data-adaptive-mode="dual"/.test(cpp));
+req('C++ must schedule automatic course/content prewarm',/function scheduleAutoPrewarm\(reason\)/.test(cpp)&&/scheduleAutoPrewarm\('course-load'\)/.test(cpp)&&/scheduleAutoPrewarm\('course-content'\)/.test(cpp));
 req('C++ must show preparing/ready state',/Preparing C\+\+ compiler/.test(cpp)&&/C\+\+ ready/.test(cpp));
 req('C++ compile/link/run timing must be measured',/milliseconds:Math\.max\(1,Math\.round\(now\(\)-started\)\)/.test(cpp));
 req('C++ must avoid redundant smoke compilation',!(/CSAI_CPP_OK|smokeTest\(/.test(cpp)));
