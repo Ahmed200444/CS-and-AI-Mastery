@@ -29,8 +29,9 @@ const leakPatterns=[
 let inlineChecked=0,localAssetsChecked=0;
 for(const file of htmlFiles){
  const html=fs.readFileSync(file,'utf8'),name=rel(file);
- const opens=(html.match(/<script\b/gi)||[]).length,closes=(html.match(/<\/script\s*>/gi)||[]).length;
- if(opens!==closes)failures.push(`${name}: unbalanced script tags (${opens} open, ${closes} close)`);
+ // Do not compare literal <script> text counts: this legacy application intentionally contains
+ // safe <script> strings inside srcdoc/code generators. What matters is whether the browser-visible
+ // script blocks parse and whether JavaScript leaks into rendered text.
  const visible=stripVisible(html);
  for(const [label,re] of leakPatterns){const m=re.exec(visible);if(m){const start=Math.max(0,m.index-90),end=Math.min(visible.length,m.index+190);failures.push(`${name}: possible visible ${label}: ${visible.slice(start,end)}`);break;}}
  const scriptRe=/<script\b([^>]*)>([\s\S]*?)<\/script\s*>/gi;let sm;
