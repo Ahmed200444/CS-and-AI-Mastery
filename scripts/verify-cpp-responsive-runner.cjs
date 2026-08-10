@@ -34,6 +34,13 @@ const requiredUi=[
  ['run timeout',/20000,'Your C\+\+ program took too long to run/],
  ['reset recovery',/resetRunner/],
  ['intent prewarm',/function prewarm\(reason\)/],
+ ['automatic course prewarm',/function scheduleAutoPrewarm\(reason\)[\s\S]*prewarm\(reason\|\|'course-load'\)/],
+ ['course-load auto boot',/scheduleAutoPrewarm\('course-load'\)/],
+ ['dynamic content auto prewarm',/scheduleAutoPrewarm\('course-content'\)/],
+ ['manifest network warmup',/fetch\(MANIFEST_URL,\{cache:'force-cache',mode:'cors'\}\)/],
+ ['visible preparing status',/Preparing C\+\+ compiler…/],
+ ['visible ready status',/C\+\+ ready ✓/],
+ ['status API',/status:function\(\)\{return orchestrator\?'ready':runnerPromise\?'warming':'idle';\}/],
  ['shared adaptive runner API',/window\.CSAICppRunner=\{prewarm:prewarm,runSource:runSource/],
  ['adaptive C++ or Dual intent',/data-adaptive-mode=\\?"cpp\\?"[\s\S]*data-adaptive-mode=\\?"dual\\?"/]
 ];
@@ -65,4 +72,4 @@ const inject=netlify.indexOf('node scripts/inject-cpp-responsive-runner.cjs');
 const verify=netlify.indexOf('node scripts/verify-cpp-responsive-runner.cjs');
 if(!(build>=0&&clientCheck>build&&workerCheck>clientCheck&&uiCheck>workerCheck&&inject>uiCheck&&verify>inject))problems.push('Netlify does not build, syntax-check, inject, then verify the direct C++ runner in order');
 if(problems.length)throw new Error('Responsive C++ runner verification failed:\n'+problems.slice(0,120).join('\n'));
-console.log('Responsive C++ runner verification passed: explicit clang++ compilation, direct wasm-ld linking, wasi-run execution, persistent reuse, and C++/Dual intent prewarm are wired on all 54 base course pages.');
+console.log('Responsive C++ runner verification passed: direct clang++ compilation, persistent compiler reuse, automatic course-level prewarm, visible readiness status, and C++/Dual intent prewarm are wired on all 54 base course pages.');
