@@ -1,0 +1,15 @@
+const fs=require('fs');
+const path=require('path');
+const root=process.cwd();
+const indexPath=path.join(root,'index.html');
+const backupPath=path.join(root,'.csai-coursedata-backup.json');
+if(!fs.existsSync(indexPath))throw new Error('index.html missing');
+if(!fs.existsSync(backupPath))throw new Error('coursedata backup missing');
+const backup=JSON.parse(fs.readFileSync(backupPath,'utf8'));
+let html=fs.readFileSync(indexPath,'utf8');
+const re=/(<script\b[^>]*\bid=["']coursedata["'][^>]*>)([\s\S]*?)(<\/script>)/i;
+if(!re.test(html))throw new Error('coursedata script missing after production augmentation');
+html=html.replace(re,(full,open,body,close)=>open+String(backup.content||'')+close);
+fs.writeFileSync(indexPath,html,'utf8');
+fs.rmSync(backupPath,{force:true});
+console.log('Restored legacy coursedata exactly after 57-course catalog augmentation.');
