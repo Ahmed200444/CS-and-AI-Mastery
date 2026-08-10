@@ -9,10 +9,13 @@ const tag='<script src="/assets/primary-language-mode.js?v=20260808-2"></script>
 function inject(file){
   let html=fs.readFileSync(file,'utf8');
   html=html.replace(/\s*<script\s+src=["']\/assets\/primary-language-mode\.js[^>]*><\/script>/gi,'');
-  if(!/<\/body>/i.test(html))throw new Error(`Missing </body> in ${file}`);
-  html=html.replace(/<\/body>/i,`${tag}\n</body>`);
+  const at=html.toLowerCase().lastIndexOf('</body>');
+  if(at<0)throw new Error(`Missing final </body> in ${file}`);
+  html=html.slice(0,at)+tag+'\n'+html.slice(at);
   fs.writeFileSync(file,html,'utf8');
-  if(!html.includes('/assets/primary-language-mode.js?v=20260808-2'))throw new Error(`Language UX injection failed for ${file}`);
+  const injectedAt=html.lastIndexOf('/assets/primary-language-mode.js?v=20260808-2');
+  const finalBody=html.toLowerCase().lastIndexOf('</body>');
+  if(injectedAt<0||injectedAt>finalBody)throw new Error(`Language UX injection failed for ${file}`);
 }
 
 if(!fs.existsSync(indexPath))throw new Error('index.html missing');
@@ -22,4 +25,4 @@ if(!fs.existsSync(coursesDir))throw new Error('courses directory missing after s
 const files=fs.readdirSync(coursesDir).filter(x=>x.endsWith('.html'));
 if(files.length!==54)throw new Error(`Expected 54 course pages, found ${files.length}`);
 files.forEach(name=>inject(path.join(coursesDir,name)));
-console.log(`Injected course language UX runtime into homepage navigation and ${files.length} course pages.`);
+console.log(`Injected course language UX runtime at final body boundaries on homepage and ${files.length} course pages.`);
