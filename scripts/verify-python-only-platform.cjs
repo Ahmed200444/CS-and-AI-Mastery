@@ -32,6 +32,14 @@ const hero=read('assets/adaptive-v4-live.js')+'\n'+read('assets/hero-polish.js')
 if(/C\+\+|Python\s*(?:&|\+|\/)\s*C\+\+|\bboth languages\b|\bDual\b/.test(hero))fail('homepage runtime still contains removed language wording');
 if(!/57/.test(hero))fail('homepage runtime does not preserve 57-course count');
 
+const portfolio=read('assets/portfolio-publish-controls.js');
+if(/C\+\+|\bcpp\b|\bdual\b/i.test(portfolio))fail('exercise/example publisher still contains removed language handling');
+if(/Add a README|data-final-readme|README already added/.test(portfolio))fail('exercise/example publisher still adds duplicate README controls');
+if(!/Publish to GitHub/.test(portfolio))fail('exercise/example publisher lost its single GitHub publish action');
+const projectReadme=read('assets/project-readme-layer.js');
+if(/C\+\+|\bcpp\b|g\+\+|STL data structures|RAII/i.test(projectReadme))fail('Smart README runtime still contains removed language handling');
+if(!/Smart README/.test(projectReadme)||!/Published code \+ recruiter-ready README/.test(projectReadme))fail('Smart README project publishing is incomplete');
+
 const catalog=JSON.parse(read('assets/catalog-data.json'));
 if(!Array.isArray(catalog.courses)||catalog.courses.length!==57)fail(`catalog expected 57 courses, found ${catalog.courses&&catalog.courses.length}`);
 const dataDir=path.join(root,'assets','course-data');
@@ -67,4 +75,4 @@ const visible=index.replace(/<script\b[\s\S]*?<\/script>/gi,' ').replace(/<style
 if(/C\+\+|Python\s*(?:&|\+|\/)\s*C\+\+|\bboth languages\b|\bDual\s+(?:mode|practice|language)/i.test(visible))fail('index.html still exposes removed language text');
 
 if(failures.length){console.error('Python-only platform verification failed:');failures.slice(0,160).forEach(x=>console.error(' - '+x));if(failures.length>160)console.error(` - ... ${failures.length-160} more`);process.exit(1)}
-console.log('Python-only platform verified: 57 courses, one Python runtime, no C++/Dual UI or generated course content, README count corrected, and GitHub/README project publishing preserved.');
+console.log('Python-only platform verified: 57 courses, one Python runtime, no removed-language UI/generated content, clean single publishing controls, Smart README project publishing, and corrected README count.');
