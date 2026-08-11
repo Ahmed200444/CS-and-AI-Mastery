@@ -21,3 +21,5 @@ for(const file of files){
 }
 if(fixed!==58)throw new Error(`Expected index + 57 course pages, fixed ${fixed}`);
 console.log(`Python-only runtime moved to the real final body boundary in ${fixed} HTML files and legacy preview strings were repaired.`);
+require('./inject-study-examples.cjs');
+require('./verify-study-examples.cjs');
