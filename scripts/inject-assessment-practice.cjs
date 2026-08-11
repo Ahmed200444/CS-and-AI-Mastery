@@ -83,6 +83,26 @@ const DSA_MAP={
   'valid parentheses':'valid parentheses'
 };
 
+const codeSignalBankFiles=fs.readdirSync(path.join(root,'assets'))
+  .filter(name=>/^codesignal-dsa-bank-.*\.json$/.test(name))
+  .sort();
+if(codeSignalBankFiles.length!==5)throw new Error(`Expected 5 CodeSignal DSA bank files, found ${codeSignalBankFiles.length}`);
+const codeSignalQuestions=[];
+for(const bankFile of codeSignalBankFiles){
+  const bank=JSON.parse(fs.readFileSync(path.join(root,'assets',bankFile),'utf8'));
+  if(!Array.isArray(bank.questions))throw new Error(`Missing questions array in ${bankFile}`);
+  codeSignalQuestions.push(...bank.questions);
+}
+if(codeSignalQuestions.length!==25)throw new Error(`Expected 25 CodeSignal DSA questions, found ${codeSignalQuestions.length}`);
+const codeSignalById=new Map();
+for(const question of codeSignalQuestions){
+  if(!question||typeof question.id!=='string'||!question.id.startsWith('codesignal-'))throw new Error('Invalid CodeSignal question id');
+  if(codeSignalById.has(question.id))throw new Error(`Duplicate CodeSignal question id: ${question.id}`);
+  if(!question.title||!question.prompt||!question.starter||!question.funcName||!question.solution)throw new Error(`Incomplete CodeSignal question: ${question.id}`);
+  if(!Array.isArray(question.tests)||question.tests.length<2)throw new Error(`CodeSignal question needs at least 2 tests: ${question.id}`);
+  codeSignalById.set(question.id,question);
+}
+
 const PYTHON_COURSES=new Set(['python','oop','dsa','backend','ai-ml','testing','apis','debugging','problem-solving','deep-learning','llms','rag','ai-agents','data-science','computer-vision','nlp','transformers','generative-ai','gans','vaes','diffusion','pytorch','tensorflow','huggingface','mlops','data-engineering','ai-system-design','secure-ai-applications','llm-evaluation-testing']);
 const JS_COURSES=new Set(['web-dev','frontend-dev']);
 const SQL_COURSES=new Set(['sql','databases']);
@@ -97,6 +117,12 @@ function dsaConfig(ex){
   const tests=Array.isArray(ex.tests)?ex.tests:[];
   const testsPy='['+tests.map(t=>`[[${t.argsRepr}], ${t.expectedRepr}]`).join(',')+']';
   return {language:'python',starter:ex.starter||'',fname:ex.funcName||null,tests_py:testsPy,hint:Array.isArray(ex.hints)?ex.hints[0]:'',solution:ex.solution||''};
+}
+function codeSignalConfig(ex){
+  if(!ex)return null;
+  const tests=Array.isArray(ex.tests)?ex.tests:[];
+  const testsPy='['+tests.map(t=>`[[${t.argsRepr}], ${t.expectedRepr}]`).join(',')+']';
+  return {language:'python',starter:ex.starter||'',fname:ex.funcName||null,tests_py:testsPy,hint:ex.hint||'',solution:ex.solution||''};
 }
 
 let injected=0;
@@ -113,6 +139,19 @@ for(const file of fs.readdirSync(coursesDir).filter(f=>f.endsWith('.html'))){
     if(lang==='text')copy.type='scenario-analysis';
     return copy;
   });
+  if(id==='dsa'){
+    for(const question of codeSignalQuestions){
+      items.push({
+        id:question.id,
+        title:`CodeSignal • ${question.title}`,
+        prompt:`${question.prompt}\n\nAssessment-style practice problem. This is an original practice question, not an official assessment question.`,
+        difficulty:Number(question.difficulty)||1,
+        hint:question.hint||'',
+        starter:question.starter,
+        type:'coding-practice'
+      });
+    }
+  }
   const structured={};
   items.forEach((item,index)=>{
     const key=exerciseKey(item,index),title=norm(item.title);
@@ -121,7 +160,13 @@ for(const file of fs.readdirSync(coursesDir).filter(f=>f.endsWith('.html'))){
       if(mapped)structured[key]=pythonConfig(mapped);
     }else if(id==='dsa'){
       const target=DSA_MAP[title];
-      if(target){const dsa=dsaByTitle.get(norm(target));if(dsa)structured[key]=dsaConfig(dsa)}
+      if(target){
+        const dsa=dsaByTitle.get(norm(target));
+        if(dsa)structured[key]=dsaConfig(dsa);
+      }else{
+        const codeSignal=codeSignalById.get(key);
+        if(codeSignal)structured[key]=codeSignalConfig(codeSignal);
+      }
     }
   });
 
@@ -141,4 +186,4 @@ for(const file of fs.readdirSync(coursesDir).filter(f=>f.endsWith('.html'))){
 }
 
 if(injected!==54)throw new Error(`Expected to enhance 54 course pages, enhanced ${injected}`);
-console.log(`Injected assessment-style practice + GitHub publishing into ${injected} static course pages.`);
+console.log(`Injected assessment-style practice + GitHub publishing into ${injected} static course pages; DSA includes ${codeSignalQuestions.length} CodeSignal-style questions.`);
