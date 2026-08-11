@@ -68,6 +68,7 @@ for(const name of pages){
  if(/cpp-runner-ui-worker|primary-language-mode|dual-single-editor-publish|course-language-mode-controller|lesson-language-variants/.test(html))fail(`${name}: removed runtime reference remains`);
  if(/C\+\+|Python\s*(?:&|\+|\/)\s*C\+\+|\.cpp\b/.test(html))fail(`${name}: removed language text remains in generated page`);
  if(/data-lang-mode=["'](?:cpp|dual)|data-adaptive-mode=["'](?:cpp|dual)|data-csai-oa-cpp|data-dual-cpp-editor/.test(html))fail(`${name}: removed language control remains in generated page`);
+ if(/csai-course-first-paint-|csai-course-booting|Loading course…/.test(html))fail(`${name}: legacy blocking course loading cover remains`);
 }
 
 const index=read('index.html');
@@ -77,4 +78,4 @@ const visible=index.replace(/<script\b[\s\S]*?<\/script>/gi,' ').replace(/<style
 if(/C\+\+|Python\s*(?:&|\+|\/)\s*C\+\+|\bboth languages\b|\bDual\s+(?:mode|practice|language)/i.test(visible))fail('index.html still exposes removed language text');
 
 if(failures.length){console.error('Python-only platform verification failed:');failures.slice(0,160).forEach(x=>console.error(' - '+x));if(failures.length>160)console.error(` - ... ${failures.length-160} more`);process.exit(1)}
-console.log('Python-only platform verified: 57 courses, one Python runtime, no removed-language UI/generated content, attached GitHub + README controls for examples/exercises, Smart README project publishing, and corrected README count.');
+console.log('Python-only platform verified: 57 courses, one Python runtime, no removed-language UI/generated content, immediate static course first paint, attached GitHub + README controls for examples/exercises, Smart README project publishing, and corrected README count.');
