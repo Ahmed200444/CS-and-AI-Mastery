@@ -1,0 +1,80 @@
+{
+  "category": "Mixed online assessment",
+  "questions": [
+    {
+      "id": "codesignal-top-k-frequent",
+      "title": "Top K Frequent Values",
+      "prompt": "Return the k most frequent integers in nums. If two values have the same frequency, the smaller value comes first.",
+      "difficulty": 2,
+      "hint": "Count with a dictionary or Counter, then order by frequency descending and value ascending.",
+      "starter": "def top_k_frequent(nums, k):\n    pass\n",
+      "funcName": "top_k_frequent",
+      "tests": [
+        {"argsRepr": "[1,1,1,2,2,3], 2", "expectedRepr": "[1,2]"},
+        {"argsRepr": "[4,4,5,5,6], 2", "expectedRepr": "[4,5]"},
+        {"argsRepr": "[9], 1", "expectedRepr": "[9]"}
+      ],
+      "solution": "def top_k_frequent(nums, k):\n    from collections import Counter\n    counts = Counter(nums)\n    ordered = sorted(counts, key=lambda x: (-counts[x], x))\n    return ordered[:k]\n"
+    },
+    {
+      "id": "codesignal-task-conflicts",
+      "title": "Task Conflict Pairs",
+      "prompt": "Given task intervals [start, end], count pairs of tasks whose time ranges overlap. Intervals that only touch at an endpoint do not overlap.",
+      "difficulty": 2,
+      "hint": "Sort by start time. For each interval, later intervals cannot overlap once their start is at least the current end.",
+      "starter": "def task_conflicts(intervals):\n    pass\n",
+      "funcName": "task_conflicts",
+      "tests": [
+        {"argsRepr": "[[1,4],[3,5],[5,7]]", "expectedRepr": "1"},
+        {"argsRepr": "[[0,10],[1,2],[3,4]]", "expectedRepr": "2"},
+        {"argsRepr": "[]", "expectedRepr": "0"}
+      ],
+      "solution": "def task_conflicts(intervals):\n    intervals = sorted(intervals)\n    total = 0\n    for i in range(len(intervals)):\n        for j in range(i + 1, len(intervals)):\n            if intervals[j][0] >= intervals[i][1]:\n                break\n            total += 1\n    return total\n"
+    },
+    {
+      "id": "codesignal-battery-schedule",
+      "title": "Battery Job Scheduler",
+      "prompt": "Each job is [duration, battery_cost]. You have a fixed battery budget. Jobs may be completed in any order and only battery_cost reduces the budget. Return the maximum number of jobs you can finish.",
+      "difficulty": 2,
+      "hint": "To maximize how many jobs fit in the budget, choose lower battery costs first.",
+      "starter": "def battery_schedule(jobs, battery):\n    pass\n",
+      "funcName": "battery_schedule",
+      "tests": [
+        {"argsRepr": "[[5,4],[2,2],[3,3]], 5", "expectedRepr": "2"},
+        {"argsRepr": "[[1,5],[2,6]], 4", "expectedRepr": "0"},
+        {"argsRepr": "[[9,1],[2,1],[3,1]], 2", "expectedRepr": "2"}
+      ],
+      "solution": "def battery_schedule(jobs, battery):\n    used = 0\n    completed = 0\n    for duration, cost in sorted(jobs, key=lambda job: (job[1], job[0])):\n        if used + cost <= battery:\n            used += cost\n            completed += 1\n        else:\n            break\n    return completed\n"
+    },
+    {
+      "id": "codesignal-group-anagrams",
+      "title": "Group Anagram Sizes",
+      "prompt": "Group words that are anagrams of one another and return only the group sizes, sorted from largest to smallest.",
+      "difficulty": 1,
+      "hint": "A sorted word can be used as a dictionary key for its anagram group.",
+      "starter": "def group_anagram_sizes(words):\n    pass\n",
+      "funcName": "group_anagram_sizes",
+      "tests": [
+        {"argsRepr": "['eat','tea','tan','ate','nat','bat']", "expectedRepr": "[3,2,1]"},
+        {"argsRepr": "['a','a','b']", "expectedRepr": "[2,1]"},
+        {"argsRepr": "[]", "expectedRepr": "[]"}
+      ],
+      "solution": "def group_anagram_sizes(words):\n    groups = {}\n    for word in words:\n        key = ''.join(sorted(word))\n        groups[key] = groups.get(key, 0) + 1\n    return sorted(groups.values(), reverse=True)\n"
+    },
+    {
+      "id": "codesignal-window-max-sum",
+      "title": "Fixed Window Maximum Sum",
+      "prompt": "Return the largest sum of any contiguous subarray of exactly k elements. Return None when k is invalid for nums.",
+      "difficulty": 1,
+      "hint": "Compute the first window once, then subtract the outgoing value and add the incoming value.",
+      "starter": "def window_max_sum(nums, k):\n    pass\n",
+      "funcName": "window_max_sum",
+      "tests": [
+        {"argsRepr": "[2,1,5,1,3,2], 3", "expectedRepr": "9"},
+        {"argsRepr": "[1,-2,3,4], 2", "expectedRepr": "7"},
+        {"argsRepr": "[1,2], 3", "expectedRepr": "None"}
+      ],
+      "solution": "def window_max_sum(nums, k):\n    if k <= 0 or k > len(nums):\n        return None\n    current = sum(nums[:k])\n    best = current\n    for i in range(k, len(nums)):\n        current += nums[i] - nums[i-k]\n        best = max(best, current)\n    return best\n"
+    }
+  ]
+}
