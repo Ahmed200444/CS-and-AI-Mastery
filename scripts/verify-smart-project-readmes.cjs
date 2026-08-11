@@ -24,8 +24,14 @@ const forbidden=[
   'Explain the main modules/components and how data or control flows through them.',
   'Provide the exact install/build/run commands used for the finished project.',
   'Describe the evidence you used, how you diagnosed the problem, and how you fixed it.',
-  'List 2–4 concrete improvements.'
+  'List 2–4 concrete improvements.',
+  'C++',
+  "lang==='cpp'",
+  "lang==='c++'",
+  'g++ -std=',
+  'STL data structures',
+  'RAII / smart-pointer ownership'
 ];
-for(const marker of forbidden){if(src.includes(marker))throw new Error('Legacy manual README placeholder still present: '+marker)}
+for(const marker of forbidden){if(src.includes(marker))throw new Error('Obsolete Smart README content still present: '+marker)}
 if(!/await write\(s,repository,readmePath,generated/.test(src))throw new Error('GitHub publish does not write the generated README');
-console.log('Smart project README verification passed: code, requirements, runtime output, project checks, run instructions, and GitHub README publishing are wired.');
+console.log('Smart project README verification passed: code, requirements, runtime output, project checks, run instructions, and GitHub README publishing are wired without removed-language handling.');
