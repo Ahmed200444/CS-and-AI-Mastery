@@ -5,7 +5,7 @@ var CLIENT_URL='/assets/emception-vite/cpp-client.mjs?v=20260810-7';
 var TOOLCHAIN_WORKER_URL='/assets/emception-vite/cpp-toolchain-worker.mjs?v=20260810-7';
 var MANIFEST_URL='https://cdn.jsdelivr.net/npm/emception@3.8.0/cdn/manifest.json';
 var clientPromise=null,orchestrator=null,toolWorker=null,runnerPromise=null,active=null,seq=0;
-var warmStartedAt=0,warmReadyAt=0,warmReason='';
+var warmStartedAt=0,warmReadyAt=0,warmReason='',networkWarmPromise=null,autoWarmTimer=null,statusTicker=null;
 
 function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function cppVariant(button){return button&&button.closest?button.closest('[data-lang-variant="cpp"]'):null;}
@@ -18,12 +18,31 @@ function timeout(promise,ms,message){return new Promise(function(resolve,reject)
 function toolError(result,fallback){return String(result&&result.stderr||'')||String(result&&result.stdout||'')||fallback;}
 function now(){return typeof performance!=='undefined'&&performance.now?performance.now():Date.now();}
 function timingNote(variant,text){if(!variant)return;var note=variant.querySelector('.csai-example-note');if(note)note.textContent=text;}
+function cppCapable(root){root=root||document;return !!(root.querySelector&&root.querySelector('[data-lang-mode="cpp"],[data-lang-mode="dual"],[data-lang-variant="cpp"],[data-adaptive-mode="cpp"],[data-adaptive-mode="dual"]'));}
+function statusHosts(root){root=root||document;var seen=[],hosts=[];var nodes=root.querySelectorAll?root.querySelectorAll('[data-lang-mode="cpp"],[data-lang-mode="dual"],[data-adaptive-mode="cpp"],[data-adaptive-mode="dual"]'):[];Array.prototype.forEach.call(nodes,function(node){var host=node.parentElement||node;if(seen.indexOf(host)<0){seen.push(host);hosts.push(host);}});return hosts;}
+function ensureStatus(root){statusHosts(root).forEach(function(host){if(host.querySelector('[data-csai-cpp-status]'))return;var s=document.createElement('span');s.setAttribute('data-csai-cpp-status','1');s.style.cssText='display:inline-flex;align-items:center;gap:6px;margin-left:8px;padding:6px 9px;border:1px solid rgba(128,145,180,.22);border-radius:999px;font-size:11px;font-weight:800;line-height:1;color:var(--sub,#9aa7ba);background:rgba(255,255,255,.035);white-space:nowrap;vertical-align:middle;';s.textContent=orchestrator?'C++ ready ✓':runnerPromise?'Preparing C++ compiler…':'C++ prepares automatically';host.appendChild(s);});}
+function setStatus(state,text){ensureStatus(document);Array.prototype.forEach.call(document.querySelectorAll('[data-csai-cpp-status]'),function(s){s.textContent=text;s.setAttribute('data-state',state);if(state==='ready'){s.style.color='#72d9a6';s.style.borderColor='rgba(114,217,166,.32)';s.style.background='rgba(114,217,166,.08)';}else if(state==='error'){s.style.color='#ff9aa1';s.style.borderColor='rgba(255,154,161,.30)';s.style.background='rgba(255,154,161,.07)';}else{s.style.color='var(--sub,#9aa7ba)';s.style.borderColor='rgba(128,145,180,.22)';s.style.background='rgba(255,255,255,.035)';}});}
+function stopStatusTicker(){if(statusTicker){clearInterval(statusTicker);statusTicker=null;}}
+function startStatusTicker(){stopStatusTicker();statusTicker=setInterval(function(){if(!runnerPromise||orchestrator){stopStatusTicker();return;}var sec=Math.max(1,Math.round((now()-warmStartedAt)/1000));setStatus('warming','Preparing C++ compiler… '+sec+'s');},1000);}
+function warmNetwork(){
+ if(networkWarmPromise)return networkWarmPromise;
+ networkWarmPromise=(async function(){
+  try{
+   if(!document.querySelector('link[data-csai-cpp-preconnect]')){var l=document.createElement('link');l.rel='preconnect';l.href='https://cdn.jsdelivr.net';l.crossOrigin='anonymous';l.setAttribute('data-csai-cpp-preconnect','1');document.head.appendChild(l);}
+   await fetch(MANIFEST_URL,{cache:'force-cache',mode:'cors'}).catch(function(){return null;});
+  }catch(e){}
+ })();
+ return networkWarmPromise;
+}
 
 async function resetRunner(){
  var old=orchestrator,w=toolWorker;
  orchestrator=null;toolWorker=null;runnerPromise=null;warmStartedAt=0;warmReadyAt=0;warmReason='';
+ document.documentElement.removeAttribute('data-csai-cpp-ready');document.documentElement.removeAttribute('data-csai-cpp-warming');
+ stopStatusTicker();
  try{if(old&&typeof old.dispose==='function')await old.dispose(new Error('C++ runner reset'));}catch(e){}
  try{if(w)w.terminate();}catch(e){}
+ if(cppCapable(document))setStatus('idle','C++ prepares automatically');
 }
 async function getClient(){
  if(!clientPromise){clientPromise=import(absolute(CLIENT_URL)).then(function(mod){
@@ -48,7 +67,10 @@ async function getRunner(outNode){
  if(orchestrator)return orchestrator;
  if(!runnerPromise){runnerPromise=(async function(){
   if(!warmStartedAt)warmStartedAt=now();
+  document.documentElement.setAttribute('data-csai-cpp-warming','1');
+  setStatus('warming','Preparing C++ compiler…');startStatusTicker();
   progress(outNode,'Loading the C++ compiler…');
+  await warmNetwork();
   var mod=await getClient();
   var worker=new Worker(absolute(TOOLCHAIN_WORKER_URL),{type:'module',name:'csai-emception-toolchain'});
   var orch=new mod.WorkerOrchestrator(mod.workerTransport(worker),{onTransportError:function(error){console.error('[C++ runner]',error);}});
@@ -56,18 +78,27 @@ async function getRunner(outNode){
   try{
    await timeout(orch.boot(MANIFEST_URL,{origin:window.location.origin}),45000,'The C++ compiler took too long to initialize.');
    warmReadyAt=now();
+   stopStatusTicker();
+   document.documentElement.removeAttribute('data-csai-cpp-warming');
    document.documentElement.setAttribute('data-csai-cpp-ready','1');
+   setStatus('ready','C++ ready ✓');
    window.dispatchEvent(new CustomEvent('csai-cpp-runner-ready',{detail:{milliseconds:Math.round(warmReadyAt-warmStartedAt),reason:warmReason||'run'}}));
    return orch;
-  }catch(error){await resetRunner();throw error;}
+  }catch(error){setStatus('error','C++ preparation failed — retry');await resetRunner();throw error;}
  })();}
  try{return await runnerPromise;}catch(error){runnerPromise=null;throw error;}
 }
 function prewarm(reason){
- if(orchestrator||runnerPromise)return runnerPromise||Promise.resolve(orchestrator);
+ if(orchestrator){setStatus('ready','C++ ready ✓');return Promise.resolve(orchestrator);}
+ if(runnerPromise)return runnerPromise;
  warmReason=String(reason||'intent');warmStartedAt=now();
- document.documentElement.setAttribute('data-csai-cpp-warming','1');
- return getRunner(null).then(function(orch){document.documentElement.removeAttribute('data-csai-cpp-warming');return orch;},function(error){document.documentElement.removeAttribute('data-csai-cpp-warming');console.warn('[C++ runner prewarm]',error);return null;});
+ return getRunner(null).then(function(orch){return orch;},function(error){console.warn('[C++ runner prewarm]',error);return null;});
+}
+function scheduleAutoPrewarm(reason){
+ if(orchestrator||runnerPromise||autoWarmTimer||!cppCapable(document))return;
+ ensureStatus(document);setStatus('warming','Preparing C++ compiler…');
+ warmNetwork();
+ autoWarmTimer=setTimeout(function(){autoWarmTimer=null;prewarm(reason||'course-load');},180);
 }
 async function runSource(code,outNode){
  var started=now(),wasWarm=!!orchestrator;
@@ -88,7 +119,7 @@ async function runSource(code,outNode){
 async function runCode(button,variant){
  var outNode=outputFor(variant),code=codeFor(variant);if(!outNode||!code.trim())return;
  if(active){progress(outNode,'Another C++ example is already running. Wait for it to finish, then press Run example.');return;}
- var token='cpp-'+(++seq);active=token;button.disabled=true;button.textContent='Running C++…';
+ var token='cpp-'+(++seq);active=token;button.disabled=true;button.textContent=orchestrator?'Running C++…':'Preparing C++…';
  try{
   var result=await runSource(code,outNode);if(active!==token)return;
   render(outNode,result.error?'Run error':'Output',result.text||'(no output)',result.error);
@@ -110,6 +141,16 @@ document.addEventListener('click',function(event){
  var variant=cppVariant(button);if(!variant)return;
  event.preventDefault();event.stopPropagation();if(event.stopImmediatePropagation)event.stopImmediatePropagation();runCode(button,variant);
 },true);
-window.CSAICppRunner={prewarm:prewarm,runSource:runSource,isReady:function(){return!!orchestrator;},warmupMilliseconds:function(){return warmReadyAt&&warmStartedAt?Math.round(warmReadyAt-warmStartedAt):null;}};
+function observeCppCapability(){
+ var obs=new MutationObserver(function(records){for(var i=0;i<records.length;i++){if(records[i].addedNodes&&records[i].addedNodes.length){ensureStatus(document);scheduleAutoPrewarm('course-content');break;}}});
+ obs.observe(document.documentElement,{subtree:true,childList:true});
+}
+function autoBoot(){
+ ensureStatus(document);
+ if(cppCapable(document))scheduleAutoPrewarm('course-load');
+ observeCppCapability();
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',autoBoot,{once:true});else autoBoot();
+window.CSAICppRunner={prewarm:prewarm,runSource:runSource,isReady:function(){return!!orchestrator;},warmupMilliseconds:function(){return warmReadyAt&&warmStartedAt?Math.round(warmReadyAt-warmStartedAt):null;},status:function(){return orchestrator?'ready':runnerPromise?'warming':'idle';}};
 window.addEventListener('pagehide',function(){active=null;resetRunner();});
 })();

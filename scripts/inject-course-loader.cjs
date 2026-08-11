@@ -131,16 +131,20 @@ for (const course of orderedCourses) {
 }
 console.log(`Ordered ${orderedCourses.length} courses; exported lightweight catalog plus ${orderedCourses.length} full course files`);
 
-html = html.replace(new RegExp(`<style\\b[^>]*\\bid=["']${catalogStyleId}["'][^>]*>[\\s\\S]*?<\\/style>\\s*`, 'gi'), '');
-const closingHead = html.toLowerCase().lastIndexOf('</head>');
-html = closingHead >= 0 ? `${html.slice(0, closingHead)}${catalogStyle}\n${html.slice(closingHead)}` : `${catalogStyle}\n${html}`;
+// The document's real </head> is the first closing head tag. Later occurrences may exist
+// inside JavaScript strings that build srcdoc documents and must never be used as injection points.
+html = html.replace(new RegExp(`^([\\s\\S]*?<head\\b[^>]*>)([\\s\\S]*?)<style\\b[^>]*\\bid=["']${catalogStyleId}["'][^>]*>[\\s\\S]*?<\\/style>\\s*`, 'i'), function(_,prefix,headContent){return prefix+headContent;});
+const closingHead = html.toLowerCase().indexOf('</head>');
+if(closingHead<0)throw new Error('Real document closing </head> is missing');
+html = `${html.slice(0, closingHead)}${catalogStyle}\n${html.slice(closingHead)}`;
 
 for (const asset of ['course-practice-routing', 'course-route-visibility-guard', 'catalog-recovery', 'catalog-course-viewer']) {
   html = html.replace(new RegExp(`<script[^>]*src=["']\\/assets\\/${asset}\\.js[^"']*["'][^>]*><\\/script>\\s*`, 'gi'), '');
 }
 const closingBody = html.toLowerCase().lastIndexOf('</body>');
+if(closingBody<0)throw new Error('Real document closing </body> is missing');
 const runtimeTags = `${loaderTag}\n${guardTag}\n${catalogTag}\n${viewerTag}`;
-html = closingBody >= 0 ? `${html.slice(0, closingBody)}${runtimeTags}\n${html.slice(closingBody)}` : `${html}\n${runtimeTags}\n`;
+html = `${html.slice(0, closingBody)}${runtimeTags}\n${html.slice(closingBody)}`;
 fs.writeFileSync(indexPath, html, 'utf8');
 
 const result = fs.readFileSync(indexPath, 'utf8');
@@ -149,7 +153,7 @@ if ((result.match(/\/assets\/course-practice-routing\.js/g) || []).length !== 1)
 if ((result.match(/\/assets\/course-route-visibility-guard\.js/g) || []).length !== 1) throw new Error('Expected exactly one course route guard');
 if ((result.match(/\/assets\/catalog-recovery\.js/g) || []).length !== 1) throw new Error('Expected exactly one catalog recovery script');
 if ((result.match(/\/assets\/catalog-course-viewer\.js/g) || []).length !== 1) throw new Error('Expected exactly one direct course viewer');
-if ((result.match(new RegExp(`id=["']${catalogStyleId}["']`, 'g')) || []).length !== 1) throw new Error('Expected exactly one catalog select style');
+if ((result.match(new RegExp(`id=["']${catalogStyleId}["']`, 'g')) || []).length !== 1) throw new Error('Expected exactly one catalog select style in the real document head');
 if (!Array.isArray(generatedCatalog.courses) || generatedCatalog.courses.length !== orderedCourses.length) throw new Error('Generated catalog data does not match coursedata');
 if (generatedCatalog.courses.some(course => Object.prototype.hasOwnProperty.call(course, 'lessons'))) throw new Error('Catalog data is not lightweight');
 for (const course of orderedCourses) {
@@ -158,4 +162,4 @@ for (const course of orderedCourses) {
   const full = JSON.parse(fs.readFileSync(fullPath, 'utf8'));
   if (!full || full.id !== course.id) throw new Error(`Invalid generated course file: ${course.id}`);
 }
-console.log(`Injected direct viewer; generated ${generatedCatalog.courses.length} catalog entries and ${orderedCourses.length} course files`);
+console.log(`Injected direct viewer; generated ${generatedCatalog.courses.length} catalog entries and ${orderedCourses.length} course files without touching nested srcdoc markup.`);
