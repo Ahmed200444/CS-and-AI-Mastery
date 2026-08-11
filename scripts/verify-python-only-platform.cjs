@@ -34,7 +34,7 @@ if(!/57/.test(hero))fail('homepage runtime does not preserve 57-course count');
 
 const portfolio=read('assets/portfolio-publish-controls.js');
 if(/C\+\+|\bcpp\b|\bdual\b/i.test(portfolio))fail('exercise/example publisher still contains removed language handling');
-if(/Add a README|data-final-readme|README already added/.test(portfolio))fail('exercise/example publisher still adds duplicate README controls');
+if(/Add a README|README already added|readme\.textContent/.test(portfolio))fail('exercise/example publisher still creates duplicate README controls');
 if(!/Publish to GitHub/.test(portfolio))fail('exercise/example publisher lost its single GitHub publish action');
 const projectReadme=read('assets/project-readme-layer.js');
 if(/C\+\+|\bcpp\b|g\+\+|STL data structures|RAII/i.test(projectReadme))fail('Smart README runtime still contains removed language handling');
