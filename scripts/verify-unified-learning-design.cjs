@@ -25,7 +25,7 @@ if (!fs.existsSync(courseDir)) {
   fail('generated courses directory missing');
 } else {
   const pages = fs.readdirSync(courseDir).filter(f=>f.endsWith('.html'));
-  if (pages.length < 54) fail(`expected at least 54 generated course pages, found ${pages.length}`);
+  if (pages.length !== 57) fail(`expected 57 generated course pages, found ${pages.length}`);
   for (const file of pages) {
     const html = fs.readFileSync(path.join(courseDir,file),'utf8');
     if (count(html,'../assets/unified-learning-design.css') !== 1) fail(`${file}: missing or duplicate unified stylesheet`);
@@ -39,4 +39,4 @@ if (failures.length) {
   failures.forEach(f=>console.error(` - ${f}`));
   process.exit(1);
 }
-console.log('Unified learning design verification passed: index path UI and generated course pages are wired consistently.');
+console.log('Unified learning design verification passed across 57 generated course pages.');
