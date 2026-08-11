@@ -22,7 +22,7 @@ const heroCssCourse = '../assets/hero-polish.css';
 const heroJsCourse = '../assets/hero-polish.js';
 const START = '<!-- csai-unified-design:start -->';
 const END = '<!-- csai-unified-design:end -->';
-const V4 = '20260811-hero-polish-1';
+const V4 = '20260811-hero-polish-2';
 
 [indexPath, path.join(root, cssRelRoot), path.join(root, jsRelRoot), path.join(root, productCssRoot), path.join(root, productJsRoot), path.join(root, liveCssRoot), path.join(root, liveJsRoot), path.join(root, heroCssRoot), path.join(root, heroJsRoot)].forEach(p => {
   if (!fs.existsSync(p)) throw new Error(`${path.relative(root,p)} missing`);
