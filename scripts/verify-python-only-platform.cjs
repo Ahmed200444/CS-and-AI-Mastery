@@ -34,8 +34,9 @@ if(!/57/.test(hero))fail('homepage runtime does not preserve 57-course count');
 
 const portfolio=read('assets/portfolio-publish-controls.js');
 if(/C\+\+|\bcpp\b|\bdual\b/i.test(portfolio))fail('exercise/example publisher still contains removed language handling');
-if(/Add a README|README already added|readme\.textContent/.test(portfolio))fail('exercise/example publisher still creates duplicate README controls');
-if(!/Publish to GitHub/.test(portfolio))fail('exercise/example publisher lost its single GitHub publish action');
+for(const marker of ['Publish to GitHub','Add a README','data-final-publish','data-final-readme','requirePath:isReadme?d.codePath:undefined','function readme(d)'])if(!portfolio.includes(marker))fail(`exercise/example publishing control missing: ${marker}`);
+if(!portfolio.includes("root.querySelector('[data-final-readme]')"))fail('README controls are not deduplicated per item');
+if(!portfolio.includes("existing.insertAdjacentElement('afterend',readmeBtn)"))fail('README control is not attached beside its item publish button');
 const projectReadme=read('assets/project-readme-layer.js');
 if(/C\+\+|\bcpp\b|g\+\+|STL data structures|RAII/i.test(projectReadme))fail('Smart README runtime still contains removed language handling');
 if(!/Smart README/.test(projectReadme)||!/Published code \+ recruiter-ready README/.test(projectReadme))fail('Smart README project publishing is incomplete');
@@ -63,6 +64,7 @@ for(const name of pages){
  if(!html.includes('runner-performance-guard.js'))fail(`${name}: Python performance guard missing`);
  if(!html.includes('python-only-ui.js'))fail(`${name}: Python-only UI guard missing`);
  if(!html.includes('project-readme-layer.js'))fail(`${name}: project README publishing missing`);
+ if(!html.includes('portfolio-publish-controls.js'))fail(`${name}: example/exercise GitHub publishing missing`);
  if(/cpp-runner-ui-worker|primary-language-mode|dual-single-editor-publish|course-language-mode-controller|lesson-language-variants/.test(html))fail(`${name}: removed runtime reference remains`);
  if(/C\+\+|Python\s*(?:&|\+|\/)\s*C\+\+|\.cpp\b/.test(html))fail(`${name}: removed language text remains in generated page`);
  if(/data-lang-mode=["'](?:cpp|dual)|data-adaptive-mode=["'](?:cpp|dual)|data-csai-oa-cpp|data-dual-cpp-editor/.test(html))fail(`${name}: removed language control remains in generated page`);
@@ -75,4 +77,4 @@ const visible=index.replace(/<script\b[\s\S]*?<\/script>/gi,' ').replace(/<style
 if(/C\+\+|Python\s*(?:&|\+|\/)\s*C\+\+|\bboth languages\b|\bDual\s+(?:mode|practice|language)/i.test(visible))fail('index.html still exposes removed language text');
 
 if(failures.length){console.error('Python-only platform verification failed:');failures.slice(0,160).forEach(x=>console.error(' - '+x));if(failures.length>160)console.error(` - ... ${failures.length-160} more`);process.exit(1)}
-console.log('Python-only platform verified: 57 courses, one Python runtime, no removed-language UI/generated content, clean single publishing controls, Smart README project publishing, and corrected README count.');
+console.log('Python-only platform verified: 57 courses, one Python runtime, no removed-language UI/generated content, attached GitHub + README controls for examples/exercises, Smart README project publishing, and corrected README count.');
