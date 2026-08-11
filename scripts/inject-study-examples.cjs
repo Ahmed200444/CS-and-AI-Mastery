@@ -3,7 +3,7 @@ const path=require('path');
 const root=process.cwd();
 const indexPath=path.join(root,'index.html');
 const coursesDir=path.join(root,'courses');
-const tag='<script src="/assets/study-examples.js?v=20260811-1" defer></script>';
+const tag='<script src="/assets/study-examples.js?v=20260811-2" defer></script>';
 const files=[indexPath];
 if(!fs.existsSync(coursesDir))throw new Error('courses directory missing before study-example injection');
 for(const name of fs.readdirSync(coursesDir).filter(x=>x.endsWith('.html')))files.push(path.join(coursesDir,name));
