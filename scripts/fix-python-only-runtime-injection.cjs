@@ -10,14 +10,15 @@ let fixed=0;
 for(const file of files){
  let html=fs.readFileSync(file,'utf8');
  html=html.replace(/\s*<script\b[^>]*src=["'][^"']*\/assets\/python-only-ui\.js[^"']*["'][^>]*><\/script>\s*/gi,'\n');
- // A previous first-match injection could land inside a legacy srcdoc string.
  html=html.replace(/'\s*\n\s*<\/body><\/html>'/g,"'</body></html>'");
  html=html.replace(/"\s*\n\s*<\/body><\/html>"/g,'"</body></html>"');
  const isCourse=path.dirname(file)===courses;
  if(isCourse){
-  // Keep exactly one lightweight shared Python runner and remove the old single-example runtimes.
+  // One shared Python runner only.
   html=html.replace(/\s*<script\b[^>]*src=["'][^"']*\/assets\/adaptive-practice-layer\.js[^"']*["'][^>]*><\/script>\s*/gi,'\n');
-  html=html.replace(/\s*<script\b[^>]*src=["'][^"']*\/assets\/(?:runnable-lesson-example-fixes|lesson-example-runner|lesson-example-runner-guard)\.js[^"']*["'][^>]*><\/script>\s*/gi,'\n');
+  // Remove obsolete lesson/example systems that duplicate the new 5–8 study cards
+  // and cause large DOM bursts / observer churn on course startup.
+  html=html.replace(/\s*<script\b[^>]*src=["'][^"']*\/assets\/(?:runnable-lesson-example-fixes|lesson-example-runner|lesson-example-runner-guard|evergreen-learning-engine|evergreen-review-navigation|smart-evergreen-review|example-learning-tools|practice-publish-completer)\.js[^"']*["'][^>]*><\/script>\s*/gi,'\n');
  }
  const at=html.toLowerCase().lastIndexOf('</body>');
  if(at<0)throw new Error(`Final </body> missing in ${path.relative(root,file)}`);
@@ -26,6 +27,6 @@ for(const file of files){
  fs.writeFileSync(file,html,'utf8');fixed++;
 }
 if(fixed!==58)throw new Error(`Expected index + 57 course pages, fixed ${fixed}`);
-console.log(`Python-only runtime normalized across ${fixed} HTML files; course pages now use one lightweight cache-busted Python runner.`);
+console.log(`Python-only runtime normalized across ${fixed} HTML files; redundant legacy lesson/example runtimes removed from course pages.`);
 require('./inject-study-examples.cjs');
 require('./verify-study-examples.cjs');
