@@ -3,9 +3,9 @@
 CS & AI Mastery is an interactive learning platform for building practical computer science, software engineering, and AI skills. It is designed around learning a concept, seeing it work, practicing it, reviewing it later, and turning completed work into a clean GitHub portfolio.
 
 ## What the platform includes
-- 54 generated course pages across core CS, software engineering, and AI topics.
+- 57 generated course pages across core CS, software engineering, and AI topics.
 - Structured lessons with explanations, examples, review tools, exercises, and projects.
-- Browser-based execution for supported Python, C++, JavaScript, SQL, and HTML learning activities.
+- Browser-based execution for supported Python, JavaScript, SQL, and HTML learning activities.
 - Safe simulation and validation guidance for infrastructure topics that should not execute real system or cloud commands in a learning browser.
 - Practice and project workspaces with Run, Check/Submit, Reset, Reveal, and GitHub publishing tools where appropriate.
 - Review states and recurring mastery tools for returning to material later.
@@ -35,7 +35,7 @@ student-code/
 - `netlify/functions/` — server-side GitHub OAuth/session and publishing endpoints.
 - `tests/` — repository contracts and final quality checks.
 - `student-code/` — completed practice and portfolio submissions.
-- `courses/` — generated during the production build and verified as a 54-course set.
+- `courses/` — generated during the production build and verified as a 57-course set.
 
 ## Development and verification
 Requirements: Node.js 20 or newer.
