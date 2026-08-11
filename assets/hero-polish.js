@@ -1,6 +1,11 @@
 (function(){
 'use strict';
 
+function removeSidebarWorkspaceCard(){
+  var card=document.querySelector('.av4-side-foot');
+  if(card)card.remove();
+}
+
 function decorateHero(){
   var hero=document.querySelector('#hub .av4-hero');
   if(!hero)return false;
@@ -30,14 +35,19 @@ function decorateHero(){
 }
 
 function boot(){
+  removeSidebarWorkspaceCard();
   decorateHero();
   var tries=0;
   var timer=setInterval(function(){
     tries++;
+    removeSidebarWorkspaceCard();
     if(decorateHero()||tries>20)clearInterval(timer);
   },100);
   var observer=new MutationObserver(function(records){
-    if(records.some(function(r){return r.addedNodes&&r.addedNodes.length;}))decorateHero();
+    if(records.some(function(r){return r.addedNodes&&r.addedNodes.length;})){
+      removeSidebarWorkspaceCard();
+      decorateHero();
+    }
   });
   observer.observe(document.documentElement,{childList:true,subtree:true});
 }
