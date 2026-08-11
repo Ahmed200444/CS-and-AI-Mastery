@@ -23,8 +23,8 @@ function decorateHero(){
         '<span class="av4-code-line av4-code-indent"><span class="av4-code-kw">return</span> result</span>'+
         '<span class="av4-code-line"><span class="av4-code-comment"># learn · test · build</span></span>'+
       '</div>'+
-      '<span class="av4-code-cpp">C++ READY</span>'+
-      '<div class="av4-code-status"><span class="av4-code-ready"></span><b>Python ready</b><span>•</span><span>C++ warmed</span><span class="av4-code-run">Run ↵</span></div>'+
+      '<span class="av4-code-cpp">PYTHON READY</span>'+
+      '<div class="av4-code-status"><span class="av4-code-ready"></span><b>Python ready</b><span>•</span><span>Runner cached</span><span class="av4-code-run">Run ↵</span></div>'+
     '</div>';
   return true;
 }
@@ -32,16 +32,10 @@ function decorateHero(){
 function boot(){
   decorateHero();
   var tries=0;
-  var timer=setInterval(function(){
-    tries++;
-    if(decorateHero()||tries>20)clearInterval(timer);
-  },100);
-  var observer=new MutationObserver(function(records){
-    if(records.some(function(r){return r.addedNodes&&r.addedNodes.length;}))decorateHero();
-  });
+  var timer=setInterval(function(){tries++;if(decorateHero()||tries>20)clearInterval(timer);},100);
+  var observer=new MutationObserver(function(records){if(records.some(function(r){return r.addedNodes&&r.addedNodes.length;}))decorateHero();});
   observer.observe(document.documentElement,{childList:true,subtree:true});
 }
 
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});
-else boot();
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
