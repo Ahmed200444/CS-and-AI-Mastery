@@ -13,7 +13,8 @@ function cleanText(v){return String(v==null?'':v)
  .replace(/C\s*\/\s*C\+\+/gi,'Python')
  .replace(/C\+\+/g,'Python')
  .replace(/\.cpp\b/gi,'.py')
- .replace(/\bboth languages\b/gi,'Python');}
+ .replace(/\bboth languages\b/gi,'Python')
+ .replace(/\bDual\b/g,'Python');}
 function looksCpp(v){return /#include\s*[<"]|\bstd::|\bcout\s*<<|\bcin\s*>>|\busing\s+namespace\s+std\b|\bvector\s*<|\bunique_ptr\s*</.test(String(v||''));}
 function pyExample(lesson){
  const title=String(lesson&&lesson.title||'Lesson example'),t=title.toLowerCase(),concepts=Array.isArray(lesson&&lesson.concepts)?lesson.concepts:[];
@@ -39,7 +40,7 @@ function convertValue(value,ctx){
  if(!value||typeof value!=='object')return typeof value==='string'?cleanText(value):value;
  const out={};
  for(const [k,v] of Object.entries(value)){
-  if((k==='language'||k==='defaultLanguage')&&/^(cpp|c\+\+)$/i.test(String(v||''))){out[k]='python';continue;}
+  if((k==='language'||k==='defaultLanguage')&&/^(cpp|c\+\+|dual)$/i.test(String(v||''))){out[k]='python';continue;}
   if(k==='starter'&&typeof v==='string'&&looksCpp(v)){out[k]='# '+cleanText(value.title||ctx&&ctx.title||'Project')+'\n# Build your Python solution here.\n\nprint("Project workspace ready")\n';continue;}
   out[k]=convertValue(v,value);
  }
@@ -49,18 +50,27 @@ function convertValue(value,ctx){
 }
 function replaceJsonScript(html,id,fn){const re=new RegExp(`(<script\\b[^>]*\\bid=["']${id}["'][^>]*>)([\\s\\S]*?)(<\\/script>)`,'i');return html.replace(re,(all,a,b,c)=>{try{return a+JSON.stringify(fn(JSON.parse(b))).replace(/<\//g,'<\\/')+c}catch(e){return all}});}
 function stripOldLanguageAssets(html){return html.replace(/\s*<script\b[^>]*src=["'][^"']*(?:cpp-runner-ui-worker|primary-language-mode|dual-single-editor-publish|course-language-mode-controller|lesson-language-variants)[^"']*["'][^>]*><\/script>/gi,'');}
+function stripOldLanguageControls(html){
+ html=html.replace(/<button\b[^>]*(?:data-lang-mode|data-adaptive-mode)=["'](?:cpp|dual)["'][^>]*>[\s\S]*?<\/button>/gi,'');
+ html=html.replace(/<option\b[^>]*value=["'](?:cpp|c\+\+|dual)["'][^>]*>[\s\S]*?<\/option>/gi,'');
+ html=html.replace(/<textarea\b[^>]*data-dual-cpp-editor[^>]*>[\s\S]*?<\/textarea>/gi,'');
+ html=html.replace(/data-csai-active-language=["'](?:cpp|dual)["']/gi,'data-csai-active-language="python"');
+ html=html.replace(/data-csai-oa-cpp-run/gi,'data-csai-oa-python-run').replace(/data-csai-oa-cpp-editor/gi,'data-csai-oa-python-editor');
+ return html;
+}
 function replaceCodeBlocks(html){return html.replace(/<(pre|code)(\b[^>]*)>([\s\S]*?)<\/\1>/gi,(all,tag,attrs,body)=>{const decoded=body.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#39;/g,"'");if(!looksCpp(decoded))return all;return `<${tag}${attrs}>${esc('# Python-focused example\nvalues = [1, 2, 3, 4]\nprint(sum(values))')}</${tag}>`;});}
 function replaceEditors(html){return html.replace(/<textarea(\b[^>]*)>([\s\S]*?)<\/textarea>/gi,(all,attrs,body)=>{const decoded=body.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#39;/g,"'");if(!looksCpp(decoded))return all;return `<textarea${attrs}>${esc('# Write your Python solution here.\n\nprint("Start your solution")\n')}</textarea>`;});}
-function injectRuntime(html){if(html.includes('python-only-ui.js'))return html;const tag='<script src="/assets/python-only-ui.js?v=20260811-1" defer></script>';return html.replace(/\s*<\/body>/i,'\n'+tag+'\n</body>');}
+function injectRuntime(html){if(html.includes('python-only-ui.js'))return html;const tag='<script src="/assets/python-only-ui.js?v=20260811-2" defer></script>';return html.replace(/\s*<\/body>/i,'\n'+tag+'\n</body>');}
 function cleanHtml(html){
  html=stripOldLanguageAssets(html);
+ html=stripOldLanguageControls(html);
  html=replaceJsonScript(html,'csai-project-data',convertValue);
  html=replaceJsonScript(html,'csai-assessment-data',convertValue);
  html=replaceJsonScript(html,'course-page-meta',convertValue);
  html=replaceCodeBlocks(html);
  html=replaceEditors(html);
  html=cleanText(html);
- html=html.replace(/Practice both languages/gi,'Practice Python').replace(/real Python\s*\/\s*Python runners?/gi,'real Python runner').replace(/Python\s*&\s*Python/gi,'Python').replace(/Python\s*\+\s*Python/gi,'Python');
+ html=html.replace(/Practice Python languages/gi,'Practice Python').replace(/real Python\s*\/\s*Python runners?/gi,'real Python runner').replace(/Python\s*&\s*Python/gi,'Python').replace(/Python\s*\+\s*Python/gi,'Python');
  return injectRuntime(html);
 }
 
