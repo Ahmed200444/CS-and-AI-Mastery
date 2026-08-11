@@ -5,6 +5,7 @@ const assetPath=path.join(root,'assets','study-examples.js');
 if(!fs.existsSync(assetPath))failures.push('assets/study-examples.js is missing');
 else{
  const src=fs.readFileSync(assetPath,'utf8');
+ try{new Function(src);}catch(error){failures.push('study-examples.js syntax error: '+error.message);}
  const required=[
   ['5-example minimum',/clamp\(Math\.max\(concepts\(b\)\.length,objectives\(b\)\.length\)\+2,5,8\)/],
   ['8-example maximum',/data-study-count/],
