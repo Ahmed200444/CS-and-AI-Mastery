@@ -200,3 +200,157 @@ body[data-theme="light"] .av4-hero-art{
 @media(prefers-reduced-motion:reduce){
   html.adaptive-v4-live .av4-hero-art{transform:none!important}
 }
+
+/* GitHub vault layout polish — visual-only. Keeps OAuth, publishing, README,
+   drafts, history data, and repository state completely untouched. */
+@media (min-width:901px){
+  html.adaptive-v4-live body.av4-shell #githubSyncTrack{
+    margin-left:258px!important;
+    width:calc(100% - 258px)!important;
+    max-width:none!important;
+    padding-top:92px!important;
+    background:transparent!important;
+    color:var(--av4-ink)!important;
+    min-height:100vh!important;
+    box-sizing:border-box!important;
+  }
+}
+
+html.adaptive-v4-live #githubSyncTrack .cx-wrap{
+  width:100%!important;
+  max-width:1320px!important;
+  margin:0 auto!important;
+  padding:30px 34px 104px!important;
+  box-sizing:border-box!important;
+}
+html.adaptive-v4-live #githubSyncTrack .ghs-hero{
+  margin:4px 0 22px!important;
+}
+html.adaptive-v4-live #githubSyncTrack .ghs-hero h1{
+  font-size:clamp(1.75rem,2.1vw,2.2rem)!important;
+  letter-spacing:-.035em!important;
+}
+html.adaptive-v4-live #githubSyncTrack .ghs-grid{
+  grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr)!important;
+  gap:20px!important;
+  align-items:start!important;
+}
+html.adaptive-v4-live #githubSyncTrack .ghs-grid>.ghs-card{
+  min-width:0!important;
+  padding:22px!important;
+  border-radius:18px!important;
+  box-shadow:var(--av4-shadow-soft)!important;
+}
+html.adaptive-v4-live #githubSyncTrack .ghs-grid>.ghs-card:first-child>label{
+  display:block!important;
+  margin:14px 0 12px!important;
+  color:var(--av4-sub)!important;
+  font-size:.78rem!important;
+  font-weight:800!important;
+}
+html.adaptive-v4-live #githubSyncTrack #ghsRepo,
+html.adaptive-v4-live #githubSyncTrack details input:not([type="checkbox"]){
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+  margin-top:7px!important;
+  padding:11px 12px!important;
+  border:1px solid var(--av4-line)!important;
+  border-radius:11px!important;
+  background:var(--av4-panel2)!important;
+  color:var(--av4-ink)!important;
+  font:600 .84rem/1.35 Inter,system-ui,sans-serif!important;
+  outline:none!important;
+}
+html.adaptive-v4-live #githubSyncTrack #ghsRepo:focus,
+html.adaptive-v4-live #githubSyncTrack details input:not([type="checkbox"]):focus{
+  border-color:rgba(85,222,209,.55)!important;
+  box-shadow:0 0 0 3px rgba(85,222,209,.10)!important;
+}
+html.adaptive-v4-live #githubSyncTrack .ghs-grid>.ghs-card:first-child>.ghs-btn,
+html.adaptive-v4-live #githubSyncTrack .ghs-grid>.ghs-card:first-child>a.ghs-btn{
+  margin:0 8px 8px 0!important;
+}
+html.adaptive-v4-live #githubSyncTrack .ghs-grid>.ghs-card:first-child>details{
+  display:block!important;
+  clear:both!important;
+  margin-top:10px!important;
+  padding-top:14px!important;
+  border-top:1px solid var(--av4-line)!important;
+}
+html.adaptive-v4-live #githubSyncTrack .ghs-grid>.ghs-card:first-child>details summary{
+  padding:3px 0!important;
+  color:var(--av4-sub)!important;
+  font-weight:800!important;
+}
+html.adaptive-v4-live #githubSyncTrack .ghs-history{
+  max-height:430px!important;
+  overflow:auto!important;
+  padding-right:8px!important;
+  gap:0!important;
+  scrollbar-width:thin!important;
+}
+html.adaptive-v4-live #githubSyncTrack .ghs-history li{
+  padding:11px 2px!important;
+  margin:0!important;
+  font-size:.79rem!important;
+  line-height:1.5!important;
+  word-break:break-word!important;
+}
+html.adaptive-v4-live #githubSyncTrack .ghs-history li b{
+  color:var(--av4-ink)!important;
+}
+html.adaptive-v4-live #githubSyncTrack .ghs-history a{
+  white-space:nowrap!important;
+  font-weight:800!important;
+}
+html.adaptive-v4-live #githubSyncTrack .ghs-card{
+  overflow:hidden!important;
+}
+html.adaptive-v4-live #githubSyncTrack .ghs-draft-top{
+  gap:16px!important;
+}
+html.adaptive-v4-live #githubSyncTrack .ghs-actions input{
+  min-width:220px!important;
+  max-width:100%!important;
+}
+body[data-theme="light"] #githubSyncTrack #ghsRepo,
+body[data-theme="light"] #githubSyncTrack details input:not([type="checkbox"]){
+  background:#fff!important;
+}
+
+@media(max-width:1080px) and (min-width:901px){
+  html.adaptive-v4-live #githubSyncTrack .cx-wrap{padding-left:24px!important;padding-right:24px!important}
+  html.adaptive-v4-live #githubSyncTrack .ghs-grid{grid-template-columns:1fr!important}
+  html.adaptive-v4-live #githubSyncTrack .ghs-history{max-height:320px!important}
+}
+@media(max-width:900px){
+  html.adaptive-v4-live body.av4-shell #githubSyncTrack{
+    margin-left:0!important;
+    width:100%!important;
+    max-width:none!important;
+    padding-top:72px!important;
+    box-sizing:border-box!important;
+  }
+  html.adaptive-v4-live #githubSyncTrack .cx-wrap{
+    padding:24px 18px 96px!important;
+  }
+  html.adaptive-v4-live #githubSyncTrack .ghs-grid{
+    grid-template-columns:1fr!important;
+  }
+  html.adaptive-v4-live #githubSyncTrack .ghs-history{
+    max-height:300px!important;
+  }
+}
+@media(max-width:560px){
+  html.adaptive-v4-live #githubSyncTrack .ghs-grid>.ghs-card{padding:17px!important}
+  html.adaptive-v4-live #githubSyncTrack .ghs-grid>.ghs-card:first-child>.ghs-btn,
+  html.adaptive-v4-live #githubSyncTrack .ghs-grid>.ghs-card:first-child>a.ghs-btn{
+    width:100%!important;
+    box-sizing:border-box!important;
+    text-align:center!important;
+    margin-right:0!important;
+  }
+  html.adaptive-v4-live #githubSyncTrack .ghs-actions input{min-width:0!important;width:100%!important}
+}
