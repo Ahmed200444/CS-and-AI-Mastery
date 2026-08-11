@@ -29,6 +29,9 @@
   }
 }
 
+/* Remove the bottom informational card from the sidebar. */
+html.adaptive-v4-live .av4-side-foot{display:none!important}
+
 /* Hero composition: text and code visual now have a clearly intentional split. */
 html.adaptive-v4-live .av4-hero{
   min-height:330px!important;
