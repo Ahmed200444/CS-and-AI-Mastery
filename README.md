@@ -1,52 +1,51 @@
 # CS & AI Mastery
 
-CS & AI Mastery is an interactive learning platform for building practical computer science, software engineering, and AI skills. It is designed around learning a concept, seeing it work, practicing it, reviewing it later, and turning completed work into a clean GitHub portfolio.
+CS & AI Mastery is my AI-assisted personal learning platform for studying computer science and software engineering topics through lessons, examples, exercises, and projects.
 
-## What the platform includes
-- 57 generated course pages across core CS, software engineering, and AI topics.
-- Structured lessons with explanations, examples, review tools, exercises, and projects.
-- Browser-based execution for supported Python, JavaScript, SQL, and HTML learning activities.
-- Safe simulation and validation guidance for infrastructure topics that should not execute real system or cloud commands in a learning browser.
-- Practice and project workspaces with Run, Check/Submit, Reset, Reveal, and GitHub publishing tools where appropriate.
-- Review states and recurring mastery tools for returning to material later.
+The platform contains material for a wider learning roadmap, but the presence of a topic in the platform does **not** mean I have already studied or mastered it.
 
-## Learning tracks
-The repository covers foundations and internship-oriented topics including Python, SQL, Git, Linux, data structures and algorithms, object-oriented programming, debugging, testing, APIs, backend development, web development, machine learning, deep learning, transformers, LLMs, RAG, AI agents, deployment, Docker, cloud concepts, and system design.
+## My current study progress
 
-## GitHub portfolio publishing
-Course exercises, examples, and projects publish into deterministic folders under `student-code/`. Portfolio code paths are create-once so revisiting a lesson cannot silently overwrite an earlier submission or create duplicate update commits. A separate **Add a README** action documents an item only after its code exists, and README creation is duplicate-protected too.
+My completed studies so far focus on:
+
+- **Python** — programming fundamentals, functions, collections, file handling, error handling, and problem solving.
+- **SQL** — querying and working with relational data.
+- **Object-Oriented Programming (OOP)** — classes, objects, methods, state, and related programming concepts.
+
+I am continuing through the rest of the learning roadmap over time.
+
+## My code and portfolio work
+
+The `student-code/` directory is the important portfolio area of this repository. It contains practice exercises and projects I completed while studying.
 
 ```text
 student-code/
-  practice/<course>/<item>/
-    <item>.<ext>
-    README.md
-  examples/<course>/<item>/
-    example.<ext>
-    README.md
-  projects/<course>/<project>/
-    <project>.<ext>
-    README.md
+  practice/    # completed practice exercises
+  examples/    # saved study examples
+  projects/    # completed projects
 ```
+
+Each portfolio item can include its source code and a README explaining what it does, what concepts it practices, and how it can be run.
+
+## About the learning platform
+
+The surrounding learning platform was created with AI-assisted development and is used as my personal study environment. It provides structured lessons, examples, exercises, projects, review tools, and coding workspaces.
+
+The platform includes material for topics I plan to study later as well as topics I have already studied. For that reason, recruiters and visitors should use the **My current study progress** section above and my completed work under `student-code/` as the accurate representation of my current technical experience.
+
+## Current portfolio examples
+
+My completed work currently includes Python programming exercises, OOP practice, problem-solving exercises, and Python projects. I will continue adding work as I complete additional parts of the roadmap.
 
 ## Repository structure
-- `assets/` — shared browser UI, runners, editors, review systems, and learning tools.
-- `scripts/` — course generation, injection, audits, build-time repairs, and verification gates.
-- `netlify/functions/` — server-side GitHub OAuth/session and publishing endpoints.
-- `tests/` — repository contracts and final quality checks.
-- `student-code/` — completed practice and portfolio submissions.
-- `courses/` — generated during the production build and verified as a 57-course set.
 
-## Development and verification
-Requirements: Node.js 20 or newer.
-```bash
-npm ci
-npm test
-```
-The Netlify production build runs the course-generation pipeline and the repository's audits/verifiers. A GitHub Actions quality gate executes the same build command from `netlify.toml` on a complete checkout so generated-course failures are caught before merging quality upgrades.
+- `student-code/` — my completed study exercises and portfolio projects.
+- `assets/` — platform interface and learning-tool files.
+- `scripts/` — platform generation and verification tooling.
+- `netlify/functions/` — platform integration files.
+- `tests/` — platform quality and verification checks.
+- `courses/` — generated learning material.
 
-## Security and safety
-GitHub access is handled server-side through Netlify functions. Publishing requests use the authenticated session, CSRF validation, safe repository paths, file-size checks, and basic secret-pattern detection. Infrastructure-oriented examples are simulated or validated in the browser rather than executing real operating-system, network, Docker, cloud, or deployment commands.
+## Purpose
 
-## Goal
-The goal is a platform that remains useful months later: understand the mental model, run or simulate the idea, inspect output, practice it, debug mistakes, review it, and keep strong completed work in a readable GitHub portfolio.
+This repository is both a study workspace and a record of my progress. My goal is to learn concepts, practice them with code, build projects from what I have studied, and keep that completed work organized in a public portfolio.
