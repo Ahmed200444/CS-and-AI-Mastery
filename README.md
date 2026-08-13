@@ -8,9 +8,10 @@ The platform contains material for a wider learning roadmap, but the presence of
 
 My completed studies so far focus on:
 
-- **Python** — programming fundamentals, functions, collections, file handling, error handling, and problem solving.
-- **SQL** — querying and working with relational data.
-- **Object-Oriented Programming (OOP)** — classes, objects, methods, state, and related programming concepts.
+- **C++** — studied through university coursework, including programming fundamentals and object-oriented programming.
+- **Python** — studied independently, including programming fundamentals, functions, collections, file handling, error handling, problem solving, and object-oriented programming.
+- **SQL** — studied independently, covering queries and relational data.
+- **Object-Oriented Programming (OOP)** — studied in C++ at university and practiced independently in Python, including classes, objects, methods, and state.
 
 I am continuing through the rest of the learning roadmap over time.
 
@@ -35,7 +36,7 @@ The platform includes material for topics I plan to study later as well as topic
 
 ## Current portfolio examples
 
-My completed work currently includes Python programming exercises, OOP practice, problem-solving exercises, and Python projects. I will continue adding work as I complete additional parts of the roadmap.
+My completed work currently includes Python programming exercises, OOP practice, problem-solving exercises, and Python projects. My university coursework also includes C++ programming and OOP. I will continue adding work as I complete additional parts of the roadmap.
 
 ## Repository structure
 
