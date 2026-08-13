@@ -1,6 +1,8 @@
 (function(){
 'use strict';
 
+import('/assets/project-path-normalizer.js');
+
 var WORKER_URL='/assets/python-terminal-worker.js';
 var worker=null,active=null,runSeq=0;
 
