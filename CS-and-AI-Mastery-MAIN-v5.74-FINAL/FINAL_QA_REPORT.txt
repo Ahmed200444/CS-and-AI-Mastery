@@ -1,0 +1,7 @@
+CS & AI Mastery v5.60 — MAIN / Scroll Performance
+
+Current release focus: smooth scrolling on long course pages while preserving every visible key-idea example and all study functionality.
+
+Key contracts: 62 courses, 800 lessons, 3,427 key ideas, 5,040 base concept/integration/edge example slots, Big-O 11-example ladder, 432/432 generated-code paths execute, no active exact/literal-only repeated examples, GitHub setup page present, current-lesson-only example rendering, pre-laid-out scroll blocks, interaction-triggered diagnostics/explanations, scroll-paint effects reduced, package release 5.60.
+
+Historical v5.57 depth/package reports are retained as regression records. Current v5.60 scroll behavior is documented in SCROLL_PERFORMANCE_QA_v5.60.md; v5.59 concept-example behavior remains preserved.

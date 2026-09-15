@@ -1,0 +1,80 @@
+{
+  "category": "Implementation-heavy",
+  "questions": [
+    {
+      "id": "codesignal-score-band",
+      "title": "Score Band Lookup",
+      "prompt": "Given an integer start, a list of integer changes, and non-overlapping intervals [low, high, label], return the label whose interval contains start + sum(changes). Intervals use low <= value < high. Return 'out' if none match.",
+      "difficulty": 1,
+      "hint": "Compute the final score once, then scan the intervals.",
+      "starter": "def score_band(start, changes, intervals):\n    pass\n",
+      "funcName": "score_band",
+      "tests": [
+        {"argsRepr": "10, [2, -1, 5], [[0, 10, 'low'], [10, 20, 'mid'], [20, 30, 'high']]", "expectedRepr": "'mid'"},
+        {"argsRepr": "5, [1, 1], [[0, 5, 'a'], [5, 8, 'b']]", "expectedRepr": "'b'"},
+        {"argsRepr": "100, [-10], [[0, 50, 'x'], [50, 90, 'y']]", "expectedRepr": "'out'"}
+      ],
+      "solution": "def score_band(start, changes, intervals):\n    total = start + sum(changes)\n    for low, high, label in intervals:\n        if low <= total < high:\n            return label\n    return 'out'\n"
+    },
+    {
+      "id": "codesignal-vowel-flip",
+      "title": "Vowel Case Flip",
+      "prompt": "Given a string, change every vowel to the opposite case while leaving every other character unchanged.",
+      "difficulty": 1,
+      "hint": "Check whether ch.lower() is in the set of vowels.",
+      "starter": "def vowel_flip(text):\n    pass\n",
+      "funcName": "vowel_flip",
+      "tests": [
+        {"argsRepr": "'Hello World'", "expectedRepr": "'HEllO WOrld'"},
+        {"argsRepr": "'AEiou xyz'", "expectedRepr": "'aeIOU xyz'"},
+        {"argsRepr": "''", "expectedRepr": "''"}
+      ],
+      "solution": "def vowel_flip(text):\n    vowels = set('aeiou')\n    out = []\n    for ch in text:\n        out.append(ch.swapcase() if ch.lower() in vowels else ch)\n    return ''.join(out)\n"
+    },
+    {
+      "id": "codesignal-chain-walk",
+      "title": "Index Chain Walk",
+      "prompt": "A list next_index stores the next position for each index. Start at start and follow the chain until -1 or until the next step would revisit an index. Return the visited indices in order.",
+      "difficulty": 1,
+      "hint": "Use a set to remember visited indices.",
+      "starter": "def chain_walk(next_index, start):\n    pass\n",
+      "funcName": "chain_walk",
+      "tests": [
+        {"argsRepr": "[2, -1, 3, 1], 0", "expectedRepr": "[0, 2, 3, 1]"},
+        {"argsRepr": "[1, 2, 0], 0", "expectedRepr": "[0, 1, 2]"},
+        {"argsRepr": "[-1], 0", "expectedRepr": "[0]"}
+      ],
+      "solution": "def chain_walk(next_index, start):\n    seen = set()\n    order = []\n    cur = start\n    while cur != -1 and cur not in seen:\n        seen.add(cur)\n        order.append(cur)\n        cur = next_index[cur]\n    return order\n"
+    },
+    {
+      "id": "codesignal-run-compress",
+      "title": "Run Compression",
+      "prompt": "Compress each maximal run of equal characters as character + count. Return the original string when the compressed result is not shorter.",
+      "difficulty": 1,
+      "hint": "Build output pieces in a list and join once.",
+      "starter": "def run_compress(text):\n    pass\n",
+      "funcName": "run_compress",
+      "tests": [
+        {"argsRepr": "'aaaabbc'", "expectedRepr": "'a4b2c1'"},
+        {"argsRepr": "'abcd'", "expectedRepr": "'abcd'"},
+        {"argsRepr": "'aaaaaaaaaa'", "expectedRepr": "'a10'"}
+      ],
+      "solution": "def run_compress(text):\n    if not text:\n        return text\n    parts = []\n    count = 1\n    for i in range(1, len(text) + 1):\n        if i < len(text) and text[i] == text[i - 1]:\n            count += 1\n        else:\n            parts.append(text[i - 1] + str(count))\n            count = 1\n    compressed = ''.join(parts)\n    return compressed if len(compressed) < len(text) else text\n"
+    },
+    {
+      "id": "codesignal-min-increments",
+      "title": "Minimum Increments for Non-Decreasing",
+      "prompt": "You may increase any element by 1 in one operation. Return the minimum number of operations needed to make nums non-decreasing.",
+      "difficulty": 2,
+      "hint": "Scan left to right and raise values that fall below the previous fixed value.",
+      "starter": "def min_increments_non_decreasing(nums):\n    pass\n",
+      "funcName": "min_increments_non_decreasing",
+      "tests": [
+        {"argsRepr": "[3, 2, 5, 1, 7]", "expectedRepr": "5"},
+        {"argsRepr": "[1, 2, 3]", "expectedRepr": "0"},
+        {"argsRepr": "[5, 4, 3]", "expectedRepr": "3"}
+      ],
+      "solution": "def min_increments_non_decreasing(nums):\n    if not nums:\n        return 0\n    ops = 0\n    prev = nums[0]\n    for x in nums[1:]:\n        if x < prev:\n            ops += prev - x\n        else:\n            prev = x\n    return ops\n"
+    }
+  ]
+}

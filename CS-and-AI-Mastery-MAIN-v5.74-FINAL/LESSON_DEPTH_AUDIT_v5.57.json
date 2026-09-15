@@ -1,0 +1,535 @@
+{
+  "release": "5.57",
+  "status": "PASS",
+  "courses": 62,
+  "lessons": 800,
+  "normalizedKeyIdeas": 3427,
+  "baseConceptIntegrationEdgeSlots": 5040,
+  "nativeExamples": 895,
+  "exercises": 794,
+  "projectsAndCapstones": 271,
+  "knowledgeChecks": 1585,
+  "sourceExplanationWords": {
+    "min": 90,
+    "p10": 102.1,
+    "median": 192.0,
+    "avg": 176.2,
+    "p90": 224.0,
+    "max": 286
+  },
+  "renderedTeachingBlockWords": {
+    "min": 422,
+    "median": 531.0,
+    "avg": 528.6,
+    "max": 699
+  },
+  "companyUseAdditions": 38,
+  "courseStats": [
+    {
+      "id": "advanced-computer-organization",
+      "title": "Advanced Computer Organization",
+      "lessons": 8,
+      "minExplanationWords": 202,
+      "avgExplanationWords": 209.1,
+      "keyIdeas": 40
+    },
+    {
+      "id": "ai-agents",
+      "title": "AI Agents / Agentic AI",
+      "lessons": 21,
+      "minExplanationWords": 92,
+      "avgExplanationWords": 194.9,
+      "keyIdeas": 85
+    },
+    {
+      "id": "ai-ml",
+      "title": "AI / Machine Learning",
+      "lessons": 12,
+      "minExplanationWords": 95,
+      "avgExplanationWords": 160.3,
+      "keyIdeas": 63
+    },
+    {
+      "id": "ai-system-design",
+      "title": "AI System Design",
+      "lessons": 15,
+      "minExplanationWords": 91,
+      "avgExplanationWords": 114.5,
+      "keyIdeas": 47
+    },
+    {
+      "id": "apis",
+      "title": "APIs",
+      "lessons": 10,
+      "minExplanationWords": 164,
+      "avgExplanationWords": 187.6,
+      "keyIdeas": 51
+    },
+    {
+      "id": "backend",
+      "title": "Backend Development",
+      "lessons": 9,
+      "minExplanationWords": 106,
+      "avgExplanationWords": 147.3,
+      "keyIdeas": 49
+    },
+    {
+      "id": "capstone",
+      "title": "Capstone Portfolio",
+      "lessons": 1,
+      "minExplanationWords": 183,
+      "avgExplanationWords": 183.0,
+      "keyIdeas": 5
+    },
+    {
+      "id": "cicd",
+      "title": "CI/CD: Continuous Integration & Deployment",
+      "lessons": 15,
+      "minExplanationWords": 92,
+      "avgExplanationWords": 113.4,
+      "keyIdeas": 63
+    },
+    {
+      "id": "classical-ai",
+      "title": "Classical AI: Search, Reasoning & Planning",
+      "lessons": 20,
+      "minExplanationWords": 192,
+      "avgExplanationWords": 202.7,
+      "keyIdeas": 74
+    },
+    {
+      "id": "cloud-computing",
+      "title": "Cloud Computing",
+      "lessons": 8,
+      "minExplanationWords": 106,
+      "avgExplanationWords": 171.5,
+      "keyIdeas": 45
+    },
+    {
+      "id": "company-prep",
+      "title": "Company Preparation",
+      "lessons": 10,
+      "minExplanationWords": 191,
+      "avgExplanationWords": 217.5,
+      "keyIdeas": 46
+    },
+    {
+      "id": "comparch-os",
+      "title": "Computer Architecture & Operating Systems",
+      "lessons": 8,
+      "minExplanationWords": 95,
+      "avgExplanationWords": 194.0,
+      "keyIdeas": 35
+    },
+    {
+      "id": "computer-vision",
+      "title": "Computer Vision",
+      "lessons": 9,
+      "minExplanationWords": 196,
+      "avgExplanationWords": 208.9,
+      "keyIdeas": 35
+    },
+    {
+      "id": "cpp-dsa",
+      "title": "C++ Programming & DSA",
+      "lessons": 54,
+      "minExplanationWords": 160,
+      "avgExplanationWords": 170.4,
+      "keyIdeas": 162
+    },
+    {
+      "id": "cybersecurity",
+      "title": "Cybersecurity Fundamentals",
+      "lessons": 10,
+      "minExplanationWords": 100,
+      "avgExplanationWords": 199.1,
+      "keyIdeas": 51
+    },
+    {
+      "id": "data-engineering",
+      "title": "Data Engineering & Data Pipelines",
+      "lessons": 17,
+      "minExplanationWords": 96,
+      "avgExplanationWords": 124.4,
+      "keyIdeas": 74
+    },
+    {
+      "id": "data-science",
+      "title": "Data Science",
+      "lessons": 11,
+      "minExplanationWords": 159,
+      "avgExplanationWords": 201.8,
+      "keyIdeas": 57
+    },
+    {
+      "id": "databases",
+      "title": "Databases",
+      "lessons": 15,
+      "minExplanationWords": 123,
+      "avgExplanationWords": 199.5,
+      "keyIdeas": 78
+    },
+    {
+      "id": "debugging",
+      "title": "Debugging",
+      "lessons": 9,
+      "minExplanationWords": 100,
+      "avgExplanationWords": 175.4,
+      "keyIdeas": 34
+    },
+    {
+      "id": "deep-learning",
+      "title": "Deep Learning",
+      "lessons": 10,
+      "minExplanationWords": 96,
+      "avgExplanationWords": 153.7,
+      "keyIdeas": 55
+    },
+    {
+      "id": "deployment",
+      "title": "Model & App Deployment",
+      "lessons": 10,
+      "minExplanationWords": 128,
+      "avgExplanationWords": 176.7,
+      "keyIdeas": 43
+    },
+    {
+      "id": "diffusion",
+      "title": "Diffusion Models",
+      "lessons": 12,
+      "minExplanationWords": 181,
+      "avgExplanationWords": 218.6,
+      "keyIdeas": 46
+    },
+    {
+      "id": "digital-hardware",
+      "title": "Digital Systems & Computer Hardware",
+      "lessons": 15,
+      "minExplanationWords": 95,
+      "avgExplanationWords": 139.4,
+      "keyIdeas": 87
+    },
+    {
+      "id": "distributed-systems",
+      "title": "Distributed Systems & Concurrency",
+      "lessons": 17,
+      "minExplanationWords": 90,
+      "avgExplanationWords": 128.6,
+      "keyIdeas": 76
+    },
+    {
+      "id": "docker",
+      "title": "Docker",
+      "lessons": 8,
+      "minExplanationWords": 106,
+      "avgExplanationWords": 176.9,
+      "keyIdeas": 36
+    },
+    {
+      "id": "dsa",
+      "title": "Data Structures & Algorithms",
+      "lessons": 20,
+      "minExplanationWords": 150,
+      "avgExplanationWords": 186.7,
+      "keyIdeas": 107
+    },
+    {
+      "id": "embedded-systems",
+      "title": "Embedded Systems & Microcontrollers",
+      "lessons": 8,
+      "minExplanationWords": 202,
+      "avgExplanationWords": 205.4,
+      "keyIdeas": 39
+    },
+    {
+      "id": "frontend-dev",
+      "title": "Frontend Development",
+      "lessons": 7,
+      "minExplanationWords": 110,
+      "avgExplanationWords": 168.1,
+      "keyIdeas": 42
+    },
+    {
+      "id": "gans",
+      "title": "GANs",
+      "lessons": 11,
+      "minExplanationWords": 187,
+      "avgExplanationWords": 210.5,
+      "keyIdeas": 36
+    },
+    {
+      "id": "generative-ai",
+      "title": "Generative AI",
+      "lessons": 9,
+      "minExplanationWords": 181,
+      "avgExplanationWords": 217.0,
+      "keyIdeas": 39
+    },
+    {
+      "id": "git",
+      "title": "Git & GitHub",
+      "lessons": 10,
+      "minExplanationWords": 131,
+      "avgExplanationWords": 189.2,
+      "keyIdeas": 40
+    },
+    {
+      "id": "huggingface",
+      "title": "Hugging Face",
+      "lessons": 14,
+      "minExplanationWords": 95,
+      "avgExplanationWords": 219.1,
+      "keyIdeas": 56
+    },
+    {
+      "id": "influencing-without-authority",
+      "title": "Influencing Without Authority for Engineers",
+      "lessons": 15,
+      "minExplanationWords": 90,
+      "avgExplanationWords": 141.6,
+      "keyIdeas": 50
+    },
+    {
+      "id": "interview-prep",
+      "title": "Interview Preparation",
+      "lessons": 9,
+      "minExplanationWords": 176,
+      "avgExplanationWords": 210.7,
+      "keyIdeas": 39
+    },
+    {
+      "id": "kubernetes",
+      "title": "Kubernetes",
+      "lessons": 12,
+      "minExplanationWords": 99,
+      "avgExplanationWords": 204.4,
+      "keyIdeas": 52
+    },
+    {
+      "id": "large-scale-ai",
+      "title": "Large-Scale AI Training & Inference",
+      "lessons": 22,
+      "minExplanationWords": 183,
+      "avgExplanationWords": 198.7,
+      "keyIdeas": 82
+    },
+    {
+      "id": "linux",
+      "title": "Linux & Command Line",
+      "lessons": 12,
+      "minExplanationWords": 92,
+      "avgExplanationWords": 150.8,
+      "keyIdeas": 61
+    },
+    {
+      "id": "llm-evaluation-testing",
+      "title": "LLM Evaluation & Testing",
+      "lessons": 15,
+      "minExplanationWords": 92,
+      "avgExplanationWords": 110.0,
+      "keyIdeas": 64
+    },
+    {
+      "id": "llms",
+      "title": "Large Language Models",
+      "lessons": 9,
+      "minExplanationWords": 114,
+      "avgExplanationWords": 198.0,
+      "keyIdeas": 41
+    },
+    {
+      "id": "mlops",
+      "title": "MLOps / Production AI",
+      "lessons": 17,
+      "minExplanationWords": 90,
+      "avgExplanationWords": 125.6,
+      "keyIdeas": 65
+    },
+    {
+      "id": "networking",
+      "title": "Computer Networks",
+      "lessons": 13,
+      "minExplanationWords": 93,
+      "avgExplanationWords": 124.9,
+      "keyIdeas": 71
+    },
+    {
+      "id": "nlp",
+      "title": "NLP",
+      "lessons": 9,
+      "minExplanationWords": 185,
+      "avgExplanationWords": 207.8,
+      "keyIdeas": 37
+    },
+    {
+      "id": "observability",
+      "title": "Observability & Monitoring",
+      "lessons": 15,
+      "minExplanationWords": 92,
+      "avgExplanationWords": 122.7,
+      "keyIdeas": 54
+    },
+    {
+      "id": "oop",
+      "title": "Object-Oriented Programming",
+      "lessons": 9,
+      "minExplanationWords": 149,
+      "avgExplanationWords": 182.9,
+      "keyIdeas": 38
+    },
+    {
+      "id": "problem-solving",
+      "title": "Problem Solving",
+      "lessons": 9,
+      "minExplanationWords": 92,
+      "avgExplanationWords": 178.8,
+      "keyIdeas": 47
+    },
+    {
+      "id": "prompt-engineering",
+      "title": "Prompt Engineering",
+      "lessons": 9,
+      "minExplanationWords": 204,
+      "avgExplanationWords": 230.8,
+      "keyIdeas": 37
+    },
+    {
+      "id": "python",
+      "title": "Python",
+      "lessons": 31,
+      "minExplanationWords": 149,
+      "avgExplanationWords": 190.8,
+      "keyIdeas": 186
+    },
+    {
+      "id": "pytorch",
+      "title": "PyTorch",
+      "lessons": 9,
+      "minExplanationWords": 174,
+      "avgExplanationWords": 206.6,
+      "keyIdeas": 32
+    },
+    {
+      "id": "rag",
+      "title": "Retrieval-Augmented Generation",
+      "lessons": 10,
+      "minExplanationWords": 103,
+      "avgExplanationWords": 198.9,
+      "keyIdeas": 45
+    },
+    {
+      "id": "reinforcement-learning-post-training",
+      "title": "Reinforcement Learning & Modern LLM Post-Training",
+      "lessons": 26,
+      "minExplanationWords": 184,
+      "avgExplanationWords": 200.8,
+      "keyIdeas": 86
+    },
+    {
+      "id": "resume-prep",
+      "title": "Resume Preparation",
+      "lessons": 9,
+      "minExplanationWords": 185,
+      "avgExplanationWords": 213.3,
+      "keyIdeas": 44
+    },
+    {
+      "id": "secure-ai-applications",
+      "title": "Secure AI Applications",
+      "lessons": 15,
+      "minExplanationWords": 92,
+      "avgExplanationWords": 121.4,
+      "keyIdeas": 49
+    },
+    {
+      "id": "software-architecture",
+      "title": "Software Architecture & Design Patterns",
+      "lessons": 16,
+      "minExplanationWords": 91,
+      "avgExplanationWords": 131.9,
+      "keyIdeas": 66
+    },
+    {
+      "id": "software-engineering-practice",
+      "title": "Software Engineering in Practice",
+      "lessons": 20,
+      "minExplanationWords": 169,
+      "avgExplanationWords": 191.9,
+      "keyIdeas": 78
+    },
+    {
+      "id": "sql",
+      "title": "SQL",
+      "lessons": 12,
+      "minExplanationWords": 92,
+      "avgExplanationWords": 166.3,
+      "keyIdeas": 48
+    },
+    {
+      "id": "system-design",
+      "title": "System Design",
+      "lessons": 10,
+      "minExplanationWords": 106,
+      "avgExplanationWords": 154.3,
+      "keyIdeas": 51
+    },
+    {
+      "id": "systems-programming",
+      "title": "Systems Programming",
+      "lessons": 8,
+      "minExplanationWords": 200,
+      "avgExplanationWords": 206.4,
+      "keyIdeas": 40
+    },
+    {
+      "id": "tensorflow",
+      "title": "TensorFlow",
+      "lessons": 9,
+      "minExplanationWords": 192,
+      "avgExplanationWords": 209.7,
+      "keyIdeas": 35
+    },
+    {
+      "id": "testing",
+      "title": "Testing",
+      "lessons": 11,
+      "minExplanationWords": 120,
+      "avgExplanationWords": 184.4,
+      "keyIdeas": 36
+    },
+    {
+      "id": "transformers",
+      "title": "Transformers",
+      "lessons": 9,
+      "minExplanationWords": 110,
+      "avgExplanationWords": 188.7,
+      "keyIdeas": 38
+    },
+    {
+      "id": "vaes",
+      "title": "VAEs",
+      "lessons": 11,
+      "minExplanationWords": 189,
+      "avgExplanationWords": 218.2,
+      "keyIdeas": 40
+    },
+    {
+      "id": "web-dev",
+      "title": "Full-Stack Web Integration",
+      "lessons": 6,
+      "minExplanationWords": 191,
+      "avgExplanationWords": 201.5,
+      "keyIdeas": 19
+    }
+  ],
+  "checks": {
+    "everyLessonSourceExplanationAtLeast90Words": true,
+    "everyRenderedTeachingBlockAtLeast350Words": true,
+    "everyLessonHasAtLeastThreeObjectives": true,
+    "everyLessonHasMultipleKeyIdeas": true,
+    "staticKeyIdeasMatchSource": true,
+    "everyKeyIdeaHasProfessionalExampleAndSuccessCheck": true,
+    "activeExamplesHaveNoExactOrLiteralOnlyStructuralDuplicates": true,
+    "githubSetupPagePreserved": true
+  }
+}

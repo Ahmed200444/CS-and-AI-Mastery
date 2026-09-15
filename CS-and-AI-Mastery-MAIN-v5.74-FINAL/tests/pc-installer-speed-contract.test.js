@@ -1,0 +1,10 @@
+const fs=require('fs'),path=require('path');
+const root=path.join(__dirname,'..'),t=fs.readFileSync(path.join(root,'INSTALL_ON_MY_COMPUTER.bat'),'utf8'),ok=(c,m)=>{if(!c)throw new Error(m)};
+ok((t.match(/^:make_shortcut\s*$/gmi)||[]).length===1,'installer must contain exactly one make_shortcut label');
+ok((t.match(/^:precache\s*$/gmi)||[]).length===1,'installer must contain exactly one precache label');
+ok(/if \/I "%SOURCE_DIR%"=="%TARGET_DIR%" goto :precache/i.test(t),'same-folder reinstall must jump to precache safely');
+ok(/robocopy[\s\S]*runtime-cache[\s\S]*:precache/i.test(t),'installer must copy app before runtime pre-cache and preserve existing cache');
+ok(/runtime-cache-prepare\.js/.test(t),'installer must prepare runtimes');
+ok(!/^goto\s*$/gmi.test(t),'installer must not contain a blank goto');
+ok(/START_CSAI\.bat/.test(t)&&/local-server\.js/.test(t),'installer must validate launch files');
+console.log('PC installer maximum-speed contract passed.');

@@ -1,0 +1,16 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const root=path.resolve(__dirname,'..');
+const server=fs.readFileSync(path.join(root,'local-server.js'),'utf8');
+const backend=fs.readFileSync(path.join(root,'local-github-backend.js'),'utf8');
+const launcher=fs.readFileSync(path.join(root,'CONNECT_GITHUB.bat'),'utf8');
+assert.ok(server.includes("require('./local-github-backend')"),'local server must load local GitHub backend');
+for(const route of ['status','authorize','file','sync','disconnect'])assert.ok(backend.includes(`/api/github/${route}`),`missing local route ${route}`);
+assert.ok(backend.includes("execFileSync('gh', ['auth', 'token']"),'local auth must use GitHub CLI token without storing it in the site');
+assert.ok(backend.includes('CSAI_GITHUB_TOKEN'),'environment-token fallback must be supported');
+assert.ok(backend.includes("'X-CSAI-CSRF'" ) || backend.includes("x-csai-csrf"),'local writes must retain CSRF protection');
+assert.ok(backend.includes("student-code/projects/"),'local publisher must normalize lowercase projects path');
+assert.ok(launcher.includes('gh auth login --web --git-protocol https'),'one-time GitHub CLI login launcher missing');
+assert.ok(!server.includes('GitHub OAuth requires the deployed Netlify backend'),'old Netlify-only local blocker must be removed');
+console.log('Local GitHub contract: OK');

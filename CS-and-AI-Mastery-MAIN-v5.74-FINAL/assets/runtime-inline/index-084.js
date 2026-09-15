@@ -1,0 +1,1 @@
+(function(){window.cxOpen=function(id){id=String(id||'').replace(/[^A-Za-z0-9._-]/g,'');if(!id)return;location.href='courses/'+encodeURIComponent(id)+'.html';};})();

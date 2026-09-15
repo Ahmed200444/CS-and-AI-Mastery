@@ -1,0 +1,25 @@
+const fs=require('fs'),path=require('path'),assert=require('assert');
+const root=path.join(__dirname,'..');
+const read=p=>fs.readFileSync(path.join(root,p),'utf8');
+const html=read('courses/cpp-dsa.html');
+const blocks=[...html.matchAll(/<pre\b[^>]*>([\s\S]*?)<\/pre>/g)].map(m=>m[1].replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&'));
+assert.equal(blocks.length,54,'expected all 54 native C++ lesson examples');
+blocks.forEach((code,i)=>{
+  if(i!==32 && /#include|int\s+main\s*\(/.test(code)) assert(code.includes('using namespace std;'),`lesson ${i+1} should use using namespace std`);
+  assert(!code.includes('std::'),`lesson ${i+1} should use the teaching namespace style, not std:: prefixes`);
+  assert(!/int\s+main\s*\([^)]*\)\s*\{[^\n]/.test(code),`lesson ${i+1} main should not be compressed onto one line`);
+  assert(!/\}\s*else\s+if\s*\([^)]*\)\s+[^\{\n]/.test(code),`lesson ${i+1} else-if body should be readable`);
+});
+const generated=read('assets/study-examples.js');
+assert(generated.includes("using namespace std;\\n\\n"),'generated C++ examples must include using namespace std');
+assert(!generated.includes("int main(){std::"),'generated C++ main must not be compressed');
+assert(generated.includes('if (value % 2 == 0) {\\n        cout << "even'),'default generated conditional should use normal block formatting');
+const project=read('assets/course-project-workspace.js');
+assert(project.includes('using namespace std;\\n\\nint main() {'),'C++ project starter should use namespace and readable main');
+const reveal=read('assets/practice-publish-completer.js');
+assert(!reveal.includes('int main(){'),'revealed C++ practice solutions should not use compressed main');
+assert(!reveal.includes('if(nums[i]==target)return i;'),'revealed C++ practice solutions should not use compressed if statements');
+assert.equal(JSON.parse(read('package.json')).version,'5.74.0','package version must be 5.71.0');
+assert(read('local-server.js').includes("RELEASE='5.74'"),'server release must be 5.71');
+assert(read('desktop-launcher.js').includes("RELEASE = '5.74'"),'launcher release must be 5.71');
+console.log('C++ readable teaching style v5.71 contract passed');

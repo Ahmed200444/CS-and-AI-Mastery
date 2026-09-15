@@ -1,0 +1,1 @@
+const fs=require('fs'),p='index.html';let html=fs.readFileSync(p,'utf8'),changed=0;html=html.replace(/<footer\b[\s\S]*?<\/footer>/gi,footer=>footer.replace(/>(\s*)(?:Version\s*)?v?\d+\.\d+\.\d+(\s*)</gi,(m,a,b)=>{changed++;return`>${a}${b}<`}));fs.writeFileSync(p,html);console.log(`Removed ${changed} visible homepage version label${changed===1?'':'s'} from footer content.`);

@@ -1,0 +1,9 @@
+CS & AI Mastery v5.74 — CONCEPT EXAMPLES + QUESTIONS + RUNNABLE CODE
+
+1. Extract the ZIP completely.
+2. Run INSTALL_ON_MY_COMPUTER.bat once.
+3. Start CS & AI Mastery from the installed desktop shortcut/launcher.
+4. After the website opens, you may close the black launcher window; the local study server keeps running in the background.
+5. Open the GitHub page only if you want to connect GitHub and explicitly choose a repository for publishing.
+
+v5.74 keeps the audited v5.73 foundation and restores always-visible conceptual examples, places a tailored Question directly above program code, and fixes valid teaching code that was incorrectly classified as reference-only. The lazy rendering/performance architecture remains in place.

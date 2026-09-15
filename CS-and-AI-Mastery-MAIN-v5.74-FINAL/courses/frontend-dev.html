@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Frontend Development — CS &amp; AI Mastery</title><script src="../assets/runtime-inline/courses-frontend-dev-001.js?v=20260822-v567"></script><style>
+:root{color-scheme:light;--bg:#f4f7fb;--panel:#fff;--text:#172231;--muted:#5d6c7c;--border:#d8e1ea;--pill:#e8f1f8;--pilltext:#174b72;--accent:#17649a;--code:#101827;--note:#fff7e7}
+html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#edf3f8;--muted:#c6d1da;--border:#344352;--pill:#223446;--pilltext:#b9dcf5;--accent:#4da3df;--code:#0b111b;--note:#2b2417}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:1100px;margin:auto;padding:18px 20px 110px}.top{position:sticky;top:0;z-index:4;display:flex;justify-content:space-between;gap:10px;padding:10px 0;background:var(--bg)}.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid #b8c7d6;border-radius:9px;padding:9px 13px;background:var(--panel);color:var(--text);font:inherit;font-weight:800;cursor:pointer}.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.hero,.card,.lesson{background:var(--panel);border:1px solid var(--border);border-radius:15px;color:var(--text)}.hero{padding:22px;margin:8px 0 16px}.kicker{font-size:.74rem;letter-spacing:.1em;font-weight:900;color:var(--accent)}.hero h1{margin:5px 0 8px;font-size:clamp(2rem,4vw,3.2rem);line-height:1.08}.muted{color:var(--muted)}.meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.pill{padding:4px 8px;border-radius:999px;background:var(--pill);color:var(--pilltext);font-size:.78rem;font-weight:800}.progress{height:10px;border-radius:999px;background:var(--border);overflow:hidden;margin:14px 0 5px}.progress span{display:block;height:100%;background:#16805b}.lessons{display:grid;gap:11px}.lesson{overflow:hidden}.lesson summary{display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;font-weight:850}.num{display:grid;place-items:center;min-width:34px;height:28px;border-radius:8px;background:var(--pill);color:var(--pilltext)}.title{flex:1}.check{display:flex;gap:6px;align-items:center;font-size:.82rem;font-weight:700}.body{padding:0 16px 18px}.body h3{margin:17px 0 7px;font-size:1rem}.body p,.body li{line-height:1.68}.code{white-space:pre-wrap;overflow:auto;padding:13px;border-radius:10px;background:var(--code);color:#f4f7fb;font:500 .86rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}.note{margin-top:12px;padding:12px;border-left:4px solid #d28b23;border-radius:8px;background:var(--note)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}.card{padding:17px}.card h2{margin:0 0 10px}.item{padding:12px;margin:9px 0;border-radius:10px;background:var(--bg);border:1px solid var(--border)}.answer{width:100%;min-height:90px;margin-top:8px;padding:10px;border:1px solid #aebdca;border-radius:8px;background:transparent;color:inherit;font:inherit}.theme{position:fixed;right:22px;bottom:22px;z-index:20;border:1px solid #b8c7d6;border-radius:999px;padding:10px 16px;background:var(--panel);color:var(--text);font:800 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.16);cursor:pointer}.empty{padding:17px;border:1px dashed var(--border);border-radius:10px}.hero-icon{margin-right:.25em}@media(max-width:720px){.wrap{padding:10px 10px 100px}.grid{grid-template-columns:1fr}.top .btn{flex:1}.lesson summary{flex-wrap:wrap;align-items:flex-start}.check{width:100%;padding-left:44px}.theme{right:14px;bottom:14px;padding:10px 14px}}
+</style><link href="../assets/final-quality-layer.css?v=20260822-v567" rel="stylesheet"/>
+<script defer="" src="../assets/smart-code-editor.js?v=20260822-v567"></script><script defer="" src="../assets/vscode-diagnostics.js?v=20260822-v567"></script>
+<script defer="" src="../assets/portfolio-publish-controls.js?v=20260822-v567"></script>
+<!-- csai-unified-design:start -->
+<link href="../assets/unified-learning-design.css?v=20260822-v567" rel="stylesheet"/>
+<link href="../assets/product-redesign-v2.css?v=20260822-v567" rel="stylesheet"/>
+<link href="../assets/adaptive-v4-live.css?v=20260822-v567" rel="stylesheet"/>
+<link href="../assets/hero-polish.css?v=20260822-v567" rel="stylesheet"/>
+<script src="../assets/runtime-inline/courses-frontend-dev-002.js?v=20260822-v567"></script>
+<script defer="" src="../assets/unified-learning-design.js?v=20260822-v567"></script>
+<script defer="" src="../assets/product-redesign-v2.js?v=20260822-v567"></script>
+<script defer="" src="../assets/adaptive-v4-live.js?v=20260822-v567"></script>
+<script defer="" src="../assets/hero-polish.js?v=20260822-v567"></script>
+<!-- csai-unified-design:end -->
+<link href="../assets/oa-assessment-fallback.css?v=20260822-v567" rel="stylesheet"/>
+<link href="../assets/oa-assessment-upgrade.css?v=20260822-v567" rel="stylesheet"/>
+<link crossorigin="" data-csai-local-speed-hint="" href="https://cdn.jsdelivr.net" rel="preconnect"/><style id="csai-expanded-lessons-style">
+.lesson-main-explanation{margin:12px 0 20px;padding:4px 0 18px;border-bottom:1px solid var(--border)}
+.lesson-main-explanation h3{margin-top:22px!important;margin-bottom:8px!important;font-size:1.02rem!important}.lesson-main-explanation h3:first-child{margin-top:8px!important;font-size:1.12rem!important}
+.lesson-main-explanation p,.lesson-main-explanation li{line-height:1.75!important}
+.deep-steps{margin:8px 0 4px;padding-left:24px}.deep-steps li{margin:7px 0}
+.deep-scenario,.deep-takeaway{margin:9px 0;padding:13px 14px;border:1px solid var(--border);border-radius:10px;background:var(--bg)}
+.deep-scenario{border-left:4px solid var(--accent)}
+.deep-takeaway{border-left:4px solid #16805b}
+.deep-scenario p,.deep-takeaway p{margin:0}
+.deep-check{margin-bottom:4px}.deep-check li{margin:6px 0}
+</style>
+<link rel="stylesheet" href="../assets/scroll-performance-v561.css?v=20260822-v567"></head><body>
+<main class="wrap"><div class="top"><a class="btn" href="../index.html#courses">← All courses</a><a class="btn primary" href="../index.html#hub">Home</a></div>
+<section class="hero"><div class="kicker">COURSE</div><h1><span class="hero-icon">🖥️</span>Frontend Development</h1><p class="muted">HTML, CSS, JavaScript, accessibility, and modern component architecture — everything that runs in the browser.</p><div class="meta"><span class="pill">7 lessons</span><span class="pill">6 exercises</span><span class="pill">5 checkpoints</span><span class="pill">3 projects</span></div><div class="progress"><span data-progress-bar="" style="width:0%"></span></div><div class="muted" data-progress-status="">0 of 7 lessons complete</div></section>
+<section class="lessons">
+<details class="lesson" data-lesson="fe-html" id="lesson-fe-html" open="">
+<summary><span class="num">01</span><span class="title">HTML structure &amp; semantics</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Structure a page with semantic tags instead of generic divs</li><li>Explain how semantic HTML changes the behavior, result, or engineering decision in a concrete example</li><li>Connect semantic HTML with document structure and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>HTML gives content structure and meaning. Semantic tags — &lt;header&gt;, &lt;nav&gt;, &lt;main&gt;, &lt;article&gt;, &lt;footer&gt; — describe WHAT something is, not just how it looks, which helps screen readers, search engines, and other developers understand your page at a glance.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">semantic HTML</span><span class="pill">document structure</span><span class="pill">accessibility basics</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">&lt;body&gt;
+  &lt;header&gt;&lt;h1&gt;My Site&lt;/h1&gt;&lt;nav&gt;...&lt;/nav&gt;&lt;/header&gt;
+  &lt;main&gt;
+    &lt;article&gt;&lt;h2&gt;Post title&lt;/h2&gt;&lt;p&gt;...&lt;/p&gt;&lt;/article&gt;
+  &lt;/main&gt;
+  &lt;footer&gt;© 2026&lt;/footer&gt;
+&lt;/body&gt;</pre>
+<div class="note"><b>Common mistake:</b> 'Div soup' — building an entire layout from unlabeled &lt;div&gt;s when a semantic tag already exists for that role.</div>
+</div></details>
+<details class="lesson" data-lesson="fe-css" id="lesson-fe-css">
+<summary><span class="num">02</span><span class="title">CSS fundamentals: the box model &amp; selectors</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain the CSS box model</li><li>Write selectors with the right specificity</li><li>Explain how box model changes the behavior, result, or engineering decision in a concrete example</li><li>Connect box model with specificity and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Every element is a box: content, then padding, then border, then margin, from the inside out. CSS selectors target elements to style — by tag, class, id, or relationship (descendant, child) — and specificity determines which rule wins when several apply to the same element (id beats class beats tag).</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">box model</span><span class="pill">specificity</span><span class="pill">selectors</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">.card {
+  padding: 16px;      /* inside the border */
+  border: 1px solid #ddd;
+  margin: 12px;        /* outside the border */
+}
+.card.featured { border-color: gold; } /* more specific than .card */</pre>
+<div class="note"><b>Common mistake:</b> Fighting CSS with !important instead of understanding why a more specific selector is winning — it treats the symptom, not the cause.</div>
+</div></details>
+<details class="lesson" data-lesson="fe-responsive" id="lesson-fe-responsive">
+<summary><span class="num">03</span><span class="title">Responsive design: Flexbox, Grid, media queries</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Build a layout that adapts to different screen sizes</li><li>Explain how Flexbox changes the behavior, result, or engineering decision in a concrete example</li><li>Connect Flexbox with Grid and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Responsive design means one page works well from a phone to a desktop. Flexbox arranges items along one axis (great for navbars, button rows); Grid arranges in two dimensions (great for full page layouts).</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">Flexbox</span><span class="pill">Grid</span><span class="pill">media queries</span><span class="pill">mobile-first</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">.row { display: flex; gap: 12px; }
+.layout { display: grid; grid-template-columns: 1fr 1fr 1fr; }
+@media (max-width: 600px) {
+  .layout { grid-template-columns: 1fr; }
+}</pre>
+<div class="note"><b>Common mistake:</b> Designing desktop-first and bolting on mobile support later — it's far easier to design mobile-first and add complexity as the screen grows.</div>
+</div></details>
+<details class="lesson" data-lesson="fe-js-dom" id="lesson-fe-js-dom">
+<summary><span class="num">04</span><span class="title">JavaScript &amp; the DOM</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Select, read, and modify DOM elements from JavaScript</li><li>Respond to user events</li><li>Explain how DOM changes the behavior, result, or engineering decision in a concrete example</li><li>Connect DOM with event listeners and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>The DOM (Document Object Model) is the live, in-memory tree of your page that JavaScript can read and change. `querySelector` finds elements; `addEventListener` reacts to clicks/input/etc; changing an element's `.textContent` or classes updates what the user sees, instantly, with no page reload.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">DOM</span><span class="pill">event listeners</span><span class="pill">querySelector</span><span class="pill">DOM mutation</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">const btn = document.querySelector('#submit');
+btn.addEventListener('click', () =&gt; {
+  document.querySelector('#status').textContent = 'Submitted!';
+});</pre>
+<div class="note"><b>Common mistake:</b> Directly manipulating dozens of elements ad hoc as an app grows — this is exactly the pain component frameworks (React etc.) exist to solve.</div>
+</div></details>
+<details class="lesson" data-lesson="fe-react-basics" id="lesson-fe-react-basics">
+<summary><span class="num">05</span><span class="title">React fundamentals: components, props &amp; state</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Build a small React component that manages its own state and reacts to a user event</li><li>Apply the KHDA-benchmarked professional additions in a realistic company workflow: useEffect for side effects, API data fetching, loading and error states.</li><li>Explain how components changes the behavior, result, or engineering decision in a concrete example</li><li>Connect components with JSX and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>React builds interfaces from components whose output depends on props and state. State changes trigger re-rendering, while effects are for synchronizing with work outside rendering such as network requests or browser APIs.</p>
+</section>
+<div class="note khda-benchmark-note" data-khda-benchmark-note="true"><b>Professional benchmark addition: </b>These company-use concepts were kept after comparing the course with public syllabi from KHDA-listed Dubai training providers: useEffect for side effects, API data fetching, loading and error states.</div><h3>Key concepts</h3><div class="meta"><span class="pill">components</span><span class="pill">JSX</span><span class="pill">props</span><span class="pill">state</span><span class="pill">useState</span><span class="pill">re-rendering</span><span class="pill">useEffect for side effects</span><span class="pill">API data fetching</span><span class="pill">loading and error states</span><span class="pill">form state</span><span class="pill">client-side validation</span><span class="pill">TypeScript props and interfaces</span><span class="pill">frontend component testing</span><span class="pill">error boundary</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">function Greeting({ name }) {
+  const [clicked, setClicked] = useState(false);
+  return &lt;button onClick={() =&gt; setClicked(true)}&gt;
+    {clicked ? 'Hi ' + name : 'Click me'}
+  &lt;/button&gt;;
+}</pre>
+<div class="note"><b>Common mistake:</b> Mutating state directly (state.value = x) instead of calling the setter function (setValue(x)) -- React only re-renders when it detects an update through its own setter, not a raw mutation.</div>
+</div></details>
+<details class="lesson" data-lesson="fe-a11y" id="lesson-fe-a11y">
+<summary><span class="num">06</span><span class="title">Accessibility (a11y) fundamentals</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Apply the most common accessibility fixes: labels, alt text, contrast, keyboard nav</li><li>Explain how alt text changes the behavior, result, or engineering decision in a concrete example</li><li>Connect alt text with labels and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Accessibility means your site works for people using screen readers, keyboard-only navigation, or with visual impairments — not an afterthought, a requirement.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">alt text</span><span class="pill">labels</span><span class="pill">keyboard navigation</span><span class="pill">color contrast</span><span class="pill">div onclick</span><span class="pill">semantic button</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">&lt;label for="email"&gt;Email&lt;/label&gt;
+&lt;input id="email" type="email"&gt;
+&lt;img src="chart.png" alt="Revenue grew 40% year over year"&gt;</pre>
+<div class="note"><b>Common mistake:</b> Using a &lt;div onclick=...&gt; as a button — it looks like a button but is invisible to keyboard and screen-reader users, who have no way to activate it.</div>
+</div></details>
+<details class="lesson" data-lesson="fe-architecture" id="lesson-fe-architecture">
+<summary><span class="num">07</span><span class="title">Modern frontend architecture: components &amp; state</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain component-based architecture and where state should live</li><li>Apply the KHDA-benchmarked professional additions in a realistic company workflow: client-side routing.</li><li>Explain how components changes the behavior, result, or engineering decision in a concrete example</li><li>Connect components with state and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Frontend architecture is about separating responsibilities so a growing UI stays understandable. Components own focused presentation or interaction responsibilities, props move information into components, composition builds larger views, and client-side routing maps URLs to application screens.</p>
+</section>
+<div class="note khda-benchmark-note" data-khda-benchmark-note="true"><b>Professional benchmark addition: </b>These company-use concepts were kept after comparing the course with public syllabi from KHDA-listed Dubai training providers: client-side routing.</div><h3>Key concepts</h3><div class="meta"><span class="pill">components</span><span class="pill">state</span><span class="pill">props</span><span class="pill">composition</span><span class="pill">client-side routing</span><span class="pill">server state vs UI state</span><span class="pill">production error handling</span><span class="pill">route-level loading state</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">function Counter() {
+  const [count, setCount] = useState(0);
+  return &lt;button onClick={() =&gt; setCount(count+1)}&gt;{count}&lt;/button&gt;;
+}
+// state is LOCAL to this component -- no other component needs it</pre>
+<div class="note"><b>Common mistake:</b> Putting all state in one giant top-level component 'to be safe' — it works but makes every small change trigger unnecessary re-renders and coupling across the whole app.</div>
+</div></details></section>
+<div class="grid"><section class="card"><h2>Exercises</h2><div class="item"><b>Semantic refactor</b><p>Rewrite a div-only page layout using semantic tags (header, nav, main, footer).</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Box model debug</b><p>Given a layout where padding is making an element overflow its container, explain the fix (box-sizing: border-box).</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Responsive card grid</b><p>Build a 3-column card grid with CSS Grid that collapses to 1 column under 600px.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>DOM todo toggle</b><p>Write JS that toggles a 'done' class on a list item when it's clicked.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Accessibility audit</b><p>Given a form with no labels and low-contrast text, list every fix needed and why.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Component split</b><p>Given a single 200-line page of markup, propose how you'd split it into 4-5 reusable components and what state each would own.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div></section><section class="card"><h2>Knowledge checks</h2><div class="item"><b>The CSS box model, from inside out, is:</b><ol><li>margin, border, padding, content</li><li>content, padding, border, margin</li><li>content, border, padding, margin</li><li>padding, content, margin, border</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>Flexbox arranges items along:</b><ol><li>two dimensions at once</li><li>one axis at a time</li><li>a fixed pixel grid only</li><li>z-index layers</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>A &lt;div onclick=...&gt; used as a button is problematic mainly because:</b><ol><li>it's slower</li><li>it's invisible to keyboard/screen-reader users</li><li>it can't have CSS applied</li><li>browsers block it</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>In component architecture, state should generally live:</b><ol><li>always in the very top-level component</li><li>as close as possible to where it's needed, lifted up only when shared</li><li>in global variables</li><li>in CSS</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>Media queries let you:</b><ol><li>change JavaScript behavior only</li><li>apply different CSS at different viewport widths</li><li>query a database</li><li>validate forms</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div></section></div>
+<section class="card" style="margin-top:14px"><h2>Projects</h2><div class="item"><b>Responsive personal website</b><p>A multi-section personal site (about, projects, contact) that's fully responsive from 390px to desktop, using semantic HTML.</p></div><div class="item"><b>Interactive dashboard UI</b><p>A dashboard with cards, a responsive grid layout, and JS-driven interactivity (filtering, toggling views) — no backend needed yet, mock data is fine.</p></div><div class="item"><b>Accessible component library</b><p>Build 4-5 reusable, accessible components (button, modal, form field, card) with proper labels, keyboard support, and documented props/state.</p></div></section></main>
+<button class="theme" data-theme-toggle="" type="button" aria-label="Toggle light or dark theme"></button>
+<script id="course-page-meta" type="application/json">{"id":"frontend-dev","lessonIds":["fe-html","fe-css","fe-responsive","fe-js-dom","fe-react-basics","fe-a11y","fe-architecture"]}</script>
+<script defer="" src="../assets/runtime-inline/courses-frontend-dev-003.js?v=20260822-v567"></script><script defer="" src="../assets/runnable-lesson-example-fixes.js?v=20260822-v567"></script>
+<script defer="" src="../assets/fast-js-runner.js?v=20260822-v567"></script>
+<script defer="" src="../assets/lesson-example-runner.js?v=20260822-v567"></script>
+<script defer="" src="../assets/lesson-example-runner-guard.js?v=20260822-v567"></script><script defer="" src="../assets/python-inline-terminal.js?v=20260822-v567"></script><script defer="" src="../assets/runner-performance-guard.js?v=20260822-v567"></script>
+<script defer="" src="../assets/evergreen-learning-engine.js?v=20260822-v567"></script>
+<script defer="" src="../assets/evergreen-review-navigation.js?v=20260822-v567"></script>
+<script defer="" src="../assets/smart-evergreen-review.js?v=20260822-v567"></script>
+<script id="csai-assessment-data" type="application/json">{"courseId":"frontend-dev","courseTitle":"Frontend Development","defaultLanguage":"javascript","exercises":[{"id":"fe_ex1","title":"Semantic refactor","difficulty":1,"prompt":"Rewrite a div-only page layout using semantic tags (header, nav, main, footer).","type":"practice"},{"id":"fe_ex2","title":"Box model debug","difficulty":1,"prompt":"Given a layout where padding is making an element overflow its container, explain the fix (box-sizing: border-box).","type":"practice"},{"id":"fe_ex3","title":"Responsive card grid","difficulty":2,"prompt":"Build a 3-column card grid with CSS Grid that collapses to 1 column under 600px.","type":"practice"},{"id":"fe_ex4","title":"DOM todo toggle","difficulty":2,"prompt":"Write JS that toggles a 'done' class on a list item when it's clicked.","type":"practice"},{"id":"fe_ex5","title":"Accessibility audit","difficulty":3,"prompt":"Given a form with no labels and low-contrast text, list every fix needed and why.","type":"practice"},{"id":"fe_ex6","title":"Component split","difficulty":3,"prompt":"Given a single 200-line page of markup, propose how you'd split it into 4-5 reusable components and what state each would own.","type":"practice"}],"quiz":[{"q":"The CSS box model, from inside out, is:","options":["margin, border, padding, content","content, padding, border, margin","content, border, padding, margin","padding, content, margin, border"],"correct":1,"type":"mcq"},{"q":"Flexbox arranges items along:","options":["two dimensions at once","one axis at a time","a fixed pixel grid only","z-index layers"],"correct":1,"type":"mcq"},{"q":"A <div onclick=...> used as a button is problematic mainly because:","options":["it's slower","it's invisible to keyboard/screen-reader users","it can't have CSS applied","browsers block it"],"correct":1,"type":"mcq"},{"q":"In component architecture, state should generally live:","options":["always in the very top-level component","as close as possible to where it's needed, lifted up only when shared","in global variables","in CSS"],"correct":1,"type":"mcq"},{"q":"Media queries let you:","options":["change JavaScript behavior only","apply different CSS at different viewport widths","query a database","validate forms"],"correct":1,"type":"mcq"}],"structured":{}}</script>
+<script defer="" src="../assets/assessment-practice.js?v=20260822-v567"></script>
+<script defer src="../assets/exam-style-problem-statements-v565.js?v=20260822-v567"></script>
+<script defer="" src="../assets/github-integration.js?v=20260822-v567"></script>
+<script defer="" src="../assets/assessment-layout-fix.js?v=20260822-v567"></script>
+<script defer="" src="../assets/universal-reveal-solutions.js?v=20260822-v567"></script>
+<script defer="" src="../assets/reveal-solution-explanations.js?v=20260822-v567"></script>
+<script defer="" src="../assets/assessment-expanded-descriptions.js?v=20260822-v567"></script>
+<script defer="" src="../assets/exercise-direct-publish.js?v=20260822-v567"></script>
+<script defer="" src="../assets/universal-run-output.js?v=20260822-v567"></script>
+<script defer="" src="../assets/final-exercise-toolbar.js?v=20260822-v567"></script>
+<script id="csai-project-data" type="application/json">{"courseId":"frontend-dev","courseTitle":"Frontend Development","defaultLanguage":"javascript","projects":[{"id":"frontend-dev-proj-1","title":"Responsive personal website","description":"A multi-section personal site (about, projects, contact) that's fully responsive from 390px to desktop, using semantic HTML.","requirements":[],"starter":"","language":"javascript"},{"id":"frontend-dev-proj-2","title":"Interactive dashboard UI","description":"A dashboard with cards, a responsive grid layout, and JS-driven interactivity (filtering, toggling views) — no backend needed yet, mock data is fine.","requirements":[],"starter":"","language":"javascript"},{"id":"frontend-dev-proj-3","title":"Accessible component library","description":"Build 4-5 reusable, accessible components (button, modal, form field, card) with proper labels, keyboard support, and documented props/state.","requirements":[],"starter":"","language":"javascript"}]}</script>
+<script defer="" src="../assets/course-project-workspace.js?v=20260822-v571"></script>
+<script defer="" src="../assets/universal-editable-code.js?v=20260822-v567"></script>
+<script defer="" src="../assets/progressive-lesson-layout.js?v=20260822-v567"></script><script defer="" src="../assets/line-by-line-explanations.js?v=20260822-v567"></script><script defer="" src="../assets/example-learning-tools.js?v=20260822-v567"></script>
+<script defer="" src="../assets/practice-publish-completer.js?v=20260823-v573"></script>
+<!-- csai-production-augmentation -->
+<script defer="" src="../assets/adaptive-practice-layer.js?v=20260822-v567"></script>
+<script defer="" src="../assets/project-readme-layer.js?v=20260822-v567"></script>
+<!-- /csai-production-augmentation -->
+<script defer="" src="../assets/oa-assessment-fallback.js?v=20260822-v567"></script>
+<script defer="" src="../assets/oa-assessment-upgrade.js?v=20260822-v567"></script>
+<script defer="" src="../assets/python-only-ui.js?v=20260822-v567"></script>
+<script defer="" src="../assets/study-examples.js?v=20260824-v574"></script><script defer="" src="../assets/conceptual-examples-v574.js?v=20260824-v574"></script><script defer="" src="../assets/program-questions-v574.js?v=20260824-v574"></script><script defer="" src="../assets/calm-study-flow.js?v=20260822-v567"></script>
+<script defer="" src="../assets/progress-resume.js?v=20260822-v567"></script>
+<script defer="" src="../assets/practice-guidance.js?v=20260823-v573"></script>
+<script src="../assets/purpose-first-prompts.js?v=20260822-v567" defer></script>
+<script defer src="../assets/scroll-performance-v561.js?v=20260822-v567"></script><script defer src="../assets/try-it-yourself-v568.js?v=20260822-v568"></script></body></html>

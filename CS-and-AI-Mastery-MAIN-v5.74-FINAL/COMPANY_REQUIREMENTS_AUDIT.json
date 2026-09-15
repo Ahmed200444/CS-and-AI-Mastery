@@ -1,0 +1,97 @@
+{
+  "principle": "Company requirements are integrated into existing technical courses; no ByteDance/Revolut course was added.",
+  "updatedCourses": {
+    "python": [
+      "Iterators & generators",
+      "Decorators: wrapping behavior cleanly",
+      "Context managers & resource safety",
+      "Type hints, dataclasses & clean interfaces",
+      "Python concurrency: threads, asyncio, locks & race conditions",
+      "Decimal & money-safe arithmetic"
+    ],
+    "dsa": [
+      "Recursion & backtracking",
+      "Heaps & priority queues",
+      "Divide and conquer",
+      "Greedy algorithms",
+      "Dynamic programming",
+      "Intervals & sweep-line patterns",
+      "Monotonic stacks & queues",
+      "Build a set / hash table from scratch"
+    ],
+    "databases": [
+      "Transaction isolation levels & anomalies",
+      "Optimistic vs pessimistic locking",
+      "Query plans, EXPLAIN & index trade-offs",
+      "Redis caching & database consistency",
+      "B+ trees & LSM trees: how storage indexes work",
+      "MySQL & PostgreSQL production fundamentals",
+      "Schema migrations & safe database changes"
+    ],
+    "testing": [
+      "TDD in practice: Red → Green → Refactor",
+      "Testing concurrent & transactional behavior"
+    ],
+    "data-engineering": [
+      "Apache Kafka: topics, partitions & consumer groups",
+      "Apache Airflow: DAGs, scheduling, retries & backfills"
+    ],
+    "cloud-computing": [
+      "GCP fundamentals for application & data workloads"
+    ],
+    "comparch-os": [
+      "Address spaces, segmentation & memory protection",
+      "File systems, system calls & I/O"
+    ],
+    "networking": [
+      "Routing protocols: OSPF & BGP fundamentals"
+    ],
+    "distributed-systems": [
+      "Consensus fundamentals: Raft & Paxos",
+      "Distributed storage: replication & erasure coding"
+    ],
+    "backend": [
+      "Async FastAPI, concurrency & request safety"
+    ],
+    "software-architecture": [
+      "CQRS & DDD fundamentals"
+    ],
+    "system-design": [
+      "Designing a distributed data storage service"
+    ],
+    "data-science": [
+      "Model-ready data preprocessing pipelines"
+    ]
+  },
+  "requirements": {
+    "ByteDance": [
+      "Python/general programming",
+      "DSA",
+      "OS fundamentals",
+      "networking",
+      "SQL/NoSQL",
+      "Redis/cache consistency",
+      "Linux",
+      "distributed systems/CAP",
+      "Kafka",
+      "cloud/backend/testing",
+      "GANs/VAEs + TensorFlow/PyTorch + data preprocessing for BytePlus"
+    ],
+    "Revolut Python": [
+      "Python 3",
+      "DSA/problem solving",
+      "SQL/PostgreSQL",
+      "Kafka",
+      "Airflow",
+      "Kubernetes",
+      "Docker",
+      "GCP",
+      "TDD",
+      "scalable APIs",
+      "data pipelines",
+      "distributed systems",
+      "transactions/locking/concurrency",
+      "SOLID and clean design"
+    ]
+  }
+}

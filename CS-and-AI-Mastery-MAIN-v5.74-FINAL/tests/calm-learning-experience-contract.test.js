@@ -1,0 +1,15 @@
+const fs=require('fs'),path=require('path'),assert=require('assert');
+const root=path.join(__dirname,'..');
+const read=p=>fs.readFileSync(path.join(root,p),'utf8');
+const study=read('assets/study-examples.js'),calm=read('assets/calm-study-flow.js'),adaptive=read('assets/adaptive-practice-layer.js'),evergreen=read('assets/evergreen-learning-engine.js');
+assert.ok(study.includes('function buildCurrent()'),'study examples must lazy-render only the currently open lesson');
+assert.ok(!study.includes('function buildCurrentAndNext()'),'next lesson must not be pre-rendered before the learner opens it');
+assert.ok(!study.includes("document.querySelectorAll('.lesson').forEach(buildLesson)"),'must not eagerly render every lesson example at page load');
+assert.ok(adaptive.includes('function apply(){style();updateHero();}'),'hidden adaptive labs must not be generated');
+assert.ok(evergreen.includes('function run(){addStyle();updateCourseStatus()}'),'hidden evergreen labs must not be generated');
+assert.ok(calm.includes("data-csai-example-flow')==='all-visible'"),'all concept examples must use the all-visible flow');
+assert.ok(calm.includes('Every key idea has its own example below.'),'the page must explicitly tell the learner every key idea is represented');
+assert.ok(!calm.includes('cards.slice(2)'),'examples must not be moved into hidden optional groups');
+assert.ok(!calm.includes('data-csai-more-examples'),'no key-idea examples may be classified as optional extra practice');
+assert.ok(calm.includes('content-visibility:auto'),'off-screen example painting must be deferred for responsiveness');
+console.log('Calm learning experience contract PASS — every key-idea example visible, current-lesson-only rendering, off-screen paint deferred.');

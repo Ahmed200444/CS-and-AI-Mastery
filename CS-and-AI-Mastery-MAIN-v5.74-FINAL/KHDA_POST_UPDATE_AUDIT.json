@@ -1,0 +1,14 @@
+{
+  "release": "5.57",
+  "status": "PASS",
+  "counts": {
+    "courses": 62,
+    "lessons": 800,
+    "concepts": 3424,
+    "exercises": 794,
+    "projects": 229,
+    "quiz": 1585
+  },
+  "khda_additions": 89,
+  "problems": []
+}

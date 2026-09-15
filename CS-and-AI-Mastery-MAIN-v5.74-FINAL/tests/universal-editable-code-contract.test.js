@@ -1,0 +1,21 @@
+const fs=require('fs'),path=require('path');
+const root=path.join(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8'),ok=(c,m)=>{if(!c)throw new Error(m)};
+const asset=read('assets/universal-editable-code.js');
+ok(/contenteditable','plaintext-only/.test(asset),'static code examples must become plain-text editable');
+ok(/data-csai-editable-code/.test(asset)&&/Reset code/.test(asset),'editable code must expose one reset path');
+ok(/removeAttribute\('readonly'\)/.test(asset),'code textareas must not remain readonly');
+ok(/CSAILineExplainer\.targetNodes/.test(asset),'editable coverage must reuse the universal code-workspace inventory');
+ok(/data-project-editor/.test(asset)&&/csai-study-code/.test(asset)&&/adaptive-code/.test(asset)&&/oa-editor/.test(asset),'projects, study examples, adaptive examples and assessments must be covered');
+ok(/pre\[data-example-audit="candidate"\]/.test(asset)&&/data-reference-only/.test(asset),'native and reference examples must be editable');
+const lessonRunner=read('assets/lesson-example-runner.js');
+ok(/code=pre\.textContent\|\|''/.test(lessonRunner),'lesson Run must read the current edited code at click time');
+ok(!/var code=pre\.textContent\|\|'',lang=inferLanguage/.test(lessonRunner),'lesson Run must not capture immutable source at page load');
+const py=read('assets/python-terminal-worker.js');
+ok(/_csai_prepare/.test(py)&&/prewarm-source/.test(py),'Python edited code must be precompiled in the shared worker');
+const js=read('assets/fast-js-runner.js');
+ok(/prewarmSource/.test(js)&&/t:'prepare'/.test(js),'JavaScript edited code must precompile in the persistent worker');
+const courseFiles=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith('.html'));
+let nativeBlocks=0;
+for(const f of courseFiles){const h=read('courses/'+f);ok(/universal-editable-code\.js\?v=20260822-v567/.test(h),f+': missing universal editable code layer');nativeBlocks+=(h.match(/<pre\b[^>]*(?:class="[^"]*\bcode\b|data-example-audit="candidate"|data-reference-only="true")/g)||[]).length;}
+ok(nativeBlocks>700,'expected hundreds of native/reference code blocks to be covered, found '+nativeBlocks);
+console.log('Universal editable code contract PASS — '+courseFiles.length+' course pages, '+nativeBlocks+' native/reference blocks plus dynamic editors.');

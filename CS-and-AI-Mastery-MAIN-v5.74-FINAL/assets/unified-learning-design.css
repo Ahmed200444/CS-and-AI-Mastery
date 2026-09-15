@@ -1,0 +1,464 @@
+/* CS & AI Mastery — unified learning design layer
+   Shared polish for every generated course page and every learning path.
+   This layer is intentionally additive: it does not change course content,
+   progress keys, routing, GitHub publishing, or exercise behavior. */
+
+html.csai-unified-design {
+  --ul-accent: #8f83ff;
+  --ul-accent-2: #56d7c8;
+  --ul-accent-3: #75a7ff;
+  --ul-surface: rgba(255,255,255,.045);
+  --ul-surface-strong: rgba(255,255,255,.072);
+  --ul-border: rgba(255,255,255,.10);
+  --ul-border-strong: rgba(143,131,255,.34);
+  --ul-shadow: 0 20px 55px rgba(0,0,0,.18);
+  --ul-radius-lg: 20px;
+  --ul-radius-md: 14px;
+}
+
+html.csai-unified-design body[data-theme="light"] {
+  --ul-surface: rgba(31,28,45,.035);
+  --ul-surface-strong: rgba(31,28,45,.06);
+  --ul-border: rgba(31,28,45,.10);
+  --ul-border-strong: rgba(103,87,218,.30);
+  --ul-shadow: 0 20px 48px rgba(35,31,60,.08);
+}
+
+/* ---------- shared page chrome ---------- */
+html.csai-unified-design .app,
+html.csai-unified-design .cx-app,
+html.csai-unified-design .web-app {
+  position: relative;
+}
+
+html.csai-unified-design .app::before,
+html.csai-unified-design .cx-app::before,
+html.csai-unified-design .web-app::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(600px 340px at 16% 0%, rgba(143,131,255,.09), transparent 66%),
+    radial-gradient(540px 330px at 92% 4%, rgba(86,215,200,.07), transparent 70%);
+}
+
+html.csai-unified-design .main,
+html.csai-unified-design .cx-wrap,
+html.csai-unified-design main.main {
+  position: relative;
+  z-index: 1;
+}
+
+html.csai-unified-design .main {
+  max-width: 1180px;
+  margin-inline: auto;
+}
+
+html.csai-unified-design .cx-wrap {
+  max-width: 1100px;
+  margin-inline: auto;
+}
+
+html.csai-unified-design .side,
+html.csai-unified-design .sidebar {
+  border-right-color: var(--ul-border) !important;
+  backdrop-filter: blur(16px);
+}
+
+html.csai-unified-design .brand {
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--ul-border);
+}
+
+html.csai-unified-design .brand .dot {
+  box-shadow: 0 0 0 5px rgba(143,131,255,.10), 0 0 26px rgba(143,131,255,.18);
+}
+
+/* ---------- hero/header ---------- */
+html.csai-unified-design .hero,
+html.csai-unified-design .cx-hero,
+html.csai-unified-design .wd-lesson-head {
+  border-radius: var(--ul-radius-lg);
+}
+
+html.csai-unified-design .cx-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 22px 24px !important;
+  border: 1px solid var(--ul-border-strong);
+  background:
+    linear-gradient(125deg, rgba(143,131,255,.12), rgba(86,215,200,.055) 55%, rgba(255,255,255,.025));
+  box-shadow: var(--ul-shadow);
+}
+
+html.csai-unified-design .cx-hero::after {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  right: -70px;
+  top: -95px;
+  background: rgba(117,167,255,.10);
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+html.csai-unified-design .cx-hero h1,
+html.csai-unified-design .hero h1 {
+  letter-spacing: -.025em;
+}
+
+html.csai-unified-design .ul-path-kicker {
+  margin: 0 0 7px;
+  color: var(--ul-accent-2);
+  font-size: .68rem;
+  font-weight: 850;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+/* ---------- cards ---------- */
+html.csai-unified-design .card,
+html.csai-unified-design .cx-card,
+html.csai-unified-design .ai-path-course-card,
+html.csai-unified-design .ai-path-phase,
+html.csai-unified-design .cp-card,
+html.csai-unified-design .pf-card,
+html.csai-unified-design .wd-card,
+html.csai-unified-design .schema-card,
+html.csai-unified-design .box,
+html.csai-unified-design .proj {
+  border-color: var(--ul-border) !important;
+  border-radius: var(--ul-radius-md) !important;
+  background-color: var(--ul-surface) !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,.07);
+}
+
+html.csai-unified-design .card,
+html.csai-unified-design .cx-card,
+html.csai-unified-design .ai-path-course-card,
+html.csai-unified-design .cp-card,
+html.csai-unified-design .pf-card {
+  transition: transform .16s ease, border-color .16s ease, background-color .16s ease, box-shadow .16s ease;
+}
+
+@media (hover:hover) {
+  html.csai-unified-design .card:hover,
+  html.csai-unified-design .cx-card:hover,
+  html.csai-unified-design .ai-path-course-card:hover,
+  html.csai-unified-design .cp-card:hover,
+  html.csai-unified-design .pf-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--ul-border-strong) !important;
+    background-color: var(--ul-surface-strong) !important;
+    box-shadow: 0 16px 36px rgba(0,0,0,.10);
+  }
+}
+
+/* ---------- lesson identity / mental-model callouts ---------- */
+html.csai-unified-design .lesson {
+  scroll-margin-top: 24px;
+}
+
+html.csai-unified-design .lesson > h2[data-n],
+html.csai-unified-design .lesson > h2 {
+  position: relative;
+  letter-spacing: -.015em;
+}
+
+html.csai-unified-design .lesson > h2[data-n]::before {
+  content: attr(data-n);
+  display: inline-grid;
+  place-items: center;
+  min-width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  padding: 0 8px;
+  border-radius: 9px;
+  vertical-align: middle;
+  color: #f5f3ff;
+  background: linear-gradient(135deg, rgba(143,131,255,.94), rgba(117,167,255,.88));
+  box-shadow: 0 8px 20px rgba(93,81,211,.22);
+  font-size: .72rem;
+  line-height: 1;
+}
+
+html.csai-unified-design .why,
+html.csai-unified-design .career-note,
+html.csai-unified-design .note,
+html.csai-unified-design .analogy,
+html.csai-unified-design .mistake {
+  border-radius: 13px !important;
+}
+
+html.csai-unified-design .why {
+  border: 1px solid rgba(86,215,200,.20) !important;
+  background: linear-gradient(110deg, rgba(86,215,200,.07), rgba(143,131,255,.035)) !important;
+}
+
+html.csai-unified-design .why .t,
+html.csai-unified-design .career-note-t {
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  font-size: .67rem;
+  font-weight: 850;
+}
+
+/* ---------- code workspace ---------- */
+html.csai-unified-design .editor-shell,
+html.csai-unified-design .csai-code-editor,
+html.csai-unified-design textarea[data-editor],
+html.csai-unified-design textarea[data-project-editor],
+html.csai-unified-design textarea[data-dual-editor] {
+  border-radius: 13px !important;
+}
+
+html.csai-unified-design .editor-shell {
+  overflow: hidden;
+  border: 1px solid rgba(141,155,189,.18) !important;
+  background: #10141f !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.025), 0 14px 30px rgba(0,0,0,.14);
+}
+
+html.csai-unified-design .editor-bar {
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,.07) !important;
+  background: #151a27 !important;
+}
+
+html.csai-unified-design .editor-bar .name {
+  opacity: .88;
+  font-size: .76rem;
+}
+
+html.csai-unified-design .editor-shell textarea,
+html.csai-unified-design .editor-shell .py,
+html.csai-unified-design .editor-shell .editor,
+html.csai-unified-design .csai-code-editor,
+html.csai-unified-design textarea[data-editor],
+html.csai-unified-design textarea[data-project-editor],
+html.csai-unified-design textarea[data-dual-editor] {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace !important;
+  line-height: 1.58 !important;
+}
+
+html.csai-unified-design .runbar,
+html.csai-unified-design .csai-final-publish-row {
+  gap: 8px !important;
+}
+
+html.csai-unified-design .out,
+html.csai-unified-design .wd-out,
+html.csai-unified-design .csai-simulation-output {
+  border-radius: 11px !important;
+}
+
+/* ---------- buttons / controls ---------- */
+html.csai-unified-design .b,
+html.csai-unified-design .wd-btn,
+html.csai-unified-design .wd-btn-ghost,
+html.csai-unified-design .cx-back,
+html.csai-unified-design .side-btn,
+html.csai-unified-design button[class*="btn"] {
+  border-radius: 10px !important;
+}
+
+html.csai-unified-design .wd-btn,
+html.csai-unified-design .b-run {
+  box-shadow: 0 8px 20px rgba(77,142,210,.10);
+}
+
+html.csai-unified-design button:focus-visible,
+html.csai-unified-design a:focus-visible,
+html.csai-unified-design input:focus-visible,
+html.csai-unified-design select:focus-visible,
+html.csai-unified-design textarea:focus-visible {
+  outline: 2px solid var(--ul-accent-2) !important;
+  outline-offset: 2px !important;
+}
+
+/* ---------- learning paths ---------- */
+html.csai-unified-design #aiPathTrack .main,
+html.csai-unified-design #cePathTrack .main,
+html.csai-unified-design #fsPathTrack .main,
+html.csai-unified-design #companyPathsTrack .main {
+  width: min(100%, 1180px);
+}
+
+html.csai-unified-design #aiPathTrack .cx-wrap,
+html.csai-unified-design #cePathTrack .cx-wrap,
+html.csai-unified-design #fsPathTrack .cx-wrap,
+html.csai-unified-design #companyPathsTrack .cx-wrap {
+  width: 100%;
+}
+
+html.csai-unified-design .ul-path-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 10px;
+  margin: 15px 0 19px;
+}
+
+html.csai-unified-design .ul-path-stat {
+  min-width: 0;
+  padding: 13px 14px;
+  border: 1px solid var(--ul-border);
+  border-radius: 13px;
+  background: var(--ul-surface);
+}
+
+html.csai-unified-design .ul-path-stat strong {
+  display: block;
+  font-size: 1.05rem;
+  line-height: 1.2;
+  letter-spacing: -.015em;
+}
+
+html.csai-unified-design .ul-path-stat span {
+  display: block;
+  margin-top: 4px;
+  color: var(--sub, #929cad);
+  font-size: .72rem;
+  line-height: 1.25;
+}
+
+html.csai-unified-design .ai-path-continue {
+  border-color: rgba(143,131,255,.30) !important;
+  background: linear-gradient(120deg, rgba(143,131,255,.12), rgba(86,215,200,.07)) !important;
+  box-shadow: var(--ul-shadow);
+}
+
+html.csai-unified-design .ai-path-phase {
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+html.csai-unified-design .ai-path-phase-toggle {
+  min-height: 64px;
+}
+
+html.csai-unified-design .ai-path-step {
+  border-radius: 10px !important;
+  background: linear-gradient(135deg, rgba(143,131,255,.20), rgba(86,215,200,.10)) !important;
+  color: var(--ink) !important;
+}
+
+html.csai-unified-design .ai-path-course-card {
+  position: relative;
+}
+
+html.csai-unified-design .ai-path-course-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 13px;
+  bottom: 13px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(var(--ul-accent), var(--ul-accent-2));
+  opacity: .56;
+}
+
+html.csai-unified-design .ul-path-warning {
+  border-color: rgba(230,173,75,.34) !important;
+  background: rgba(230,173,75,.06) !important;
+}
+
+html.csai-unified-design .ul-path-warning-title {
+  font-weight: 800;
+}
+
+html.csai-unified-design .ul-path-warning-sub {
+  margin-top: 5px;
+  color: var(--sub, #929cad);
+  font-size: .82rem;
+  line-height: 1.45;
+}
+
+html.csai-unified-design #cePathTrack .cx-flag-soon,
+html.csai-unified-design #cePathTrack [disabled][aria-disabled="true"] {
+  opacity: .72;
+}
+
+html.csai-unified-design #cePathTrack .cx-card:has(.cx-flag-soon) {
+  border-style: dashed !important;
+}
+
+/* ---------- course catalog ---------- */
+html.csai-unified-design #coursesTrack .course-card,
+html.csai-unified-design #catalogTrack .course-card,
+html.csai-unified-design .catalog-course-card {
+  border-radius: 16px !important;
+  border-color: var(--ul-border) !important;
+  background: var(--ul-surface) !important;
+}
+
+html.csai-unified-design #coursesTrack input[type="search"],
+html.csai-unified-design #catalogTrack input[type="search"],
+html.csai-unified-design .catalog-filters input,
+html.csai-unified-design .catalog-filters select {
+  border-radius: 11px !important;
+}
+
+/* ---------- light-theme refinements ---------- */
+html.csai-unified-design body[data-theme="light"] .editor-shell {
+  background: #f7f8fb !important;
+  border-color: rgba(45,50,70,.13) !important;
+  box-shadow: 0 12px 28px rgba(41,36,76,.08);
+}
+
+html.csai-unified-design body[data-theme="light"] .editor-bar {
+  background: #eef0f5 !important;
+  border-bottom-color: rgba(45,50,70,.10) !important;
+}
+
+html.csai-unified-design body[data-theme="light"] .lesson > h2[data-n]::before {
+  color: #fff;
+}
+
+/* ---------- responsive ---------- */
+@media(max-width: 860px) {
+  html.csai-unified-design .ul-path-stats {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
+}
+
+@media(max-width: 640px) {
+  html.csai-unified-design .cx-hero {
+    padding: 17px 16px !important;
+  }
+
+  html.csai-unified-design .ul-path-stats {
+    gap: 8px;
+  }
+
+  html.csai-unified-design .ul-path-stat {
+    padding: 11px 12px;
+  }
+
+  html.csai-unified-design .lesson > h2[data-n]::before {
+    min-width: 27px;
+    height: 27px;
+    margin-right: 7px;
+  }
+}
+
+@media(max-width: 420px) {
+  html.csai-unified-design .ul-path-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  html.csai-unified-design *,
+  html.csai-unified-design *::before,
+  html.csai-unified-design *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .001ms !important;
+  }
+}

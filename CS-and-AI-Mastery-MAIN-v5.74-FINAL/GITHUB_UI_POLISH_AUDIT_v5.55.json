@@ -1,0 +1,35 @@
+{
+  "release": "5.55",
+  "scope": "GitHub page and homepage GitHub entry point",
+  "desktop": {
+    "viewport": "1440x1200",
+    "rendered": true,
+    "visual_hierarchy": "pass",
+    "horizontal_overflow": false
+  },
+  "mobile": {
+    "viewport": "390x844",
+    "rendered": true,
+    "horizontal_overflow": false,
+    "primary_action_height_px": 44
+  },
+  "interaction_mock": {
+    "connected_account": "demo-user",
+    "writable_repo_options": 2,
+    "explicit_repo_selection": "pass",
+    "current_repo_updates": "pass",
+    "success_message": "pass"
+  },
+  "accessibility": {
+    "focus_visible": "pass",
+    "aria_live_status": "pass",
+    "responsive_breakpoints": "pass",
+    "reduced_motion": "pass",
+    "disabled_state_before_connection": "pass"
+  },
+  "style": {
+    "main_platform_palette": "pass",
+    "homepage_button_polished": "pass",
+    "emoji_free_github_entry": "pass"
+  }
+}

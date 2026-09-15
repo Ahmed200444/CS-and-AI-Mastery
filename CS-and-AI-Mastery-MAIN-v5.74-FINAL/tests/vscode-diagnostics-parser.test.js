@@ -1,0 +1,12 @@
+const fs=require('fs'),vm=require('vm'),path=require('path'),assert=require('assert');
+const source=fs.readFileSync(path.join(__dirname,'..','assets','vscode-diagnostics.js'),'utf8');
+const sandbox={window:{},document:{readyState:'loading',addEventListener(){},getElementById(){return null}},location:{pathname:'/courses/python.html'},console,setTimeout,clearTimeout,Set,WeakMap,Map,Array,Object,String,Number,Math,JSON,RegExp};
+vm.createContext(sandbox);vm.runInContext(source,sandbox);
+const api=sandbox.window.CSAIDiagnostics;assert(api,'diagnostics API missing');
+const pyEditor={value:'def greet():\n    print("hello")\n\nmissing_function()'};
+const pyTrace='Traceback (most recent call last):\n  File "<student-code>", line 4, in <module>\n    missing_function()\n    ^^^^^^^^^^^^^^^^\nNameError: name \'missing_function\' is not defined\n';
+const py=api.parsePython(pyTrace,pyEditor);assert.strictEqual(py.length,1);assert.strictEqual(py[0].line,4);assert.strictEqual(py[0].column,1);assert(py[0].message.includes('NameError'));assert(py[0].message.includes('missing_function'));
+const cppEditor={value:'int main() {\n    missing_function();\n    return 0;\n}'};
+const cppText="/home/user/test.cpp:2:5: error: use of undeclared identifier 'missing_function'\n";
+const cpp=api.parseCpp(cppText,cppEditor);assert.strictEqual(cpp.length,1);assert.strictEqual(cpp[0].line,2);assert.strictEqual(cpp[0].column,5);assert(cpp[0].message.includes('undeclared identifier'));assert(cpp[0].help.toLowerCase().includes('scope'));
+console.log('VS Code diagnostics parser tests passed for Python traceback and C++ compiler formats.');

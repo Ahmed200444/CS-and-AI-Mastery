@@ -1,0 +1,16 @@
+{
+  "release": "5.56",
+  "status": "PASS",
+  "courses": 62,
+  "lessons": 800,
+  "key_ideas": 3389,
+  "base_concept_example_slots": 5004,
+  "generated_code_paths": {"passed": 432, "total": 432},
+  "active_native_source_examples": 702,
+  "active_static_examples": 886,
+  "active_exact_duplicate_groups": 0,
+  "active_literal_only_structure_duplicate_groups": 0,
+  "hidden_oop_compatibility_examples": {"native": 9, "static": 9},
+  "big_o_curated_examples": 11,
+  "github_setup_page_preserved": true
+}

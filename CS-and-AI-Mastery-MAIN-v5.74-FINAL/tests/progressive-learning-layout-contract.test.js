@@ -1,0 +1,21 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const vm=require('node:vm');
+const root=path.resolve(__dirname,'..');
+const source=fs.readFileSync(path.join(root,'assets','progressive-lesson-layout.js'),'utf8');
+for(const marker of ['Quick explanation','Learn deeper','Today you will learn','Explain more simply','data-csai-progressive','MAX_QUICK_WORDS=55']) assert.ok(source.includes(marker),`missing calm-learning marker: ${marker}`);
+const pages=fs.readdirSync(path.join(root,'courses')).filter(n=>n.endsWith('.html'));
+assert.equal(pages.length,62,'expected 62 generated course pages including compatibility route');
+let lessons=0;
+for(const page of pages){const html=fs.readFileSync(path.join(root,'courses',page),'utf8');const progressive=html.indexOf('progressive-lesson-layout.js');assert.ok(progressive>=0,`${page} must load the progressive lesson layout`);assert.ok(html.includes('calm-study-flow.js'),`${page} must load the calm study flow`);const count=(html.match(/class="lesson-main-explanation"[^>]*data-main-explanation/g)||[]).length;assert.ok(count>0,`${page} should contain lesson explanations`);lessons+=count;}
+assert.equal(lessons,800,'expected all 800 generated lesson explanations to be covered');
+const sandbox={window:{},document:{readyState:'loading',addEventListener(){},getElementById(){return null;}},setTimeout(){return 1;},MutationObserver:function(){this.observe=function(){};},console};
+vm.createContext(sandbox);vm.runInContext(source,sandbox,{filename:'progressive-lesson-layout.js'});
+const api=sandbox.window.CSAIProgressiveLessons;assert.ok(api&&typeof api.splitQuick==='function','layout API should expose the quick-summary splitter');
+const long=Array.from({length:12},(_,i)=>`Sentence ${i+1} explains a useful concept with enough words to make this a realistic teaching sentence for the lesson.`).join(' ');
+const split=api.splitQuick(long,55),countWords=s=>String(s).trim().split(/\s+/).filter(Boolean).length;
+assert.ok(countWords(split.quick)<=55,'quick explanation must respect the 55-word cap');assert.ok(split.quick.length>0,'quick explanation must keep useful content');assert.ok(split.rest.length>0,'deeper content must be preserved');assert.ok(!/open[^>]*data-csai-deep-dive/.test(source),'Learn deeper must stay collapsed by default');
+const calm=fs.readFileSync(path.join(root,'assets','calm-study-flow.js'),'utf8');for(const marker of ['Every key idea has its own example below.','none are hidden as optional practice','content-visibility:auto','Before you move on','I understand — next lesson'])assert.ok(calm.includes(marker),`calm study flow missing ${marker}`);assert.ok(!calm.includes('data-csai-next-example'),'key-idea examples must no longer be hidden behind progressive-disclosure details');
+const lineSource=fs.readFileSync(path.join(root,'assets','line-by-line-explanations.js'),'utf8');assert.ok(!/csai-line-explanation[^']* open/.test(lineSource),'line-by-line explanation should start collapsed for a consistent low-clutter UI');assert.ok(lineSource.includes('<summary>Syntax</summary>'),'syntax details must stay individually collapsible');
+console.log(`Progressive calm learning layout contract: OK across ${lessons} lessons and ${pages.length} course pages.`);

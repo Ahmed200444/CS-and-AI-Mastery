@@ -1,0 +1,159 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Full-Stack Web Integration — CS & AI Mastery</title><script src="../assets/runtime-inline/courses-web-dev-001.js?v=20260822-v567"></script><style>
+:root{color-scheme:light;--bg:#f4f7fb;--panel:#fff;--text:#172231;--muted:#5d6c7c;--border:#d8e1ea;--pill:#e8f1f8;--pilltext:#174b72;--accent:#17649a;--code:#101827;--note:#fff7e7}
+html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#edf3f8;--muted:#c6d1da;--border:#344352;--pill:#223446;--pilltext:#b9dcf5;--accent:#4da3df;--code:#0b111b;--note:#2b2417}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:1100px;margin:auto;padding:18px 20px 110px}.top{position:sticky;top:0;z-index:4;display:flex;justify-content:space-between;gap:10px;padding:10px 0;background:var(--bg)}.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid #b8c7d6;border-radius:9px;padding:9px 13px;background:var(--panel);color:var(--text);font:inherit;font-weight:800;cursor:pointer}.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.hero,.card,.lesson{background:var(--panel);border:1px solid var(--border);border-radius:15px;color:var(--text)}.hero{padding:22px;margin:8px 0 16px}.kicker{font-size:.74rem;letter-spacing:.1em;font-weight:900;color:var(--accent)}.hero h1{margin:5px 0 8px;font-size:clamp(2rem,4vw,3.2rem);line-height:1.08}.muted{color:var(--muted)}.meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.pill{padding:4px 8px;border-radius:999px;background:var(--pill);color:var(--pilltext);font-size:.78rem;font-weight:800}.progress{height:10px;border-radius:999px;background:var(--border);overflow:hidden;margin:14px 0 5px}.progress span{display:block;height:100%;background:#16805b}.lessons{display:grid;gap:11px}.lesson{overflow:hidden}.lesson summary{display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;font-weight:850}.num{display:grid;place-items:center;min-width:34px;height:28px;border-radius:8px;background:var(--pill);color:var(--pilltext)}.title{flex:1}.check{display:flex;gap:6px;align-items:center;font-size:.82rem;font-weight:700}.body{padding:0 16px 18px}.body h3{margin:17px 0 7px;font-size:1rem}.body p,.body li{line-height:1.68}.code{white-space:pre-wrap;overflow:auto;padding:13px;border-radius:10px;background:var(--code);color:#f4f7fb;font:500 .86rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}.note{margin-top:12px;padding:12px;border-left:4px solid #d28b23;border-radius:8px;background:var(--note)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}.card{padding:17px}.card h2{margin:0 0 10px}.item{padding:12px;margin:9px 0;border-radius:10px;background:var(--bg);border:1px solid var(--border)}.answer{width:100%;min-height:90px;margin-top:8px;padding:10px;border:1px solid #aebdca;border-radius:8px;background:transparent;color:inherit;font:inherit}.theme{position:fixed;right:22px;bottom:22px;z-index:20;border:1px solid #b8c7d6;border-radius:999px;padding:10px 16px;background:var(--panel);color:var(--text);font:800 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.16);cursor:pointer}.empty{padding:17px;border:1px dashed var(--border);border-radius:10px}.hero-icon{margin-right:.25em}@media(max-width:720px){.wrap{padding:10px 10px 100px}.grid{grid-template-columns:1fr}.top .btn{flex:1}.lesson summary{flex-wrap:wrap;align-items:flex-start}.check{width:100%;padding-left:44px}.theme{right:14px;bottom:14px;padding:10px 14px}}
+</style><link rel="stylesheet" href="../assets/final-quality-layer.css?v=20260822-v567">
+<script src="../assets/smart-code-editor.js?v=20260822-v567" defer></script><script defer="" src="../assets/vscode-diagnostics.js?v=20260822-v567"></script>
+<script src="../assets/portfolio-publish-controls.js?v=20260822-v567" defer></script>
+
+<!-- csai-unified-design:start -->
+<link rel="stylesheet" href="../assets/unified-learning-design.css?v=20260822-v567">
+<link rel="stylesheet" href="../assets/product-redesign-v2.css?v=20260822-v567">
+<link rel="stylesheet" href="../assets/adaptive-v4-live.css?v=20260822-v567">
+<link rel="stylesheet" href="../assets/hero-polish.css?v=20260822-v567">
+<script src="../assets/runtime-inline/courses-web-dev-002.js?v=20260822-v567"></script>
+<script src="../assets/unified-learning-design.js?v=20260822-v567" defer></script>
+<script src="../assets/product-redesign-v2.js?v=20260822-v567" defer></script>
+<script src="../assets/adaptive-v4-live.js?v=20260822-v567" defer></script>
+<script src="../assets/hero-polish.js?v=20260822-v567" defer></script>
+<!-- csai-unified-design:end -->
+<link rel="stylesheet" href="../assets/oa-assessment-fallback.css?v=20260822-v567">
+<link rel="stylesheet" href="../assets/oa-assessment-upgrade.css?v=20260822-v567">
+<link data-csai-local-speed-hint rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><style id="csai-expanded-lessons-style">
+.lesson-main-explanation{margin:12px 0 20px;padding:4px 0 18px;border-bottom:1px solid var(--border)}
+.lesson-main-explanation h3{margin-top:22px!important;margin-bottom:8px!important;font-size:1.02rem!important}.lesson-main-explanation h3:first-child{margin-top:8px!important;font-size:1.12rem!important}
+.lesson-main-explanation p,.lesson-main-explanation li{line-height:1.75!important}
+.deep-steps{margin:8px 0 4px;padding-left:24px}.deep-steps li{margin:7px 0}
+.deep-scenario,.deep-takeaway{margin:9px 0;padding:13px 14px;border:1px solid var(--border);border-radius:10px;background:var(--bg)}
+.deep-scenario{border-left:4px solid var(--accent)}
+.deep-takeaway{border-left:4px solid #16805b}
+.deep-scenario p,.deep-takeaway p{margin:0}
+.deep-check{margin-bottom:4px}.deep-check li{margin:6px 0}
+</style>
+<link rel="stylesheet" href="../assets/scroll-performance-v561.css?v=20260822-v567"></head><body>
+<main class="wrap"><div class="top"><a class="btn" href="../index.html#courses">← All courses</a><a class="btn primary" href="../index.html#hub">Home</a></div>
+<section class="hero"><div class="kicker">COURSE</div><h1><span class="hero-icon">🌐</span>Full-Stack Web Integration</h1><p class="muted">Connect browser, backend, APIs, data flow, deployment, and architecture without repeating the dedicated Frontend course.</p><div class="meta"><span class="pill">6 lessons</span><span class="pill">9 exercises</span><span class="pill">5 checkpoints</span><span class="pill">4 projects</span></div><div class="progress"><span data-progress-bar style="width:0%"></span></div><div class="muted" data-progress-status>0 of 6 lessons complete</div></section>
+<section class="lessons">
+<details class="lesson" data-lesson="wd-browser-server" id="lesson-wd-browser-server" open>
+<summary><span class="num">01</span><span class="title">How browsers and servers communicate</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Trace the full request/response cycle between browser and server</li><li>Explain how DNS changes the behavior, result, or engineering decision in a concrete example</li><li>Connect DNS with HTTP request/response and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Typing a URL and hitting enter triggers: DNS resolves the domain to an IP, the browser opens a connection and sends an HTTP request, the server processes it and sends back an HTTP response (usually HTML/JSON/etc), and the browser renders or uses that response.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">DNS</span><span class="pill">HTTP request/response</span><span class="pill">client-server model</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">Browser --DNS lookup--&gt; IP address
+Browser --HTTP GET /--&gt; Server
+Server --HTTP 200 + HTML--&gt; Browser
+Browser renders the page</pre>
+<div class="note"><b>Common mistake:</b> Thinking of &#x27;the frontend&#x27; and &#x27;the backend&#x27; as unrelated systems rather than two ends of the same conversation.</div>
+</div></details>
+<details class="lesson" data-lesson="wd-responsibilities" id="lesson-wd-responsibilities" >
+<summary><span class="num">02</span><span class="title">Frontend vs backend responsibilities</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Draw a clear line between what belongs on each side</li><li>Explain how separation of concerns changes the behavior, result, or engineering decision in a concrete example</li><li>Connect separation of concerns with client-side vs server-side and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Frontend owns what the user sees and directly interacts with: layout, styling, client-side interactivity, and calling APIs. Backend owns business logic, data storage, security enforcement, and anything that must be trusted (never trust validation that only happens in the browser — the backend must re-check everything).</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">separation of concerns</span><span class="pill">client-side vs server-side</span><span class="pill">trust boundary</span><span class="pill">client-side validation</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># Frontend: &#x27;disable the submit button if the email field is empty&#x27; (UX nicety)
+# Backend: &#x27;reject the request if the email field is empty&#x27; (the REAL enforcement)
+# Both matter -- but only one can be trusted.</pre>
+<div class="note"><b>Common mistake:</b> Relying only on frontend validation for anything that matters — a user can bypass your JavaScript entirely and hit your API directly.</div>
+</div></details>
+<details class="lesson" data-lesson="wd-lifecycle" id="lesson-wd-lifecycle" >
+<summary><span class="num">03</span><span class="title">The full-stack request lifecycle</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Trace a realistic request end to end through a full-stack app</li><li>Explain how request lifecycle changes the behavior, result, or engineering decision in a concrete example</li><li>Connect request lifecycle with middleware and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A real request touches many layers in sequence: browser sends a request -&gt; (optionally) a CDN/load balancer -&gt; your backend server -&gt; authentication check -&gt; business logic -&gt; database query -&gt; response assembled -&gt; sent back -&gt; frontend updates the DOM with the result.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">request lifecycle</span><span class="pill">middleware</span><span class="pill">full-stack debugging</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">Browser -&gt; Load Balancer -&gt; API server -&gt; Auth middleware -&gt; Route handler
+  -&gt; Database query -&gt; Response JSON -&gt; Frontend renders it</pre>
+<div class="note"><b>Common mistake:</b> Debugging &#x27;the app is broken&#x27; by guessing instead of tracing which layer actually failed (network tab, server logs, database) first.</div>
+</div></details>
+<details class="lesson" data-lesson="wd-apis-dataflow" id="lesson-wd-apis-dataflow" >
+<summary><span class="num">04</span><span class="title">APIs and data flow between frontend and backend</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Design a simple API contract that frontend and backend both agree on</li><li>Explain how API contract changes the behavior, result, or engineering decision in a concrete example</li><li>Connect API contract with JSON shape and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>The API is the CONTRACT between frontend and backend: an agreed shape of requests and responses (usually JSON) that lets both sides be built and even changed somewhat independently, as long as the contract holds.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">API contract</span><span class="pill">JSON shape</span><span class="pill">frontend/backend parallelism</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">// contract both sides agree on:
+// GET /api/users/:id -&gt; { id, name, email }
+// frontend can build its UI against this shape
+// before the backend team even finishes the real implementation</pre>
+<div class="note"><b>Common mistake:</b> Changing an API&#x27;s response shape without telling the frontend team — a classic, entirely preventable full-stack breakage.</div>
+</div></details>
+<details class="lesson" data-lesson="wd-deployment" id="lesson-wd-deployment" >
+<summary><span class="num">05</span><span class="title">Deployment basics for a full-stack app</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain, at a high level, how a full-stack app reaches real users</li><li>Explain how static hosting changes the behavior, result, or engineering decision in a concrete example</li><li>Connect static hosting with environment config and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A deployed full-stack app usually has: the frontend built into static files and served from a CDN or static host, the backend running as a containerized service behind a load balancer, and a managed database — all wired together with environment variables (API URLs, secrets) instead of hardcoded values.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">static hosting</span><span class="pill">environment config</span><span class="pill">frontend/backend deployment</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># frontend: build -&gt; static files -&gt; CDN
+# backend: Docker container -&gt; cloud compute service
+# both configured via env vars, e.g. API_BASE_URL, DATABASE_URL</pre>
+<div class="note"><b>Common mistake:</b> Hardcoding a &#x27;localhost&#x27; API URL into the frontend build — it works perfectly until deployed, then breaks for every real user.</div>
+</div></details>
+<details class="lesson" data-lesson="wd-architecture" id="lesson-wd-architecture" >
+<summary><span class="num">06</span><span class="title">Full-stack architecture, end to end</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Describe a complete, coherent full-stack architecture for a real app</li><li>Explain how end-to-end architecture changes the behavior, result, or engineering decision in a concrete example</li><li>Connect end-to-end architecture with independent scaling and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Putting it all together: a frontend (Frontend Development track) talks over HTTP to a backend (Backend Development track), which validates input, enforces auth, and reads/writes a database (Databases track); the whole thing is containerized (Docker) and deployed to the cloud (Cloud Computing) behind a load balancer.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">end-to-end architecture</span><span class="pill">independent scaling</span><span class="pill">full-stack system design</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">[Frontend: React/static] --HTTPS--&gt; [Load Balancer] --&gt; [Backend API containers]
+                                                              |
+                                                        [Database + cache]</pre>
+<div class="note"><b>Common mistake:</b> Treating frontend and backend as needing to scale together — in real systems they almost always scale independently, since their bottlenecks are completely different.</div>
+</div></details></section>
+<div class="grid"><section class="card"><h2>Exercises</h2><div class="item"><b>Style a card</b><p>Build a centered card with padding, rounded corners, and a shadow using CSS.</p><details><summary>Hint</summary><p>border-radius + box-shadow + flex centering</p></details><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Todo list (vanilla JS)</b><p>Add/remove items from a list, updating the DOM on button click.</p><details><summary>Hint</summary><p>createElement + addEventListener</p></details><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Fetch &amp; render</b><p>Fetch JSON from a public API and render it into cards.</p><details><summary>Hint</summary><p>async/await + fetch + template literals</p></details><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Trace the full cycle</b><p>Write out, step by step, everything that happens between typing a URL and seeing a rendered page.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Where does this validation belong</b><p>For 3 given rules (email format, password strength, unique username), say whether each belongs on the frontend, backend, or both — and why.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Design an API contract</b><p>Design the request/response shape for a &#x27;create a comment&#x27; feature that both frontend and backend teams could build against independently.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Diagnose the layer</b><p>Given a bug report (&#x27;the page is blank&#x27;), list the 4 layers you&#x27;d check in order and what you&#x27;d look for at each.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Spot the deployment bug</b><p>A frontend works locally but fails in production with network errors. What&#x27;s the most likely cause, and how do you fix it?</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Sketch a full-stack architecture</b><p>Sketch (in words or a diagram) the full architecture for a simple blog: frontend, backend, database, and deployment, showing what scales independently.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div></section><section class="card"><h2>Knowledge checks</h2><div class="item"><b>Which is one-dimensional layout?</b><ol><li>Grid</li><li>Flexbox</li><li>Table</li><li>Float</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>The DOM is:</b><ol><li>a CSS file</li><li>the live tree of the page</li><li>a database</li><li>a server</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>Which tag is semantic?</b><ol><li>&lt;div&gt;</li><li>&lt;span&gt;</li><li>&lt;article&gt;</li><li>&lt;b&gt;</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>Client-side validation should be treated as:</b><ol><li>the only validation needed</li><li>a UX nicety, never a security boundary</li><li>unnecessary since the backend checks anyway</li><li>a replacement for backend validation</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>An API contract mainly enables:</b><ol><li>faster CSS</li><li>frontend and backend teams to build in parallel</li><li>automatic deployment</li><li>free hosting</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div></section></div>
+<section class="card" style="margin-top:14px"><h2>Projects</h2><div class="item"><b>Personal portfolio page</b><p>A responsive single-page portfolio with sections, styled with Flexbox/Grid, mobile-friendly.</p></div><div class="item"><b>Weather app</b><p>Fetch live weather from an API by city and display it with clean UI and loading/error states.</p></div><div class="item"><b>React dashboard</b><p>A multi-component React app with state, routing between views, and data fetched from an API.</p></div><div class="item"><b>Full-stack application</b><p>Connect a frontend you build to a backend API you build (your own or from the Backend Development track), with real data flowing end to end.</p></div></section></main>
+<button class="theme" type="button" data-theme-toggle aria-label="Toggle light or dark theme"></button>
+<script type="application/json" id="course-page-meta">{"id":"web-dev","lessonIds":["wd-browser-server","wd-responsibilities","wd-lifecycle","wd-apis-dataflow","wd-deployment","wd-architecture"]}</script>
+<script src="../assets/runtime-inline/courses-web-dev-003.js?v=20260822-v567" defer></script><script src="../assets/runnable-lesson-example-fixes.js?v=20260822-v567" defer></script>
+<script src="../assets/fast-js-runner.js?v=20260822-v567" defer></script>
+<script src="../assets/lesson-example-runner.js?v=20260822-v567" defer></script>
+<script src="../assets/lesson-example-runner-guard.js?v=20260822-v567" defer></script><script defer src="../assets/python-inline-terminal.js?v=20260822-v567"></script><script defer src="../assets/runner-performance-guard.js?v=20260822-v567"></script>
+<script src="../assets/evergreen-learning-engine.js?v=20260822-v567" defer></script>
+<script src="../assets/evergreen-review-navigation.js?v=20260822-v567" defer></script>
+<script src="../assets/smart-evergreen-review.js?v=20260822-v567" defer></script>
+<script id="csai-assessment-data" type="application/json">{"courseId":"web-dev","courseTitle":"Full-Stack Web Integration","defaultLanguage":"javascript","exercises":[{"title":"Style a card","difficulty":1,"prompt":"Build a centered card with padding, rounded corners, and a shadow using CSS.","hint":"border-radius + box-shadow + flex centering","type":"practice"},{"title":"Todo list (vanilla JS)","difficulty":2,"prompt":"Add/remove items from a list, updating the DOM on button click.","hint":"createElement + addEventListener","type":"practice"},{"title":"Fetch & render","difficulty":3,"prompt":"Fetch JSON from a public API and render it into cards.","hint":"async/await + fetch + template literals","type":"practice"},{"id":"wd_ex4","title":"Trace the full cycle","difficulty":1,"prompt":"Write out, step by step, everything that happens between typing a URL and seeing a rendered page.","type":"practice"},{"id":"wd_ex5","title":"Where does this validation belong","difficulty":1,"prompt":"For 3 given rules (email format, password strength, unique username), say whether each belongs on the frontend, backend, or both — and why.","type":"practice"},{"id":"wd_ex6","title":"Design an API contract","difficulty":2,"prompt":"Design the request/response shape for a 'create a comment' feature that both frontend and backend teams could build against independently.","type":"practice"},{"id":"wd_ex7","title":"Diagnose the layer","difficulty":2,"prompt":"Given a bug report ('the page is blank'), list the 4 layers you'd check in order and what you'd look for at each.","type":"practice"},{"id":"wd_ex8","title":"Spot the deployment bug","difficulty":3,"prompt":"A frontend works locally but fails in production with network errors. What's the most likely cause, and how do you fix it?","type":"practice"},{"id":"wd_ex9","title":"Sketch a full-stack architecture","difficulty":3,"prompt":"Sketch (in words or a diagram) the full architecture for a simple blog: frontend, backend, database, and deployment, showing what scales independently.","type":"practice"}],"quiz":[{"q":"Which is one-dimensional layout?","options":["Grid","Flexbox","Table","Float"],"correct":1,"type":"mcq"},{"q":"The DOM is:","options":["a CSS file","the live tree of the page","a database","a server"],"correct":1,"type":"mcq"},{"q":"Which tag is semantic?","options":["<div>","<span>","<article>","<b>"],"correct":2,"type":"mcq"},{"q":"Client-side validation should be treated as:","options":["the only validation needed","a UX nicety, never a security boundary","unnecessary since the backend checks anyway","a replacement for backend validation"],"correct":1,"type":"mcq"},{"q":"An API contract mainly enables:","options":["faster CSS","frontend and backend teams to build in parallel","automatic deployment","free hosting"],"correct":1,"type":"mcq"}],"structured":{}}</script>
+<script src="../assets/assessment-practice.js?v=20260822-v567" defer></script>
+<script src="../assets/github-integration.js?v=20260822-v567" defer></script>
+<script defer src="../assets/exam-style-problem-statements-v565.js?v=20260822-v567"></script>
+<script src="../assets/assessment-layout-fix.js?v=20260822-v567" defer></script>
+<script src="../assets/universal-reveal-solutions.js?v=20260822-v567" defer></script>
+<script src="../assets/reveal-solution-explanations.js?v=20260822-v567" defer></script>
+<script src="../assets/assessment-expanded-descriptions.js?v=20260822-v567" defer></script>
+<script src="../assets/exercise-direct-publish.js?v=20260822-v567" defer></script>
+<script src="../assets/universal-run-output.js?v=20260822-v567" defer></script>
+<script src="../assets/final-exercise-toolbar.js?v=20260822-v567" defer></script>
+<script id="csai-project-data" type="application/json">{"courseId":"web-dev","courseTitle":"Full-Stack Web Integration","defaultLanguage":"text","projects":[{"id":"web-dev-proj-1","title":"Personal portfolio page","description":"A responsive single-page portfolio with sections, styled with Flexbox/Grid, mobile-friendly.","requirements":[],"starter":"","language":"text"},{"id":"web-dev-proj-2","title":"Weather app","description":"Fetch live weather from an API by city and display it with clean UI and loading/error states.","requirements":[],"starter":"","language":"text"},{"id":"web-dev-proj-3","title":"React dashboard","description":"A multi-component React app with state, routing between views, and data fetched from an API.","requirements":[],"starter":"","language":"text"},{"id":"web-dev-proj-4","title":"Full-stack application","description":"Connect a frontend you build to a backend API you build (your own or from the Backend Development track), with real data flowing end to end.","requirements":[],"starter":"","language":"text"}]}</script>
+<script src="../assets/course-project-workspace.js?v=20260822-v571" defer></script>
+<script defer src="../assets/universal-editable-code.js?v=20260822-v567"></script>
+<script src="../assets/progressive-lesson-layout.js?v=20260822-v567" defer></script><script src="../assets/line-by-line-explanations.js?v=20260822-v567" defer></script><script src="../assets/example-learning-tools.js?v=20260822-v567" defer></script>
+<script src="../assets/practice-publish-completer.js?v=20260823-v573" defer></script>
+
+<!-- csai-production-augmentation -->
+<script src="../assets/adaptive-practice-layer.js?v=20260822-v567" defer></script>
+
+<script src="../assets/project-readme-layer.js?v=20260822-v567" defer></script>
+<!-- /csai-production-augmentation -->
+
+<script src="../assets/oa-assessment-fallback.js?v=20260822-v567" defer></script>
+<script src="../assets/oa-assessment-upgrade.js?v=20260822-v567" defer></script>
+
+<script src="../assets/python-only-ui.js?v=20260822-v567" defer></script>
+
+<script defer="" src="../assets/study-examples.js?v=20260824-v574"></script><script defer="" src="../assets/conceptual-examples-v574.js?v=20260824-v574"></script><script defer="" src="../assets/program-questions-v574.js?v=20260824-v574"></script>
+<script src="../assets/purpose-first-prompts.js?v=20260822-v567" defer></script><script defer src="../assets/calm-study-flow.js?v=20260822-v567"></script>
+<script defer src="../assets/progress-resume.js?v=20260822-v567"></script>
+<script defer src="../assets/practice-guidance.js?v=20260823-v573"></script>
+<script defer src="../assets/scroll-performance-v561.js?v=20260822-v567"></script><script defer src="../assets/try-it-yourself-v568.js?v=20260822-v568"></script></body></html>

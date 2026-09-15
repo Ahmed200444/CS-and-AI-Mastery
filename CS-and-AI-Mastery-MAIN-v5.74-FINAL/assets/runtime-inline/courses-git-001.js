@@ -1,0 +1,1 @@
+(function(){try{var t=localStorage.getItem('cs-ai-mastery-theme')||localStorage.getItem('theme')||'light';document.documentElement.dataset.theme=t==='dark'?'dark':'light'}catch(e){document.documentElement.dataset.theme='light'}})();

@@ -1,0 +1,86 @@
+/* CS & AI Mastery v5.61 — zero-scroll-work visual layer.
+   No content virtualization: expensive content is explicitly opened by the learner. */
+html.csai-scroll-performance,html.csai-scroll-performance body{
+  scroll-behavior:auto!important;
+}
+html.csai-scroll-performance body{
+  background:var(--av4-bg,var(--bg,#0f1720))!important;
+  background-image:none!important;
+}
+html.csai-scroll-performance body::before,
+html.csai-scroll-performance body::after,
+html.csai-scroll-performance .app::before,
+html.csai-scroll-performance .app::after,
+html.csai-scroll-performance .cx-app::before,
+html.csai-scroll-performance .cx-app::after,
+html.csai-scroll-performance .web-app::before,
+html.csai-scroll-performance .web-app::after{
+  display:none!important;
+}
+html.csai-scroll-performance .av4-side,
+html.csai-scroll-performance .av4-topbar,
+html.csai-scroll-performance .ulv2-product-nav,
+html.csai-scroll-performance .side,
+html.csai-scroll-performance .sidebar,
+html.csai-scroll-performance .top,
+html.csai-scroll-performance .theme,
+html.csai-scroll-performance .themebtn,
+html.csai-scroll-performance #csai-ghbar{
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  box-shadow:none!important;
+}
+html.csai-scroll-performance body.av4-course-page .top{
+  position:relative!important;
+  top:auto!important;
+}
+html.csai-scroll-performance body.av4-course-page .lesson,
+html.csai-scroll-performance body.av4-course-page .card,
+html.csai-scroll-performance body.av4-course-page .csai-study-example,
+html.csai-scroll-performance body.av4-course-page .csai-heavy-fold,
+html.csai-scroll-performance body.av4-course-page .csai-lazy-item,
+html.csai-scroll-performance body.av4-course-page .editor-shell,
+html.csai-scroll-performance body.av4-course-page .csai-code-editor,
+html.csai-scroll-performance body.av4-course-page [data-project-workspace]{
+  box-shadow:none!important;
+}
+html.csai-scroll-performance body.av4-course-page .lesson,
+html.csai-scroll-performance body.av4-course-page .csai-study-example,
+html.csai-scroll-performance body.av4-course-page .csai-heavy-fold,
+html.csai-scroll-performance body.av4-course-page .csai-lazy-item{
+  content-visibility:visible!important;
+  contain:layout paint style!important;
+  contain-intrinsic-size:none!important;
+}
+html.csai-scroll-performance .av4-spotlight{display:none!important}
+html.csai-scroll-performance body.av4-course-page .lesson,
+html.csai-scroll-performance body.av4-course-page .card,
+html.csai-scroll-performance body.av4-course-page .item,
+html.csai-scroll-performance body.av4-course-page .csai-study-example{
+  transition:none!important;
+}
+/* Lazy study examples */
+.csai-study-example.csai-study-example-lazy{overflow:hidden;border:1px solid var(--border);border-radius:14px;background:var(--panel)}
+.csai-study-example-lazy>summary{list-style:none;cursor:pointer}
+.csai-study-example-lazy>summary::-webkit-details-marker{display:none}
+.csai-study-example-lazy>summary .csai-study-example-head{border-bottom:0!important}
+.csai-study-example-lazy[open]>summary .csai-study-example-head{border-bottom:1px solid var(--border)!important}
+.csai-study-example-lazy>summary .csai-study-example-head::after{content:'Open';margin-left:auto;padding:4px 8px;border:1px solid var(--border);border-radius:999px;color:var(--muted);font-size:.68rem;font-weight:850}
+.csai-study-example-lazy[open]>summary .csai-study-example-head::after{content:'Close'}
+.csai-study-example-lazy-body:empty{display:none}
+/* Explicitly opened heavy course sections */
+.csai-heavy-fold{margin:14px 0;border:1px solid var(--border);border-radius:14px;background:var(--panel);overflow:hidden}
+.csai-heavy-fold>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;list-style:none;cursor:pointer;padding:14px 16px;font-weight:900}
+.csai-heavy-fold>summary::-webkit-details-marker{display:none}
+.csai-heavy-fold>summary::after{content:'Open';font-size:.72rem;color:var(--muted);font-weight:850}
+.csai-heavy-fold[open]>summary{border-bottom:1px solid var(--border)}
+.csai-heavy-fold[open]>summary::after{content:'Close'}
+.csai-heavy-fold-body{padding:12px}
+.csai-heavy-fold-body:empty{display:none}
+.csai-lazy-item{margin:8px 0;border:1px solid var(--border);border-radius:10px;background:var(--panel);overflow:hidden}
+.csai-lazy-item>summary{list-style:none;cursor:pointer;padding:11px 12px;font-weight:800;color:var(--text)}
+.csai-lazy-item>summary::-webkit-details-marker{display:none}
+.csai-lazy-item>summary::after{content:' +';float:right;color:var(--muted)}
+.csai-lazy-item[open]>summary::after{content:' −'}
+.csai-lazy-item-body{padding:0 8px 8px}
+@media(prefers-reduced-motion:reduce){html.csai-scroll-performance *,html.csai-scroll-performance *::before,html.csai-scroll-performance *::after{animation:none!important;transition:none!important}}

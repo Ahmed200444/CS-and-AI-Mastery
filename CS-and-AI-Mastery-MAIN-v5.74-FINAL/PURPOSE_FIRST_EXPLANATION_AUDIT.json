@@ -1,0 +1,25 @@
+{
+  "release": "5.57",
+  "status": "PASS",
+  "counts": {
+    "courses": 62,
+    "lessons": 800,
+    "native_example_guides": 895,
+    "exercises": 794,
+    "projects": 271,
+    "knowledge_checks": 1585,
+    "course_pages_with_prompt_layer": 62
+  },
+  "existing_concept_coverage": {
+    "normalized_key_ideas": 3424,
+    "base_concept_integration_edge_slots": 5039
+  },
+  "description_repairs": 13,
+  "checks": {
+    "every_course_lesson_native_example_exercise_project_has_question_and_why": true,
+    "every_course_page_loads_generated_example_question_layer": true,
+    "problem_solving_examples_require_reasoning_before_finished_example": true,
+    "generated_key_idea_examples_still_use_professional_scenarios_and_success_checks": true
+  },
+  "problems": []
+}

@@ -1,0 +1,439 @@
+{
+  "release": "5.46",
+  "courses": [
+    {
+      "id": "python",
+      "title": "Python",
+      "careerApplications": "Used in every subsequent track; the base language for SWE and AI/ML internship applications.",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "dsa",
+      "title": "Data Structures & Algorithms",
+      "careerApplications": "The core of coding interview rounds (OAs and live coding).",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "cpp-dsa",
+      "title": "C++ Programming & DSA",
+      "careerApplications": "Builds the C++ fluency, memory model, STL usage, and DSA implementation skills useful for systems/software engineering and coding interviews.",
+      "industryUsageCount": 0,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "problem-solving",
+      "title": "Problem Solving",
+      "careerApplications": "The actual skill coding interviews are trying to measure.",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "oop",
+      "title": "Object-Oriented Programming",
+      "careerApplications": "Interview topic on its own and the design basis of most production codebases.",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "git",
+      "title": "Git & GitHub",
+      "careerApplications": "Expected baseline on any engineering team from day one.",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "linux",
+      "title": "Linux & Command Line",
+      "careerApplications": "Assumed knowledge for most backend/infra tasks and technical interviews.",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "sql",
+      "title": "SQL",
+      "careerApplications": "Directly asked about in most SWE and data interviews; used daily on the job.",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "databases",
+      "title": "Databases",
+      "careerApplications": "Schema design and indexing come up in almost every backend interview and every real production incident.",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "apis",
+      "title": "APIs",
+      "careerApplications": "What most backend internship tickets actually involve building.",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "backend",
+      "title": "Backend Development",
+      "careerApplications": "Core skill for backend/SWE internship roles — APIs are what most internship tasks touch.",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "debugging",
+      "title": "Debugging",
+      "careerApplications": "Evaluated implicitly in every technical interview and every day on the job.",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "testing",
+      "title": "Testing",
+      "careerApplications": "Increasingly asked about directly; expected of any hire past junior.",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "networking",
+      "title": "Computer Networks",
+      "careerApplications": "",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "system-design",
+      "title": "System Design",
+      "careerApplications": "Common in later-round SWE interviews, even for some internships.",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "deep-learning",
+      "title": "Deep Learning",
+      "careerApplications": "Needed before LLM/CV/NLP specialization.",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "transformers",
+      "title": "Transformers",
+      "careerApplications": "This is the single most valuable architecture to understand deeply for any AI/ML role today — it underlies virtually every state-of-the-art model in language, vision, and beyond.",
+      "industryUsageCount": 0,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "generative-ai",
+      "title": "Generative AI",
+      "careerApplications": "Generative AI is the fastest-growing area of AI hiring; understanding the landscape across model families (not just LLMs) is what separates a generalist AI engineer from a prompt-only user.",
+      "industryUsageCount": 0,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "llms",
+      "title": "Large Language Models",
+      "careerApplications": "Directly relevant if targeting AI-focused roles (e.g. ByteDance AI teams).",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "rag",
+      "title": "Retrieval-Augmented Generation",
+      "careerApplications": "A concrete, in-demand AI engineering skill beyond just prompting.",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "ai-agents",
+      "title": "AI Agents / Agentic AI",
+      "careerApplications": "An emerging, differentiating skill for AI/ML engineer roles.",
+      "industryUsageCount": 0,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "docker",
+      "title": "Docker",
+      "careerApplications": "'It works on my machine' is a real, common failure mode Docker exists to eliminate — expected baseline knowledge for most SWE roles.",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "huggingface",
+      "title": "Hugging Face",
+      "careerApplications": "The Hugging Face ecosystem is the practical toolkit real AI engineering teams use daily to work with pretrained models -- assumed fluency for most AI/ML roles.",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "web-dev",
+      "title": "Full-Stack Web Integration",
+      "careerApplications": "Needed for any full-stack or frontend-adjacent SWE role.",
+      "industryUsageCount": 0,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "comparch-os",
+      "title": "Computer Architecture & Operating Systems",
+      "careerApplications": "",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "digital-hardware",
+      "title": "Digital Systems & Computer Hardware",
+      "careerApplications": "",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "distributed-systems",
+      "title": "Distributed Systems & Concurrency",
+      "careerApplications": "",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "deployment",
+      "title": "Model & App Deployment",
+      "careerApplications": "Turns a working model/app into something a company can actually ship.",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "kubernetes",
+      "title": "Kubernetes",
+      "careerApplications": "ByteDance and most companies running containers at scale expect Kubernetes fluency alongside Docker.",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "cloud-computing",
+      "title": "Cloud Computing",
+      "careerApplications": "Nearly every backend/SWE role assumes basic comfort deploying to a cloud provider.",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "software-architecture",
+      "title": "Software Architecture & Design Patterns",
+      "careerApplications": "",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "cicd",
+      "title": "CI/CD: Continuous Integration & Deployment",
+      "careerApplications": "",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "mlops",
+      "title": "MLOps / Production AI",
+      "careerApplications": "",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "observability",
+      "title": "Observability & Monitoring",
+      "careerApplications": "",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "data-engineering",
+      "title": "Data Engineering & Data Pipelines",
+      "careerApplications": "",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "ai-system-design",
+      "title": "AI System Design",
+      "careerApplications": "",
+      "industryUsageCount": 2,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "secure-ai-applications",
+      "title": "Secure AI Applications",
+      "careerApplications": "",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "frontend-dev",
+      "title": "Frontend Development",
+      "careerApplications": "Frontend roles and full-stack roles both expect this; even backend-focused engineers are expected to ship a usable UI.",
+      "industryUsageCount": 0,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "cybersecurity",
+      "title": "Cybersecurity Fundamentals",
+      "careerApplications": "Security awareness is now expected baseline knowledge for any backend/SWE role, not a specialist-only concern, and is directly tested in many technical interviews.",
+      "industryUsageCount": 0,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "ai-ml",
+      "title": "AI / Machine Learning",
+      "careerApplications": "Foundation for the AI/ML specialization phase of your roadmap.",
+      "industryUsageCount": 3,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "data-science",
+      "title": "Data Science",
+      "careerApplications": "Cleaning and understanding data correctly is the unglamorous 80% of real ML/AI work — and the step where most project failures actually start.",
+      "industryUsageCount": 0,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "computer-vision",
+      "title": "Computer Vision",
+      "careerApplications": "Computer vision roles (autonomous systems, medical imaging, quality inspection) and general AI/ML roles both expect these fundamentals.",
+      "industryUsageCount": 0,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "nlp",
+      "title": "NLP",
+      "careerApplications": "Every LLM/AI-agent role builds on these fundamentals; understanding classical NLP also explains why transformers were such a leap forward.",
+      "industryUsageCount": 0,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "gans",
+      "title": "GANs",
+      "careerApplications": "GANs remain relevant for real-time and fast-inference generation use cases even as diffusion models dominate quality benchmarks.",
+      "industryUsageCount": 0,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "vaes",
+      "title": "VAEs",
+      "careerApplications": "VAEs' structured, smooth latent spaces are still the go-to choice for representation learning and controllable generation tasks GANs and diffusion handle less naturally.",
+      "industryUsageCount": 0,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "diffusion",
+      "title": "Diffusion Models",
+      "careerApplications": "Diffusion models are the current state of the art behind most production image/video generation products — directly relevant to any generative-AI-focused role today.",
+      "industryUsageCount": 0,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "prompt-engineering",
+      "title": "Prompt Engineering",
+      "careerApplications": "Prompt engineering is the fastest, cheapest lever for improving an LLM application's reliability, and is expected working knowledge for any AI-adjacent engineering role today.",
+      "industryUsageCount": 0,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "llm-evaluation-testing",
+      "title": "LLM Evaluation & Testing",
+      "careerApplications": "",
+      "industryUsageCount": 2,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "pytorch",
+      "title": "PyTorch",
+      "careerApplications": "PyTorch is the dominant framework in research and increasingly in production AI engineering roles — hands-on fluency is directly, frequently tested in AI/ML interviews.",
+      "industryUsageCount": 0,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "tensorflow",
+      "title": "TensorFlow",
+      "careerApplications": "TensorFlow (via Keras) remains widely used in production ML systems, especially where mobile/edge deployment (TensorFlow Lite) or mature MLOps tooling matters.",
+      "industryUsageCount": 0,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "software-engineering-practice",
+      "title": "Software Engineering in Practice",
+      "careerApplications": "Directly used in production teams for code review, maintainability, testing, debugging, collaboration, incident follow-up, and shipping changes safely.",
+      "industryUsageCount": 0,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "classical-ai",
+      "title": "Classical AI: Search, Reasoning & Planning",
+      "careerApplications": "Role-specific company use: search, planning, constraint solving, optimization, robotics, games, scheduling, and rule-based decision systems. Keep it as a specialization, not mandatory daily material for every SWE role.",
+      "industryUsageCount": 0,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "reinforcement-learning-post-training",
+      "title": "Reinforcement Learning & Modern LLM Post-Training",
+      "careerApplications": "Role-specific company use: recommendation/decision systems, robotics, RL research, and modern LLM post-training such as preference optimization and RLHF-style pipelines.",
+      "industryUsageCount": 0,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "large-scale-ai",
+      "title": "Large-Scale AI Training & Inference",
+      "careerApplications": "Role-specific company use for ML infrastructure and platform teams that train or serve large models across multiple GPUs or machines.",
+      "industryUsageCount": 0,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "interview-prep",
+      "title": "Interview Preparation",
+      "careerApplications": "Directly prepares you for the ByteDance-style process and others.",
+      "industryUsageCount": 0,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "capstone",
+      "title": "Capstone Portfolio",
+      "careerApplications": "The portfolio proof that converts skill into an offer.",
+      "industryUsageCount": 0,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "resume-prep",
+      "title": "Resume Preparation",
+      "careerApplications": "The resume and portfolio are the gate every application must pass before any human even considers the candidate — polish here directly determines interview volume.",
+      "industryUsageCount": 0,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "company-prep",
+      "title": "Company Preparation",
+      "careerApplications": "Company-specific preparation is what turns general interview skill into a successful outcome at a SPECIFIC employer, including for processes like ByteDance's.",
+      "industryUsageCount": 0,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "influencing-without-authority",
+      "title": "Influencing Without Authority for Engineers",
+      "careerApplications": "",
+      "industryUsageCount": 2,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "embedded-systems",
+      "title": "Embedded Systems & Microcontrollers",
+      "careerApplications": "Role-specific company use in firmware, IoT, robotics, automotive, devices, and hardware-software integration.",
+      "industryUsageCount": 0,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "systems-programming",
+      "title": "Systems Programming",
+      "careerApplications": "Used in infrastructure, performance-sensitive services, runtimes, tooling, operating-system integrations, networking, and low-level debugging roles.",
+      "industryUsageCount": 0,
+      "explicitCompanyUse": true
+    },
+    {
+      "id": "advanced-computer-organization",
+      "title": "Advanced Computer Organization",
+      "careerApplications": "Role-specific company use in performance engineering, compilers, embedded systems, systems software, accelerators, and hardware-adjacent engineering.",
+      "industryUsageCount": 0,
+      "explicitCompanyUse": true
+    }
+  ]
+}
