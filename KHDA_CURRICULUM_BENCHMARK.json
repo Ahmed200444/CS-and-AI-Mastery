@@ -1,0 +1,1218 @@
+{
+  "version": "5.47",
+  "policy": "KHDA benchmark + company-use-only filter",
+  "courses_total": 62,
+  "lessons_total": 800,
+  "sources": {
+    "khda-edoxi": {
+      "provider": "Edoxi Training Institute",
+      "evidence_level": "KHDA directory + official institute syllabus",
+      "khda": "https://web.khda.gov.ae/en/Education-Directory/Training/Training-Details?CenterID=152918",
+      "detail": "https://www.edoxi.com/dubai/courses"
+    },
+    "khda-aptech": {
+      "provider": "Aptech Dubai",
+      "evidence_level": "KHDA directory + official institute syllabus",
+      "khda": "https://web.khda.gov.ae/en/education-directory/Training/Training-Details?CenterID=189",
+      "detail": "https://www.aptech.ae/"
+    },
+    "khda-learnerspoint": {
+      "provider": "Learners Point Academy",
+      "evidence_level": "KHDA directory + official institute syllabus",
+      "khda": "https://web.khda.gov.ae/en/Education-Directory/Training/Training-Details?CenterID=1369",
+      "detail": "https://learnerspoint.org/"
+    },
+    "khda-modern": {
+      "provider": "KHDA-listed Dubai training provider (modern technical titles)",
+      "evidence_level": "KHDA course-title authorization only",
+      "khda": "https://web.khda.gov.ae/en/education-directory/Training/Training-Details?CenterID=500588",
+      "detail": null
+    }
+  },
+  "rows": [
+    {
+      "course_id": "python",
+      "course_title": "Python",
+      "lesson_count": 31,
+      "benchmark_sources": [
+        "khda-edoxi",
+        "khda-aptech",
+        "khda-learnerspoint"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Edoxi Training Institute; KHDA directory + official institute syllabus — Aptech Dubai; KHDA directory + official institute syllabus — Learners Point Academy",
+      "added": [
+        {
+          "course": "python",
+          "lesson": "aptech-py-modules",
+          "added_concepts": [
+            "virtual environments (venv)",
+            "dependency isolation"
+          ]
+        },
+        {
+          "course": "python",
+          "lesson": "py-functions-args",
+          "added_concepts": [
+            "recursion"
+          ]
+        }
+      ],
+      "decision": "expanded",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "dsa",
+      "course_title": "Data Structures & Algorithms",
+      "lesson_count": 20,
+      "benchmark_sources": [
+        "khda-edoxi"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Edoxi Training Institute",
+      "added": [
+        {
+          "course": "dsa",
+          "lesson": "dsa-graphs",
+          "added_concepts": [
+            "Dijkstra shortest path",
+            "minimum spanning tree (Prim/Kruskal)",
+            "union-find / disjoint set"
+          ]
+        }
+      ],
+      "decision": "expanded",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "cpp-dsa",
+      "course_title": "C++ Programming & DSA",
+      "lesson_count": 54,
+      "benchmark_sources": [
+        "khda-edoxi"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Edoxi Training Institute",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "problem-solving",
+      "course_title": "Problem Solving",
+      "lesson_count": 9,
+      "benchmark_sources": [],
+      "evidence": "No direct public detailed syllabus used; audited against adjacent software/AI professional benchmarks and the company-use-only gate.",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "oop",
+      "course_title": "Object-Oriented Programming",
+      "lesson_count": 9,
+      "benchmark_sources": [
+        "khda-edoxi"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Edoxi Training Institute",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "git",
+      "course_title": "Git & GitHub",
+      "lesson_count": 10,
+      "benchmark_sources": [],
+      "evidence": "No direct public detailed syllabus used; audited against adjacent software/AI professional benchmarks and the company-use-only gate.",
+      "added": [
+        {
+          "course": "git",
+          "lesson": "git-pull-requests",
+          "added_concepts": [
+            "branch protection rules",
+            "required CI checks"
+          ]
+        }
+      ],
+      "decision": "expanded",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "linux",
+      "course_title": "Linux & Command Line",
+      "lesson_count": 12,
+      "benchmark_sources": [
+        "khda-aptech"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Aptech Dubai",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "sql",
+      "course_title": "SQL",
+      "lesson_count": 12,
+      "benchmark_sources": [
+        "khda-edoxi",
+        "khda-aptech"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Edoxi Training Institute; KHDA directory + official institute syllabus — Aptech Dubai",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "databases",
+      "course_title": "Databases",
+      "lesson_count": 15,
+      "benchmark_sources": [
+        "khda-edoxi",
+        "khda-aptech"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Edoxi Training Institute; KHDA directory + official institute syllabus — Aptech Dubai",
+      "added": [
+        {
+          "course": "databases",
+          "lesson": "db-mysql-postgresql-production",
+          "added_concepts": [
+            "backup and restore",
+            "replication",
+            "read replicas",
+            "partitioning / sharding"
+          ]
+        }
+      ],
+      "decision": "expanded",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "apis",
+      "course_title": "APIs",
+      "lesson_count": 10,
+      "benchmark_sources": [],
+      "evidence": "No direct public detailed syllabus used; audited against adjacent software/AI professional benchmarks and the company-use-only gate.",
+      "added": [
+        {
+          "course": "apis",
+          "lesson": "apis-error-handling",
+          "added_concepts": [
+            "idempotency keys",
+            "retry with exponential backoff"
+          ]
+        },
+        {
+          "course": "apis",
+          "lesson": "apis-versioning",
+          "added_concepts": [
+            "OpenAPI schema contracts",
+            "webhooks"
+          ]
+        }
+      ],
+      "decision": "expanded",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "backend",
+      "course_title": "Backend Development",
+      "lesson_count": 9,
+      "benchmark_sources": [
+        "khda-edoxi",
+        "khda-aptech",
+        "khda-learnerspoint"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Edoxi Training Institute; KHDA directory + official institute syllabus — Aptech Dubai; KHDA directory + official institute syllabus — Learners Point Academy",
+      "added": [
+        {
+          "course": "backend",
+          "lesson": "be-servers",
+          "added_concepts": [
+            "middleware",
+            "environment-based configuration",
+            "structured logging"
+          ]
+        },
+        {
+          "course": "backend",
+          "lesson": "be-security",
+          "added_concepts": [
+            "CORS",
+            "password hashing",
+            "safe file upload/download"
+          ]
+        }
+      ],
+      "decision": "expanded",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "debugging",
+      "course_title": "Debugging",
+      "lesson_count": 9,
+      "benchmark_sources": [],
+      "evidence": "No direct public detailed syllabus used; audited against adjacent software/AI professional benchmarks and the company-use-only gate.",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "testing",
+      "course_title": "Testing",
+      "lesson_count": 11,
+      "benchmark_sources": [
+        "khda-edoxi",
+        "khda-learnerspoint"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Edoxi Training Institute; KHDA directory + official institute syllabus — Learners Point Academy",
+      "added": [
+        {
+          "course": "testing",
+          "lesson": "testing-pyramid",
+          "added_concepts": [
+            "browser end-to-end automation (Playwright/Selenium)"
+          ]
+        }
+      ],
+      "decision": "expanded",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "networking",
+      "course_title": "Computer Networks",
+      "lesson_count": 13,
+      "benchmark_sources": [],
+      "evidence": "No direct public detailed syllabus used; audited against adjacent software/AI professional benchmarks and the company-use-only gate.",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "system-design",
+      "course_title": "System Design",
+      "lesson_count": 10,
+      "benchmark_sources": [
+        "khda-edoxi",
+        "khda-modern"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Edoxi Training Institute; KHDA course-title authorization only — KHDA-listed Dubai training provider (modern technical titles)",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "deep-learning",
+      "course_title": "Deep Learning",
+      "lesson_count": 10,
+      "benchmark_sources": [
+        "khda-edoxi",
+        "khda-learnerspoint"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Edoxi Training Institute; KHDA directory + official institute syllabus — Learners Point Academy",
+      "added": [
+        {
+          "course": "deep-learning",
+          "lesson": "dl-neurons",
+          "added_concepts": [
+            "weight initialization"
+          ]
+        },
+        {
+          "course": "deep-learning",
+          "lesson": "dl-optimizers",
+          "added_concepts": [
+            "RMSProp",
+            "learning-rate schedules"
+          ]
+        },
+        {
+          "course": "deep-learning",
+          "lesson": "dl-transfer-eval",
+          "added_concepts": [
+            "bias vs variance diagnosis",
+            "hyperparameter tuning"
+          ]
+        },
+        {
+          "course": "deep-learning",
+          "lesson": "dl-cnn-sequence",
+          "added_concepts": [
+            "LSTM / GRU awareness"
+          ]
+        }
+      ],
+      "decision": "expanded",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "transformers",
+      "course_title": "Transformers",
+      "lesson_count": 9,
+      "benchmark_sources": [],
+      "evidence": "No direct public detailed syllabus used; audited against adjacent software/AI professional benchmarks and the company-use-only gate.",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "generative-ai",
+      "course_title": "Generative AI",
+      "lesson_count": 9,
+      "benchmark_sources": [
+        "khda-learnerspoint",
+        "khda-modern"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Learners Point Academy; KHDA course-title authorization only — KHDA-listed Dubai training provider (modern technical titles)",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "llms",
+      "course_title": "Large Language Models",
+      "lesson_count": 9,
+      "benchmark_sources": [
+        "khda-learnerspoint"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Learners Point Academy",
+      "added": [
+        {
+          "course": "llms",
+          "lesson": "llm-instruction-alignment",
+          "added_concepts": [
+            "LoRA / PEFT",
+            "QLoRA"
+          ]
+        },
+        {
+          "course": "llms",
+          "lesson": "llm-cost-compute",
+          "added_concepts": [
+            "LLM API rate limits",
+            "retry/backoff for model APIs",
+            "token-cost budgeting"
+          ]
+        }
+      ],
+      "decision": "expanded",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "rag",
+      "course_title": "Retrieval-Augmented Generation",
+      "lesson_count": 10,
+      "benchmark_sources": [
+        "khda-learnerspoint"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Learners Point Academy",
+      "added": [
+        {
+          "course": "rag",
+          "lesson": "rag-embeddings-vectordb",
+          "added_concepts": [
+            "cosine similarity"
+          ]
+        },
+        {
+          "course": "rag",
+          "lesson": "rag-evaluation",
+          "added_concepts": [
+            "Recall@K",
+            "MRR (mean reciprocal rank)"
+          ]
+        }
+      ],
+      "decision": "expanded",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "ai-agents",
+      "course_title": "AI Agents / Agentic AI",
+      "lesson_count": 21,
+      "benchmark_sources": [
+        "khda-learnerspoint",
+        "khda-modern"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Learners Point Academy; KHDA course-title authorization only — KHDA-listed Dubai training provider (modern technical titles)",
+      "added": [
+        {
+          "course": "ai-agents",
+          "lesson": "agent-planning-reflection",
+          "added_concepts": [
+            "ReAct reasoning-and-action pattern"
+          ]
+        },
+        {
+          "course": "ai-agents",
+          "lesson": "agent-multistep-multiagent",
+          "added_concepts": [
+            "agent orchestration graphs",
+            "LangGraph awareness",
+            "CrewAI awareness"
+          ]
+        },
+        {
+          "course": "ai-agents",
+          "lesson": "agent-errorhandling-eval",
+          "added_concepts": [
+            "agent task-completion rate",
+            "agent latency and tool-call observability"
+          ]
+        }
+      ],
+      "decision": "expanded",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "docker",
+      "course_title": "Docker",
+      "lesson_count": 8,
+      "benchmark_sources": [
+        "khda-edoxi",
+        "khda-learnerspoint"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Edoxi Training Institute; KHDA directory + official institute syllabus — Learners Point Academy",
+      "added": [
+        {
+          "course": "docker",
+          "lesson": "dk-image-container",
+          "added_concepts": [
+            "container registry"
+          ]
+        },
+        {
+          "course": "docker",
+          "lesson": "dk-dockerfile",
+          "added_concepts": [
+            "HEALTHCHECK"
+          ]
+        }
+      ],
+      "decision": "expanded",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "huggingface",
+      "course_title": "Hugging Face",
+      "lesson_count": 14,
+      "benchmark_sources": [],
+      "evidence": "No direct public detailed syllabus used; audited against adjacent software/AI professional benchmarks and the company-use-only gate.",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "web-dev",
+      "course_title": "Full-Stack Web Integration",
+      "lesson_count": 6,
+      "benchmark_sources": [
+        "khda-edoxi",
+        "khda-aptech",
+        "khda-learnerspoint"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Edoxi Training Institute; KHDA directory + official institute syllabus — Aptech Dubai; KHDA directory + official institute syllabus — Learners Point Academy",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "comparch-os",
+      "course_title": "Computer Architecture & Operating Systems",
+      "lesson_count": 8,
+      "benchmark_sources": [],
+      "evidence": "No direct public detailed syllabus used; audited against adjacent software/AI professional benchmarks and the company-use-only gate.",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "digital-hardware",
+      "course_title": "Digital Systems & Computer Hardware",
+      "lesson_count": 15,
+      "benchmark_sources": [],
+      "evidence": "No direct public detailed syllabus used; audited against adjacent software/AI professional benchmarks and the company-use-only gate.",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "distributed-systems",
+      "course_title": "Distributed Systems & Concurrency",
+      "lesson_count": 17,
+      "benchmark_sources": [
+        "khda-edoxi"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Edoxi Training Institute",
+      "added": [
+        {
+          "course": "distributed-systems",
+          "lesson": "ds-messaging-eventdriven",
+          "added_concepts": [
+            "at-least-once delivery",
+            "at-most-once delivery",
+            "exactly-once semantics caveat",
+            "backpressure"
+          ]
+        }
+      ],
+      "decision": "expanded",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "deployment",
+      "course_title": "Model & App Deployment",
+      "lesson_count": 10,
+      "benchmark_sources": [
+        "khda-edoxi",
+        "khda-learnerspoint"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Edoxi Training Institute; KHDA directory + official institute syllabus — Learners Point Academy",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "kubernetes",
+      "course_title": "Kubernetes",
+      "lesson_count": 12,
+      "benchmark_sources": [
+        "khda-edoxi",
+        "khda-learnerspoint"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Edoxi Training Institute; KHDA directory + official institute syllabus — Learners Point Academy",
+      "added": [
+        {
+          "course": "kubernetes",
+          "lesson": "k8s-pods",
+          "added_concepts": [
+            "readiness probe",
+            "liveness probe"
+          ]
+        },
+        {
+          "course": "kubernetes",
+          "lesson": "k8s-troubleshooting",
+          "added_concepts": [
+            "probe failures"
+          ]
+        }
+      ],
+      "decision": "expanded",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "cloud-computing",
+      "course_title": "Cloud Computing",
+      "lesson_count": 8,
+      "benchmark_sources": [
+        "khda-edoxi",
+        "khda-aptech",
+        "khda-modern"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Edoxi Training Institute; KHDA directory + official institute syllabus — Aptech Dubai; KHDA course-title authorization only — KHDA-listed Dubai training provider (modern technical titles)",
+      "added": [
+        {
+          "course": "cloud-computing",
+          "lesson": "cc-what-is",
+          "added_concepts": [
+            "cloud cost estimation and budgets"
+          ]
+        },
+        {
+          "course": "cloud-computing",
+          "lesson": "cc-autoscaling",
+          "added_concepts": [
+            "cloud monitoring and utilization metrics"
+          ]
+        }
+      ],
+      "decision": "expanded",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "software-architecture",
+      "course_title": "Software Architecture & Design Patterns",
+      "lesson_count": 16,
+      "benchmark_sources": [
+        "khda-edoxi"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Edoxi Training Institute",
+      "added": [
+        {
+          "course": "software-architecture",
+          "lesson": "sa-architectural-styles",
+          "added_concepts": [
+            "event-driven architecture",
+            "message broker (Kafka/RabbitMQ awareness)"
+          ]
+        },
+        {
+          "course": "software-architecture",
+          "lesson": "sa-reading-reviewing",
+          "added_concepts": [
+            "load testing",
+            "bottleneck analysis"
+          ]
+        }
+      ],
+      "decision": "expanded",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "cicd",
+      "course_title": "CI/CD: Continuous Integration & Deployment",
+      "lesson_count": 15,
+      "benchmark_sources": [
+        "khda-edoxi",
+        "khda-learnerspoint"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Edoxi Training Institute; KHDA directory + official institute syllabus — Learners Point Academy",
+      "added": [
+        {
+          "course": "cicd",
+          "lesson": "cicd-continuous-integration",
+          "added_concepts": [
+            "branch protection",
+            "required status checks"
+          ]
+        }
+      ],
+      "decision": "expanded",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "mlops",
+      "course_title": "MLOps / Production AI",
+      "lesson_count": 17,
+      "benchmark_sources": [
+        "khda-learnerspoint",
+        "khda-modern"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Learners Point Academy; KHDA course-title authorization only — KHDA-listed Dubai training provider (modern technical titles)",
+      "added": [
+        {
+          "course": "mlops",
+          "lesson": "mlops-reproducible-training",
+          "added_concepts": [
+            "experiment tracking"
+          ]
+        },
+        {
+          "course": "mlops",
+          "lesson": "mlops-monitoring",
+          "added_concepts": [
+            "data validation / schema checks"
+          ]
+        },
+        {
+          "course": "mlops",
+          "lesson": "mlops-registry",
+          "added_concepts": [
+            "feature store awareness"
+          ]
+        }
+      ],
+      "decision": "expanded",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "observability",
+      "course_title": "Observability & Monitoring",
+      "lesson_count": 15,
+      "benchmark_sources": [],
+      "evidence": "No direct public detailed syllabus used; audited against adjacent software/AI professional benchmarks and the company-use-only gate.",
+      "added": [
+        {
+          "course": "observability",
+          "lesson": "obs-metric-types",
+          "added_concepts": [
+            "Prometheus metrics"
+          ]
+        },
+        {
+          "course": "observability",
+          "lesson": "obs-dashboards",
+          "added_concepts": [
+            "Grafana dashboards"
+          ]
+        }
+      ],
+      "decision": "expanded",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "data-engineering",
+      "course_title": "Data Engineering & Data Pipelines",
+      "lesson_count": 17,
+      "benchmark_sources": [
+        "khda-edoxi"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Edoxi Training Institute",
+      "added": [
+        {
+          "course": "data-engineering",
+          "lesson": "deng-schema-evolution",
+          "added_concepts": [
+            "Schema Registry"
+          ]
+        },
+        {
+          "course": "data-engineering",
+          "lesson": "deng-kafka",
+          "added_concepts": [
+            "Kafka Connect"
+          ]
+        }
+      ],
+      "decision": "expanded",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "ai-system-design",
+      "course_title": "AI System Design",
+      "lesson_count": 15,
+      "benchmark_sources": [],
+      "evidence": "No direct public detailed syllabus used; audited against adjacent software/AI professional benchmarks and the company-use-only gate.",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "secure-ai-applications",
+      "course_title": "Secure AI Applications",
+      "lesson_count": 15,
+      "benchmark_sources": [],
+      "evidence": "No direct public detailed syllabus used; audited against adjacent software/AI professional benchmarks and the company-use-only gate.",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "frontend-dev",
+      "course_title": "Frontend Development",
+      "lesson_count": 7,
+      "benchmark_sources": [
+        "khda-edoxi",
+        "khda-aptech",
+        "khda-learnerspoint"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Edoxi Training Institute; KHDA directory + official institute syllabus — Aptech Dubai; KHDA directory + official institute syllabus — Learners Point Academy",
+      "added": [
+        {
+          "course": "frontend-dev",
+          "lesson": "fe-react-basics",
+          "added_concepts": [
+            "useEffect for side effects",
+            "API data fetching",
+            "loading and error states"
+          ]
+        },
+        {
+          "course": "frontend-dev",
+          "lesson": "fe-architecture",
+          "added_concepts": [
+            "client-side routing"
+          ]
+        }
+      ],
+      "decision": "expanded",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "cybersecurity",
+      "course_title": "Cybersecurity Fundamentals",
+      "lesson_count": 10,
+      "benchmark_sources": [
+        "khda-edoxi"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Edoxi Training Institute",
+      "added": [
+        {
+          "course": "cybersecurity",
+          "lesson": "cyb-authauthz",
+          "added_concepts": [
+            "multi-factor authentication (MFA)"
+          ]
+        },
+        {
+          "course": "cybersecurity",
+          "lesson": "cyb-network",
+          "added_concepts": [
+            "network segmentation",
+            "IDS/IPS awareness",
+            "TLS certificates / PKI"
+          ]
+        },
+        {
+          "course": "cybersecurity",
+          "lesson": "cyb-testing",
+          "added_concepts": [
+            "vulnerability assessment / scanning"
+          ]
+        },
+        {
+          "course": "cybersecurity",
+          "lesson": "cyb-incident-sdlc",
+          "added_concepts": [
+            "incident evidence and log preservation"
+          ]
+        }
+      ],
+      "decision": "expanded",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "ai-ml",
+      "course_title": "AI / Machine Learning",
+      "lesson_count": 12,
+      "benchmark_sources": [
+        "khda-edoxi",
+        "khda-aptech",
+        "khda-learnerspoint"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Edoxi Training Institute; KHDA directory + official institute syllabus — Aptech Dubai; KHDA directory + official institute syllabus — Learners Point Academy",
+      "added": [
+        {
+          "course": "ai-ml",
+          "lesson": "ml-classification",
+          "added_concepts": [
+            "k-nearest neighbors (KNN)",
+            "Naive Bayes",
+            "decision tree",
+            "random forest",
+            "gradient boosting / XGBoost"
+          ]
+        },
+        {
+          "course": "ai-ml",
+          "lesson": "ml-unsupervised",
+          "added_concepts": [
+            "PCA dimensionality reduction"
+          ]
+        }
+      ],
+      "decision": "expanded",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "data-science",
+      "course_title": "Data Science",
+      "lesson_count": 11,
+      "benchmark_sources": [
+        "khda-edoxi",
+        "khda-aptech",
+        "khda-learnerspoint"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Edoxi Training Institute; KHDA directory + official institute syllabus — Aptech Dubai; KHDA directory + official institute syllabus — Learners Point Academy",
+      "added": [
+        {
+          "course": "data-science",
+          "lesson": "ds-pandas",
+          "added_concepts": [
+            "DataFrame merge / join"
+          ]
+        },
+        {
+          "course": "data-science",
+          "lesson": "ds-stats",
+          "added_concepts": [
+            "confidence interval intuition",
+            "hypothesis testing",
+            "A/B testing",
+            "correlation vs causation"
+          ]
+        },
+        {
+          "course": "data-science",
+          "lesson": "ds-eda",
+          "added_concepts": [
+            "time-series trend and seasonality"
+          ]
+        }
+      ],
+      "decision": "expanded",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "computer-vision",
+      "course_title": "Computer Vision",
+      "lesson_count": 9,
+      "benchmark_sources": [
+        "khda-edoxi"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Edoxi Training Institute",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "nlp",
+      "course_title": "NLP",
+      "lesson_count": 9,
+      "benchmark_sources": [
+        "khda-edoxi"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Edoxi Training Institute",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "gans",
+      "course_title": "GANs",
+      "lesson_count": 11,
+      "benchmark_sources": [],
+      "evidence": "No direct public detailed syllabus used; audited against adjacent software/AI professional benchmarks and the company-use-only gate.",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "vaes",
+      "course_title": "VAEs",
+      "lesson_count": 11,
+      "benchmark_sources": [],
+      "evidence": "No direct public detailed syllabus used; audited against adjacent software/AI professional benchmarks and the company-use-only gate.",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "diffusion",
+      "course_title": "Diffusion Models",
+      "lesson_count": 12,
+      "benchmark_sources": [],
+      "evidence": "No direct public detailed syllabus used; audited against adjacent software/AI professional benchmarks and the company-use-only gate.",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "prompt-engineering",
+      "course_title": "Prompt Engineering",
+      "lesson_count": 9,
+      "benchmark_sources": [
+        "khda-learnerspoint"
+      ],
+      "evidence": "KHDA directory + official institute syllabus — Learners Point Academy",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "llm-evaluation-testing",
+      "course_title": "LLM Evaluation & Testing",
+      "lesson_count": 15,
+      "benchmark_sources": [],
+      "evidence": "No direct public detailed syllabus used; audited against adjacent software/AI professional benchmarks and the company-use-only gate.",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "pytorch",
+      "course_title": "PyTorch",
+      "lesson_count": 9,
+      "benchmark_sources": [],
+      "evidence": "No direct public detailed syllabus used; audited against adjacent software/AI professional benchmarks and the company-use-only gate.",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "tensorflow",
+      "course_title": "TensorFlow",
+      "lesson_count": 9,
+      "benchmark_sources": [],
+      "evidence": "No direct public detailed syllabus used; audited against adjacent software/AI professional benchmarks and the company-use-only gate.",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "software-engineering-practice",
+      "course_title": "Software Engineering in Practice",
+      "lesson_count": 20,
+      "benchmark_sources": [],
+      "evidence": "No direct public detailed syllabus used; audited against adjacent software/AI professional benchmarks and the company-use-only gate.",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "classical-ai",
+      "course_title": "Classical AI: Search, Reasoning & Planning",
+      "lesson_count": 20,
+      "benchmark_sources": [],
+      "evidence": "No direct public detailed syllabus used; audited against adjacent software/AI professional benchmarks and the company-use-only gate.",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "reinforcement-learning-post-training",
+      "course_title": "Reinforcement Learning & Modern LLM Post-Training",
+      "lesson_count": 26,
+      "benchmark_sources": [
+        "khda-modern"
+      ],
+      "evidence": "KHDA course-title authorization only — KHDA-listed Dubai training provider (modern technical titles)",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "large-scale-ai",
+      "course_title": "Large-Scale AI Training & Inference",
+      "lesson_count": 22,
+      "benchmark_sources": [],
+      "evidence": "No direct public detailed syllabus used; audited against adjacent software/AI professional benchmarks and the company-use-only gate.",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "interview-prep",
+      "course_title": "Interview Preparation",
+      "lesson_count": 9,
+      "benchmark_sources": [],
+      "evidence": "No direct public detailed syllabus used; audited against adjacent software/AI professional benchmarks and the company-use-only gate.",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "capstone",
+      "course_title": "Capstone Portfolio",
+      "lesson_count": 1,
+      "benchmark_sources": [],
+      "evidence": "No direct public detailed syllabus used; audited against adjacent software/AI professional benchmarks and the company-use-only gate.",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "resume-prep",
+      "course_title": "Resume Preparation",
+      "lesson_count": 9,
+      "benchmark_sources": [],
+      "evidence": "No direct public detailed syllabus used; audited against adjacent software/AI professional benchmarks and the company-use-only gate.",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "company-prep",
+      "course_title": "Company Preparation",
+      "lesson_count": 10,
+      "benchmark_sources": [],
+      "evidence": "No direct public detailed syllabus used; audited against adjacent software/AI professional benchmarks and the company-use-only gate.",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "influencing-without-authority",
+      "course_title": "Influencing Without Authority for Engineers",
+      "lesson_count": 15,
+      "benchmark_sources": [],
+      "evidence": "No direct public detailed syllabus used; audited against adjacent software/AI professional benchmarks and the company-use-only gate.",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "embedded-systems",
+      "course_title": "Embedded Systems & Microcontrollers",
+      "lesson_count": 8,
+      "benchmark_sources": [],
+      "evidence": "No direct public detailed syllabus used; audited against adjacent software/AI professional benchmarks and the company-use-only gate.",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "systems-programming",
+      "course_title": "Systems Programming",
+      "lesson_count": 8,
+      "benchmark_sources": [],
+      "evidence": "No direct public detailed syllabus used; audited against adjacent software/AI professional benchmarks and the company-use-only gate.",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    },
+    {
+      "course_id": "advanced-computer-organization",
+      "course_title": "Advanced Computer Organization",
+      "lesson_count": 8,
+      "benchmark_sources": [],
+      "evidence": "No direct public detailed syllabus used; audited against adjacent software/AI professional benchmarks and the company-use-only gate.",
+      "added": [],
+      "decision": "retained-no-gap",
+      "company_use_gate": "Only skills with a plausible build/debug/test/design/deploy/operate/secure/optimize/analyze/evaluate use in professional work are retained. No addition was made solely for certificate coverage or theory completeness.",
+      "status": "verified"
+    }
+  ],
+  "additions_count": 89,
+  "affected_lessons_count": 49,
+  "notes": "KHDA directory entries confirm institute/course-title availability. Detailed module-level syllabus comparisons come from the institutes’ own public course pages. The audit does not claim that every sentence/topic on an institute webpage is separately approved by KHDA."
+}

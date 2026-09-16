@@ -1,0 +1,572 @@
+{
+  "version": 1,
+  "coursePages": 62,
+  "evergreenPages": 62,
+  "studyExamplePages": 62,
+  "lessons": 800,
+  "expandedLessons": 0,
+  "sourceExamples": 895,
+  "studyExamplesPlannedMinimum": 4000,
+  "studyExamplesPlannedMaximum": 6400,
+  "promise": "Every generated lesson loads the current Study Examples system, which provides a distinct example for every key concept plus integration and edge-case practice.",
+  "courses": [
+    {
+      "id": "advanced-computer-organization",
+      "lessons": 8,
+      "expandedLessons": 0,
+      "sourceExamples": 8,
+      "studyExamplesPlannedMinimum": 40,
+      "studyExamplesPlannedMaximum": 64,
+      "evergreenLayer": true
+    },
+    {
+      "id": "ai-agents",
+      "lessons": 21,
+      "expandedLessons": 0,
+      "sourceExamples": 21,
+      "studyExamplesPlannedMinimum": 105,
+      "studyExamplesPlannedMaximum": 168,
+      "evergreenLayer": true
+    },
+    {
+      "id": "ai-ml",
+      "lessons": 12,
+      "expandedLessons": 0,
+      "sourceExamples": 12,
+      "studyExamplesPlannedMinimum": 60,
+      "studyExamplesPlannedMaximum": 96,
+      "evergreenLayer": true
+    },
+    {
+      "id": "ai-system-design",
+      "lessons": 15,
+      "expandedLessons": 0,
+      "sourceExamples": 15,
+      "studyExamplesPlannedMinimum": 75,
+      "studyExamplesPlannedMaximum": 120,
+      "evergreenLayer": true
+    },
+    {
+      "id": "apis",
+      "lessons": 10,
+      "expandedLessons": 0,
+      "sourceExamples": 10,
+      "studyExamplesPlannedMinimum": 50,
+      "studyExamplesPlannedMaximum": 80,
+      "evergreenLayer": true
+    },
+    {
+      "id": "backend",
+      "lessons": 9,
+      "expandedLessons": 0,
+      "sourceExamples": 9,
+      "studyExamplesPlannedMinimum": 45,
+      "studyExamplesPlannedMaximum": 72,
+      "evergreenLayer": true
+    },
+    {
+      "id": "capstone",
+      "lessons": 1,
+      "expandedLessons": 0,
+      "sourceExamples": 1,
+      "studyExamplesPlannedMinimum": 5,
+      "studyExamplesPlannedMaximum": 8,
+      "evergreenLayer": true
+    },
+    {
+      "id": "cicd",
+      "lessons": 15,
+      "expandedLessons": 0,
+      "sourceExamples": 15,
+      "studyExamplesPlannedMinimum": 75,
+      "studyExamplesPlannedMaximum": 120,
+      "evergreenLayer": true
+    },
+    {
+      "id": "classical-ai",
+      "lessons": 20,
+      "expandedLessons": 0,
+      "sourceExamples": 20,
+      "studyExamplesPlannedMinimum": 100,
+      "studyExamplesPlannedMaximum": 160,
+      "evergreenLayer": true
+    },
+    {
+      "id": "cloud-computing",
+      "lessons": 8,
+      "expandedLessons": 0,
+      "sourceExamples": 8,
+      "studyExamplesPlannedMinimum": 40,
+      "studyExamplesPlannedMaximum": 64,
+      "evergreenLayer": true
+    },
+    {
+      "id": "company-prep",
+      "lessons": 10,
+      "expandedLessons": 0,
+      "sourceExamples": 10,
+      "studyExamplesPlannedMinimum": 50,
+      "studyExamplesPlannedMaximum": 80,
+      "evergreenLayer": true
+    },
+    {
+      "id": "comparch-os",
+      "lessons": 8,
+      "expandedLessons": 0,
+      "sourceExamples": 8,
+      "studyExamplesPlannedMinimum": 40,
+      "studyExamplesPlannedMaximum": 64,
+      "evergreenLayer": true
+    },
+    {
+      "id": "computer-vision",
+      "lessons": 9,
+      "expandedLessons": 0,
+      "sourceExamples": 9,
+      "studyExamplesPlannedMinimum": 45,
+      "studyExamplesPlannedMaximum": 72,
+      "evergreenLayer": true
+    },
+    {
+      "id": "cpp-dsa",
+      "lessons": 54,
+      "expandedLessons": 0,
+      "sourceExamples": 54,
+      "studyExamplesPlannedMinimum": 270,
+      "studyExamplesPlannedMaximum": 432,
+      "evergreenLayer": true
+    },
+    {
+      "id": "cybersecurity",
+      "lessons": 10,
+      "expandedLessons": 0,
+      "sourceExamples": 10,
+      "studyExamplesPlannedMinimum": 50,
+      "studyExamplesPlannedMaximum": 80,
+      "evergreenLayer": true
+    },
+    {
+      "id": "data-engineering",
+      "lessons": 17,
+      "expandedLessons": 0,
+      "sourceExamples": 17,
+      "studyExamplesPlannedMinimum": 85,
+      "studyExamplesPlannedMaximum": 136,
+      "evergreenLayer": true
+    },
+    {
+      "id": "data-science",
+      "lessons": 11,
+      "expandedLessons": 0,
+      "sourceExamples": 11,
+      "studyExamplesPlannedMinimum": 55,
+      "studyExamplesPlannedMaximum": 88,
+      "evergreenLayer": true
+    },
+    {
+      "id": "databases",
+      "lessons": 15,
+      "expandedLessons": 0,
+      "sourceExamples": 15,
+      "studyExamplesPlannedMinimum": 75,
+      "studyExamplesPlannedMaximum": 120,
+      "evergreenLayer": true
+    },
+    {
+      "id": "debugging",
+      "lessons": 9,
+      "expandedLessons": 0,
+      "sourceExamples": 9,
+      "studyExamplesPlannedMinimum": 45,
+      "studyExamplesPlannedMaximum": 72,
+      "evergreenLayer": true
+    },
+    {
+      "id": "deep-learning",
+      "lessons": 10,
+      "expandedLessons": 0,
+      "sourceExamples": 10,
+      "studyExamplesPlannedMinimum": 50,
+      "studyExamplesPlannedMaximum": 80,
+      "evergreenLayer": true
+    },
+    {
+      "id": "deployment",
+      "lessons": 10,
+      "expandedLessons": 0,
+      "sourceExamples": 10,
+      "studyExamplesPlannedMinimum": 50,
+      "studyExamplesPlannedMaximum": 80,
+      "evergreenLayer": true
+    },
+    {
+      "id": "diffusion",
+      "lessons": 12,
+      "expandedLessons": 0,
+      "sourceExamples": 12,
+      "studyExamplesPlannedMinimum": 60,
+      "studyExamplesPlannedMaximum": 96,
+      "evergreenLayer": true
+    },
+    {
+      "id": "digital-hardware",
+      "lessons": 15,
+      "expandedLessons": 0,
+      "sourceExamples": 15,
+      "studyExamplesPlannedMinimum": 75,
+      "studyExamplesPlannedMaximum": 120,
+      "evergreenLayer": true
+    },
+    {
+      "id": "distributed-systems",
+      "lessons": 17,
+      "expandedLessons": 0,
+      "sourceExamples": 17,
+      "studyExamplesPlannedMinimum": 85,
+      "studyExamplesPlannedMaximum": 136,
+      "evergreenLayer": true
+    },
+    {
+      "id": "docker",
+      "lessons": 8,
+      "expandedLessons": 0,
+      "sourceExamples": 8,
+      "studyExamplesPlannedMinimum": 40,
+      "studyExamplesPlannedMaximum": 64,
+      "evergreenLayer": true
+    },
+    {
+      "id": "dsa",
+      "lessons": 20,
+      "expandedLessons": 0,
+      "sourceExamples": 67,
+      "studyExamplesPlannedMinimum": 100,
+      "studyExamplesPlannedMaximum": 160,
+      "evergreenLayer": true
+    },
+    {
+      "id": "embedded-systems",
+      "lessons": 8,
+      "expandedLessons": 0,
+      "sourceExamples": 8,
+      "studyExamplesPlannedMinimum": 40,
+      "studyExamplesPlannedMaximum": 64,
+      "evergreenLayer": true
+    },
+    {
+      "id": "frontend-dev",
+      "lessons": 7,
+      "expandedLessons": 0,
+      "sourceExamples": 7,
+      "studyExamplesPlannedMinimum": 35,
+      "studyExamplesPlannedMaximum": 56,
+      "evergreenLayer": true
+    },
+    {
+      "id": "gans",
+      "lessons": 11,
+      "expandedLessons": 0,
+      "sourceExamples": 11,
+      "studyExamplesPlannedMinimum": 55,
+      "studyExamplesPlannedMaximum": 88,
+      "evergreenLayer": true
+    },
+    {
+      "id": "generative-ai",
+      "lessons": 9,
+      "expandedLessons": 0,
+      "sourceExamples": 9,
+      "studyExamplesPlannedMinimum": 45,
+      "studyExamplesPlannedMaximum": 72,
+      "evergreenLayer": true
+    },
+    {
+      "id": "git",
+      "lessons": 10,
+      "expandedLessons": 0,
+      "sourceExamples": 10,
+      "studyExamplesPlannedMinimum": 50,
+      "studyExamplesPlannedMaximum": 80,
+      "evergreenLayer": true
+    },
+    {
+      "id": "huggingface",
+      "lessons": 14,
+      "expandedLessons": 0,
+      "sourceExamples": 14,
+      "studyExamplesPlannedMinimum": 70,
+      "studyExamplesPlannedMaximum": 112,
+      "evergreenLayer": true
+    },
+    {
+      "id": "influencing-without-authority",
+      "lessons": 15,
+      "expandedLessons": 0,
+      "sourceExamples": 15,
+      "studyExamplesPlannedMinimum": 75,
+      "studyExamplesPlannedMaximum": 120,
+      "evergreenLayer": true
+    },
+    {
+      "id": "interview-prep",
+      "lessons": 9,
+      "expandedLessons": 0,
+      "sourceExamples": 9,
+      "studyExamplesPlannedMinimum": 45,
+      "studyExamplesPlannedMaximum": 72,
+      "evergreenLayer": true
+    },
+    {
+      "id": "kubernetes",
+      "lessons": 12,
+      "expandedLessons": 0,
+      "sourceExamples": 12,
+      "studyExamplesPlannedMinimum": 60,
+      "studyExamplesPlannedMaximum": 96,
+      "evergreenLayer": true
+    },
+    {
+      "id": "large-scale-ai",
+      "lessons": 22,
+      "expandedLessons": 0,
+      "sourceExamples": 22,
+      "studyExamplesPlannedMinimum": 110,
+      "studyExamplesPlannedMaximum": 176,
+      "evergreenLayer": true
+    },
+    {
+      "id": "linux",
+      "lessons": 12,
+      "expandedLessons": 0,
+      "sourceExamples": 12,
+      "studyExamplesPlannedMinimum": 60,
+      "studyExamplesPlannedMaximum": 96,
+      "evergreenLayer": true
+    },
+    {
+      "id": "llm-evaluation-testing",
+      "lessons": 15,
+      "expandedLessons": 0,
+      "sourceExamples": 15,
+      "studyExamplesPlannedMinimum": 75,
+      "studyExamplesPlannedMaximum": 120,
+      "evergreenLayer": true
+    },
+    {
+      "id": "llms",
+      "lessons": 9,
+      "expandedLessons": 0,
+      "sourceExamples": 9,
+      "studyExamplesPlannedMinimum": 45,
+      "studyExamplesPlannedMaximum": 72,
+      "evergreenLayer": true
+    },
+    {
+      "id": "mlops",
+      "lessons": 17,
+      "expandedLessons": 0,
+      "sourceExamples": 17,
+      "studyExamplesPlannedMinimum": 85,
+      "studyExamplesPlannedMaximum": 136,
+      "evergreenLayer": true
+    },
+    {
+      "id": "networking",
+      "lessons": 13,
+      "expandedLessons": 0,
+      "sourceExamples": 13,
+      "studyExamplesPlannedMinimum": 65,
+      "studyExamplesPlannedMaximum": 104,
+      "evergreenLayer": true
+    },
+    {
+      "id": "nlp",
+      "lessons": 9,
+      "expandedLessons": 0,
+      "sourceExamples": 9,
+      "studyExamplesPlannedMinimum": 45,
+      "studyExamplesPlannedMaximum": 72,
+      "evergreenLayer": true
+    },
+    {
+      "id": "observability",
+      "lessons": 15,
+      "expandedLessons": 0,
+      "sourceExamples": 15,
+      "studyExamplesPlannedMinimum": 75,
+      "studyExamplesPlannedMaximum": 120,
+      "evergreenLayer": true
+    },
+    {
+      "id": "oop",
+      "lessons": 9,
+      "expandedLessons": 0,
+      "sourceExamples": 9,
+      "studyExamplesPlannedMinimum": 45,
+      "studyExamplesPlannedMaximum": 72,
+      "evergreenLayer": true
+    },
+    {
+      "id": "problem-solving",
+      "lessons": 9,
+      "expandedLessons": 0,
+      "sourceExamples": 9,
+      "studyExamplesPlannedMinimum": 45,
+      "studyExamplesPlannedMaximum": 72,
+      "evergreenLayer": true
+    },
+    {
+      "id": "prompt-engineering",
+      "lessons": 9,
+      "expandedLessons": 0,
+      "sourceExamples": 9,
+      "studyExamplesPlannedMinimum": 45,
+      "studyExamplesPlannedMaximum": 72,
+      "evergreenLayer": true
+    },
+    {
+      "id": "python",
+      "lessons": 31,
+      "expandedLessons": 0,
+      "sourceExamples": 79,
+      "studyExamplesPlannedMinimum": 155,
+      "studyExamplesPlannedMaximum": 248,
+      "evergreenLayer": true
+    },
+    {
+      "id": "pytorch",
+      "lessons": 9,
+      "expandedLessons": 0,
+      "sourceExamples": 9,
+      "studyExamplesPlannedMinimum": 45,
+      "studyExamplesPlannedMaximum": 72,
+      "evergreenLayer": true
+    },
+    {
+      "id": "rag",
+      "lessons": 10,
+      "expandedLessons": 0,
+      "sourceExamples": 10,
+      "studyExamplesPlannedMinimum": 50,
+      "studyExamplesPlannedMaximum": 80,
+      "evergreenLayer": true
+    },
+    {
+      "id": "reinforcement-learning-post-training",
+      "lessons": 26,
+      "expandedLessons": 0,
+      "sourceExamples": 26,
+      "studyExamplesPlannedMinimum": 130,
+      "studyExamplesPlannedMaximum": 208,
+      "evergreenLayer": true
+    },
+    {
+      "id": "resume-prep",
+      "lessons": 9,
+      "expandedLessons": 0,
+      "sourceExamples": 9,
+      "studyExamplesPlannedMinimum": 45,
+      "studyExamplesPlannedMaximum": 72,
+      "evergreenLayer": true
+    },
+    {
+      "id": "secure-ai-applications",
+      "lessons": 15,
+      "expandedLessons": 0,
+      "sourceExamples": 15,
+      "studyExamplesPlannedMinimum": 75,
+      "studyExamplesPlannedMaximum": 120,
+      "evergreenLayer": true
+    },
+    {
+      "id": "software-architecture",
+      "lessons": 16,
+      "expandedLessons": 0,
+      "sourceExamples": 16,
+      "studyExamplesPlannedMinimum": 80,
+      "studyExamplesPlannedMaximum": 128,
+      "evergreenLayer": true
+    },
+    {
+      "id": "software-engineering-practice",
+      "lessons": 20,
+      "expandedLessons": 0,
+      "sourceExamples": 20,
+      "studyExamplesPlannedMinimum": 100,
+      "studyExamplesPlannedMaximum": 160,
+      "evergreenLayer": true
+    },
+    {
+      "id": "sql",
+      "lessons": 12,
+      "expandedLessons": 0,
+      "sourceExamples": 12,
+      "studyExamplesPlannedMinimum": 60,
+      "studyExamplesPlannedMaximum": 96,
+      "evergreenLayer": true
+    },
+    {
+      "id": "system-design",
+      "lessons": 10,
+      "expandedLessons": 0,
+      "sourceExamples": 10,
+      "studyExamplesPlannedMinimum": 50,
+      "studyExamplesPlannedMaximum": 80,
+      "evergreenLayer": true
+    },
+    {
+      "id": "systems-programming",
+      "lessons": 8,
+      "expandedLessons": 0,
+      "sourceExamples": 8,
+      "studyExamplesPlannedMinimum": 40,
+      "studyExamplesPlannedMaximum": 64,
+      "evergreenLayer": true
+    },
+    {
+      "id": "tensorflow",
+      "lessons": 9,
+      "expandedLessons": 0,
+      "sourceExamples": 9,
+      "studyExamplesPlannedMinimum": 45,
+      "studyExamplesPlannedMaximum": 72,
+      "evergreenLayer": true
+    },
+    {
+      "id": "testing",
+      "lessons": 11,
+      "expandedLessons": 0,
+      "sourceExamples": 11,
+      "studyExamplesPlannedMinimum": 55,
+      "studyExamplesPlannedMaximum": 88,
+      "evergreenLayer": true
+    },
+    {
+      "id": "transformers",
+      "lessons": 9,
+      "expandedLessons": 0,
+      "sourceExamples": 9,
+      "studyExamplesPlannedMinimum": 45,
+      "studyExamplesPlannedMaximum": 72,
+      "evergreenLayer": true
+    },
+    {
+      "id": "vaes",
+      "lessons": 11,
+      "expandedLessons": 0,
+      "sourceExamples": 11,
+      "studyExamplesPlannedMinimum": 55,
+      "studyExamplesPlannedMaximum": 88,
+      "evergreenLayer": true
+    },
+    {
+      "id": "web-dev",
+      "lessons": 6,
+      "expandedLessons": 0,
+      "sourceExamples": 6,
+      "studyExamplesPlannedMinimum": 30,
+      "studyExamplesPlannedMaximum": 48,
+      "evergreenLayer": true
+    }
+  ]
+}

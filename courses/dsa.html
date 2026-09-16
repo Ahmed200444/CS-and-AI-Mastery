@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta data-csai-head-preload="calmfast2"/><link as="script" href="/runtime/pyodide/pyodide.js" rel="preload"/><link as="fetch" crossorigin="anonymous" href="/runtime/pyodide/pyodide.asm.wasm" rel="prefetch"/><link as="fetch" crossorigin="anonymous" href="/runtime/pyodide/python_stdlib.zip" rel="prefetch"/><link as="script" href="../assets/python-terminal-worker.js?v=20260822-v567" rel="preload"/><meta charset="utf-8"><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Data Structures &amp; Algorithms — CS &amp; AI Mastery</title><script src="../assets/runtime-inline/courses-dsa-001.js?v=20260822-v567"></script><style>
+:root{color-scheme:light;--bg:#f4f7fb;--panel:#fff;--text:#172231;--muted:#5d6c7c;--border:#d8e1ea;--pill:#e8f1f8;--pilltext:#174b72;--accent:#17649a;--code:#101827;--note:#fff7e7}
+html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#edf3f8;--muted:#c6d1da;--border:#344352;--pill:#223446;--pilltext:#b9dcf5;--accent:#4da3df;--code:#0b111b;--note:#2b2417}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:1100px;margin:auto;padding:18px 20px 110px}.top{position:sticky;top:0;z-index:4;display:flex;justify-content:space-between;gap:10px;padding:10px 0;background:var(--bg)}.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid #b8c7d6;border-radius:9px;padding:9px 13px;background:var(--panel);color:var(--text);font:inherit;font-weight:800;cursor:pointer}.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.hero,.card,.lesson{background:var(--panel);border:1px solid var(--border);border-radius:15px;color:var(--text)}.hero{padding:22px;margin:8px 0 16px}.kicker{font-size:.74rem;letter-spacing:.1em;font-weight:900;color:var(--accent)}.hero h1{margin:5px 0 8px;font-size:clamp(2rem,4vw,3.2rem);line-height:1.08}.muted{color:var(--muted)}.meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.pill{padding:4px 8px;border-radius:999px;background:var(--pill);color:var(--pilltext);font-size:.78rem;font-weight:800}.progress{height:10px;border-radius:999px;background:var(--border);overflow:hidden;margin:14px 0 5px}.progress span{display:block;height:100%;background:#16805b}.lessons{display:grid;gap:11px}.lesson{overflow:hidden}.lesson summary{display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;font-weight:850}.num{display:grid;place-items:center;min-width:34px;height:28px;border-radius:8px;background:var(--pill);color:var(--pilltext)}.title{flex:1}.check{display:flex;gap:6px;align-items:center;font-size:.82rem;font-weight:700}.body{padding:0 16px 18px}.body h3{margin:17px 0 7px;font-size:1rem}.body p,.body li{line-height:1.68}.code{white-space:pre-wrap;overflow:auto;padding:13px;border-radius:10px;background:var(--code);color:#f4f7fb;font:500 .86rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}.note{margin-top:12px;padding:12px;border-left:4px solid #d28b23;border-radius:8px;background:var(--note)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}.card{padding:17px}.card h2{margin:0 0 10px}.item{padding:12px;margin:9px 0;border-radius:10px;background:var(--bg);border:1px solid var(--border)}.answer{width:100%;min-height:90px;margin-top:8px;padding:10px;border:1px solid #aebdca;border-radius:8px;background:transparent;color:inherit;font:inherit}.theme{position:fixed;right:22px;bottom:22px;z-index:20;border:1px solid #b8c7d6;border-radius:999px;padding:10px 16px;background:var(--panel);color:var(--text);font:800 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.16);cursor:pointer}.empty{padding:17px;border:1px dashed var(--border);border-radius:10px}.hero-icon{margin-right:.25em}@media(max-width:720px){.wrap{padding:10px 10px 100px}.grid{grid-template-columns:1fr}.top .btn{flex:1}.lesson summary{flex-wrap:wrap;align-items:flex-start}.check{width:100%;padding-left:44px}.theme{right:14px;bottom:14px;padding:10px 14px}}
+</style>
+<script defer="" src="../assets/vscode-diagnostics.js?v=20260822-v567"></script>
+<link href="../assets/oa-assessment-fallback.css?v=20260822-v567" rel="stylesheet"/>
+<link href="../assets/oa-assessment-upgrade.css?v=20260822-v567" rel="stylesheet"/>
+<link crossorigin="" data-csai-local-speed-hint="" href="https://cdn.jsdelivr.net" rel="preconnect"/></link></link></link></link></meta><style id="csai-expanded-lessons-style">
+.lesson-main-explanation{margin:12px 0 20px;padding:4px 0 18px;border-bottom:1px solid var(--border)}
+.lesson-main-explanation h3{margin-top:22px!important;margin-bottom:8px!important;font-size:1.02rem!important}.lesson-main-explanation h3:first-child{margin-top:8px!important;font-size:1.12rem!important}
+.lesson-main-explanation p,.lesson-main-explanation li{line-height:1.75!important}
+.deep-steps{margin:8px 0 4px;padding-left:24px}.deep-steps li{margin:7px 0}
+.deep-scenario,.deep-takeaway{margin:9px 0;padding:13px 14px;border:1px solid var(--border);border-radius:10px;background:var(--bg)}
+.deep-scenario{border-left:4px solid var(--accent)}
+.deep-takeaway{border-left:4px solid #16805b}
+.deep-scenario p,.deep-takeaway p{margin:0}
+.deep-check{margin-bottom:4px}.deep-check li{margin:6px 0}
+</style>
+<link rel="stylesheet" href="../assets/scroll-performance-v561.css?v=20260822-v567">
+<link rel="stylesheet" href="../assets/final-quality-layer.css?v=20260822-v567">
+<script src="../assets/smart-code-editor.js?v=20260822-v567" defer></script>
+<script src="../assets/portfolio-publish-controls.js?v=20260822-v567" defer></script>
+
+<!-- csai-unified-design:start -->
+<link rel="stylesheet" href="../assets/unified-learning-design.css?v=20260822-v567">
+<link rel="stylesheet" href="../assets/product-redesign-v2.css?v=20260822-v567">
+<link rel="stylesheet" href="../assets/adaptive-v4-live.css?v=20260822-v567">
+<link rel="stylesheet" href="../assets/hero-polish.css?v=20260822-v567">
+<script>document.documentElement.classList.add('csai-unified-design')</script>
+<script src="../assets/unified-learning-design.js?v=20260822-v567" defer></script>
+<script src="../assets/product-redesign-v2.js?v=20260822-v567" defer></script>
+<script src="../assets/adaptive-v4-live.js?v=20260822-v567" defer></script>
+<script src="../assets/hero-polish.js?v=20260822-v567" defer></script>
+<!-- csai-unified-design:end -->
+<link rel="stylesheet" href="/assets/oa-assessment-fallback.css?v=20260811-1">
+<link rel="stylesheet" href="/assets/oa-assessment-upgrade.css?v=20260811-1">
+</head><body>
+<main class="wrap"><div class="top"><a class="btn" href="../index.html#courses">← All courses</a><a class="btn primary" href="../index.html#hub">Home</a></div>
+<section class="hero"><div class="kicker">COURSE</div><h1><span class="hero-icon">🧮</span>Data Structures &amp; Algorithms</h1><p class="muted">The core of coding interviews — patterns that solve whole problem classes.</p><div class="meta"><span class="pill">20 lessons</span><span class="pill">9 exercises</span><span class="pill">30 checkpoints</span><span class="pill">4 projects</span></div><div class="progress"><span data-progress-bar="" style="width:0%"></span></div><div class="muted" data-progress-status="">0 of 20 lessons complete</div></section>
+<section class="lessons"><section class="card" data-aptech-curriculum="1" id="aptech-dsa-curriculum" style="margin:0 0 18px"><div class="kicker">APTECH-ALIGNED DSA CURRICULUM</div><h2 style="margin:.3rem 0">One DSA curriculum, no duplicate chapters</h2><p class="muted">The Aptech syllabus now points to the canonical DSA lessons below. Repeated copies of Big-O, arrays, linked lists, stacks/queues, trees, graphs, and searching were merged. The memory bridge and the two distinct sorting chapters remain separate because they teach genuinely different material.</p><div class="item"><b>Chapter 1: Algorithm analysis &amp; Big-O</b><div style="margin-top:7px"><a class="btn" href="#lesson-dsa-big-o" style="padding:6px 9px;margin:3px 4px 3px 0">Big-O notation</a></div></div><div class="item"><b>Chapter 2: From C pointers to Python references</b><div style="margin-top:7px"><a class="btn" href="#lesson-aptech-dsa-memory" style="padding:6px 9px;margin:3px 4px 3px 0">Python references, memory &amp; pointer intuition</a></div></div><div class="item"><b>Chapter 3: Arrays / Python lists</b><div style="margin-top:7px"><a class="btn" href="#lesson-dsa-arrays" style="padding:6px 9px;margin:3px 4px 3px 0">Arrays</a></div></div><div class="item"><b>Chapter 4: Linked lists in Python</b><div style="margin-top:7px"><a class="btn" href="#lesson-dsa-linked-lists" style="padding:6px 9px;margin:3px 4px 3px 0">Linked lists</a></div></div><div class="item"><b>Chapter 5: Stacks &amp; queues</b><div style="margin-top:7px"><a class="btn" href="#lesson-dsa-stacks-queues" style="padding:6px 9px;margin:3px 4px 3px 0">Stacks &amp; queues</a></div></div><div class="item"><b>Chapter 6: Trees, binary trees &amp; BSTs</b><div style="margin-top:7px"><a class="btn" href="#lesson-dsa-trees" style="padding:6px 9px;margin:3px 4px 3px 0">Trees</a></div></div><div class="item"><b>Chapter 7: Graphs with BFS &amp; DFS</b><div style="margin-top:7px"><a class="btn" href="#lesson-dsa-graphs" style="padding:6px 9px;margin:3px 4px 3px 0">Graphs</a></div></div><div class="item"><b>Chapter 8: Searching: linear &amp; binary</b><div style="margin-top:7px"><a class="btn" href="#lesson-dsa-searching" style="padding:6px 9px;margin:3px 4px 3px 0">Searching algorithms</a></div></div><div class="item"><b>Chapter 9: Bubble, selection &amp; insertion sorting</b><div style="margin-top:7px"><a class="btn" href="#lesson-aptech-dsa-sorting-basic" style="padding:6px 9px;margin:3px 4px 3px 0">Sorting I — Bubble, selection &amp; insertion</a></div></div><div class="item"><b>Chapter 10: Merge sort &amp; quicksort</b><div style="margin-top:7px"><a class="btn" href="#lesson-aptech-dsa-sorting-fast" style="padding:6px 9px;margin:3px 4px 3px 0">Sorting II — Merge sort &amp; quicksort</a></div></div></section>
+<details class="lesson aptech-aligned" data-lesson="dsa-big-o" id="lesson-dsa-big-o" open=""><summary><span class="num">01</span><span class="title">Big-O notation</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Describe how an algorithm&#x27;s runtime or memory grows with input size</li><li>Understand and apply Algorithm analysis &amp; Big-O in Python.</li><li>Explain how time complexity changes the behavior, result, or engineering decision in a concrete example</li><li>Connect time complexity with space complexity and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<div class="note"><b>Aptech-aligned:</b> This is the one canonical lesson for this DSA topic; the repeated Aptech copy was merged here.</div><section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Big-O describes how runtime or extra memory grows as input size n grows. Analyze the structure of the algorithm rather than memorizing labels: identify loops/recursion, account for nested work, and state meaningful best/average/worst cases when they differ.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">time complexity</span><span class="pill">space complexity</span><span class="pill">growth rate</span><span class="pill">Big-O</span><span class="pill">best / average / worst case</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">nums = [4, 1, 7, 3]
+# O(n): one pass
+steps = 0
+for x in nums:
+    steps += 1
+print(steps)
+
+# O(n^2): nested passes
+pairs = 0
+for i in nums:
+    for j in nums:
+        pairs += 1
+print(pairs)</pre><pre class="code" data-example-audit="candidate">nums = [10,20,30]
+print(nums[0])</pre><pre class="code" data-example-audit="candidate">nums = [3,1,9,2]
+best = nums[0]
+for x in nums[1:]:
+    if x &gt; best: best = x
+print(best)</pre><pre class="code" data-example-audit="candidate">nums = [1,2,3]
+pairs = 0
+for a in nums:
+    for b in nums:
+        pairs += 1
+print(pairs)</pre><pre class="code" data-example-audit="candidate">n = 64
+steps = 0
+while n &gt; 1:
+    n //= 2
+    steps += 1
+print(steps)</pre><pre class="code" data-example-audit="candidate">nums = [1,2,1,3,2]
+seen = set(nums)
+print(len(seen))</pre><div class="note"><b>Common mistake:</b> Confusing the WORST-case complexity with typical or best-case performance -- Big-O usually describes the worst case.</div></div></details>
+<details class="lesson aptech-aligned" data-lesson="aptech-dsa-memory" id="lesson-aptech-dsa-memory"><summary><span class="num">02</span><span class="title">Python references, memory &amp; pointer intuition</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Understand and apply From C pointers to Python references in Python.</li><li>Explain how references changes the behavior, result, or engineering decision in a concrete example</li><li>Connect references with identity and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<div class="note"><b>Aptech-aligned:</b> This is the one canonical lesson for this DSA topic; the repeated Aptech copy was merged here.</div><section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A traditional C DSA course discusses pointers, malloc/free, and dynamic allocation. In Python, variables hold references to objects and Python manages object lifetime automatically.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">references</span><span class="pill">identity</span><span class="pill">aliasing</span><span class="pill">mutation</span><span class="pill">automatic memory management</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">a = [1,2]
+b = a
+b.append(3)
+print(a)
+print(a is b)</pre><pre class="code" data-example-audit="candidate">a = [1,2]
+b = [1,2]
+print(a == b)
+print(a is b)</pre><pre class="code" data-example-audit="candidate">a = [1,2]
+b = a
+a = [9,9]
+print(a)
+print(b)</pre><pre class="code" data-example-audit="candidate">class Node:
+    def __init__(self, value, next_node=None):
+        self.value = value
+        self.next = next_node
+head = Node(1, Node(2, Node(3)))
+print(head.next.next.value)</pre><pre class="code" data-example-audit="candidate">import sys
+obj = []
+alias = obj
+print(sys.getrefcount(obj) &gt;= 2)
+del alias
+print(sys.getrefcount(obj) &gt;= 1)</pre><div class="note"><b>Common mistake:</b> Trying to imitate malloc/free in Python.</div></div></details>
+<details class="lesson aptech-aligned" data-lesson="dsa-arrays" id="lesson-dsa-arrays"><summary><span class="num">03</span><span class="title">Arrays</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Explain array storage and access time complexity</li><li>Understand and apply Arrays / Python lists in Python.</li><li>Explain how array changes the behavior, result, or engineering decision in a concrete example</li><li>Connect array with index and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<div class="note"><b>Aptech-aligned:</b> This is the one canonical lesson for this DSA topic; the repeated Aptech copy was merged here.</div><section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Python lists act as dynamic arrays for most interview problems. Index access is O(1); traversal is O(n); inserting or deleting in the middle can shift later elements and cost O(n).</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">array</span><span class="pill">index</span><span class="pill">O(1) access</span><span class="pill">contiguous memory</span><span class="pill">arrays</span><span class="pill">lists</span><span class="pill">indexing</span><span class="pill">traversal</span><span class="pill">insert/delete costs</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">arr = [10, 20, 30]
+print(arr[1])     # 20 -- O(1) access
+arr.insert(1, 99)  # O(n) -- shifts 20 and 30 over</pre><pre class="code" data-example-audit="candidate">nums = [4,8,15]
+for i, value in enumerate(nums):
+    print(i, value)</pre><pre class="code" data-example-audit="candidate">nums = [1,3,4]
+nums.insert(1,2)
+nums.pop()
+print(nums)</pre><pre class="code" data-example-audit="candidate">nums = [1,2,3,4]
+left, right = 0, len(nums)-1
+while left &lt; right:
+    nums[left], nums[right] = nums[right], nums[left]
+    left += 1; right -= 1
+print(nums)</pre><pre class="code" data-example-audit="candidate">counts = {}
+for x in [1,2,1,3,1]: counts[x] = counts.get(x,0)+1
+print(counts)</pre><pre class="code" data-example-audit="candidate">nums=[2,4,6,8]
+prefix=[0]
+for x in nums: prefix.append(prefix[-1]+x)
+print(prefix)</pre><div class="note"><b>Common mistake:</b> Assuming inserting into the middle of an array is as cheap as accessing an element -- access is O(1), but insertion/deletion in the middle is O(n).</div></div></details>
+<details class="lesson aptech-aligned" data-lesson="dsa-linked-lists" id="lesson-dsa-linked-lists"><summary><span class="num">04</span><span class="title">Linked lists</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Explain how linked lists differ from arrays</li><li>Understand and apply Linked lists in Python in Python.</li><li>Explain how linked list changes the behavior, result, or engineering decision in a concrete example</li><li>Connect linked list with node and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<div class="note"><b>Aptech-aligned:</b> This is the one canonical lesson for this DSA topic; the repeated Aptech copy was merged here.</div><section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A linked list stores elements as nodes, each holding a value and a pointer to the next node -- not contiguous in memory. Inserting or deleting at the front is O(1), unlike an array's O(n) shift.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">linked list</span><span class="pill">node</span><span class="pill">pointer</span><span class="pill">O(1) insertion at front</span><span class="pill">next reference</span><span class="pill">singly linked list</span><span class="pill">reverse</span><span class="pill">fast/slow pointers</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+# 1 -&gt; 2 -&gt; 3
+head = Node(1)
+head.next = Node(2)
+head.next.next = Node(3)
+
+print(head.value, head.next.value, head.next.next.value)</pre><pre class="code" data-example-audit="candidate">class Node:
+    def __init__(self,value,next_node=None): self.value,self.next=value,next_node
+head=Node(1,Node(2,Node(3)))
+print(head.next.value)</pre><pre class="code" data-example-audit="candidate">class Node:
+    def __init__(self,value,next_node=None): self.value,self.next=value,next_node
+head=Node(1,Node(2,Node(3)))
+cur=head
+while cur:
+    print(cur.value)
+    cur=cur.next</pre><pre class="code" data-example-audit="candidate">class Node:
+    def __init__(self,value,next_node=None): self.value,self.next=value,next_node
+head=Node(2,Node(3))
+head=Node(1,head)
+print(head.value, head.next.value)</pre><pre class="code" data-example-audit="candidate">class Node:
+    def __init__(self,value,next_node=None): self.value,self.next=value,next_node
+head=Node(1,Node(2,Node(3)))
+prev=None
+while head:
+    nxt=head.next; head.next=prev; prev=head; head=nxt
+print(prev.value, prev.next.value, prev.next.next.value)</pre><pre class="code" data-example-audit="candidate">class Node:
+    def __init__(self,value,next_node=None): self.value,self.next=value,next_node
+head=Node(1,Node(2,Node(3,Node(4,Node(5)))))
+slow=fast=head
+while fast and fast.next:
+    slow=slow.next; fast=fast.next.next
+print(slow.value)</pre><div class="note"><b>Common mistake:</b> Assuming linked lists support O(1) random access like arrays do -- they don't; reaching the nth node takes O(n) time.</div></div></details>
+<details class="lesson aptech-aligned" data-lesson="dsa-stacks-queues" id="lesson-dsa-stacks-queues"><summary><span class="num">05</span><span class="title">Stacks &amp; queues</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Explain LIFO and FIFO ordering and when each is useful</li><li>Understand and apply Stacks &amp; queues in Python.</li><li>Explain how stack changes the behavior, result, or engineering decision in a concrete example</li><li>Connect stack with queue and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<div class="note"><b>Aptech-aligned:</b> This is the one canonical lesson for this DSA topic; the repeated Aptech copy was merged here.</div><section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A stack is Last-In-First-Out (LIFO) -- the most recently added item is removed first, like a stack of plates. A queue is First-In-First-Out (FIFO) -- the first item added is the first removed, like a line of people.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">stack</span><span class="pill">queue</span><span class="pill">LIFO</span><span class="pill">FIFO</span><span class="pill">deque</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate"># stack: push/pop from the same end
+stack = []
+stack.append(1); stack.append(2)
+stack.pop()   # removes 2 (LIFO)
+
+# queue: add at one end, remove from the other
+from collections import deque
+q = deque()
+q.append(1); q.append(2)
+q.popleft()   # removes 1 (FIFO)</pre><pre class="code" data-example-audit="candidate">stack=[]
+stack.append("A"); stack.append("B")
+print(stack.pop())</pre><pre class="code" data-example-audit="candidate">def balanced(text):
+    pairs={')':'(',']':'[','}':'{'}; stack=[]
+    for ch in text:
+        if ch in '([{': stack.append(ch)
+        elif ch in pairs:
+            if not stack or stack.pop()!=pairs[ch]: return False
+    return not stack
+print(balanced('(a[b])'))</pre><pre class="code" data-example-audit="candidate">from collections import deque
+q=deque(['A','B']); q.append('C')
+print(q.popleft(), list(q))</pre><pre class="code" data-example-audit="candidate">from collections import deque
+d=deque([2,3]); d.appendleft(1); d.append(4)
+print(list(d))</pre><pre class="code" data-example-audit="candidate">from collections import deque
+q=deque([0]); seen={0}
+while q:
+    print(q.popleft())</pre><div class="note"><b>Common mistake:</b> Using a plain list's .pop(0) to simulate a queue -- this is O(n), not O(1); use collections.deque for real O(1) queue operations.</div></div></details>
+<details class="lesson" data-lesson="dsa-hash-maps" id="lesson-dsa-hash-maps"><summary><span class="num">06</span><span class="title">Hash maps</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Use a hash map for O(1) average lookup to avoid repeated scanning</li><li>Explain how O(1) lookup changes the behavior, result, or engineering decision in a concrete example</li><li>Connect O(1) lookup with dict and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A hash map gives O(1) average lookup. The 'have I seen this?' pattern turns many O(n²) brute forces into O(n).</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">O(1) lookup</span><span class="pill">dict</span><span class="pill">complement trick</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">def has_duplicate(nums):
+    seen = set()
+    for n in nums:
+        if n in seen:
+            return True
+        seen.add(n)
+    return False
+
+print(has_duplicate([1, 3, 2, 3]))</pre><div class="note"><b>Common mistake:</b> Assuming hash map lookup is O(1) worst-case -- it's O(1) average case; pathological cases can degrade to O(n).</div></div></details>
+<details class="lesson aptech-aligned" data-lesson="dsa-trees" id="lesson-dsa-trees"><summary><span class="num">07</span><span class="title">Trees</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Explain tree structure and traversal</li><li>Understand and apply Trees, binary trees &amp; BSTs in Python.</li><li>Explain how tree changes the behavior, result, or engineering decision in a concrete example</li><li>Connect tree with binary tree and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<div class="note"><b>Aptech-aligned:</b> This is the one canonical lesson for this DSA topic; the repeated Aptech copy was merged here.</div><section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A tree is a hierarchical structure of nodes, each with one parent (except the root) and any number of children. A binary tree limits each node to at most two children.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">tree</span><span class="pill">binary tree</span><span class="pill">traversal</span><span class="pill">depth-first</span><span class="pill">breadth-first</span><span class="pill">BST</span><span class="pill">inorder traversal</span><span class="pill">search</span><span class="pill">insert</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">class TreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+# depth-first traversal (in-order, simplified):
+def inorder(node):
+    if node:
+        inorder(node.left)
+        print(node.value)
+        inorder(node.right)</pre><pre class="code" data-example-audit="candidate">class Node:
+    def __init__(self,value,left=None,right=None): self.value,self.left,self.right=value,left,right
+root=Node(2,Node(1),Node(3))
+print(root.left.value, root.right.value)</pre><pre class="code" data-example-audit="candidate">class Node:
+    def __init__(self,value,left=None,right=None): self.value,self.left,self.right=value,left,right
+root=Node(2,Node(1),Node(3))
+def inorder(node): return inorder(node.left)+[node.value]+inorder(node.right) if node else []
+print(inorder(root))</pre><pre class="code" data-example-audit="candidate">class Node:
+    def __init__(self,value,left=None,right=None): self.value,self.left,self.right=value,left,right
+node=Node(4,Node(2),Node(6)); target=6
+while node and node.value!=target:
+    node=node.left if target&lt;node.value else node.right
+print(node is not None)</pre><pre class="code" data-example-audit="candidate">class Node:
+    def __init__(self,value): self.value=value; self.left=None; self.right=None
+def insert(node,value):
+    if not node: return Node(value)
+    if value&lt;node.value: node.left=insert(node.left,value)
+    elif value&gt;node.value: node.right=insert(node.right,value)
+    return node
+root=None
+for x in [4,2,6,5]: root=insert(root,x)
+print(root.right.left.value)</pre><pre class="code" data-example-audit="candidate">class Node:
+    def __init__(self,value,left=None,right=None): self.value,self.left,self.right=value,left,right
+root=Node(1,Node(2,Node(3)),Node(4))
+def height(node): return 0 if not node else 1+max(height(node.left),height(node.right))
+print(height(root))</pre><div class="note"><b>Common mistake:</b> Forgetting to check for None (an empty subtree) before recursing into it -- this causes a crash rather than simply stopping that branch.</div></div></details>
+<details class="lesson aptech-aligned" data-lesson="dsa-graphs" id="lesson-dsa-graphs"><summary><span class="num">08</span><span class="title">Graphs</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Represent graphs and understand basic traversal</li><li>Understand and apply Graphs with BFS &amp; DFS in Python.</li><li>Apply the KHDA-benchmarked professional additions in a realistic company workflow: Dijkstra shortest path, minimum spanning tree (Prim/Kruskal), union-find / disjoint set.</li></ul>
+<div class="note"><b>Aptech-aligned:</b> This is the one canonical lesson for this DSA topic; the repeated Aptech copy was merged here.</div><section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A graph is a set of nodes (vertices) connected by edges -- more general than a tree, since cycles and multiple paths are allowed. Graphs can be directed (edges have a direction) or undirected.</p>
+</section>
+<div class="note khda-benchmark-note" data-khda-benchmark-note="true"><b>Professional benchmark addition: </b>These company-use concepts were kept after comparing the course with public syllabi from KHDA-listed Dubai training providers: Dijkstra shortest path, minimum spanning tree (Prim/Kruskal), union-find / disjoint set.</div><h3>Key concepts</h3><div class="meta"><span class="pill">graph</span><span class="pill">vertex</span><span class="pill">edge</span><span class="pill">adjacency list</span><span class="pill">directed vs undirected</span><span class="pill">visited set</span><span class="pill">BFS</span><span class="pill">DFS</span><span class="pill">Dijkstra shortest path</span><span class="pill">minimum spanning tree (Prim/Kruskal)</span><span class="pill">union-find / disjoint set</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate"># adjacency list representation:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'D'],
+    'C': ['A'],
+    'D': ['B']
+}</pre><pre class="code" data-example-audit="candidate">graph={'A':['B','C'],'B':['D'],'C':['D'],'D':[]}
+print(graph['A'])</pre><pre class="code" data-example-audit="candidate">from collections import deque
+g={'A':['B','C'],'B':['D'],'C':['D'],'D':[]}
+q=deque(['A']); seen={'A'}; order=[]
+while q:
+    node=q.popleft(); order.append(node)
+    for nxt in g[node]:
+        if nxt not in seen: seen.add(nxt); q.append(nxt)
+print(order)</pre><pre class="code" data-example-audit="candidate">g={'A':['B','C'],'B':['D'],'C':['D'],'D':[]}
+stack=['A']; seen=set(); order=[]
+while stack:
+    node=stack.pop()
+    if node in seen: continue
+    seen.add(node); order.append(node); stack.extend(reversed(g[node]))
+print(order)</pre><pre class="code" data-example-audit="candidate">g={1:[2],2:[3],3:[]}
+target=3; stack=[1]; seen=set(); found=False
+while stack:
+    node=stack.pop()
+    if node==target: found=True; break
+    if node in seen: continue
+    seen.add(node); stack.extend(g[node])
+print(found)</pre><pre class="code" data-example-audit="candidate">g={1:[2],2:[1],3:[4],4:[3],5:[]}
+seen=set(); components=0
+for start in g:
+    if start in seen: continue
+    components+=1; stack=[start]
+    while stack:
+        node=stack.pop()
+        if node in seen: continue
+        seen.add(node); stack.extend(g[node])
+print(components)</pre><div class="note"><b>Common mistake:</b> Not tracking visited nodes during traversal -- this causes infinite loops on graphs with cycles, unlike trees which have none.</div></div></details>
+<details class="lesson aptech-aligned" data-lesson="dsa-searching" id="lesson-dsa-searching"><summary><span class="num">09</span><span class="title">Searching algorithms</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Compare linear and binary search</li><li>Understand and apply Searching: linear &amp; binary in Python.</li><li>Explain how linear search changes the behavior, result, or engineering decision in a concrete example</li><li>Connect linear search with binary search and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<div class="note"><b>Aptech-aligned:</b> This is the one canonical lesson for this DSA topic; the repeated Aptech copy was merged here.</div><section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Linear search checks each element one at a time -- O(n), works on any list. Binary search repeatedly halves the search space by comparing the middle element -- O(log n), but REQUIRES the data to already be sorted.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">linear search</span><span class="pill">binary search</span><span class="pill">O(log n)</span><span class="pill">requires sorted data</span><span class="pill">sorted input</span><span class="pill">O(n)</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">def binary_search(sorted_arr, target):
+    lo, hi = 0, len(sorted_arr) - 1
+    while lo &lt;= hi:
+        mid = (lo + hi) // 2
+        if sorted_arr[mid] == target: return mid
+        elif sorted_arr[mid] &lt; target: lo = mid + 1
+        else: hi = mid - 1
+    return -1</pre><pre class="code" data-example-audit="candidate">def linear_search(nums,target):
+    for i,x in enumerate(nums):
+        if x==target: return i
+    return -1
+print(linear_search([9,3,7],7))</pre><pre class="code" data-example-audit="candidate">def binary_search(nums,target):
+    low,high=0,len(nums)-1
+    while low&lt;=high:
+        mid=(low+high)//2
+        if nums[mid]==target: return mid
+        if nums[mid]&lt;target: low=mid+1
+        else: high=mid-1
+    return -1
+print(binary_search([1,3,5,7,9],7))</pre><pre class="code" data-example-audit="candidate">def first_at_least(nums,target):
+    low,high=0,len(nums)
+    while low&lt;high:
+        mid=(low+high)//2
+        if nums[mid]&gt;=target: high=mid
+        else: low=mid+1
+    return low
+print(first_at_least([1,3,5,7],4))</pre><pre class="code" data-example-audit="candidate">from bisect import bisect_left
+nums=[1,3,5,7]
+print(bisect_left(nums,5), bisect_left(nums,4))</pre><pre class="code" data-example-audit="candidate">nums=[1,3,5,7,9,11,13]; target=11
+low,high=0,len(nums)-1
+while low&lt;=high:
+    mid=(low+high)//2
+    print(low,mid,high,nums[mid])
+    if nums[mid]==target: break
+    if nums[mid]&lt;target: low=mid+1
+    else: high=mid-1</pre><div class="note"><b>Common mistake:</b> Applying binary search to unsorted data -- it silently gives wrong results, since the halving logic assumes sorted order.</div></div></details>
+<details class="lesson aptech-aligned" data-lesson="aptech-dsa-sorting-basic" id="lesson-aptech-dsa-sorting-basic"><summary><span class="num">10</span><span class="title">Sorting I — Bubble, selection &amp; insertion</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Understand and apply Bubble, selection &amp; insertion sorting in Python.</li><li>Explain how bubble sort changes the behavior, result, or engineering decision in a concrete example</li><li>Connect bubble sort with selection sort and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<div class="note"><b>Aptech-aligned:</b> This is the one canonical lesson for this DSA topic; the repeated Aptech copy was merged here.</div><section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Bubble, selection, and insertion sort are not usually the fastest production choices, but they make the mechanics of sorting easy to see and analyze.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">bubble sort</span><span class="pill">selection sort</span><span class="pill">insertion sort</span><span class="pill">O(n²)</span><span class="pill">stability</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">def bubble_sort(nums):
+    nums=nums[:]
+    for end in range(len(nums)-1,0,-1):
+        swapped=False
+        for i in range(end):
+            if nums[i]&gt;nums[i+1]: nums[i],nums[i+1]=nums[i+1],nums[i]; swapped=True
+        if not swapped: break
+    return nums
+print(bubble_sort([5,1,4,2]))</pre><pre class="code" data-example-audit="candidate">def selection_sort(nums):
+    nums=nums[:]
+    for i in range(len(nums)):
+        smallest=i
+        for j in range(i+1,len(nums)):
+            if nums[j]&lt;nums[smallest]: smallest=j
+        nums[i],nums[smallest]=nums[smallest],nums[i]
+    return nums
+print(selection_sort([5,1,4,2]))</pre><pre class="code" data-example-audit="candidate">def insertion_sort(nums):
+    nums=nums[:]
+    for i in range(1,len(nums)):
+        value=nums[i]; j=i-1
+        while j&gt;=0 and nums[j]&gt;value:
+            nums[j+1]=nums[j]; j-=1
+        nums[j+1]=value
+    return nums
+print(insertion_sort([5,1,4,2]))</pre><pre class="code" data-example-audit="candidate">records=[('A',90),('B',80),('C',90)]
+print(sorted(records,key=lambda item:item[1]))</pre><pre class="code" data-example-audit="candidate">nums=[4,3,2,1]; comparisons=0
+for i in range(len(nums)):
+    for j in range(0,len(nums)-1-i): comparisons+=1
+print(comparisons)</pre><div class="note"><b>Common mistake:</b> Memorizing the code without being able to explain why the nested work is O(n²).</div></div></details>
+<details class="lesson aptech-aligned" data-lesson="aptech-dsa-sorting-fast" id="lesson-aptech-dsa-sorting-fast"><summary><span class="num">11</span><span class="title">Sorting II — Merge sort &amp; quicksort</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Understand and apply Merge sort &amp; quicksort in Python.</li><li>Explain how merge sort changes the behavior, result, or engineering decision in a concrete example</li><li>Connect merge sort with quicksort and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<div class="note"><b>Aptech-aligned:</b> This is the one canonical lesson for this DSA topic; the repeated Aptech copy was merged here.</div><section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Merge sort divides the input, recursively sorts each half, then merges sorted halves. Quicksort chooses a pivot and partitions values around it.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">merge sort</span><span class="pill">quicksort</span><span class="pill">divide and conquer</span><span class="pill">O(n log n)</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">def merge_sort(nums):
+    if len(nums)&lt;=1: return nums[:]
+    mid=len(nums)//2; left=merge_sort(nums[:mid]); right=merge_sort(nums[mid:])
+    out=[]; i=j=0
+    while i&lt;len(left) and j&lt;len(right):
+        if left[i]&lt;=right[j]: out.append(left[i]); i+=1
+        else: out.append(right[j]); j+=1
+    return out+left[i:]+right[j:]
+print(merge_sort([5,1,4,2]))</pre><pre class="code" data-example-audit="candidate">def quick_sort(nums):
+    if len(nums)&lt;=1: return nums[:]
+    pivot=nums[len(nums)//2]
+    left=[x for x in nums if x&lt;pivot]
+    middle=[x for x in nums if x==pivot]
+    right=[x for x in nums if x&gt;pivot]
+    return quick_sort(left)+middle+quick_sort(right)
+print(quick_sort([5,1,4,2,4]))</pre><pre class="code" data-example-audit="candidate">a=[1,4,7]; b=[2,3,8]; i=j=0; out=[]
+while i&lt;len(a) and j&lt;len(b):
+    if a[i]&lt;=b[j]: out.append(a[i]); i+=1
+    else: out.append(b[j]); j+=1
+out += a[i:]+b[j:]
+print(out)</pre><pre class="code" data-example-audit="candidate">nums=[7,2,5,3,5]; pivot=5
+print([x for x in nums if x&lt;pivot])
+print([x for x in nums if x==pivot])
+print([x for x in nums if x&gt;pivot])</pre><pre class="code" data-example-audit="candidate">nums=[9,1,7,3,8,2]
+print(sorted(nums))</pre><div class="note"><b>Common mistake:</b> Saying quicksort is always O(n log n).</div></div></details>
+<details class="lesson" data-lesson="dsa-two-pointers" id="lesson-dsa-two-pointers"><summary><span class="num">12</span><span class="title">Two pointers &amp; sliding window</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Use two pointers or a sliding window to solve array/string problems in O(n)</li><li>Explain how two pointers changes the behavior, result, or engineering decision in a concrete example</li><li>Connect two pointers with sliding window and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Two pointers move toward each other (sorted arrays) or track a window (substrings). Both avoid re-scanning, keeping things O(n).</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">two pointers</span><span class="pill">sliding window</span><span class="pill">O(n)</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">a = [1, 2, 3, 4, 5]
+l, r = 0, len(a) - 1
+while l &lt; r:
+    print(a[l], a[r])
+    l += 1
+    r -= 1</pre><div class="note"><b>Common mistake:</b> Reaching for nested loops (O(n^2)) by default when a sorted array or contiguous-window problem often allows an O(n) two-pointer approach.</div></div></details>
+<details class="lesson" data-lesson="dsa-recursion-backtracking" id="lesson-dsa-recursion-backtracking"><summary><span class="num">13</span><span class="title">Recursion &amp; backtracking</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Use recursion safely and apply choose-explore-unchoose backtracking to search problems</li><li>Explain how base case changes the behavior, result, or engineering decision in a concrete example</li><li>Connect base case with recursive state and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Recursion solves a problem by reducing it to smaller versions of itself. A correct recursive solution needs a base case and progress toward that base case.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">base case</span><span class="pill">recursive state</span><span class="pill">backtracking</span><span class="pill">search tree</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">def subsets(nums):
+    out = []
+    path = []
+    def dfs(i):
+        if i == len(nums):
+            out.append(path.copy())
+            return
+        dfs(i + 1)
+        path.append(nums[i])
+        dfs(i + 1)
+        path.pop()
+    dfs(0)
+    return out
+
+print(subsets([1, 2]))</pre><div class="note"><b>Common mistake:</b> Forgetting to undo mutable state after exploring a branch, or writing recursion that does not move toward a base case.</div></div></details>
+<details class="lesson" data-lesson="dsa-heaps-priority-queues" id="lesson-dsa-heaps-priority-queues"><summary><span class="num">14</span><span class="title">Heaps &amp; priority queues</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Use a heap for repeated smallest/largest-item selection and top-k problems</li><li>Explain how heap changes the behavior, result, or engineering decision in a concrete example</li><li>Connect heap with priority queue and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A binary heap keeps the smallest (or, with a transformation, largest) priority at the root. Python heapq provides O(log n) insertion/removal and O(1) access to the minimum.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">heap</span><span class="pill">priority queue</span><span class="pill">heapq</span><span class="pill">top-k</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">import heapq
+
+nums = [7, 2, 9, 1, 5]
+heapq.heapify(nums)
+print(heapq.heappop(nums))
+heapq.heappush(nums, 3)
+print(heapq.nsmallest(3, nums))</pre><div class="note"><b>Common mistake:</b> Sorting the entire collection every time you need one next-priority item.</div></div></details>
+<details class="lesson" data-lesson="dsa-divide-conquer" id="lesson-dsa-divide-conquer"><summary><span class="num">15</span><span class="title">Divide and conquer</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Recognize divide-combine recurrences behind binary search and merge sort</li><li>Explain how divide changes the behavior, result, or engineering decision in a concrete example</li><li>Connect divide with conquer and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Divide and conquer splits a problem into smaller independent subproblems, solves them, then combines their results. Binary search discards half the search range each step; merge sort recursively sorts two halves and merges them.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">divide</span><span class="pill">conquer</span><span class="pill">combine</span><span class="pill">recurrence</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">def merge_sort(nums):
+    if len(nums) &lt;= 1:
+        return nums
+    mid = len(nums) // 2
+    left = merge_sort(nums[:mid])
+    right = merge_sort(nums[mid:])
+    out = []
+    i = j = 0
+    while i &lt; len(left) and j &lt; len(right):
+        if left[i] &lt;= right[j]:
+            out.append(left[i]); i += 1
+        else:
+            out.append(right[j]); j += 1
+    return out + left[i:] + right[j:]
+
+print(merge_sort([5, 2, 8, 1]))</pre><div class="note"><b>Common mistake:</b> Using recursion alone does not automatically make an algorithm divide-and-conquer.</div></div></details>
+<details class="lesson" data-lesson="dsa-greedy" id="lesson-dsa-greedy"><summary><span class="num">16</span><span class="title">Greedy algorithms</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Identify when a locally optimal choice can safely build a globally optimal solution</li><li>Explain how greedy choice changes the behavior, result, or engineering decision in a concrete example</li><li>Connect greedy choice with exchange argument and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A greedy algorithm makes the best-looking local choice and never revisits it. Greedy is powerful but only correct when the problem has the right structure.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">greedy choice</span><span class="pill">exchange argument</span><span class="pill">interval scheduling</span><span class="pill">counterexample</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">def max_non_overlapping(intervals):
+    intervals = sorted(intervals, key=lambda item: item[1])
+    count = 0
+    end = float("-inf")
+    for start, finish in intervals:
+        if start &gt;= end:
+            count += 1
+            end = finish
+    return count
+
+print(max_non_overlapping([(1,3),(2,4),(3,5),(6,8)]))</pre><div class="note"><b>Common mistake:</b> Choosing a plausible greedy rule without proving or stress-testing it.</div></div></details>
+<details class="lesson" data-lesson="dsa-dynamic-programming" id="lesson-dsa-dynamic-programming"><summary><span class="num">17</span><span class="title">Dynamic programming</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Turn overlapping recursive subproblems into memoized or tabulated solutions</li><li>Explain how state changes the behavior, result, or engineering decision in a concrete example</li><li>Connect state with transition and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Dynamic programming applies when many recursive branches repeat the same subproblems and the final answer can be built from optimal smaller answers. Start by defining the state precisely, write the transition, identify base cases, then choose top-down memoization or bottom-up tabulation.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">state</span><span class="pill">transition</span><span class="pill">memoization</span><span class="pill">tabulation</span><span class="pill">optimal substructure</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">def min_cost_climb(cost):
+    if len(cost) &lt;= 1:
+        return 0
+    prev2 = 0
+    prev1 = 0
+    for value in cost:
+        current = value + min(prev1, prev2)
+        prev2, prev1 = prev1, current
+    return min(prev1, prev2)
+
+print(min_cost_climb([10, 15, 20]))</pre><div class="note"><b>Common mistake:</b> Memorizing DP code instead of defining the state and transition.</div></div></details>
+<details class="lesson" data-lesson="dsa-intervals-sweep" id="lesson-dsa-intervals-sweep"><summary><span class="num">18</span><span class="title">Intervals &amp; sweep-line patterns</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Solve overlap, merge, room-counting, and scheduling questions by sorting interval events</li><li>Explain how merge intervals changes the behavior, result, or engineering decision in a concrete example</li><li>Connect merge intervals with event sweep and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Interval problems become much simpler after sorting. For merging, sort by start time and compare with the last merged interval.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">merge intervals</span><span class="pill">event sweep</span><span class="pill">overlap</span><span class="pill">sorting by start/end</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">def merge_intervals(intervals):
+    if not intervals:
+        return []
+    intervals = sorted(intervals)
+    merged = [list(intervals[0])]
+    for start, end in intervals[1:]:
+        if start &lt;= merged[-1][1]:
+            merged[-1][1] = max(merged[-1][1], end)
+        else:
+            merged.append([start, end])
+    return merged
+
+print(merge_intervals([(1,3),(2,6),(8,10)]))</pre><div class="note"><b>Common mistake:</b> Forgetting to sort first, or failing to define whether [1,2] and [2,3] should merge in the problem statement.</div></div></details>
+<details class="lesson" data-lesson="dsa-monotonic-stack-queue" id="lesson-dsa-monotonic-stack-queue"><summary><span class="num">19</span><span class="title">Monotonic stacks &amp; queues</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Use monotonic structures to find next-greater values and maintain window extrema in linear time</li><li>Explain how monotonic stack changes the behavior, result, or engineering decision in a concrete example</li><li>Connect monotonic stack with monotonic deque and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A monotonic stack or deque keeps candidates in sorted order while scanning once. Values that can never become useful again are removed immediately.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">monotonic stack</span><span class="pill">monotonic deque</span><span class="pill">next greater</span><span class="pill">amortized O(n)</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">def next_greater(nums):
+    answer = [-1] * len(nums)
+    stack = []
+    for i, value in enumerate(nums):
+        while stack and nums[stack[-1]] &lt; value:
+            answer[stack.pop()] = value
+        stack.append(i)
+    return answer
+
+print(next_greater([2,1,2,4,3]))</pre><div class="note"><b>Common mistake:</b> Storing values when you actually need indices, or overlooking that each element is pushed/popped once when analyzing complexity.</div></div></details>
+<details class="lesson" data-lesson="dsa-build-set-hash-table" id="lesson-dsa-build-set-hash-table"><summary><span class="num">20</span><span class="title">Build a set / hash table from scratch</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Implement set-style insert, contains, and remove operations without Python set</li><li>Explain how hash function changes the behavior, result, or engineering decision in a concrete example</li><li>Connect hash function with bucket and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A hash table maps a key to a bucket using a hash function. Different keys can collide, so a real implementation needs a collision strategy such as separate chaining.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">hash function</span><span class="pill">bucket</span><span class="pill">collision</span><span class="pill">load factor</span><span class="pill">chaining</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">class SimpleSet:
+    def __init__(self, size=8):
+        self.buckets = [[] for _ in range(size)]
+    def _bucket(self, value):
+        return self.buckets[hash(value) % len(self.buckets)]
+    def add(self, value):
+        bucket = self._bucket(value)
+        if value not in bucket:
+            bucket.append(value)
+    def contains(self, value):
+        return value in self._bucket(value)
+
+s = SimpleSet()
+s.add("python")
+print(s.contains("python"), s.contains("java"))</pre><div class="note"><b>Common mistake:</b> Ignoring collisions.</div></div></details></section>
+<div class="grid"><section class="card"><h2>Exercises</h2><div class="item"><b>Two Sum</b><p>Return indices of two numbers adding to target.</p><details><summary>Hint</summary><p>hash map of complements</p></details><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Valid parentheses</b><p>Return True if brackets are balanced.</p><details><summary>Hint</summary><p>stack; push opens, match on close</p></details><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Longest substring w/o repeat</b><p>Length of longest substring with all unique chars.</p><details><summary>Hint</summary><p>sliding window + last-seen index</p></details><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Array vs linked list trade-off</b><p>You need frequent insertions at the front and don't need random access by index. Which structure fits better, array or linked list?</p><details><summary>Hint</summary><p>linked list -- O(1) front insertion vs array's O(n) shift</p></details><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Implement a stack-based check</b><p>Using a stack, describe how you'd check if parentheses in a string are balanced, e.g. '(())' is balanced but '(()' is not.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Choose linear or binary search</b><p>Given an unsorted list, explain why binary search can't be used directly, and what you'd need to do first.</p><details><summary>Hint</summary><p>sort it first -- binary search requires sorted data</p></details><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Traverse a small tree</b><p>Given a small binary tree, write out the values in-order (left, node, right) traversal order by hand.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Find the off-by-one bug in a binary search</b><p>A binary search implementation uses `while lo &lt; hi:` and `hi = mid` (instead of `hi = mid - 1`) after a non-match. It sometimes loops forever or returns the wrong index. Identify the bug and fix it.</p><details><summary>Hint</summary><p>when the search space doesn't shrink on every iteration (hi=mid instead of hi=mid-1, or lo&lt;=hi vs lo&lt;hi mismatched with how mid is used), the loop can fail to terminate or skip the target</p></details><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Diagnose a hidden O(n²) in 'optimized' code</b><p>A solution uses `if x in my_list:` inside a loop over n items, and the author claims it's O(n). Explain why it's actually O(n²), and what single change fixes it.</p><details><summary>Hint</summary><p>'in' on a list is O(n) per check, and it's called n times -- switching my_list to a set makes membership checks O(1) average, restoring real O(n)</p></details><textarea class="answer" placeholder="Write code or notes here..."></textarea></div></section><section class="card"><h2>Knowledge checks</h2><div class="item"><b>Binary search is:</b><ol><li>O(n)</li><li>O(log n)</li><li>O(n²)</li><li>O(1)</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>Best structure for 'have I seen this?':</b><ol><li>list</li><li>hash set</li><li>stack</li><li>queue</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>'Shortest path in unweighted graph' → use:</b><ol><li>DFS</li><li>BFS</li><li>DP</li><li>sorting</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the time complexity of accessing an array element by index?</b><ol><li>O(n)</li><li>O(1)</li><li>O(log n)</li><li>O(n^2)</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the time complexity of inserting into the middle of an array?</b><ol><li>O(1)</li><li>O(n)</li><li>O(log n)</li><li>O(n^2)</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What does each node in a linked list store?</b><ol><li>only a value</li><li>a value and a pointer to the next node</li><li>only a pointer</li><li>an array of values</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the time complexity of inserting at the front of a linked list?</b><ol><li>O(n)</li><li>O(1)</li><li>O(log n)</li><li>O(n^2)</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>Why can't a linked list support O(1) random access like an array?</b><ol><li>it can, they're identical</li><li>reaching the nth node requires following pointers from the start, which takes O(n)</li><li>linked lists don't store values</li><li>arrays are always faster for everything</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What ordering does a stack use?</b><ol><li>FIFO</li><li>LIFO</li><li>random order</li><li>sorted order</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What ordering does a queue use?</b><ol><li>LIFO</li><li>FIFO</li><li>random order</li><li>sorted order</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>Why is using a plain list's pop(0) to simulate a queue inefficient?</b><ol><li>it isn't inefficient</li><li>it's O(n) per operation, unlike collections.deque's O(1)</li><li>lists can't remove elements</li><li>pop(0) doesn't exist in Python</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is a binary tree?</b><ol><li>any tree structure</li><li>a tree where each node has at most two children</li><li>a tree with exactly two nodes</li><li>a sorted array</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What must you track when traversing a graph to avoid infinite loops?</b><ol><li>nothing extra is needed</li><li>visited nodes, since graphs can have cycles unlike trees</li><li>the total number of edges only</li><li>the alphabetical order of nodes</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is an adjacency list?</b><ol><li>a sorted list of all nodes</li><li>a representation where each node lists its directly connected neighbors</li><li>a type of sorting algorithm</li><li>a binary search structure</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the time complexity of merge sort and quicksort, on average?</b><ol><li>O(n)</li><li>O(n log n)</li><li>O(n^2)</li><li>O(log n)</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>Why is an O(n^2) sort risky for large datasets?</b><ol><li>it isn't risky, all sorts are equally fast</li><li>the number of operations grows quadratically, becoming impractically slow as data size increases</li><li>O(n^2) sorts always crash</li><li>O(n^2) means constant time</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What sorting algorithm does Python's built-in sorted() use?</b><ol><li>bubble sort</li><li>Timsort, a highly-optimized O(n log n) algorithm</li><li>a random algorithm each time</li><li>insertion sort only</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the time complexity of linear search?</b><ol><li>O(1)</li><li>O(n)</li><li>O(log n)</li><li>O(n^2)</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is required before binary search can be used correctly?</b><ol><li>nothing, it works on any data</li><li>the data must already be sorted</li><li>the data must be a linked list</li><li>the data must contain only numbers</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the time complexity of binary search?</b><ol><li>O(n)</li><li>O(log n)</li><li>O(n^2)</li><li>O(1)</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What happens if binary search is applied to unsorted data?</b><ol><li>it works but slower</li><li>it silently gives wrong results, since the halving logic assumes sorted order</li><li>it raises a clear error</li><li>it automatically sorts the data first</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What does a directed graph's edges represent, unlike an undirected graph?</b><ol><li>no difference between them</li><li>edges have a specific direction (A-&gt;B doesn't imply B-&gt;A)</li><li>directed graphs have no edges</li><li>directed graphs can't have cycles</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>Why is an adjacency list often preferred over an adjacency matrix for sparse graphs?</b><ol><li>adjacency matrices don't exist</li><li>it's more memory-efficient when most nodes aren't connected to most others</li><li>adjacency lists are always slower</li><li>matrices can't represent graphs at all</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is depth-first traversal?</b><ol><li>visiting nodes level by level</li><li>going as deep as possible down one path before backtracking</li><li>visiting random nodes</li><li>only visiting leaf nodes</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is breadth-first traversal?</b><ol><li>going deep before wide</li><li>visiting nodes level by level, wide before deep</li><li>only visiting the root</li><li>a type of sorting algorithm</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>Why check for None before recursing into a tree node's child?</b><ol><li>it's unnecessary, trees never have empty subtrees</li><li>an empty subtree (None) would cause a crash if you tried to recurse into it without checking</li><li>checking is only needed for graphs</li><li>None checks slow down traversal significantly</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is Big-O notation used to describe?</b><ol><li>the exact runtime in seconds</li><li>how an algorithm's resource use (time or space) grows relative to input size</li><li>the programming language used</li><li>the number of bugs in code</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>Between O(n) and O(n log n), which grows faster as n increases?</b><ol><li>O(n)</li><li>O(n log n)</li><li>they're identical</li><li>neither grows</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is a hash table primarily used for?</b><ol><li>sorting data</li><li>fast average-case lookup, insertion, and deletion by key</li><li>storing data in sorted order</li><li>representing hierarchical relationships</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the average time complexity of a hash table lookup?</b><ol><li>O(n)</li><li>O(1)</li><li>O(log n)</li><li>O(n^2)</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div></section></div>
+<section class="card" style="margin-top:14px"><h2>Projects</h2><div class="item"><b>Implement your own HashMap</b><p>Build a hash map from scratch with buckets and collision handling — proves you understand O(1) lookup.</p></div><div class="item"><b>Maze solver</b><p>Given a grid, find the shortest path with BFS and visualize the explored cells.</p></div><div class="item"><b>Mini text autocomplete</b><p>Build a trie and use it to suggest completions for a typed prefix.</p></div><div class="item"><b>Benchmark and compare 3 approaches to the same problem</b><p>Pick a classic problem (e.g. finding duplicates, computing the k most frequent elements, or detecting a cycle in a graph). Implement it three different ways with genuinely different time/space trade-offs (e.g. a brute-force O(n^2) approach, a hash-based O(n) approach, and a sorting-based O(n log n) approach). Measure and compare their actual runtime on inputs of increasing size, and write up which approach you'd actually choose in a real system and why.</p></div></section></main>
+<button class="theme" data-theme-toggle="" type="button" aria-label="Toggle light or dark theme"></button>
+<script id="course-page-meta" type="application/json">{"id":"dsa","lessonIds":["dsa-big-o","aptech-dsa-memory","dsa-arrays","dsa-linked-lists","dsa-stacks-queues","dsa-hash-maps","dsa-trees","dsa-graphs","dsa-searching","aptech-dsa-sorting-basic","aptech-dsa-sorting-fast","dsa-two-pointers","dsa-recursion-backtracking","dsa-heaps-priority-queues","dsa-divide-conquer","dsa-greedy","dsa-dynamic-programming","dsa-intervals-sweep","dsa-monotonic-stack-queue","dsa-build-set-hash-table"]}</script>
+<script defer="" src="../assets/runtime-inline/courses-dsa-003.js?v=20260822-v567"></script><script defer="" src="../assets/runnable-lesson-example-fixes.js?v=20260822-v567"></script>
+<script defer="" src="../assets/fast-js-runner.js?v=20260822-v567"></script>
+<script defer="" src="../assets/lesson-example-runner.js?v=20260822-v567"></script>
+<script defer="" src="../assets/lesson-example-runner-guard.js?v=20260822-v567"></script><script defer="" src="../assets/python-inline-terminal.js?v=20260822-v567"></script><script defer="" src="../assets/runner-performance-guard.js?v=20260822-v567"></script>
+<script defer="" src="../assets/evergreen-learning-engine.js?v=20260822-v567"></script>
+<script defer="" src="../assets/evergreen-review-navigation.js?v=20260822-v567"></script>
+<script defer="" src="../assets/smart-evergreen-review.js?v=20260822-v567"></script>
+<script defer="" src="../assets/assessment-practice.js?v=20260822-v567"></script>
+<script defer src="../assets/exam-style-problem-statements-v565.js?v=20260822-v567"></script>
+<script defer="" src="../assets/github-integration.js?v=20260822-v567"></script>
+<script defer="" src="../assets/assessment-layout-fix.js?v=20260822-v567"></script>
+<script defer="" src="../assets/universal-reveal-solutions.js?v=20260822-v567"></script>
+<script defer="" src="../assets/reveal-solution-explanations.js?v=20260822-v567"></script>
+<script defer="" src="../assets/assessment-expanded-descriptions.js?v=20260822-v567"></script>
+<script defer="" src="../assets/exercise-direct-publish.js?v=20260822-v567"></script>
+<script defer="" src="../assets/universal-run-output.js?v=20260822-v567"></script>
+<script defer="" src="../assets/final-exercise-toolbar.js?v=20260822-v567"></script>
+<script defer="" src="../assets/course-project-workspace.js?v=20260822-v571"></script>
+<script defer="" src="../assets/universal-editable-code.js?v=20260822-v567"></script>
+<script defer="" src="../assets/progressive-lesson-layout.js?v=20260822-v567"></script><script defer="" src="../assets/line-by-line-explanations.js?v=20260822-v567"></script><script defer="" src="../assets/example-learning-tools.js?v=20260822-v567"></script>
+<script defer="" src="../assets/practice-publish-completer.js?v=20260823-v573"></script>
+<script defer="" src="../assets/oa-assessment-fallback.js?v=20260822-v567"></script>
+<script defer="" src="../assets/oa-assessment-upgrade.js?v=20260822-v567"></script>
+<script defer="" src="../assets/python-only-ui.js?v=20260822-v567"></script>
+<script defer="" src="../assets/conceptual-examples-v574.js?v=20260824-v574"></script><script defer="" src="../assets/program-questions-v574.js?v=20260824-v574"></script><script defer="" src="../assets/calm-study-flow.js?v=20260822-v567"></script>
+<script defer="" src="../assets/progress-resume.js?v=20260822-v567"></script>
+<script defer="" src="../assets/practice-guidance.js?v=20260823-v573"></script>
+<script src="../assets/purpose-first-prompts.js?v=20260822-v567" defer></script>
+<script defer src="../assets/scroll-performance-v561.js?v=20260822-v567"></script><script defer src="../assets/try-it-yourself-v568.js?v=20260822-v568"></script><script defer src="../assets/runnable-lesson-example-fixes.js?v=20260822-v567"></script>
+<script defer src="../assets/lesson-example-runner.js?v=20260822-v567"></script>
+<script defer src="../assets/lesson-example-runner-guard.js?v=20260822-v567"></script>
+<script defer src="../assets/evergreen-learning-engine.js?v=20260822-v567"></script>
+<script defer src="../assets/evergreen-review-navigation.js?v=20260822-v567"></script>
+<script defer src="../assets/smart-evergreen-review.js?v=20260822-v567"></script>
+<script id="csai-assessment-data" type="application/json">{"courseId":"dsa","courseTitle":"Data Structures & Algorithms","defaultLanguage":"python","exercises":[{"title":"Two Sum","difficulty":1,"prompt":"Return indices of two numbers adding to target.","hint":"hash map of complements","solution":"def two_sum(nums,t):\n    seen={}\n    for i,n in enumerate(nums):\n        if t-n in seen: return [seen[t-n],i]\n        seen[n]=i","type":"practice","starter":"def two_sum(nums,t):\n    pass"},{"title":"Valid parentheses","difficulty":2,"prompt":"Return True if brackets are balanced.","hint":"stack; push opens, match on close","solution":"def valid(s):\n    st=[];pairs={')':'(',']':'[','}':'{'}\n    for c in s:\n        if c in pairs:\n            if not st or st.pop()!=pairs[c]: return False\n        else: st.append(c)\n    return not st","type":"practice","starter":"def valid(s):\n    pass"},{"title":"Longest substring w/o repeat","difficulty":3,"prompt":"Length of longest substring with all unique chars.","hint":"sliding window + last-seen index","solution":"def longest(s):\n    seen={};l=0;best=0\n    for r,c in enumerate(s):\n        if c in seen and seen[c]>=l: l=seen[c]+1\n        seen[c]=r; best=max(best,r-l+1)\n    return best","type":"practice","starter":"def longest(s):\n    pass"},{"id":"dsa_ex4","title":"Array vs linked list trade-off","difficulty":1,"prompt":"You need frequent insertions at the front and don't need random access by index. Which structure fits better, array or linked list?","type":"scenario-analysis","hint":"linked list -- O(1) front insertion vs array's O(n) shift"},{"id":"dsa_ex5","title":"Implement a stack-based check","difficulty":2,"prompt":"Using a stack, describe how you'd check if parentheses in a string are balanced, e.g. '(())' is balanced but '(()' is not.","type":"scenario-analysis"},{"id":"dsa_ex6","title":"Choose linear or binary search","difficulty":1,"prompt":"Given an unsorted list, explain why binary search can't be used directly, and what you'd need to do first.","type":"short-answer","hint":"sort it first -- binary search requires sorted data"},{"id":"dsa_ex7","title":"Traverse a small tree","difficulty":2,"prompt":"Given a small binary tree, write out the values in-order (left, node, right) traversal order by hand.","type":"scenario-analysis"},{"id":"dsa_ex8","title":"Find the off-by-one bug in a binary search","difficulty":2,"type":"debugging","prompt":"A binary search implementation uses `while lo < hi:` and `hi = mid` (instead of `hi = mid - 1`) after a non-match. It sometimes loops forever or returns the wrong index. Identify the bug and fix it.","hint":"when the search space doesn't shrink on every iteration (hi=mid instead of hi=mid-1, or lo<=hi vs lo<hi mismatched with how mid is used), the loop can fail to terminate or skip the target","starter":"while lo < hi:"},{"id":"dsa_ex9","title":"Diagnose a hidden O(n²) in 'optimized' code","difficulty":2,"type":"debugging","prompt":"A solution uses `if x in my_list:` inside a loop over n items, and the author claims it's O(n). Explain why it's actually O(n²), and what single change fixes it.","hint":"'in' on a list is O(n) per check, and it's called n times -- switching my_list to a set makes membership checks O(1) average, restoring real O(n)","starter":"if x in my_list:"},{"id":"codesignal-second-largest","title":"CodeSignal • Second Largest Distinct","prompt":"Return the second largest distinct integer in nums. Return None if fewer than two distinct values exist. Do not sort the entire list.\n\nAssessment-style practice problem. This is an original practice question, not an official assessment question.","difficulty":1,"hint":"Track the largest and second-largest distinct values while scanning.","starter":"def second_largest_distinct(nums):\n    pass\n","type":"coding-practice"},{"id":"codesignal-valley-array","title":"CodeSignal • Valley Array","prompt":"Return True if nums strictly decreases to one interior minimum and then strictly increases. The minimum cannot be the first or last element.\n\nAssessment-style practice problem. This is an original practice question, not an official assessment question.","difficulty":2,"hint":"Walk down while values decrease, then walk up while values increase.","starter":"def is_valley(nums):\n    pass\n","type":"coding-practice"},{"id":"codesignal-pair-sum","title":"CodeSignal • First Pair Sum","prompt":"Return the indices of the first pair encountered during a left-to-right scan whose values add to target. Return [] if no pair exists.\n\nAssessment-style practice problem. This is an original practice question, not an official assessment question.","difficulty":1,"hint":"Store value -> earliest index in a dictionary.","starter":"def first_pair_sum(nums, target):\n    pass\n","type":"coding-practice"},{"id":"codesignal-longest-unique","title":"CodeSignal • Longest Unique Window","prompt":"Return the length of the longest substring with no repeated characters.\n\nAssessment-style practice problem. This is an original practice question, not an official assessment question.","difficulty":2,"hint":"Use a sliding window and store the most recent index of each character.","starter":"def longest_unique(text):\n    pass\n","type":"coding-practice"},{"id":"codesignal-range-sums","title":"CodeSignal • Batch Range Sums","prompt":"Given nums and queries where each query is [left, right] inclusive, return the sum for every query.\n\nAssessment-style practice problem. This is an original practice question, not an official assessment question.","difficulty":2,"hint":"Build a prefix sum array with one extra leading zero.","starter":"def range_sums(nums, queries):\n    pass\n","type":"coding-practice"},{"id":"codesignal-grid-word","title":"CodeSignal • Grid Word Exists","prompt":"Given a grid of characters and a word, return True if the word can be formed by moving up, down, left, or right without reusing a cell in the same path.\n\nAssessment-style practice problem. This is an original practice question, not an official assessment question.","difficulty":2,"hint":"Try DFS from every cell that could be the first character, marking a cell while it is in the current path.","starter":"def grid_word(board, word):\n    pass\n","type":"coding-practice"},{"id":"codesignal-island-count","title":"CodeSignal • Count Islands","prompt":"Given a grid containing 0 and 1, count connected groups of 1s. Cells connect only up, down, left, and right.\n\nAssessment-style practice problem. This is an original practice question, not an official assessment question.","difficulty":2,"hint":"Every unvisited land cell starts one new island; flood-fill it so it is not counted again.","starter":"def island_count(grid):\n    pass\n","type":"coding-practice"},{"id":"codesignal-shortest-grid","title":"CodeSignal • Shortest Grid Route","prompt":"In a 0/1 grid, move up, down, left, or right through 0 cells only. Return the minimum number of moves from the top-left cell to the bottom-right cell, or -1 if impossible.\n\nAssessment-style practice problem. This is an original practice question, not an official assessment question.","difficulty":2,"hint":"Use BFS because every move has the same cost.","starter":"def shortest_grid(grid):\n    pass\n","type":"coding-practice"},{"id":"codesignal-course-order","title":"CodeSignal • Dependency Order","prompt":"There are n tasks numbered 0 through n-1. Each pair [task, prerequisite] means prerequisite must come first. Return one valid order, or [] if a cycle makes completion impossible.\n\nAssessment-style practice problem. This is an original practice question, not an official assessment question.","difficulty":2,"hint":"Use indegrees and process nodes with indegree zero using Kahn's topological sort.","starter":"def dependency_order(n, prerequisites):\n    pass\n","type":"coding-practice"},{"id":"codesignal-grid-paths","title":"CodeSignal • Grid Paths With Blocks","prompt":"A 0/1 grid uses 0 for open cells and 1 for blocked cells. Starting at the top-left, move only right or down. Return the number of distinct paths to the bottom-right.\n\nAssessment-style practice problem. This is an original practice question, not an official assessment question.","difficulty":2,"hint":"Let dp[c] store the number of ways to reach the current row at column c.","starter":"def grid_paths(grid):\n    pass\n","type":"coding-practice"},{"id":"codesignal-score-band","title":"CodeSignal • Score Band Lookup","prompt":"Given an integer start, a list of integer changes, and non-overlapping intervals [low, high, label], return the label whose interval contains start + sum(changes). Intervals use low <= value < high. Return 'out' if none match.\n\nAssessment-style practice problem. This is an original practice question, not an official assessment question.","difficulty":1,"hint":"Compute the final score once, then scan the intervals.","starter":"def score_band(start, changes, intervals):\n    pass\n","type":"coding-practice"},{"id":"codesignal-vowel-flip","title":"CodeSignal • Vowel Case Flip","prompt":"Given a string, change every vowel to the opposite case while leaving every other character unchanged.\n\nAssessment-style practice problem. This is an original practice question, not an official assessment question.","difficulty":1,"hint":"Check whether ch.lower() is in the set of vowels.","starter":"def vowel_flip(text):\n    pass\n","type":"coding-practice"},{"id":"codesignal-chain-walk","title":"CodeSignal • Index Chain Walk","prompt":"A list next_index stores the next position for each index. Start at start and follow the chain until -1 or until the next step would revisit an index. Return the visited indices in order.\n\nAssessment-style practice problem. This is an original practice question, not an official assessment question.","difficulty":1,"hint":"Use a set to remember visited indices.","starter":"def chain_walk(next_index, start):\n    pass\n","type":"coding-practice"},{"id":"codesignal-run-compress","title":"CodeSignal • Run Compression","prompt":"Compress each maximal run of equal characters as character + count. Return the original string when the compressed result is not shorter.\n\nAssessment-style practice problem. This is an original practice question, not an official assessment question.","difficulty":1,"hint":"Build output pieces in a list and join once.","starter":"def run_compress(text):\n    pass\n","type":"coding-practice"},{"id":"codesignal-min-increments","title":"CodeSignal • Minimum Increments for Non-Decreasing","prompt":"You may increase any element by 1 in one operation. Return the minimum number of operations needed to make nums non-decreasing.\n\nAssessment-style practice problem. This is an original practice question, not an official assessment question.","difficulty":2,"hint":"Scan left to right and raise values that fall below the previous fixed value.","starter":"def min_increments_non_decreasing(nums):\n    pass\n","type":"coding-practice"},{"id":"codesignal-top-k-frequent","title":"CodeSignal • Top K Frequent Values","prompt":"Return the k most frequent integers in nums. If two values have the same frequency, the smaller value comes first.\n\nAssessment-style practice problem. This is an original practice question, not an official assessment question.","difficulty":2,"hint":"Count with a dictionary or Counter, then order by frequency descending and value ascending.","starter":"def top_k_frequent(nums, k):\n    pass\n","type":"coding-practice"},{"id":"codesignal-task-conflicts","title":"CodeSignal • Task Conflict Pairs","prompt":"Given task intervals [start, end], count pairs of tasks whose time ranges overlap. Intervals that only touch at an endpoint do not overlap.\n\nAssessment-style practice problem. This is an original practice question, not an official assessment question.","difficulty":2,"hint":"Sort by start time. For each interval, later intervals cannot overlap once their start is at least the current end.","starter":"def task_conflicts(intervals):\n    pass\n","type":"coding-practice"},{"id":"codesignal-battery-schedule","title":"CodeSignal • Battery Job Scheduler","prompt":"Each job is [duration, battery_cost]. You have a fixed battery budget. Jobs may be completed in any order and only battery_cost reduces the budget. Return the maximum number of jobs you can finish.\n\nAssessment-style practice problem. This is an original practice question, not an official assessment question.","difficulty":2,"hint":"To maximize how many jobs fit in the budget, choose lower battery costs first.","starter":"def battery_schedule(jobs, battery):\n    pass\n","type":"coding-practice"},{"id":"codesignal-group-anagrams","title":"CodeSignal • Group Anagram Sizes","prompt":"Group words that are anagrams of one another and return only the group sizes, sorted from largest to smallest.\n\nAssessment-style practice problem. This is an original practice question, not an official assessment question.","difficulty":1,"hint":"A sorted word can be used as a dictionary key for its anagram group.","starter":"def group_anagram_sizes(words):\n    pass\n","type":"coding-practice"},{"id":"codesignal-window-max-sum","title":"CodeSignal • Fixed Window Maximum Sum","prompt":"Return the largest sum of any contiguous subarray of exactly k elements. Return None when k is invalid for nums.\n\nAssessment-style practice problem. This is an original practice question, not an official assessment question.","difficulty":1,"hint":"Compute the first window once, then subtract the outgoing value and add the incoming value.","starter":"def window_max_sum(nums, k):\n    pass\n","type":"coding-practice"},{"id":"codesignal-balanced-brackets","title":"CodeSignal • Balanced Brackets","prompt":"Return True if every opening bracket in text is closed by the correct bracket in the correct order. Ignore non-bracket characters.\n\nAssessment-style practice problem. This is an original practice question, not an official assessment question.","difficulty":1,"hint":"Push opening brackets; for a closing bracket, check the top of the stack.","starter":"def balanced_brackets(text):\n    pass\n","type":"coding-practice"},{"id":"codesignal-next-greater","title":"CodeSignal • Next Greater Value","prompt":"For each value in nums, return the first later value that is strictly greater. Use -1 if none exists.\n\nAssessment-style practice problem. This is an original practice question, not an official assessment question.","difficulty":2,"hint":"Keep a decreasing stack of indices whose answer has not been found yet.","starter":"def next_greater(nums):\n    pass\n","type":"coding-practice"},{"id":"codesignal-merge-intervals","title":"CodeSignal • Merge Overlapping Intervals","prompt":"Given intervals [start, end], merge every pair that overlaps and return the merged intervals sorted by start.\n\nAssessment-style practice problem. This is an original practice question, not an official assessment question.","difficulty":2,"hint":"Sort by start, then compare each interval with the last merged interval.","starter":"def merge_intervals(intervals):\n    pass\n","type":"coding-practice"},{"id":"codesignal-min-rooms","title":"CodeSignal • Minimum Meeting Rooms","prompt":"Given meeting intervals [start, end], return the minimum number of rooms needed so that all meetings can run without overlap. A meeting ending at time t frees its room for another starting at t.\n\nAssessment-style practice problem. This is an original practice question, not an official assessment question.","difficulty":2,"hint":"Sort all start times and end times separately, then sweep through them.","starter":"def min_rooms(intervals):\n    pass\n","type":"coding-practice"},{"id":"codesignal-spiral-matrix","title":"CodeSignal • Spiral Matrix Read","prompt":"Return all values of a rectangular matrix in clockwise spiral order, starting at the top-left corner.\n\nAssessment-style practice problem. This is an original practice question, not an official assessment question.","difficulty":2,"hint":"Maintain top, bottom, left, and right boundaries and shrink them after each side.","starter":"def spiral_matrix(matrix):\n    pass\n","type":"coding-practice"}],"quiz":[{"q":"Binary search is:","options":["O(n)","O(log n)","O(n²)","O(1)"],"correct":1,"type":"mcq"},{"q":"Best structure for 'have I seen this?':","options":["list","hash set","stack","queue"],"correct":1,"type":"mcq"},{"q":"'Shortest path in unweighted graph' → use:","options":["DFS","BFS","DP","sorting"],"correct":1,"type":"mcq"},{"q":"What is the time complexity of accessing an array element by index?","options":["O(n)","O(1)","O(log n)","O(n^2)"],"correct":1,"type":"mcq"},{"q":"What is the time complexity of inserting into the middle of an array?","options":["O(1)","O(n)","O(log n)","O(n^2)"],"correct":1,"type":"mcq"},{"q":"What does each node in a linked list store?","options":["only a value","a value and a pointer to the next node","only a pointer","an array of values"],"correct":1,"type":"mcq"},{"q":"What is the time complexity of inserting at the front of a linked list?","options":["O(n)","O(1)","O(log n)","O(n^2)"],"correct":1,"type":"mcq"},{"q":"Why can't a linked list support O(1) random access like an array?","options":["it can, they're identical","reaching the nth node requires following pointers from the start, which takes O(n)","linked lists don't store values","arrays are always faster for everything"],"correct":1,"type":"mcq"},{"q":"What ordering does a stack use?","options":["FIFO","LIFO","random order","sorted order"],"correct":1,"type":"mcq"},{"q":"What ordering does a queue use?","options":["LIFO","FIFO","random order","sorted order"],"correct":1,"type":"mcq"},{"q":"Why is using a plain list's pop(0) to simulate a queue inefficient?","options":["it isn't inefficient","it's O(n) per operation, unlike collections.deque's O(1)","lists can't remove elements","pop(0) doesn't exist in Python"],"correct":1,"type":"mcq"},{"q":"What is a binary tree?","options":["any tree structure","a tree where each node has at most two children","a tree with exactly two nodes","a sorted array"],"correct":1,"type":"mcq"},{"q":"What must you track when traversing a graph to avoid infinite loops?","options":["nothing extra is needed","visited nodes, since graphs can have cycles unlike trees","the total number of edges only","the alphabetical order of nodes"],"correct":1,"type":"mcq"},{"q":"What is an adjacency list?","options":["a sorted list of all nodes","a representation where each node lists its directly connected neighbors","a type of sorting algorithm","a binary search structure"],"correct":1,"type":"mcq"},{"q":"What is the time complexity of merge sort and quicksort, on average?","options":["O(n)","O(n log n)","O(n^2)","O(log n)"],"correct":1,"type":"mcq"},{"q":"Why is an O(n^2) sort risky for large datasets?","options":["it isn't risky, all sorts are equally fast","the number of operations grows quadratically, becoming impractically slow as data size increases","O(n^2) sorts always crash","O(n^2) means constant time"],"correct":1,"type":"mcq"},{"q":"What sorting algorithm does Python's built-in sorted() use?","options":["bubble sort","Timsort, a highly-optimized O(n log n) algorithm","a random algorithm each time","insertion sort only"],"correct":1,"type":"mcq"},{"q":"What is the time complexity of linear search?","options":["O(1)","O(n)","O(log n)","O(n^2)"],"correct":1,"type":"mcq"},{"q":"What is required before binary search can be used correctly?","options":["nothing, it works on any data","the data must already be sorted","the data must be a linked list","the data must contain only numbers"],"correct":1,"type":"mcq"},{"q":"What is the time complexity of binary search?","options":["O(n)","O(log n)","O(n^2)","O(1)"],"correct":1,"type":"mcq"},{"q":"What happens if binary search is applied to unsorted data?","options":["it works but slower","it silently gives wrong results, since the halving logic assumes sorted order","it raises a clear error","it automatically sorts the data first"],"correct":1,"type":"mcq"},{"q":"What does a directed graph's edges represent, unlike an undirected graph?","options":["no difference between them","edges have a specific direction (A->B doesn't imply B->A)","directed graphs have no edges","directed graphs can't have cycles"],"correct":1,"type":"mcq"},{"q":"Why is an adjacency list often preferred over an adjacency matrix for sparse graphs?","options":["adjacency matrices don't exist","it's more memory-efficient when most nodes aren't connected to most others","adjacency lists are always slower","matrices can't represent graphs at all"],"correct":1,"type":"mcq"},{"q":"What is depth-first traversal?","options":["visiting nodes level by level","going as deep as possible down one path before backtracking","visiting random nodes","only visiting leaf nodes"],"correct":1,"type":"mcq"},{"q":"What is breadth-first traversal?","options":["going deep before wide","visiting nodes level by level, wide before deep","only visiting the root","a type of sorting algorithm"],"correct":1,"type":"mcq"},{"q":"Why check for None before recursing into a tree node's child?","options":["it's unnecessary, trees never have empty subtrees","an empty subtree (None) would cause a crash if you tried to recurse into it without checking","checking is only needed for graphs","None checks slow down traversal significantly"],"correct":1,"type":"mcq"},{"q":"What is Big-O notation used to describe?","options":["the exact runtime in seconds","how an algorithm's resource use (time or space) grows relative to input size","the programming language used","the number of bugs in code"],"correct":1,"type":"mcq"},{"q":"Between O(n) and O(n log n), which grows faster as n increases?","options":["O(n)","O(n log n)","they're identical","neither grows"],"correct":1,"type":"mcq"},{"q":"What is a hash table primarily used for?","options":["sorting data","fast average-case lookup, insertion, and deletion by key","storing data in sorted order","representing hierarchical relationships"],"correct":1,"type":"mcq"},{"q":"What is the average time complexity of a hash table lookup?","options":["O(n)","O(1)","O(log n)","O(n^2)"],"correct":1,"type":"mcq"}],"structured":{"codesignal-second-largest":{"language":"python","starter":"def second_largest_distinct(nums):\n    pass\n","fname":"second_largest_distinct","tests_py":"[[[[4, 1, 9, 9, 7]], 7],[[[5, 5, 5]], None],[[[-3, -1, -2]], -2]]","hint":"Track the largest and second-largest distinct values while scanning.","solution":"def second_largest_distinct(nums):\n    first = None\n    second = None\n    for x in nums:\n        if first is None or x > first:\n            if x != first:\n                second = first\n                first = x\n        elif x != first and (second is None or x > second):\n            second = x\n    return second\n"},"codesignal-valley-array":{"language":"python","starter":"def is_valley(nums):\n    pass\n","fname":"is_valley","tests_py":"[[[[9, 7, 4, 5, 8]], True],[[[5, 4, 3, 2]], False],[[[3, 2, 2, 4]], False]]","hint":"Walk down while values decrease, then walk up while values increase.","solution":"def is_valley(nums):\n    if len(nums) < 3:\n        return False\n    i = 1\n    while i < len(nums) and nums[i] < nums[i - 1]:\n        i += 1\n    if i == 1 or i == len(nums):\n        return False\n    while i < len(nums) and nums[i] > nums[i - 1]:\n        i += 1\n    return i == len(nums)\n"},"codesignal-pair-sum":{"language":"python","starter":"def first_pair_sum(nums, target):\n    pass\n","fname":"first_pair_sum","tests_py":"[[[[2, 7, 11, 15], 9], [0, 1]],[[[3, 3, 4], 6], [0, 1]],[[[1, 2, 3], 10], []]]","hint":"Store value -> earliest index in a dictionary.","solution":"def first_pair_sum(nums, target):\n    seen = {}\n    for i, x in enumerate(nums):\n        need = target - x\n        if need in seen:\n            return [seen[need], i]\n        if x not in seen:\n            seen[x] = i\n    return []\n"},"codesignal-longest-unique":{"language":"python","starter":"def longest_unique(text):\n    pass\n","fname":"longest_unique","tests_py":"[[['abcabcbb'], 3],[['bbbbb'], 1],[['pwwkew'], 3]]","hint":"Use a sliding window and store the most recent index of each character.","solution":"def longest_unique(text):\n    last = {}\n    left = 0\n    best = 0\n    for right, ch in enumerate(text):\n        if ch in last and last[ch] >= left:\n            left = last[ch] + 1\n        last[ch] = right\n        best = max(best, right - left + 1)\n    return best\n"},"codesignal-range-sums":{"language":"python","starter":"def range_sums(nums, queries):\n    pass\n","fname":"range_sums","tests_py":"[[[[3, 1, 4, 1, 5], [[0, 2], [1, 3], [4, 4]]], [8, 6, 5]],[[[-1, 2, 7], [[0, 1], [0, 2]]], [1, 8]]]","hint":"Build a prefix sum array with one extra leading zero.","solution":"def range_sums(nums, queries):\n    prefix = [0]\n    for x in nums:\n        prefix.append(prefix[-1] + x)\n    return [prefix[r + 1] - prefix[l] for l, r in queries]\n"},"codesignal-grid-word":{"language":"python","starter":"def grid_word(board, word):\n    pass\n","fname":"grid_word","tests_py":"[[[[['A','B','C','E'],['S','F','C','S'],['A','D','E','E']], 'ABCCED'], True],[[[['A','B'],['C','D']], 'ABCD'], False],[[[['A']], 'A'], True]]","hint":"Try DFS from every cell that could be the first character, marking a cell while it is in the current path.","solution":"def grid_word(board, word):\n    if not word:\n        return True\n    if not board or not board[0]:\n        return False\n    rows, cols = len(board), len(board[0])\n    def dfs(r, c, i):\n        if i == len(word):\n            return True\n        if r < 0 or r >= rows or c < 0 or c >= cols or board[r][c] != word[i]:\n            return False\n        ch = board[r][c]\n        board[r][c] = '#'\n        found = dfs(r+1,c,i+1) or dfs(r-1,c,i+1) or dfs(r,c+1,i+1) or dfs(r,c-1,i+1)\n        board[r][c] = ch\n        return found\n    return any(dfs(r,c,0) for r in range(rows) for c in range(cols))\n"},"codesignal-island-count":{"language":"python","starter":"def island_count(grid):\n    pass\n","fname":"island_count","tests_py":"[[[[[1,1,0],[0,1,0],[1,0,1]]], 3],[[[[0,0],[0,0]]], 0],[[[[1,1],[1,1]]], 1]]","hint":"Every unvisited land cell starts one new island; flood-fill it so it is not counted again.","solution":"def island_count(grid):\n    if not grid:\n        return 0\n    rows, cols = len(grid), len(grid[0])\n    seen = set()\n    def dfs(r, c):\n        if r < 0 or r >= rows or c < 0 or c >= cols or grid[r][c] != 1 or (r,c) in seen:\n            return\n        seen.add((r,c))\n        dfs(r+1,c); dfs(r-1,c); dfs(r,c+1); dfs(r,c-1)\n    total = 0\n    for r in range(rows):\n        for c in range(cols):\n            if grid[r][c] == 1 and (r,c) not in seen:\n                total += 1\n                dfs(r,c)\n    return total\n"},"codesignal-shortest-grid":{"language":"python","starter":"def shortest_grid(grid):\n    pass\n","fname":"shortest_grid","tests_py":"[[[[[0,0,0],[1,1,0],[0,0,0]]], 4],[[[[0,1],[1,0]]], -1],[[[[0]]], 0]]","hint":"Use BFS because every move has the same cost.","solution":"def shortest_grid(grid):\n    from collections import deque\n    if not grid or not grid[0] or grid[0][0] or grid[-1][-1]:\n        return -1\n    rows, cols = len(grid), len(grid[0])\n    q = deque([(0,0,0)])\n    seen = {(0,0)}\n    while q:\n        r, c, dist = q.popleft()\n        if (r,c) == (rows-1, cols-1):\n            return dist\n        for dr, dc in ((1,0),(-1,0),(0,1),(0,-1)):\n            nr, nc = r+dr, c+dc\n            if 0 <= nr < rows and 0 <= nc < cols and grid[nr][nc] == 0 and (nr,nc) not in seen:\n                seen.add((nr,nc))\n                q.append((nr,nc,dist+1))\n    return -1\n"},"codesignal-course-order":{"language":"python","starter":"def dependency_order(n, prerequisites):\n    pass\n","fname":"dependency_order","tests_py":"[[[4, [[1,0],[2,0],[3,1],[3,2]]], [0,1,2,3]],[[2, [[1,0],[0,1]]], []],[[3, []], [0,1,2]]]","hint":"Use indegrees and process nodes with indegree zero using Kahn's topological sort.","solution":"def dependency_order(n, prerequisites):\n    from collections import deque\n    graph = [[] for _ in range(n)]\n    indegree = [0] * n\n    for task, pre in prerequisites:\n        graph[pre].append(task)\n        indegree[task] += 1\n    q = deque(i for i in range(n) if indegree[i] == 0)\n    order = []\n    while q:\n        node = q.popleft()\n        order.append(node)\n        for nxt in graph[node]:\n            indegree[nxt] -= 1\n            if indegree[nxt] == 0:\n                q.append(nxt)\n    return order if len(order) == n else []\n"},"codesignal-grid-paths":{"language":"python","starter":"def grid_paths(grid):\n    pass\n","fname":"grid_paths","tests_py":"[[[[[0,0,0],[0,1,0],[0,0,0]]], 2],[[[[0,1],[0,0]]], 1],[[[[1]]], 0]]","hint":"Let dp[c] store the number of ways to reach the current row at column c.","solution":"def grid_paths(grid):\n    if not grid or not grid[0] or grid[0][0] == 1:\n        return 0\n    cols = len(grid[0])\n    dp = [0] * cols\n    dp[0] = 1\n    for row in grid:\n        for c in range(cols):\n            if row[c] == 1:\n                dp[c] = 0\n            elif c > 0:\n                dp[c] += dp[c-1]\n    return dp[-1]\n"},"codesignal-score-band":{"language":"python","starter":"def score_band(start, changes, intervals):\n    pass\n","fname":"score_band","tests_py":"[[[10, [2, -1, 5], [[0, 10, 'low'], [10, 20, 'mid'], [20, 30, 'high']]], 'mid'],[[5, [1, 1], [[0, 5, 'a'], [5, 8, 'b']]], 'b'],[[100, [-10], [[0, 50, 'x'], [50, 90, 'y']]], 'out']]","hint":"Compute the final score once, then scan the intervals.","solution":"def score_band(start, changes, intervals):\n    total = start + sum(changes)\n    for low, high, label in intervals:\n        if low <= total < high:\n            return label\n    return 'out'\n"},"codesignal-vowel-flip":{"language":"python","starter":"def vowel_flip(text):\n    pass\n","fname":"vowel_flip","tests_py":"[[['Hello World'], 'HEllO WOrld'],[['AEiou xyz'], 'aeIOU xyz'],[[''], '']]","hint":"Check whether ch.lower() is in the set of vowels.","solution":"def vowel_flip(text):\n    vowels = set('aeiou')\n    out = []\n    for ch in text:\n        out.append(ch.swapcase() if ch.lower() in vowels else ch)\n    return ''.join(out)\n"},"codesignal-chain-walk":{"language":"python","starter":"def chain_walk(next_index, start):\n    pass\n","fname":"chain_walk","tests_py":"[[[[2, -1, 3, 1], 0], [0, 2, 3, 1]],[[[1, 2, 0], 0], [0, 1, 2]],[[[-1], 0], [0]]]","hint":"Use a set to remember visited indices.","solution":"def chain_walk(next_index, start):\n    seen = set()\n    order = []\n    cur = start\n    while cur != -1 and cur not in seen:\n        seen.add(cur)\n        order.append(cur)\n        cur = next_index[cur]\n    return order\n"},"codesignal-run-compress":{"language":"python","starter":"def run_compress(text):\n    pass\n","fname":"run_compress","tests_py":"[[['aaaabbc'], 'a4b2c1'],[['abcd'], 'abcd'],[['aaaaaaaaaa'], 'a10']]","hint":"Build output pieces in a list and join once.","solution":"def run_compress(text):\n    if not text:\n        return text\n    parts = []\n    count = 1\n    for i in range(1, len(text) + 1):\n        if i < len(text) and text[i] == text[i - 1]:\n            count += 1\n        else:\n            parts.append(text[i - 1] + str(count))\n            count = 1\n    compressed = ''.join(parts)\n    return compressed if len(compressed) < len(text) else text\n"},"codesignal-min-increments":{"language":"python","starter":"def min_increments_non_decreasing(nums):\n    pass\n","fname":"min_increments_non_decreasing","tests_py":"[[[[3, 2, 5, 1, 7]], 5],[[[1, 2, 3]], 0],[[[5, 4, 3]], 3]]","hint":"Scan left to right and raise values that fall below the previous fixed value.","solution":"def min_increments_non_decreasing(nums):\n    if not nums:\n        return 0\n    ops = 0\n    prev = nums[0]\n    for x in nums[1:]:\n        if x < prev:\n            ops += prev - x\n        else:\n            prev = x\n    return ops\n"},"codesignal-top-k-frequent":{"language":"python","starter":"def top_k_frequent(nums, k):\n    pass\n","fname":"top_k_frequent","tests_py":"[[[[1,1,1,2,2,3], 2], [1,2]],[[[4,4,5,5,6], 2], [4,5]],[[[9], 1], [9]]]","hint":"Count with a dictionary or Counter, then order by frequency descending and value ascending.","solution":"def top_k_frequent(nums, k):\n    from collections import Counter\n    counts = Counter(nums)\n    ordered = sorted(counts, key=lambda x: (-counts[x], x))\n    return ordered[:k]\n"},"codesignal-task-conflicts":{"language":"python","starter":"def task_conflicts(intervals):\n    pass\n","fname":"task_conflicts","tests_py":"[[[[[1,4],[3,5],[5,7]]], 1],[[[[0,10],[1,2],[3,4]]], 2],[[[]], 0]]","hint":"Sort by start time. For each interval, later intervals cannot overlap once their start is at least the current end.","solution":"def task_conflicts(intervals):\n    intervals = sorted(intervals)\n    total = 0\n    for i in range(len(intervals)):\n        for j in range(i + 1, len(intervals)):\n            if intervals[j][0] >= intervals[i][1]:\n                break\n            total += 1\n    return total\n"},"codesignal-battery-schedule":{"language":"python","starter":"def battery_schedule(jobs, battery):\n    pass\n","fname":"battery_schedule","tests_py":"[[[[[5,4],[2,2],[3,3]], 5], 2],[[[[1,5],[2,6]], 4], 0],[[[[9,1],[2,1],[3,1]], 2], 2]]","hint":"To maximize how many jobs fit in the budget, choose lower battery costs first.","solution":"def battery_schedule(jobs, battery):\n    used = 0\n    completed = 0\n    for duration, cost in sorted(jobs, key=lambda job: (job[1], job[0])):\n        if used + cost <= battery:\n            used += cost\n            completed += 1\n        else:\n            break\n    return completed\n"},"codesignal-group-anagrams":{"language":"python","starter":"def group_anagram_sizes(words):\n    pass\n","fname":"group_anagram_sizes","tests_py":"[[[['eat','tea','tan','ate','nat','bat']], [3,2,1]],[[['a','a','b']], [2,1]],[[[]], []]]","hint":"A sorted word can be used as a dictionary key for its anagram group.","solution":"def group_anagram_sizes(words):\n    groups = {}\n    for word in words:\n        key = ''.join(sorted(word))\n        groups[key] = groups.get(key, 0) + 1\n    return sorted(groups.values(), reverse=True)\n"},"codesignal-window-max-sum":{"language":"python","starter":"def window_max_sum(nums, k):\n    pass\n","fname":"window_max_sum","tests_py":"[[[[2,1,5,1,3,2], 3], 9],[[[1,-2,3,4], 2], 7],[[[1,2], 3], None]]","hint":"Compute the first window once, then subtract the outgoing value and add the incoming value.","solution":"def window_max_sum(nums, k):\n    if k <= 0 or k > len(nums):\n        return None\n    current = sum(nums[:k])\n    best = current\n    for i in range(k, len(nums)):\n        current += nums[i] - nums[i-k]\n        best = max(best, current)\n    return best\n"},"codesignal-balanced-brackets":{"language":"python","starter":"def balanced_brackets(text):\n    pass\n","fname":"balanced_brackets","tests_py":"[[['([]){}'], True],[['([)]'], False],[['a+(b*c)-{d}'], True]]","hint":"Push opening brackets; for a closing bracket, check the top of the stack.","solution":"def balanced_brackets(text):\n    pairs = {')': '(', ']': '[', '}': '{'}\n    stack = []\n    for ch in text:\n        if ch in '([{':\n            stack.append(ch)\n        elif ch in pairs:\n            if not stack or stack.pop() != pairs[ch]:\n                return False\n    return not stack\n"},"codesignal-next-greater":{"language":"python","starter":"def next_greater(nums):\n    pass\n","fname":"next_greater","tests_py":"[[[[2, 1, 2, 4, 3]], [4, 2, 4, -1, -1]],[[[5, 4, 3]], [-1, -1, -1]],[[[1, 3, 2, 5]], [3, 5, 5, -1]]]","hint":"Keep a decreasing stack of indices whose answer has not been found yet.","solution":"def next_greater(nums):\n    answer = [-1] * len(nums)\n    stack = []\n    for i, value in enumerate(nums):\n        while stack and nums[stack[-1]] < value:\n            answer[stack.pop()] = value\n        stack.append(i)\n    return answer\n"},"codesignal-merge-intervals":{"language":"python","starter":"def merge_intervals(intervals):\n    pass\n","fname":"merge_intervals","tests_py":"[[[[[1, 3], [2, 6], [8, 10], [9, 12]]], [[1, 6], [8, 12]]],[[[[1, 2], [3, 4]]], [[1, 2], [3, 4]]],[[[]], []]]","hint":"Sort by start, then compare each interval with the last merged interval.","solution":"def merge_intervals(intervals):\n    if not intervals:\n        return []\n    intervals = sorted(intervals)\n    merged = [intervals[0][:]]\n    for start, end in intervals[1:]:\n        if start <= merged[-1][1]:\n            merged[-1][1] = max(merged[-1][1], end)\n        else:\n            merged.append([start, end])\n    return merged\n"},"codesignal-min-rooms":{"language":"python","starter":"def min_rooms(intervals):\n    pass\n","fname":"min_rooms","tests_py":"[[[[[0, 30], [5, 10], [15, 20]]], 2],[[[[7, 10], [2, 4]]], 1],[[[]], 0]]","hint":"Sort all start times and end times separately, then sweep through them.","solution":"def min_rooms(intervals):\n    if not intervals:\n        return 0\n    starts = sorted(start for start, _ in intervals)\n    ends = sorted(end for _, end in intervals)\n    i = j = rooms = best = 0\n    while i < len(starts):\n        if starts[i] < ends[j]:\n            rooms += 1\n            best = max(best, rooms)\n            i += 1\n        else:\n            rooms -= 1\n            j += 1\n    return best\n"},"codesignal-spiral-matrix":{"language":"python","starter":"def spiral_matrix(matrix):\n    pass\n","fname":"spiral_matrix","tests_py":"[[[[[1, 2, 3], [4, 5, 6], [7, 8, 9]]], [1, 2, 3, 6, 9, 8, 7, 4, 5]],[[[[1, 2, 3, 4]]], [1, 2, 3, 4]],[[[]], []]]","hint":"Maintain top, bottom, left, and right boundaries and shrink them after each side.","solution":"def spiral_matrix(matrix):\n    if not matrix or not matrix[0]:\n        return []\n    top, bottom = 0, len(matrix) - 1\n    left, right = 0, len(matrix[0]) - 1\n    out = []\n    while top <= bottom and left <= right:\n        for col in range(left, right + 1):\n            out.append(matrix[top][col])\n        top += 1\n        for row in range(top, bottom + 1):\n            out.append(matrix[row][right])\n        right -= 1\n        if top <= bottom:\n            for col in range(right, left - 1, -1):\n                out.append(matrix[bottom][col])\n            bottom -= 1\n        if left <= right:\n            for row in range(bottom, top - 1, -1):\n                out.append(matrix[row][left])\n            left += 1\n    return out\n"}}}</script>
+<script defer src="../assets/assessment-practice.js?v=20260822-v567"></script>
+<script defer src="../assets/github-integration.js?v=20260822-v567"></script>
+<script defer src="../assets/assessment-layout-fix.js?v=20260822-v567"></script>
+<script defer src="../assets/universal-reveal-solutions.js?v=20260822-v567"></script>
+<script defer src="../assets/reveal-solution-explanations.js?v=20260822-v567"></script>
+<script defer src="../assets/assessment-expanded-descriptions.js?v=20260822-v567"></script>
+<script defer src="../assets/exercise-direct-publish.js?v=20260822-v567"></script>
+<script defer src="../assets/universal-run-output.js?v=20260822-v567"></script>
+<script defer src="../assets/final-exercise-toolbar.js?v=20260822-v567"></script>
+<script id="csai-project-data" type="application/json">{"courseId":"dsa","courseTitle":"Data Structures & Algorithms","defaultLanguage":"python","projects":[{"id":"dsa-proj-1","title":"Implement your own HashMap","description":"Build a hash map from scratch with buckets and collision handling — proves you understand O(1) lookup.","requirements":[],"starter":"","language":"python"},{"id":"dsa-proj-2","title":"Maze solver","description":"Given a grid, find the shortest path with BFS and visualize the explored cells.","requirements":[],"starter":"","language":"python"},{"id":"dsa-proj-3","title":"Mini text autocomplete","description":"Build a trie and use it to suggest completions for a typed prefix.","requirements":[],"starter":"","language":"python"},{"id":"project-4","title":"Benchmark and compare 3 approaches to the same problem","description":"Pick a classic problem (e.g. finding duplicates, computing the k most frequent elements, or detecting a cycle in a graph). Implement it three different ways with genuinely different time/space trade-offs (e.g. a brute-force O(n^2) approach, a hash-based O(n) approach, and a sorting-based O(n log n) approach). Measure and compare their actual runtime on inputs of increasing size, and write up which approach you'd actually choose in a real system and why.","requirements":["Three distinct, correctly-working implementations of the same problem with different complexity classes","A benchmark script measuring actual runtime across at least 3 input sizes (e.g. 100, 10,000, 1,000,000 elements)","A short written comparison explaining WHY the runtimes diverge as input size grows, tied to each approach's real complexity","A clear recommendation: which approach you'd actually use in production, and under what conditions you'd choose differently (e.g. very small n, memory-constrained environment)"],"starter":"","language":"python"}]}</script>
+<script defer src="../assets/course-project-workspace.js?v=20260822-v571"></script>
+<script defer src="../assets/example-learning-tools.js?v=20260822-v567"></script>
+<script defer src="../assets/practice-publish-completer.js?v=20260823-v573"></script>
+
+<!-- csai-production-augmentation -->
+<script src="../assets/adaptive-practice-layer.js?v=20260822-v567" defer></script>
+<script src="../assets/project-readme-layer.js?v=20260822-v567" defer></script>
+<!-- /csai-production-augmentation -->
+<script src="/assets/oa-assessment-fallback.js?v=20260811-1" defer></script>
+<script src="/assets/oa-assessment-upgrade.js?v=20260811-1" defer></script>
+
+<script src="/assets/python-only-ui.js?v=20260811-2" defer></script>
+
+<script defer src="../assets/study-examples.js?v=20260824-v574"></script>
+
+<script src="../assets/runtime-inline/courses-dsa-002.js?v=20260822-v567"></script>
+</body></html>

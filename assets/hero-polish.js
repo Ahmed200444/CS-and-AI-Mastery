@@ -30,6 +30,7 @@ function decorateHero(){
 }
 
 function boot(){
+  if(!document.getElementById('hub'))return;
   decorateHero();
   var tries=0;
   var timer=setInterval(function(){tries++;if(decorateHero()||tries>20)clearInterval(timer);},100);

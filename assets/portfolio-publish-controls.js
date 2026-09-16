@@ -7,14 +7,17 @@ function courseId(){return slug(document.body.dataset.courseId||document.documen
 function courseTitle(){return clean(document.querySelector('.hero h1,h1')?.textContent||courseId())}
 function ext(code,hint=''){
  hint=String(hint||'').toLowerCase();
+ if(/c\+\+|cpp/.test(hint)||/#include\s*[<"]|\bstd::/.test(code))return'cpp';
  if(/python|\bpy\b/.test(hint)||/^\s*(def |from |import )/m.test(code))return'py';
  if(/sql/.test(hint)||/\b(select|insert|update|create table)\b/i.test(code))return'sql';
  if(/html/.test(hint)||/<[a-z][\s\S]*>/i.test(code))return'html';
+ if(/css/.test(hint)||/(^|\n)\s*[.#][A-Za-z_-][\w-]*\s*\{/.test(code))return'css';
+ if(/shell|bash|\bsh\b/.test(hint)||/(^|\n)\s*(git|ls|cd|pwd|mkdir|chmod|grep|find|docker|kubectl|curl|ssh)\b/m.test(code))return'sh';
  if(/javascript|\bjs\b/.test(hint)||/\b(const|let|function)\b|=>/.test(code))return'js';
  return'txt';
 }
-function languageName(extension){return({py:'Python',js:'JavaScript',sql:'SQL',html:'HTML',txt:'Text / concept work'})[extension]||extension.toUpperCase()}
-function runLine(extension,filename){if(extension==='py')return`python ${filename}`;if(extension==='js')return`node ${filename}`;if(extension==='html')return`Open ${filename} in a browser.`;if(extension==='sql')return`Run ${filename} in the course SQL runner or your SQL client.`;return`Open ${filename} with the appropriate tool.`}
+function languageName(extension){return({py:'Python',cpp:'C++',js:'JavaScript',sql:'SQL',html:'HTML',css:'CSS',sh:'Shell',txt:'Text / concept work'})[extension]||extension.toUpperCase()}
+function runLine(extension,filename){if(extension==='cpp')return`g++ -std=c++17 ${filename} -o app && ./app`;if(extension==='py')return`python ${filename}`;if(extension==='js')return`node ${filename}`;if(extension==='html')return`Open ${filename} in a browser.`;if(extension==='css')return`Use ${filename} from an HTML page or frontend project.`;if(extension==='sh')return`bash ${filename}`;if(extension==='sql')return`Run ${filename} in the course SQL runner or your SQL client.`;return`Open ${filename} with the appropriate tool.`}
 function containerFor(button){return button.closest('.evergreen-example,.csai-example-card,.csai-example,.oa-task,[data-exercise],[data-practice],.exercise,.practice')||button.parentElement}
 function details(button){
  const root=containerFor(button),example=!!root?.matches('.evergreen-example,.csai-example-card,.csai-example')||button.dataset.finalKind==='example',kind=example?'examples':'practice';
@@ -28,17 +31,18 @@ function readme(d){
  const type=d.kind==='examples'?'Learning Example':'Course Exercise';
  const overview=d.description||`${type} completed while studying ${courseTitle()} in CS & AI Mastery.`;
  const lines=d.code?d.code.split(/\r?\n/).filter(x=>x.trim()).length:0;
- return `# ${d.title}\n\n**Course:** ${courseTitle()}  \n**Type:** ${type}  \n**Language:** ${languageName(d.extension)}\n\n## Overview\n\n${overview}\n\n## What this demonstrates\n\n- Applies the concepts practiced in **${courseTitle()}**.\n- Keeps the submitted solution in a focused, reviewable file.\n- Can be rerun and checked against the learning task in CS & AI Mastery.\n\n## Implementation\n\n- **Main file:** \`${d.filename}\`\n- **Non-empty code lines:** ${lines}\n- **Saved from:** ${type.toLowerCase()} workspace\n\n## How to run\n\n\`${runLine(d.extension,d.filename)}\`\n\n## Validation\n\nUse the course **Run / Check** controls to verify the solution before publishing. For assessment exercises, compare the result with the visible and hidden checks provided by the course.\n\n## Learning note\n\nThis item was completed as part of **CS & AI Mastery** and saved separately so the GitHub portfolio stays readable when lessons are revisited.\n`;
+ const validation=['py','cpp','js','sql','html'].includes(d.extension)?'Use the course **Run / Check** controls to verify the example before publishing.':'This item is reference material in the course; review the commands, configuration, or scenario before publishing rather than pretending it executes in the browser.';
+ return `# ${d.title}\n\n**Course:** ${courseTitle()}  \n**Type:** ${type}  \n**Language:** ${languageName(d.extension)}\n\n## Overview\n\n${overview}\n\n## What this demonstrates\n\n- Applies the concepts practiced in **${courseTitle()}**.\n- Keeps the submitted solution in a focused, reviewable file.\n- Can be rerun and checked against the learning task in CS & AI Mastery.\n\n## Implementation\n\n- **Main file:** \`${d.filename}\`\n- **Non-empty code lines:** ${lines}\n- **Saved from:** ${type.toLowerCase()} workspace\n\n## How to run\n\n\`${runLine(d.extension,d.filename)}\`\n\n## Validation\n\n${validation} For assessment exercises, compare the result with the visible and hidden checks provided by the course.\n\n## Learning note\n\nThis item was completed as part of **CS & AI Mastery** and saved separately so the GitHub portfolio stays readable when lessons are revisited.\n`;
 }
 async function status(){if(!statusPromise)statusPromise=fetch(STATUS_URL,{credentials:'same-origin'}).then(async r=>{const d=await r.json();if(!r.ok)throw new Error(d.error||'GitHub status failed');return d}).catch(e=>{statusPromise=null;throw e});return statusPromise}
-function selectedRepo(s){const preferred=localStorage.getItem(STORE_KEY);return s.repositories?.find(r=>r.full_name===preferred)?.full_name||s.repositories?.find(r=>r.full_name==='Ahmed200444/CS-and-AI-Mastery')?.full_name||s.repositories?.[0]?.full_name||''}
+function selectedRepo(s){const preferred=localStorage.getItem(STORE_KEY);return s.repositories?.find(r=>r.full_name===preferred)?.full_name||''}
 function statusNode(button){const root=containerFor(button);let el=root?.querySelector('[data-final-publish-status]');if(!el&&root){el=document.createElement('span');el.className='csai-final-publish-status';el.setAttribute('data-final-publish-status','');el.setAttribute('aria-live','polite');const toolbar=button.closest('.oa-toolbar,.evergreen-toolbar,.csai-example-actions,.lesson-run-toolbar')||button.parentElement;toolbar?.appendChild(el)}return el}
 function setMessage(button,text,kind=''){const el=statusNode(button);if(el){el.textContent=text;el.className=`csai-final-publish-status ${kind}`}}
 async function publish(button,isReadme){
  const d=details(button);if(!d.code){setMessage(button,'Add your solution first','is-error');return}
  const old=button.textContent;button.disabled=true;button.textContent=isReadme?'Adding README…':'Publishing…';setMessage(button,isReadme?'Creating README from this item…':`Publishing ${d.filename}…`);
  try{
-  const s=await status();if(!s.connected)throw new Error('Connect GitHub first.');const repository=selectedRepo(s);if(!repository)throw new Error('Choose a GitHub repository first.');
+  const s=await status();if(!s.connected)throw new Error('Connect GitHub first.');const repository=selectedRepo(s);if(!repository)throw new Error('Choose a repository on the GitHub page first.');
   const path=isReadme?d.readmePath:d.codePath,content=isReadme?readme(d):d.code;
   const response=await fetch(FILE_URL,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json','X-CSAI-CSRF':s.csrf},body:JSON.stringify({repository,path,content,createOnly:true,requirePath:isReadme?d.codePath:undefined,message:isReadme?`Add README for ${d.title}`:`Add ${d.title} from CS & AI Mastery`})}),data=await response.json();
   if(!response.ok)throw new Error(data.error||'GitHub publish failed');
@@ -76,13 +80,16 @@ function attach(root,existing,kind){
 }
 function ensureExample(root){if(!root||root.dataset.finalControlsReady==='1')return;if(!root.querySelector('textarea[data-evergreen-code],textarea[data-editor],pre code,pre'))return;const toolbar=toolbarFor(root);if(!toolbar)return;let publish=root.querySelector('[data-final-publish],[data-publish]');if(!publish){publish=document.createElement('button');publish.type='button';toolbar.appendChild(publish)}attach(root,publish,'example');if(alreadyReady(root,publish,'example'))root.dataset.finalControlsReady='1'}
 function ensurePractice(root){if(!root||root.dataset.finalControlsReady==='1'||root.closest('.project-card,.project-workspace,[data-project-card]'))return;const toolbar=toolbarFor(root);if(!toolbar)return;let publish=root.querySelector('[data-final-publish],[data-publish]');if(!publish){publish=document.createElement('button');publish.type='button';toolbar.appendChild(publish)}attach(root,publish,'practice');if(alreadyReady(root,publish,'practice'))root.dataset.finalControlsReady='1'}
-function enhance(){
- document.querySelectorAll('.evergreen-example,.csai-example-card,.csai-example').forEach(ensureExample);
- document.querySelectorAll('.assessment-stack .oa-task,[data-exercise],[data-practice]').forEach(ensurePractice);
+function enhance(root=document){
+ const examples=[],practice=[];
+ if(root.matches&&root.matches('.evergreen-example,.csai-example-card,.csai-example'))examples.push(root);
+ if(root.matches&&root.matches('.assessment-stack .oa-task,[data-exercise],[data-practice]'))practice.push(root);
+ if(root.querySelectorAll){examples.push(...root.querySelectorAll('.evergreen-example,.csai-example-card,.csai-example'));practice.push(...root.querySelectorAll('.assessment-stack .oa-task,[data-exercise],[data-practice]'));}
+ examples.forEach(ensureExample);practice.forEach(ensurePractice);
 }
-function scheduleEnhance(){clearTimeout(enhanceTimer);enhanceTimer=setTimeout(enhance,35)}
+const pendingRoots=new Set();function scheduleEnhance(root){if(root&&root.nodeType===1)pendingRoots.add(root);clearTimeout(enhanceTimer);enhanceTimer=setTimeout(()=>{const batch=Array.from(pendingRoots);pendingRoots.clear();if(!batch.length)enhance(document);else batch.forEach(enhance)},50)}
 document.addEventListener('click',event=>{const button=event.target.closest?.('[data-final-publish],[data-final-readme]');if(!button||button.closest('.project-card,.project-workspace,[data-project-card]'))return;event.preventDefault();event.stopImmediatePropagation();publish(button,button.hasAttribute('data-final-readme'))},true);
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',enhance,{once:true});else enhance();
-setTimeout(enhance,220);setTimeout(enhance,900);
-new MutationObserver(records=>{if(records.some(r=>r.addedNodes&&r.addedNodes.length))scheduleEnhance()}).observe(document.documentElement,{childList:true,subtree:true});
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>enhance(document),{once:true});else enhance(document);
+setTimeout(()=>enhance(document),220);setTimeout(()=>enhance(document),900);
+new MutationObserver(records=>{records.forEach(r=>Array.from(r.addedNodes||[]).forEach(n=>{if(n&&n.nodeType===1)scheduleEnhance(n)}))}).observe(document.documentElement,{childList:true,subtree:true});
 })();

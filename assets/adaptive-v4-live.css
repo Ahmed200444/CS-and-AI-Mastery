@@ -72,3 +72,31 @@ html.adaptive-v4-live body.av4-course-page .app,html.adaptive-v4-live body.av4-c
 @media(max-width:880px){.av4-side,.av4-topbar{display:none!important}body.av4-shell #hub,body.av4-shell #coursesTrack,body.av4-shell #aiPathTrack,body.av4-shell #cePathTrack,body.av4-shell #fsPathTrack,body.av4-shell #companyPathsTrack{margin-left:0!important;width:100%!important;padding-top:0!important}.av4-course-grid,html.adaptive-v4-live #coursesTrack .cx-grid{grid-template-columns:repeat(2,1fr)!important}.av4-path-grid{grid-template-columns:1fr}.av4-hero{min-height:0;padding:26px 22px}.av4-hero-art{display:none}html.adaptive-v4-live #hub .hub-wrap,html.adaptive-v4-live #coursesTrack .cx-wrap,html.adaptive-v4-live #aiPathTrack .cx-wrap,html.adaptive-v4-live #cePathTrack .cx-wrap,html.adaptive-v4-live #fsPathTrack .cx-wrap{padding:22px 15px 70px!important}}
 @media(max-width:560px){.av4-course-grid,html.adaptive-v4-live #coursesTrack .cx-grid{grid-template-columns:1fr!important}.av4-stats{grid-template-columns:1fr 1fr}.av4-hero h1{font-size:2.35rem}.av4-catalog-title{padding:24px 20px}.av4-catalog-title h1{font-size:2.3rem}html.adaptive-v4-live #coursesTrack .cx-toolbar{grid-template-columns:1fr!important}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* v5.59 responsiveness layer: fixed glass surfaces were expensive to repaint while scrolling. */
+html.adaptive-v4-live .av4-side,
+html.adaptive-v4-live .av4-topbar,
+html.adaptive-v4-live #coursesTrack .cx-toolbar{
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+@supports (content-visibility:auto){
+  html.adaptive-v4-live #coursesTrack .cx-card,
+  html.adaptive-v4-live .av4-mini-course,
+  html.adaptive-v4-live .av4-path-card{
+    content-visibility:auto;
+    contain-intrinsic-size:340px;
+  }
+}
+
+/* v5.60: do not virtualize catalog/path cards during scrolling. The v5.59
+   content-visibility layer caused layout bursts when cards crossed the viewport. */
+@supports (content-visibility:auto){
+  html.adaptive-v4-live #coursesTrack .cx-card,
+  html.adaptive-v4-live .av4-mini-course,
+  html.adaptive-v4-live .av4-path-card{
+    content-visibility:visible!important;
+    contain:none!important;
+    contain-intrinsic-size:none!important;
+  }
+}

@@ -31,13 +31,17 @@ function addStyle(){
   `;
   document.head.appendChild(s);
 }
-function apply(){
+function apply(root){
   addStyle();
-  document.querySelectorAll('.assessment-section').forEach(function(section){
+  root=root||document;
+  var sections=[];
+  if(root.matches&&root.matches('.assessment-section'))sections.push(root);
+  if(root.querySelectorAll)sections=sections.concat(Array.from(root.querySelectorAll('.assessment-section')));
+  sections.forEach(function(section){
     var parent=section.parentElement;
     if(parent&&parent.classList.contains('grid'))parent.classList.add('assessment-fullwidth-grid');
   });
 }
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply);else apply();
-new MutationObserver(function(){requestAnimationFrame(apply)}).observe(document.documentElement,{childList:true,subtree:true});
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){apply(document);});else apply(document);
+var pending=new Set(),raf=0;new MutationObserver(function(records){records.forEach(function(r){Array.from(r.addedNodes||[]).forEach(function(n){if(n&&n.nodeType===1)pending.add(n);});});if(!pending.size||raf)return;raf=requestAnimationFrame(function(){raf=0;var batch=Array.from(pending);pending.clear();batch.forEach(apply);});}).observe(document.documentElement,{childList:true,subtree:true});
 })();

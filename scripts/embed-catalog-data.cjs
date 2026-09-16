@@ -48,7 +48,7 @@ const shimTag = `<script id="${shimId}">(function(){
   window.fetch=wrapped;
 })();</script>`;
 
-const recoveryMatch = html.match(/<script[^>]*src=["']\/assets\/catalog-recovery\.js[^"']*["'][^>]*><\/script>/i);
+const recoveryMatch = html.match(/<script[^>]*src=["']\/?assets\/catalog-recovery\.js[^"']*["'][^>]*><\/script>/i);
 if (!recoveryMatch || recoveryMatch.index == null) {
   throw new Error('catalog-recovery.js tag was not found in index.html');
 }
@@ -64,7 +64,7 @@ if ((output.match(new RegExp(`id=["']${dataId}["']`, 'g')) || []).length !== 1) 
 if ((output.match(new RegExp(`id=["']${shimId}["']`, 'g')) || []).length !== 1) {
   throw new Error('Expected exactly one embedded catalog fetch shim');
 }
-if (output.indexOf(dataTag) > output.search(/<script[^>]*src=["']\/assets\/catalog-recovery\.js/i)) {
+if (output.indexOf(dataTag) > output.search(/<script[^>]*src=["']\/?assets\/catalog-recovery\.js/i)) {
   throw new Error('Embedded catalog must load before catalog-recovery.js');
 }
 

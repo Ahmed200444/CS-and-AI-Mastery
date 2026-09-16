@@ -12,4 +12,4 @@ if(!re.test(html))throw new Error('coursedata script missing after production au
 html=html.replace(re,(full,open,body,close)=>open+String(backup.content||'')+close);
 fs.writeFileSync(indexPath,html,'utf8');
 fs.rmSync(backupPath,{force:true});
-console.log('Restored legacy coursedata exactly after 57-course catalog augmentation.');
+console.log('Restored legacy coursedata exactly after 61-course catalog augmentation.');

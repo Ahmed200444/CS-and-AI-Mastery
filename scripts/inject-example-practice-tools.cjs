@@ -2,8 +2,8 @@ const fs=require('fs');
 const path=require('path');
 const dir=path.join(process.cwd(),'courses');
 if(!fs.existsSync(dir))throw new Error('courses directory is missing');
-const exampleTag='<script src="/assets/example-learning-tools.js?v=20260809-1"></script>';
-const practiceTag='<script src="/assets/practice-publish-completer.js?v=20260809-1"></script>';
+const exampleTag='<script defer src="../assets/example-learning-tools.js?v=20260822-v567"></script>';
+const practiceTag='<script defer src="../assets/practice-publish-completer.js?v=20260823-v573"></script>';
 let count=0;
 for(const file of fs.readdirSync(dir).filter(name=>name.endsWith('.html'))){
   const full=path.join(dir,file);
@@ -16,5 +16,5 @@ for(const file of fs.readdirSync(dir).filter(name=>name.endsWith('.html'))){
   fs.writeFileSync(full,html,'utf8');
   count++;
 }
-if(count!==54)throw new Error(`Expected 54 course pages, injected ${count}`);
+if(count!==62)throw new Error(`Expected 62 course pages, injected ${count}`);
 console.log(`Injected deep example tools and practice publishing into ${count} course pages.`);

@@ -41,8 +41,8 @@ if (!fs.existsSync(catalogPath)) throw new Error('catalog-data.json is missing')
 if (!fs.existsSync(courseDataDir)) throw new Error('course-data directory is missing');
 
 const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
-if (!catalog || !Array.isArray(catalog.courses) || catalog.courses.length !== 54) {
-  throw new Error(`Expected 54 catalog courses, found ${catalog && catalog.courses ? catalog.courses.length : 0}`);
+if (!catalog || !Array.isArray(catalog.courses) || catalog.courses.length !== 62) {
+  throw new Error(`Expected 62 catalog courses, found ${catalog && catalog.courses ? catalog.courses.length : 0}`);
 }
 
 const THEME_HEAD = `<script>(function(){try{var t=localStorage.getItem('cs-ai-mastery-theme')||localStorage.getItem('theme')||'light';document.documentElement.dataset.theme=t==='dark'?'dark':'light'}catch(e){document.documentElement.dataset.theme='light'}})();</script>`;
@@ -94,21 +94,27 @@ function pageFor(course) {
 <section class="lessons">${lessons.length ? lessons.map((entry, i) => lessonHtml(course, entry, i)).join('') : '<div class="empty">No lesson content is listed for this course yet.</div>'}</section>
 <div class="grid"><section class="card"><h2>Exercises</h2>${exercises.length ? exercises.map(exerciseHtml).join('') : '<p class="muted">No separate exercises are listed.</p>'}</section><section class="card"><h2>Knowledge checks</h2>${quiz.length ? quiz.map(quizHtml).join('') : '<p class="muted">No separate checkpoints are listed.</p>'}</section></div>
 <section class="card" style="margin-top:14px"><h2>Projects</h2>${projects.length ? projects.map(projectHtml).join('') : '<p class="muted">No separate projects are listed.</p>'}</section></main>
-<button class="theme" type="button" data-theme-toggle></button>
+<button class="theme" type="button" data-theme-toggle aria-label="Toggle light or dark theme"></button>
 <script type="application/json" id="course-page-meta">${safeCourseJson}</script>
 <script>(function(){'use strict';var KEY='cs-ai-mastery-theme',PROGRESS='courses_progress_v1',meta=JSON.parse(document.getElementById('course-page-meta').textContent),courseId=meta.id,lessonIds=meta.lessonIds;function read(){try{return JSON.parse(localStorage.getItem(PROGRESS)||'{}')||{}}catch(e){return{}}}function save(v){try{localStorage.setItem(PROGRESS,JSON.stringify(v))}catch(e){}}function update(){var p=read(),m=((p[courseId]||{}).lessons||{}),done=0;lessonIds.forEach(function(id){if(m[id])done++});var pct=lessonIds.length?Math.round(done/lessonIds.length*100):0;var bar=document.querySelector('[data-progress-bar]'),status=document.querySelector('[data-progress-status]');if(bar)bar.style.width=pct+'%';if(status)status.textContent=done+' of '+lessonIds.length+' lessons complete';document.querySelectorAll('[data-lesson]').forEach(function(el){var cb=el.querySelector('[data-complete]');if(cb)cb.checked=!!m[el.getAttribute('data-lesson')]})}document.addEventListener('change',function(e){if(!e.target.matches('[data-complete]'))return;var lesson=e.target.closest('[data-lesson]');if(!lesson)return;var p=read();p[courseId]=p[courseId]||{};p[courseId].lessons=p[courseId].lessons||{};p[courseId].lessons[lesson.getAttribute('data-lesson')]=!!e.target.checked;save(p);update()});function theme(){var t=document.documentElement.dataset.theme==='dark'?'dark':'light',b=document.querySelector('[data-theme-toggle]');if(b)b.textContent=t==='dark'?'☀️ Light':'🌙 Dark'}document.querySelector('[data-theme-toggle]').addEventListener('click',function(){var next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem(KEY,next);localStorage.setItem('theme',next)}catch(e){}theme()});update();theme()})();</script></body></html>`;
 }
 
-fs.rmSync(outDir, { recursive: true, force: true });
+// FIX #26a -- never wipe the output directory: that deletes the shipped v5.74 course pages,
+// which carry the full runtime layer the generated template does not.
 fs.mkdirSync(outDir, { recursive: true });
 
+let shippedPagesPreserved = 0, generatedNow = 0;
 for (const summary of catalog.courses) {
   const id = safeCourseId(summary.id);
   const fullPath = path.join(courseDataDir, `${id}.json`);
   if (!fs.existsSync(fullPath)) throw new Error(`Missing generated course data for ${id}`);
   const course = JSON.parse(fs.readFileSync(fullPath, 'utf8'));
   if (!course || course.id !== id) throw new Error(`Invalid course data for ${id}`);
-  fs.writeFileSync(path.join(outDir, `${id}.html`), pageFor(course), 'utf8');
+  const pagePath = path.join(outDir, `${id}.html`);
+  // FIX #26b -- an existing shipped page is authoritative. Only create genuinely missing ones.
+  if (fs.existsSync(pagePath)) { shippedPagesPreserved += 1; continue; }
+  fs.writeFileSync(pagePath, pageFor(course), 'utf8');
+  generatedNow += 1;
 }
 
 let html = fs.readFileSync(indexPath, 'utf8');
@@ -122,10 +128,11 @@ html = bodyEnd >= 0 ? html.slice(0, bodyEnd) + navTag + '\n' + html.slice(bodyEn
 fs.writeFileSync(indexPath, html, 'utf8');
 
 const generated = fs.readdirSync(outDir).filter(name => name.endsWith('.html'));
-if (generated.length !== 54) throw new Error(`Expected 54 static course pages, generated ${generated.length}`);
+if (generated.length !== 62) throw new Error(`Expected 62 static course pages, generated ${generated.length}`);
 const pythonPage = fs.readFileSync(path.join(outDir, 'python.html'), 'utf8');
 if (!pythonPage.includes('Python') || !pythonPage.includes('Variables &amp; types') && !pythonPage.includes('Variables & types')) throw new Error('Python static page validation failed');
 const finalIndex = fs.readFileSync(indexPath, 'utf8');
 if ((finalIndex.match(/csai-static-course-navigation/g) || []).length !== 1) throw new Error('Expected one static course navigation shim');
 if (/catalog-course-viewer\.js|instant-course-viewer\.js/.test(finalIndex)) throw new Error('A legacy dynamic course viewer is still referenced');
+console.log(`Course pages ready: ${generated.length} total (${shippedPagesPreserved} shipped v5.74 page(s) preserved, ${generatedNow} generated).`);
 console.log(`Generated ${generated.length} static course pages. Course opening now uses direct static HTML navigation with no course-data fetch or timeout path.`);

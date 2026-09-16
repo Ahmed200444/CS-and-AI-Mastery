@@ -478,9 +478,10 @@ const GUIDES = [
 ];
 
 function guideFor(course, lesson) {
-  const concepts = list(lesson.concepts).join(' ');
-  const text = [course.id, course.title, lesson.title, concepts, lesson.explanation, lesson.description].join(' ');
-  return GUIDES.find(guide => guide.test.test(text)) || null;
+  // v5.57 keeps the main explanation anchored to the lesson's authoritative
+  // source content. Specialist concept teaching is handled by the per-key-idea
+  // examples, which avoids keyword collisions between neighboring domains.
+  return null;
 }
 
 function fallbackSteps(course, lesson, profile) {
@@ -539,7 +540,7 @@ function expansionHtml(course, lesson) {
   const mistakes = unique([
     ...existingMistakes,
     guide && guide.mistake ? guide.mistake : profile.mistake,
-    `Do not move on from ${title} only because the example looks familiar. Make sure you can predict the result of a slightly changed example without looking at the answer.`
+    `Do not move on from ${title} only because an example looks familiar. Predict a changed case and explain why the result changes.`
   ]).slice(0, 4);
   const practical = guide && guide.practical ? guide.practical : profile.practical;
   const interview = guide && guide.interview ? guide.interview : profile.interview;
@@ -548,10 +549,10 @@ function expansionHtml(course, lesson) {
   const check1 = concepts.length
     ? `Can you explain how ${concepts.join(', ')} connect to ${title} without reading the lesson?`
     : `Can you explain ${title} in your own words without repeating the definition?`;
-  const check2 = `Can you make a small example of ${title}, predict the result, and explain one edge case or failure case?`;
+  const check2 = `Can you create a different example of ${title}, predict the result, and explain one edge case or failure case?`;
 
-  return `<section class="lesson-deep-dive" data-expanded-lesson>
-<h3>Deeper explanation</h3>
+  return `<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
 ${paragraphs.map(p => `<p>${esc(p)}</p>`).join('')}
 <h3>How to think about it step by step</h3>
 <ol class="deep-steps">${steps.map(step => `<li>${esc(step)}</li>`).join('')}</ol>
@@ -569,9 +570,9 @@ ${paragraphs.map(p => `<p>${esc(p)}</p>`).join('')}
 }
 
 const STYLE = `<style id="csai-expanded-lessons-style">
-.lesson-deep-dive{margin-top:20px;padding-top:4px;border-top:1px solid var(--border)}
-.lesson-deep-dive h3{margin-top:22px!important;margin-bottom:8px!important;font-size:1.02rem!important}
-.lesson-deep-dive p,.lesson-deep-dive li{line-height:1.75!important}
+.lesson-main-explanation{margin:12px 0 20px;padding:4px 0 18px;border-bottom:1px solid var(--border)}
+.lesson-main-explanation h3{margin-top:22px!important;margin-bottom:8px!important;font-size:1.02rem!important}.lesson-main-explanation h3:first-child{margin-top:8px!important;font-size:1.12rem!important}
+.lesson-main-explanation p,.lesson-main-explanation li{line-height:1.75!important}
 .deep-steps{margin:8px 0 4px;padding-left:24px}.deep-steps li{margin:7px 0}
 .deep-scenario,.deep-takeaway{margin:9px 0;padding:13px 14px;border:1px solid var(--border);border-radius:10px;background:var(--bg)}
 .deep-scenario{border-left:4px solid var(--accent)}
@@ -582,6 +583,7 @@ const STYLE = `<style id="csai-expanded-lessons-style">
 
 let pages = 0;
 let lessonsExpanded = 0;
+const lessonsNotOnStaticPage = [];
 
 for (const file of fs.readdirSync(coursesDir).filter(name => name.endsWith('.html'))) {
   const id = file.replace(/\.html$/, '');
@@ -600,12 +602,21 @@ for (const file of fs.readdirSync(coursesDir).filter(name => name.endsWith('.htm
     const lesson = entry.lesson;
     const lessonId = lesson.id || `lesson-${index}`;
     const attrValue = esc(lessonId);
-    const pattern = new RegExp(`(<details class="lesson" data-lesson="${rx(attrValue)}"[\\s\\S]*?<div class="body">)([\\s\\S]*?)(<\\/div><\\/details>)`);
+    const pattern = new RegExp(`(<details class="[^"]*\\blesson\\b[^"]*" data-lesson="${rx(attrValue)}"[\\s\\S]*?<div class="body">)([\\s\\S]*?)(<\\/div><\\/details>)`);
     const match = html.match(pattern);
-    if (!match) throw new Error(`Could not locate lesson ${lessonId} in ${file}`);
-    const originalBody = match[2].replace(/<section class="lesson-deep-dive"[\s\S]*?<\/section>\s*/g, '');
-    const expanded = expansionHtml(course, lesson);
-    html = html.replace(pattern, `${match[1]}${originalBody}${expanded}${match[3]}`);
+    if (!match) { lessonsNotOnStaticPage.push(`${id}:${lessonId}`); return; }
+    const preservedMath = (match[2].match(/<div class="note csai-company-use-math"[\s\S]*?<\/div>/i) || [''])[0];
+    let originalBody = match[2]
+      .replace(/<section class="lesson-deep-dive"[\s\S]*?<\/section>\s*/g, '')
+      .replace(/<section class="lesson-main-explanation"[\s\S]*?<\/section>\s*/g, '')
+      .replace(/<div class="note csai-company-use-math"[\s\S]*?<\/div>\s*/gi, '')
+      .replace(/<h3>Explanation<\/h3>\s*<p>[\s\S]*?<\/p>\s*/i, '');
+    let expanded = expansionHtml(course, lesson);
+    if (preservedMath) expanded = expanded.replace('<h3>Check yourself</h3>', preservedMath + '\n<h3>Check yourself</h3>');
+    const learnBlock = /(<h3>What you will learn<\/h3>\s*(?:<ul>[\s\S]*?<\/ul>|<ol>[\s\S]*?<\/ol>))/i;
+    if (learnBlock.test(originalBody)) originalBody = originalBody.replace(learnBlock, (full, prefix) => `${prefix}\n${expanded}`);
+    else originalBody = `${expanded}\n${originalBody}`;
+    html = html.replace(pattern, () => `${match[1]}${originalBody}${match[3]}`);
     lessonsExpanded++;
   });
 
@@ -613,6 +624,8 @@ for (const file of fs.readdirSync(coursesDir).filter(name => name.endsWith('.htm
   pages++;
 }
 
-if (pages !== 54) throw new Error(`Expected 54 course pages, expanded ${pages}`);
+const expectedPages = fs.readdirSync(coursesDir).filter(name => name.endsWith('.html')).length;
+if (pages !== expectedPages) throw new Error(`Expected ${expectedPages} course pages, expanded ${pages}`);
 if (lessonsExpanded < 54) throw new Error(`Expected many lessons to be expanded, found ${lessonsExpanded}`);
-console.log(`Expanded the existing content of ${lessonsExpanded} lessons across ${pages} courses without adding lessons.`);
+console.log(`Promoted the full explanation for ${lessonsExpanded} visible lessons across ${pages} course pages.`);
+if (lessonsNotOnStaticPage.length) console.log(`Skipped ${lessonsNotOnStaticPage.length} data-only lessons not present on their current static page.`);

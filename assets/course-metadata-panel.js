@@ -13,7 +13,7 @@
     'machine-learning':['Intermediate','24–32 hours','Python, NumPy, basic statistics'], 'deep-learning':['Advanced','24–32 hours','Machine learning and Python'],
     transformers:['Advanced','18–24 hours','Deep learning basics'], 'hugging-face':['Advanced','14–18 hours','Transformers and Python'],
     'generative-ai':['Advanced','20–28 hours','Deep learning fundamentals'], llms:['Advanced','20–28 hours','Python and transformer basics'],
-    rag:['Advanced','20–28 hours','LLMs, APIs, databases'], 'ai-agents':['Advanced','24–32 hours','LLMs, RAG, APIs'],
+    rag:['Advanced','20–28 hours','LLMs, APIs, databases'], 'ai-agents':['Advanced','38–48 hours','LLMs, RAG, APIs'], 'cpp-dsa':['Mixed','68–80 hours','None — starts from fundamentals'], 'classical-ai':['Mixed','36–44 hours','DSA, problem solving'], 'reinforcement-learning-post-training':['Advanced','48–60 hours','ML, deep learning, PyTorch'], 'large-scale-ai':['Advanced','42–52 hours','PyTorch, MLOps'], 'software-engineering-practice':['Mixed','30–38 hours','Git, testing, architecture'],
     'model-deployment':['Advanced','18–24 hours','Python, APIs, Docker']
   };
 

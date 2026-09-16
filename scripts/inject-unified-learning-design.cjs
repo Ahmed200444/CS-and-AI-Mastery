@@ -32,15 +32,15 @@ function stripExisting(html){
   const marker = new RegExp(`\\n?${START.replace(/[.*+?^${}()|[\\]\\]/g,'\\$&')}[\\s\\S]*?${END.replace(/[.*+?^${}()|[\\]\\]/g,'\\$&')}\\n?`, 'g');
   html = html.replace(marker, '\n');
   return html
-    .replace(/\n?<link rel="stylesheet" href="(?:\.\.\/)?assets\/unified-learning-design\.css[^"']*">\n?/g, '\n')
-    .replace(/\n?<link rel="stylesheet" href="(?:\.\.\/)?assets\/product-redesign-v2\.css[^"']*">\n?/g, '\n')
-    .replace(/\n?<link rel="stylesheet" href="(?:\.\.\/)?assets\/adaptive-v4-live\.css[^"']*">\n?/g, '\n')
-    .replace(/\n?<link rel="stylesheet" href="(?:\.\.\/)?assets\/hero-polish\.css[^"']*">\n?/g, '\n')
+    .replace(/\n?<link\b[^>]*unified-learning-design\.css[^>]*>\n?/g, '\n')
+    .replace(/\n?<link\b[^>]*product-redesign-v2\.css[^>]*>\n?/g, '\n')
+    .replace(/\n?<link\b[^>]*adaptive-v4-live\.css[^>]*>\n?/g, '\n')
+    .replace(/\n?<link\b[^>]*hero-polish\.css[^>]*>\n?/g, '\n')
     .replace(/\n?<script>document\.documentElement\.classList\.add\('csai-unified-design'\)<\/script>\n?/g, '\n')
-    .replace(/\n?<script src="(?:\.\.\/)?assets\/unified-learning-design\.js[^"']*" defer><\/script>\n?/g, '\n')
-    .replace(/\n?<script src="(?:\.\.\/)?assets\/product-redesign-v2\.js[^"']*" defer><\/script>\n?/g, '\n')
-    .replace(/\n?<script src="(?:\.\.\/)?assets\/adaptive-v4-live\.js[^"']*" defer><\/script>\n?/g, '\n')
-    .replace(/\n?<script src="(?:\.\.\/)?assets\/hero-polish\.js[^"']*" defer><\/script>\n?/g, '\n');
+    .replace(/\n?<script\b[^>]*unified-learning-design\.js[^>]*><\/script>\n?/g, '\n')
+    .replace(/\n?<script\b[^>]*product-redesign-v2\.js[^>]*><\/script>\n?/g, '\n')
+    .replace(/\n?<script\b[^>]*adaptive-v4-live\.js[^>]*><\/script>\n?/g, '\n')
+    .replace(/\n?<script\b[^>]*hero-polish\.js[^>]*><\/script>\n?/g, '\n');
 }
 
 function inject(html, cssHref, jsSrc, productCss, productJs, liveCss, liveJs, heroCss, heroJs){

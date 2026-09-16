@@ -13,6 +13,11 @@ if(pattern.test(src)){
   console.log('Disabled automatic Python runtime preloading; runner now loads only on Run / Check.');
 }else if(src.includes("Runner loads when Run / Check is pressed")){
   console.log('Assessment Python runtime is already configured for on-demand loading.');
+}else if(!/warming up/i.test(src)&&!src.includes("defaultLanguage==='python'")){
+  // FIX #5 -- this release of assessment-practice.js never carried the prewarm block, so
+  // there is nothing to disable. The invariant this script exists to enforce (no automatic
+  // Python runtime prewarm) already holds.
+  console.log('Assessment practice asset contains no automatic Python prewarm; nothing to disable.');
 }else{
-  throw new Error('Could not find the assessment Python prewarm block; refusing to patch an unexpected file.');
+  throw new Error('Found an unrecognised automatic prewarm block; refusing to patch an unexpected file.');
 }

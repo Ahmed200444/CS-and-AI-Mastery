@@ -9,7 +9,7 @@ function list(v){return Array.isArray(v)?v:(v?[v]:[])}
 function safeId(v){return String(v||'').replace(/[^A-Za-z0-9._-]/g,'')}
 function progress(){try{return JSON.parse(localStorage.getItem('courses_progress_v1')||'{}')||{}}catch(e){return{}}}
 function saveProgress(v){try{localStorage.setItem('courses_progress_v1',JSON.stringify(v))}catch(e){}}
-function explain(l){return l.explanation||l.explain||l.description||'Study the concept, review the example, and practise it before moving on.'}
+function explain(l){var base=l.explanation||l.explain||l.description||'Study the concept, review the example, and practise it before moving on.';var cs=list(l.concepts).slice(0,5),os=list(l.objectives).slice(0,2);var extra='';if(cs.length)extra+=' Key ideas: '+cs.join(', ')+'.';if(os.length)extra+=' By the end, you should be able to '+String(os[0]).replace(/^./,function(c){return c.toLowerCase();})+( /[.!?]$/.test(String(os[0]))?'':' .');return String(base)+extra}
 function examples(l){var v=l.examples||l.example;return Array.isArray(v)?v:(v?[v]:[])}
 function lessonOrder(c){return arr(c.lessons).map(function(l,i){return{l:l,i:i}}).sort(function(a,b){var x=Number(a.l.displayOrder),y=Number(b.l.displayOrder);if(!Number.isFinite(x))x=a.i;if(!Number.isFinite(y))y=b.i;return x-y})}
 function addStyle(){if(document.getElementById(STYLE_ID))return;var s=document.createElement('style');s.id=STYLE_ID;s.textContent=`

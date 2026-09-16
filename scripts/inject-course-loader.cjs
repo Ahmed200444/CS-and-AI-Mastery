@@ -6,7 +6,7 @@ const catalogDataPath = path.join(process.cwd(), 'assets', 'catalog-data.json');
 const courseDataDir = path.join(process.cwd(), 'assets', 'course-data');
 const loaderPath = '/assets/course-practice-routing.js?v=20260807-2';
 const guardPath = '/assets/course-route-visibility-guard.js?v=20260807-2';
-const catalogPath = '/assets/catalog-recovery.js?v=20260807-3';
+const catalogPath = '/assets/catalog-recovery.js?v=20260808-5';
 const viewerPath = '/assets/catalog-course-viewer.js?v=20260807-2';
 const loaderTag = `<script type="module" src="${loaderPath}"></script>`;
 const guardTag = `<script src="${guardPath}"></script>`;
@@ -99,6 +99,13 @@ function catalogSummary(course) {
     tier: course.tier,
     available: course.available,
     status: course.status,
+    // FIX #24/#25 -- the shipped catalog carries visibility/integration fields for courses
+    // folded into another course (OOP is integrated into Python and marked hidden). This
+    // whitelist dropped them, which made a hidden course visible again and the catalog
+    // reported 62 visible courses where the contract requires 61.
+    ...(course.hidden !== undefined ? { hidden: course.hidden } : {}),
+    ...(course.integratedInto !== undefined ? { integratedInto: course.integratedInto } : {}),
+    ...(course.redirectTo !== undefined ? { redirectTo: course.redirectTo } : {}),
     counts: { lessons: lessons.length, exercises: exercises.length, quiz: quiz.length, projects: projects.length },
     progressIds: {
       lessons: itemIds(lessons, 'lessons'),
@@ -115,7 +122,9 @@ if (!courseData || !Array.isArray(courseData.value) || courseData.value.length =
 const categories = categoryData && Array.isArray(categoryData.value) ? categoryData.value : [];
 const orderedCourses = sortCoursesByLearningOrder(courseData.value, categories);
 const safeJson = JSON.stringify(orderedCourses).replace(/<\//g, '<\\/');
-html = html.replace(courseData.re, `${courseData.match[1]}${safeJson}${courseData.match[3]}`);
+// FIX #7 -- a function replacement, so a literal $' inside course JSON is not expanded to
+// the document tail by String.prototype.replace.
+html = html.replace(courseData.re, () => `${courseData.match[1]}${safeJson}${courseData.match[3]}`);
 
 const lightweightCourses = orderedCourses.map(catalogSummary);
 fs.mkdirSync(path.dirname(catalogDataPath), { recursive: true });

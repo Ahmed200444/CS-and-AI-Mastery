@@ -4,11 +4,20 @@
   const STATUS_URL = '/api/github/status';
   const FILE_URL = '/api/github/file';
   const AUTHORIZE_URL = '/api/github/authorize';
+  const SETUP_URL = '/github-setup.html';
   const STORE_KEY = 'csai-github-preferred-repo';
-  let state = { connected:false, csrf:null, repositories:[], selected:null, user:null };
+  let state = { connected:false, csrf:null, repositories:[], selected:'', user:null };
 
   const clean = value => String(value || '').trim();
   const slug = value => clean(value).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'practice';
+  function savedRepo(){
+    try { return clean(localStorage.getItem(STORE_KEY)); } catch (_) { return ''; }
+  }
+  function chooseSaved(){
+    const preferred=savedRepo();
+    state.selected=preferred && state.repositories.some(r=>r.full_name===preferred) ? preferred : '';
+    if(!state.selected && preferred){ try{localStorage.removeItem(STORE_KEY)}catch(_){} }
+  }
 
   function activeTrack(){
     if (window.CSAIMasteryPracticeFolder?.currentTrack) {
@@ -64,19 +73,20 @@
     let bar = document.getElementById('csai-ghbar');
     if (!bar) { bar = document.createElement('div'); bar.id='csai-ghbar'; bar.className='csai-ghbar'; document.body.appendChild(bar); }
     if (!state.connected) {
-      bar.innerHTML = `<span class="status">GitHub not connected</span><a class="primary" href="${AUTHORIZE_URL}">Connect GitHub</a>`;
+      bar.innerHTML = `<span class="status">GitHub not connected${state.local?' · local':''}</span><a class="primary" href="${SETUP_URL}">GitHub</a>`;
       return;
     }
-    const preferred = state.selected || localStorage.getItem(STORE_KEY) || state.repositories.find(r=>r.full_name==='Ahmed200444/CS-and-AI-Mastery')?.full_name || state.repositories[0]?.full_name || '';
-    state.selected = preferred;
-    const options = state.repositories.map(r=>`<option value="${r.full_name.replace(/"/g,'&quot;')}" ${r.full_name===preferred?'selected':''}>${r.full_name}</option>`).join('');
-    bar.innerHTML = `<span class="status ok">GitHub ✓</span><select aria-label="GitHub repository">${options}</select><input aria-label="Repository file path" placeholder="student-code/practice/..."><button data-gh-download>Download</button><button class="primary" data-gh-publish>Publish to GitHub</button><span class="status" data-gh-msg></span>`;
-    const select = bar.querySelector('select');
+    chooseSaved();
+    if (!state.selected) {
+      const login=state.user?.login ? ` as ${state.user.login}` : '';
+      bar.innerHTML = `<span class="status ok">GitHub ✓${login}</span><a class="primary" href="${SETUP_URL}">Choose repository</a><span class="status">Select your own repository before publishing.</span>`;
+      return;
+    }
+    bar.innerHTML = `<span class="status ok">GitHub ✓${state.local?' Local':''} · ${state.selected}</span><input aria-label="Repository file path" placeholder="student-code/practice/..."><button data-gh-download>Download</button><button class="primary" data-gh-publish>Publish to GitHub</button><a href="${SETUP_URL}">Setup</a><span class="status" data-gh-msg></span>`;
     const path = bar.querySelector('input');
     const editor = activeEditor();
     const content = editorContent(editor);
     path.value = content ? suggestedPath(content) : `student-code/practice/${activeTrack()}/practice.txt`;
-    select.addEventListener('change',()=>{state.selected=select.value;localStorage.setItem(STORE_KEY,select.value);});
     bar.querySelector('[data-gh-download]').addEventListener('click',downloadActive);
     bar.querySelector('[data-gh-publish]').addEventListener('click',()=>publishActive(path.value));
   }
@@ -110,7 +120,8 @@
     try{
       const response=await fetch(STATUS_URL,{credentials:'same-origin'}), data=await response.json();
       if(!response.ok) throw new Error(data.error || 'Status check failed');
-      state={...state,...data,selected:localStorage.getItem(STORE_KEY)};
+      state={...state,...data,selected:''};
+      chooseSaved();
     }catch(error){ state.connected=false; }
     render();
   }

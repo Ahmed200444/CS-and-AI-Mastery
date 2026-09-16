@@ -1,0 +1,18 @@
+{
+  "release": "5.58",
+  "status": "PASS",
+  "courses": 62,
+  "lessons": 800,
+  "key_ideas": 3427,
+  "base_concept_integration_edge_slots": 5040,
+  "big_o_curated_examples": 11,
+  "generated_code_paths": {"passing": 432, "total": 432},
+  "behavior": {
+    "every_key_idea_visible_when_lesson_open": true,
+    "progressive_hiding_of_key_idea_examples": false,
+    "current_lesson_only_initial_generation": true,
+    "offscreen_content_visibility": true,
+    "idle_first_runtime_warmup": true
+  },
+  "concepts_per_lesson": {"median": 4, "max": 14}
+}

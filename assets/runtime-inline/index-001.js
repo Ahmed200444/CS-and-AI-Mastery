@@ -1,0 +1,1 @@
+(function(){document.documentElement.classList.add('csai-home-booting');window.__csaiHomeBootStarted=Date.now();window.__csaiHomeBootFailSafe=setTimeout(function(){document.documentElement.classList.remove('csai-home-booting')},2200)})();

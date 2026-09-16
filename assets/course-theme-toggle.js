@@ -129,7 +129,7 @@ function scheduleScan(){
 }
 
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',scan);else scan();
-new MutationObserver(scheduleScan).observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:['data-theme','style','hidden','class']});
+new MutationObserver(function(records){if(records.some(function(r){return r.addedNodes&&r.addedNodes.length;}))scheduleScan();}).observe(document.documentElement,{childList:true,subtree:true});
 window.addEventListener('hashchange',function(){setTimeout(scan,0)});
 window.addEventListener('storage',function(event){if(event.key===KEY||event.key==='theme')scan()});
 })();

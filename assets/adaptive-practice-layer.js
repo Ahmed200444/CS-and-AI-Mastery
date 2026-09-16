@@ -2,30 +2,11 @@
 'use strict';
 
 var PYTHON_IDS=['python','dsa','problem-solving','oop','debugging','testing','algorithms','data-structures','systems-programming','embedded-systems','advanced-computer-organization'];
-var pyInstance=null,pyPromise=null,applyTimer=0;
-var PYODIDE='https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js';
-var PY=`import sys,io,traceback\n_b=io.StringIO();_old=sys.stdout;sys.stdout=_b;_err=None\ntry: exec(compile(_SRC,'<adaptive-practice>','exec'),{'__name__':'__main__'})\nexcept Exception: _err=traceback.format_exc()\nfinally: sys.stdout=_old\n_RESULT=_b.getvalue() if _err is None else _b.getvalue()+'\\n'+_err\n_ISERR=_err is not None`;
+var applyTimer=0;
 
-function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
-function norm(v){return String(v||'').toLowerCase().replace(/[^a-z0-9+]+/g,' ').replace(/\s+/g,' ').trim();}
-function clamp(n,a,b){return Math.max(a,Math.min(b,n));}
-function meta(){try{var n=document.getElementById('course-page-meta');return n?JSON.parse(n.textContent||'{}'):{};}catch(e){return{};}}
-function courseId(){var m=meta();return String(m.id||location.pathname.split('/').pop()||'').replace(/\.html$/,'').toLowerCase();}
-function pythonCourse(){return PYTHON_IDS.indexOf(courseId())>=0;}
-function lessonTitle(lesson){var n=lesson.querySelector('summary .title,summary');return String(n&&n.textContent||'Lesson').replace(/\s+Complete\s*$/i,'').trim();}
-function body(lesson){return lesson.querySelector('.body');}
-function headingNextList(b,label){var h=Array.from(b.querySelectorAll('h3')).find(function(x){return norm(x.textContent)===norm(label);});if(!h)return[];var n=h.nextElementSibling;if(!n||!/^UL|OL$/.test(n.tagName))return[];return Array.from(n.querySelectorAll('li')).map(function(x){return x.textContent.trim();}).filter(Boolean);}
-function concepts(b){var out=[];var h=Array.from(b.querySelectorAll('h3')).find(function(x){return /key concepts/i.test(x.textContent||'');});var n=h&&h.nextElementSibling;if(n)out=Array.from(n.querySelectorAll('.pill')).map(function(x){return x.textContent.trim();}).filter(Boolean);if(!out.length)out=Array.from(b.querySelectorAll('.meta .pill')).map(function(x){return x.textContent.trim();}).filter(Boolean);return Array.from(new Set(out)).slice(0,8);}
-function objectives(b){return headingNextList(b,'What you will learn').slice(0,8);}
-function exampleCount(b){return clamp(Math.max(concepts(b).length,objectives(b).length)+2,4,8);}
-function conceptAt(b,i){var cs=concepts(b);return cs[i]||cs[0]||lessonTitle(b.closest('.lesson'));}
-function objectiveAt(b,i){var os=objectives(b);return os[i]||os[0]||('Apply '+lessonTitle(b.closest('.lesson')));}
-function stage(b,i){var total=exampleCount(b),cs=concepts(b),c=conceptAt(b,i);if(i<cs.length)return{name:(i+1)+'. '+c,kind:'Concept focus',task:'Use this example to understand '+c+'. Connect the code or scenario to: '+objectiveAt(b,i)+'.'};if(i===total-1)return{name:(i+1)+'. Debug / edge case',kind:'Prove it',task:'Find, prevent, or explain a realistic failure involving this lesson. State why it fails and what a correct solution must do.'};if(i===total-2)return{name:(i+1)+'. Integrated application',kind:'Combine',task:'Combine at least two lesson concepts in one realistic mini-task, then explain the trade-off in your approach.'};return{name:(i+1)+'. Variation',kind:'Transfer',task:'Change the input, structure, condition, or use case so you prove you understand the concept instead of memorizing one example.'};}
-function loadScript(src,test){return new Promise(function(resolve,reject){if(test&&test())return resolve();var s=document.createElement('script');s.src=src;s.async=true;s.crossOrigin='anonymous';s.onload=resolve;s.onerror=function(){reject(new Error('Could not load '+src));};document.head.appendChild(s);});}
-async function getPy(){if(pyInstance)return pyInstance;if(!pyPromise){pyPromise=(async function(){await loadScript(PYODIDE,function(){return typeof window.loadPyodide==='function';});pyInstance=await window.loadPyodide();document.documentElement.setAttribute('data-csai-python-ready','1');return pyInstance;})();}return pyPromise;}
-function prewarmPython(){return getPy().catch(function(e){console.warn('[Python prewarm]',e);return null;});}
-async function runPython(code){var start=performance.now(),py=await getPy();try{await py.loadPackagesFromImports(code);}catch(e){}py.globals.set('_SRC',String(code||''));py.runPython(PY);return{error:!!py.globals.get('_ISERR'),text:String(py.globals.get('_RESULT')||''),milliseconds:Math.max(1,Math.round(performance.now()-start))};}
-window.CSAIPythonRunner={prewarm:prewarmPython,runSource:runPython,isReady:function(){return!!pyInstance;}};
+function sharedPythonRunner(){return window.CSAIPythonRunner&&window.CSAIPythonRunner.singleRuntime?window.CSAIPythonRunner:null;}
+function prewarmPython(){var r=sharedPythonRunner();return r&&typeof r.prewarm==='function'?r.prewarm():Promise.resolve(false);}
+async function runPython(code){var r=sharedPythonRunner();if(!r||typeof r.runSource!=='function')throw new Error('Python runner is still preparing. Try again in a moment.');return r.runSource(code);}
 
 function pyProgram(topic,seed){var t=norm(topic),n=(seed||0)+3;
  if(/variable|type|assignment/.test(t))return 'age = '+(18+n)+'\nname = "Ahmed"\nprint(f"{name} is {age}")';
@@ -46,8 +27,8 @@ function pyProgram(topic,seed){var t=norm(topic),n=(seed||0)+3;
  if(/error|exception|debug/.test(t))return 'def safe_divide(a, b):\n    if b == 0:\n        raise ValueError("b cannot be zero")\n    return a / b\n\ntry:\n    print(safe_divide(10, 0))\nexcept ValueError as error:\n    print("handled:", error)';
  if(/test|assert/.test(t))return 'def add(a, b):\n    return a + b\n\nassert add(2, 3) == 5\nassert add(-1, 1) == 0\nprint("tests passed")';
  if(/file|io/.test(t))return 'from io import StringIO\nf = StringIO("alpha\\nbeta\\n")\nfor line in f:\n    print(line.strip())';
- if(/thread|concurr|race|lock/.test(t))return 'from concurrent.futures import ThreadPoolExecutor\n\ndef work(value):\n    return value * value\n\nwith ThreadPoolExecutor(max_workers=3) as pool:\n    print(list(pool.map(work, [2, 3, 4])))';
- if(/process|subprocess/.test(t))return 'import subprocess\nresult = subprocess.run(["python", "-c", "print(21 * 2)"], capture_output=True, text=True)\nprint(result.stdout.strip())';
+ if(/thread|concurr|race|lock/.test(t))return 'shared = {"counter": 0}\nevents = [("worker-a", 1), ("worker-b", 1), ("worker-a", 1)]\nfor worker, delta in events:\n    before = shared["counter"]\n    shared["counter"] = before + delta\n    print(worker, before, "->", shared["counter"])\nprint("browser-safe concurrency simulation")';
+ if(/process|subprocess/.test(t))return 'jobs = [("process-a", 21), ("process-b", 7), ("process-c", 4)]\nfor worker, value in jobs:\n    print(worker, value * 2)\nprint("browser-safe process-work simulation")';
  if(/cache|cpi|pipeline|latency|throughput/.test(t))return 'instructions = 1200\ncycles = 1560\ncpi = cycles / instructions\nprint(f"CPI={cpi:.2f}")';
  if(/interrupt|sensor|gpio|embedded|timer/.test(t))return 'samples = [21.3, 21.8, 22.1, 23.5]\nlimit = 23.0\nfor tick, value in enumerate(samples):\n    state = "ALARM" if value > limit else "OK"\n    print(tick, value, state)';
  return 'values = [1, 2, 3, '+n+']\nresult = [value * 2 for value in values]\nprint(result)';
@@ -63,7 +44,7 @@ function build(lesson){var b=body(lesson);if(!b||b.querySelector('[data-adaptive
 function updateHero(){var hero=document.querySelector('.hero'),m=hero&&hero.querySelector('.meta');if(!hero||!m)return;var total=Array.from(document.querySelectorAll('.lesson')).map(function(l){var b=body(l);return b?exampleCount(b):0;}).reduce(function(a,b){return a+b;},0);if(!m.querySelector('[data-adaptive-total]')){var p=document.createElement('span');p.className='pill';p.setAttribute('data-adaptive-total','');p.textContent=total+' examples';m.appendChild(p);}if(pythonCourse()&&!m.querySelector('[data-adaptive-python]')){var d=document.createElement('span');d.className='pill';d.setAttribute('data-adaptive-python','');d.textContent='Python';m.appendChild(d);}var h=hero.querySelector('h1');if(h)h.textContent=h.textContent.replace(/\s*&\s*Python\b/gi,'').replace(/Python\s*&\s*[^ ]+/gi,'Python');}
 async function runPanel(btn){var p=btn.closest('.adaptive-panel'),out=p&&p.querySelector('[data-adaptive-output]'),code=p&&p.querySelector('[data-adaptive-code]');if(!p||!out||!code)return;btn.disabled=true;out.textContent='Running Python…';try{var result=await runPython(code.value);out.textContent=(result.error?'Run error':'Output')+'\n'+(result.text||'(no output)')+'\n\nPython run: '+result.milliseconds+' ms';}catch(e){out.textContent='Runner error\n'+(e.message||String(e));}finally{btn.disabled=false;}}
 function bind(){document.addEventListener('click',function(e){var tab=e.target.closest&&e.target.closest('[data-adaptive-index]');if(tab){render(tab.closest('[data-adaptive-lab]'),Number(tab.getAttribute('data-adaptive-index'))||0);return;}var run=e.target.closest&&e.target.closest('[data-adaptive-run="python"]');if(run){e.preventDefault();runPanel(run);}},true);document.addEventListener('pointerover',function(e){if(e.target.closest&&e.target.closest('[data-adaptive-lab]')&&pythonCourse())prewarmPython();},true);document.addEventListener('focusin',function(e){if(e.target.closest&&e.target.closest('[data-adaptive-code]')&&pythonCourse())prewarmPython();},true);}
-function apply(){style();document.querySelectorAll('.lesson').forEach(build);updateHero();}
+function apply(){style();updateHero();}
 function queue(){clearTimeout(applyTimer);applyTimer=setTimeout(apply,40);}
 if(document.getElementById('course-page-meta')){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){apply();bind();},{once:true});else{apply();bind();}setTimeout(apply,350);setTimeout(apply,900);var observer=new MutationObserver(function(records){if(records.some(function(r){return r.addedNodes&&r.addedNodes.length;}))queue();});observer.observe(document.documentElement,{childList:true,subtree:true});}
 })();

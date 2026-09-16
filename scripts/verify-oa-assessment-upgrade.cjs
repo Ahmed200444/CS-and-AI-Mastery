@@ -4,7 +4,7 @@ const root=process.cwd(),dir=path.join(root,'courses');
 const oaPath=path.join(root,'assets','oa-assessment-upgrade.js'),fallbackPath=path.join(root,'assets','oa-assessment-fallback.js');
 if(!fs.existsSync(oaPath)||!fs.existsSync(fallbackPath))throw new Error('OA assessment runtime assets missing');
 const oa=fs.readFileSync(oaPath,'utf8'),fallback=fs.readFileSync(fallbackPath,'utf8');
-for(const token of ['OA Practice Score','Training metric only','Assessment test cases','Visible + hidden','Progressive project assessment','Core implementation','Edge cases & robustness','Portfolio readiness'])if(!oa.includes(token))throw new Error(`OA runtime missing ${token}`);
+for(const token of ['OA Practice Score','Training metric only','Assessment test cases','Visible + hidden','Progressive project assessment','Core implementation','Edge cases & robustness','Portfolio readiness','Reset OA Progress','function resetOaProgress()','localStorage.removeItem(STORE)','lesson progress is kept'])if(!oa.includes(token))throw new Error(`OA runtime missing ${token}`);
 if(/querySelector\([^)]*["']\.lesson["']/.test(oa)||/querySelectorAll\([^)]*["']\.lesson["']/.test(oa))throw new Error('OA runtime must not modify lesson DOM');
 if(!fallback.includes('CSAIPythonRunner.runSource'))throw new Error('Fallback Python exercises are not wired to the shared Python runner');
 if(/C\+\+|CSAICppRunner|data-csai-oa-cpp/.test(fallback))throw new Error('Fallback assessment runtime still contains removed language support');
@@ -16,5 +16,5 @@ for(const file of fs.readdirSync(dir).filter(f=>f.endsWith('.html'))){const html
  if(!html.includes('runner-performance-guard.js'))throw new Error(`${file}: runner performance layer missing`);
  if(html.includes('csai-oa-fallback-assessment')){fallbacks++;if(!html.includes('data-csai-oa-python-run'))throw new Error(`${file}: fallback assessment is not Python runnable`);if(/data-csai-oa-cpp|\.cpp\b|C\+\+/.test(html))throw new Error(`${file}: fallback assessment still contains removed language content`)}
 }
-if(pages!==57||assessment!==57)throw new Error(`Expected assessment coverage on 57 courses; pages=${pages}, assessment=${assessment}`);
+if(pages!==62||assessment!==62)throw new Error(`Expected assessment coverage on 62 courses; pages=${pages}, assessment=${assessment}`);
 console.log(`OA assessment verification passed: ${pages} courses covered, ${fallbacks} Python fallback assessment page(s), lessons remain unscored, project README/GitHub and Python runner layers preserved.`);

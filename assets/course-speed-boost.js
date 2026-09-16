@@ -1,7 +1,7 @@
 (function(){
 'use strict';
 
-var COURSE_PREFIX='/assets/course-data/';
+var COURSE_PREFIX='assets/course-data/';
 var COURSE_VERSION='?v=20260807-2';
 var prefetched=new Map();
 var busy=false;

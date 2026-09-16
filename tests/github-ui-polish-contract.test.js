@@ -1,0 +1,18 @@
+const fs=require('fs');
+const assert=(c,m)=>{if(!c)throw new Error(m)};
+const setup=fs.readFileSync('github-setup.html','utf8');
+const index=fs.readFileSync('index.html','utf8');
+assert(setup.includes('--accent:#4fd1c5') && setup.includes('--panel:#121826'),'GitHub page must match the main platform dark/teal palette');
+assert(setup.includes('class="topbar"') && setup.includes('class="hero"') && setup.includes('class="overview"'),'GitHub page must have professional hierarchy');
+assert(setup.includes('min-height:44px'),'GitHub actions must have comfortable minimum tap targets');
+assert(setup.includes(':focus-visible'),'GitHub page must have keyboard focus styling');
+assert(setup.includes('prefers-reduced-motion'),'GitHub page must respect reduced-motion accessibility');
+assert(setup.includes('@media(max-width:760px)') && setup.includes('@media(max-width:460px)'),'GitHub page must include responsive mobile layouts');
+assert(setup.includes('aria-live="polite"'),'GitHub status updates must be announced accessibly');
+assert(setup.includes('disabled>Add &amp; use repository</button>'),'repository actions must start disabled until GitHub is connected');
+assert(setup.includes('Nothing is selected automatically'),'page must make safe repository behavior explicit');
+assert(setup.includes('Safe to share the website ZIP'),'page must explain sharing/privacy behavior');
+assert(index.includes('class="gs-trigger github-trigger"'),'homepage must use the polished GitHub navigation control');
+assert(index.includes('github-trigger-icon') && index.includes('github-trigger-sub'),'homepage GitHub control must have clear visual hierarchy');
+assert(!index.includes('🐙 GitHub — connect account'),'homepage must not rely on an emoji as the GitHub navigation icon');
+console.log('v5.57 GitHub UI polish contract PASS — professional styling, responsive layout, accessible controls, and safe repository states.');

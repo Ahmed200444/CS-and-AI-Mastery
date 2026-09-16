@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>GitHub · CS & AI Mastery</title>
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#0a0e15;
+  --panel:#121826;
+  --panel-2:#0f1420;
+  --line:rgba(255,255,255,.10);
+  --line-strong:rgba(255,255,255,.17);
+  --text:#e8ecf3;
+  --muted:#8b96a6;
+  --accent:#4fd1c5;
+  --accent-ink:#062925;
+  --accent-soft:rgba(79,209,197,.12);
+  --good:#72d69a;
+  --good-soft:rgba(68,180,113,.12);
+  --bad:#ff9aaa;
+  --bad-soft:rgba(255,120,140,.09);
+  --shadow:0 24px 70px rgba(0,0,0,.28);
+}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{
+  margin:0;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 8% -8%,rgba(79,209,197,.14),transparent 30rem),
+    radial-gradient(circle at 92% 8%,rgba(180,142,240,.09),transparent 28rem),
+    var(--bg);
+  color:var(--text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+a,button,input,select{font:inherit}
+a,button{transition:border-color .18s ease,background .18s ease,color .18s ease,transform .18s ease,box-shadow .18s ease}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{
+  outline:3px solid rgba(79,209,197,.34);
+  outline-offset:2px;
+}
+button:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
+.shell{width:min(1080px,calc(100% - 36px));margin:0 auto;padding:28px 0 64px}
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  padding-bottom:22px;
+  border-bottom:1px solid var(--line);
+}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.brand-mark{
+  width:38px;height:38px;display:grid;place-items:center;flex:0 0 auto;
+  border:1px solid rgba(79,209,197,.28);
+  border-radius:11px;
+  background:linear-gradient(145deg,rgba(79,209,197,.16),rgba(79,209,197,.05));
+  color:var(--accent);
+  font-weight:900;
+  letter-spacing:-.06em;
+}
+.brand-name{font-size:.93rem;font-weight:850;letter-spacing:.01em}
+.brand-sub{margin-top:2px;color:var(--muted);font-size:.78rem}
+.back{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:42px;padding:0 14px;border:1px solid var(--line-strong);border-radius:10px;
+  background:rgba(255,255,255,.025);color:var(--text);text-decoration:none;font-weight:760;font-size:.88rem;
+}
+.back:hover{border-color:rgba(79,209,197,.38);background:rgba(79,209,197,.06);transform:translateY(-1px)}
+.hero{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:28px;
+  align-items:end;
+  padding:44px 0 26px;
+}
+.eyebrow{
+  display:flex;align-items:center;gap:8px;
+  margin-bottom:12px;color:var(--accent);
+  text-transform:uppercase;letter-spacing:.13em;font-size:.72rem;font-weight:900;
+}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--accent);opacity:.7}
+h1{margin:0;font-size:clamp(2.35rem,6vw,4rem);line-height:.98;letter-spacing:-.045em}
+.lead{max-width:720px;margin:18px 0 0;color:#aeb8c7;font-size:1.04rem;line-height:1.68}
+.hero-badge{
+  display:flex;align-items:center;gap:10px;
+  align-self:start;
+  padding:11px 13px;border:1px solid rgba(79,209,197,.22);border-radius:999px;
+  background:var(--accent-soft);color:#baf7f1;font-size:.78rem;font-weight:800;white-space:nowrap;
+}
+.hero-badge-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px rgba(79,209,197,.09)}
+.privacy{
+  display:grid;grid-template-columns:auto 1fr;gap:13px;align-items:start;
+  margin:2px 0 22px;padding:15px 17px;border:1px solid var(--line);border-radius:14px;
+  background:rgba(255,255,255,.024);
+}
+.privacy-icon{
+  width:31px;height:31px;display:grid;place-items:center;border-radius:9px;
+  background:rgba(79,209,197,.10);border:1px solid rgba(79,209,197,.18);color:var(--accent);font-weight:900
+}
+.privacy strong{display:block;margin-bottom:3px;font-size:.9rem}
+.privacy p{margin:0;color:var(--muted);font-size:.86rem;line-height:1.55}
+.overview{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;
+}
+.overview-item{
+  min-width:0;padding:14px 16px;border:1px solid var(--line);border-radius:13px;background:rgba(15,20,32,.78);
+}
+.overview-label{display:block;color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.09em;font-weight:850}
+.overview-value{display:flex;align-items:center;gap:8px;min-width:0;margin-top:7px;font-size:.9rem;font-weight:780}
+.overview-value span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.state-dot{width:8px;height:8px;border-radius:50%;background:#687586;flex:0 0 auto}
+.state-dot.good{background:var(--good)}
+.setup-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.card{
+  position:relative;overflow:hidden;
+  padding:22px;border:1px solid var(--line);border-radius:17px;
+  background:linear-gradient(180deg,rgba(18,24,38,.98),rgba(15,20,32,.98));
+  box-shadow:0 1px 0 rgba(255,255,255,.025) inset;
+}
+.card::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(79,209,197,.35),transparent);opacity:.6}
+.card.wide{grid-column:1/-1}
+.card-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:13px}
+.step{
+  width:31px;height:31px;display:grid;place-items:center;flex:0 0 auto;
+  border-radius:9px;background:var(--accent-soft);border:1px solid rgba(79,209,197,.20);
+  color:var(--accent);font-size:.79rem;font-weight:900;
+}
+h2{margin:1px 0 4px;font-size:1.03rem;letter-spacing:-.01em}
+.card-sub{margin:0;color:var(--muted);font-size:.82rem;line-height:1.5}
+label{display:block;margin:15px 0 7px;color:#cfd6e1;font-size:.8rem;font-weight:820}
+select,input{
+  width:100%;min-height:46px;padding:0 12px;
+  border:1px solid var(--line-strong);border-radius:10px;
+  background:#0b111b;color:var(--text);
+}
+select:hover,input:hover{border-color:rgba(255,255,255,.25)}
+select:focus,input:focus{border-color:rgba(79,209,197,.55)}
+input::placeholder{color:#667286}
+.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:13px}
+button,.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:44px;padding:0 15px;border:1px solid transparent;border-radius:10px;
+  background:var(--accent);color:var(--accent-ink);
+  text-decoration:none;font-size:.84rem;font-weight:900;cursor:pointer;
+}
+button:hover:not(:disabled),.btn:hover{transform:translateY(-1px);box-shadow:0 8px 26px rgba(79,209,197,.12)}
+.secondary{background:rgba(255,255,255,.025);color:var(--text);border-color:var(--line-strong)}
+.secondary:hover{border-color:rgba(79,209,197,.35);background:rgba(79,209,197,.05);box-shadow:none!important}
+.danger{background:transparent;color:#ffcbd3;border-color:rgba(255,130,150,.28)}
+.danger:hover:not(:disabled){background:var(--bad-soft);border-color:rgba(255,130,150,.44);box-shadow:none}
+.status{
+  min-height:22px;margin-top:12px;color:var(--muted);font-size:.83rem;font-weight:720;line-height:1.45;
+}
+.status.good{color:var(--good)}
+.status.bad{color:var(--bad)}
+.repo-current{
+  display:flex;justify-content:space-between;gap:18px;align-items:center;
+  padding:16px 17px;border:1px solid var(--line);border-radius:13px;background:#0b111b;
+}
+.repo-current-copy{min-width:0}
+.repo-current-label{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;font-weight:850}
+.repo-current-name{margin-top:5px;font-size:.95rem;font-weight:820;overflow-wrap:anywhere}
+.repo-current-note{margin-top:5px;color:var(--muted);font-size:.8rem;line-height:1.45}
+.repo-empty{color:var(--muted);font-weight:650}
+code{
+  padding:2px 6px;border:1px solid var(--line);border-radius:6px;
+  background:#0a0f18;color:#cbd5e2;font-size:.9em;
+}
+.note{margin:12px 0 0;color:var(--muted);font-size:.79rem;line-height:1.55}
+.footer{
+  display:flex;justify-content:space-between;gap:18px;align-items:center;
+  margin-top:22px;padding-top:18px;border-top:1px solid var(--line);
+  color:#697586;font-size:.75rem
+}
+.footer strong{color:#8793a3}
+@media(max-width:760px){
+  .shell{width:min(100% - 24px,1080px);padding-top:16px}
+  .topbar{align-items:flex-start}
+  .brand-sub{display:none}
+  .back{min-height:40px;padding:0 11px}
+  .hero{grid-template-columns:1fr;padding-top:32px;gap:16px}
+  .hero-badge{justify-self:start}
+  .overview,.setup-grid{grid-template-columns:1fr}
+  .card.wide{grid-column:auto}
+  .repo-current{align-items:flex-start;flex-direction:column}
+  .repo-current .danger{width:100%}
+}
+@media(max-width:460px){
+  .brand-name{font-size:.86rem}
+  .back-label{display:none}
+  .hero{padding-top:28px}
+  .lead{font-size:.96rem}
+  .privacy{grid-template-columns:1fr}
+  .privacy-icon{display:none}
+  .card{padding:18px}
+  .actions>*{width:100%}
+  .footer{align-items:flex-start;flex-direction:column}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;transition:none!important}
+}
+</style>
+<link rel="stylesheet" href="assets/scroll-performance-v561.css?v=20260822-v567"></head>
+<body>
+<main class="shell">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">&lt;/&gt;</div>
+      <div>
+        <div class="brand-name">CS &amp; AI Mastery</div>
+        <div class="brand-sub">Developer tools · GitHub</div>
+      </div>
+    </div>
+    <a class="back" href="index.html" aria-label="Back to learning">
+      <span aria-hidden="true">←</span><span class="back-label">Back to learning</span>
+    </a>
+  </header>
+
+  <section class="hero" aria-labelledby="page-title">
+    <div>
+      <div class="eyebrow">Developer tools</div>
+      <h1 id="page-title">GitHub</h1>
+      <p class="lead">Connect your account and choose exactly where exercises and projects should be published. GitHub is optional—the entire learning platform works without it.</p>
+    </div>
+    <div class="hero-badge"><span class="hero-badge-dot" aria-hidden="true"></span>Local &amp; optional</div>
+  </section>
+
+  <aside class="privacy" aria-label="Privacy and sharing">
+    <div class="privacy-icon" aria-hidden="true">i</div>
+    <div>
+      <strong>Safe to share the website ZIP</strong>
+      <p>Your GitHub sign-in stays on this computer, and the selected repository stays in this browser. Neither is stored inside the ZIP. A friend connects their own account and repository on their computer.</p>
+    </div>
+  </aside>
+
+  <section class="overview" aria-label="GitHub connection overview">
+    <div class="overview-item">
+      <span class="overview-label">Account</span>
+      <div class="overview-value"><span id="accountDot" class="state-dot" aria-hidden="true"></span><span id="accountSummary">Checking connection…</span></div>
+    </div>
+    <div class="overview-item">
+      <span class="overview-label">Publish repository</span>
+      <div class="overview-value"><span id="repoDot" class="state-dot" aria-hidden="true"></span><span id="repoSummary">Not selected</span></div>
+    </div>
+  </section>
+
+  <div class="setup-grid">
+    <section class="card">
+      <div class="card-head">
+        <span class="step" aria-hidden="true">01</span>
+        <div><h2>Connect your account</h2><p class="card-sub">Authorize GitHub on this computer before choosing a repository.</p></div>
+      </div>
+      <div id="accountStatus" class="status" aria-live="polite">Checking GitHub…</div>
+      <div class="actions">
+        <a id="connectBtn" class="btn" href="/api/github/authorize">Connect GitHub</a>
+        <button id="refreshBtn" class="secondary" type="button">Refresh status</button>
+      </div>
+      <p class="note">Authentication is handled by GitHub CLI on this computer. Your token is not stored in the website folder.</p>
+    </section>
+
+    <section class="card">
+      <div class="card-head">
+        <span class="step" aria-hidden="true">02</span>
+        <div><h2>Choose a repository</h2><p class="card-sub">Select the repository that should receive your published coursework.</p></div>
+      </div>
+      <label for="repoSelect">Writable repositories</label>
+      <select id="repoSelect" disabled>
+        <option value="">Connect GitHub first…</option>
+      </select>
+      <div class="actions">
+        <button id="saveSelectBtn" type="button" disabled>Use selected repository</button>
+      </div>
+      <p class="note">Nothing is selected automatically, so your code cannot silently publish to the wrong repository.</p>
+    </section>
+
+    <section class="card wide">
+      <div class="card-head">
+        <span class="step" aria-hidden="true">03</span>
+        <div><h2>Add an existing repository</h2><p class="card-sub">Use this if you already know the repository you want to connect.</p></div>
+      </div>
+      <label for="repoInput">Repository name or GitHub URL</label>
+      <input id="repoInput" autocomplete="off" spellcheck="false" placeholder="username/repository" aria-describedby="repoFormat">
+      <p id="repoFormat" class="note">Accepted formats: <code>username/repository</code> or a full GitHub repository URL.</p>
+      <div class="actions">
+        <button id="addBtn" type="button" disabled>Add &amp; use repository</button>
+        <a class="btn secondary" href="https://github.com/new" target="_blank" rel="noopener noreferrer">Create repository on GitHub <span aria-hidden="true">↗</span></a>
+      </div>
+      <div id="repoMessage" class="status" aria-live="polite"></div>
+    </section>
+
+    <section class="card wide">
+      <div class="card-head">
+        <span class="step" aria-hidden="true">✓</span>
+        <div><h2>Current connection</h2><p class="card-sub">This is the destination used when you choose “Publish to GitHub” elsewhere in the platform.</p></div>
+      </div>
+      <div class="repo-current">
+        <div class="repo-current-copy" id="currentRepo" aria-live="polite">
+          <div class="repo-current-label">Selected repository</div>
+          <div class="repo-current-name repo-empty">No repository selected yet.</div>
+        </div>
+        <button id="disconnectBtn" class="danger" type="button" disabled>Disconnect GitHub</button>
+      </div>
+    </section>
+  </div>
+
+  <footer class="footer">
+    <span>GitHub integration is optional and local to this computer.</span>
+    <strong>CS &amp; AI Mastery · v5.60</strong>
+  </footer>
+</main>
+
+<script>
+(()=>{
+'use strict';
+const STATUS='/api/github/status', DISCONNECT='/api/github/disconnect', STORE='csai-github-preferred-repo';
+const account=document.getElementById('accountStatus');
+const accountSummary=document.getElementById('accountSummary');
+const accountDot=document.getElementById('accountDot');
+const select=document.getElementById('repoSelect');
+const repoSummary=document.getElementById('repoSummary');
+const repoDot=document.getElementById('repoDot');
+const current=document.getElementById('currentRepo');
+const msg=document.getElementById('repoMessage');
+const connect=document.getElementById('connectBtn');
+const saveSelect=document.getElementById('saveSelectBtn');
+const addBtn=document.getElementById('addBtn');
+const disconnect=document.getElementById('disconnectBtn');
+const repoInput=document.getElementById('repoInput');
+let data={connected:false,repositories:[]};
+
+function cleanRepo(value){
+  let v=String(value||'').trim();
+  v=v.replace(/^https?:\/\/github\.com\//i,'').replace(/\.git$/i,'').replace(/^\/+|\/+$/g,'');
+  return v;
+}
+function stored(){try{return localStorage.getItem(STORE)||''}catch(_){return''}}
+function save(repo){try{localStorage.setItem(STORE,repo)}catch(_){};renderCurrent(repo)}
+function setMessage(text,type=''){
+  msg.textContent=text;
+  msg.className='status'+(type?' '+type:'');
+}
+function renderCurrent(repo=stored()){
+  current.textContent='';
+  const label=document.createElement('div');
+  label.className='repo-current-label';
+  label.textContent='Selected repository';
+  const name=document.createElement('div');
+  name.className='repo-current-name';
+  if(repo){
+    name.textContent=repo;
+    repoSummary.textContent=repo;
+    repoDot.className='state-dot good';
+    const note=document.createElement('div');
+    note.className='repo-current-note';
+    note.textContent='Exercises and projects publish here only when you press Publish to GitHub.';
+    current.append(label,name,note);
+  }else{
+    name.textContent='No repository selected yet.';
+    name.classList.add('repo-empty');
+    repoSummary.textContent='Not selected';
+    repoDot.className='state-dot';
+    current.append(label,name);
+  }
+}
+function updateActionState(){
+  const connected=Boolean(data.connected);
+  select.disabled=!connected;
+  addBtn.disabled=!connected;
+  disconnect.disabled=!connected;
+  saveSelect.disabled=!connected || !select.value;
+}
+function render(){
+  if(!data.connected){
+    const text=data.message||'GitHub is not connected yet.';
+    account.textContent=text;
+    account.className='status';
+    accountSummary.textContent='Not connected';
+    accountDot.className='state-dot';
+    connect.style.display='inline-flex';
+    select.innerHTML='<option value="">Connect GitHub first…</option>';
+    updateActionState();
+    renderCurrent();
+    return;
+  }
+  const login=(data.user&&data.user.login)||'GitHub user';
+  account.textContent='Connected as '+login+' ✓';
+  account.className='status good';
+  accountSummary.textContent=login;
+  accountDot.className='state-dot good';
+  connect.style.display='none';
+  const preferred=stored();
+  select.innerHTML='<option value="">Choose repository…</option>';
+  for(const repo of data.repositories){
+    const option=document.createElement('option');
+    option.value=repo.full_name;
+    option.textContent=repo.full_name+(repo.private?' · private':'');
+    option.selected=repo.full_name===preferred;
+    select.appendChild(option);
+  }
+  updateActionState();
+  renderCurrent(preferred);
+}
+async function load(){
+  account.textContent='Checking GitHub…';
+  accountSummary.textContent='Checking…';
+  try{
+    const r=await fetch(STATUS,{cache:'no-store'});
+    const j=await r.json();
+    data=j;
+    if(!r.ok)throw new Error(j.error||'Could not check GitHub');
+    render();
+  }catch(e){
+    data={connected:false,repositories:[]};
+    account.textContent=e.message;
+    account.className='status bad';
+    accountSummary.textContent='Unavailable';
+    accountDot.className='state-dot';
+    render();
+  }
+}
+document.getElementById('refreshBtn').onclick=load;
+select.onchange=()=>{saveSelect.disabled=!data.connected||!select.value;setMessage('')};
+saveSelect.onclick=()=>{
+  const repo=select.value;
+  if(!repo){setMessage('Choose a repository first.','bad');return}
+  save(repo);
+  setMessage('Repository connected to CS & AI Mastery ✓','good');
+};
+addBtn.onclick=()=>{
+  const repo=cleanRepo(repoInput.value);
+  if(!/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(repo)){
+    setMessage('Enter a repository as username/repository or paste a GitHub repository URL.','bad');return;
+  }
+  if(!data.connected){setMessage('Connect GitHub first.','bad');return}
+  const match=data.repositories.find(r=>r.full_name.toLowerCase()===repo.toLowerCase());
+  if(!match){
+    setMessage("That repository is not in the connected account's writable repository list. Check access, create it if needed, then refresh status.",'bad');return;
+  }
+  save(match.full_name);
+  select.value=match.full_name;
+  updateActionState();
+  setMessage('Repository connected to CS & AI Mastery ✓','good');
+};
+disconnect.onclick=async()=>{
+  try{
+    await fetch(DISCONNECT,{method:'POST'});
+    try{localStorage.removeItem(STORE)}catch(_){}
+    setMessage('GitHub disconnected from this app session.');
+    await load();
+  }catch(e){setMessage(e.message,'bad')}
+};
+renderCurrent();
+updateActionState();
+load();
+})();
+</script>
+<script src="assets/scroll-performance-v561.js?v=20260822-v567"></script><script defer src="assets/try-it-yourself-v568.js?v=20260822-v568"></script></body>
+</html>

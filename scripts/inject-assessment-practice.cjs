@@ -172,8 +172,8 @@ for(const file of fs.readdirSync(coursesDir).filter(f=>f.endsWith('.html'))){
 
   const payload={courseId:id,courseTitle:course.title||id,defaultLanguage:lang,exercises:items,quiz:Array.isArray(course.quiz)?course.quiz:[],structured};
   const dataTag=`<script id="csai-assessment-data" type="application/json">${safeJson(payload)}</script>`;
-  const practiceTag='<script src="/assets/assessment-practice.js?v=20260807-1"></script>';
-  const githubTag='<script src="/assets/github-integration.js?v=20260807-1"></script>';
+  const practiceTag='<script defer src="../assets/assessment-practice.js?v=20260822-v567"></script>';
+  const githubTag='<script defer src="../assets/github-integration.js?v=20260822-v567"></script>';
   let html=fs.readFileSync(path.join(coursesDir,file),'utf8');
   html=html.replace(/<script\b[^>]*\bid=["']csai-assessment-data["'][^>]*>[\s\S]*?<\/script>\s*/gi,'');
   html=html.replace(/<script[^>]*src=["']\/assets\/assessment-practice\.js[^"']*["'][^>]*><\/script>\s*/gi,'');
@@ -185,5 +185,5 @@ for(const file of fs.readdirSync(coursesDir).filter(f=>f.endsWith('.html'))){
   injected++;
 }
 
-if(injected!==54)throw new Error(`Expected to enhance 54 course pages, enhanced ${injected}`);
+if(injected!==62)throw new Error(`Expected to enhance 62 course pages, enhanced ${injected}`);
 console.log(`Injected assessment-style practice + GitHub publishing into ${injected} static course pages; DSA includes ${codeSignalQuestions.length} CodeSignal-style questions.`);

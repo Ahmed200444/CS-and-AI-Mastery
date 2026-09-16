@@ -55,7 +55,7 @@ async function fetchCourseWithTimeout(id){
   try{
     var options={cache:'no-store'};
     if(controller)options.signal=controller.signal;
-    var response=await fetch('/assets/course-data/'+encodeURIComponent(id)+'.json?v=20260807-2',options);
+    var response=await fetch('assets/course-data/'+encodeURIComponent(id)+'.json?v=20260807-2',options);
     if(!response.ok)throw new Error('Course data returned HTTP '+response.status);
     var course=await response.json();
     if(!course||course.id!==id)throw new Error('Course data is invalid');

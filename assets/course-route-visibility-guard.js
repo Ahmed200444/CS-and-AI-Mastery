@@ -7,6 +7,8 @@
   var fallbackId = 'csai-safe-course-view';
   var fallbackStyleId = 'csai-safe-course-style';
   var progressKey = 'csai_safe_course_progress_v1';
+  var fullCoursesCache = null;
+  var lightCoursesCache = null;
 
   function registry(){ return window.TRACK_REGISTRY || null; }
   function esc(value){
@@ -15,25 +17,29 @@
     });
   }
   function list(value){ return Array.isArray(value) ? value.filter(Boolean) : (value ? [value] : []); }
-  function getCourses(){
+  function lightCourses(){
+    if(lightCoursesCache) return lightCoursesCache;
     try{
-      var node = document.getElementById('coursedata');
-      return node ? (JSON.parse(node.textContent || '[]') || []) : [];
-    }catch(error){
-      console.error('[CS AI Mastery] Could not read course data for blank-screen recovery.', error);
-      return [];
-    }
+      var node=document.getElementById('csai-inline-catalog-data');
+      var data=node?JSON.parse(node.textContent||'{}'):{};
+      lightCoursesCache=Array.isArray(data.courses)?data.courses:[];
+    }catch(error){lightCoursesCache=[];}
+    return lightCoursesCache;
   }
-  function courseById(id){
-    var courses = getCourses();
-    for(var i=0;i<courses.length;i++) if(courses[i].id === id) return courses[i];
-    return null;
+  function getCourses(){
+    if(fullCoursesCache) return fullCoursesCache;
+    if(window.__CSAI_COURSES__ && Array.isArray(window.__CSAI_COURSES__)) return (fullCoursesCache=window.__CSAI_COURSES__);
+    try{
+      var node=document.getElementById('coursedata');
+      fullCoursesCache=node?(JSON.parse(node.textContent||'[]')||[]):[];
+      if(Array.isArray(fullCoursesCache)) window.__CSAI_COURSES__=fullCoursesCache;
+      else fullCoursesCache=[];
+      return fullCoursesCache;
+    }catch(error){console.error('[CS AI Mastery] Could not read course data for blank-screen recovery.',error);return (fullCoursesCache=[]);}
   }
-  function courseForRoute(route){
-    var courses = getCourses();
-    for(var i=0;i<courses.length;i++) if(courses[i].linked === route) return courses[i];
-    return null;
-  }
+  function courseById(id){var courses=getCourses();for(var i=0;i<courses.length;i++)if(courses[i].id===id)return courses[i];return null;}
+  function courseMetaById(id){var courses=lightCourses();for(var i=0;i<courses.length;i++)if(courses[i].id===id)return courses[i];return null;}
+  function courseForRoute(route){var courses=lightCourses();for(var i=0;i<courses.length;i++)if(courses[i].linked===route)return courses[i];return null;}
   function currentHashRoute(){
     var reg = registry();
     if(!reg) return null;
@@ -124,7 +130,7 @@
     style.textContent = '\n#'+fallbackId+'{position:fixed;inset:0;z-index:2147483000;overflow:auto;background:#f4f7fb;color:#172231;font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}\n#'+fallbackId+' *{box-sizing:border-box}\n.csai-safe-wrap{max-width:1040px;margin:auto;padding:22px 22px 100px}.csai-safe-top{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;gap:12px;align-items:center;padding:10px 0;background:#f4f7fb}.csai-safe-btn{border:1px solid #b9c7d5;border-radius:9px;padding:9px 13px;background:#fff;color:#17304b;font:inherit;font-weight:800;cursor:pointer}.csai-safe-hero,.csai-safe-card{background:#fff;border:1px solid #d8e1ea;border-radius:16px;padding:20px}.csai-safe-hero{margin:8px 0 16px}.csai-safe-kicker{font-size:.75rem;letter-spacing:.1em;font-weight:900;color:#17649a}.csai-safe-hero h1{margin:5px 0 8px;font-size:clamp(1.8rem,4vw,3rem);line-height:1.12}.csai-safe-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}.csai-safe-meta span{padding:5px 9px;border-radius:999px;background:#e8f1f8;font-size:.8rem;font-weight:750}.csai-safe-list{display:grid;gap:12px}.csai-safe-lesson{border:1px solid #d8e1ea;border-radius:13px;background:#fff;overflow:hidden}.csai-safe-lesson summary{display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;font-weight:850}.csai-safe-num{display:grid;place-items:center;min-width:34px;height:28px;border-radius:8px;background:#e8f1f8;color:#17649a}.csai-safe-title{flex:1}.csai-safe-complete{display:flex;align-items:center;gap:6px;font-size:.82rem}.csai-safe-body{padding:0 16px 18px}.csai-safe-body h3{margin:18px 0 7px}.csai-safe-body p{margin:7px 0}.csai-safe-code{overflow:auto;white-space:pre-wrap;padding:13px;border-radius:10px;background:#101827;color:#f4f7fb;font:500 .86rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}.csai-safe-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}.csai-safe-card h2{margin:0 0 10px}.csai-safe-item{padding:12px;border-radius:10px;background:#f4f7fb;margin:9px 0}.csai-safe-note{padding:12px;border-left:4px solid #d28b23;background:#fff7e7;border-radius:8px;margin-top:12px}.csai-safe-status{font-weight:800;color:#167554}.csai-safe-error{color:#8f2d2d}.csai-safe-empty{padding:18px;border:1px dashed #b9c7d5;border-radius:12px;background:#fff}.csai-safe-retry{background:#17649a;color:#fff;border-color:#17649a}\nhtml[data-theme="dark"] #'+fallbackId+',body[data-theme="dark"] #'+fallbackId+'{background:#0f1720;color:#edf3f8}html[data-theme="dark"] #'+fallbackId+' .csai-safe-top,body[data-theme="dark"] #'+fallbackId+' .csai-safe-top{background:#0f1720}html[data-theme="dark"] #'+fallbackId+' .csai-safe-hero,html[data-theme="dark"] #'+fallbackId+' .csai-safe-card,html[data-theme="dark"] #'+fallbackId+' .csai-safe-lesson,html[data-theme="dark"] #'+fallbackId+' .csai-safe-empty,body[data-theme="dark"] #'+fallbackId+' .csai-safe-hero,body[data-theme="dark"] #'+fallbackId+' .csai-safe-card,body[data-theme="dark"] #'+fallbackId+' .csai-safe-lesson,body[data-theme="dark"] #'+fallbackId+' .csai-safe-empty{background:#17212c;border-color:#344352;color:#edf3f8}html[data-theme="dark"] #'+fallbackId+' .csai-safe-item,body[data-theme="dark"] #'+fallbackId+' .csai-safe-item{background:#111b25}html[data-theme="dark"] #'+fallbackId+' .csai-safe-btn,body[data-theme="dark"] #'+fallbackId+' .csai-safe-btn{background:#17212c;color:#edf3f8;border-color:#455464}html[data-theme="dark"] #'+fallbackId+' .csai-safe-note,body[data-theme="dark"] #'+fallbackId+' .csai-safe-note{background:#2b2417;color:#edf3f8}\n@media(max-width:700px){.csai-safe-wrap{padding:12px 12px 90px}.csai-safe-grid{grid-template-columns:1fr}.csai-safe-top{align-items:stretch}.csai-safe-top .csai-safe-btn{flex:1}.csai-safe-lesson summary{align-items:flex-start;flex-wrap:wrap}.csai-safe-complete{width:100%;padding-left:44px}}\n';
     document.head.appendChild(style);
   }
-  function lessonExplanation(lesson){ return lesson.explanation || lesson.explain || lesson.description || 'This lesson introduces an important course concept.'; }
+  function lessonExplanation(lesson){ var base=lesson.explanation || lesson.explain || lesson.description || 'This lesson introduces an important course concept.'; var cs=list(lesson.concepts).slice(0,5),os=list(lesson.objectives).slice(0,2); return String(base)+(cs.length?' Key ideas: '+cs.join(', ')+'.':'')+(os.length?' The goal is to '+String(os[0]).replace(/^./,function(c){return c.toLowerCase();})+( /[.!?]$/.test(String(os[0]))?'':' .'):''); }
   function lessonExamples(lesson){ return list(lesson.examples || lesson.example); }
   function renderFallback(course, reason){
     if(!course) return;
@@ -182,7 +188,7 @@
         document.documentElement.style.overflow = '';
         if(course.linked && typeof window.showTrack === 'function') window.showTrack(course.linked);
         forceRouteVisible(course.linked);
-        setTimeout(function(){ verifyCourse(course.id, true); }, 700);
+        setTimeout(function(){ verifyCourse(course.id, true); }, 80);
       }
     });
     overlay.addEventListener('change',function(event){
@@ -200,30 +206,29 @@
     console.warn('[CS AI Mastery] Opened safe course fallback for', course.id, reason || 'blank route');
   }
   function verifyCourse(courseId, afterRetry){
-    var course = courseById(courseId);
-    if(!course || !course.linked) return;
-    var token = ++verifyToken;
-    lastCourseId = course.id;
-    lastRoute = course.linked;
-    forceRouteVisible(course.linked);
-    setTimeout(function(){
-      if(token !== verifyToken || document.getElementById(fallbackId)) return;
-      forceRouteVisible(course.linked);
-      if(isRendered(course.linked)) return;
+    var meta=courseMetaById(courseId);
+    if(!meta||!meta.linked)return;
+    var token=++verifyToken;
+    lastCourseId=meta.id;lastRoute=meta.linked;
+    forceRouteVisible(meta.linked);
+    requestAnimationFrame(function(){
+      if(token!==verifyToken||document.getElementById(fallbackId))return;
+      forceRouteVisible(meta.linked);
+      if(isRendered(meta.linked))return;
       setTimeout(function(){
-        if(token !== verifyToken || document.getElementById(fallbackId)) return;
-        forceRouteVisible(course.linked);
-        if(!isRendered(course.linked)){
-          renderFallback(course, afterRetry ? 'The interactive route was still blank after retrying.' : 'The interactive route did not show visible lesson content after loading.');
+        if(token!==verifyToken||document.getElementById(fallbackId))return;
+        forceRouteVisible(meta.linked);
+        if(!isRendered(meta.linked)){
+          var full=courseById(courseId);
+          if(full)renderFallback(full,afterRetry?'The interactive route was still blank after retrying.':'The interactive route did not show visible lesson content after loading.');
         }
-      },700);
-    },450);
+      },180);
+    });
   }
   function scheduleRoute(route){
-    lastRoute = route || lastRoute || currentHashRoute();
-    var course = courseForRoute(lastRoute);
-    if(course) verifyCourse(course.id, false);
-    else forceRouteVisible(lastRoute);
+    lastRoute=route||lastRoute||currentHashRoute();
+    var course=courseForRoute(lastRoute);
+    if(course)verifyCourse(course.id,false);else forceRouteVisible(lastRoute);
   }
   function install(){
     try{ if('scrollRestoration' in history) history.scrollRestoration = 'manual'; }catch(error){}

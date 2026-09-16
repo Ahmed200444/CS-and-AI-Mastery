@@ -1,1 +1,50 @@
 textarea[data-editor],textarea[data-project-editor],.csai-code-editor{tab-size:4;-moz-tab-size:4;background-image:repeating-linear-gradient(to right,transparent 0,transparent calc(4ch - 1px),rgba(127,127,127,.08) calc(4ch - 1px),rgba(127,127,127,.08) 4ch);background-attachment:local;background-position:.75rem 0}.csai-clean-publish,.csai-clean-readme{appearance:none;min-height:38px;border-radius:10px!important;padding:.62rem .9rem!important;font:850 12px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;cursor:pointer;white-space:nowrap;transition:transform .15s ease,filter .15s ease,background .15s ease,border-color .15s ease}.csai-clean-publish{background:#17649a!important;color:#fff!important;border:1px solid #17649a!important}.csai-clean-readme{background:var(--panel,#fff)!important;color:var(--text,#172033)!important;border:1px solid var(--border,#d3dce8)!important}.csai-clean-publish:hover,.csai-clean-readme:hover{transform:translateY(-1px);filter:brightness(1.04)}.csai-clean-publish:disabled,.csai-clean-readme:disabled{opacity:.58;cursor:wait;transform:none}.oa-toolbar>.csai-clean-publish,.oa-toolbar>.csai-clean-readme,.evergreen-toolbar>.csai-clean-publish,.evergreen-toolbar>.csai-clean-readme,.csai-example-actions>.csai-clean-publish,.csai-example-actions>.csai-clean-readme{flex:0 0 auto}.csai-final-publish-status{display:inline-flex;align-items:center;font-size:.78rem;opacity:.82;min-height:1em;margin-left:2px}.csai-final-publish-status:empty{display:none}.csai-final-publish-status.is-ok{color:#55c985}.csai-final-publish-status.is-error{color:#ee7187}.csai-simulation-output{white-space:pre-wrap;line-height:1.5}@media(max-width:640px){.oa-toolbar>.csai-clean-publish,.oa-toolbar>.csai-clean-readme,.evergreen-toolbar>.csai-clean-publish,.evergreen-toolbar>.csai-clean-readme{flex:1 1 145px}.csai-final-publish-status{flex-basis:100%;margin-left:0}}
+
+/* v5.59 responsiveness layer: skip layout/paint work for large off-screen practice blocks. */
+@supports (content-visibility:auto){
+  .oa-task,.project-card,.assessment-section>.item,.assessment-section>.dcv-item,[data-project-workspace],.csai-study-example{
+    content-visibility:auto;
+    contain-intrinsic-size:520px;
+  }
+  .project-card,[data-project-workspace]{contain-intrinsic-size:720px}
+}
+
+/* v5.60 scroll-smoothness fix.
+   v5.59 used content-visibility:auto on large learning blocks. That reduced
+   initial layout work but moved expensive layout into the scroll path, causing
+   visible stutter as examples, assessments and projects entered the viewport.
+   Keep these sections fully laid out so scrolling is compositor-friendly. */
+@supports (content-visibility:auto){
+  .oa-task,
+  .project-card,
+  .assessment-section>.item,
+  .assessment-section>.dcv-item,
+  [data-project-workspace],
+  .csai-study-example{
+    content-visibility:visible!important;
+    contain:none!important;
+    contain-intrinsic-size:none!important;
+  }
+}
+
+/* v5.60 course-page paint budget.
+   Decorative fixed gradients and large glass/shadow surfaces make Chrome repaint
+   more pixels during every scroll frame on long lessons. Keep the learning UI
+   visually clean but move those effects out of the scrolling hot path. */
+html.csai-unified-design .app::before,
+html.csai-unified-design .cx-app::before,
+html.csai-unified-design .web-app::before{
+  display:none!important;
+}
+html.csai-unified-design .side,
+html.csai-unified-design .sidebar{
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+html.adaptive-v4-live body.av4-course-page .lesson,
+html.adaptive-v4-live body.av4-course-page .card,
+html.adaptive-v4-live body.av4-course-page .adaptive-lab,
+html.adaptive-v4-live body.av4-course-page .editor-shell,
+html.adaptive-v4-live body.av4-course-page .csai-code-editor{
+  box-shadow:none!important;
+}

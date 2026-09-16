@@ -1,40 +1,59 @@
-# CS & AI Mastery v5.18.2 — GitHub connection setup (browser-only workflow)
+# CS & AI Mastery — Windows PC installation
 
-You do not need VS Code. The platform works locally immediately; secure GitHub sync needs hosting.
+This build is portable and can be installed permanently on your Windows computer. ChatGPT is only used to deliver the ZIP; it is not required after installation.
 
-## 1. Put this folder in a GitHub repository
-Use GitHub.com in your browser: create a repository, choose **Add file → Upload files**, and upload everything in this bundle.
+## Recommended one-time installation
 
-## 2. Create a GitHub App
-On GitHub.com, open **Settings → Developer settings → GitHub Apps → New GitHub App**.
+1. Download the **entire ZIP**.
+2. Right-click it and choose **Extract All**.
+3. Open the extracted folder.
+4. Double-click `INSTALL_ON_MY_COMPUTER.bat`.
+5. Approve the installation if Windows asks.
 
-Use:
-- Homepage URL: your Netlify site URL
-- Callback URL: `https://YOUR-SITE.netlify.app/api/github/callback`
-- Request user authorization during installation: enabled
-- Repository permissions: **Contents: Read and write**
-- Metadata: Read-only (automatic)
-- Installation: Only on this account
+The installer copies the complete application to:
 
-After creating it, copy the **Client ID**, generate a **Client secret**, and note the app slug from its URL. Install the app on only the repository you want the platform to use.
+```text
+%LOCALAPPDATA%\CS-and-AI-Mastery
+```
 
-## 3. Deploy on Netlify
-In Netlify's browser dashboard choose **Add new site → Import an existing project → GitHub**, select the repository, and deploy. No build command is required.
+and creates a **CS & AI Mastery** shortcut on your Windows desktop.
 
-Add these environment variables in Netlify:
-- `SITE_URL` = your final Netlify site URL
-- `GITHUB_CLIENT_ID` = GitHub App Client ID
-- `GITHUB_CLIENT_SECRET` = GitHub App Client secret
-- `GITHUB_APP_SLUG` = the app slug
-- `SESSION_SECRET` = a long random value (at least 32 characters)
+After that, launch the app from the desktop shortcut. You may delete the downloaded ZIP and extracted download copy; the installed Local AppData copy is independent.
 
-Redeploy after adding them.
+## Why browser "Save page as" does not work
 
-## 4. Connect
-Open the hosted platform, choose **Code Vault & GitHub Sync**, paste the repository link, and press **Connect GitHub**. Approve access once on GitHub. After that, the platform uses the default `main` branch and `cs-ai-mastery` folder unless you open Advanced settings and change them.
+CS & AI Mastery is not one HTML file. It uses local course pages, JavaScript, data, workers, and a local server. Saving only the page omits required files and bypasses the HTTP/security setup used by the interactive runners.
 
-## Security design
-- No GitHub password, token, client secret, or private key is stored in the HTML or localStorage.
-- The user token is encrypted into an HttpOnly, Secure cookie and is unavailable to page JavaScript.
-- The GitHub App can be installed on one selected repository with only Contents read/write.
-- Strong secret patterns are blocked before upload.
+## Node.js
+
+The local server requires Node.js 20+. `START_CSAI.bat` detects it automatically. If Node.js is missing, the launcher can offer to install the official Node.js LTS package using Windows `winget`.
+
+## GitHub
+
+GitHub publishing is optional. If needed, run `CONNECT_GITHUB.bat` once. Authentication is stored by GitHub CLI in your Windows account, not embedded in the app files.
+
+The website never silently chooses a repository. Open the **GitHub** page, connect your own account, then explicitly choose or add a repository you can write to.
+
+## Starting manually
+
+You can always run:
+
+```text
+START_CSAI.bat
+```
+
+The current launcher starts the server in the background, waits for `/__health`, and only then opens the browser. After it reports that the server is ready, you may close the launcher window. The server keeps running until you use `STOP_CSAI.bat`.
+
+The app runs at:
+
+```text
+http://127.0.0.1:5711/
+```
+
+Do not double-click `index.html` directly and do not use `file://`.
+
+## If the browser says 127.0.0.1 refused to connect
+
+Use the desktop **CS & AI Mastery** shortcut again. If the server cannot start, the launcher stays open with the error and writes `csai-server.log` so the problem can be diagnosed.
+
+Run `STOP_CSAI.bat` only when you intentionally want to stop the background study server.

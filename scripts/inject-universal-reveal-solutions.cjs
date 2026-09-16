@@ -4,7 +4,7 @@ const path=require('path');
 const dir=path.join(process.cwd(),'courses');
 if(!fs.existsSync(dir))throw new Error('courses directory is missing');
 
-const tag='<script src="/assets/universal-reveal-solutions.js?v=20260807-1"></script>';
+const tag='<script defer src="../assets/universal-reveal-solutions.js?v=20260822-v567"></script>';
 let count=0;
 
 for(const file of fs.readdirSync(dir).filter(name=>name.endsWith('.html'))){
@@ -17,5 +17,5 @@ for(const file of fs.readdirSync(dir).filter(name=>name.endsWith('.html'))){
   count++;
 }
 
-if(count!==54)throw new Error(`Expected 54 course pages, updated ${count}`);
+if(count!==62)throw new Error(`Expected 62 course pages, updated ${count}`);
 console.log(`Added universal Reveal solution controls to ${count} course pages.`);

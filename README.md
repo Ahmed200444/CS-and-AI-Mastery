@@ -1,52 +1,84 @@
 # CS & AI Mastery
 
-CS & AI Mastery is my AI-assisted personal learning platform for studying computer science and software engineering topics through lessons, examples, exercises, and projects.
+> **Windows installable build:** Extract the ZIP and run `INSTALL_ON_MY_COMPUTER.bat` once. It creates a permanent copy under `%LOCALAPPDATA%\CS-and-AI-Mastery` plus a desktop shortcut, avoiding OneDrive/Documents sync issues. After installation, ChatGPT is not required.
 
-The platform contains material for a wider learning roadmap, but the presence of a topic in the platform does **not** mean I have already studied or mastered it.
 
-## My current study progress
+CS & AI Mastery is an interactive learning platform for building practical computer science, software engineering, and AI skills. It is designed around learning a concept, seeing it work, practicing it, reviewing it later, and turning completed work into a clean GitHub portfolio.
 
-My completed studies so far focus on:
+## What the platform includes
+- 62 generated course pages across core CS, software engineering, and AI topics.
+- A dedicated **C++ Programming & DSA** mastery course: 54 lessons from C++ fundamentals through modern C++ and interview-grade data structures/algorithms.
+- Structured lessons with explanations, examples, review tools, exercises, and projects.
+- Guided practice scaffolding across every course, lesson, example, exercise, project/capstone, and knowledge check: it tells you what building blocks to use and what order to work in without giving you the finished solution.
+- Browser-based execution for supported Python, C++, JavaScript, SQL, and HTML learning activities.
+- Safe simulation and validation guidance for infrastructure topics that should not execute real system or cloud commands in a learning browser.
+- Practice and project workspaces with Run, Check/Submit, Reset, Reveal, and GitHub publishing tools where appropriate.
+- Review states and recurring mastery tools for returning to material later.
 
-- **C++** — studied through university coursework, including programming fundamentals and object-oriented programming.
-- **Python** — studied independently, including programming fundamentals, functions, collections, file handling, error handling, problem solving, and object-oriented programming.
-- **SQL** — studied independently, covering queries and relational data.
-- **Object-Oriented Programming (OOP)** — studied in C++ at university and practiced independently in Python, including classes, objects, methods, and state.
+## Learning tracks
+The repository covers foundations and internship-oriented topics including Python, SQL, Git, Linux, DSA, integrated Python OOP, software engineering practice, APIs/backend/web development, classical AI, machine learning, deep learning, transformers, LLMs, reinforcement learning and LLM post-training, RAG, AI agents with MCP, distributed AI training/inference, deployment, Docker, cloud concepts, and system design.
 
-I am continuing through the rest of the learning roadmap over time.
-
-## My code and portfolio work
-
-The `student-code/` directory is the important portfolio area of this repository. It contains practice exercises and projects I completed while studying.
+## GitHub portfolio publishing
+Course exercises, examples, and projects publish into deterministic folders under `student-code/`. Portfolio code paths are create-once so revisiting a lesson cannot silently overwrite an earlier submission or create duplicate update commits. A separate **Add a README** action documents an item only after its code exists, and README creation is duplicate-protected too.
 
 ```text
 student-code/
-  practice/    # completed practice exercises
-  examples/    # saved study examples
-  projects/    # completed projects
+  practice/<course>/<item>/
+    <item>.<ext>
+    README.md
+  examples/<course>/<item>/
+    example.<ext>
+    README.md
+  projects/<course>/<project>/
+    <project>.<ext>
+    README.md
 ```
 
-Each portfolio item can include its source code and a README explaining what it does, what concepts it practices, and how it can be run.
-
-## About the learning platform
-
-The surrounding learning platform was created with AI-assisted development and is used as my personal study environment. It provides structured lessons, examples, exercises, projects, review tools, and coding workspaces.
-
-The platform includes material for topics I plan to study later as well as topics I have already studied. For that reason, recruiters and visitors should use the **My current study progress** section above and my completed work under `student-code/` as the accurate representation of my current technical experience.
-
-## Current portfolio examples
-
-My completed work currently includes Python programming exercises, OOP practice, problem-solving exercises, and Python projects. My university coursework also includes C++ programming and OOP. I will continue adding work as I complete additional parts of the roadmap.
-
 ## Repository structure
+- `assets/` — shared browser UI, runners, editors, review systems, and learning tools.
+- `scripts/` — course generation, injection, audits, build-time repairs, and verification gates.
+- `netlify/functions/` — server-side GitHub OAuth/session and publishing endpoints.
+- `tests/` — repository contracts and final quality checks.
+- `student-code/` — completed practice and portfolio submissions.
+- `courses/` — generated during the production build and verified as a 62-course set.
 
-- `student-code/` — my completed study exercises and portfolio projects.
-- `assets/` — platform interface and learning-tool files.
-- `scripts/` — platform generation and verification tooling.
-- `netlify/functions/` — platform integration files.
-- `tests/` — platform quality and verification checks.
-- `courses/` — generated learning material.
+## Development and verification
+Requirements: Node.js 20 or newer.
+```bash
+npm ci
+npm test
+```
+The Netlify production build runs the course-generation pipeline and the repository's audits/verifiers. A GitHub Actions quality gate executes the same build command from `netlify.toml` on a complete checkout so generated-course failures are caught before merging quality upgrades.
 
-## Purpose
+## Security and safety
+GitHub access uses two secure backends: Netlify functions for an optional hosted deployment, and the included local Node/GitHub-CLI backend when using `START_SITE.bat`. Both flows keep credentials out of page JavaScript and apply CSRF/path/size/secret checks before publishing. Infrastructure-oriented examples are simulated or validated in the browser rather than executing real operating-system, network, Docker, cloud, or deployment commands.
 
-This repository is both a study workspace and a record of my progress. My goal is to learn concepts, practice them with code, build projects from what I have studied, and keep that completed work organized in a public portfolio.
+## Goal
+The goal is a platform that remains useful months later: understand the mental model, run or simulate the idea, inspect output, practice it, debug mistakes, review it, and keep strong completed work in a readable GitHub portfolio.
+
+## Local GitHub publishing (no Netlify required)
+
+For the local VS Code/Windows build, start the site with `START_SITE.bat`. GitHub publishing is handled by the included local Node server.
+
+One-time setup:
+
+```text
+CONNECT_GITHUB.bat
+```
+
+If GitHub CLI is not installed, the launcher shows the `winget` install command. Authentication is performed by GitHub CLI; CS & AI Mastery reads the credential at runtime and does not store the token in the project files.
+
+## Automatic fast Run / Check
+
+This build automatically prewarms the Python runtime on Python-heavy courses, the C++ runtime on C++ Programming & DSA, and the SQL runtime on SQL/Databases pages. The currently open Python source is also prepared in the background, and repeated import preparation is cached. This reduces the delay on the first Run/Check and keeps later runs fast without changing lesson, project, GitHub, README, or inline-input behavior.
+
+Python Run/Check also recovers automatically from abandoned `input()` prompts: starting another Python run cancels the stale run instead of leaving the platform locked. The inline terminal has a **Cancel** button, and simple `int(input(...))` / `float(input(...))` programs validate numeric input before submission. Plain `input()` still accepts normal text exactly like Python.
+
+
+Code workspaces support direct editing and automatic indentation across examples, exercises, assessments, and projects.
+
+## Reliable local startup
+
+The Windows launcher now starts the study server in the background, waits for the local health check to pass, and only then opens `http://127.0.0.1:5711/`. The launcher window may be closed after startup; the study server stays running. If startup fails, `csai-server.log` records the error. Use `STOP_CSAI.bat` to stop the background server.
+
+The installer and launcher can detect a local GitHub CLI sign-in, but no repository is selected automatically. Use the **GitHub** page to connect your own account and choose your own repository. GitHub credentials remain in GitHub CLI and are never copied into the project.

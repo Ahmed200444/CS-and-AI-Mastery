@@ -1,0 +1,1736 @@
+{
+  "schemaVersion": 2,
+  "purpose": "Exam-style requirement briefs for every course learning item; no finished solutions or answer keys are stored here.",
+  "id": "web-dev",
+  "title": "Full-Stack Web Integration",
+  "course": {
+    "title": "Course requirements — what you must be able to do",
+    "intro": "Treat Full-Stack Web Integration like exam preparation: the requirements below describe what you should be able to demonstrate. They do not give you solution code.",
+    "plainEnglishTitle": "In plain English",
+    "plainEnglish": [
+      "This course is training you to use Full-Stack Web Integration ideas on new problems, not just recognize code or answers you have already seen.",
+      "You should finish able to read a requirement, describe the behavior it needs in ordinary language, and then choose the code or method yourself."
+    ],
+    "focus": [
+      "building and updating the visible page structure",
+      "understanding what changes, what is checked, and what result should follow",
+      "sending information to another service and handling its response",
+      "learning from data and checking performance on unseen cases",
+      "handling invalid or failing cases safely"
+    ],
+    "tools": [
+      "HTML/CSS/JavaScript",
+      "DNS",
+      "HTTP request/response",
+      "client-server model",
+      "separation of concerns",
+      "client-side vs server-side"
+    ],
+    "requirements": [
+      "By the end of Full-Stack Web Integration, you must be able to use the course concepts in your own work rather than only recognize completed examples.",
+      "You must be able to explain the main course ideas as behaviors and decisions, then apply them to a new problem without being told the exact syntax or implementation pattern.",
+      "For each lesson, you must be able to state what the lesson is teaching and demonstrate the idea on a small new case.",
+      "For each example, you must be able to predict or determine its result, explain the important lines or commands, and reproduce the same idea with different values or data.",
+      "For each exercise, your submission must satisfy the behavior or answer requested by the exercise and you must be able to explain why it is correct.",
+      "For each project or capstone, the finished submission must satisfy every stated requirement and demonstrate the required normal and relevant edge/failure behavior.",
+      "For each knowledge check, you must be able to justify the selected answer using a course rule or concept instead of guessing."
+    ],
+    "steps": [
+      "By the end of Full-Stack Web Integration, you must be able to use the course concepts in your own work rather than only recognize completed examples.",
+      "You must be able to explain the main course ideas as behaviors and decisions, then apply them to a new problem without being told the exact syntax or implementation pattern.",
+      "For each lesson, you must be able to state what the lesson is teaching and demonstrate the idea on a small new case.",
+      "For each example, you must be able to predict or determine its result, explain the important lines or commands, and reproduce the same idea with different values or data.",
+      "For each exercise, your submission must satisfy the behavior or answer requested by the exercise and you must be able to explain why it is correct.",
+      "For each project or capstone, the finished submission must satisfy every stated requirement and demonstrate the required normal and relevant edge/failure behavior.",
+      "For each knowledge check, you must be able to justify the selected answer using a course rule or concept instead of guessing."
+    ],
+    "checkpoint": "You are ready to finish the course when you can meet these requirements with unfamiliar inputs or a new problem, not only repeat a memorized example.",
+    "question": "What real software, data, systems, or AI problems should Full-Stack Web Integration help you solve, and what would competent work in those situations look like?",
+    "why": "Full-Stack Web Integration belongs in the platform because its skills map to practical engineering work. Study each item for the decision or behavior it teaches, not merely to finish the lesson.",
+    "workScenario": "A user or product teammate reports a user-interface requirement related to “Full-Stack Web Integration”. You need to make the visible behavior correct without breaking the existing flow.",
+    "workTask": "When a future work ticket matches Full-Stack Web Integration, recognize what information you need, choose an appropriate approach, verify the result, and explain the trade-off or evidence.",
+    "engineerProcess": [
+      "Restate the request in plain English and define what success means before touching the implementation.",
+      "Reproduce the user flow and identify the exact visible state, input, browser/event state, or request that triggers the problem.",
+      "Choose the smallest clear approach that satisfies the requirement. Use the lesson concept because it fits the problem, not because it was the last thing you studied.",
+      "Make the change in a way another engineer could read, review, and maintain; avoid unrelated changes.",
+      "Verify the normal user flow, an error/empty/loading/edge state when relevant, and that nearby UI behavior did not regress.",
+      "Explain what changed, why you chose it, what you tested, and any trade-off, limitation, or follow-up the team should know."
+    ],
+    "acceptanceCriteria": [
+      "The requested user/service behavior works from input/request to visible or returned result.",
+      "A relevant invalid/error/empty/loading/failure case is handled clearly.",
+      "A nearby existing behavior is checked so the change does not create an obvious regression."
+    ]
+  },
+  "lessons": {
+    "wd-browser-server": {
+      "title": "How browsers and servers communicate",
+      "practice": {
+        "title": "Lesson requirements — what you must be able to do",
+        "intro": "Meet the requirements below for this lesson. Use the examples as evidence and practice, not as code to memorize or wording to copy.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "This lesson mainly trains you in these behaviors: understanding what changes, what is checked, and what result should follow; sending information to another service and handling its response; learning from data and checking performance on unseen cases.",
+          "After studying it, you should be able to describe the required behavior in ordinary language first, then decide how to express it in code yourself."
+        ],
+        "focus": [
+          "understanding what changes, what is checked, and what result should follow",
+          "sending information to another service and handling its response",
+          "learning from data and checking performance on unseen cases",
+          "building and updating the visible page structure"
+        ],
+        "tools": [
+          "DNS",
+          "HTTP request/response",
+          "client-server model",
+          "HTML/CSS/JavaScript"
+        ],
+        "requirements": [
+          "You must be able to demonstrate this behavior: understanding what changes, what is checked, and what result should follow.",
+          "You must be able to demonstrate this behavior: sending information to another service and handling its response.",
+          "You must be able to demonstrate this behavior: learning from data and checking performance on unseen cases.",
+          "You must be able to demonstrate this behavior: building and updating the visible page structure.",
+          "Given a small example from this lesson, you must be able to determine its output, result, state change, or effect before relying on the provided explanation.",
+          "You must be able to explain the important actions in the lesson examples in ordinary language instead of repeating variable names or code keywords.",
+          "You must be able to create or complete one new small case that uses the same lesson idea with different values, data, or conditions.",
+          "You must be able to identify at least one mistake, invalid case, limitation, or edge case that is relevant to this lesson."
+        ],
+        "steps": [
+          "You must be able to demonstrate this behavior: understanding what changes, what is checked, and what result should follow.",
+          "You must be able to demonstrate this behavior: sending information to another service and handling its response.",
+          "You must be able to demonstrate this behavior: learning from data and checking performance on unseen cases.",
+          "You must be able to demonstrate this behavior: building and updating the visible page structure.",
+          "Given a small example from this lesson, you must be able to determine its output, result, state change, or effect before relying on the provided explanation.",
+          "You must be able to explain the important actions in the lesson examples in ordinary language instead of repeating variable names or code keywords.",
+          "You must be able to create or complete one new small case that uses the same lesson idea with different values, data, or conditions.",
+          "You must be able to identify at least one mistake, invalid case, limitation, or edge case that is relevant to this lesson."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy the requirements using a fresh small example without copying the lesson example.",
+        "question": "When a user or service needs the behavior taught here, what should happen from input/request to visible or returned result, and how would you know it is correct?",
+        "why": "This lesson is here so you can recognize when its main idea is useful inside Full-Stack Web Integration, explain the reason for each major step, and apply the behavior to a new case instead of memorizing finished syntax.",
+        "workScenario": "A user or product teammate reports a user-interface requirement related to “How browsers and servers communicate”. You need to make the visible behavior correct without breaking the existing flow.",
+        "workTask": "Before looking for a finished answer, decide how you would diagnose or approach a ticket involving How browsers and servers communicate, what evidence you would inspect, and what “done” should mean.",
+        "engineerProcess": [
+          "Restate the request in plain English and define what success means before touching the implementation.",
+          "Reproduce the user flow and identify the exact visible state, input, browser/event state, or request that triggers the problem.",
+          "Choose the smallest clear approach that satisfies the requirement. Use the lesson concept because it fits the problem, not because it was the last thing you studied.",
+          "Make the change in a way another engineer could read, review, and maintain; avoid unrelated changes.",
+          "Verify the normal user flow, an error/empty/loading/edge state when relevant, and that nearby UI behavior did not regress.",
+          "Explain what changed, why you chose it, what you tested, and any trade-off, limitation, or follow-up the team should know."
+        ],
+        "acceptanceCriteria": [
+          "The requested user/service behavior works from input/request to visible or returned result.",
+          "A relevant invalid/error/empty/loading/failure case is handled clearly.",
+          "A nearby existing behavior is checked so the change does not create an obvious regression."
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example 1 requirements — what you must do",
+          "intro": "Treat this example like an exam trace-and-apply question. The goal is to prove that you understand what the example does and can transfer the idea to a new case.",
+          "plainEnglishTitle": "What this code means in plain English",
+          "plainEnglish": [
+            "Your job is to translate the example into ordinary behavior: how many times something happens, what condition changes the path, what gets skipped or stopped, and what result is eventually shown or returned.",
+            "Do not use the variable names or exact code keywords as the explanation; describe what they mean in the program instead."
+          ],
+          "focus": [
+            "understanding what changes, what is checked, and what result should follow",
+            "sending information to another service and handling its response",
+            "learning from data and checking performance on unseen cases",
+            "building and updating the visible page structure"
+          ],
+          "tools": [
+            "DNS",
+            "HTTP request/response",
+            "client-server model",
+            "HTML/CSS/JavaScript"
+          ],
+          "requirements": [
+            "Before checking the result, you must determine or predict what this example will output, return, change, create, query, or otherwise do.",
+            "You must identify the important behavior in the example — what repeats, what is checked, what changes, what may be skipped or stopped, and what result is produced — without simply repeating the code words.",
+            "You must be able to explain how the input, variables, data, state, or query result changes from the beginning of the example to the end.",
+            "Change at least one meaningful value, condition, input, collection, query condition, or configuration value and determine the new expected result before running or checking it.",
+            "Create a separate small example that demonstrates the same concept with different values or data; do not copy the original example line for line."
+          ],
+          "steps": [
+            "Before checking the result, you must determine or predict what this example will output, return, change, create, query, or otherwise do.",
+            "You must identify the important behavior in the example — what repeats, what is checked, what changes, what may be skipped or stopped, and what result is produced — without simply repeating the code words.",
+            "You must be able to explain how the input, variables, data, state, or query result changes from the beginning of the example to the end.",
+            "Change at least one meaningful value, condition, input, collection, query condition, or configuration value and determine the new expected result before running or checking it.",
+            "Create a separate small example that demonstrates the same concept with different values or data; do not copy the original example line for line."
+          ],
+          "checkpoint": "You understand the example when you can predict it, explain it, change it, and recreate the same idea with different data.",
+          "question": "What user or service behavior is needed, what should happen from input to output, and why does the approach shown below fit that behavior? What result would prove it worked?",
+          "why": "The example is not here just to show finished code. It is here to make the reason for the lesson behavior visible: you should be able to explain what job each important step performs, what would change if that step were removed or altered, and how the final result proves the idea worked.",
+          "workScenario": "A user or product teammate reports a user-interface requirement related to “Example 1 requirements — what you must do”. You need to make the visible behavior correct without breaking the existing flow.",
+          "workTask": "Treat this as a small work ticket for Example 1 requirements — what you must do. Before reading the finished example, decide what the problem is asking, what approach you would try first, and how you would prove the result is correct.",
+          "engineerProcess": [
+            "Restate the request in plain English and define what success means before touching the implementation.",
+            "Reproduce the user flow and identify the exact visible state, input, browser/event state, or request that triggers the problem.",
+            "Choose the smallest clear approach that satisfies the requirement. Use the lesson concept because it fits the problem, not because it was the last thing you studied.",
+            "Make the change in a way another engineer could read, review, and maintain; avoid unrelated changes.",
+            "Verify the normal user flow, an error/empty/loading/edge state when relevant, and that nearby UI behavior did not regress.",
+            "Explain what changed, why you chose it, what you tested, and any trade-off, limitation, or follow-up the team should know."
+          ],
+          "acceptanceCriteria": [
+            "The requested user/service behavior works from input/request to visible or returned result.",
+            "A relevant invalid/error/empty/loading/failure case is handled clearly.",
+            "A nearby existing behavior is checked so the change does not create an obvious regression."
+          ]
+        }
+      ]
+    },
+    "wd-responsibilities": {
+      "title": "Frontend vs backend responsibilities",
+      "practice": {
+        "title": "Lesson requirements — what you must be able to do",
+        "intro": "Meet the requirements below for this lesson. Use the examples as evidence and practice, not as code to memorize or wording to copy.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "This lesson mainly trains you in these behaviors: understanding what changes, what is checked, and what result should follow; handling invalid or failing cases safely; building and updating the visible page structure.",
+          "After studying it, you should be able to describe the required behavior in ordinary language first, then decide how to express it in code yourself."
+        ],
+        "focus": [
+          "understanding what changes, what is checked, and what result should follow",
+          "handling invalid or failing cases safely",
+          "building and updating the visible page structure"
+        ],
+        "tools": [
+          "separation of concerns",
+          "client-side vs server-side",
+          "trust boundary",
+          "client-side validation",
+          "HTML/CSS/JavaScript"
+        ],
+        "requirements": [
+          "You must be able to demonstrate this behavior: understanding what changes, what is checked, and what result should follow.",
+          "You must be able to demonstrate this behavior: handling invalid or failing cases safely.",
+          "You must be able to demonstrate this behavior: building and updating the visible page structure.",
+          "Given a small example from this lesson, you must be able to determine its output, result, state change, or effect before relying on the provided explanation.",
+          "You must be able to explain the important actions in the lesson examples in ordinary language instead of repeating variable names or code keywords.",
+          "You must be able to create or complete one new small case that uses the same lesson idea with different values, data, or conditions.",
+          "You must be able to identify at least one mistake, invalid case, limitation, or edge case that is relevant to this lesson."
+        ],
+        "steps": [
+          "You must be able to demonstrate this behavior: understanding what changes, what is checked, and what result should follow.",
+          "You must be able to demonstrate this behavior: handling invalid or failing cases safely.",
+          "You must be able to demonstrate this behavior: building and updating the visible page structure.",
+          "Given a small example from this lesson, you must be able to determine its output, result, state change, or effect before relying on the provided explanation.",
+          "You must be able to explain the important actions in the lesson examples in ordinary language instead of repeating variable names or code keywords.",
+          "You must be able to create or complete one new small case that uses the same lesson idea with different values, data, or conditions.",
+          "You must be able to identify at least one mistake, invalid case, limitation, or edge case that is relevant to this lesson."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy the requirements using a fresh small example without copying the lesson example.",
+        "question": "When a user or service needs the behavior taught here, what should happen from input/request to visible or returned result, and how would you know it is correct?",
+        "why": "This lesson is here so you can recognize when its main idea is useful inside Full-Stack Web Integration, explain the reason for each major step, and apply the behavior to a new case instead of memorizing finished syntax.",
+        "workScenario": "A user or product teammate reports a user-interface requirement related to “Frontend vs backend responsibilities”. You need to make the visible behavior correct without breaking the existing flow.",
+        "workTask": "Before looking for a finished answer, decide how you would diagnose or approach a ticket involving Frontend vs backend responsibilities, what evidence you would inspect, and what “done” should mean.",
+        "engineerProcess": [
+          "Restate the request in plain English and define what success means before touching the implementation.",
+          "Reproduce the user flow and identify the exact visible state, input, browser/event state, or request that triggers the problem.",
+          "Choose the smallest clear approach that satisfies the requirement. Use the lesson concept because it fits the problem, not because it was the last thing you studied.",
+          "Make the change in a way another engineer could read, review, and maintain; avoid unrelated changes.",
+          "Verify the normal user flow, an error/empty/loading/edge state when relevant, and that nearby UI behavior did not regress.",
+          "Explain what changed, why you chose it, what you tested, and any trade-off, limitation, or follow-up the team should know."
+        ],
+        "acceptanceCriteria": [
+          "The requested user/service behavior works from input/request to visible or returned result.",
+          "A relevant invalid/error/empty/loading/failure case is handled clearly.",
+          "A nearby existing behavior is checked so the change does not create an obvious regression."
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example 1 requirements — what you must do",
+          "intro": "Treat this example like an exam trace-and-apply question. The goal is to prove that you understand what the example does and can transfer the idea to a new case.",
+          "plainEnglishTitle": "What this code means in plain English",
+          "plainEnglish": [
+            "Your job is to translate the example into ordinary behavior: how many times something happens, what condition changes the path, what gets skipped or stopped, and what result is eventually shown or returned.",
+            "Do not use the variable names or exact code keywords as the explanation; describe what they mean in the program instead."
+          ],
+          "focus": [
+            "understanding what changes, what is checked, and what result should follow",
+            "handling invalid or failing cases safely",
+            "building and updating the visible page structure"
+          ],
+          "tools": [
+            "separation of concerns",
+            "client-side vs server-side",
+            "trust boundary",
+            "client-side validation",
+            "HTML/CSS/JavaScript"
+          ],
+          "requirements": [
+            "Before checking the result, you must determine or predict what this example will output, return, change, create, query, or otherwise do.",
+            "You must identify the important behavior in the example — what repeats, what is checked, what changes, what may be skipped or stopped, and what result is produced — without simply repeating the code words.",
+            "You must be able to explain how the input, variables, data, state, or query result changes from the beginning of the example to the end.",
+            "Change at least one meaningful value, condition, input, collection, query condition, or configuration value and determine the new expected result before running or checking it.",
+            "Create a separate small example that demonstrates the same concept with different values or data; do not copy the original example line for line."
+          ],
+          "steps": [
+            "Before checking the result, you must determine or predict what this example will output, return, change, create, query, or otherwise do.",
+            "You must identify the important behavior in the example — what repeats, what is checked, what changes, what may be skipped or stopped, and what result is produced — without simply repeating the code words.",
+            "You must be able to explain how the input, variables, data, state, or query result changes from the beginning of the example to the end.",
+            "Change at least one meaningful value, condition, input, collection, query condition, or configuration value and determine the new expected result before running or checking it.",
+            "Create a separate small example that demonstrates the same concept with different values or data; do not copy the original example line for line."
+          ],
+          "checkpoint": "You understand the example when you can predict it, explain it, change it, and recreate the same idea with different data.",
+          "question": "What user or service behavior is needed, what should happen from input to output, and why does the approach shown below fit that behavior? What result would prove it worked?",
+          "why": "The example is not here just to show finished code. It is here to make the reason for the lesson behavior visible: you should be able to explain what job each important step performs, what would change if that step were removed or altered, and how the final result proves the idea worked.",
+          "workScenario": "A user or product teammate reports a user-interface requirement related to “Example 1 requirements — what you must do”. You need to make the visible behavior correct without breaking the existing flow.",
+          "workTask": "Treat this as a small work ticket for Example 1 requirements — what you must do. Before reading the finished example, decide what the problem is asking, what approach you would try first, and how you would prove the result is correct.",
+          "engineerProcess": [
+            "Restate the request in plain English and define what success means before touching the implementation.",
+            "Reproduce the user flow and identify the exact visible state, input, browser/event state, or request that triggers the problem.",
+            "Choose the smallest clear approach that satisfies the requirement. Use the lesson concept because it fits the problem, not because it was the last thing you studied.",
+            "Make the change in a way another engineer could read, review, and maintain; avoid unrelated changes.",
+            "Verify the normal user flow, an error/empty/loading/edge state when relevant, and that nearby UI behavior did not regress.",
+            "Explain what changed, why you chose it, what you tested, and any trade-off, limitation, or follow-up the team should know."
+          ],
+          "acceptanceCriteria": [
+            "The requested user/service behavior works from input/request to visible or returned result.",
+            "A relevant invalid/error/empty/loading/failure case is handled clearly.",
+            "A nearby existing behavior is checked so the change does not create an obvious regression."
+          ]
+        }
+      ]
+    },
+    "wd-lifecycle": {
+      "title": "The full-stack request lifecycle",
+      "practice": {
+        "title": "Lesson requirements — what you must be able to do",
+        "intro": "Meet the requirements below for this lesson. Use the examples as evidence and practice, not as code to memorize or wording to copy.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "This lesson mainly trains you in these behaviors: choosing what happens based on a condition; understanding what changes, what is checked, and what result should follow; checking normal behavior and important edge cases.",
+          "After studying it, you should be able to describe the required behavior in ordinary language first, then decide how to express it in code yourself."
+        ],
+        "focus": [
+          "choosing what happens based on a condition",
+          "understanding what changes, what is checked, and what result should follow",
+          "checking normal behavior and important edge cases",
+          "building and updating the visible page structure"
+        ],
+        "tools": [
+          "request lifecycle",
+          "middleware",
+          "full-stack debugging",
+          "HTML/CSS/JavaScript"
+        ],
+        "requirements": [
+          "You must be able to demonstrate this behavior: choosing what happens based on a condition.",
+          "You must be able to demonstrate this behavior: understanding what changes, what is checked, and what result should follow.",
+          "You must be able to demonstrate this behavior: checking normal behavior and important edge cases.",
+          "You must be able to demonstrate this behavior: building and updating the visible page structure.",
+          "Given a small example from this lesson, you must be able to determine its output, result, state change, or effect before relying on the provided explanation.",
+          "You must be able to explain the important actions in the lesson examples in ordinary language instead of repeating variable names or code keywords.",
+          "You must be able to create or complete one new small case that uses the same lesson idea with different values, data, or conditions.",
+          "You must be able to identify at least one mistake, invalid case, limitation, or edge case that is relevant to this lesson."
+        ],
+        "steps": [
+          "You must be able to demonstrate this behavior: choosing what happens based on a condition.",
+          "You must be able to demonstrate this behavior: understanding what changes, what is checked, and what result should follow.",
+          "You must be able to demonstrate this behavior: checking normal behavior and important edge cases.",
+          "You must be able to demonstrate this behavior: building and updating the visible page structure.",
+          "Given a small example from this lesson, you must be able to determine its output, result, state change, or effect before relying on the provided explanation.",
+          "You must be able to explain the important actions in the lesson examples in ordinary language instead of repeating variable names or code keywords.",
+          "You must be able to create or complete one new small case that uses the same lesson idea with different values, data, or conditions.",
+          "You must be able to identify at least one mistake, invalid case, limitation, or edge case that is relevant to this lesson."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy the requirements using a fresh small example without copying the lesson example.",
+        "question": "When a user or service needs the behavior taught here, what should happen from input/request to visible or returned result, and how would you know it is correct?",
+        "why": "This lesson is here so you can recognize when its main idea is useful inside Full-Stack Web Integration, explain the reason for each major step, and apply the behavior to a new case instead of memorizing finished syntax.",
+        "workScenario": "A user or product teammate reports a user-interface requirement related to “The full-stack request lifecycle”. You need to make the visible behavior correct without breaking the existing flow.",
+        "workTask": "Before looking for a finished answer, decide how you would diagnose or approach a ticket involving The full-stack request lifecycle, what evidence you would inspect, and what “done” should mean.",
+        "engineerProcess": [
+          "Restate the request in plain English and define what success means before touching the implementation.",
+          "Reproduce the user flow and identify the exact visible state, input, browser/event state, or request that triggers the problem.",
+          "Choose the smallest clear approach that satisfies the requirement. Use the lesson concept because it fits the problem, not because it was the last thing you studied.",
+          "Make the change in a way another engineer could read, review, and maintain; avoid unrelated changes.",
+          "Verify the normal user flow, an error/empty/loading/edge state when relevant, and that nearby UI behavior did not regress.",
+          "Explain what changed, why you chose it, what you tested, and any trade-off, limitation, or follow-up the team should know."
+        ],
+        "acceptanceCriteria": [
+          "The requested user/service behavior works from input/request to visible or returned result.",
+          "A relevant invalid/error/empty/loading/failure case is handled clearly.",
+          "A nearby existing behavior is checked so the change does not create an obvious regression."
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example 1 requirements — what you must do",
+          "intro": "Treat this example like an exam trace-and-apply question. The goal is to prove that you understand what the example does and can transfer the idea to a new case.",
+          "plainEnglishTitle": "What this code means in plain English",
+          "plainEnglish": [
+            "Your job is to translate the example into ordinary behavior: how many times something happens, what condition changes the path, what gets skipped or stopped, and what result is eventually shown or returned.",
+            "Do not use the variable names or exact code keywords as the explanation; describe what they mean in the program instead."
+          ],
+          "focus": [
+            "choosing what happens based on a condition",
+            "understanding what changes, what is checked, and what result should follow",
+            "checking normal behavior and important edge cases",
+            "building and updating the visible page structure"
+          ],
+          "tools": [
+            "request lifecycle",
+            "middleware",
+            "full-stack debugging",
+            "HTML/CSS/JavaScript"
+          ],
+          "requirements": [
+            "Before checking the result, you must determine or predict what this example will output, return, change, create, query, or otherwise do.",
+            "You must identify the important behavior in the example — what repeats, what is checked, what changes, what may be skipped or stopped, and what result is produced — without simply repeating the code words.",
+            "You must be able to explain how the input, variables, data, state, or query result changes from the beginning of the example to the end.",
+            "Change at least one meaningful value, condition, input, collection, query condition, or configuration value and determine the new expected result before running or checking it.",
+            "Create a separate small example that demonstrates the same concept with different values or data; do not copy the original example line for line."
+          ],
+          "steps": [
+            "Before checking the result, you must determine or predict what this example will output, return, change, create, query, or otherwise do.",
+            "You must identify the important behavior in the example — what repeats, what is checked, what changes, what may be skipped or stopped, and what result is produced — without simply repeating the code words.",
+            "You must be able to explain how the input, variables, data, state, or query result changes from the beginning of the example to the end.",
+            "Change at least one meaningful value, condition, input, collection, query condition, or configuration value and determine the new expected result before running or checking it.",
+            "Create a separate small example that demonstrates the same concept with different values or data; do not copy the original example line for line."
+          ],
+          "checkpoint": "You understand the example when you can predict it, explain it, change it, and recreate the same idea with different data.",
+          "question": "What user or service behavior is needed, what should happen from input to output, and why does the approach shown below fit that behavior? What result would prove it worked?",
+          "why": "The example is not here just to show finished code. It is here to make the reason for the lesson behavior visible: you should be able to explain what job each important step performs, what would change if that step were removed or altered, and how the final result proves the idea worked.",
+          "workScenario": "A user or product teammate reports a user-interface requirement related to “Example 1 requirements — what you must do”. You need to make the visible behavior correct without breaking the existing flow.",
+          "workTask": "Treat this as a small work ticket for Example 1 requirements — what you must do. Before reading the finished example, decide what the problem is asking, what approach you would try first, and how you would prove the result is correct.",
+          "engineerProcess": [
+            "Restate the request in plain English and define what success means before touching the implementation.",
+            "Reproduce the user flow and identify the exact visible state, input, browser/event state, or request that triggers the problem.",
+            "Choose the smallest clear approach that satisfies the requirement. Use the lesson concept because it fits the problem, not because it was the last thing you studied.",
+            "Make the change in a way another engineer could read, review, and maintain; avoid unrelated changes.",
+            "Verify the normal user flow, an error/empty/loading/edge state when relevant, and that nearby UI behavior did not regress.",
+            "Explain what changed, why you chose it, what you tested, and any trade-off, limitation, or follow-up the team should know."
+          ],
+          "acceptanceCriteria": [
+            "The requested user/service behavior works from input/request to visible or returned result.",
+            "A relevant invalid/error/empty/loading/failure case is handled clearly.",
+            "A nearby existing behavior is checked so the change does not create an obvious regression."
+          ]
+        }
+      ]
+    },
+    "wd-apis-dataflow": {
+      "title": "APIs and data flow between frontend and backend",
+      "practice": {
+        "title": "Lesson requirements — what you must be able to do",
+        "intro": "Meet the requirements below for this lesson. Use the examples as evidence and practice, not as code to memorize or wording to copy.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "This lesson mainly trains you in these behaviors: sending information to another service and handling its response; keeping structured information available between runs; understanding what changes, what is checked, and what result should follow.",
+          "After studying it, you should be able to describe the required behavior in ordinary language first, then decide how to express it in code yourself."
+        ],
+        "focus": [
+          "sending information to another service and handling its response",
+          "keeping structured information available between runs",
+          "understanding what changes, what is checked, and what result should follow",
+          "building and updating the visible page structure"
+        ],
+        "tools": [
+          "API contract",
+          "JSON shape",
+          "frontend/backend parallelism",
+          "HTML/CSS/JavaScript"
+        ],
+        "requirements": [
+          "You must be able to demonstrate this behavior: sending information to another service and handling its response.",
+          "You must be able to demonstrate this behavior: keeping structured information available between runs.",
+          "You must be able to demonstrate this behavior: understanding what changes, what is checked, and what result should follow.",
+          "You must be able to demonstrate this behavior: building and updating the visible page structure.",
+          "Given a small example from this lesson, you must be able to determine its output, result, state change, or effect before relying on the provided explanation.",
+          "You must be able to explain the important actions in the lesson examples in ordinary language instead of repeating variable names or code keywords.",
+          "You must be able to create or complete one new small case that uses the same lesson idea with different values, data, or conditions.",
+          "You must be able to identify at least one mistake, invalid case, limitation, or edge case that is relevant to this lesson."
+        ],
+        "steps": [
+          "You must be able to demonstrate this behavior: sending information to another service and handling its response.",
+          "You must be able to demonstrate this behavior: keeping structured information available between runs.",
+          "You must be able to demonstrate this behavior: understanding what changes, what is checked, and what result should follow.",
+          "You must be able to demonstrate this behavior: building and updating the visible page structure.",
+          "Given a small example from this lesson, you must be able to determine its output, result, state change, or effect before relying on the provided explanation.",
+          "You must be able to explain the important actions in the lesson examples in ordinary language instead of repeating variable names or code keywords.",
+          "You must be able to create or complete one new small case that uses the same lesson idea with different values, data, or conditions.",
+          "You must be able to identify at least one mistake, invalid case, limitation, or edge case that is relevant to this lesson."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy the requirements using a fresh small example without copying the lesson example.",
+        "question": "When a user or service needs the behavior taught here, what should happen from input/request to visible or returned result, and how would you know it is correct?",
+        "why": "This lesson is here so you can recognize when its main idea is useful inside Full-Stack Web Integration, explain the reason for each major step, and apply the behavior to a new case instead of memorizing finished syntax.",
+        "workScenario": "A user or product teammate reports a user-interface requirement related to “APIs and data flow between frontend and backend”. You need to make the visible behavior correct without breaking the existing flow.",
+        "workTask": "Before looking for a finished answer, decide how you would diagnose or approach a ticket involving APIs and data flow between frontend and backend, what evidence you would inspect, and what “done” should mean.",
+        "engineerProcess": [
+          "Restate the request in plain English and define what success means before touching the implementation.",
+          "Reproduce the user flow and identify the exact visible state, input, browser/event state, or request that triggers the problem.",
+          "Choose the smallest clear approach that satisfies the requirement. Use the lesson concept because it fits the problem, not because it was the last thing you studied.",
+          "Make the change in a way another engineer could read, review, and maintain; avoid unrelated changes.",
+          "Verify the normal user flow, an error/empty/loading/edge state when relevant, and that nearby UI behavior did not regress.",
+          "Explain what changed, why you chose it, what you tested, and any trade-off, limitation, or follow-up the team should know."
+        ],
+        "acceptanceCriteria": [
+          "The requested user/service behavior works from input/request to visible or returned result.",
+          "A relevant invalid/error/empty/loading/failure case is handled clearly.",
+          "A nearby existing behavior is checked so the change does not create an obvious regression."
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example 1 requirements — what you must do",
+          "intro": "Treat this example like an exam trace-and-apply question. The goal is to prove that you understand what the example does and can transfer the idea to a new case.",
+          "plainEnglishTitle": "What this code means in plain English",
+          "plainEnglish": [
+            "Your job is to translate the example into ordinary behavior: how many times something happens, what condition changes the path, what gets skipped or stopped, and what result is eventually shown or returned.",
+            "Do not use the variable names or exact code keywords as the explanation; describe what they mean in the program instead."
+          ],
+          "focus": [
+            "sending information to another service and handling its response",
+            "keeping structured information available between runs",
+            "understanding what changes, what is checked, and what result should follow",
+            "building and updating the visible page structure"
+          ],
+          "tools": [
+            "API contract",
+            "JSON shape",
+            "frontend/backend parallelism",
+            "HTML/CSS/JavaScript"
+          ],
+          "requirements": [
+            "Before checking the result, you must determine or predict what this example will output, return, change, create, query, or otherwise do.",
+            "You must identify the important behavior in the example — what repeats, what is checked, what changes, what may be skipped or stopped, and what result is produced — without simply repeating the code words.",
+            "You must be able to explain how the input, variables, data, state, or query result changes from the beginning of the example to the end.",
+            "Change at least one meaningful value, condition, input, collection, query condition, or configuration value and determine the new expected result before running or checking it.",
+            "Create a separate small example that demonstrates the same concept with different values or data; do not copy the original example line for line."
+          ],
+          "steps": [
+            "Before checking the result, you must determine or predict what this example will output, return, change, create, query, or otherwise do.",
+            "You must identify the important behavior in the example — what repeats, what is checked, what changes, what may be skipped or stopped, and what result is produced — without simply repeating the code words.",
+            "You must be able to explain how the input, variables, data, state, or query result changes from the beginning of the example to the end.",
+            "Change at least one meaningful value, condition, input, collection, query condition, or configuration value and determine the new expected result before running or checking it.",
+            "Create a separate small example that demonstrates the same concept with different values or data; do not copy the original example line for line."
+          ],
+          "checkpoint": "You understand the example when you can predict it, explain it, change it, and recreate the same idea with different data.",
+          "question": "What user or service behavior is needed, what should happen from input to output, and why does the approach shown below fit that behavior? What result would prove it worked?",
+          "why": "The example is not here just to show finished code. It is here to make the reason for the lesson behavior visible: you should be able to explain what job each important step performs, what would change if that step were removed or altered, and how the final result proves the idea worked.",
+          "workScenario": "A user or product teammate reports a user-interface requirement related to “Example 1 requirements — what you must do”. You need to make the visible behavior correct without breaking the existing flow.",
+          "workTask": "Treat this as a small work ticket for Example 1 requirements — what you must do. Before reading the finished example, decide what the problem is asking, what approach you would try first, and how you would prove the result is correct.",
+          "engineerProcess": [
+            "Restate the request in plain English and define what success means before touching the implementation.",
+            "Reproduce the user flow and identify the exact visible state, input, browser/event state, or request that triggers the problem.",
+            "Choose the smallest clear approach that satisfies the requirement. Use the lesson concept because it fits the problem, not because it was the last thing you studied.",
+            "Make the change in a way another engineer could read, review, and maintain; avoid unrelated changes.",
+            "Verify the normal user flow, an error/empty/loading/edge state when relevant, and that nearby UI behavior did not regress.",
+            "Explain what changed, why you chose it, what you tested, and any trade-off, limitation, or follow-up the team should know."
+          ],
+          "acceptanceCriteria": [
+            "The requested user/service behavior works from input/request to visible or returned result.",
+            "A relevant invalid/error/empty/loading/failure case is handled clearly.",
+            "A nearby existing behavior is checked so the change does not create an obvious regression."
+          ]
+        }
+      ]
+    },
+    "wd-deployment": {
+      "title": "Deployment basics for a full-stack app",
+      "practice": {
+        "title": "Lesson requirements — what you must be able to do",
+        "intro": "Meet the requirements below for this lesson. Use the examples as evidence and practice, not as code to memorize or wording to copy.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "This lesson mainly trains you in these behaviors: working with external resources without leaving them in a bad state; turning the required behavior into a working program; understanding what changes, what is checked, and what result should follow.",
+          "After studying it, you should be able to describe the required behavior in ordinary language first, then decide how to express it in code yourself."
+        ],
+        "focus": [
+          "working with external resources without leaving them in a bad state",
+          "turning the required behavior into a working program",
+          "understanding what changes, what is checked, and what result should follow",
+          "building and updating the visible page structure"
+        ],
+        "tools": [
+          "Dockerfile / container config",
+          "static hosting",
+          "environment config",
+          "frontend/backend deployment",
+          "HTML/CSS/JavaScript"
+        ],
+        "requirements": [
+          "You must be able to demonstrate this behavior: working with external resources without leaving them in a bad state.",
+          "You must be able to demonstrate this behavior: turning the required behavior into a working program.",
+          "You must be able to demonstrate this behavior: understanding what changes, what is checked, and what result should follow.",
+          "You must be able to demonstrate this behavior: building and updating the visible page structure.",
+          "Given a small example from this lesson, you must be able to determine its output, result, state change, or effect before relying on the provided explanation.",
+          "You must be able to explain the important actions in the lesson examples in ordinary language instead of repeating variable names or code keywords.",
+          "You must be able to create or complete one new small case that uses the same lesson idea with different values, data, or conditions.",
+          "You must be able to identify at least one mistake, invalid case, limitation, or edge case that is relevant to this lesson."
+        ],
+        "steps": [
+          "You must be able to demonstrate this behavior: working with external resources without leaving them in a bad state.",
+          "You must be able to demonstrate this behavior: turning the required behavior into a working program.",
+          "You must be able to demonstrate this behavior: understanding what changes, what is checked, and what result should follow.",
+          "You must be able to demonstrate this behavior: building and updating the visible page structure.",
+          "Given a small example from this lesson, you must be able to determine its output, result, state change, or effect before relying on the provided explanation.",
+          "You must be able to explain the important actions in the lesson examples in ordinary language instead of repeating variable names or code keywords.",
+          "You must be able to create or complete one new small case that uses the same lesson idea with different values, data, or conditions.",
+          "You must be able to identify at least one mistake, invalid case, limitation, or edge case that is relevant to this lesson."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy the requirements using a fresh small example without copying the lesson example.",
+        "question": "When a user or service needs the behavior taught here, what should happen from input/request to visible or returned result, and how would you know it is correct?",
+        "why": "This lesson is here so you can recognize when its main idea is useful inside Full-Stack Web Integration, explain the reason for each major step, and apply the behavior to a new case instead of memorizing finished syntax.",
+        "workScenario": "A user or product teammate reports a user-interface requirement related to “Deployment basics for a full-stack app”. You need to make the visible behavior correct without breaking the existing flow.",
+        "workTask": "Before looking for a finished answer, decide how you would diagnose or approach a ticket involving Deployment basics for a full-stack app, what evidence you would inspect, and what “done” should mean.",
+        "engineerProcess": [
+          "Restate the request in plain English and define what success means before touching the implementation.",
+          "Reproduce the user flow and identify the exact visible state, input, browser/event state, or request that triggers the problem.",
+          "Choose the smallest clear approach that satisfies the requirement. Use the lesson concept because it fits the problem, not because it was the last thing you studied.",
+          "Make the change in a way another engineer could read, review, and maintain; avoid unrelated changes.",
+          "Verify the normal user flow, an error/empty/loading/edge state when relevant, and that nearby UI behavior did not regress.",
+          "Explain what changed, why you chose it, what you tested, and any trade-off, limitation, or follow-up the team should know."
+        ],
+        "acceptanceCriteria": [
+          "The requested user/service behavior works from input/request to visible or returned result.",
+          "A relevant invalid/error/empty/loading/failure case is handled clearly.",
+          "A nearby existing behavior is checked so the change does not create an obvious regression."
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example 1 requirements — what you must do",
+          "intro": "Treat this example like an exam trace-and-apply question. The goal is to prove that you understand what the example does and can transfer the idea to a new case.",
+          "plainEnglishTitle": "What this code means in plain English",
+          "plainEnglish": [
+            "Your job is to translate the example into ordinary behavior: how many times something happens, what condition changes the path, what gets skipped or stopped, and what result is eventually shown or returned.",
+            "Do not use the variable names or exact code keywords as the explanation; describe what they mean in the program instead."
+          ],
+          "focus": [
+            "working with external resources without leaving them in a bad state"
+          ],
+          "tools": [
+            "Dockerfile / container config"
+          ],
+          "requirements": [
+            "Before checking the result, you must determine or predict what this example will output, return, change, create, query, or otherwise do.",
+            "You must identify the important behavior in the example — what repeats, what is checked, what changes, what may be skipped or stopped, and what result is produced — without simply repeating the code words.",
+            "You must be able to explain how the input, variables, data, state, or query result changes from the beginning of the example to the end.",
+            "Change at least one meaningful value, condition, input, collection, query condition, or configuration value and determine the new expected result before running or checking it.",
+            "Create a separate small example that demonstrates the same concept with different values or data; do not copy the original example line for line."
+          ],
+          "steps": [
+            "Before checking the result, you must determine or predict what this example will output, return, change, create, query, or otherwise do.",
+            "You must identify the important behavior in the example — what repeats, what is checked, what changes, what may be skipped or stopped, and what result is produced — without simply repeating the code words.",
+            "You must be able to explain how the input, variables, data, state, or query result changes from the beginning of the example to the end.",
+            "Change at least one meaningful value, condition, input, collection, query condition, or configuration value and determine the new expected result before running or checking it.",
+            "Create a separate small example that demonstrates the same concept with different values or data; do not copy the original example line for line."
+          ],
+          "checkpoint": "You understand the example when you can predict it, explain it, change it, and recreate the same idea with different data.",
+          "question": "What user or service behavior is needed, what should happen from input to output, and why does the approach shown below fit that behavior? What result would prove it worked?",
+          "why": "The example is not here just to show finished code. It is here to make the reason for the lesson behavior visible: you should be able to explain what job each important step performs, what would change if that step were removed or altered, and how the final result proves the idea worked.",
+          "workScenario": "A user or product teammate reports a user-interface requirement related to “Example 1 requirements — what you must do”. You need to make the visible behavior correct without breaking the existing flow.",
+          "workTask": "Treat this as a small work ticket for Example 1 requirements — what you must do. Before reading the finished example, decide what the problem is asking, what approach you would try first, and how you would prove the result is correct.",
+          "engineerProcess": [
+            "Restate the request in plain English and define what success means before touching the implementation.",
+            "Reproduce the user flow and identify the exact visible state, input, browser/event state, or request that triggers the problem.",
+            "Choose the smallest clear approach that satisfies the requirement. Use the lesson concept because it fits the problem, not because it was the last thing you studied.",
+            "Make the change in a way another engineer could read, review, and maintain; avoid unrelated changes.",
+            "Verify the normal user flow, an error/empty/loading/edge state when relevant, and that nearby UI behavior did not regress.",
+            "Explain what changed, why you chose it, what you tested, and any trade-off, limitation, or follow-up the team should know."
+          ],
+          "acceptanceCriteria": [
+            "The requested user/service behavior works from input/request to visible or returned result.",
+            "A relevant invalid/error/empty/loading/failure case is handled clearly.",
+            "A nearby existing behavior is checked so the change does not create an obvious regression."
+          ]
+        }
+      ]
+    },
+    "wd-architecture": {
+      "title": "Full-stack architecture, end to end",
+      "practice": {
+        "title": "Lesson requirements — what you must be able to do",
+        "intro": "Meet the requirements below for this lesson. Use the examples as evidence and practice, not as code to memorize or wording to copy.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "This lesson mainly trains you in these behaviors: understanding what changes, what is checked, and what result should follow; processing stored items in the required order; building and updating the visible page structure.",
+          "After studying it, you should be able to describe the required behavior in ordinary language first, then decide how to express it in code yourself."
+        ],
+        "focus": [
+          "understanding what changes, what is checked, and what result should follow",
+          "processing stored items in the required order",
+          "building and updating the visible page structure"
+        ],
+        "tools": [
+          "end-to-end architecture",
+          "independent scaling",
+          "full-stack system design",
+          "HTML/CSS/JavaScript"
+        ],
+        "requirements": [
+          "You must be able to demonstrate this behavior: understanding what changes, what is checked, and what result should follow.",
+          "You must be able to demonstrate this behavior: processing stored items in the required order.",
+          "You must be able to demonstrate this behavior: building and updating the visible page structure.",
+          "Given a small example from this lesson, you must be able to determine its output, result, state change, or effect before relying on the provided explanation.",
+          "You must be able to explain the important actions in the lesson examples in ordinary language instead of repeating variable names or code keywords.",
+          "You must be able to create or complete one new small case that uses the same lesson idea with different values, data, or conditions.",
+          "You must be able to identify at least one mistake, invalid case, limitation, or edge case that is relevant to this lesson."
+        ],
+        "steps": [
+          "You must be able to demonstrate this behavior: understanding what changes, what is checked, and what result should follow.",
+          "You must be able to demonstrate this behavior: processing stored items in the required order.",
+          "You must be able to demonstrate this behavior: building and updating the visible page structure.",
+          "Given a small example from this lesson, you must be able to determine its output, result, state change, or effect before relying on the provided explanation.",
+          "You must be able to explain the important actions in the lesson examples in ordinary language instead of repeating variable names or code keywords.",
+          "You must be able to create or complete one new small case that uses the same lesson idea with different values, data, or conditions.",
+          "You must be able to identify at least one mistake, invalid case, limitation, or edge case that is relevant to this lesson."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy the requirements using a fresh small example without copying the lesson example.",
+        "question": "When a user or service needs the behavior taught here, what should happen from input/request to visible or returned result, and how would you know it is correct?",
+        "why": "This lesson is here so you can recognize when its main idea is useful inside Full-Stack Web Integration, explain the reason for each major step, and apply the behavior to a new case instead of memorizing finished syntax.",
+        "workScenario": "A user or product teammate reports a user-interface requirement related to “Full-stack architecture, end to end”. You need to make the visible behavior correct without breaking the existing flow.",
+        "workTask": "Before looking for a finished answer, decide how you would diagnose or approach a ticket involving Full-stack architecture, end to end, what evidence you would inspect, and what “done” should mean.",
+        "engineerProcess": [
+          "Restate the request in plain English and define what success means before touching the implementation.",
+          "Reproduce the user flow and identify the exact visible state, input, browser/event state, or request that triggers the problem.",
+          "Choose the smallest clear approach that satisfies the requirement. Use the lesson concept because it fits the problem, not because it was the last thing you studied.",
+          "Make the change in a way another engineer could read, review, and maintain; avoid unrelated changes.",
+          "Verify the normal user flow, an error/empty/loading/edge state when relevant, and that nearby UI behavior did not regress.",
+          "Explain what changed, why you chose it, what you tested, and any trade-off, limitation, or follow-up the team should know."
+        ],
+        "acceptanceCriteria": [
+          "The requested user/service behavior works from input/request to visible or returned result.",
+          "A relevant invalid/error/empty/loading/failure case is handled clearly.",
+          "A nearby existing behavior is checked so the change does not create an obvious regression."
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example 1 requirements — what you must do",
+          "intro": "Treat this example like an exam trace-and-apply question. The goal is to prove that you understand what the example does and can transfer the idea to a new case.",
+          "plainEnglishTitle": "What this code means in plain English",
+          "plainEnglish": [
+            "Your job is to translate the example into ordinary behavior: how many times something happens, what condition changes the path, what gets skipped or stopped, and what result is eventually shown or returned.",
+            "Do not use the variable names or exact code keywords as the explanation; describe what they mean in the program instead."
+          ],
+          "focus": [
+            "understanding what changes, what is checked, and what result should follow",
+            "processing stored items in the required order",
+            "building and updating the visible page structure"
+          ],
+          "tools": [
+            "end-to-end architecture",
+            "independent scaling",
+            "full-stack system design",
+            "HTML/CSS/JavaScript"
+          ],
+          "requirements": [
+            "Before checking the result, you must determine or predict what this example will output, return, change, create, query, or otherwise do.",
+            "You must identify the important behavior in the example — what repeats, what is checked, what changes, what may be skipped or stopped, and what result is produced — without simply repeating the code words.",
+            "You must be able to explain how the input, variables, data, state, or query result changes from the beginning of the example to the end.",
+            "Change at least one meaningful value, condition, input, collection, query condition, or configuration value and determine the new expected result before running or checking it.",
+            "Create a separate small example that demonstrates the same concept with different values or data; do not copy the original example line for line."
+          ],
+          "steps": [
+            "Before checking the result, you must determine or predict what this example will output, return, change, create, query, or otherwise do.",
+            "You must identify the important behavior in the example — what repeats, what is checked, what changes, what may be skipped or stopped, and what result is produced — without simply repeating the code words.",
+            "You must be able to explain how the input, variables, data, state, or query result changes from the beginning of the example to the end.",
+            "Change at least one meaningful value, condition, input, collection, query condition, or configuration value and determine the new expected result before running or checking it.",
+            "Create a separate small example that demonstrates the same concept with different values or data; do not copy the original example line for line."
+          ],
+          "checkpoint": "You understand the example when you can predict it, explain it, change it, and recreate the same idea with different data.",
+          "question": "What user or service behavior is needed, what should happen from input to output, and why does the approach shown below fit that behavior? What result would prove it worked?",
+          "why": "The example is not here just to show finished code. It is here to make the reason for the lesson behavior visible: you should be able to explain what job each important step performs, what would change if that step were removed or altered, and how the final result proves the idea worked.",
+          "workScenario": "A user or product teammate reports a user-interface requirement related to “Example 1 requirements — what you must do”. You need to make the visible behavior correct without breaking the existing flow.",
+          "workTask": "Treat this as a small work ticket for Example 1 requirements — what you must do. Before reading the finished example, decide what the problem is asking, what approach you would try first, and how you would prove the result is correct.",
+          "engineerProcess": [
+            "Restate the request in plain English and define what success means before touching the implementation.",
+            "Reproduce the user flow and identify the exact visible state, input, browser/event state, or request that triggers the problem.",
+            "Choose the smallest clear approach that satisfies the requirement. Use the lesson concept because it fits the problem, not because it was the last thing you studied.",
+            "Make the change in a way another engineer could read, review, and maintain; avoid unrelated changes.",
+            "Verify the normal user flow, an error/empty/loading/edge state when relevant, and that nearby UI behavior did not regress.",
+            "Explain what changed, why you chose it, what you tested, and any trade-off, limitation, or follow-up the team should know."
+          ],
+          "acceptanceCriteria": [
+            "The requested user/service behavior works from input/request to visible or returned result.",
+            "A relevant invalid/error/empty/loading/failure case is handled clearly.",
+            "A nearby existing behavior is checked so the change does not create an obvious regression."
+          ]
+        }
+      ]
+    }
+  },
+  "exercises": [
+    {
+      "id": "exercise-0",
+      "title": "Style a card",
+      "practice": {
+        "title": "Exercise question — what your answer must do",
+        "intro": "Treat this as an exam-style task. The requirements describe the expected result; you decide how to write the answer or code.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Read the exercise as a behavior or result to produce. Describe that behavior in ordinary language before deciding how to implement it.",
+          "The guidance should help you understand the target result without naming the exact loop, condition, variable, function shape, query clause, command, or other code construct to copy."
+        ],
+        "focus": [
+          "asking stored data for the exact result you need",
+          "controlling layout and presentation clearly",
+          "understanding what changes, what is checked, and what result should follow"
+        ],
+        "tools": [
+          "CSS selector/rule",
+          "layout with Flexbox/Grid",
+          "spacing/sizing",
+          "responsive check",
+          "browser inspection"
+        ],
+        "requirements": [
+          "Build a centered card with padding, rounded corners, and a shadow using CSS.",
+          "The program, function, query, command, configuration, or other submission must produce the behavior or result requested by the exercise for a normal valid case.",
+          "Choose an implementation that produces the requested behavior; the guidance should not tell you the exact code construct to use unless the original exercise explicitly requires one.",
+          "The required input and output/result relationship described by the exercise must be preserved; do not add behavior that changes the requested result.",
+          "At least one relevant boundary, empty, duplicate, invalid, missing-data, or failure case must be checked when that type of case can occur.",
+          "You must be able to explain why your submission satisfies the exercise without relying on the provided hint or a copied solution."
+        ],
+        "steps": [
+          "Build a centered card with padding, rounded corners, and a shadow using CSS.",
+          "The program, function, query, command, configuration, or other submission must produce the behavior or result requested by the exercise for a normal valid case.",
+          "Choose an implementation that produces the requested behavior; the guidance should not tell you the exact code construct to use unless the original exercise explicitly requires one.",
+          "The required input and output/result relationship described by the exercise must be preserved; do not add behavior that changes the requested result.",
+          "At least one relevant boundary, empty, duplicate, invalid, missing-data, or failure case must be checked when that type of case can occur.",
+          "You must be able to explain why your submission satisfies the exercise without relying on the provided hint or a copied solution."
+        ],
+        "checkpoint": "You are finished when the requested behavior can be demonstrated and you can explain why your own answer is correct.",
+        "question": "Build a centered card with padding, rounded corners, and a shadow using CSS. Before writing the answer, identify the input or starting information, the exact result you must produce, any stated constraint, and one case that could make a careless solution fail.",
+        "why": "This exercise exists to make you turn a written requirement into your own correct solution and justify why it works. That requirement-to-solution reasoning is what you use in real engineering work, not just the final syntax.",
+        "workScenario": "A user or product teammate reports a user-interface requirement related to “Style a card”. You need to make the visible behavior correct without breaking the existing flow.",
+        "workTask": "Treat “Style a card” like a ticket assigned to you. Produce your own solution, then show the evidence that it meets the requested behavior and does not fail on the important edge case.",
+        "engineerProcess": [
+          "Restate the request in plain English and define what success means before touching the implementation.",
+          "Reproduce the user flow and identify the exact visible state, input, browser/event state, or request that triggers the problem.",
+          "Choose the smallest clear approach that satisfies the requirement. Use the lesson concept because it fits the problem, not because it was the last thing you studied.",
+          "Make the change in a way another engineer could read, review, and maintain; avoid unrelated changes.",
+          "Verify the normal user flow, an error/empty/loading/edge state when relevant, and that nearby UI behavior did not regress.",
+          "Explain what changed, why you chose it, what you tested, and any trade-off, limitation, or follow-up the team should know."
+        ],
+        "acceptanceCriteria": [
+          "The requested user/service behavior works from input/request to visible or returned result.",
+          "A relevant invalid/error/empty/loading/failure case is handled clearly.",
+          "A nearby existing behavior is checked so the change does not create an obvious regression."
+        ]
+      }
+    },
+    {
+      "id": "exercise-1",
+      "title": "Todo list (vanilla JS)",
+      "practice": {
+        "title": "Exercise question — what your answer must do",
+        "intro": "Treat this as an exam-style task. The requirements describe the expected result; you decide how to write the answer or code.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Read the exercise as a behavior or result to produce. Describe that behavior in ordinary language before deciding how to implement it.",
+          "The guidance should help you understand the target result without naming the exact loop, condition, variable, function shape, query clause, command, or other code construct to copy."
+        ],
+        "focus": [
+          "asking stored data for the exact result you need",
+          "working through a group of values",
+          "understanding what changes, what is checked, and what result should follow",
+          "building and updating the visible page structure",
+          "checking normal behavior and important edge cases",
+          "controlling layout and presentation clearly"
+        ],
+        "tools": [
+          "DOM selection/creation",
+          "event listener",
+          "state/data update",
+          "DOM render/update",
+          "browser test",
+          "semantic HTML",
+          "CSS layout"
+        ],
+        "requirements": [
+          "Add/remove items from a ordered collections of values, updating the DOM on button click.",
+          "The program, function, query, command, configuration, or other submission must produce the behavior or result requested by the exercise for a normal valid case.",
+          "Choose an implementation that produces the requested behavior; the guidance should not tell you the exact code construct to use unless the original exercise explicitly requires one.",
+          "The required input and output/result relationship described by the exercise must be preserved; do not add behavior that changes the requested result.",
+          "At least one relevant boundary, empty, duplicate, invalid, missing-data, or failure case must be checked when that type of case can occur.",
+          "You must be able to explain why your submission satisfies the exercise without relying on the provided hint or a copied solution."
+        ],
+        "steps": [
+          "Add/remove items from a ordered collections of values, updating the DOM on button click.",
+          "The program, function, query, command, configuration, or other submission must produce the behavior or result requested by the exercise for a normal valid case.",
+          "Choose an implementation that produces the requested behavior; the guidance should not tell you the exact code construct to use unless the original exercise explicitly requires one.",
+          "The required input and output/result relationship described by the exercise must be preserved; do not add behavior that changes the requested result.",
+          "At least one relevant boundary, empty, duplicate, invalid, missing-data, or failure case must be checked when that type of case can occur.",
+          "You must be able to explain why your submission satisfies the exercise without relying on the provided hint or a copied solution."
+        ],
+        "checkpoint": "You are finished when the requested behavior can be demonstrated and you can explain why your own answer is correct.",
+        "question": "Add/remove items from a ordered collections of values, updating the DOM on button click. Before writing the answer, identify the input or starting information, the exact result you must produce, any stated constraint, and one case that could make a careless solution fail.",
+        "why": "This exercise exists to make you turn a written requirement into your own correct solution and justify why it works. That requirement-to-solution reasoning is what you use in real engineering work, not just the final syntax.",
+        "workScenario": "A user or product teammate reports a user-interface requirement related to “Todo list (vanilla JS)”. You need to make the visible behavior correct without breaking the existing flow.",
+        "workTask": "Treat “Todo list (vanilla JS)” like a ticket assigned to you. Produce your own solution, then show the evidence that it meets the requested behavior and does not fail on the important edge case.",
+        "engineerProcess": [
+          "Restate the request in plain English and define what success means before touching the implementation.",
+          "Reproduce the user flow and identify the exact visible state, input, browser/event state, or request that triggers the problem.",
+          "Choose the smallest clear approach that satisfies the requirement. Use the lesson concept because it fits the problem, not because it was the last thing you studied.",
+          "Make the change in a way another engineer could read, review, and maintain; avoid unrelated changes.",
+          "Verify the normal user flow, an error/empty/loading/edge state when relevant, and that nearby UI behavior did not regress.",
+          "Explain what changed, why you chose it, what you tested, and any trade-off, limitation, or follow-up the team should know."
+        ],
+        "acceptanceCriteria": [
+          "The requested user/service behavior works from input/request to visible or returned result.",
+          "A relevant invalid/error/empty/loading/failure case is handled clearly.",
+          "A nearby existing behavior is checked so the change does not create an obvious regression."
+        ]
+      }
+    },
+    {
+      "id": "exercise-2",
+      "title": "Fetch & render",
+      "practice": {
+        "title": "Exercise question — what your answer must do",
+        "intro": "Treat this as an exam-style task. The requirements describe the expected result; you decide how to write the answer or code.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Read the exercise as a behavior or result to produce. Describe that behavior in ordinary language before deciding how to implement it.",
+          "The guidance should help you understand the target result without naming the exact loop, condition, variable, function shape, query clause, command, or other code construct to copy."
+        ],
+        "focus": [
+          "sending information to another service and handling its response",
+          "keeping structured information available between runs",
+          "understanding what changes, what is checked, and what result should follow",
+          "turning the required behavior into a working program",
+          "handling invalid or failing cases safely"
+        ],
+        "tools": [
+          "API contract",
+          "JSON shape",
+          "frontend/backend parallelism",
+          "fetch/HTTP request",
+          "async/await or promise flow",
+          "response parsing",
+          "loading/error path"
+        ],
+        "requirements": [
+          "Fetch JSON from a public API and render it into cards.",
+          "The program, function, query, command, configuration, or other submission must produce the behavior or result requested by the exercise for a normal valid case.",
+          "Choose an implementation that produces the requested behavior; the guidance should not tell you the exact code construct to use unless the original exercise explicitly requires one.",
+          "The required input and output/result relationship described by the exercise must be preserved; do not add behavior that changes the requested result.",
+          "At least one relevant boundary, empty, duplicate, invalid, missing-data, or failure case must be checked when that type of case can occur.",
+          "You must be able to explain why your submission satisfies the exercise without relying on the provided hint or a copied solution."
+        ],
+        "steps": [
+          "Fetch JSON from a public API and render it into cards.",
+          "The program, function, query, command, configuration, or other submission must produce the behavior or result requested by the exercise for a normal valid case.",
+          "Choose an implementation that produces the requested behavior; the guidance should not tell you the exact code construct to use unless the original exercise explicitly requires one.",
+          "The required input and output/result relationship described by the exercise must be preserved; do not add behavior that changes the requested result.",
+          "At least one relevant boundary, empty, duplicate, invalid, missing-data, or failure case must be checked when that type of case can occur.",
+          "You must be able to explain why your submission satisfies the exercise without relying on the provided hint or a copied solution."
+        ],
+        "checkpoint": "You are finished when the requested behavior can be demonstrated and you can explain why your own answer is correct.",
+        "question": "Fetch JSON from a public API and render it into cards. Before writing the answer, identify the input or starting information, the exact result you must produce, any stated constraint, and one case that could make a careless solution fail.",
+        "why": "This exercise exists to make you turn a written requirement into your own correct solution and justify why it works. That requirement-to-solution reasoning is what you use in real engineering work, not just the final syntax.",
+        "workScenario": "A user or product teammate reports a user-interface requirement related to “Fetch & render”. You need to make the visible behavior correct without breaking the existing flow.",
+        "workTask": "Treat “Fetch & render” like a ticket assigned to you. Produce your own solution, then show the evidence that it meets the requested behavior and does not fail on the important edge case.",
+        "engineerProcess": [
+          "Restate the request in plain English and define what success means before touching the implementation.",
+          "Reproduce the user flow and identify the exact visible state, input, browser/event state, or request that triggers the problem.",
+          "Choose the smallest clear approach that satisfies the requirement. Use the lesson concept because it fits the problem, not because it was the last thing you studied.",
+          "Make the change in a way another engineer could read, review, and maintain; avoid unrelated changes.",
+          "Verify the normal user flow, an error/empty/loading/edge state when relevant, and that nearby UI behavior did not regress.",
+          "Explain what changed, why you chose it, what you tested, and any trade-off, limitation, or follow-up the team should know."
+        ],
+        "acceptanceCriteria": [
+          "The requested user/service behavior works from input/request to visible or returned result.",
+          "A relevant invalid/error/empty/loading/failure case is handled clearly.",
+          "A nearby existing behavior is checked so the change does not create an obvious regression."
+        ]
+      }
+    },
+    {
+      "id": "wd_ex4",
+      "title": "Trace the full cycle",
+      "practice": {
+        "title": "Exercise question — what your answer must do",
+        "intro": "Treat this as an exam-style task. The requirements describe the expected result; you decide how to write the answer or code.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Read the exercise as a behavior or result to produce. Describe that behavior in ordinary language before deciding how to implement it.",
+          "The guidance should help you understand the target result without naming the exact loop, condition, variable, function shape, query clause, command, or other code construct to copy."
+        ],
+        "focus": [
+          "choosing what happens based on a condition",
+          "understanding what changes, what is checked, and what result should follow",
+          "checking normal behavior and important edge cases"
+        ],
+        "tools": [
+          "request lifecycle",
+          "middleware",
+          "full-stack debugging",
+          "reproduce first",
+          "small failing case",
+          "inspect state",
+          "change one cause at a time"
+        ],
+        "requirements": [
+          "Write out, step by step, everything that happens between typing a URL and seeing a rendered page.",
+          "Your response must directly answer the question or decision requested by the exercise rather than only define the topic.",
+          "Choose the course idea that matches the required behavior, but decide the exact syntax, command, query form, or implementation yourself.",
+          "Your explanation must connect the course concept to the specific facts, inputs, constraints, or scenario in the exercise.",
+          "Your answer must include enough reasoning, evidence, or a small example to show why the conclusion is correct.",
+          "If a reasonable counterexample, trade-off, invalid case, or edge case applies, your answer must address it."
+        ],
+        "steps": [
+          "Write out, step by step, everything that happens between typing a URL and seeing a rendered page.",
+          "Your response must directly answer the question or decision requested by the exercise rather than only define the topic.",
+          "Choose the course idea that matches the required behavior, but decide the exact syntax, command, query form, or implementation yourself.",
+          "Your explanation must connect the course concept to the specific facts, inputs, constraints, or scenario in the exercise.",
+          "Your answer must include enough reasoning, evidence, or a small example to show why the conclusion is correct.",
+          "If a reasonable counterexample, trade-off, invalid case, or edge case applies, your answer must address it."
+        ],
+        "checkpoint": "You are finished when the requested behavior can be demonstrated and you can explain why your own answer is correct.",
+        "question": "Write out, step by step, everything that happens between typing a URL and seeing a rendered page. Before writing the answer, identify the input or starting information, the exact result you must produce, any stated constraint, and one case that could make a careless solution fail.",
+        "why": "This exercise exists to make you turn a written requirement into your own correct solution and justify why it works. That requirement-to-solution reasoning is what you use in real engineering work, not just the final syntax.",
+        "workScenario": "A user or product teammate reports a user-interface requirement related to “Trace the full cycle”. You need to make the visible behavior correct without breaking the existing flow.",
+        "workTask": "Treat “Trace the full cycle” like a ticket assigned to you. Produce your own solution, then show the evidence that it meets the requested behavior and does not fail on the important edge case.",
+        "engineerProcess": [
+          "Restate the request in plain English and define what success means before touching the implementation.",
+          "Reproduce the user flow and identify the exact visible state, input, browser/event state, or request that triggers the problem.",
+          "Choose the smallest clear approach that satisfies the requirement. Use the lesson concept because it fits the problem, not because it was the last thing you studied.",
+          "Make the change in a way another engineer could read, review, and maintain; avoid unrelated changes.",
+          "Verify the normal user flow, an error/empty/loading/edge state when relevant, and that nearby UI behavior did not regress.",
+          "Explain what changed, why you chose it, what you tested, and any trade-off, limitation, or follow-up the team should know."
+        ],
+        "acceptanceCriteria": [
+          "The requested user/service behavior works from input/request to visible or returned result.",
+          "A relevant invalid/error/empty/loading/failure case is handled clearly.",
+          "A nearby existing behavior is checked so the change does not create an obvious regression."
+        ]
+      }
+    },
+    {
+      "id": "wd_ex5",
+      "title": "Where does this validation belong",
+      "practice": {
+        "title": "Exercise question — what your answer must do",
+        "intro": "Treat this as an exam-style task. The requirements describe the expected result; you decide how to write the answer or code.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Read the exercise as a behavior or result to produce. Describe that behavior in ordinary language before deciding how to implement it.",
+          "The guidance should help you understand the target result without naming the exact loop, condition, variable, function shape, query clause, command, or other code construct to copy."
+        ],
+        "focus": [
+          "sending information to another service and handling its response",
+          "keeping structured information available between runs",
+          "understanding what changes, what is checked, and what result should follow",
+          "working with external resources without leaving them in a bad state",
+          "handling invalid or failing cases safely"
+        ],
+        "tools": [
+          "API contract",
+          "JSON shape",
+          "frontend/backend parallelism",
+          "JSON parser/library",
+          "safe file handling",
+          "error handling",
+          "data validation"
+        ],
+        "requirements": [
+          "For 3 given rules (email format, password strength, unique username), say whether each belongs on the frontend, backend, or both — and why.",
+          "Your response must directly answer the question or decision requested by the exercise rather than only define the topic.",
+          "Choose the course idea that matches the required behavior, but decide the exact syntax, command, query form, or implementation yourself.",
+          "Your explanation must connect the course concept to the specific facts, inputs, constraints, or scenario in the exercise.",
+          "Your answer must include enough reasoning, evidence, or a small example to show why the conclusion is correct.",
+          "If a reasonable counterexample, trade-off, invalid case, or edge case applies, your answer must address it."
+        ],
+        "steps": [
+          "For 3 given rules (email format, password strength, unique username), say whether each belongs on the frontend, backend, or both — and why.",
+          "Your response must directly answer the question or decision requested by the exercise rather than only define the topic.",
+          "Choose the course idea that matches the required behavior, but decide the exact syntax, command, query form, or implementation yourself.",
+          "Your explanation must connect the course concept to the specific facts, inputs, constraints, or scenario in the exercise.",
+          "Your answer must include enough reasoning, evidence, or a small example to show why the conclusion is correct.",
+          "If a reasonable counterexample, trade-off, invalid case, or edge case applies, your answer must address it."
+        ],
+        "checkpoint": "You are finished when the requested behavior can be demonstrated and you can explain why your own answer is correct.",
+        "question": "For 3 given rules (email format, password strength, unique username), say whether each belongs on the frontend, backend, or both — and why. Before writing the answer, identify the input or starting information, the exact result you must produce, any stated constraint, and one case that could make a careless solution fail.",
+        "why": "This exercise exists to make you turn a written requirement into your own correct solution and justify why it works. That requirement-to-solution reasoning is what you use in real engineering work, not just the final syntax.",
+        "workScenario": "A user or product teammate reports a user-interface requirement related to “Where does this validation belong”. You need to make the visible behavior correct without breaking the existing flow.",
+        "workTask": "Treat “Where does this validation belong” like a ticket assigned to you. Produce your own solution, then show the evidence that it meets the requested behavior and does not fail on the important edge case.",
+        "engineerProcess": [
+          "Restate the request in plain English and define what success means before touching the implementation.",
+          "Reproduce the user flow and identify the exact visible state, input, browser/event state, or request that triggers the problem.",
+          "Choose the smallest clear approach that satisfies the requirement. Use the lesson concept because it fits the problem, not because it was the last thing you studied.",
+          "Make the change in a way another engineer could read, review, and maintain; avoid unrelated changes.",
+          "Verify the normal user flow, an error/empty/loading/edge state when relevant, and that nearby UI behavior did not regress.",
+          "Explain what changed, why you chose it, what you tested, and any trade-off, limitation, or follow-up the team should know."
+        ],
+        "acceptanceCriteria": [
+          "The requested user/service behavior works from input/request to visible or returned result.",
+          "A relevant invalid/error/empty/loading/failure case is handled clearly.",
+          "A nearby existing behavior is checked so the change does not create an obvious regression."
+        ]
+      }
+    },
+    {
+      "id": "wd_ex6",
+      "title": "Design an API contract",
+      "practice": {
+        "title": "Exercise question — what your answer must do",
+        "intro": "Treat this as an exam-style task. The requirements describe the expected result; you decide how to write the answer or code.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Read the exercise as a behavior or result to produce. Describe that behavior in ordinary language before deciding how to implement it.",
+          "The guidance should help you understand the target result without naming the exact loop, condition, variable, function shape, query clause, command, or other code construct to copy."
+        ],
+        "focus": [
+          "sending information to another service and handling its response",
+          "keeping structured information available between runs",
+          "understanding what changes, what is checked, and what result should follow",
+          "working with external resources without leaving them in a bad state",
+          "handling invalid or failing cases safely"
+        ],
+        "tools": [
+          "API contract",
+          "JSON shape",
+          "frontend/backend parallelism",
+          "JSON parser/library",
+          "safe file handling",
+          "error handling",
+          "data validation"
+        ],
+        "requirements": [
+          "Design the request/response shape for a 'create a comment' feature that both frontend and backend teams could build against independently.",
+          "Your response must directly answer the question or decision requested by the exercise rather than only define the topic.",
+          "Choose the course idea that matches the required behavior, but decide the exact syntax, command, query form, or implementation yourself.",
+          "Your explanation must connect the course concept to the specific facts, inputs, constraints, or scenario in the exercise.",
+          "Your answer must include enough reasoning, evidence, or a small example to show why the conclusion is correct.",
+          "If a reasonable counterexample, trade-off, invalid case, or edge case applies, your answer must address it."
+        ],
+        "steps": [
+          "Design the request/response shape for a 'create a comment' feature that both frontend and backend teams could build against independently.",
+          "Your response must directly answer the question or decision requested by the exercise rather than only define the topic.",
+          "Choose the course idea that matches the required behavior, but decide the exact syntax, command, query form, or implementation yourself.",
+          "Your explanation must connect the course concept to the specific facts, inputs, constraints, or scenario in the exercise.",
+          "Your answer must include enough reasoning, evidence, or a small example to show why the conclusion is correct.",
+          "If a reasonable counterexample, trade-off, invalid case, or edge case applies, your answer must address it."
+        ],
+        "checkpoint": "You are finished when the requested behavior can be demonstrated and you can explain why your own answer is correct.",
+        "question": "Design the request/response shape for a 'create a comment' feature that both frontend and backend teams could build against independently. Before writing the answer, identify the input or starting information, the exact result you must produce, any stated constraint, and one case that could make a careless solution fail.",
+        "why": "This exercise exists to make you turn a written requirement into your own correct solution and justify why it works. That requirement-to-solution reasoning is what you use in real engineering work, not just the final syntax.",
+        "workScenario": "A user or product teammate reports a user-interface requirement related to “Design an API contract”. You need to make the visible behavior correct without breaking the existing flow.",
+        "workTask": "Treat “Design an API contract” like a ticket assigned to you. Produce your own solution, then show the evidence that it meets the requested behavior and does not fail on the important edge case.",
+        "engineerProcess": [
+          "Restate the request in plain English and define what success means before touching the implementation.",
+          "Reproduce the user flow and identify the exact visible state, input, browser/event state, or request that triggers the problem.",
+          "Choose the smallest clear approach that satisfies the requirement. Use the lesson concept because it fits the problem, not because it was the last thing you studied.",
+          "Make the change in a way another engineer could read, review, and maintain; avoid unrelated changes.",
+          "Verify the normal user flow, an error/empty/loading/edge state when relevant, and that nearby UI behavior did not regress.",
+          "Explain what changed, why you chose it, what you tested, and any trade-off, limitation, or follow-up the team should know."
+        ],
+        "acceptanceCriteria": [
+          "The requested user/service behavior works from input/request to visible or returned result.",
+          "A relevant invalid/error/empty/loading/failure case is handled clearly.",
+          "A nearby existing behavior is checked so the change does not create an obvious regression."
+        ]
+      }
+    },
+    {
+      "id": "wd_ex7",
+      "title": "Diagnose the layer",
+      "practice": {
+        "title": "Exercise question — what your answer must do",
+        "intro": "Treat this as an exam-style task. The requirements describe the expected result; you decide how to write the answer or code.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Read the exercise as a behavior or result to produce. Describe that behavior in ordinary language before deciding how to implement it.",
+          "The guidance should help you understand the target result without naming the exact loop, condition, variable, function shape, query clause, command, or other code construct to copy."
+        ],
+        "focus": [
+          "understanding what changes, what is checked, and what result should follow",
+          "checking normal behavior and important edge cases"
+        ],
+        "tools": [
+          "reproduce first",
+          "small failing case",
+          "inspect state",
+          "change one cause at a time",
+          "regression test"
+        ],
+        "requirements": [
+          "Given a bug report ('the page is blank'), ordered collections of values the 4 layers you'd check in order and what you'd look for at each.",
+          "The program, function, query, command, configuration, or other submission must produce the behavior or result requested by the exercise for a normal valid case.",
+          "Choose an implementation that produces the requested behavior; the guidance should not tell you the exact code construct to use unless the original exercise explicitly requires one.",
+          "The required input and output/result relationship described by the exercise must be preserved; do not add behavior that changes the requested result.",
+          "At least one relevant boundary, empty, duplicate, invalid, missing-data, or failure case must be checked when that type of case can occur.",
+          "You must be able to explain why your submission satisfies the exercise without relying on the provided hint or a copied solution."
+        ],
+        "steps": [
+          "Given a bug report ('the page is blank'), ordered collections of values the 4 layers you'd check in order and what you'd look for at each.",
+          "The program, function, query, command, configuration, or other submission must produce the behavior or result requested by the exercise for a normal valid case.",
+          "Choose an implementation that produces the requested behavior; the guidance should not tell you the exact code construct to use unless the original exercise explicitly requires one.",
+          "The required input and output/result relationship described by the exercise must be preserved; do not add behavior that changes the requested result.",
+          "At least one relevant boundary, empty, duplicate, invalid, missing-data, or failure case must be checked when that type of case can occur.",
+          "You must be able to explain why your submission satisfies the exercise without relying on the provided hint or a copied solution."
+        ],
+        "checkpoint": "You are finished when the requested behavior can be demonstrated and you can explain why your own answer is correct.",
+        "question": "Given a bug report ('the page is blank'), ordered collections of values the 4 layers you'd check in order and what you'd look for at each. Before writing the answer, identify the input or starting information, the exact result you must produce, any stated constraint, and one case that could make a careless solution fail.",
+        "why": "This exercise exists to make you turn a written requirement into your own correct solution and justify why it works. That requirement-to-solution reasoning is what you use in real engineering work, not just the final syntax.",
+        "workScenario": "A user or product teammate reports a user-interface requirement related to “Diagnose the layer”. You need to make the visible behavior correct without breaking the existing flow.",
+        "workTask": "Treat “Diagnose the layer” like a ticket assigned to you. Produce your own solution, then show the evidence that it meets the requested behavior and does not fail on the important edge case.",
+        "engineerProcess": [
+          "Restate the request in plain English and define what success means before touching the implementation.",
+          "Reproduce the user flow and identify the exact visible state, input, browser/event state, or request that triggers the problem.",
+          "Choose the smallest clear approach that satisfies the requirement. Use the lesson concept because it fits the problem, not because it was the last thing you studied.",
+          "Make the change in a way another engineer could read, review, and maintain; avoid unrelated changes.",
+          "Verify the normal user flow, an error/empty/loading/edge state when relevant, and that nearby UI behavior did not regress.",
+          "Explain what changed, why you chose it, what you tested, and any trade-off, limitation, or follow-up the team should know."
+        ],
+        "acceptanceCriteria": [
+          "The requested user/service behavior works from input/request to visible or returned result.",
+          "A relevant invalid/error/empty/loading/failure case is handled clearly.",
+          "A nearby existing behavior is checked so the change does not create an obvious regression."
+        ]
+      }
+    },
+    {
+      "id": "wd_ex8",
+      "title": "Spot the deployment bug",
+      "practice": {
+        "title": "Exercise question — what your answer must do",
+        "intro": "Treat this as an exam-style task. The requirements describe the expected result; you decide how to write the answer or code.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Read the exercise as a behavior or result to produce. Describe that behavior in ordinary language before deciding how to implement it.",
+          "The guidance should help you understand the target result without naming the exact loop, condition, variable, function shape, query clause, command, or other code construct to copy."
+        ],
+        "focus": [
+          "turning the required behavior into a working program",
+          "understanding what changes, what is checked, and what result should follow",
+          "building and updating the visible page structure",
+          "controlling layout and presentation clearly"
+        ],
+        "tools": [
+          "static hosting",
+          "environment config",
+          "frontend/backend deployment",
+          "semantic HTML",
+          "CSS layout",
+          "JavaScript event handling",
+          "DOM updates"
+        ],
+        "requirements": [
+          "A frontend works locally but fails in production with network errors. What's the most likely cause, and how do you fix it?",
+          "The program, function, query, command, configuration, or other submission must produce the behavior or result requested by the exercise for a normal valid case.",
+          "Choose an implementation that produces the requested behavior; the guidance should not tell you the exact code construct to use unless the original exercise explicitly requires one.",
+          "The required input and output/result relationship described by the exercise must be preserved; do not add behavior that changes the requested result.",
+          "At least one relevant boundary, empty, duplicate, invalid, missing-data, or failure case must be checked when that type of case can occur.",
+          "You must be able to explain why your submission satisfies the exercise without relying on the provided hint or a copied solution."
+        ],
+        "steps": [
+          "A frontend works locally but fails in production with network errors. What's the most likely cause, and how do you fix it?",
+          "The program, function, query, command, configuration, or other submission must produce the behavior or result requested by the exercise for a normal valid case.",
+          "Choose an implementation that produces the requested behavior; the guidance should not tell you the exact code construct to use unless the original exercise explicitly requires one.",
+          "The required input and output/result relationship described by the exercise must be preserved; do not add behavior that changes the requested result.",
+          "At least one relevant boundary, empty, duplicate, invalid, missing-data, or failure case must be checked when that type of case can occur.",
+          "You must be able to explain why your submission satisfies the exercise without relying on the provided hint or a copied solution."
+        ],
+        "checkpoint": "You are finished when the requested behavior can be demonstrated and you can explain why your own answer is correct.",
+        "question": "A frontend works locally but fails in production with network errors. What's the most likely cause, and how do you fix it? Before writing the answer, identify the input or starting information, the exact result you must produce, any stated constraint, and one case that could make a careless solution fail.",
+        "why": "This exercise exists to make you turn a written requirement into your own correct solution and justify why it works. That requirement-to-solution reasoning is what you use in real engineering work, not just the final syntax.",
+        "workScenario": "A user or product teammate reports a user-interface requirement related to “Spot the deployment bug”. You need to make the visible behavior correct without breaking the existing flow.",
+        "workTask": "Treat “Spot the deployment bug” like a ticket assigned to you. Produce your own solution, then show the evidence that it meets the requested behavior and does not fail on the important edge case.",
+        "engineerProcess": [
+          "Restate the request in plain English and define what success means before touching the implementation.",
+          "Reproduce the user flow and identify the exact visible state, input, browser/event state, or request that triggers the problem.",
+          "Choose the smallest clear approach that satisfies the requirement. Use the lesson concept because it fits the problem, not because it was the last thing you studied.",
+          "Make the change in a way another engineer could read, review, and maintain; avoid unrelated changes.",
+          "Verify the normal user flow, an error/empty/loading/edge state when relevant, and that nearby UI behavior did not regress.",
+          "Explain what changed, why you chose it, what you tested, and any trade-off, limitation, or follow-up the team should know."
+        ],
+        "acceptanceCriteria": [
+          "The requested user/service behavior works from input/request to visible or returned result.",
+          "A relevant invalid/error/empty/loading/failure case is handled clearly.",
+          "A nearby existing behavior is checked so the change does not create an obvious regression."
+        ]
+      }
+    },
+    {
+      "id": "wd_ex9",
+      "title": "Sketch a full-stack architecture",
+      "practice": {
+        "title": "Exercise question — what your answer must do",
+        "intro": "Treat this as an exam-style task. The requirements describe the expected result; you decide how to write the answer or code.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Read the exercise as a behavior or result to produce. Describe that behavior in ordinary language before deciding how to implement it.",
+          "The guidance should help you understand the target result without naming the exact loop, condition, variable, function shape, query clause, command, or other code construct to copy."
+        ],
+        "focus": [
+          "understanding what changes, what is checked, and what result should follow",
+          "processing stored items in the required order",
+          "asking stored data for the exact result you need",
+          "learning from data and checking performance on unseen cases",
+          "checking normal behavior and important edge cases"
+        ],
+        "tools": [
+          "end-to-end architecture",
+          "independent scaling",
+          "full-stack system design",
+          "schema/tables when relevant",
+          "keys/constraints when relevant",
+          "query/operation",
+          "edge-case rows/data"
+        ],
+        "requirements": [
+          "Sketch (in words or a diagram) the full architecture for a simple blog: frontend, backend, database, and deployment, showing what scales independently.",
+          "Your response must directly answer the question or decision requested by the exercise rather than only define the topic.",
+          "Choose the course idea that matches the required behavior, but decide the exact syntax, command, query form, or implementation yourself.",
+          "Your explanation must connect the course concept to the specific facts, inputs, constraints, or scenario in the exercise.",
+          "Your answer must include enough reasoning, evidence, or a small example to show why the conclusion is correct.",
+          "If a reasonable counterexample, trade-off, invalid case, or edge case applies, your answer must address it."
+        ],
+        "steps": [
+          "Sketch (in words or a diagram) the full architecture for a simple blog: frontend, backend, database, and deployment, showing what scales independently.",
+          "Your response must directly answer the question or decision requested by the exercise rather than only define the topic.",
+          "Choose the course idea that matches the required behavior, but decide the exact syntax, command, query form, or implementation yourself.",
+          "Your explanation must connect the course concept to the specific facts, inputs, constraints, or scenario in the exercise.",
+          "Your answer must include enough reasoning, evidence, or a small example to show why the conclusion is correct.",
+          "If a reasonable counterexample, trade-off, invalid case, or edge case applies, your answer must address it."
+        ],
+        "checkpoint": "You are finished when the requested behavior can be demonstrated and you can explain why your own answer is correct.",
+        "question": "Sketch (in words or a diagram) the full architecture for a simple blog: frontend, backend, database, and deployment, showing what scales independently. Before writing the answer, identify the input or starting information, the exact result you must produce, any stated constraint, and one case that could make a careless solution fail.",
+        "why": "This exercise exists to make you turn a written requirement into your own correct solution and justify why it works. That requirement-to-solution reasoning is what you use in real engineering work, not just the final syntax.",
+        "workScenario": "A user or product teammate reports a user-interface requirement related to “Sketch a full-stack architecture”. You need to make the visible behavior correct without breaking the existing flow.",
+        "workTask": "Treat “Sketch a full-stack architecture” like a ticket assigned to you. Produce your own solution, then show the evidence that it meets the requested behavior and does not fail on the important edge case.",
+        "engineerProcess": [
+          "Restate the request in plain English and define what success means before touching the implementation.",
+          "Reproduce the user flow and identify the exact visible state, input, browser/event state, or request that triggers the problem.",
+          "Choose the smallest clear approach that satisfies the requirement. Use the lesson concept because it fits the problem, not because it was the last thing you studied.",
+          "Make the change in a way another engineer could read, review, and maintain; avoid unrelated changes.",
+          "Verify the normal user flow, an error/empty/loading/edge state when relevant, and that nearby UI behavior did not regress.",
+          "Explain what changed, why you chose it, what you tested, and any trade-off, limitation, or follow-up the team should know."
+        ],
+        "acceptanceCriteria": [
+          "The requested user/service behavior works from input/request to visible or returned result.",
+          "A relevant invalid/error/empty/loading/failure case is handled clearly.",
+          "A nearby existing behavior is checked so the change does not create an obvious regression."
+        ]
+      }
+    }
+  ],
+  "projects": [
+    {
+      "id": "web-dev-proj-1",
+      "title": "Personal portfolio page",
+      "practice": {
+        "title": "Project question — what your finished work must do",
+        "intro": "Build “Personal portfolio page” so that the finished web application satisfies every requirement below. The requirements describe the behavior the user should see; you decide how to implement it.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Your job is to build a finished “Personal portfolio page” that a user or reviewer can actually test against the behaviors listed below.",
+          "The brief tells you what the finished work must do from the user or system point of view. You decide the exact code structure, names, syntax, files, queries, commands, and implementation order yourself."
+        ],
+        "focus": [
+          "asking stored data for the exact result you need",
+          "controlling layout and presentation clearly",
+          "understanding what changes, what is checked, and what result should follow"
+        ],
+        "tools": [
+          "CSS selector/rule",
+          "layout with Flexbox/Grid",
+          "spacing/sizing",
+          "responsive check",
+          "browser inspection"
+        ],
+        "requirements": [
+          "A responsive single-page portfolio with sections, styled with Flexbox/Grid, mobile-friendly.",
+          "The required behavior must be reachable through the browser interface and must visibly update or respond as described by the task.",
+          "The interface must handle the main empty/invalid/error state that is relevant to this project instead of silently failing.",
+          "The finished project must be demonstrated in the browser with the required interactions working from start to finish."
+        ],
+        "steps": [
+          "A responsive single-page portfolio with sections, styled with Flexbox/Grid, mobile-friendly.",
+          "The required behavior must be reachable through the browser interface and must visibly update or respond as described by the task.",
+          "The interface must handle the main empty/invalid/error state that is relevant to this project instead of silently failing.",
+          "The finished project must be demonstrated in the browser with the required interactions working from start to finish."
+        ],
+        "checkpoint": "You are finished when every requirement can be demonstrated or checked and you can explain the code/design you wrote to meet it.",
+        "question": "A responsive single-page portfolio with sections, styled with Flexbox/Grid, mobile-friendly. What must go into the project, what must come out or change, what failure/edge case matters, and what concrete evidence will prove every requirement works?",
+        "why": "This project exists to practice turning several Full-Stack Web Integration requirements into one complete, testable piece of work. You should be able to explain why each major part exists and how it contributes to the finished behavior.",
+        "workScenario": "A user or product teammate reports a user-interface requirement related to “Personal portfolio page”. You need to make the visible behavior correct without breaking the existing flow.",
+        "workTask": "Treat “Personal portfolio page” like a small feature or engineering assignment. Deliver a complete result whose requirements can be demonstrated, tested, and explained in a code review.",
+        "engineerProcess": [
+          "Restate the request in plain English and define what success means before touching the implementation.",
+          "Reproduce the user flow and identify the exact visible state, input, browser/event state, or request that triggers the problem.",
+          "Choose the smallest clear approach that satisfies the requirement. Use the lesson concept because it fits the problem, not because it was the last thing you studied.",
+          "Make the change in a way another engineer could read, review, and maintain; avoid unrelated changes.",
+          "Verify the normal user flow, an error/empty/loading/edge state when relevant, and that nearby UI behavior did not regress.",
+          "Explain what changed, why you chose it, what you tested, and any trade-off, limitation, or follow-up the team should know."
+        ],
+        "acceptanceCriteria": [
+          "The requested user/service behavior works from input/request to visible or returned result.",
+          "A relevant invalid/error/empty/loading/failure case is handled clearly.",
+          "A nearby existing behavior is checked so the change does not create an obvious regression."
+        ]
+      }
+    },
+    {
+      "id": "web-dev-proj-2",
+      "title": "Weather app",
+      "practice": {
+        "title": "Project question — what your finished work must do",
+        "intro": "Build “Weather app” so that the finished web application satisfies every requirement below. The requirements describe the behavior the user should see; you decide how to implement it.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Your job is to build a finished “Weather app” that a user or reviewer can actually test against the behaviors listed below.",
+          "The brief tells you what the finished work must do from the user or system point of view. You decide the exact code structure, names, syntax, files, queries, commands, and implementation order yourself."
+        ],
+        "focus": [
+          "sending information to another service and handling its response",
+          "turning the required behavior into a working program",
+          "handling invalid or failing cases safely",
+          "understanding what changes, what is checked, and what result should follow"
+        ],
+        "tools": [
+          "fetch/HTTP request",
+          "async/await or promise flow",
+          "response parsing",
+          "loading/error path",
+          "render/use result",
+          "request/response model",
+          "input validation"
+        ],
+        "requirements": [
+          "Fetch live weather from an API by city and display it with clean UI and loading/error states.",
+          "The required behavior must be reachable through the browser interface and must visibly update or respond as described by the task.",
+          "The interface must handle the main empty/invalid/error state that is relevant to this project instead of silently failing.",
+          "The finished project must be demonstrated in the browser with the required interactions working from start to finish."
+        ],
+        "steps": [
+          "Fetch live weather from an API by city and display it with clean UI and loading/error states.",
+          "The required behavior must be reachable through the browser interface and must visibly update or respond as described by the task.",
+          "The interface must handle the main empty/invalid/error state that is relevant to this project instead of silently failing.",
+          "The finished project must be demonstrated in the browser with the required interactions working from start to finish."
+        ],
+        "checkpoint": "You are finished when every requirement can be demonstrated or checked and you can explain the code/design you wrote to meet it.",
+        "question": "Fetch live weather from an API by city and display it with clean UI and loading/error states. What must go into the project, what must come out or change, what failure/edge case matters, and what concrete evidence will prove every requirement works?",
+        "why": "This project exists to practice turning several Full-Stack Web Integration requirements into one complete, testable piece of work. You should be able to explain why each major part exists and how it contributes to the finished behavior.",
+        "workScenario": "A user or product teammate reports a user-interface requirement related to “Weather app”. You need to make the visible behavior correct without breaking the existing flow.",
+        "workTask": "Treat “Weather app” like a small feature or engineering assignment. Deliver a complete result whose requirements can be demonstrated, tested, and explained in a code review.",
+        "engineerProcess": [
+          "Restate the request in plain English and define what success means before touching the implementation.",
+          "Reproduce the user flow and identify the exact visible state, input, browser/event state, or request that triggers the problem.",
+          "Choose the smallest clear approach that satisfies the requirement. Use the lesson concept because it fits the problem, not because it was the last thing you studied.",
+          "Make the change in a way another engineer could read, review, and maintain; avoid unrelated changes.",
+          "Verify the normal user flow, an error/empty/loading/edge state when relevant, and that nearby UI behavior did not regress.",
+          "Explain what changed, why you chose it, what you tested, and any trade-off, limitation, or follow-up the team should know."
+        ],
+        "acceptanceCriteria": [
+          "The requested user/service behavior works from input/request to visible or returned result.",
+          "A relevant invalid/error/empty/loading/failure case is handled clearly.",
+          "A nearby existing behavior is checked so the change does not create an obvious regression."
+        ]
+      }
+    },
+    {
+      "id": "web-dev-proj-3",
+      "title": "React dashboard",
+      "practice": {
+        "title": "Project question — what your finished work must do",
+        "intro": "Build “React dashboard” so that the finished web application satisfies every requirement below. The requirements describe the behavior the user should see; you decide how to implement it.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Your job is to build a finished “React dashboard” that a user or reviewer can actually test against the behaviors listed below.",
+          "The brief tells you what the finished work must do from the user or system point of view. You decide the exact code structure, names, syntax, files, queries, commands, and implementation order yourself."
+        ],
+        "focus": [
+          "building and updating the visible page structure",
+          "understanding what changes, what is checked, and what result should follow",
+          "sending information to another service and handling its response"
+        ],
+        "tools": [
+          "components",
+          "props/state",
+          "event handlers",
+          "routing when required",
+          "data fetching/effects",
+          "render-state checks",
+          "request/response model"
+        ],
+        "requirements": [
+          "A multi-component React app with state, routing between views, and data fetched from an API.",
+          "The required behavior must be reachable through the browser interface and must visibly update or respond as described by the task.",
+          "The interface must handle the main empty/invalid/error state that is relevant to this project instead of silently failing.",
+          "The finished project must be demonstrated in the browser with the required interactions working from start to finish."
+        ],
+        "steps": [
+          "A multi-component React app with state, routing between views, and data fetched from an API.",
+          "The required behavior must be reachable through the browser interface and must visibly update or respond as described by the task.",
+          "The interface must handle the main empty/invalid/error state that is relevant to this project instead of silently failing.",
+          "The finished project must be demonstrated in the browser with the required interactions working from start to finish."
+        ],
+        "checkpoint": "You are finished when every requirement can be demonstrated or checked and you can explain the code/design you wrote to meet it.",
+        "question": "A multi-component React app with state, routing between views, and data fetched from an API. What must go into the project, what must come out or change, what failure/edge case matters, and what concrete evidence will prove every requirement works?",
+        "why": "This project exists to practice turning several Full-Stack Web Integration requirements into one complete, testable piece of work. You should be able to explain why each major part exists and how it contributes to the finished behavior.",
+        "workScenario": "A user or product teammate reports a user-interface requirement related to “React dashboard”. You need to make the visible behavior correct without breaking the existing flow.",
+        "workTask": "Treat “React dashboard” like a small feature or engineering assignment. Deliver a complete result whose requirements can be demonstrated, tested, and explained in a code review.",
+        "engineerProcess": [
+          "Restate the request in plain English and define what success means before touching the implementation.",
+          "Reproduce the user flow and identify the exact visible state, input, browser/event state, or request that triggers the problem.",
+          "Choose the smallest clear approach that satisfies the requirement. Use the lesson concept because it fits the problem, not because it was the last thing you studied.",
+          "Make the change in a way another engineer could read, review, and maintain; avoid unrelated changes.",
+          "Verify the normal user flow, an error/empty/loading/edge state when relevant, and that nearby UI behavior did not regress.",
+          "Explain what changed, why you chose it, what you tested, and any trade-off, limitation, or follow-up the team should know."
+        ],
+        "acceptanceCriteria": [
+          "The requested user/service behavior works from input/request to visible or returned result.",
+          "A relevant invalid/error/empty/loading/failure case is handled clearly.",
+          "A nearby existing behavior is checked so the change does not create an obvious regression."
+        ]
+      }
+    },
+    {
+      "id": "web-dev-proj-4",
+      "title": "Full-stack application",
+      "practice": {
+        "title": "Project question — what your finished work must do",
+        "intro": "Build “Full-stack application” so that the finished web application satisfies every requirement below. The requirements describe the behavior the user should see; you decide how to implement it.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Your job is to build a finished “Full-stack application” that a user or reviewer can actually test against the behaviors listed below.",
+          "The brief tells you what the finished work must do from the user or system point of view. You decide the exact code structure, names, syntax, files, queries, commands, and implementation order yourself."
+        ],
+        "focus": [
+          "sending information to another service and handling its response",
+          "handling invalid or failing cases safely",
+          "organizing reusable behavior around inputs and results",
+          "checking normal behavior and important edge cases",
+          "building and updating the visible page structure",
+          "controlling layout and presentation clearly"
+        ],
+        "tools": [
+          "request/response model",
+          "input validation",
+          "status/error handling",
+          "small endpoints/functions",
+          "tests",
+          "semantic HTML",
+          "CSS layout"
+        ],
+        "requirements": [
+          "Connect a frontend you build to a backend API you build (your own or from the Backend Development track), with real data flowing end to end.",
+          "The required behavior must be reachable through the browser interface and must visibly update or respond as described by the task.",
+          "The interface must handle the main empty/invalid/error state that is relevant to this project instead of silently failing.",
+          "The finished project must be demonstrated in the browser with the required interactions working from start to finish."
+        ],
+        "steps": [
+          "Connect a frontend you build to a backend API you build (your own or from the Backend Development track), with real data flowing end to end.",
+          "The required behavior must be reachable through the browser interface and must visibly update or respond as described by the task.",
+          "The interface must handle the main empty/invalid/error state that is relevant to this project instead of silently failing.",
+          "The finished project must be demonstrated in the browser with the required interactions working from start to finish."
+        ],
+        "checkpoint": "You are finished when every requirement can be demonstrated or checked and you can explain the code/design you wrote to meet it.",
+        "question": "Connect a frontend you build to a backend API you build (your own or from the Backend Development track), with real data flowing end to end. What must go into the project, what must come out or change, what failure/edge case matters, and what concrete evidence will prove every requirement works?",
+        "why": "This project exists to practice turning several Full-Stack Web Integration requirements into one complete, testable piece of work. You should be able to explain why each major part exists and how it contributes to the finished behavior.",
+        "workScenario": "A user or product teammate reports a user-interface requirement related to “Full-stack application”. You need to make the visible behavior correct without breaking the existing flow.",
+        "workTask": "Treat “Full-stack application” like a small feature or engineering assignment. Deliver a complete result whose requirements can be demonstrated, tested, and explained in a code review.",
+        "engineerProcess": [
+          "Restate the request in plain English and define what success means before touching the implementation.",
+          "Reproduce the user flow and identify the exact visible state, input, browser/event state, or request that triggers the problem.",
+          "Choose the smallest clear approach that satisfies the requirement. Use the lesson concept because it fits the problem, not because it was the last thing you studied.",
+          "Make the change in a way another engineer could read, review, and maintain; avoid unrelated changes.",
+          "Verify the normal user flow, an error/empty/loading/edge state when relevant, and that nearby UI behavior did not regress.",
+          "Explain what changed, why you chose it, what you tested, and any trade-off, limitation, or follow-up the team should know."
+        ],
+        "acceptanceCriteria": [
+          "The requested user/service behavior works from input/request to visible or returned result.",
+          "A relevant invalid/error/empty/loading/failure case is handled clearly.",
+          "A nearby existing behavior is checked so the change does not create an obvious regression."
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "id": "quiz-0",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must determine",
+        "intro": "Treat the question like a short exam item. The goal is not only to select an option but to know why it is correct.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Decide which answer best matches the behavior or rule taught in the related lesson, not which option merely contains familiar syntax words.",
+          "You should be able to explain the reason for your choice in ordinary language before you reveal the answer."
+        ],
+        "focus": [
+          "understanding what changes, what is checked, and what result should follow",
+          "sending information to another service and handling its response",
+          "learning from data and checking performance on unseen cases",
+          "building and updating the visible page structure"
+        ],
+        "tools": [
+          "DNS",
+          "HTTP request/response",
+          "client-server model",
+          "HTML/CSS/JavaScript"
+        ],
+        "requirements": [
+          "Determine which answer correctly responds to the knowledge-check question using the course material rather than familiarity or guessing.",
+          "Base your decision on the behavior, rule, or reasoning taught in the related lesson rather than matching an answer to familiar code words.",
+          "You must be able to state the rule, definition, behavior, or reasoning that makes your selected answer correct.",
+          "You must be able to explain why at least one competing option does not fit the question or scenario."
+        ],
+        "steps": [
+          "Determine which answer correctly responds to the knowledge-check question using the course material rather than familiarity or guessing.",
+          "Base your decision on the behavior, rule, or reasoning taught in the related lesson rather than matching an answer to familiar code words.",
+          "You must be able to state the rule, definition, behavior, or reasoning that makes your selected answer correct.",
+          "You must be able to explain why at least one competing option does not fit the question or scenario."
+        ],
+        "checkpoint": "You are ready to check the answer when you can justify your choice without seeing the answer key."
+      }
+    },
+    {
+      "id": "quiz-1",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must determine",
+        "intro": "Treat the question like a short exam item. The goal is not only to select an option but to know why it is correct.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Decide which answer best matches the behavior or rule taught in the related lesson, not which option merely contains familiar syntax words.",
+          "You should be able to explain the reason for your choice in ordinary language before you reveal the answer."
+        ],
+        "focus": [
+          "understanding what changes, what is checked, and what result should follow",
+          "sending information to another service and handling its response",
+          "learning from data and checking performance on unseen cases",
+          "building and updating the visible page structure"
+        ],
+        "tools": [
+          "DNS",
+          "HTTP request/response",
+          "client-server model",
+          "HTML/CSS/JavaScript"
+        ],
+        "requirements": [
+          "Determine which answer correctly responds to the knowledge-check question using the course material rather than familiarity or guessing.",
+          "Base your decision on the behavior, rule, or reasoning taught in the related lesson rather than matching an answer to familiar code words.",
+          "You must be able to state the rule, definition, behavior, or reasoning that makes your selected answer correct.",
+          "You must be able to explain why at least one competing option does not fit the question or scenario."
+        ],
+        "steps": [
+          "Determine which answer correctly responds to the knowledge-check question using the course material rather than familiarity or guessing.",
+          "Base your decision on the behavior, rule, or reasoning taught in the related lesson rather than matching an answer to familiar code words.",
+          "You must be able to state the rule, definition, behavior, or reasoning that makes your selected answer correct.",
+          "You must be able to explain why at least one competing option does not fit the question or scenario."
+        ],
+        "checkpoint": "You are ready to check the answer when you can justify your choice without seeing the answer key."
+      }
+    },
+    {
+      "id": "quiz-2",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must determine",
+        "intro": "Treat the question like a short exam item. The goal is not only to select an option but to know why it is correct.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Decide which answer best matches the behavior or rule taught in the related lesson, not which option merely contains familiar syntax words.",
+          "You should be able to explain the reason for your choice in ordinary language before you reveal the answer."
+        ],
+        "focus": [
+          "choosing what happens based on a condition",
+          "understanding what changes, what is checked, and what result should follow",
+          "checking normal behavior and important edge cases",
+          "building and updating the visible page structure"
+        ],
+        "tools": [
+          "request lifecycle",
+          "middleware",
+          "full-stack debugging",
+          "HTML/CSS/JavaScript"
+        ],
+        "requirements": [
+          "Determine which answer correctly responds to the knowledge-check question using the course material rather than familiarity or guessing.",
+          "Base your decision on the behavior, rule, or reasoning taught in the related lesson rather than matching an answer to familiar code words.",
+          "You must be able to state the rule, definition, behavior, or reasoning that makes your selected answer correct.",
+          "You must be able to explain why at least one competing option does not fit the question or scenario."
+        ],
+        "steps": [
+          "Determine which answer correctly responds to the knowledge-check question using the course material rather than familiarity or guessing.",
+          "Base your decision on the behavior, rule, or reasoning taught in the related lesson rather than matching an answer to familiar code words.",
+          "You must be able to state the rule, definition, behavior, or reasoning that makes your selected answer correct.",
+          "You must be able to explain why at least one competing option does not fit the question or scenario."
+        ],
+        "checkpoint": "You are ready to check the answer when you can justify your choice without seeing the answer key."
+      }
+    },
+    {
+      "id": "quiz-3",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must determine",
+        "intro": "Treat the question like a short exam item. The goal is not only to select an option but to know why it is correct.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Decide which answer best matches the behavior or rule taught in the related lesson, not which option merely contains familiar syntax words.",
+          "You should be able to explain the reason for your choice in ordinary language before you reveal the answer."
+        ],
+        "focus": [
+          "understanding what changes, what is checked, and what result should follow",
+          "handling invalid or failing cases safely",
+          "building and updating the visible page structure"
+        ],
+        "tools": [
+          "separation of concerns",
+          "client-side vs server-side",
+          "trust boundary",
+          "client-side validation",
+          "HTML/CSS/JavaScript"
+        ],
+        "requirements": [
+          "Determine which answer correctly responds to the knowledge-check question using the course material rather than familiarity or guessing.",
+          "Base your decision on the behavior, rule, or reasoning taught in the related lesson rather than matching an answer to familiar code words.",
+          "You must be able to state the rule, definition, behavior, or reasoning that makes your selected answer correct.",
+          "You must be able to explain why at least one competing option does not fit the question or scenario."
+        ],
+        "steps": [
+          "Determine which answer correctly responds to the knowledge-check question using the course material rather than familiarity or guessing.",
+          "Base your decision on the behavior, rule, or reasoning taught in the related lesson rather than matching an answer to familiar code words.",
+          "You must be able to state the rule, definition, behavior, or reasoning that makes your selected answer correct.",
+          "You must be able to explain why at least one competing option does not fit the question or scenario."
+        ],
+        "checkpoint": "You are ready to check the answer when you can justify your choice without seeing the answer key."
+      }
+    },
+    {
+      "id": "quiz-4",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must determine",
+        "intro": "Treat the question like a short exam item. The goal is not only to select an option but to know why it is correct.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Decide which answer best matches the behavior or rule taught in the related lesson, not which option merely contains familiar syntax words.",
+          "You should be able to explain the reason for your choice in ordinary language before you reveal the answer."
+        ],
+        "focus": [
+          "sending information to another service and handling its response",
+          "keeping structured information available between runs",
+          "understanding what changes, what is checked, and what result should follow",
+          "building and updating the visible page structure"
+        ],
+        "tools": [
+          "API contract",
+          "JSON shape",
+          "frontend/backend parallelism",
+          "HTML/CSS/JavaScript"
+        ],
+        "requirements": [
+          "Determine which answer correctly responds to the knowledge-check question using the course material rather than familiarity or guessing.",
+          "Base your decision on the behavior, rule, or reasoning taught in the related lesson rather than matching an answer to familiar code words.",
+          "You must be able to state the rule, definition, behavior, or reasoning that makes your selected answer correct.",
+          "You must be able to explain why at least one competing option does not fit the question or scenario."
+        ],
+        "steps": [
+          "Determine which answer correctly responds to the knowledge-check question using the course material rather than familiarity or guessing.",
+          "Base your decision on the behavior, rule, or reasoning taught in the related lesson rather than matching an answer to familiar code words.",
+          "You must be able to state the rule, definition, behavior, or reasoning that makes your selected answer correct.",
+          "You must be able to explain why at least one competing option does not fit the question or scenario."
+        ],
+        "checkpoint": "You are ready to check the answer when you can justify your choice without seeing the answer key."
+      }
+    }
+  ]
+}

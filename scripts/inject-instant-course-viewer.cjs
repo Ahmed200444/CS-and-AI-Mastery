@@ -39,14 +39,14 @@ while (i < raw.length) {
   offsets[course.id] = [start, end];
 }
 const ids = Object.keys(offsets);
-if (ids.length !== 54) throw new Error(`Expected 54 course offsets, found ${ids.length}`);
+if (ids.length !== 62) throw new Error(`Expected 62 course offsets, found ${ids.length}`);
 const indexId = 'csai-course-offset-index';
 html = html.replace(new RegExp(`<script\\b[^>]*\\bid=["']${indexId}["'][^>]*>[\\s\\S]*?<\\/script>\\s*`, 'gi'), '');
 const offsetTag = `<script id="${indexId}">window.__CSAI_COURSE_OFFSETS__=${JSON.stringify(offsets)};</script>`;
 html = html.replace(/<script[^>]*src=["']\/assets\/catalog-course-viewer\.js[^"']*["'][^>]*><\/script>\s*/gi, '');
 html = html.replace(/<script[^>]*src=["']\/assets\/instant-course-viewer\.js[^"']*["'][^>]*><\/script>\s*/gi, '');
 const themeMatch = html.match(/<script[^>]*src=["']\/assets\/course-theme-toggle\.js[^"']*["'][^>]*><\/script>/i);
-const tag = `${offsetTag}\n<script src="/assets/instant-course-viewer.js?v=20260807-1"></script>`;
+const tag = `${offsetTag}\n<script src="/assets/instant-course-viewer.js?v=20260822-v567"></script>`;
 if (themeMatch && themeMatch.index != null) html = html.slice(0, themeMatch.index) + tag + '\n' + html.slice(themeMatch.index);
 else {
   const body = html.toLowerCase().lastIndexOf('</body>');

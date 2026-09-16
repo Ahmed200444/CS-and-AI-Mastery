@@ -30,7 +30,7 @@ let inlineChecked=0,localAssetsChecked=0;
 for(const file of htmlFiles){
  const html=fs.readFileSync(file,'utf8'),name=rel(file),visible=stripVisible(html);
  for(const [label,re] of leakPatterns){const m=re.exec(visible);if(m){const start=Math.max(0,m.index-90),end=Math.min(visible.length,m.index+190);failures.push(`${name}: possible visible ${label}: ${visible.slice(start,end)}`);break;}}
- if(/C\+\+|Python\s*(?:&|\+|\/)\s*C\+\+|\bDual\s+(?:mode|language|practice)/i.test(visible))failures.push(`${name}: removed language is still visible`);
+ if(name!=='courses/cpp-dsa.html'&&/C\+\+|Python\s*(?:&|\+|\/)\s*C\+\+|\bDual\s+(?:mode|language|practice)/i.test(visible))failures.push(`${name}: unexpected legacy C++/dual language text is visible`);
  if(name!=='index.html'&&/cpp-runner-ui-worker|primary-language-mode|dual-single-editor-publish|course-language-mode-controller|lesson-language-variants/.test(html))failures.push(`${name}: removed language asset reference remains`);
  const scriptRe=/<script\b([^>]*)>([\s\S]*?)<\/script\s*>/gi;let sm;
  while((sm=scriptRe.exec(html))){
@@ -43,10 +43,16 @@ for(const file of htmlFiles){
   if(r.status!==0)failures.push(`${name}: inline JavaScript syntax error: ${(r.stderr||r.stdout||'').trim().slice(0,450)}`);
   inlineChecked++;
  }
- const refs=[...html.matchAll(/(?:src|href)=["'](\/assets\/[^"'?#]+)[^"']*["']/gi)].map(m=>m[1]);
- for(const ref of new Set(refs)){const p=path.join(root,ref.replace(/^\//,''));if(!fs.existsSync(p))failures.push(`${name}: missing local asset ${ref}`);else localAssetsChecked++;}
+ const assetHtml=html.replace(/<pre\b[\s\S]*?<\/pre\s*>/gi,' ').replace(/<code\b[\s\S]*?<\/code\s*>/gi,' ').replace(/<textarea\b[\s\S]*?<\/textarea\s*>/gi,' ');
+ const refs=[...assetHtml.matchAll(/(?:src|href)=["']([^"']+)["']/gi)].map(m=>m[1]).filter(ref=>ref&&!/^(?:https?:|data:|mailto:|tel:|javascript:|#)/i.test(ref));
+ for(const ref of new Set(refs)){
+   const clean=ref.split(/[?#]/)[0];if(!clean)continue;
+   if(clean.startsWith('/runtime/')){localAssetsChecked++;continue;} // virtual local runtime-cache route served by local-server.js
+   const p=clean.startsWith('/')?path.join(root,clean.replace(/^\//,'')):path.resolve(path.dirname(file),clean);
+   if(!fs.existsSync(p))failures.push(`${name}: missing local asset ${ref}`);else localAssetsChecked++;
+ }
 }
-if(htmlFiles.length!==58)failures.push(`expected index + 57 course pages = 58 HTML files, found ${htmlFiles.length}`);
+if(htmlFiles.length!==63)failures.push(`expected index + 62 course pages = 63 HTML files, found ${htmlFiles.length}`);
 const expectedAssets=['assets/adaptive-practice-layer.js','assets/project-readme-layer.js','assets/runner-performance-guard.js','assets/python-only-ui.js'];
 for(const a of expectedAssets)if(!fs.existsSync(path.join(root,a)))failures.push(`missing critical runtime ${a}`);
 const removedAssets=['assets/cpp-runner-ui-worker.js','assets/dual-single-editor-publish.js','assets/primary-language-mode.js','assets/course-language-mode-controller.js','assets/lesson-language-variants.js'];
@@ -59,4 +65,4 @@ for(const f of htmlFiles.slice(1)){
  if(!html.includes('python-only-ui.js'))failures.push(`${name}: Python-only UI guard missing`);
 }
 if(failures.length){console.error('Production integrity audit failed:');failures.slice(0,120).forEach(x=>console.error(' - '+x));if(failures.length>120)console.error(` - ... ${failures.length-120} more`);process.exit(1)}
-console.log(`Production integrity audit passed: ${htmlFiles.length} HTML files, ${inlineChecked} inline JS blocks syntax-checked, ${localAssetsChecked} local asset references resolved, no visible removed-language content, and Python-only runtime assets are intact.`);
+console.log(`Production integrity audit passed: ${htmlFiles.length} HTML files, ${inlineChecked} inline JS blocks syntax-checked, ${localAssetsChecked} local asset references resolved, dedicated C++ visibility is isolated to cpp-dsa and runtime assets are intact.`);

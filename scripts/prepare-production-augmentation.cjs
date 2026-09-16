@@ -27,4 +27,4 @@ const safe=`function injectBeforeBody(html,tags){const marker='<!-- csai-product
 source=source.slice(0,start)+safe+source.slice(end);
 fs.writeFileSync(augmentPath,source,'utf8');
 if(!source.includes("lastIndexOf('</body>')"))throw new Error('Safe final-body augmentation patch was not applied');
-console.log('Protected legacy coursedata and forced 57-course augmentation to the real final document body.');
+console.log('Protected legacy coursedata and forced 61-course augmentation to the real final document body.');

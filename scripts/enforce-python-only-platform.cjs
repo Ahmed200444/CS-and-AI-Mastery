@@ -36,6 +36,8 @@ function pyExample(lesson){
  return '# '+cleanText(title)+'\nvalues = [1, 2, 3, 4]\nresult = [value * 2 for value in values]\nprint("'+String(concept).replace(/["\\]/g,'')+'", result)';
 }
 function convertValue(value,ctx){
+ // FIX #3 -- the dedicated C++ course keeps its C++ lessons, examples, editors and metadata.
+ if(value&&typeof value==='object'&&!Array.isArray(value)&&value.id==='cpp-dsa')return value;
  if(Array.isArray(value))return value.map(v=>convertValue(v,ctx));
  if(!value||typeof value!=='object')return typeof value==='string'?cleanText(value):value;
  const out={};
@@ -61,9 +63,14 @@ function stripOldLanguageControls(html){
 function replaceCodeBlocks(html){return html.replace(/<(pre|code)(\b[^>]*)>([\s\S]*?)<\/\1>/gi,(all,tag,attrs,body)=>{const decoded=body.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#39;/g,"'");if(!looksCpp(decoded))return all;return `<${tag}${attrs}>${esc('# Python-focused example\nvalues = [1, 2, 3, 4]\nprint(sum(values))')}</${tag}>`;});}
 function replaceEditors(html){return html.replace(/<textarea(\b[^>]*)>([\s\S]*?)<\/textarea>/gi,(all,attrs,body)=>{const decoded=body.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#39;/g,"'");if(!looksCpp(decoded))return all;return `<textarea${attrs}>${esc('# Write your Python solution here.\n\nprint("Start your solution")\n')}</textarea>`;});}
 function injectRuntime(html){if(html.includes('python-only-ui.js'))return html;const tag='<script src="/assets/python-only-ui.js?v=20260811-2" defer></script>';return html.replace(/\s*<\/body>/i,'\n'+tag+'\n</body>');}
-function cleanHtml(html){
+function cleanHtml(html,preserveCpp){
  html=stripOldLanguageAssets(html);
  html=stripOldLanguageControls(html);
+ // FIX #3b -- the dedicated C++ course page keeps its C++ titles, examples, code blocks,
+ // editors and JSON islands. index.html embeds the whole catalog including that course, so a
+ // whole-document text rewrite there would also rewrite the C++ course title. For both,
+ // strip only the obsolete language runtime/controls and touch nothing else.
+ if(preserveCpp)return injectRuntime(html);
  html=replaceJsonScript(html,'csai-project-data',convertValue);
  html=replaceJsonScript(html,'csai-assessment-data',convertValue);
  html=replaceJsonScript(html,'course-page-meta',convertValue);
@@ -74,16 +81,17 @@ function cleanHtml(html){
  return injectRuntime(html);
 }
 
-let dataFiles=0,pageFiles=0;
+let dataFiles=0,pageFiles=0,cppPreserved=0;
 if(fs.existsSync(dataDir))for(const name of fs.readdirSync(dataDir).filter(x=>x.endsWith('.json'))){const p=path.join(dataDir,name);const data=JSON.parse(fs.readFileSync(p,'utf8'));fs.writeFileSync(p,JSON.stringify(convertValue(data),null,2)+'\n');dataFiles++;}
 if(fs.existsSync(catalogPath)){const data=JSON.parse(fs.readFileSync(catalogPath,'utf8'));fs.writeFileSync(catalogPath,JSON.stringify(convertValue(data),null,2)+'\n');}
-if(fs.existsSync(coursesDir))for(const name of fs.readdirSync(coursesDir).filter(x=>x.endsWith('.html'))){const p=path.join(coursesDir,name);fs.writeFileSync(p,cleanHtml(fs.readFileSync(p,'utf8')),'utf8');pageFiles++;}
+if(fs.existsSync(coursesDir))for(const name of fs.readdirSync(coursesDir).filter(x=>x.endsWith('.html'))){const p=path.join(coursesDir,name);const preserveCpp=name==='cpp-dsa.html';if(preserveCpp)cppPreserved++;fs.writeFileSync(p,cleanHtml(fs.readFileSync(p,'utf8'),preserveCpp),'utf8');pageFiles++;}
 if(fs.existsSync(indexPath)){
  let html=fs.readFileSync(indexPath,'utf8');
  html=replaceJsonScript(html,'coursedata',convertValue);
  html=replaceJsonScript(html,'csai-inline-catalog-data',convertValue);
- html=cleanHtml(html);
+ html=cleanHtml(html,true);
  fs.writeFileSync(indexPath,html,'utf8');
 }
-if(pageFiles!==57)throw new Error(`Python-only cleanup expected 57 course pages, found ${pageFiles}`);
+if(cppPreserved!==1)throw new Error(`Dedicated C++ course page was not preserved (found ${cppPreserved})`);
+if(pageFiles!==62)throw new Error(`Python-only cleanup expected 62 course pages, found ${pageFiles}`);
 console.log(`Python-only platform cleanup complete: ${pageFiles} course pages and ${dataFiles} course-data files normalized.`);

@@ -32,7 +32,7 @@ function normalizeProject(p,index,defaultLanguage){
 }
 
 const files=fs.readdirSync(coursesDir).filter(f=>f.endsWith('.html'));
-if(files.length!==54)throw new Error(`Expected 54 course pages, found ${files.length}`);
+if(files.length!==62)throw new Error(`Expected 62 course pages, found ${files.length}`);
 let updated=0,totalProjects=0;
 for(const file of files){
  const id=file.replace(/\.html$/,'');
@@ -41,12 +41,18 @@ for(const file of files){
  const course=JSON.parse(fs.readFileSync(dataPath,'utf8'));
  let raw=Array.isArray(course.projects)?course.projects.slice():[];
  if(course.capstone)raw.push(course.capstone);
- const defaultLanguage=lang(id);
- const projects=raw.map((p,i)=>normalizeProject(p||{},i,defaultLanguage));
+ // FIX #32 -- lang() is a hard-coded per-course table that has no entry for the dedicated C++
+ // course, so the C++/DSA project workspace defaulted to "text" even though every project on
+ // that page declares language "cpp". Derive the default from the projects instead.
+ const fallbackLanguage=lang(id);
+ const projects=raw.map((p,i)=>normalizeProject(p||{},i,fallbackLanguage));
+ const declaredLanguages=projects.map(x=>x&&x.language).filter(Boolean);
+ const uniformLanguage=declaredLanguages.length&&declaredLanguages.every(l=>l===declaredLanguages[0])?declaredLanguages[0]:null;
+ const defaultLanguage=uniformLanguage||fallbackLanguage;
  totalProjects+=projects.length;
  const payload={courseId:id,courseTitle:course.title||id,defaultLanguage,projects};
  const dataTag=`<script id="csai-project-data" type="application/json">${safe(payload)}</script>`;
- const assetTag='<script src="/assets/course-project-workspace.js?v=20260808-1"></script>';
+ const assetTag='<script defer src="../assets/course-project-workspace.js?v=20260822-v571"></script>';
  const full=path.join(coursesDir,file);
  let html=fs.readFileSync(full,'utf8');
  html=html.replace(/<script\b[^>]*\bid=["']csai-project-data["'][^>]*>[\s\S]*?<\/script>\s*/gi,'');
@@ -57,5 +63,5 @@ for(const file of files){
  fs.writeFileSync(full,html,'utf8');
  updated++;
 }
-if(updated!==54)throw new Error(`Expected to update 54 course pages, updated ${updated}`);
+if(updated!==62)throw new Error(`Expected to update 62 course pages, updated ${updated}`);
 console.log(`Injected project workspaces into ${updated} course pages (${totalProjects} projects/capstones total). Evergreen location guidance is enabled at each course header.`);

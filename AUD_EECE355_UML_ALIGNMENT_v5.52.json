@@ -1,0 +1,36 @@
+{
+  "release": "5.52",
+  "status": "PASS",
+  "course": "software-engineering-practice",
+  "lesson": "sep-04",
+  "lesson_title": "Design docs, ADRs & practical UML",
+  "added_key_ideas": [
+    "UML",
+    "class diagram",
+    "sequence diagram",
+    "component diagram",
+    "activity diagram",
+    "state diagram"
+  ],
+  "principle": "Only job-useful diagramming: choose the lightest artifact from the engineering question; no theory-heavy notation memorization.",
+  "counts": {
+    "courses": 62,
+    "lessons": 800,
+    "native_examples": 895,
+    "exercises": 794,
+    "projects_and_capstones": 271,
+    "knowledge_checks": 1585,
+    "normalized_key_ideas": 3386,
+    "base_concept_example_slots": 5003
+  },
+  "checks": {
+    "full_test_suite": true,
+    "deep_study_ready": true,
+    "static_example_audit": true,
+    "production_integrity": true,
+    "purpose_first": true,
+    "company_problem_solving": true,
+    "khda_additions_preserved": true,
+    "aud_uml_regression_contract": true
+  }
+}

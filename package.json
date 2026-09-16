@@ -1,9 +1,13 @@
 {
   "name": "cs-ai-mastery-github-sync",
   "private": true,
-  "version": "5.20.0",
+  "version": "5.74.0",
   "scripts": {
-    "test": "node tests/github-integration-contract.test.js && node tests/final-quality-contract.test.js"
+    "test": "node tests/github-integration-contract.test.js && node tests/local-github-contract.test.js && node tests/final-quality-contract.test.js && node tests/performance-navigation-contract.test.js && node tests/performance-explanation-v559-contract.test.js && node tests/performance-scroll-v560-contract.test.js && node tests/shared-python-runner-contract.test.js && node tests/interactive-input-contract.test.js && node tests/lesson-depth-and-example-quality-contract.test.js && node tests/concept-example-coverage-contract.test.js && node tests/course-native-example-contract.test.js && node tests/line-by-line-explanation-contract.test.js && node tests/meaningful-line-explanation-contract.test.js && node tests/universal-editable-code-contract.test.js && node tests/auto-indentation-contract.test.js && node tests/universal-code-explanation-coverage.test.js && node tests/automatic-run-acceleration-contract.test.js && node tests/maximum-runtime-cache-contract.test.js && node tests/pc-installer-speed-contract.test.js && node tests/cpp-dsa-contract.test.js && node tests/progressive-learning-layout-contract.test.js && node tests/calm-learning-experience-contract.test.js && node tests/vscode-diagnostics-contract.test.js && node tests/vscode-diagnostics-parser.test.js && node tests/python-runner-recovery-validation-contract.test.js && node tests/verify-progress-resume.cjs && node tests/course-continue-ui-contract.test.js && node tests/course-continue-behavior.test.js && node tests/launcher-reliability-contract.test.js && node tests/aud-eece355-uml-contract.test.js && node tests/github-page-contract.test.js && node tests/github-ui-polish-contract.test.js && node tests/concise-example-descriptions-v564-contract.test.js && node tests/code-grounded-explanations-v564-contract.test.js && node tests/concise-global-content-v564-contract.test.js && node tests/exam-style-problem-statements-v565-contract.test.js && node tests/concept-specific-definitions-v566-contract.test.js && node tests/syntax-used-v567-contract.test.js && node tests/try-it-yourself-v568-contract.test.js && node tests/example-diversity-v569-contract.test.js && node tests/cpp-readable-style-v571-contract.test.js && node tests/concept-definition-depth-v571-contract.test.js && node tests/learning-questions-v572-contract.test.js && node tests/general-project-audit-v573-contract.test.js && node tests/conceptual-question-runnable-v574-contract.test.js",
+    "start": "node local-server.js",
+    "github:login": "gh auth login --web --git-protocol https"
   },
-  "engines": {"node": ">=20"}
+  "engines": {
+    "node": ">=20"
+  }
 }

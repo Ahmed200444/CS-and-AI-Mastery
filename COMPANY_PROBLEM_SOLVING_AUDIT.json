@@ -1,0 +1,23 @@
+{
+  "release": "5.57",
+  "status": "PASS",
+  "counts": {
+    "courses": 62,
+    "lessons": 800,
+    "native_examples": 895,
+    "exercises": 794,
+    "projects": 271,
+    "knowledge_checks": 1585,
+    "key_ideas": 3424,
+    "base_example_slots": 5039,
+    "course_pages": 62
+  },
+  "checks": {
+    "company_ticket_guidance_on_every_course_lesson_native_example_exercise_project": true,
+    "generated_examples_receive_company_problem_prompt_layer": true,
+    "every_key_idea_still_has_professional_example_contract": true,
+    "problem_solving_uses_ticket_decomposition_workflow": true,
+    "embedded_course_json_is_html_safe_and_valid": true
+  },
+  "problems": []
+}

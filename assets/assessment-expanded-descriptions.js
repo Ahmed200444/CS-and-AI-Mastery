@@ -66,9 +66,8 @@ function renderSpec(spec){
 }
 
 function enhance(){
- addStyle();
- var tasks=Array.from(document.querySelectorAll('.assessment-stack .oa-task'));
- tasks.forEach(function(task,index){if(task.querySelector('.oa-spec'))return;var item=exercises[index]||{},promptBox=task.querySelector('.oa-prompt');if(!promptBox)return;var old=promptBox.querySelector('p');if(old)old.classList.add('oa-original-prompt');var spec=genericSpec(item,index,task);var wrapper=document.createElement('div');wrapper.innerHTML=renderSpec(spec);var hint=promptBox.querySelector('.oa-hint');if(hint)promptBox.insertBefore(wrapper.firstElementChild,hint);else promptBox.appendChild(wrapper.firstElementChild)})
+  // v5.64: prompts already state the task; do not duplicate them with extra task/result/requirements panels.
+  return;
 }
 
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',enhance);else enhance();

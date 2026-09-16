@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Docker — CS &amp; AI Mastery</title><script src="../assets/runtime-inline/courses-docker-001.js?v=20260822-v567"></script><style>
+:root{color-scheme:light;--bg:#f4f7fb;--panel:#fff;--text:#172231;--muted:#5d6c7c;--border:#d8e1ea;--pill:#e8f1f8;--pilltext:#174b72;--accent:#17649a;--code:#101827;--note:#fff7e7}
+html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#edf3f8;--muted:#c6d1da;--border:#344352;--pill:#223446;--pilltext:#b9dcf5;--accent:#4da3df;--code:#0b111b;--note:#2b2417}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:1100px;margin:auto;padding:18px 20px 110px}.top{position:sticky;top:0;z-index:4;display:flex;justify-content:space-between;gap:10px;padding:10px 0;background:var(--bg)}.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid #b8c7d6;border-radius:9px;padding:9px 13px;background:var(--panel);color:var(--text);font:inherit;font-weight:800;cursor:pointer}.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.hero,.card,.lesson{background:var(--panel);border:1px solid var(--border);border-radius:15px;color:var(--text)}.hero{padding:22px;margin:8px 0 16px}.kicker{font-size:.74rem;letter-spacing:.1em;font-weight:900;color:var(--accent)}.hero h1{margin:5px 0 8px;font-size:clamp(2rem,4vw,3.2rem);line-height:1.08}.muted{color:var(--muted)}.meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.pill{padding:4px 8px;border-radius:999px;background:var(--pill);color:var(--pilltext);font-size:.78rem;font-weight:800}.progress{height:10px;border-radius:999px;background:var(--border);overflow:hidden;margin:14px 0 5px}.progress span{display:block;height:100%;background:#16805b}.lessons{display:grid;gap:11px}.lesson{overflow:hidden}.lesson summary{display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;font-weight:850}.num{display:grid;place-items:center;min-width:34px;height:28px;border-radius:8px;background:var(--pill);color:var(--pilltext)}.title{flex:1}.check{display:flex;gap:6px;align-items:center;font-size:.82rem;font-weight:700}.body{padding:0 16px 18px}.body h3{margin:17px 0 7px;font-size:1rem}.body p,.body li{line-height:1.68}.code{white-space:pre-wrap;overflow:auto;padding:13px;border-radius:10px;background:var(--code);color:#f4f7fb;font:500 .86rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}.note{margin-top:12px;padding:12px;border-left:4px solid #d28b23;border-radius:8px;background:var(--note)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}.card{padding:17px}.card h2{margin:0 0 10px}.item{padding:12px;margin:9px 0;border-radius:10px;background:var(--bg);border:1px solid var(--border)}.answer{width:100%;min-height:90px;margin-top:8px;padding:10px;border:1px solid #aebdca;border-radius:8px;background:transparent;color:inherit;font:inherit}.theme{position:fixed;right:22px;bottom:22px;z-index:20;border:1px solid #b8c7d6;border-radius:999px;padding:10px 16px;background:var(--panel);color:var(--text);font:800 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.16);cursor:pointer}.empty{padding:17px;border:1px dashed var(--border);border-radius:10px}.hero-icon{margin-right:.25em}@media(max-width:720px){.wrap{padding:10px 10px 100px}.grid{grid-template-columns:1fr}.top .btn{flex:1}.lesson summary{flex-wrap:wrap;align-items:flex-start}.check{width:100%;padding-left:44px}.theme{right:14px;bottom:14px;padding:10px 14px}}
+</style>
+<script defer="" src="../assets/vscode-diagnostics.js?v=20260822-v567"></script>
+<link href="../assets/oa-assessment-fallback.css?v=20260822-v567" rel="stylesheet"/>
+<link href="../assets/oa-assessment-upgrade.css?v=20260822-v567" rel="stylesheet"/>
+<link crossorigin="" data-csai-local-speed-hint="" href="https://cdn.jsdelivr.net" rel="preconnect"/><style id="csai-expanded-lessons-style">
+.lesson-main-explanation{margin:12px 0 20px;padding:4px 0 18px;border-bottom:1px solid var(--border)}
+.lesson-main-explanation h3{margin-top:22px!important;margin-bottom:8px!important;font-size:1.02rem!important}.lesson-main-explanation h3:first-child{margin-top:8px!important;font-size:1.12rem!important}
+.lesson-main-explanation p,.lesson-main-explanation li{line-height:1.75!important}
+.deep-steps{margin:8px 0 4px;padding-left:24px}.deep-steps li{margin:7px 0}
+.deep-scenario,.deep-takeaway{margin:9px 0;padding:13px 14px;border:1px solid var(--border);border-radius:10px;background:var(--bg)}
+.deep-scenario{border-left:4px solid var(--accent)}
+.deep-takeaway{border-left:4px solid #16805b}
+.deep-scenario p,.deep-takeaway p{margin:0}
+.deep-check{margin-bottom:4px}.deep-check li{margin:6px 0}
+</style>
+<link rel="stylesheet" href="../assets/scroll-performance-v561.css?v=20260822-v567">
+<link rel="stylesheet" href="../assets/final-quality-layer.css?v=20260822-v567">
+<script src="../assets/smart-code-editor.js?v=20260822-v567" defer></script>
+<script src="../assets/portfolio-publish-controls.js?v=20260822-v567" defer></script>
+
+<!-- csai-unified-design:start -->
+<link rel="stylesheet" href="../assets/unified-learning-design.css?v=20260822-v567">
+<link rel="stylesheet" href="../assets/product-redesign-v2.css?v=20260822-v567">
+<link rel="stylesheet" href="../assets/adaptive-v4-live.css?v=20260822-v567">
+<link rel="stylesheet" href="../assets/hero-polish.css?v=20260822-v567">
+<script>document.documentElement.classList.add('csai-unified-design')</script>
+<script src="../assets/unified-learning-design.js?v=20260822-v567" defer></script>
+<script src="../assets/product-redesign-v2.js?v=20260822-v567" defer></script>
+<script src="../assets/adaptive-v4-live.js?v=20260822-v567" defer></script>
+<script src="../assets/hero-polish.js?v=20260822-v567" defer></script>
+<!-- csai-unified-design:end -->
+<link rel="stylesheet" href="/assets/oa-assessment-fallback.css?v=20260811-1">
+<link rel="stylesheet" href="/assets/oa-assessment-upgrade.css?v=20260811-1">
+</head><body>
+<main class="wrap"><div class="top"><a class="btn" href="../index.html#courses">← All courses</a><a class="btn primary" href="../index.html#hub">Home</a></div>
+<section class="hero"><div class="kicker">COURSE</div><h1><span class="hero-icon">🐳</span>Docker</h1><p class="muted">Containers, images, Dockerfiles, and Compose for reproducible environments.</p><div class="meta"><span class="pill">8 lessons</span><span class="pill">7 exercises</span><span class="pill">5 checkpoints</span><span class="pill">4 projects</span></div><div class="progress"><span data-progress-bar="" style="width:0%"></span></div><div class="muted" data-progress-status="">0 of 8 lessons complete</div></section>
+<section class="lessons"><details class="lesson" data-lesson="dk-why" open="">
+<summary><span class="num">01</span><span class="title">Why containers exist</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>State the problem containers solve</li><li>Distinguish a container from a VM</li><li>Explain how container changes the behavior, result, or engineering decision in a concrete example</li><li>Connect container with virtual machine and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>'It works on my machine' happens because your machine has different OS versions, library versions, and config than the server. A container packages your app WITH its exact dependencies into one portable unit that runs identically anywhere Docker is installed.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">container</span><span class="pill">virtual machine</span><span class="pill">portability</span><span class="pill">isolation</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># Without Docker: 'runs fine locally, breaks in prod'
+# because prod has Python 3.9 and your machine has 3.12
+
+# With Docker: the container HAS Python 3.9 baked in,
+# identical everywhere</pre>
+<div class="note"><b>Common mistake:</b> Thinking a container IS a lightweight VM — it isn't; it shares the host kernel, which is exactly why it's fast but also why it isn't as isolated as a real VM.</div>
+</div></details><details class="lesson" data-lesson="dk-image-container">
+<summary><span class="num">02</span><span class="title">Images vs containers</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Define image and container precisely</li><li>Explain the relationship between them</li><li>Apply the KHDA-benchmarked professional additions in a realistic company workflow: container registry.</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>An image is a read-only template — your app plus its dependencies, frozen as a set of layered files. A container is a running instance of that image, with its own writable layer on top.</p>
+</section>
+<div class="note khda-benchmark-note" data-khda-benchmark-note="true"><b>Professional benchmark addition: </b>These company-use concepts were kept after comparing the course with public syllabi from KHDA-listed Dubai training providers: container registry.</div><h3>Key concepts</h3><div class="meta"><span class="pill">image</span><span class="pill">container</span><span class="pill">layers</span><span class="pill">container registry</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">docker images        # list images (the templates)
+docker ps             # list running containers (instances)
+docker run python:3.11  # spins up a NEW container from the python:3.11 image</pre>
+<div class="note"><b>Common mistake:</b> Confusing 'stopping a container' with 'deleting the image' — stopping just pauses the running instance; the image (template) is untouched.</div>
+</div></details><details class="lesson" data-lesson="dk-cli">
+<summary><span class="num">03</span><span class="title">Basic docker CLI</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Run, list, stop, and inspect containers from the command line</li><li>Explain how docker run changes the behavior, result, or engineering decision in a concrete example</li><li>Connect docker run with docker ps and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A small set of commands covers most day-to-day container use: `docker run` starts a new container from an image, `docker ps` lists running containers, `docker stop` gracefully stops one, and `docker logs` shows its output — essential for debugging.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">docker run</span><span class="pill">docker ps</span><span class="pill">docker logs</span><span class="pill">port mapping</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">docker run -d --name myapp -p 8000:8000 myimage
+docker ps
+docker logs myapp
+docker stop myapp</pre>
+<div class="note"><b>Common mistake:</b> Forgetting `-p` (port mapping) and then wondering why the app 'isn't responding' — the container is running, but nothing outside it can reach the port.</div>
+</div></details><details class="lesson" data-lesson="dk-dockerfile">
+<summary><span class="num">04</span><span class="title">Writing a Dockerfile</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Write a Dockerfile that builds a working image</li><li>Explain each common instruction</li><li>Apply the KHDA-benchmarked professional additions in a realistic company workflow: HEALTHCHECK.</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A Dockerfile is a recipe for building an image: FROM picks a base image, COPY brings in your code, RUN executes setup commands (like installing dependencies) at build time, and CMD specifies what runs when the container starts.</p>
+</section>
+<div class="note khda-benchmark-note" data-khda-benchmark-note="true"><b>Professional benchmark addition: </b>These company-use concepts were kept after comparing the course with public syllabi from KHDA-listed Dubai training providers: HEALTHCHECK.</div><h3>Key concepts</h3><div class="meta"><span class="pill">FROM</span><span class="pill">COPY</span><span class="pill">RUN</span><span class="pill">CMD</span><span class="pill">WORKDIR</span><span class="pill">HEALTHCHECK</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">FROM python:3.11-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY . .
+CMD ["python", "app.py"]</pre>
+<div class="note"><b>Common mistake:</b> Copying all your code BEFORE installing dependencies — this busts the build cache on every code change, since Docker rebuilds every layer after the first one that changed.</div>
+</div></details><details class="lesson" data-lesson="dk-volumes">
+<summary><span class="num">05</span><span class="title">Volumes &amp; persisting data</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain why container data is ephemeral by default</li><li>Use a volume to persist data</li><li>Explain how volume changes the behavior, result, or engineering decision in a concrete example</li><li>Connect volume with ephemeral storage and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A container's writable layer disappears when the container is removed — anything your app wrote (a database file, uploaded images) is gone too, unless you use a volume: a directory managed by Docker (or mounted from the host) that survives container restarts and removal.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">volume</span><span class="pill">ephemeral storage</span><span class="pill">bind mount</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">docker run -v mydata:/app/data myimage
+# 'mydata' volume persists even if the container is deleted and recreated</pre>
+<div class="note"><b>Common mistake:</b> Storing a database's data files inside the container with no volume — a routine `docker rm` silently wipes the database.</div>
+</div></details><details class="lesson" data-lesson="dk-compose">
+<summary><span class="num">06</span><span class="title">Docker Compose for multi-container apps</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Read and write a docker-compose.yml for a multi-service app</li><li>Explain how docker-compose.yml changes the behavior, result, or engineering decision in a concrete example</li><li>Connect docker-compose.yml with services and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Real apps are rarely one container — a web app + a database + a cache is typical. Docker Compose lets you define all of them, plus how they connect, in one YAML file, and bring the whole stack up or down with a single command.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">docker-compose.yml</span><span class="pill">services</span><span class="pill">depends_on</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate"># docker-compose.yml
+services:
+  web:
+    build: .
+    ports: ["8000:8000"]
+    depends_on: [db]
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_PASSWORD: secret</pre>
+<div class="note"><b>Common mistake:</b> Assuming `depends_on` waits for the database to be READY (accepting connections) — it only waits for the container to START, which is not the same thing; apps often need their own retry.</div>
+</div></details><details class="lesson" data-lesson="docker-multistage-optimization">
+<summary><span class="num">07</span><span class="title">Multi-Stage Builds &amp; Image Optimization</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Use multi-stage builds to keep production images small and free of build-time dependencies</li><li>Explain how multi-stage build changes the behavior, result, or engineering decision in a concrete example</li><li>Connect multi-stage build with build stage and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A naive Dockerfile often ships the whole build toolchain (compilers, dev dependencies, source maps) inside the final image, even though none of that is needed to actually RUN the app -- this bloats image size and increases attack surface.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">multi-stage build</span><span class="pill">build stage</span><span class="pill">COPY --from</span><span class="pill">image optimization</span><span class="pill">slim base image</span><span class="pill">attack surface</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate"># Stage 1: build
+FROM node:20 AS build
+WORKDIR /app
+COPY package.json .
+RUN npm install
+COPY . .
+RUN npm run build
+
+# Stage 2: run -- only the compiled output ships, not node_modules or source
+FROM node:20-alpine
+WORKDIR /app
+COPY --from=build /app/dist ./dist
+CMD ["node", "dist/server.js"]</pre>
+<div class="note"><b>Common mistake:</b> Shipping the entire build stage (compilers, dev dependencies, source files) in the final image because it's simpler than setting up a second stage -- this can make images several times.</div>
+</div></details><details class="lesson" data-lesson="docker-networking-env">
+<summary><span class="num">08</span><span class="title">Container Networking &amp; Environment Configuration</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Configure containers with environment variables and understand how containers reach each other over Docker&#x27;s network</li><li>Explain how environment variable changes the behavior, result, or engineering decision in a concrete example</li><li>Connect environment variable with env-file and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Environment variables (passed via `docker run -e KEY=value` or an `--env-file`, or the `environment:` section in Compose) let the same image behave differently across environments -- a database URL, an API key, a feature flag -- without baking those values into the image itself, which also keeps secrets out of version control.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">environment variable</span><span class="pill">env-file</span><span class="pill">container networking</span><span class="pill">bridge network</span><span class="pill">service name resolution</span><span class="pill">localhost inside a container</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">docker run -e DATABASE_URL=postgres://db:5432/app -e DEBUG=false my-app
+
+# in docker-compose.yml, a Flask service reaching a Redis service:
+services:
+  web:
+    build: .
+    environment:
+      - REDIS_HOST=redis   # service name, NOT localhost
+  redis:
+    image: redis:7</pre>
+<div class="note"><b>Common mistake:</b> Using `localhost` to reach another container -- from inside a container, localhost refers to that container itself, not the host machine or a sibling service; use the other service's name on.</div>
+</div></details></section>
+<div class="grid"><section class="card"><h2>Exercises</h2><div class="item"><b>Container vs VM</b><p>Explain in 2-3 sentences why a container starts faster than a VM.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Run a container</b><p>Write the command to run an nginx container in the background, mapping host port 8080 to container port 80.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Write a Dockerfile</b><p>Write a Dockerfile for a Node.js app: base image, copy package.json, install deps, copy code, run `node index.js`.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Fix the cache-busting bug</b><p>Given a Dockerfile that COPYs all code before RUN pip install, reorder it to use the build cache properly.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Persist a database</b><p>Write a docker run command that persists a Postgres container's data directory using a named volume.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Compose a two-service app</b><p>Write a docker-compose.yml for a Flask app depending on a Redis cache.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Diagnose a container that exits immediately</b><p>You run `docker run my-app` and the container starts, then immediately exits with no error printed to your terminal. What are the first two things you'd check, and why does a container exit immediately in the first place (unlike a VM, which keeps running)?</p><details><summary>Hint</summary><p>run `docker logs &lt;container&gt;` first to see what the process actually printed before exiting, and check the Dockerfile's CMD/ENTRYPOINT -- a container's lifecycle is tied to its main process, so if that process finishes (or crashes) immediately, the container stops immediately too, unlike a VM which keeps running its OS regardless</p></details><textarea class="answer" placeholder="Write code or notes here..."></textarea></div></section><section class="card"><h2>Knowledge checks</h2><div class="item"><b>A container shares its host's:</b><ol><li>file system only</li><li>OS kernel</li><li>IP address</li><li>GPU only</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>An image is best described as:</b><ol><li>a running process</li><li>a read-only template</li><li>a network</li><li>a volume</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>Which Dockerfile instruction runs at build time (not startup)?</b><ol><li>CMD</li><li>RUN</li><li>ENTRYPOINT (default form)</li><li>EXPOSE</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>Without a volume, a container's writable data is:</b><ol><li>backed up automatically</li><li>lost when the container is removed</li><li>shared with all other containers</li><li>encrypted</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>Docker Compose is primarily used to:</b><ol><li>build a single image faster</li><li>define and run multi-container applications together</li><li>replace Kubernetes entirely</li><li>compile code</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div></section></div>
+<section class="card" style="margin-top:14px"><h2>Projects</h2><div class="item"><b>Containerize a script</b><p>Take a simple Python/Node script and containerize it with a correct, minimal Dockerfile.</p></div><div class="item"><b>Multi-stage build</b><p>Containerize a small web app with a multi-stage Dockerfile that keeps the final image small.</p></div><div class="item"><b>Full local stack with Compose</b><p>Use docker-compose to run an app + database + cache together, with persisted data via volumes.</p></div><div class="item"><b>Package and deploy your Backend + API system with Docker</b><p>Take the backend service and API you already built (from the Backend and APIs capstones, or equivalents) and make them genuinely deployable: multi-stage Dockerfiles that keep images lean, a Compose setup that wires the service to its real dependencies (a database, a cache), environment-based configuration instead of hardcoded values, and a documented account of at least one real container failure you hit and how you debugged it. This capstone isn't about building new backend logic -- it's about proving you can package and run what you already built reliably.</p></div></section></main>
+<button class="theme" data-theme-toggle="" type="button" aria-label="Toggle light or dark theme"></button>
+<script id="course-page-meta" type="application/json">{"id":"docker","lessonIds":["dk-why","dk-image-container","dk-cli","dk-dockerfile","dk-volumes","dk-compose","docker-multistage-optimization","docker-networking-env"]}</script>
+<script defer="" src="../assets/runtime-inline/courses-docker-003.js?v=20260822-v567"></script><script defer="" src="../assets/runnable-lesson-example-fixes.js?v=20260822-v567"></script>
+<script defer="" src="../assets/fast-js-runner.js?v=20260822-v567"></script>
+<script defer="" src="../assets/lesson-example-runner.js?v=20260822-v567"></script>
+<script defer="" src="../assets/lesson-example-runner-guard.js?v=20260822-v567"></script><script defer="" src="../assets/python-inline-terminal.js?v=20260822-v567"></script><script defer="" src="../assets/runner-performance-guard.js?v=20260822-v567"></script>
+<script defer="" src="../assets/evergreen-learning-engine.js?v=20260822-v567"></script>
+<script defer="" src="../assets/evergreen-review-navigation.js?v=20260822-v567"></script>
+<script defer="" src="../assets/smart-evergreen-review.js?v=20260822-v567"></script>
+<script defer="" src="../assets/assessment-practice.js?v=20260822-v567"></script>
+<script defer src="../assets/exam-style-problem-statements-v565.js?v=20260822-v567"></script>
+<script defer="" src="../assets/github-integration.js?v=20260822-v567"></script>
+<script defer="" src="../assets/assessment-layout-fix.js?v=20260822-v567"></script>
+<script defer="" src="../assets/universal-reveal-solutions.js?v=20260822-v567"></script>
+<script defer="" src="../assets/reveal-solution-explanations.js?v=20260822-v567"></script>
+<script defer="" src="../assets/assessment-expanded-descriptions.js?v=20260822-v567"></script>
+<script defer="" src="../assets/exercise-direct-publish.js?v=20260822-v567"></script>
+<script defer="" src="../assets/universal-run-output.js?v=20260822-v567"></script>
+<script defer="" src="../assets/final-exercise-toolbar.js?v=20260822-v567"></script>
+<script defer="" src="../assets/course-project-workspace.js?v=20260822-v571"></script>
+<script defer="" src="../assets/universal-editable-code.js?v=20260822-v567"></script>
+<script defer="" src="../assets/progressive-lesson-layout.js?v=20260822-v567"></script><script defer="" src="../assets/line-by-line-explanations.js?v=20260822-v567"></script><script defer="" src="../assets/example-learning-tools.js?v=20260822-v567"></script>
+<script defer="" src="../assets/practice-publish-completer.js?v=20260823-v573"></script>
+<script defer="" src="../assets/oa-assessment-fallback.js?v=20260822-v567"></script>
+<script defer="" src="../assets/oa-assessment-upgrade.js?v=20260822-v567"></script>
+<script defer="" src="../assets/python-only-ui.js?v=20260822-v567"></script>
+<script defer="" src="../assets/conceptual-examples-v574.js?v=20260824-v574"></script><script defer="" src="../assets/program-questions-v574.js?v=20260824-v574"></script><script defer="" src="../assets/calm-study-flow.js?v=20260822-v567"></script>
+<script defer="" src="../assets/progress-resume.js?v=20260822-v567"></script>
+<script defer="" src="../assets/practice-guidance.js?v=20260823-v573"></script>
+<script src="../assets/purpose-first-prompts.js?v=20260822-v567" defer></script>
+<script defer src="../assets/scroll-performance-v561.js?v=20260822-v567"></script><script defer src="../assets/try-it-yourself-v568.js?v=20260822-v568"></script><script defer src="../assets/runnable-lesson-example-fixes.js?v=20260822-v567"></script>
+<script defer src="../assets/lesson-example-runner.js?v=20260822-v567"></script>
+<script defer src="../assets/lesson-example-runner-guard.js?v=20260822-v567"></script>
+<script defer src="../assets/evergreen-learning-engine.js?v=20260822-v567"></script>
+<script defer src="../assets/evergreen-review-navigation.js?v=20260822-v567"></script>
+<script defer src="../assets/smart-evergreen-review.js?v=20260822-v567"></script>
+<script id="csai-assessment-data" type="application/json">{"courseId":"docker","courseTitle":"Docker","defaultLanguage":"text","exercises":[{"id":"dk_ex1","title":"Container vs VM","difficulty":1,"prompt":"Explain in 2-3 sentences why a container starts faster than a VM.","type":"scenario-analysis"},{"id":"dk_ex2","title":"Run a container","difficulty":1,"prompt":"Write the command to run an nginx container in the background, mapping host port 8080 to container port 80.","type":"scenario-analysis"},{"id":"dk_ex3","title":"Write a Dockerfile","difficulty":2,"prompt":"Write a Dockerfile for a Node.js app: base image, copy package.json, install deps, copy code, run `node index.js`.","type":"scenario-analysis"},{"id":"dk_ex4","title":"Fix the cache-busting bug","difficulty":2,"prompt":"Given a Dockerfile that COPYs all code before RUN pip install, reorder it to use the build cache properly.","type":"scenario-analysis"},{"id":"dk_ex5","title":"Persist a database","difficulty":3,"prompt":"Write a docker run command that persists a Postgres container's data directory using a named volume.","type":"scenario-analysis"},{"id":"dk_ex6","title":"Compose a two-service app","difficulty":3,"prompt":"Write a docker-compose.yml for a Flask app depending on a Redis cache.","type":"scenario-analysis"},{"id":"dk_ex7","title":"Diagnose a container that exits immediately","difficulty":2,"type":"scenario-analysis","prompt":"You run `docker run my-app` and the container starts, then immediately exits with no error printed to your terminal. What are the first two things you'd check, and why does a container exit immediately in the first place (unlike a VM, which keeps running)?","hint":"run `docker logs <container>` first to see what the process actually printed before exiting, and check the Dockerfile's CMD/ENTRYPOINT -- a container's lifecycle is tied to its main process, so if that process finishes (or crashes) immediately, the container stops immediately too, unlike a VM which keeps running its OS regardless","starter":"docker run my-app"}],"quiz":[{"q":"A container shares its host's:","options":["file system only","OS kernel","IP address","GPU only"],"correct":1,"type":"mcq"},{"q":"An image is best described as:","options":["a running process","a read-only template","a network","a volume"],"correct":1,"type":"mcq"},{"q":"Which Dockerfile instruction runs at build time (not startup)?","options":["CMD","RUN","ENTRYPOINT (default form)","EXPOSE"],"correct":1,"type":"mcq"},{"q":"Without a volume, a container's writable data is:","options":["backed up automatically","lost when the container is removed","shared with all other containers","encrypted"],"correct":1,"type":"mcq"},{"q":"Docker Compose is primarily used to:","options":["build a single image faster","define and run multi-container applications together","replace Kubernetes entirely","compile code"],"correct":1,"type":"mcq"}],"structured":{}}</script>
+<script defer src="../assets/assessment-practice.js?v=20260822-v567"></script>
+<script defer src="../assets/github-integration.js?v=20260822-v567"></script>
+<script defer src="../assets/assessment-layout-fix.js?v=20260822-v567"></script>
+<script defer src="../assets/universal-reveal-solutions.js?v=20260822-v567"></script>
+<script defer src="../assets/reveal-solution-explanations.js?v=20260822-v567"></script>
+<script defer src="../assets/assessment-expanded-descriptions.js?v=20260822-v567"></script>
+<script defer src="../assets/exercise-direct-publish.js?v=20260822-v567"></script>
+<script defer src="../assets/universal-run-output.js?v=20260822-v567"></script>
+<script defer src="../assets/final-exercise-toolbar.js?v=20260822-v567"></script>
+<script id="csai-project-data" type="application/json">{"courseId":"docker","courseTitle":"Docker","defaultLanguage":"shell","projects":[{"id":"docker-proj-1","title":"Containerize a script","description":"Take a simple Python/Node script and containerize it with a correct, minimal Dockerfile.","requirements":[],"starter":"","language":"shell"},{"id":"docker-proj-2","title":"Multi-stage build","description":"Containerize a small web app with a multi-stage Dockerfile that keeps the final image small.","requirements":[],"starter":"","language":"shell"},{"id":"docker-proj-3","title":"Full local stack with Compose","description":"Use docker-compose to run an app + database + cache together, with persisted data via volumes.","requirements":[],"starter":"","language":"shell"},{"id":"project-4","title":"Package and deploy your Backend + API system with Docker","description":"Take the backend service and API you already built (from the Backend and APIs capstones, or equivalents) and make them genuinely deployable: multi-stage Dockerfiles that keep images lean, a Compose setup that wires the service to its real dependencies (a database, a cache), environment-based configuration instead of hardcoded values, and a documented account of at least one real container failure you hit and how you debugged it. This capstone isn't about building new backend logic -- it's about proving you can package and run what you already built reliably.","requirements":["A multi-stage Dockerfile for the service, with a documented before/after image size comparison","A docker-compose.yml wiring the service to at least one real dependency (database and/or cache) via service-name networking, not hardcoded IPs","Configuration driven by environment variables (e.g. database URL, debug flag) -- nothing environment-specific hardcoded into the image","A short written account of one real container failure you hit while building this (a crash, a networking issue, a build cache problem) and exactly how you diagnosed and fixed it","Volumes correctly used for anything that needs to persist across container restarts (e.g. database data)"],"starter":"","language":"shell"}]}</script>
+<script defer src="../assets/course-project-workspace.js?v=20260822-v571"></script>
+<script defer src="../assets/example-learning-tools.js?v=20260822-v567"></script>
+<script defer src="../assets/practice-publish-completer.js?v=20260823-v573"></script>
+
+<!-- csai-production-augmentation -->
+<script src="../assets/adaptive-practice-layer.js?v=20260822-v567" defer></script>
+<script src="../assets/project-readme-layer.js?v=20260822-v567" defer></script>
+<!-- /csai-production-augmentation -->
+<script src="/assets/oa-assessment-fallback.js?v=20260811-1" defer></script>
+<script src="/assets/oa-assessment-upgrade.js?v=20260811-1" defer></script>
+
+<script src="/assets/python-only-ui.js?v=20260811-2" defer></script>
+
+<script defer src="../assets/study-examples.js?v=20260824-v574"></script>
+
+<script src="../assets/runtime-inline/courses-docker-002.js?v=20260822-v567"></script>
+</body></html>

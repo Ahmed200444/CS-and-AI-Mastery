@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta data-csai-head-preload="calmfast2"/><link as="script" href="/runtime/sql/sql-wasm.js" rel="preload"/><link as="fetch" crossorigin="anonymous" href="/runtime/sql/sql-wasm.wasm" rel="prefetch"/><meta charset="utf-8"><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Databases — CS &amp; AI Mastery</title><script src="../assets/runtime-inline/courses-databases-001.js?v=20260822-v567"></script><style>
+:root{color-scheme:light;--bg:#f4f7fb;--panel:#fff;--text:#172231;--muted:#5d6c7c;--border:#d8e1ea;--pill:#e8f1f8;--pilltext:#174b72;--accent:#17649a;--code:#101827;--note:#fff7e7}
+html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#edf3f8;--muted:#c6d1da;--border:#344352;--pill:#223446;--pilltext:#b9dcf5;--accent:#4da3df;--code:#0b111b;--note:#2b2417}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:1100px;margin:auto;padding:18px 20px 110px}.top{position:sticky;top:0;z-index:4;display:flex;justify-content:space-between;gap:10px;padding:10px 0;background:var(--bg)}.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid #b8c7d6;border-radius:9px;padding:9px 13px;background:var(--panel);color:var(--text);font:inherit;font-weight:800;cursor:pointer}.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.hero,.card,.lesson{background:var(--panel);border:1px solid var(--border);border-radius:15px;color:var(--text)}.hero{padding:22px;margin:8px 0 16px}.kicker{font-size:.74rem;letter-spacing:.1em;font-weight:900;color:var(--accent)}.hero h1{margin:5px 0 8px;font-size:clamp(2rem,4vw,3.2rem);line-height:1.08}.muted{color:var(--muted)}.meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.pill{padding:4px 8px;border-radius:999px;background:var(--pill);color:var(--pilltext);font-size:.78rem;font-weight:800}.progress{height:10px;border-radius:999px;background:var(--border);overflow:hidden;margin:14px 0 5px}.progress span{display:block;height:100%;background:#16805b}.lessons{display:grid;gap:11px}.lesson{overflow:hidden}.lesson summary{display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;font-weight:850}.num{display:grid;place-items:center;min-width:34px;height:28px;border-radius:8px;background:var(--pill);color:var(--pilltext)}.title{flex:1}.check{display:flex;gap:6px;align-items:center;font-size:.82rem;font-weight:700}.body{padding:0 16px 18px}.body h3{margin:17px 0 7px;font-size:1rem}.body p,.body li{line-height:1.68}.code{white-space:pre-wrap;overflow:auto;padding:13px;border-radius:10px;background:var(--code);color:#f4f7fb;font:500 .86rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}.note{margin-top:12px;padding:12px;border-left:4px solid #d28b23;border-radius:8px;background:var(--note)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}.card{padding:17px}.card h2{margin:0 0 10px}.item{padding:12px;margin:9px 0;border-radius:10px;background:var(--bg);border:1px solid var(--border)}.answer{width:100%;min-height:90px;margin-top:8px;padding:10px;border:1px solid #aebdca;border-radius:8px;background:transparent;color:inherit;font:inherit}.theme{position:fixed;right:22px;bottom:22px;z-index:20;border:1px solid #b8c7d6;border-radius:999px;padding:10px 16px;background:var(--panel);color:var(--text);font:800 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.16);cursor:pointer}.empty{padding:17px;border:1px dashed var(--border);border-radius:10px}.hero-icon{margin-right:.25em}@media(max-width:720px){.wrap{padding:10px 10px 100px}.grid{grid-template-columns:1fr}.top .btn{flex:1}.lesson summary{flex-wrap:wrap;align-items:flex-start}.check{width:100%;padding-left:44px}.theme{right:14px;bottom:14px;padding:10px 14px}}
+</style>
+<script defer="" src="../assets/vscode-diagnostics.js?v=20260822-v567"></script>
+<link href="../assets/oa-assessment-fallback.css?v=20260822-v567" rel="stylesheet"/>
+<link href="../assets/oa-assessment-upgrade.css?v=20260822-v567" rel="stylesheet"/>
+<link crossorigin="" data-csai-local-speed-hint="" href="https://cdn.jsdelivr.net" rel="preconnect"/></link></link></meta><style id="csai-expanded-lessons-style">
+.lesson-main-explanation{margin:12px 0 20px;padding:4px 0 18px;border-bottom:1px solid var(--border)}
+.lesson-main-explanation h3{margin-top:22px!important;margin-bottom:8px!important;font-size:1.02rem!important}.lesson-main-explanation h3:first-child{margin-top:8px!important;font-size:1.12rem!important}
+.lesson-main-explanation p,.lesson-main-explanation li{line-height:1.75!important}
+.deep-steps{margin:8px 0 4px;padding-left:24px}.deep-steps li{margin:7px 0}
+.deep-scenario,.deep-takeaway{margin:9px 0;padding:13px 14px;border:1px solid var(--border);border-radius:10px;background:var(--bg)}
+.deep-scenario{border-left:4px solid var(--accent)}
+.deep-takeaway{border-left:4px solid #16805b}
+.deep-scenario p,.deep-takeaway p{margin:0}
+.deep-check{margin-bottom:4px}.deep-check li{margin:6px 0}
+</style>
+<link rel="stylesheet" href="../assets/scroll-performance-v561.css?v=20260822-v567">
+<link rel="stylesheet" href="../assets/final-quality-layer.css?v=20260822-v567">
+<script src="../assets/smart-code-editor.js?v=20260822-v567" defer></script>
+<script src="../assets/portfolio-publish-controls.js?v=20260822-v567" defer></script>
+
+<!-- csai-unified-design:start -->
+<link rel="stylesheet" href="../assets/unified-learning-design.css?v=20260822-v567">
+<link rel="stylesheet" href="../assets/product-redesign-v2.css?v=20260822-v567">
+<link rel="stylesheet" href="../assets/adaptive-v4-live.css?v=20260822-v567">
+<link rel="stylesheet" href="../assets/hero-polish.css?v=20260822-v567">
+<script>document.documentElement.classList.add('csai-unified-design')</script>
+<script src="../assets/unified-learning-design.js?v=20260822-v567" defer></script>
+<script src="../assets/product-redesign-v2.js?v=20260822-v567" defer></script>
+<script src="../assets/adaptive-v4-live.js?v=20260822-v567" defer></script>
+<script src="../assets/hero-polish.js?v=20260822-v567" defer></script>
+<!-- csai-unified-design:end -->
+<link rel="stylesheet" href="/assets/oa-assessment-fallback.css?v=20260811-1">
+<link rel="stylesheet" href="/assets/oa-assessment-upgrade.css?v=20260811-1">
+</head><body>
+<main class="wrap"><div class="top"><a class="btn" href="../index.html#courses">← All courses</a><a class="btn primary" href="../index.html#hub">Home</a></div>
+<section class="hero"><div class="kicker">COURSE</div><h1><span class="hero-icon">🗃️</span>Databases</h1><p class="muted">Schema design, normalization, indexing, and NoSQL — the theory behind the SQL you already write.</p><div class="meta"><span class="pill">15 lessons</span><span class="pill">8 exercises</span><span class="pill">5 checkpoints</span><span class="pill">4 projects</span></div><div class="progress"><span data-progress-bar="" style="width:0%"></span></div><div class="muted" data-progress-status="">0 of 15 lessons complete</div></section>
+<section class="lessons"><details class="lesson" data-lesson="db-what-is" open="">
+<summary><span class="num">01</span><span class="title">What a database actually is</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain what a DBMS does that a flat file can&#x27;t</li><li>Name the two broad DB families</li><li>Explain how DBMS changes the behavior, result, or engineering decision in a concrete example</li><li>Connect DBMS with durability and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A database is software that stores data durably and lets many programs read/write it safely at once, with guarantees a plain file can't give you: concurrent access without corruption, crash recovery, and fast lookups even at huge scale.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">DBMS</span><span class="pill">durability</span><span class="pill">concurrency</span><span class="pill">SQL vs NoSQL</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># Without a DBMS: two processes writing to the same file
+# can corrupt it, or clobber each other's writes.
+# A DBMS enforces safe concurrent access + durability guarantees.</pre>
+<div class="note"><b>Common mistake:</b> Assuming a database is 'just a fancy Excel file' — the concurrency and crash-safety guarantees are the whole point, not the storage format.</div>
+</div></details><details class="lesson" data-lesson="db-keys">
+<summary><span class="num">02</span><span class="title">Primary &amp; foreign keys</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Define primary key and foreign key</li><li>Explain what a foreign key enforces</li><li>Explain how primary key changes the behavior, result, or engineering decision in a concrete example</li><li>Connect primary key with foreign key and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A primary key uniquely identifies each row in a table (often an auto-incrementing id). A foreign key is a column in one table that references a primary key in another, and the database ENFORCES that the referenced row must exist — this is called referential integrity.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">primary key</span><span class="pill">foreign key</span><span class="pill">referential integrity</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">-- orders.customer_id is a foreign key into customers.id
+CREATE TABLE customers (id INTEGER PRIMARY KEY, name TEXT);
+CREATE TABLE orders (
+  id INTEGER PRIMARY KEY,
+  customer_id INTEGER REFERENCES customers(id),
+  total NUMERIC
+);</pre>
+<div class="note"><b>Common mistake:</b> Deleting a parent row (a customer) while orders still reference it — most databases block this by default unless you explicitly cascade or nullify.</div>
+</div></details><details class="lesson" data-lesson="db-constraints">
+<summary><span class="num">03</span><span class="title">Data types &amp; constraints</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Pick appropriate column types</li><li>Use NOT NULL / UNIQUE / CHECK constraints</li><li>Explain how data types changes the behavior, result, or engineering decision in a concrete example</li><li>Connect data types with NOT NULL and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Choosing the right data type (INTEGER, TEXT, NUMERIC, BOOLEAN, TIMESTAMP) isn't just style — it affects storage size, valid values, and what operations are even possible. Constraints (NOT NULL, UNIQUE, CHECK) let the database itself reject bad data, instead of relying on application code to catch every case.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">data types</span><span class="pill">NOT NULL</span><span class="pill">UNIQUE</span><span class="pill">CHECK</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">CREATE TABLE users (
+  id INTEGER PRIMARY KEY,
+  email TEXT UNIQUE NOT NULL,
+  age INTEGER CHECK (age &gt;= 0)
+);</pre>
+<div class="note"><b>Common mistake:</b> Storing dates/money as raw TEXT — you lose sorting, range queries, and arithmetic; use proper TIMESTAMP/NUMERIC types.</div>
+</div></details><details class="lesson" data-lesson="db-normalization">
+<summary><span class="num">04</span><span class="title">Normalization (1NF–3NF)</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain what each normal form eliminates</li><li>Spot an un-normalized table</li><li>Explain how 1NF changes the behavior, result, or engineering decision in a concrete example</li><li>Connect 1NF with 2NF and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Normalization is the process of structuring tables to eliminate redundant data. 1NF: every cell holds one atomic value (no comma-separated lists in a column).</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">1NF</span><span class="pill">2NF</span><span class="pill">3NF</span><span class="pill">redundancy</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">-- NOT normalized: customer_name repeated on every order row
+-- (id, customer_name, customer_email, item, price)
+
+-- Normalized: split into two tables
+-- customers(id, name, email)
+-- orders(id, customer_id, item, price)</pre>
+<div class="note"><b>Common mistake:</b> Over-normalizing a reporting/analytics table — sometimes deliberate redundancy (denormalization) is the right call for read-heavy workloads.</div>
+</div></details><details class="lesson" data-lesson="db-indexes">
+<summary><span class="num">05</span><span class="title">Indexes &amp; how lookups get fast</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain why an index speeds up lookups</li><li>Know the trade-off indexes carry</li><li>Explain how index changes the behavior, result, or engineering decision in a concrete example</li><li>Connect index with B-tree and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Without an index, finding a row means scanning every row (O(n)) — a full table scan. An index is a separate, sorted structure (usually a B-tree) that lets the database jump straight to matching rows (roughly O(log n)).</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">index</span><span class="pill">B-tree</span><span class="pill">full table scan</span><span class="pill">read/write trade-off</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">CREATE INDEX idx_orders_customer ON orders(customer_id);
+-- now: WHERE customer_id = 42 is fast
+-- but every INSERT into orders now also updates this index</pre>
+<div class="note"><b>Common mistake:</b> Indexing every column 'just in case' — this bloats storage and slows down writes for indexes that are never used by a query.</div>
+</div></details><details class="lesson" data-lesson="db-nosql">
+<summary><span class="num">06</span><span class="title">NoSQL vs SQL: when to use which</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Contrast document/key-value/relational models</li><li>Pick the right store for a given access pattern</li><li>Explain how document store changes the behavior, result, or engineering decision in a concrete example</li><li>Connect document store with key-value store and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>SQL databases enforce a fixed schema and strong relational integrity — great when your data has clear structure and relationships (orders, customers, inventory). NoSQL stores relax this: document stores (MongoDB) hold flexible JSON-like records; key-value stores (Redis, DynamoDB) trade query flexibility for extreme speed at massive scale.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">document store</span><span class="pill">key-value store</span><span class="pill">schema flexibility</span><span class="pill">access patterns</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># SQL: 'give me all orders over $50 for customers in Dubai, joined with product names'
+# -&gt; relational, needs joins and constraints -&gt; SQL
+
+# Key-value: 'get this user's session by session_id, sub-millisecond'
+# -&gt; no relationships, pure lookup speed -&gt; Redis/DynamoDB</pre>
+<div class="note"><b>Common mistake:</b> Choosing NoSQL purely because it's trendy, then rebuilding joins and constraints in application code — usually a sign SQL was the right choice.</div>
+</div></details><details class="lesson" data-lesson="db-postgresql-practice">
+<summary><span class="num">07</span><span class="title">PostgreSQL in practice</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Write a PostgreSQL-specific CREATE TABLE and INSERT using Postgres conventions</li><li>Explain how PostgreSQL changes the behavior, result, or engineering decision in a concrete example</li><li>Connect PostgreSQL with SERIAL and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>PostgreSQL is a specific, widely-used SQL database -- everything you've learned about schemas, keys, and normalization applies directly. Postgres adds practical tools on top: SERIAL/IDENTITY columns for auto-incrementing ids, RETURNING to get a row back from an INSERT in one round trip, and rich data types like JSONB and arrays that go beyond standard SQL.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">PostgreSQL</span><span class="pill">SERIAL</span><span class="pill">RETURNING</span><span class="pill">JSONB</span><span class="pill">connection strings</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  email TEXT UNIQUE NOT NULL,
+  created_at TIMESTAMP DEFAULT now()
+);
+
+INSERT INTO users (email) VALUES ('a@b.com') RETURNING id;</pre>
+<div class="note"><b>Common mistake:</b> Forgetting UNIQUE or NOT NULL constraints and only discovering the gap once duplicate or missing data has already been written in production.</div>
+</div></details><details class="lesson" data-lesson="databases-transactions">
+<summary><span class="num">08</span><span class="title">Transactions &amp; ACID Properties</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain why transactions exist and use commit/rollback to keep multi-step operations consistent</li><li>Explain how transaction changes the behavior, result, or engineering decision in a concrete example</li><li>Connect transaction with ACID and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A transaction groups multiple database operations into one all-or-nothing unit -- either every operation in it succeeds and is committed, or if anything fails partway through, the whole thing rolls back as if none of it happened.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">transaction</span><span class="pill">ACID</span><span class="pill">atomicity</span><span class="pill">consistency</span><span class="pill">isolation</span><span class="pill">durability</span><span class="pill">commit</span><span class="pill">rollback</span><span class="pill">race condition</span><span class="pill">try/catch</span><span class="pill">un-transacted</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">BEGIN TRANSACTION;
+  UPDATE accounts SET balance = balance - 100 WHERE id = 1;
+  UPDATE accounts SET balance = balance + 100 WHERE id = 2;
+COMMIT;
+-- if the second UPDATE fails (or the app crashes between the two),
+-- the transaction rolls back and account 1 keeps its original balance --
+-- without a transaction, a crash here would silently lose </pre>
+<div class="note"><b>Common mistake:</b> Performing a multi-step operation (like a funds transfer) as separate, un-transacted writes -- if anything fails between the steps, the database is left in a genuinely inconsistent state.</div>
+</div></details><details class="lesson" data-lesson="db-isolation-levels">
+<summary><span class="num">09</span><span class="title">Transaction isolation levels &amp; anomalies</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain dirty reads, non-repeatable reads, phantoms, and what isolation levels trade off</li><li>Explain how Read Committed changes the behavior, result, or engineering decision in a concrete example</li><li>Connect Read Committed with Repeatable Read and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Isolation controls how concurrent transactions can observe one another. Weak isolation improves concurrency but can expose anomalies; stronger isolation reduces anomalies at the cost of more coordination or retries.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">Read Committed</span><span class="pill">Repeatable Read</span><span class="pill">Serializable</span><span class="pill">MVCC</span><span class="pill">anomalies</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">Two transfers read the same balance of 100. If both independently decide that withdrawing 80 is allowed, a weakly coordinated implementation can overspend. A transaction must protect the invariant with appropriate locking, serializable behavior, or a conditional atomic update.</pre>
+<div class="note"><b>Common mistake:</b> Assuming ACID means every transaction automatically behaves as if it ran alone.</div>
+</div></details><details class="lesson" data-lesson="db-locking-concurrency">
+<summary><span class="num">10</span><span class="title">Optimistic vs pessimistic locking</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Choose between optimistic version checks and pessimistic row locks for concurrent updates</li><li>Explain how SELECT FOR UPDATE changes the behavior, result, or engineering decision in a concrete example</li><li>Connect SELECT FOR UPDATE with optimistic locking and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Pessimistic locking reserves rows before changing them, which is useful when conflicts are likely but can block other work. Optimistic locking lets work proceed and rejects an update if a version changed, which is useful when conflicts are rare.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">SELECT FOR UPDATE</span><span class="pill">optimistic locking</span><span class="pill">version column</span><span class="pill">deadlock</span><span class="pill">lock ordering</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">Pessimistic pattern: BEGIN; SELECT balance FROM accounts WHERE id IN (...) FOR UPDATE; validate both rows; UPDATE accounts ...; COMMIT. Optimistic pattern: UPDATE accounts SET balance=?, version=version+1 WHERE id=? AND version=?; verify exactly one row changed.</pre>
+<div class="note"><b>Common mistake:</b> Locking the same pair of rows in different orders in different code paths.</div>
+</div></details><details class="lesson" data-lesson="db-query-plans-explain">
+<summary><span class="num">11</span><span class="title">Query plans, EXPLAIN &amp; index trade-offs</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Read the main idea of an execution plan and decide when an index can help</li><li>Explain how EXPLAIN changes the behavior, result, or engineering decision in a concrete example</li><li>Connect EXPLAIN with sequential scan and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A database optimizer chooses a plan based on estimated cost. EXPLAIN shows operations such as scans, joins, and sorts so you can investigate slow queries instead of guessing.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">EXPLAIN</span><span class="pill">sequential scan</span><span class="pill">index scan</span><span class="pill">selectivity</span><span class="pill">composite index</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">EXPLAIN SELECT id, balance FROM accounts WHERE user_id = 42 ORDER BY created_at DESC LIMIT 20;
+
+A useful candidate index might begin with user_id and then created_at, but the correct choice depends on real data distribution and workload.</pre>
+<div class="note"><b>Common mistake:</b> Adding indexes to every column.</div>
+</div></details><details class="lesson" data-lesson="db-redis-cache-consistency">
+<summary><span class="num">12</span><span class="title">Redis caching &amp; database consistency</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain cache-aside and reason about stale-cache windows during database writes</li><li>Explain how Redis changes the behavior, result, or engineering decision in a concrete example</li><li>Connect Redis with cache-aside and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Redis is often used as an in-memory cache because reads are fast and data structures are convenient. In cache-aside, the application reads the cache first, falls back to the database on a miss, then populates the cache.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">Redis</span><span class="pill">cache-aside</span><span class="pill">TTL</span><span class="pill">invalidation</span><span class="pill">eventual consistency</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">Read: cache GET key -&gt; on miss read DB -&gt; SET key with TTL.
+Write: commit DB transaction first -&gt; invalidate cache key.
+If invalidation fails, retry it and keep TTL finite so stale data cannot live forever.</pre>
+<div class="note"><b>Common mistake:</b> Updating the cache first and then treating the database write as guaranteed.</div>
+</div></details><details class="lesson" data-lesson="db-btree-lsm">
+<summary><span class="num">13</span><span class="title">B+ trees &amp; LSM trees: how storage indexes work</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Compare B+ tree and LSM-tree trade-offs for reads, writes, and storage layout</li><li>Explain how B+ tree changes the behavior, result, or engineering decision in a concrete example</li><li>Connect B+ tree with LSM tree and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>B+ trees keep sorted keys in page-friendly tree nodes and are widely used for database indexes because they support point lookups and ordered range scans. LSM trees buffer writes and later merge sorted files through compaction, trading faster sequential writes for more complicated reads and background work.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">B+ tree</span><span class="pill">LSM tree</span><span class="pill">page</span><span class="pill">compaction</span><span class="pill">write amplification</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">B+ tree intuition: follow a small number of page pointers to a sorted leaf, then scan neighboring leaves for a range. LSM intuition: write to memory/log first, flush sorted runs, and compact runs in the background.</pre>
+<div class="note"><b>Common mistake:</b> Calling one structure universally faster.</div>
+</div></details><details class="lesson" data-lesson="db-mysql-postgresql-production">
+<summary><span class="num">14</span><span class="title">MySQL &amp; PostgreSQL production fundamentals</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Recognize shared relational concepts and practical differences between common production SQL databases</li><li>Apply the KHDA-benchmarked professional additions in a realistic company workflow: backup and restore, replication, read replicas, partitioning / sharding.</li><li>Explain how MySQL changes the behavior, result, or engineering decision in a concrete example</li><li>Connect MySQL with PostgreSQL and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>MySQL and PostgreSQL are both production relational databases with transactions, indexes, constraints, and SQL, but they differ in features and operational details. The transferable skill is relational reasoning: model constraints in the database, parameterize queries, use transactions deliberately, keep connection pools bounded, and inspect query plans.</p>
+</section>
+<div class="note khda-benchmark-note" data-khda-benchmark-note="true"><b>Professional benchmark addition: </b>These company-use concepts were kept after comparing the course with public syllabi from KHDA-listed Dubai training providers: backup and restore, replication, read replicas, partitioning / sharding.</div><h3>Key concepts</h3><div class="meta"><span class="pill">MySQL</span><span class="pill">PostgreSQL</span><span class="pill">schema</span><span class="pill">connection pool</span><span class="pill">constraints</span><span class="pill">backup and restore</span><span class="pill">replication</span><span class="pill">read replicas</span><span class="pill">partitioning / sharding</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">Production checklist: use parameterized queries; enforce important uniqueness/foreign-key constraints in the database; keep transactions short; use a connection pool; measure slow queries before tuning.</pre>
+<div class="note"><b>Common mistake:</b> Treating database choice as a reason to relearn SQL from zero.</div>
+</div></details><details class="lesson" data-lesson="db-schema-migrations">
+<summary><span class="num">15</span><span class="title">Schema migrations &amp; safe database changes</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Plan backward-compatible schema changes that can be deployed without breaking live services</li><li>Explain how migration changes the behavior, result, or engineering decision in a concrete example</li><li>Connect migration with backward compatibility and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A production schema change is a deployment problem, not just an ALTER TABLE statement. A safe pattern is expand-contract: first add a compatible new field/table, deploy code that can handle both old and new shapes, backfill data, switch reads/writes, then remove the old structure later.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">migration</span><span class="pill">backward compatibility</span><span class="pill">expand-contract</span><span class="pill">backfill</span><span class="pill">rollback</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">Rename safely: add new column -&gt; dual-write or backfill -&gt; deploy readers using new column -&gt; verify -&gt; stop old writes -&gt; remove old column in a later release.</pre>
+<div class="note"><b>Common mistake:</b> Renaming or deleting a field in the same deployment that updates application code.</div>
+</div></details></section>
+<div class="grid"><section class="card"><h2>Exercises</h2><div class="item"><b>Identify the keys</b><p>Given a `books` table and an `authors` table, identify the primary key of each and where the foreign key goes.</p><details><summary>Hint</summary><p>primary key = unique id per table; foreign key lives on the 'many' side</p></details><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Add constraints</b><p>Write a CREATE TABLE for `products` with id, name (required), price (must be positive), and sku (unique).</p><details><summary>Hint</summary><p>NOT NULL, CHECK, UNIQUE</p></details><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Spot the redundancy</b><p>A `sales` table stores customer_name and customer_email on every row. What normal form does this violate, and how would you fix it?</p><details><summary>Hint</summary><p>split into a customers table; classic 2NF/3NF fix</p></details><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>When to index</b><p>You have a `users` table queried constantly by email but rarely by signup_date. Which column(s) should be indexed, and why?</p><details><summary>Hint</summary><p>index email; skip rarely-queried columns</p></details><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Design a schema</b><p>Design tables (with keys) for a many-to-many relationship: students can enroll in many courses, courses have many students.</p><details><summary>Hint</summary><p>needs a join/junction table with two foreign keys</p></details><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>SQL vs NoSQL call</b><p>A service needs sub-millisecond lookups of a shopping cart by session_id, no relationships, no reporting needs. SQL or NoSQL — justify it.</p><details><summary>Hint</summary><p>key-value store; access pattern has no relational need</p></details><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Diagnose a lost-transfer bug</b><p>A funds-transfer feature runs two separate, un-transacted UPDATE statements: debit account A, then credit account B. During a load test, a server crash between the two statements causes account A to be debited with account B never credited. What's the actual fix, and why doesn't 'just add a try/catch' solve it?</p><details><summary>Hint</summary><p>wrap both UPDATEs in a single database transaction (BEGIN...COMMIT) -- a try/catch in the application only handles errors the app can see; it can't undo a write the database already committed, or recover from the process crashing entirely between the two statements</p></details><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Diagnose a slow query with the wrong index</b><p>A `users` table has an index on `signup_date`, but the actual slow query filters by `email`, which has no index and triggers a full table scan on a million-row table. What's the mismatch here, and what should change?</p><details><summary>Hint</summary><p>the index exists on a column that isn't actually queried -- indexes only speed up lookups on the columns they cover, so an index needs to match the real query pattern (email, here), not just any column that seemed important when the schema was designed</p></details><textarea class="answer" placeholder="Write code or notes here..."></textarea></div></section><section class="card"><h2>Knowledge checks</h2><div class="item"><b>A foreign key enforces:</b><ol><li>nothing, it's just documentation</li><li>that the referenced row must exist</li><li>alphabetical order</li><li>password hashing</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>Which normal form requires atomic (non-list) values per cell?</b><ol><li>3NF</li><li>2NF</li><li>1NF</li><li>0NF</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>An index primarily speeds up:</b><ol><li>writes</li><li>reads/lookups</li><li>storage size</li><li>backups</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>The main cost of adding an index is:</b><ol><li>it makes reads slower</li><li>it slows down writes and uses storage</li><li>it deletes data</li><li>nothing, indexes are free</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>A key-value store like Redis is a good fit when you need:</b><ol><li>complex joins across many tables</li><li>enforced foreign keys</li><li>extremely fast lookups with no relational structure</li><li>strict 3NF normalization</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div></section></div>
+<section class="card" style="margin-top:14px"><h2>Projects</h2><div class="item"><b>Design a library schema</b><p>Design normalized tables (books, members, loans) with correct primary/foreign keys and constraints.</p></div><div class="item"><b>Normalize a real messy table</b><p>Take a deliberately un-normalized spreadsheet export and refactor it into 3NF tables.</p></div><div class="item"><b>Index-tune a slow query set</b><p>Given a schema and a set of slow queries, decide which indexes to add and justify each with the access pattern it serves.</p></div><div class="item"><b>Design, index, and transact against a real data layer</b><p>Take the backend service and API you've already built (or a new one) and give it a real, production-minded data layer: a normalized schema with correct keys and constraints, indexes chosen from actual query patterns rather than guesswork, and at least one multi-step operation correctly wrapped in a transaction so it can't leave data in a half-finished state. This capstone is about the data layer specifically -- the discipline that makes a backend trustworthy under real, concurrent load, not just correct in a single-user demo.</p></div></section></main>
+<button class="theme" data-theme-toggle="" type="button" aria-label="Toggle light or dark theme"></button>
+<script id="course-page-meta" type="application/json">{"id":"databases","lessonIds":["db-what-is","db-keys","db-constraints","db-normalization","db-indexes","db-nosql","db-postgresql-practice","databases-transactions","db-isolation-levels","db-locking-concurrency","db-query-plans-explain","db-redis-cache-consistency","db-btree-lsm","db-mysql-postgresql-production","db-schema-migrations"]}</script>
+<script defer="" src="../assets/runtime-inline/courses-databases-003.js?v=20260822-v567"></script><script defer="" src="../assets/runnable-lesson-example-fixes.js?v=20260822-v567"></script>
+<script defer="" src="../assets/fast-js-runner.js?v=20260822-v567"></script>
+<script defer="" src="../assets/lesson-example-runner.js?v=20260822-v567"></script>
+<script defer="" src="../assets/lesson-example-runner-guard.js?v=20260822-v567"></script><script defer="" src="../assets/python-inline-terminal.js?v=20260822-v567"></script><script defer="" src="../assets/runner-performance-guard.js?v=20260822-v567"></script>
+<script defer="" src="../assets/evergreen-learning-engine.js?v=20260822-v567"></script>
+<script defer="" src="../assets/evergreen-review-navigation.js?v=20260822-v567"></script>
+<script defer="" src="../assets/smart-evergreen-review.js?v=20260822-v567"></script>
+<script defer="" src="../assets/assessment-practice.js?v=20260822-v567"></script>
+<script defer src="../assets/exam-style-problem-statements-v565.js?v=20260822-v567"></script>
+<script defer="" src="../assets/github-integration.js?v=20260822-v567"></script>
+<script defer="" src="../assets/assessment-layout-fix.js?v=20260822-v567"></script>
+<script defer="" src="../assets/universal-reveal-solutions.js?v=20260822-v567"></script>
+<script defer="" src="../assets/reveal-solution-explanations.js?v=20260822-v567"></script>
+<script defer="" src="../assets/assessment-expanded-descriptions.js?v=20260822-v567"></script>
+<script defer="" src="../assets/exercise-direct-publish.js?v=20260822-v567"></script>
+<script defer="" src="../assets/universal-run-output.js?v=20260822-v567"></script>
+<script defer="" src="../assets/final-exercise-toolbar.js?v=20260822-v567"></script>
+<script defer="" src="../assets/course-project-workspace.js?v=20260822-v571"></script>
+<script defer="" src="../assets/universal-editable-code.js?v=20260822-v567"></script>
+<script defer="" src="../assets/progressive-lesson-layout.js?v=20260822-v567"></script><script defer="" src="../assets/line-by-line-explanations.js?v=20260822-v567"></script><script defer="" src="../assets/example-learning-tools.js?v=20260822-v567"></script>
+<script defer="" src="../assets/practice-publish-completer.js?v=20260823-v573"></script>
+<script defer="" src="../assets/oa-assessment-fallback.js?v=20260822-v567"></script>
+<script defer="" src="../assets/oa-assessment-upgrade.js?v=20260822-v567"></script>
+<script defer="" src="../assets/python-only-ui.js?v=20260822-v567"></script>
+<script defer="" src="../assets/conceptual-examples-v574.js?v=20260824-v574"></script><script defer="" src="../assets/program-questions-v574.js?v=20260824-v574"></script><script defer="" src="../assets/calm-study-flow.js?v=20260822-v567"></script>
+<script defer="" src="../assets/progress-resume.js?v=20260822-v567"></script>
+<script defer="" src="../assets/practice-guidance.js?v=20260823-v573"></script>
+<script src="../assets/purpose-first-prompts.js?v=20260822-v567" defer></script>
+<script defer src="../assets/scroll-performance-v561.js?v=20260822-v567"></script><script defer src="../assets/try-it-yourself-v568.js?v=20260822-v568"></script><script defer src="../assets/runnable-lesson-example-fixes.js?v=20260822-v567"></script>
+<script defer src="../assets/lesson-example-runner.js?v=20260822-v567"></script>
+<script defer src="../assets/lesson-example-runner-guard.js?v=20260822-v567"></script>
+<script defer src="../assets/evergreen-learning-engine.js?v=20260822-v567"></script>
+<script defer src="../assets/evergreen-review-navigation.js?v=20260822-v567"></script>
+<script defer src="../assets/smart-evergreen-review.js?v=20260822-v567"></script>
+<script id="csai-assessment-data" type="application/json">{"courseId":"databases","courseTitle":"Databases","defaultLanguage":"sql","exercises":[{"id":"db_ex1","title":"Identify the keys","difficulty":1,"prompt":"Given a `books` table and an `authors` table, identify the primary key of each and where the foreign key goes.","type":"practice","hint":"primary key = unique id per table; foreign key lives on the 'many' side"},{"id":"db_ex2","title":"Add constraints","difficulty":1,"prompt":"Write a CREATE TABLE for `products` with id, name (required), price (must be positive), and sku (unique).","type":"practice","hint":"NOT NULL, CHECK, UNIQUE"},{"id":"db_ex3","title":"Spot the redundancy","difficulty":2,"prompt":"A `sales` table stores customer_name and customer_email on every row. What normal form does this violate, and how would you fix it?","type":"practice","hint":"split into a customers table; classic 2NF/3NF fix"},{"id":"db_ex4","title":"When to index","difficulty":2,"prompt":"You have a `users` table queried constantly by email but rarely by signup_date. Which column(s) should be indexed, and why?","type":"practice","hint":"index email; skip rarely-queried columns"},{"id":"db_ex5","title":"Design a schema","difficulty":3,"prompt":"Design tables (with keys) for a many-to-many relationship: students can enroll in many courses, courses have many students.","type":"practice","hint":"needs a join/junction table with two foreign keys"},{"id":"db_ex6","title":"SQL vs NoSQL call","difficulty":3,"prompt":"A service needs sub-millisecond lookups of a shopping cart by session_id, no relationships, no reporting needs. SQL or NoSQL — justify it.","type":"practice","hint":"key-value store; access pattern has no relational need"},{"id":"db_ex7","title":"Diagnose a lost-transfer bug","difficulty":2,"type":"debugging","prompt":"A funds-transfer feature runs two separate, un-transacted UPDATE statements: debit account A, then credit account B. During a load test, a server crash between the two statements causes account A to be debited with account B never credited. What's the actual fix, and why doesn't 'just add a try/catch' solve it?","hint":"wrap both UPDATEs in a single database transaction (BEGIN...COMMIT) -- a try/catch in the application only handles errors the app can see; it can't undo a write the database already committed, or recover from the process crashing entirely between the two statements"},{"id":"db_ex8","title":"Diagnose a slow query with the wrong index","difficulty":2,"type":"debugging","prompt":"A `users` table has an index on `signup_date`, but the actual slow query filters by `email`, which has no index and triggers a full table scan on a million-row table. What's the mismatch here, and what should change?","hint":"the index exists on a column that isn't actually queried -- indexes only speed up lookups on the columns they cover, so an index needs to match the real query pattern (email, here), not just any column that seemed important when the schema was designed","starter":"users"}],"quiz":[{"q":"A foreign key enforces:","options":["nothing, it's just documentation","that the referenced row must exist","alphabetical order","password hashing"],"correct":1,"type":"mcq"},{"q":"Which normal form requires atomic (non-list) values per cell?","options":["3NF","2NF","1NF","0NF"],"correct":2,"type":"mcq"},{"q":"An index primarily speeds up:","options":["writes","reads/lookups","storage size","backups"],"correct":1,"type":"mcq"},{"q":"The main cost of adding an index is:","options":["it makes reads slower","it slows down writes and uses storage","it deletes data","nothing, indexes are free"],"correct":1,"type":"mcq"},{"q":"A key-value store like Redis is a good fit when you need:","options":["complex joins across many tables","enforced foreign keys","extremely fast lookups with no relational structure","strict 3NF normalization"],"correct":2,"type":"mcq"}],"structured":{}}</script>
+<script defer src="../assets/assessment-practice.js?v=20260822-v567"></script>
+<script defer src="../assets/github-integration.js?v=20260822-v567"></script>
+<script defer src="../assets/assessment-layout-fix.js?v=20260822-v567"></script>
+<script defer src="../assets/universal-reveal-solutions.js?v=20260822-v567"></script>
+<script defer src="../assets/reveal-solution-explanations.js?v=20260822-v567"></script>
+<script defer src="../assets/assessment-expanded-descriptions.js?v=20260822-v567"></script>
+<script defer src="../assets/exercise-direct-publish.js?v=20260822-v567"></script>
+<script defer src="../assets/universal-run-output.js?v=20260822-v567"></script>
+<script defer src="../assets/final-exercise-toolbar.js?v=20260822-v567"></script>
+<script id="csai-project-data" type="application/json">{"courseId":"databases","courseTitle":"Databases","defaultLanguage":"sql","projects":[{"id":"databases-proj-1","title":"Design a library schema","description":"Design normalized tables (books, members, loans) with correct primary/foreign keys and constraints.","requirements":[],"starter":"","language":"sql"},{"id":"databases-proj-2","title":"Normalize a real messy table","description":"Take a deliberately un-normalized spreadsheet export and refactor it into 3NF tables.","requirements":[],"starter":"","language":"sql"},{"id":"databases-proj-3","title":"Index-tune a slow query set","description":"Given a schema and a set of slow queries, decide which indexes to add and justify each with the access pattern it serves.","requirements":[],"starter":"","language":"sql"},{"id":"project-4","title":"Design, index, and transact against a real data layer","description":"Take the backend service and API you've already built (or a new one) and give it a real, production-minded data layer: a normalized schema with correct keys and constraints, indexes chosen from actual query patterns rather than guesswork, and at least one multi-step operation correctly wrapped in a transaction so it can't leave data in a half-finished state. This capstone is about the data layer specifically -- the discipline that makes a backend trustworthy under real, concurrent load, not just correct in a single-user demo.","requirements":["A normalized schema (justify your normal form choices) with correct primary/foreign keys and constraints","At least one index added specifically because of a real, stated query pattern -- not a guess -- with a before/after note on what it improved","At least one multi-step operation (e.g. a transfer, an order-plus-inventory-decrement) correctly wrapped in a transaction, with a written explanation of what would go wrong without it","A short note on one deliberate SQL vs NoSQL (or table design) trade-off you made and why"],"starter":"","language":"sql"}]}</script>
+<script defer src="../assets/course-project-workspace.js?v=20260822-v571"></script>
+<script defer src="../assets/example-learning-tools.js?v=20260822-v567"></script>
+<script defer src="../assets/practice-publish-completer.js?v=20260823-v573"></script>
+
+<!-- csai-production-augmentation -->
+<script src="../assets/adaptive-practice-layer.js?v=20260822-v567" defer></script>
+<script src="../assets/project-readme-layer.js?v=20260822-v567" defer></script>
+<!-- /csai-production-augmentation -->
+<script src="/assets/oa-assessment-fallback.js?v=20260811-1" defer></script>
+<script src="/assets/oa-assessment-upgrade.js?v=20260811-1" defer></script>
+
+<script src="/assets/python-only-ui.js?v=20260811-2" defer></script>
+
+<script defer src="../assets/study-examples.js?v=20260824-v574"></script>
+
+<script src="../assets/runtime-inline/courses-databases-002.js?v=20260822-v567"></script>
+</body></html>

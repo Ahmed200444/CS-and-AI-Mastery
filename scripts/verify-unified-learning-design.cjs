@@ -25,12 +25,17 @@ if (!fs.existsSync(courseDir)) {
   fail('generated courses directory missing');
 } else {
   const pages = fs.readdirSync(courseDir).filter(f=>f.endsWith('.html'));
-  if (pages.length !== 57) fail(`expected 57 generated course pages, found ${pages.length}`);
+  if (pages.length !== 62) fail(`expected 62 generated course pages, found ${pages.length}`);
   for (const file of pages) {
     const html = fs.readFileSync(path.join(courseDir,file),'utf8');
     if (count(html,'../assets/unified-learning-design.css') !== 1) fail(`${file}: missing or duplicate unified stylesheet`);
     if (count(html,'../assets/unified-learning-design.js') !== 1) fail(`${file}: missing or duplicate unified script`);
-    if (count(html,"document.documentElement.classList.add('csai-unified-design')") !== 1) fail(`${file}: missing unified design first-paint marker`);
+    const runtimeRefs=[...html.matchAll(/<script\b[^>]*src=["']([^"']*runtime-inline\/courses-[^"']+\.js)[^"']*["'][^>]*><\/script>/gi)].map(m=>m[1].split('?')[0]);
+    const hasFirstPaint=runtimeRefs.some(ref=>{
+      const resolved=path.resolve(courseDir,ref);
+      return fs.existsSync(resolved)&&fs.readFileSync(resolved,'utf8').includes("document.documentElement.classList.add('csai-unified-design')");
+    });
+    if (!hasFirstPaint) fail(`${file}: missing external unified design first-paint marker`);
   }
 }
 
@@ -39,4 +44,4 @@ if (failures.length) {
   failures.forEach(f=>console.error(` - ${f}`));
   process.exit(1);
 }
-console.log('Unified learning design verification passed across 57 generated course pages.');
+console.log('Unified learning design verification passed across 62 generated course pages.');

@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta data-csai-head-preload="calmfast2"><link rel="preload" href="/runtime/cpp/JSCPP.es5.min.js" as="script"><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>C++ Programming &amp; DSA — CS &amp; AI Mastery</title><script src="../assets/runtime-inline/courses-cpp-dsa-001.js?v=20260822-v567"></script><script defer src="../assets/python-inline-terminal.js?v=20260822-v567"></script><script defer src="../assets/runner-performance-guard.js?v=20260822-v567"></script><script>(function(){try{var t=localStorage.getItem('cs-ai-mastery-theme')||'light';document.documentElement.dataset.theme=t==='dark'?'dark':'light'}catch(e){}})();</script><style>
+:root{color-scheme:light;--bg:#f4f7fb;--panel:#fff;--text:#172231;--muted:#5d6c7c;--border:#d8e1ea;--pill:#e8f1f8;--pilltext:#174b72;--accent:#17649a;--code:#101827;--note:#fff7e7}html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#edf3f8;--muted:#c6d1da;--border:#344352;--pill:#223446;--pilltext:#b9dcf5;--accent:#4da3df;--code:#0b111b;--note:#2b2417}*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:1100px;margin:auto;padding:18px 20px 110px}.top{position:sticky;top:0;z-index:4;display:flex;justify-content:space-between;gap:10px;padding:10px 0;background:var(--bg)}.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid #b8c7d6;border-radius:9px;padding:9px 13px;background:var(--panel);color:var(--text);font:inherit;font-weight:800;cursor:pointer}.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.hero,.card,.lesson{background:var(--panel);border:1px solid var(--border);border-radius:15px;color:var(--text)}.hero{padding:22px;margin:8px 0 16px}.kicker{font-size:.74rem;letter-spacing:.1em;font-weight:900;color:var(--accent)}.hero h1{margin:5px 0 8px;font-size:clamp(2rem,4vw,3.2rem);line-height:1.08}.muted{color:var(--muted)}.meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.pill{padding:4px 8px;border-radius:999px;background:var(--pill);color:var(--pilltext);font-size:.78rem;font-weight:800}.progress{height:10px;border-radius:999px;background:var(--border);overflow:hidden;margin:14px 0 5px}.progress span{display:block;height:100%;background:#16805b}.lessons{display:grid;gap:11px}.lesson{overflow:hidden}.lesson summary{display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;font-weight:850}.num{display:grid;place-items:center;min-width:34px;height:28px;border-radius:8px;background:var(--pill);color:var(--pilltext)}.title{flex:1}.check{display:flex;gap:6px;align-items:center;font-size:.82rem;font-weight:700}.body{padding:0 16px 18px}.body h3{margin:17px 0 7px;font-size:1rem}.body p,.body li{line-height:1.68}.code{white-space:pre-wrap;overflow:auto;padding:13px;border-radius:10px;background:var(--code);color:#f4f7fb;font:500 .86rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}.note{margin-top:12px;padding:12px;border-left:4px solid #d28b23;border-radius:8px;background:var(--note)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}.card{padding:17px}.card h2{margin:0 0 10px}.item{padding:12px;margin:9px 0;border-radius:10px;background:var(--bg);border:1px solid var(--border)}.answer{width:100%;min-height:90px;margin-top:8px;padding:10px;border:1px solid #aebdca;border-radius:8px;background:transparent;color:inherit;font:inherit}.theme{position:fixed;right:22px;bottom:22px;z-index:20;border:1px solid #b8c7d6;border-radius:999px;padding:10px 16px;background:var(--panel);color:var(--text);font:800 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.16);cursor:pointer}.lesson-main-explanation{margin:12px 0 20px;padding:4px 0 18px;border-bottom:1px solid var(--border)}.lesson-main-explanation h3{margin-top:22px!important;margin-bottom:8px!important}.deep-steps{padding-left:24px}.deep-scenario,.deep-takeaway{padding:13px 14px;border:1px solid var(--border);border-radius:10px;background:var(--bg);border-left:4px solid var(--accent)}@media(max-width:720px){.wrap{padding:10px 10px 100px}.grid{grid-template-columns:1fr}.top .btn{flex:1}.lesson summary{flex-wrap:wrap}.check{width:100%;padding-left:44px}}
+</style>
+<script defer="" src="../assets/vscode-diagnostics.js?v=20260822-v567"></script>
+<link href="../assets/oa-assessment-fallback.css?v=20260822-v567" rel="stylesheet"/><link href="../assets/oa-assessment-upgrade.css?v=20260822-v567" rel="stylesheet"/><link crossorigin="" data-csai-local-speed-hint="" href="https://cdn.jsdelivr.net" rel="preconnect"/><style id="csai-expanded-lessons-style">
+.lesson-main-explanation{margin:12px 0 20px;padding:4px 0 18px;border-bottom:1px solid var(--border)}
+.lesson-main-explanation h3{margin-top:22px!important;margin-bottom:8px!important;font-size:1.02rem!important}.lesson-main-explanation h3:first-child{margin-top:8px!important;font-size:1.12rem!important}
+.lesson-main-explanation p,.lesson-main-explanation li{line-height:1.75!important}
+.deep-steps{margin:8px 0 4px;padding-left:24px}.deep-steps li{margin:7px 0}
+.deep-scenario,.deep-takeaway{margin:9px 0;padding:13px 14px;border:1px solid var(--border);border-radius:10px;background:var(--bg)}
+.deep-scenario{border-left:4px solid var(--accent)}
+.deep-takeaway{border-left:4px solid #16805b}
+.deep-scenario p,.deep-takeaway p{margin:0}
+.deep-check{margin-bottom:4px}.deep-check li{margin:6px 0}
+</style>
+<link rel="stylesheet" href="../assets/scroll-performance-v561.css?v=20260822-v567">
+<link rel="stylesheet" href="../assets/final-quality-layer.css?v=20260822-v567">
+<script src="../assets/smart-code-editor.js?v=20260822-v567" defer></script>
+<script src="../assets/portfolio-publish-controls.js?v=20260822-v567" defer></script>
+
+<!-- csai-unified-design:start -->
+<link rel="stylesheet" href="../assets/unified-learning-design.css?v=20260822-v567">
+<link rel="stylesheet" href="../assets/product-redesign-v2.css?v=20260822-v567">
+<link rel="stylesheet" href="../assets/adaptive-v4-live.css?v=20260822-v567">
+<link rel="stylesheet" href="../assets/hero-polish.css?v=20260822-v567">
+<script>document.documentElement.classList.add('csai-unified-design')</script>
+<script src="../assets/unified-learning-design.js?v=20260822-v567" defer></script>
+<script src="../assets/product-redesign-v2.js?v=20260822-v567" defer></script>
+<script src="../assets/adaptive-v4-live.js?v=20260822-v567" defer></script>
+<script src="../assets/hero-polish.js?v=20260822-v567" defer></script>
+<!-- csai-unified-design:end -->
+<link rel="stylesheet" href="/assets/oa-assessment-fallback.css?v=20260811-1">
+<link rel="stylesheet" href="/assets/oa-assessment-upgrade.css?v=20260811-1">
+</head><body data-course-id="cpp-dsa"><main class="wrap"><div class="top"><a class="btn" href="../index.html#courses">← All courses</a><a class="btn primary" href="../index.html#hub">Home</a></div><section class="hero"><div class="kicker">COURSE</div><h1><span class="hero-icon">⚡</span>C++ Programming &amp; DSA</h1><p class="muted">C++ from first compile through modern resource-safe programming, then a complete DSA and interview problem-solving track implemented in C++.</p><div class="meta"><span class="pill">54 lessons</span><span class="pill">54 exercises</span><span class="pill">54 checkpoints</span><span class="pill">6 projects</span></div><div class="progress"><span data-progress-bar="" style="width:0%"></span></div><div class="muted" data-progress-status="">0 of 54 lessons complete</div></section><section class="lessons"><details class="lesson" data-lesson="cpp-01" open=""><summary><span class="num">01</span><span class="title">C++ toolchain, compilation &amp; program structure</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Compile and run a C++ program while explaining the preprocessing, compilation, linking, and execution stages.</li><li>Explain how compiler changes the behavior, result, or engineering decision in a concrete example</li><li>Connect compiler with linker and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>C++ source code is translated into a native program rather than interpreted line by line. A typical build passes source through preprocessing, compilation, assembly, and linking.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">compiler</span><span class="pill">linker</span><span class="pill">main</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    cout &lt;&lt; "Hello, C++!\n";
+    return 0;
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in C++ toolchain, compilation &amp; program structure is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-02"><summary><span class="num">02</span><span class="title">Tokens, identifiers, scope &amp; namespaces</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Recognize C++ tokens and use scopes and namespaces to avoid naming collisions.</li><li>Explain how token changes the behavior, result, or engineering decision in a concrete example</li><li>Connect token with scope and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>C++ programs are made from tokens such as keywords, identifiers, literals, operators, and punctuation. Names live in scopes, so the same identifier may refer to different entities depending on where it appears.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">token</span><span class="pill">scope</span><span class="pill">namespace</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+using namespace std;
+
+namespace app {
+    int version = 2;
+}
+int main() {
+    int version = 1;
+    cout &lt;&lt; version &lt;&lt; " " &lt;&lt; app::version &lt;&lt; "\n";
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Tokens, identifiers, scope &amp; namespaces is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-03"><summary><span class="num">03</span><span class="title">Fundamental types, variables &amp; type inference</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Choose suitable C++ fundamental types and understand what `auto` infers.</li><li>Explain how type changes the behavior, result, or engineering decision in a concrete example</li><li>Connect type with variable and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>C++ is statically typed: every object has a type known at compile time. Integer, floating-point, character, and Boolean types have different representations and operations.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">type</span><span class="pill">variable</span><span class="pill">auto</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main() {
+    int age = 21;
+    double gpa = 3.75;
+    bool active = true;
+    auto name = string("Ahmed");
+    cout &lt;&lt; name &lt;&lt; " " &lt;&lt; age &lt;&lt; " " &lt;&lt; gpa &lt;&lt; " " &lt;&lt; active &lt;&lt; "\n";
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Fundamental types, variables &amp; type inference is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-04"><summary><span class="num">04</span><span class="title">Constants, literals &amp; numeric limits</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Use `const` and `constexpr` correctly and reason about numeric ranges.</li><li>Explain how const changes the behavior, result, or engineering decision in a concrete example</li><li>Connect const with constexpr and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Constants communicate that a value should not change. `const` prevents modification through that name, while `constexpr` additionally requires a value that can be evaluated at compile time when the context permits.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">const</span><span class="pill">constexpr</span><span class="pill">numeric limits</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+#include &lt;limits&gt;
+using namespace std;
+
+int main() {
+    constexpr int daysPerWeek = 7;
+    const double pi = 3.1415926535;
+    cout &lt;&lt; daysPerWeek &lt;&lt; " " &lt;&lt; pi &lt;&lt; "\n";
+    cout &lt;&lt; numeric_limits&lt;int&gt;::max() &lt;&lt; "\n";
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Constants, literals &amp; numeric limits is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-05"><summary><span class="num">05</span><span class="title">Input, output &amp; formatting with iostream</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Read typed input and format output predictably using standard streams.</li><li>Explain how cin changes the behavior, result, or engineering decision in a concrete example</li><li>Connect cin with cout and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>`std::cin` extracts formatted values from standard input and `std::cout` inserts values into standard output. Stream state matters: invalid input can make later reads fail until the error is handled.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">cin</span><span class="pill">cout</span><span class="pill">iomanip</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+using namespace std;
+
+int main() {
+    double price = 19.995;
+    int quantity = 3;
+    cout &lt;&lt; fixed &lt;&lt; setprecision(2);
+    cout &lt;&lt; "Total: " &lt;&lt; price * quantity &lt;&lt; "\n";
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Input, output &amp; formatting with iostream is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-06"><summary><span class="num">06</span><span class="title">Operators, precedence &amp; expressions</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Evaluate arithmetic, relational, logical, and assignment expressions without relying on guesswork.</li><li>Explain how operator changes the behavior, result, or engineering decision in a concrete example</li><li>Connect operator with precedence and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Operators combine values into expressions. Multiplication binds more tightly than addition, comparison produces Boolean results, and logical operators combine conditions.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">operator</span><span class="pill">precedence</span><span class="pill">expression</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a = 7, b = 3;
+    cout &lt;&lt; a / b &lt;&lt; " " &lt;&lt; a % b &lt;&lt; "\n";
+    bool ok = (a &gt; b) &amp;&amp; (b != 0);
+    cout &lt;&lt; ok &lt;&lt; "\n";
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Operators, precedence &amp; expressions is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-07"><summary><span class="num">07</span><span class="title">Conversions, casts &amp; type safety</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Distinguish implicit conversions from deliberate casts and avoid accidental narrowing.</li><li>Explain how conversion changes the behavior, result, or engineering decision in a concrete example</li><li>Connect conversion with static_cast and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>C++ performs many implicit conversions, but a conversion can lose information. Assigning a floating-point value to an integer discards the fractional part, and signed/unsigned comparisons can surprise beginners.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">conversion</span><span class="pill">static_cast</span><span class="pill">narrowing</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int total = 7;
+    int count = 2;
+    double average = static_cast&lt;double&gt;(total) / count;
+    cout &lt;&lt; average &lt;&lt; "\n";
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Conversions, casts &amp; type safety is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-08"><summary><span class="num">08</span><span class="title">Conditionals: if, else &amp; switch</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Model mutually exclusive decisions with clear conditional control flow.</li><li>Explain how if changes the behavior, result, or engineering decision in a concrete example</li><li>Connect if with else and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Conditional statements choose which code runs. An `if` evaluates a Boolean condition; `else if` checks alternatives in order; `else` is the fallback.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">if</span><span class="pill">else</span><span class="pill">switch</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int score = 82;
+    if (score &gt;= 90) {
+        cout &lt;&lt; "A\n";
+    }
+    else if (score &gt;= 80) {
+        cout &lt;&lt; "B\n";
+    }
+    else {
+        cout &lt;&lt; "Keep practicing\n";
+    }
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Conditionals: if, else &amp; switch is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-09"><summary><span class="num">09</span><span class="title">Loops: for, while, do-while, break &amp; continue</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Choose the right loop form and trace loop state without off-by-one errors.</li><li>Explain how for changes the behavior, result, or engineering decision in a concrete example</li><li>Connect for with while and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Loops repeat work while a condition permits it. A `for` loop keeps initialization, condition, and update together; a `while` loop emphasizes a condition-driven repetition; `do-while` guarantees at least one execution.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">for</span><span class="pill">while</span><span class="pill">break</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int sum = 0;
+    for (int i = 1; i &lt;= 5; ++i) {
+        if (i == 3) {
+            continue;
+        }
+        sum += i;
+    }
+    cout &lt;&lt; sum &lt;&lt; "\n";
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Loops: for, while, do-while, break &amp; continue is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-10"><summary><span class="num">10</span><span class="title">Functions, declarations &amp; return values</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Design small functions with clear parameters, return values, and declarations.</li><li>Explain how function changes the behavior, result, or engineering decision in a concrete example</li><li>Connect function with parameter and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Functions create reusable units of behavior. A declaration tells the compiler a function signature before use; a definition supplies the body.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">function</span><span class="pill">parameter</span><span class="pill">return</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">#include &lt;iostream&gt;
+using namespace std;
+
+int square(int value);
+int main() {
+    cout &lt;&lt; square(6) &lt;&lt; "\n";
+}
+int square(int value) {
+    return value * value;
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Functions, declarations &amp; return values is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-11"><summary><span class="num">11</span><span class="title">Default arguments &amp; function overloading</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Use overloads and default arguments without creating ambiguous interfaces.</li><li>Explain how overloading changes the behavior, result, or engineering decision in a concrete example</li><li>Connect overloading with default argument and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>C++ can select among functions with the same name when their parameter lists differ. This is compile-time overloading.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">overloading</span><span class="pill">default argument</span><span class="pill">signature</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+using namespace std;
+
+int area(int side) {
+    return side * side;
+}
+double area(double w, double h = 1.0) {
+    return w * h;
+}
+int main() {
+    cout &lt;&lt; area(4) &lt;&lt; " " &lt;&lt; area(2.5, 3.0) &lt;&lt; "\n";
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Default arguments &amp; function overloading is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-12"><summary><span class="num">12</span><span class="title">References, const references &amp; parameter passing</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Choose value, reference, or const-reference passing based on mutation and copying needs.</li><li>Explain how reference changes the behavior, result, or engineering decision in a concrete example</li><li>Connect reference with const reference and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Passing by value gives a function its own copy. Passing by non-const reference lets the function modify the caller’s object.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">reference</span><span class="pill">const reference</span><span class="pill">pass by value</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+void addBang(string&amp; text) {
+    text += "!";
+}
+void show(const string&amp; text) {
+    cout &lt;&lt; text &lt;&lt; "\n";
+}
+int main() {
+    string name = "Ahmed";
+    addBang(name);
+    show(name);
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in References, const references &amp; parameter passing is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-13"><summary><span class="num">13</span><span class="title">Recursion &amp; the call stack</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Trace recursive calls, identify base cases, and relate recursion to stack frames.</li><li>Explain how recursion changes the behavior, result, or engineering decision in a concrete example</li><li>Connect recursion with base case and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A recursive function solves a problem by calling itself on a smaller problem. Every active call has a stack frame containing its parameters and local state.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">recursion</span><span class="pill">base case</span><span class="pill">call stack</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">#include &lt;iostream&gt;
+using namespace std;
+
+long long factorial(int n) {
+    if (n &lt;= 1) {
+        return 1;
+    }
+    return n * factorial(n - 1);
+}
+int main() {
+    cout &lt;&lt; factorial(5) &lt;&lt; "\n";
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Recursion &amp; the call stack is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-14"><summary><span class="num">14</span><span class="title">Raw arrays &amp; multidimensional arrays</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Work safely with fixed-size contiguous arrays and explicit bounds.</li><li>Explain how array changes the behavior, result, or engineering decision in a concrete example</li><li>Connect array with index and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A raw C++ array stores a fixed number of same-type elements contiguously. Indexing begins at zero, and the language does not automatically check raw-array bounds.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">array</span><span class="pill">index</span><span class="pill">contiguous memory</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int values[4] = {3, 6, 9, 12};
+    for (int i = 0; i &lt; 4; ++i) {
+        cout &lt;&lt; values[i] &lt;&lt; " ";
+    }
+    cout &lt;&lt; "\n";
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Raw arrays &amp; multidimensional arrays is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-15"><summary><span class="num">15</span><span class="title">std::array, std::vector &amp; capacity</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Choose between fixed-size `std::array` and dynamic `std::vector` and explain size versus capacity.</li><li>Explain how std::array changes the behavior, result, or engineering decision in a concrete example</li><li>Connect std::array with std::vector and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>`std::array` wraps a fixed-size array with container operations, while `std::vector` manages a dynamically sized contiguous buffer. Vector `size()` is the number of elements; `capacity()` is the number that fit before reallocation.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">std::array</span><span class="pill">std::vector</span><span class="pill">capacity</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main() {
+    vector&lt;int&gt; values{2, 4, 6};
+    values.push_back(8);
+    cout &lt;&lt; values.size() &lt;&lt; " " &lt;&lt; values.back() &lt;&lt; "\n";
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in std::array, std::vector &amp; capacity is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-16"><summary><span class="num">16</span><span class="title">std::string, string_view &amp; text operations</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Manipulate strings efficiently and understand when `std::string_view` is a non-owning view.</li><li>Explain how std::string changes the behavior, result, or engineering decision in a concrete example</li><li>Connect std::string with string_view and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>`std::string` owns a dynamic character sequence. It supports searching, slicing, concatenation, iteration, and comparison.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">std::string</span><span class="pill">string_view</span><span class="pill">substring</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;string_view&gt;
+using namespace std;
+
+void showPrefix(string_view s) {
+    cout &lt;&lt; s.substr(0, 3) &lt;&lt; "\n";
+}
+int main() {
+    string word = "algorithm";
+    showPrefix(word);
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in std::string, string_view &amp; text operations is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-17"><summary><span class="num">17</span><span class="title">Pointers, addresses &amp; pointer arithmetic</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Explain pointer values, dereferencing, null pointers, and their relationship to arrays.</li><li>Explain how pointer changes the behavior, result, or engineering decision in a concrete example</li><li>Connect pointer with dereference and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A pointer stores a memory address. `&amp;object` obtains an address and `*pointer` accesses the pointed-to object.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">pointer</span><span class="pill">dereference</span><span class="pill">address</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int score = 90;
+    int* p = &amp;score;
+    *p += 5;
+    cout &lt;&lt; score &lt;&lt; " " &lt;&lt; *p &lt;&lt; "\n";
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Pointers, addresses &amp; pointer arithmetic is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-18"><summary><span class="num">18</span><span class="title">Dynamic memory, new/delete &amp; ownership</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Understand manual dynamic allocation and why modern C++ prefers RAII owners.</li><li>Explain how new changes the behavior, result, or engineering decision in a concrete example</li><li>Connect new with delete and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>`new` allocates an object dynamically and returns a pointer; `delete` destroys and releases a matching single object. Incorrect pairing can leak memory or create dangling pointers and double deletes.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">new</span><span class="pill">delete</span><span class="pill">ownership</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int* value = new int(42);
+    cout &lt;&lt; *value &lt;&lt; "\n";
+    delete value;
+    value = nullptr;
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Dynamic memory, new/delete &amp; ownership is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-19"><summary><span class="num">19</span><span class="title">Structs, enum &amp; enum class</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Model related data with structs and finite states with scoped enums.</li><li>Explain how struct changes the behavior, result, or engineering decision in a concrete example</li><li>Connect struct with enum class and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A `struct` defines a user type whose members are public by default and is useful for records and lightweight value objects. Enumerations define a finite set of named values.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">struct</span><span class="pill">enum class</span><span class="pill">aggregate</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+enum class Status {
+    Pending, Done
+};
+struct Task {
+    string name;
+    Status status;
+};
+int main() {
+    Task t{"Study C++", Status::Pending};
+    cout &lt;&lt; t.name &lt;&lt; "\n";
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Structs, enum &amp; enum class is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-20"><summary><span class="num">20</span><span class="title">Classes, objects &amp; access control</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Design a class with an invariant and intentional public/private boundaries.</li><li>Explain how class changes the behavior, result, or engineering decision in a concrete example</li><li>Connect class with private and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A class combines state and operations while controlling access. Private representation can be changed only through the class’s implementation, which lets the class preserve invariants.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">class</span><span class="pill">private</span><span class="pill">public</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+using namespace std;
+
+class Counter {
+private:
+    int value_ = 0;
+
+public:
+    void increment() {
+        ++value_;
+    }
+
+    int value() const {
+        return value_;
+    }
+};
+
+int main() {
+    Counter counter;
+    counter.increment();
+    cout &lt;&lt; counter.value() &lt;&lt; "\n";
+    return 0;
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Classes, objects &amp; access control is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-21"><summary><span class="num">21</span><span class="title">Constructors, destructors &amp; initializer lists</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Initialize objects correctly and explain deterministic destruction.</li><li>Explain how constructor changes the behavior, result, or engineering decision in a concrete example</li><li>Connect constructor with destructor and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Constructors establish a valid object state. Member initializer lists construct members directly and are required for references, const members, and base classes.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">constructor</span><span class="pill">destructor</span><span class="pill">initializer list</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class User {
+    string name_;
+    public:
+    explicit User(string name) : name_(move(name)) {
+    }
+    ~User() = default;
+    const string&amp; name() const {
+        return name_;
+    }
+};
+int main() {
+    User u("Ahmed");
+    cout &lt;&lt; u.name() &lt;&lt; "\n";
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Constructors, destructors &amp; initializer lists is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-22"><summary><span class="num">22</span><span class="title">const methods, static members &amp; friend declarations</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Use const-correct member functions and understand class-level static state and controlled friendship.</li><li>Explain how const method changes the behavior, result, or engineering decision in a concrete example</li><li>Connect const method with static member and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A const member function promises not to modify the observable state of its object through `this`. Static members belong to the class rather than each object.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">const method</span><span class="pill">static member</span><span class="pill">friend</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+using namespace std;
+
+class Point {
+    int x_;
+    public:
+    explicit Point(int x) : x_(x) {
+    }
+    int x() const {
+        return x_;
+    }
+    static int dimensions() {
+        return 2;
+    }
+};
+int main() {
+    Point p(4);
+    cout &lt;&lt; p.x() &lt;&lt; " " &lt;&lt; Point::dimensions() &lt;&lt; "\n";
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in const methods, static members &amp; friend declarations is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-23"><summary><span class="num">23</span><span class="title">Inheritance &amp; base/derived relationships</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Use inheritance only for genuine substitutable “is-a” relationships.</li><li>Explain how inheritance changes the behavior, result, or engineering decision in a concrete example</li><li>Connect inheritance with base class and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Inheritance creates a derived class from a base class. Public inheritance models an “is-a” relationship: code expecting the base should be able to use the derived object correctly.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">inheritance</span><span class="pill">base class</span><span class="pill">derived class</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+using namespace std;
+
+class Device {
+    public: void powerOn() {
+        cout &lt;&lt; "on\n";
+    }
+};
+class Sensor : public Device {
+    public: int read() const {
+        return 42;
+    }
+};
+int main() {
+    Sensor s;
+    s.powerOn();
+    cout &lt;&lt; s.read() &lt;&lt; "\n";
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Inheritance &amp; base/derived relationships is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-24"><summary><span class="num">24</span><span class="title">Virtual functions, polymorphism &amp; abstract classes</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Implement runtime polymorphism safely through virtual interfaces.</li><li>Explain how virtual changes the behavior, result, or engineering decision in a concrete example</li><li>Connect virtual with override and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A virtual function enables dynamic dispatch through a base pointer or reference. A pure virtual function makes a class abstract and defines an interface requirement for derived classes.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">virtual</span><span class="pill">override</span><span class="pill">abstract class</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+#include &lt;memory&gt;
+using namespace std;
+
+struct Shape {
+    virtual ~Shape() = default;
+    virtual double area() const = 0;
+};
+
+struct Square : Shape {
+    double side;
+
+    explicit Square(double value) : side(value) {}
+
+    double area() const override {
+        return side * side;
+    }
+};
+
+int main() {
+    unique_ptr&lt;Shape&gt; shape = make_unique&lt;Square&gt;(3);
+    cout &lt;&lt; shape-&gt;area() &lt;&lt; "\n";
+    return 0;
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Virtual functions, polymorphism &amp; abstract classes is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-25"><summary><span class="num">25</span><span class="title">Operator overloading</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Overload operators only when the operation has a natural meaning for the type.</li><li>Explain how operator overload changes the behavior, result, or engineering decision in a concrete example</li><li>Connect operator overload with value type and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Operator overloading lets user-defined types participate in familiar syntax. A good overload preserves the operator’s expected meaning, such as equality comparing value state or `+` producing a combined value without surprising mutation.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">operator overload</span><span class="pill">value type</span><span class="pill">comparison</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+using namespace std;
+
+struct Vec2 {
+    int x, y;
+    Vec2 operator+(const Vec2&amp; other) const {
+        return {x + other.x, y + other.y};
+    }
+};
+int main() {
+    Vec2 a{1, 2}, b{3, 4};
+    auto c = a + b;
+    cout &lt;&lt; c.x &lt;&lt; ", " &lt;&lt; c.y &lt;&lt; "\n";
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Operator overloading is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-26"><summary><span class="num">26</span><span class="title">Exception handling &amp; exception safety</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Use exceptions for exceptional failures and reason about cleanup during stack unwinding.</li><li>Explain how try changes the behavior, result, or engineering decision in a concrete example</li><li>Connect try with catch and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Exceptions separate a failure signal from ordinary return values. `throw` transfers control to a matching handler while stack unwinding destroys automatic objects along the way.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">try</span><span class="pill">catch</span><span class="pill">exception safety</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+#include &lt;stdexcept&gt;
+using namespace std;
+
+double divide(double a, double b) {
+    if (b == 0) {
+        throw invalid_argument("zero divisor");
+    }
+    return a / b;
+}
+int main() {
+    try {
+        cout &lt;&lt; divide(8, 2) &lt;&lt; "\n";
+    }
+    catch (const exception&amp; e) {
+        cout &lt;&lt; e.what() &lt;&lt; "\n";
+    }
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Exception handling &amp; exception safety is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-27"><summary><span class="num">27</span><span class="title">File streams &amp; persistent data</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Read and write files using RAII stream objects and check stream state.</li><li>Explain how ifstream changes the behavior, result, or engineering decision in a concrete example</li><li>Connect ifstream with ofstream and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>C++ file streams use the same stream model as console I/O. `std::ifstream` opens input files and `std::ofstream` opens output files, with their resources released automatically when the stream objects are destroyed.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">ifstream</span><span class="pill">ofstream</span><span class="pill">stream state</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;fstream&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    ofstream out("scores.txt");
+    out &lt;&lt; "Ahmed 95\n";
+    out.close();
+    ifstream in("scores.txt");
+    string name;
+    int score;
+    if (in &gt;&gt; name &gt;&gt; score) {
+        cout &lt;&lt; name &lt;&lt; " " &lt;&lt; score &lt;&lt; "\n";
+    }
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in File streams &amp; persistent data is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-28"><summary><span class="num">28</span><span class="title">Function &amp; class templates</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Write type-generic code and understand compile-time template instantiation.</li><li>Explain how template changes the behavior, result, or engineering decision in a concrete example</li><li>Connect template with generic programming and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Templates parameterize code by types or values. The compiler instantiates concrete functions or classes when they are used with particular template arguments.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">template</span><span class="pill">generic programming</span><span class="pill">instantiation</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+using namespace std;
+
+template &lt;typename T&gt;
+T maximum(T a, T b) {
+    return a &lt; b ? b : a;
+}
+int main() {
+    cout &lt;&lt; maximum(3, 7) &lt;&lt; " " &lt;&lt; maximum(2.5, 1.2) &lt;&lt; "\n";
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Function &amp; class templates is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-29"><summary><span class="num">29</span><span class="title">STL iterators &amp; algorithms</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Use iterators and standard algorithms instead of rewriting common traversal logic.</li><li>Explain how iterator changes the behavior, result, or engineering decision in a concrete example</li><li>Connect iterator with algorithm and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Iterators provide a uniform way to refer to positions in containers. Algorithms such as `sort`, `find`, `count_if`, and `transform` operate over iterator ranges, separating traversal mechanics from the operation being performed.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">iterator</span><span class="pill">algorithm</span><span class="pill">sort</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main() {
+    vector&lt;int&gt; v{5, 1, 4, 2};
+    sort(v.begin(), v.end());
+    for (int x : v) {
+        cout &lt;&lt; x &lt;&lt; " ";
+    }
+    cout &lt;&lt; "\n";
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in STL iterators &amp; algorithms is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-30"><summary><span class="num">30</span><span class="title">Lambdas, captures &amp; callable objects</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Write concise local behavior and reason about lambda captures and lifetimes.</li><li>Explain how lambda changes the behavior, result, or engineering decision in a concrete example</li><li>Connect lambda with capture and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A lambda creates an unnamed function object. Its capture list controls which surrounding variables are copied or referenced into that object.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">lambda</span><span class="pill">capture</span><span class="pill">callable</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main() {
+    int threshold = 5;
+    vector&lt;int&gt; values{2, 7, 4, 9};
+
+    auto count = count_if(values.begin(), values.end(), [threshold](int value) {
+        return value &gt; threshold;
+    });
+
+    cout &lt;&lt; count &lt;&lt; "\n";
+    return 0;
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Lambdas, captures &amp; callable objects is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-31"><summary><span class="num">31</span><span class="title">RAII &amp; smart pointers</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Manage resources with deterministic object lifetimes instead of manual cleanup paths.</li><li>Explain how RAII changes the behavior, result, or engineering decision in a concrete example</li><li>Connect RAII with unique_ptr and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>RAII binds resource lifetime to object lifetime: acquisition happens during construction and release during destruction. `std::unique_ptr` represents exclusive ownership and is cheap to move.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">RAII</span><span class="pill">unique_ptr</span><span class="pill">shared_ptr</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+#include &lt;memory&gt;
+using namespace std;
+
+int main() {
+    auto value = make_unique&lt;int&gt;(42);
+    cout &lt;&lt; *value &lt;&lt; "\n";
+    auto moved = move(value);
+    cout &lt;&lt; *moved &lt;&lt; "\n";
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in RAII &amp; smart pointers is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-32"><summary><span class="num">32</span><span class="title">Copy/move semantics &amp; Rule of Zero/Five</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Explain copy versus move operations and prefer types that need no custom resource-management special members.</li><li>Explain how copy changes the behavior, result, or engineering decision in a concrete example</li><li>Connect copy with move and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>C++ distinguishes copying an object’s value from moving resources out of an object that is about to be discarded. Move operations can transfer ownership without expensive deep copies.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">copy</span><span class="pill">move</span><span class="pill">Rule of Zero</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;utility&gt;
+using namespace std;
+
+int main() {
+    string a = "large payload";
+    string b = a;
+    string c = move(a);
+    cout &lt;&lt; b &lt;&lt; " | " &lt;&lt; c &lt;&lt; "\n";
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Copy/move semantics &amp; Rule of Zero/Five is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-33"><summary><span class="num">33</span><span class="title">Headers, source files, namespaces &amp; CMake basics</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Split a program into interfaces and implementations and understand a small CMake build.</li><li>Explain how header changes the behavior, result, or engineering decision in a concrete example</li><li>Connect header with translation unit and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Real C++ programs are divided into translation units. Headers usually expose declarations while `.cpp` files provide definitions.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">header</span><span class="pill">translation unit</span><span class="pill">CMake</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">// math.hpp
+#pragma once
+int add(int a, int b);
+
+// math.cpp
+#include "math.hpp"
+
+int add(int a, int b) {
+    return a + b;
+}
+
+// main.cpp
+#include &lt;iostream&gt;
+#include "math.hpp"
+using namespace std;
+
+int main() {
+    cout &lt;&lt; add(2, 3) &lt;&lt; "\n";
+    return 0;
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Headers, source files, namespaces &amp; CMake basics is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-34"><summary><span class="num">34</span><span class="title">Debugging, undefined behavior &amp; sanitizers</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Identify undefined behavior and use compiler diagnostics and sanitizers to find memory bugs.</li><li>Explain how undefined behavior changes the behavior, result, or engineering decision in a concrete example</li><li>Connect undefined behavior with sanitizer and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Undefined behavior means the C++ standard imposes no required result for an invalid operation such as out-of-bounds access or dereferencing a dangling pointer. The program may appear to work until optimization, input, or environment changes.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">undefined behavior</span><span class="pill">sanitizer</span><span class="pill">debugger</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main() {
+    vector&lt;int&gt; v{1, 2, 3};
+    if (v.size() &gt; 2) {
+        cout &lt;&lt; v.at(2) &lt;&lt; "\n";
+    }
+    // Prefer checked access while debugging uncertain indexes.
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Debugging, undefined behavior &amp; sanitizers is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-35"><summary><span class="num">35</span><span class="title">DSA in C++: Big-O time, space &amp; amortized analysis</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Analyze how C++ data-structure operations scale in time and auxiliary memory.</li><li>Explain how Big-O changes the behavior, result, or engineering decision in a concrete example</li><li>Connect Big-O with space complexity and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Asymptotic analysis describes how cost grows as input grows. Time complexity counts dominant operations and space complexity counts additional memory.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">Big-O</span><span class="pill">space complexity</span><span class="pill">amortized analysis</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main() {
+    vector&lt;int&gt; v;
+    for (int i = 0; i &lt; 8; ++i) {
+        v.push_back(i);
+        cout &lt;&lt; "size = " &lt;&lt; v.size() &lt;&lt; " capacity = " &lt;&lt; v.capacity() &lt;&lt; "\n";
+    }
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in DSA in C++: Big-O time, space &amp; amortized analysis is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-36"><summary><span class="num">36</span><span class="title">Arrays/vectors as a DSA foundation</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Solve array problems while accounting for contiguous storage and operation costs.</li><li>Explain how array changes the behavior, result, or engineering decision in a concrete example</li><li>Connect array with vector and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Arrays and vectors are the foundation of many interview patterns because they provide compact contiguous storage and constant-time indexing. Their strengths make scanning and cache-friendly computation fast, while insertions or deletions in the middle require shifting elements.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">array</span><span class="pill">vector</span><span class="pill">in-place</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main() {
+    vector&lt;int&gt; v{1, 2, 3, 4, 5};
+    int left = 0, right = static_cast&lt;int&gt;(v.size()) - 1;
+    while (left &lt; right) {
+        swap(v[left++], v[right--]);
+    }
+    for (int x : v) {
+        cout &lt;&lt; x &lt;&lt; " ";
+    }
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Arrays/vectors as a DSA foundation is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-37"><summary><span class="num">37</span><span class="title">Linked lists in C++</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Implement and traverse a linked list while managing node ownership safely.</li><li>Explain how linked list changes the behavior, result, or engineering decision in a concrete example</li><li>Connect linked list with node and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A linked list stores each value in a node connected to other nodes. Unlike a vector, nodes do not need contiguous memory and insertion after a known node can be constant time.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">linked list</span><span class="pill">node</span><span class="pill">pointer</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+#include &lt;memory&gt;
+using namespace std;
+
+struct Node {
+    int value;
+    unique_ptr&lt;Node&gt; next;
+
+    explicit Node(int value) : value(value) {}
+};
+
+int main() {
+    auto head = make_unique&lt;Node&gt;(10);
+    head-&gt;next = make_unique&lt;Node&gt;(20);
+
+    for (Node* current = head.get(); current; current = current-&gt;next.get()) {
+        cout &lt;&lt; current-&gt;value &lt;&lt; " ";
+    }
+
+    return 0;
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Linked lists in C++ is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-38"><summary><span class="num">38</span><span class="title">Stacks, queues &amp; deques</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Choose LIFO, FIFO, or double-ended access based on the algorithm’s ordering requirement.</li><li>Explain how stack changes the behavior, result, or engineering decision in a concrete example</li><li>Connect stack with queue and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A stack exposes the most recently added element first, while a queue exposes the earliest. A deque supports efficient insertion and removal at both ends.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">stack</span><span class="pill">queue</span><span class="pill">deque</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+#include &lt;queue&gt;
+#include &lt;stack&gt;
+using namespace std;
+
+int main() {
+    stack&lt;int&gt; s;
+    s.push(1);
+    s.push(2);
+    queue&lt;int&gt; q;
+    q.push(1);
+    q.push(2);
+    cout &lt;&lt; s.top() &lt;&lt; " " &lt;&lt; q.front() &lt;&lt; "\n";
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Stacks, queues &amp; deques is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-39"><summary><span class="num">39</span><span class="title">Hash tables with unordered_map &amp; unordered_set</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Use hash-based containers and explain average versus worst-case complexity.</li><li>Explain how hash table changes the behavior, result, or engineering decision in a concrete example</li><li>Connect hash table with unordered_map and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Hash tables map keys to buckets using a hash function. `std::unordered_map` stores key/value pairs and `std::unordered_set` stores unique keys.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">hash table</span><span class="pill">unordered_map</span><span class="pill">collision</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;unordered_map&gt;
+using namespace std;
+
+int main() {
+    unordered_map&lt;string, int&gt; freq;
+    for (string s : {"ai", "cpp", "ai", "dsa"}) {
+        ++freq[s];
+    }
+    cout &lt;&lt; freq["ai"] &lt;&lt; "\n";
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Hash tables with unordered_map &amp; unordered_set is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-40"><summary><span class="num">40</span><span class="title">Elementary sorting: bubble, selection &amp; insertion sort</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Implement O(n²) sorts and identify when insertion sort can still be useful.</li><li>Explain how bubble sort changes the behavior, result, or engineering decision in a concrete example</li><li>Connect bubble sort with selection sort and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Quadratic sorting algorithms are valuable for learning invariants and data movement even though they are not the default for large data. Bubble sort repeatedly exchanges inverted neighbors, selection sort repeatedly chooses an extreme element, and insertion sort grows a sorted prefix.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">bubble sort</span><span class="pill">selection sort</span><span class="pill">insertion sort</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main() {
+    vector&lt;int&gt; a{5, 2, 4, 1};
+    for (int i = 1; i &lt; (int)a.size(); ++i) {
+        int key = a[i], j = i - 1;
+        while (j &gt;= 0 &amp;&amp; a[j] &gt; key) {
+            a[j+1] = a[j];
+            --j;
+        }
+        a[j+1] = key;
+    }
+    for (int x : a) {
+        cout &lt;&lt; x &lt;&lt; " ";
+    }
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Elementary sorting: bubble, selection &amp; insertion sort is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-41"><summary><span class="num">41</span><span class="title">Merge sort, quicksort &amp; partitioning</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Trace divide-and-conquer sorting and compare merge-sort and quicksort trade-offs.</li><li>Explain how merge sort changes the behavior, result, or engineering decision in a concrete example</li><li>Connect merge sort with quicksort and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Merge sort divides the range, recursively sorts halves, and merges them in linear work per level, giving O(n log n) worst-case time with extra storage. Quicksort partitions around a pivot and recursively sorts partitions; average time is O(n log n), but poor pivots can produce quadratic behavior.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">merge sort</span><span class="pill">quicksort</span><span class="pill">partition</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main() {
+    vector&lt;int&gt; v{7, 2, 9, 1, 5};
+    auto pivot = partition(v.begin(), v.end(), [](int x) {
+        return x &lt; 5;
+    }
+    );
+    cout &lt;&lt; "left partition size = " &lt;&lt; (pivot - v.begin()) &lt;&lt; "\n";
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Merge sort, quicksort &amp; partitioning is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-42"><summary><span class="num">42</span><span class="title">Binary search &amp; lower_bound/upper_bound</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Apply binary search only when a monotonic ordering property makes half the search space removable.</li><li>Explain how binary search changes the behavior, result, or engineering decision in a concrete example</li><li>Connect binary search with lower_bound and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Binary search repeatedly discards half of a search interval. It requires more than “an array”: there must be a monotonic predicate or sorted order that tells you which half can be discarded.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">binary search</span><span class="pill">lower_bound</span><span class="pill">monotonic</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main() {
+    vector&lt;int&gt; v{1, 3, 3, 5, 8};
+    auto it = lower_bound(v.begin(), v.end(), 3);
+    cout &lt;&lt; (it - v.begin()) &lt;&lt; "\n";
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Binary search &amp; lower_bound/upper_bound is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-43"><summary><span class="num">43</span><span class="title">Two pointers &amp; sliding windows</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Recognize when ordered movement or a maintained window reduces nested-loop work.</li><li>Explain how two pointers changes the behavior, result, or engineering decision in a concrete example</li><li>Connect two pointers with sliding window and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Two-pointer algorithms coordinate indexes so work is not repeated. Sliding-window algorithms maintain information about a contiguous range while one or both boundaries move.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">two pointers</span><span class="pill">sliding window</span><span class="pill">invariant</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main() {
+    vector&lt;int&gt; v{1, 2, 3, 4, 5};
+    int k = 3, sum = 0, best = 0;
+    for (int i = 0; i &lt; (int)v.size(); ++i) {
+        sum += v[i];
+        if (i &gt;= k) {
+            sum -= v[i-k];
+        }
+        if (i &gt;= k-1) {
+            best = max(best, sum);
+        }
+    }
+    cout &lt;&lt; best &lt;&lt; "\n";
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Two pointers &amp; sliding windows is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-44"><summary><span class="num">44</span><span class="title">Prefix sums &amp; range-query thinking</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Precompute cumulative information so repeated range queries become constant time.</li><li>Explain how prefix sum changes the behavior, result, or engineering decision in a concrete example</li><li>Connect prefix sum with range query and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A prefix sum stores the cumulative sum up to each boundary. Once built in O(n), the sum of any half-open range [l, r) is the difference of two prefix values, giving O(1) queries.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">prefix sum</span><span class="pill">range query</span><span class="pill">precomputation</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main() {
+    vector&lt;int&gt; values{2, 4, 6, 8};
+    vector&lt;int&gt; prefix(values.size() + 1);
+
+    for (int i = 0; i &lt; static_cast&lt;int&gt;(values.size()); ++i) {
+        prefix[i + 1] = prefix[i] + values[i];
+    }
+
+    int left = 1;
+    int right = 4;
+    cout &lt;&lt; prefix[right] - prefix[left] &lt;&lt; "\n";
+    return 0;
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Prefix sums &amp; range-query thinking is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-45"><summary><span class="num">45</span><span class="title">Recursion, backtracking &amp; pruning</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Build a search tree, undo choices correctly, and prune branches that cannot lead to valid answers.</li><li>Explain how backtracking changes the behavior, result, or engineering decision in a concrete example</li><li>Connect backtracking with choice and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Backtracking explores a decision tree by choosing an option, recursing, and undoing that choice before trying another option. Correctness depends on restoring shared state exactly.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">backtracking</span><span class="pill">choice</span><span class="pill">pruning</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+void generate(int n, int open, int close, string current) {
+    if (static_cast&lt;int&gt;(current.size()) == 2 * n) {
+        cout &lt;&lt; current &lt;&lt; "\n";
+        return;
+    }
+
+    if (open &lt; n) {
+        generate(n, open + 1, close, current + "(");
+    }
+
+    if (close &lt; open) {
+        generate(n, open, close + 1, current + ")");
+    }
+}
+
+int main() {
+    generate(3, 0, 0, "");
+    return 0;
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Recursion, backtracking &amp; pruning is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-46"><summary><span class="num">46</span><span class="title">Binary trees, traversals &amp; BSTs</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Traverse trees recursively/iteratively and use the ordering invariant of a binary search tree.</li><li>Explain how binary tree changes the behavior, result, or engineering decision in a concrete example</li><li>Connect binary tree with traversal and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Trees represent hierarchical relationships. Depth-first traversals such as preorder, inorder, and postorder differ only in when a node is processed relative to its subtrees.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">binary tree</span><span class="pill">traversal</span><span class="pill">BST</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="candidate">#include &lt;iostream&gt;
+using namespace std;
+
+struct Node {
+    int value;
+    Node* left = nullptr;
+    Node* right = nullptr;
+};
+
+void inorder(Node* node) {
+    if (!node) {
+        return;
+    }
+
+    inorder(node-&gt;left);
+    cout &lt;&lt; node-&gt;value &lt;&lt; " ";
+    inorder(node-&gt;right);
+}
+
+int main() {
+    Node root{2};
+    Node left{1};
+    Node right{3};
+
+    root.left = &amp;left;
+    root.right = &amp;right;
+
+    inorder(&amp;root);
+    return 0;
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Binary trees, traversals &amp; BSTs is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-47"><summary><span class="num">47</span><span class="title">Heaps &amp; priority_queue</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Use a heap when repeated access to the current minimum or maximum is more important than full ordering.</li><li>Explain how heap changes the behavior, result, or engineering decision in a concrete example</li><li>Connect heap with priority_queue and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A binary heap maintains a partial order in a compact array representation. C++ `std::priority_queue` is a max-heap by default and supports insertion and removal of the maximum in O(log n), with O(1) access to the top.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">heap</span><span class="pill">priority_queue</span><span class="pill">top-k</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">#include &lt;functional&gt;
+#include &lt;iostream&gt;
+#include &lt;queue&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main() {
+    priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt; values;
+
+    for (int value : {7, 2, 9, 1}) {
+        values.push(value);
+    }
+
+    while (!values.empty()) {
+        cout &lt;&lt; values.top() &lt;&lt; " ";
+        values.pop();
+    }
+
+    return 0;
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Heaps &amp; priority_queue is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-48"><summary><span class="num">48</span><span class="title">Tries for prefix search</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Implement prefix-oriented lookup and explain the memory/time trade-off of trie nodes.</li><li>Explain how trie changes the behavior, result, or engineering decision in a concrete example</li><li>Connect trie with prefix and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A trie stores strings by following one edge per character from a root. Lookup time depends on key length rather than number of stored words, which is useful for prefix search and dictionaries.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">trie</span><span class="pill">prefix</span><span class="pill">character edge</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">#include &lt;array&gt;
+#include &lt;iostream&gt;
+#include &lt;memory&gt;
+#include &lt;string&gt;
+using namespace std;
+
+struct Node {
+    array&lt;unique_ptr&lt;Node&gt;, 26&gt; next{};
+    bool end = false;
+};
+
+int main() {
+    Node root;
+    string word = "cat";
+    Node* current = &amp;root;
+
+    for (char character : word) {
+        auto&amp; nextNode = current-&gt;next[character - 'a'];
+
+        if (!nextNode) {
+            nextNode = make_unique&lt;Node&gt;();
+        }
+
+        current = nextNode.get();
+    }
+
+    current-&gt;end = true;
+    cout &lt;&lt; current-&gt;end &lt;&lt; "\n";
+    return 0;
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Tries for prefix search is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-49"><summary><span class="num">49</span><span class="title">Graphs: representations, BFS &amp; DFS</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Represent graphs and choose BFS or DFS based on the property being explored.</li><li>Explain how graph changes the behavior, result, or engineering decision in a concrete example</li><li>Connect graph with BFS and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Graphs model arbitrary relationships. An adjacency list is space-efficient for sparse graphs, while an adjacency matrix offers constant-time edge tests at O(V²) memory.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">graph</span><span class="pill">BFS</span><span class="pill">DFS</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">#include &lt;iostream&gt;
+#include &lt;queue&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main() {
+    vector&lt;vector&lt;int&gt;&gt; graph{{1, 2}, {3}, {3}, {}};
+    queue&lt;int&gt; pending;
+    vector&lt;int&gt; seen(4);
+
+    pending.push(0);
+    seen[0] = 1;
+
+    while (!pending.empty()) {
+        int node = pending.front();
+        pending.pop();
+        cout &lt;&lt; node &lt;&lt; " ";
+
+        for (int next : graph[node]) {
+            if (!seen[next]) {
+                seen[next] = 1;
+                pending.push(next);
+            }
+        }
+    }
+
+    return 0;
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Graphs: representations, BFS &amp; DFS is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-50"><summary><span class="num">50</span><span class="title">Topological sort &amp; cycle detection</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Order a directed acyclic graph by dependencies and detect when no valid order exists.</li><li>Explain how topological sort changes the behavior, result, or engineering decision in a concrete example</li><li>Connect topological sort with DAG and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>A topological order lists vertices so every directed dependency appears before the item that depends on it. Kahn’s algorithm tracks indegrees and repeatedly removes zero-indegree vertices.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">topological sort</span><span class="pill">DAG</span><span class="pill">indegree</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">#include &lt;iostream&gt;
+#include &lt;queue&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main() {
+    vector&lt;vector&lt;int&gt;&gt; graph{{1, 2}, {3}, {3}, {}};
+    vector&lt;int&gt; indegree(4);
+
+    for (const auto&amp; neighbors : graph) {
+        for (int next : neighbors) {
+            ++indegree[next];
+        }
+    }
+
+    queue&lt;int&gt; ready;
+
+    for (int node = 0; node &lt; 4; ++node) {
+        if (indegree[node] == 0) {
+            ready.push(node);
+        }
+    }
+
+    while (!ready.empty()) {
+        int node = ready.front();
+        ready.pop();
+        cout &lt;&lt; node &lt;&lt; " ";
+
+        for (int next : graph[node]) {
+            --indegree[next];
+
+            if (indegree[next] == 0) {
+                ready.push(next);
+            }
+        }
+    }
+
+    return 0;
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Topological sort &amp; cycle detection is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-51"><summary><span class="num">51</span><span class="title">Disjoint Set Union &amp; minimum spanning trees</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Use DSU for connectivity and understand how Kruskal builds an MST.</li><li>Explain how DSU changes the behavior, result, or engineering decision in a concrete example</li><li>Connect DSU with union-find and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Disjoint Set Union maintains a partition of elements into connected components. Path compression and union by rank/size make operations almost constant time amortized.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">DSU</span><span class="pill">union-find</span><span class="pill">MST</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">#include &lt;iostream&gt;
+#include &lt;numeric&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+struct DSU {
+    vector&lt;int&gt; parent;
+
+    explicit DSU(int n) : parent(n) {
+        iota(parent.begin(), parent.end(), 0);
+    }
+
+    int find(int node) {
+        if (parent[node] == node) {
+            return node;
+        }
+
+        parent[node] = find(parent[node]);
+        return parent[node];
+    }
+
+    bool unite(int a, int b) {
+        a = find(a);
+        b = find(b);
+
+        if (a == b) {
+            return false;
+        }
+
+        parent[b] = a;
+        return true;
+    }
+};
+
+int main() {
+    DSU groups(4);
+    cout &lt;&lt; groups.unite(0, 1) &lt;&lt; " " &lt;&lt; groups.unite(0, 1) &lt;&lt; "\n";
+    return 0;
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Disjoint Set Union &amp; minimum spanning trees is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-52"><summary><span class="num">52</span><span class="title">Shortest paths: BFS &amp; Dijkstra</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Choose the correct shortest-path algorithm from edge-weight assumptions and implement Dijkstra with a priority queue.</li><li>Explain how shortest path changes the behavior, result, or engineering decision in a concrete example</li><li>Connect shortest path with Dijkstra and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Unweighted shortest paths use BFS because every edge has the same cost. Dijkstra handles nonnegative weighted edges by repeatedly finalizing the smallest known distance and relaxing outgoing edges.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">shortest path</span><span class="pill">Dijkstra</span><span class="pill">relaxation</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">#include &lt;functional&gt;
+#include &lt;iostream&gt;
+#include &lt;queue&gt;
+#include &lt;utility&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main() {
+    using Edge = pair&lt;int, int&gt;;
+    using State = pair&lt;int, int&gt;;
+
+    vector&lt;vector&lt;Edge&gt;&gt; graph(3);
+    graph[0] = {{1, 4}, {2, 1}};
+    graph[2] = {{1, 2}};
+
+    vector&lt;int&gt; distance(3, 1'000'000'000);
+    distance[0] = 0;
+
+    priority_queue&lt;State, vector&lt;State&gt;, greater&lt;State&gt;&gt; pending;
+    pending.push({0, 0});
+
+    while (!pending.empty()) {
+        auto [currentDistance, node] = pending.top();
+        pending.pop();
+
+        if (currentDistance != distance[node]) {
+            continue;
+        }
+
+        for (auto [next, weight] : graph[node]) {
+            if (distance[next] &gt; currentDistance + weight) {
+                distance[next] = currentDistance + weight;
+                pending.push({distance[next], next});
+            }
+        }
+    }
+
+    cout &lt;&lt; distance[1] &lt;&lt; "\n";
+    return 0;
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Shortest paths: BFS &amp; Dijkstra is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-53"><summary><span class="num">53</span><span class="title">Greedy algorithms &amp; interval problems</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Prove when a locally optimal choice leads to a globally optimal solution.</li><li>Explain how greedy changes the behavior, result, or engineering decision in a concrete example</li><li>Connect greedy with interval and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Greedy algorithms commit to choices without revisiting them, so they are correct only when the problem has the required structure. Interval scheduling is a classic example: choosing the activity that finishes earliest leaves the most room for future activities.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">greedy</span><span class="pill">interval</span><span class="pill">exchange argument</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;utility&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main() {
+    vector&lt;pair&lt;int, int&gt;&gt; intervals{{1, 4}, {3, 5}, {0, 6}, {5, 7}, {8, 9}};
+
+    sort(intervals.begin(), intervals.end(), [](auto first, auto second) {
+        return first.second &lt; second.second;
+    });
+
+    int previousEnd = -1;
+    int count = 0;
+
+    for (auto [start, end] : intervals) {
+        if (start &gt;= previousEnd) {
+            ++count;
+            previousEnd = end;
+        }
+    }
+
+    cout &lt;&lt; count &lt;&lt; "\n";
+    return 0;
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Greedy algorithms &amp; interval problems is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-54"><summary><span class="num">54</span><span class="title">Dynamic programming: states, transitions &amp; optimization</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Design DP states and transitions and reduce repeated subproblems systematically.</li><li>Explain how dynamic programming changes the behavior, result, or engineering decision in a concrete example</li><li>Connect dynamic programming with state and predict what changes when one assumption changes</li><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul>
+<section class="lesson-main-explanation" data-main-explanation>
+<h3>Explanation</h3>
+<p>Dynamic programming applies when subproblems overlap and optimal answers can be composed from smaller optimal answers. The hardest step is defining a state that contains exactly the information future decisions need.</p>
+</section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">dynamic programming</span><span class="pill">state</span><span class="pill">transition</span></div>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main() {
+    vector&lt;int&gt; values{3, 1, 5, 2, 6, 4, 9};
+    vector&lt;int&gt; dp(values.size(), 1);
+    int best = 0;
+
+    for (int i = 0; i &lt; static_cast&lt;int&gt;(values.size()); ++i) {
+        for (int j = 0; j &lt; i; ++j) {
+            if (values[j] &lt; values[i]) {
+                dp[i] = max(dp[i], dp[j] + 1);
+            }
+        }
+
+        best = max(best, dp[i]);
+    }
+
+    cout &lt;&lt; best &lt;&lt; "\n";
+    return 0;
+}</pre><div class="note"><b>Common mistake:</b> A common mistake in Dynamic programming: states, transitions &amp; optimization is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details></section><div class="grid"><section class="card"><h2>Exercises</h2><div class="item" data-exercise=""><b>Apply: C++ toolchain, compilation &amp; program structure</b><p>Write or modify a C++ program that demonstrates “C++ toolchain, compilation &amp; program structure”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Tokens, identifiers, scope &amp; namespaces</b><p>Write or modify a C++ program that demonstrates “Tokens, identifiers, scope &amp; namespaces”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Fundamental types, variables &amp; type inference</b><p>Write or modify a C++ program that demonstrates “Fundamental types, variables &amp; type inference”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Constants, literals &amp; numeric limits</b><p>Write or modify a C++ program that demonstrates “Constants, literals &amp; numeric limits”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Input, output &amp; formatting with iostream</b><p>Write or modify a C++ program that demonstrates “Input, output &amp; formatting with iostream”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Operators, precedence &amp; expressions</b><p>Write or modify a C++ program that demonstrates “Operators, precedence &amp; expressions”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Conversions, casts &amp; type safety</b><p>Write or modify a C++ program that demonstrates “Conversions, casts &amp; type safety”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Conditionals: if, else &amp; switch</b><p>Write or modify a C++ program that demonstrates “Conditionals: if, else &amp; switch”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Loops: for, while, do-while, break &amp; continue</b><p>Write or modify a C++ program that demonstrates “Loops: for, while, do-while, break &amp; continue”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Functions, declarations &amp; return values</b><p>Write or modify a C++ program that demonstrates “Functions, declarations &amp; return values”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Default arguments &amp; function overloading</b><p>Write or modify a C++ program that demonstrates “Default arguments &amp; function overloading”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: References, const references &amp; parameter passing</b><p>Write or modify a C++ program that demonstrates “References, const references &amp; parameter passing”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Recursion &amp; the call stack</b><p>Write or modify a C++ program that demonstrates “Recursion &amp; the call stack”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Raw arrays &amp; multidimensional arrays</b><p>Write or modify a C++ program that demonstrates “Raw arrays &amp; multidimensional arrays”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: std::array, std::vector &amp; capacity</b><p>Write or modify a C++ program that demonstrates “std::array, std::vector &amp; capacity”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: std::string, string_view &amp; text operations</b><p>Write or modify a C++ program that demonstrates “std::string, string_view &amp; text operations”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Pointers, addresses &amp; pointer arithmetic</b><p>Write or modify a C++ program that demonstrates “Pointers, addresses &amp; pointer arithmetic”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Dynamic memory, new/delete &amp; ownership</b><p>Write or modify a C++ program that demonstrates “Dynamic memory, new/delete &amp; ownership”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Structs, enum &amp; enum class</b><p>Write or modify a C++ program that demonstrates “Structs, enum &amp; enum class”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Classes, objects &amp; access control</b><p>Write or modify a C++ program that demonstrates “Classes, objects &amp; access control”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Constructors, destructors &amp; initializer lists</b><p>Write or modify a C++ program that demonstrates “Constructors, destructors &amp; initializer lists”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: const methods, static members &amp; friend declarations</b><p>Write or modify a C++ program that demonstrates “const methods, static members &amp; friend declarations”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Inheritance &amp; base/derived relationships</b><p>Write or modify a C++ program that demonstrates “Inheritance &amp; base/derived relationships”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Virtual functions, polymorphism &amp; abstract classes</b><p>Write or modify a C++ program that demonstrates “Virtual functions, polymorphism &amp; abstract classes”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Operator overloading</b><p>Write or modify a C++ program that demonstrates “Operator overloading”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Exception handling &amp; exception safety</b><p>Write or modify a C++ program that demonstrates “Exception handling &amp; exception safety”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: File streams &amp; persistent data</b><p>Write or modify a C++ program that demonstrates “File streams &amp; persistent data”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Function &amp; class templates</b><p>Write or modify a C++ program that demonstrates “Function &amp; class templates”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: STL iterators &amp; algorithms</b><p>Write or modify a C++ program that demonstrates “STL iterators &amp; algorithms”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Lambdas, captures &amp; callable objects</b><p>Write or modify a C++ program that demonstrates “Lambdas, captures &amp; callable objects”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: RAII &amp; smart pointers</b><p>Write or modify a C++ program that demonstrates “RAII &amp; smart pointers”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Copy/move semantics &amp; Rule of Zero/Five</b><p>Write or modify a C++ program that demonstrates “Copy/move semantics &amp; Rule of Zero/Five”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Headers, source files, namespaces &amp; CMake basics</b><p>Write or modify a C++ program that demonstrates “Headers, source files, namespaces &amp; CMake basics”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Debugging, undefined behavior &amp; sanitizers</b><p>Write or modify a C++ program that demonstrates “Debugging, undefined behavior &amp; sanitizers”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: DSA in C++: Big-O time, space &amp; amortized analysis</b><p>Write or modify a C++ program that demonstrates “DSA in C++: Big-O time, space &amp; amortized analysis”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Arrays/vectors as a DSA foundation</b><p>Write or modify a C++ program that demonstrates “Arrays/vectors as a DSA foundation”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Linked lists in C++</b><p>Write or modify a C++ program that demonstrates “Linked lists in C++”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Stacks, queues &amp; deques</b><p>Write or modify a C++ program that demonstrates “Stacks, queues &amp; deques”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Hash tables with unordered_map &amp; unordered_set</b><p>Write or modify a C++ program that demonstrates “Hash tables with unordered_map &amp; unordered_set”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Elementary sorting: bubble, selection &amp; insertion sort</b><p>Write or modify a C++ program that demonstrates “Elementary sorting: bubble, selection &amp; insertion sort”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Merge sort, quicksort &amp; partitioning</b><p>Write or modify a C++ program that demonstrates “Merge sort, quicksort &amp; partitioning”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Binary search &amp; lower_bound/upper_bound</b><p>Write or modify a C++ program that demonstrates “Binary search &amp; lower_bound/upper_bound”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Two pointers &amp; sliding windows</b><p>Write or modify a C++ program that demonstrates “Two pointers &amp; sliding windows”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Prefix sums &amp; range-query thinking</b><p>Write or modify a C++ program that demonstrates “Prefix sums &amp; range-query thinking”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Recursion, backtracking &amp; pruning</b><p>Write or modify a C++ program that demonstrates “Recursion, backtracking &amp; pruning”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Binary trees, traversals &amp; BSTs</b><p>Write or modify a C++ program that demonstrates “Binary trees, traversals &amp; BSTs”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Heaps &amp; priority_queue</b><p>Write or modify a C++ program that demonstrates “Heaps &amp; priority_queue”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Tries for prefix search</b><p>Write or modify a C++ program that demonstrates “Tries for prefix search”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Graphs: representations, BFS &amp; DFS</b><p>Write or modify a C++ program that demonstrates “Graphs: representations, BFS &amp; DFS”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Topological sort &amp; cycle detection</b><p>Write or modify a C++ program that demonstrates “Topological sort &amp; cycle detection”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Disjoint Set Union &amp; minimum spanning trees</b><p>Write or modify a C++ program that demonstrates “Disjoint Set Union &amp; minimum spanning trees”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Shortest paths: BFS &amp; Dijkstra</b><p>Write or modify a C++ program that demonstrates “Shortest paths: BFS &amp; Dijkstra”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Greedy algorithms &amp; interval problems</b><p>Write or modify a C++ program that demonstrates “Greedy algorithms &amp; interval problems”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div><div class="item" data-exercise=""><b>Apply: Dynamic programming: states, transitions &amp; optimization</b><p>Write or modify a C++ program that demonstrates “Dynamic programming: states, transitions &amp; optimization”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.</p><textarea class="answer" data-language="cpp" placeholder="Write C++ code or notes here..."></textarea></div></section><section class="card"><h2>Knowledge checks</h2><div class="item"><b>What is the most important mastery check for C++ toolchain, compilation &amp; program structure?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Tokens, identifiers, scope &amp; namespaces?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Fundamental types, variables &amp; type inference?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Constants, literals &amp; numeric limits?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Input, output &amp; formatting with iostream?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Operators, precedence &amp; expressions?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Conversions, casts &amp; type safety?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Conditionals: if, else &amp; switch?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Loops: for, while, do-while, break &amp; continue?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Functions, declarations &amp; return values?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Default arguments &amp; function overloading?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for References, const references &amp; parameter passing?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Recursion &amp; the call stack?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Raw arrays &amp; multidimensional arrays?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for std::array, std::vector &amp; capacity?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for std::string, string_view &amp; text operations?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Pointers, addresses &amp; pointer arithmetic?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Dynamic memory, new/delete &amp; ownership?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Structs, enum &amp; enum class?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Classes, objects &amp; access control?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Constructors, destructors &amp; initializer lists?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for const methods, static members &amp; friend declarations?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Inheritance &amp; base/derived relationships?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Virtual functions, polymorphism &amp; abstract classes?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Operator overloading?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Exception handling &amp; exception safety?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for File streams &amp; persistent data?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Function &amp; class templates?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for STL iterators &amp; algorithms?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Lambdas, captures &amp; callable objects?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for RAII &amp; smart pointers?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Copy/move semantics &amp; Rule of Zero/Five?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Headers, source files, namespaces &amp; CMake basics?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Debugging, undefined behavior &amp; sanitizers?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for DSA in C++: Big-O time, space &amp; amortized analysis?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Arrays/vectors as a DSA foundation?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Linked lists in C++?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Stacks, queues &amp; deques?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Hash tables with unordered_map &amp; unordered_set?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Elementary sorting: bubble, selection &amp; insertion sort?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Merge sort, quicksort &amp; partitioning?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Binary search &amp; lower_bound/upper_bound?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Two pointers &amp; sliding windows?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Prefix sums &amp; range-query thinking?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Recursion, backtracking &amp; pruning?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Binary trees, traversals &amp; BSTs?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Heaps &amp; priority_queue?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Tries for prefix search?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Graphs: representations, BFS &amp; DFS?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Topological sort &amp; cycle detection?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Disjoint Set Union &amp; minimum spanning trees?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Shortest paths: BFS &amp; Dijkstra?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Greedy algorithms &amp; interval problems?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>What is the most important mastery check for Dynamic programming: states, transitions &amp; optimization?</b><ol><li>Explain the relevant C++ rule/invariant and predict behavior before running the code.</li><li>Memorize only the syntax shown in one example.</li><li>Assume every operation is O(1).</li><li>Avoid testing boundary cases.</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div></section></div><section class="card" style="margin-top:14px"><h2>Projects</h2><div class="item"><b>C++ CLI Grade &amp; Statistics Analyzer</b><p>Build a command-line program that reads student scores, validates input, computes statistics, and writes a report.</p></div><div class="item"><b>OOP Library Management System</b><p>Design an object-oriented library system with books, members, loans, polymorphic notifications, and persistent storage.</p></div><div class="item"><b>Modern C++ Resource-Safe Toolkit</b><p>Build a small reusable toolkit that demonstrates templates, STL algorithms, lambdas, RAII, smart pointers, and move-aware types.</p></div><div class="item"><b>DSA Implementation Library in C++</b><p>Implement and test core data structures and algorithms without hiding the logic behind ready-made equivalents.</p></div><div class="item"><b>Graph Route Planner</b><p>Build a weighted graph route planner with BFS/DFS exploration and Dijkstra shortest paths.</p></div><div class="item"><b>C++ DSA Interview Capstone</b><p>Solve a curated set of array, hash, tree, graph, greedy, backtracking, and dynamic-programming problems in one documented portfolio project.</p></div></section></main><button class="theme" data-theme-toggle="" type="button" aria-label="Toggle light or dark theme">🌙 Dark</button><script id="course-page-meta" type="application/json">{"id": "cpp-dsa", "lessonIds": ["cpp-01", "cpp-02", "cpp-03", "cpp-04", "cpp-05", "cpp-06", "cpp-07", "cpp-08", "cpp-09", "cpp-10", "cpp-11", "cpp-12", "cpp-13", "cpp-14", "cpp-15", "cpp-16", "cpp-17", "cpp-18", "cpp-19", "cpp-20", "cpp-21", "cpp-22", "cpp-23", "cpp-24", "cpp-25", "cpp-26", "cpp-27", "cpp-28", "cpp-29", "cpp-30", "cpp-31", "cpp-32", "cpp-33", "cpp-34", "cpp-35", "cpp-36", "cpp-37", "cpp-38", "cpp-39", "cpp-40", "cpp-41", "cpp-42", "cpp-43", "cpp-44", "cpp-45", "cpp-46", "cpp-47", "cpp-48", "cpp-49", "cpp-50", "cpp-51", "cpp-52", "cpp-53", "cpp-54"]}</script><script defer="" src="../assets/assessment-practice.js?v=20260822-v567"></script>
+<script defer src="../assets/exam-style-problem-statements-v565.js?v=20260822-v567"></script><script defer="" src="../assets/github-integration.js?v=20260822-v567"></script><script defer="" src="../assets/assessment-layout-fix.js?v=20260822-v567"></script><script defer="" src="../assets/universal-reveal-solutions.js?v=20260822-v567"></script><script defer="" src="../assets/reveal-solution-explanations.js?v=20260822-v567"></script><script defer="" src="../assets/assessment-expanded-descriptions.js?v=20260822-v567"></script><script defer="" src="../assets/exercise-direct-publish.js?v=20260822-v567"></script><script defer="" src="../assets/universal-run-output.js?v=20260822-v567"></script><script defer="" src="../assets/final-exercise-toolbar.js?v=20260822-v567"></script><script defer="" src="../assets/course-project-workspace.js?v=20260822-v571"></script><script defer src="../assets/universal-editable-code.js?v=20260822-v567"></script>
+<script src="../assets/progressive-lesson-layout.js?v=20260822-v567" defer></script><script defer="" src="../assets/line-by-line-explanations.js?v=20260822-v567"></script><script defer="" src="../assets/example-learning-tools.js?v=20260822-v567"></script><script defer="" src="../assets/practice-publish-completer.js?v=20260823-v573"></script><script defer="" src="../assets/adaptive-practice-layer.js?v=20260822-v567"></script><script defer="" src="../assets/project-readme-layer.js?v=20260822-v567"></script><script defer="" src="../assets/oa-assessment-fallback.js?v=20260822-v567"></script><script defer="" src="../assets/oa-assessment-upgrade.js?v=20260822-v567"></script><script defer="" src="../assets/python-only-ui.js?v=20260822-v567"></script>
+<script defer="" src="../assets/conceptual-examples-v574.js?v=20260824-v574"></script><script defer="" src="../assets/program-questions-v574.js?v=20260824-v574"></script><script defer src="../assets/calm-study-flow.js?v=20260822-v567"></script><script>(function(){'use strict';var KEY='cs-ai-mastery-theme',PROGRESS='courses_progress_v1',meta=JSON.parse(document.getElementById('course-page-meta').textContent),courseId=meta.id,lessonIds=meta.lessonIds;function read(){try{return JSON.parse(localStorage.getItem(PROGRESS)||'{}')||{}}catch(e){return{}}}function save(v){try{localStorage.setItem(PROGRESS,JSON.stringify(v))}catch(e){}}function update(){var p=read(),m=((p[courseId]||{}).lessons||{}),done=0;lessonIds.forEach(function(id){if(m[id])done++});var pct=lessonIds.length?Math.round(done/lessonIds.length*100):0;var bar=document.querySelector('[data-progress-bar]'),status=document.querySelector('[data-progress-status]');if(bar)bar.style.width=pct+'%';if(status)status.textContent=done+' of '+lessonIds.length+' lessons complete';document.querySelectorAll('[data-lesson]').forEach(function(el){var cb=el.querySelector('[data-complete]');if(cb)cb.checked=!!m[el.getAttribute('data-lesson')]})}document.addEventListener('change',function(e){if(!e.target.matches('[data-complete]'))return;var lesson=e.target.closest('[data-lesson]');if(!lesson)return;var p=read();p[courseId]=p[courseId]||{};p[courseId].lessons=p[courseId].lessons||{};p[courseId].lessons[lesson.getAttribute('data-lesson')]=!!e.target.checked;save(p);update()});document.querySelector('[data-theme-toggle]').addEventListener('click',function(){var next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem(KEY,next)}catch(e){};this.textContent=next==='dark'?'☀️ Light':'🌙 Dark'});update()})();</script><script defer="" src="../assets/fast-js-runner.js?v=20260822-v567"></script>
+<script defer src="../assets/progress-resume.js?v=20260822-v567"></script>
+<script defer src="../assets/practice-guidance.js?v=20260823-v573"></script>
+<script src="../assets/purpose-first-prompts.js?v=20260822-v567" defer></script>
+<script defer src="../assets/scroll-performance-v561.js?v=20260822-v567"></script><script defer src="../assets/try-it-yourself-v568.js?v=20260822-v568"></script><script defer src="../assets/runnable-lesson-example-fixes.js?v=20260822-v567"></script>
+<script defer src="../assets/lesson-example-runner.js?v=20260822-v567"></script>
+<script defer src="../assets/lesson-example-runner-guard.js?v=20260822-v567"></script>
+<script defer src="../assets/evergreen-learning-engine.js?v=20260822-v567"></script>
+<script defer src="../assets/evergreen-review-navigation.js?v=20260822-v567"></script>
+<script defer src="../assets/smart-evergreen-review.js?v=20260822-v567"></script>
+<script id="csai-assessment-data" type="application/json">{"courseId":"cpp-dsa","courseTitle":"C++ Programming & DSA","defaultLanguage":"text","exercises":[{"id":"cpp-ex-1","title":"Apply: C++ toolchain, compilation & program structure","difficulty":1,"prompt":"Write or modify a C++ program that demonstrates “C++ toolchain, compilation & program structure”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-2","title":"Apply: Tokens, identifiers, scope & namespaces","difficulty":1,"prompt":"Write or modify a C++ program that demonstrates “Tokens, identifiers, scope & namespaces”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-3","title":"Apply: Fundamental types, variables & type inference","difficulty":1,"prompt":"Write or modify a C++ program that demonstrates “Fundamental types, variables & type inference”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-4","title":"Apply: Constants, literals & numeric limits","difficulty":1,"prompt":"Write or modify a C++ program that demonstrates “Constants, literals & numeric limits”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-5","title":"Apply: Input, output & formatting with iostream","difficulty":1,"prompt":"Write or modify a C++ program that demonstrates “Input, output & formatting with iostream”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-6","title":"Apply: Operators, precedence & expressions","difficulty":1,"prompt":"Write or modify a C++ program that demonstrates “Operators, precedence & expressions”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-7","title":"Apply: Conversions, casts & type safety","difficulty":1,"prompt":"Write or modify a C++ program that demonstrates “Conversions, casts & type safety”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-8","title":"Apply: Conditionals: if, else & switch","difficulty":1,"prompt":"Write or modify a C++ program that demonstrates “Conditionals: if, else & switch”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-9","title":"Apply: Loops: for, while, do-while, break & continue","difficulty":1,"prompt":"Write or modify a C++ program that demonstrates “Loops: for, while, do-while, break & continue”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-10","title":"Apply: Functions, declarations & return values","difficulty":1,"prompt":"Write or modify a C++ program that demonstrates “Functions, declarations & return values”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-11","title":"Apply: Default arguments & function overloading","difficulty":1,"prompt":"Write or modify a C++ program that demonstrates “Default arguments & function overloading”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-12","title":"Apply: References, const references & parameter passing","difficulty":1,"prompt":"Write or modify a C++ program that demonstrates “References, const references & parameter passing”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-13","title":"Apply: Recursion & the call stack","difficulty":2,"prompt":"Write or modify a C++ program that demonstrates “Recursion & the call stack”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-14","title":"Apply: Raw arrays & multidimensional arrays","difficulty":2,"prompt":"Write or modify a C++ program that demonstrates “Raw arrays & multidimensional arrays”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-15","title":"Apply: std::array, std::vector & capacity","difficulty":2,"prompt":"Write or modify a C++ program that demonstrates “std::array, std::vector & capacity”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-16","title":"Apply: std::string, string_view & text operations","difficulty":2,"prompt":"Write or modify a C++ program that demonstrates “std::string, string_view & text operations”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-17","title":"Apply: Pointers, addresses & pointer arithmetic","difficulty":2,"prompt":"Write or modify a C++ program that demonstrates “Pointers, addresses & pointer arithmetic”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-18","title":"Apply: Dynamic memory, new/delete & ownership","difficulty":2,"prompt":"Write or modify a C++ program that demonstrates “Dynamic memory, new/delete & ownership”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-19","title":"Apply: Structs, enum & enum class","difficulty":2,"prompt":"Write or modify a C++ program that demonstrates “Structs, enum & enum class”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-20","title":"Apply: Classes, objects & access control","difficulty":2,"prompt":"Write or modify a C++ program that demonstrates “Classes, objects & access control”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-21","title":"Apply: Constructors, destructors & initializer lists","difficulty":2,"prompt":"Write or modify a C++ program that demonstrates “Constructors, destructors & initializer lists”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-22","title":"Apply: const methods, static members & friend declarations","difficulty":2,"prompt":"Write or modify a C++ program that demonstrates “const methods, static members & friend declarations”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-23","title":"Apply: Inheritance & base/derived relationships","difficulty":2,"prompt":"Write or modify a C++ program that demonstrates “Inheritance & base/derived relationships”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-24","title":"Apply: Virtual functions, polymorphism & abstract classes","difficulty":2,"prompt":"Write or modify a C++ program that demonstrates “Virtual functions, polymorphism & abstract classes”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-25","title":"Apply: Operator overloading","difficulty":2,"prompt":"Write or modify a C++ program that demonstrates “Operator overloading”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-26","title":"Apply: Exception handling & exception safety","difficulty":2,"prompt":"Write or modify a C++ program that demonstrates “Exception handling & exception safety”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-27","title":"Apply: File streams & persistent data","difficulty":2,"prompt":"Write or modify a C++ program that demonstrates “File streams & persistent data”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-28","title":"Apply: Function & class templates","difficulty":2,"prompt":"Write or modify a C++ program that demonstrates “Function & class templates”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-29","title":"Apply: STL iterators & algorithms","difficulty":2,"prompt":"Write or modify a C++ program that demonstrates “STL iterators & algorithms”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-30","title":"Apply: Lambdas, captures & callable objects","difficulty":2,"prompt":"Write or modify a C++ program that demonstrates “Lambdas, captures & callable objects”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-31","title":"Apply: RAII & smart pointers","difficulty":2,"prompt":"Write or modify a C++ program that demonstrates “RAII & smart pointers”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-32","title":"Apply: Copy/move semantics & Rule of Zero/Five","difficulty":2,"prompt":"Write or modify a C++ program that demonstrates “Copy/move semantics & Rule of Zero/Five”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-33","title":"Apply: Headers, source files, namespaces & CMake basics","difficulty":2,"prompt":"Write or modify a C++ program that demonstrates “Headers, source files, namespaces & CMake basics”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-34","title":"Apply: Debugging, undefined behavior & sanitizers","difficulty":2,"prompt":"Write or modify a C++ program that demonstrates “Debugging, undefined behavior & sanitizers”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-35","title":"Apply: DSA in C++: Big-O time, space & amortized analysis","difficulty":3,"prompt":"Write or modify a C++ program that demonstrates “DSA in C++: Big-O time, space & amortized analysis”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-36","title":"Apply: Arrays/vectors as a DSA foundation","difficulty":3,"prompt":"Write or modify a C++ program that demonstrates “Arrays/vectors as a DSA foundation”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-37","title":"Apply: Linked lists in C++","difficulty":3,"prompt":"Write or modify a C++ program that demonstrates “Linked lists in C++”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-38","title":"Apply: Stacks, queues & deques","difficulty":3,"prompt":"Write or modify a C++ program that demonstrates “Stacks, queues & deques”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-39","title":"Apply: Hash tables with unordered_map & unordered_set","difficulty":3,"prompt":"Write or modify a C++ program that demonstrates “Hash tables with unordered_map & unordered_set”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-40","title":"Apply: Elementary sorting: bubble, selection & insertion sort","difficulty":3,"prompt":"Write or modify a C++ program that demonstrates “Elementary sorting: bubble, selection & insertion sort”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-41","title":"Apply: Merge sort, quicksort & partitioning","difficulty":3,"prompt":"Write or modify a C++ program that demonstrates “Merge sort, quicksort & partitioning”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-42","title":"Apply: Binary search & lower_bound/upper_bound","difficulty":3,"prompt":"Write or modify a C++ program that demonstrates “Binary search & lower_bound/upper_bound”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-43","title":"Apply: Two pointers & sliding windows","difficulty":3,"prompt":"Write or modify a C++ program that demonstrates “Two pointers & sliding windows”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-44","title":"Apply: Prefix sums & range-query thinking","difficulty":3,"prompt":"Write or modify a C++ program that demonstrates “Prefix sums & range-query thinking”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-45","title":"Apply: Recursion, backtracking & pruning","difficulty":3,"prompt":"Write or modify a C++ program that demonstrates “Recursion, backtracking & pruning”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-46","title":"Apply: Binary trees, traversals & BSTs","difficulty":3,"prompt":"Write or modify a C++ program that demonstrates “Binary trees, traversals & BSTs”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-47","title":"Apply: Heaps & priority_queue","difficulty":3,"prompt":"Write or modify a C++ program that demonstrates “Heaps & priority_queue”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-48","title":"Apply: Tries for prefix search","difficulty":3,"prompt":"Write or modify a C++ program that demonstrates “Tries for prefix search”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-49","title":"Apply: Graphs: representations, BFS & DFS","difficulty":3,"prompt":"Write or modify a C++ program that demonstrates “Graphs: representations, BFS & DFS”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-50","title":"Apply: Topological sort & cycle detection","difficulty":3,"prompt":"Write or modify a C++ program that demonstrates “Topological sort & cycle detection”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-51","title":"Apply: Disjoint Set Union & minimum spanning trees","difficulty":3,"prompt":"Write or modify a C++ program that demonstrates “Disjoint Set Union & minimum spanning trees”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-52","title":"Apply: Shortest paths: BFS & Dijkstra","difficulty":3,"prompt":"Write or modify a C++ program that demonstrates “Shortest paths: BFS & Dijkstra”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-53","title":"Apply: Greedy algorithms & interval problems","difficulty":3,"prompt":"Write or modify a C++ program that demonstrates “Greedy algorithms & interval problems”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"},{"id":"cpp-ex-54","title":"Apply: Dynamic programming: states, transitions & optimization","difficulty":3,"prompt":"Write or modify a C++ program that demonstrates “Dynamic programming: states, transitions & optimization”. Include at least one boundary or failure case, state the expected output, and explain the relevant correctness or complexity rule.","type":"scenario-analysis"}],"quiz":[{"id":"cpp-q-1","q":"What is the most important mastery check for C++ toolchain, compilation & program structure?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-2","q":"What is the most important mastery check for Tokens, identifiers, scope & namespaces?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-3","q":"What is the most important mastery check for Fundamental types, variables & type inference?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-4","q":"What is the most important mastery check for Constants, literals & numeric limits?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-5","q":"What is the most important mastery check for Input, output & formatting with iostream?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-6","q":"What is the most important mastery check for Operators, precedence & expressions?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-7","q":"What is the most important mastery check for Conversions, casts & type safety?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-8","q":"What is the most important mastery check for Conditionals: if, else & switch?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-9","q":"What is the most important mastery check for Loops: for, while, do-while, break & continue?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-10","q":"What is the most important mastery check for Functions, declarations & return values?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-11","q":"What is the most important mastery check for Default arguments & function overloading?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-12","q":"What is the most important mastery check for References, const references & parameter passing?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-13","q":"What is the most important mastery check for Recursion & the call stack?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-14","q":"What is the most important mastery check for Raw arrays & multidimensional arrays?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-15","q":"What is the most important mastery check for std::array, std::vector & capacity?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-16","q":"What is the most important mastery check for std::string, string_view & text operations?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-17","q":"What is the most important mastery check for Pointers, addresses & pointer arithmetic?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-18","q":"What is the most important mastery check for Dynamic memory, new/delete & ownership?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-19","q":"What is the most important mastery check for Structs, enum & enum class?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-20","q":"What is the most important mastery check for Classes, objects & access control?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-21","q":"What is the most important mastery check for Constructors, destructors & initializer lists?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-22","q":"What is the most important mastery check for const methods, static members & friend declarations?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-23","q":"What is the most important mastery check for Inheritance & base/derived relationships?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-24","q":"What is the most important mastery check for Virtual functions, polymorphism & abstract classes?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-25","q":"What is the most important mastery check for Operator overloading?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-26","q":"What is the most important mastery check for Exception handling & exception safety?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-27","q":"What is the most important mastery check for File streams & persistent data?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-28","q":"What is the most important mastery check for Function & class templates?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-29","q":"What is the most important mastery check for STL iterators & algorithms?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-30","q":"What is the most important mastery check for Lambdas, captures & callable objects?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-31","q":"What is the most important mastery check for RAII & smart pointers?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-32","q":"What is the most important mastery check for Copy/move semantics & Rule of Zero/Five?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-33","q":"What is the most important mastery check for Headers, source files, namespaces & CMake basics?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-34","q":"What is the most important mastery check for Debugging, undefined behavior & sanitizers?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-35","q":"What is the most important mastery check for DSA in C++: Big-O time, space & amortized analysis?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-36","q":"What is the most important mastery check for Arrays/vectors as a DSA foundation?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-37","q":"What is the most important mastery check for Linked lists in C++?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-38","q":"What is the most important mastery check for Stacks, queues & deques?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-39","q":"What is the most important mastery check for Hash tables with unordered_map & unordered_set?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-40","q":"What is the most important mastery check for Elementary sorting: bubble, selection & insertion sort?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-41","q":"What is the most important mastery check for Merge sort, quicksort & partitioning?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-42","q":"What is the most important mastery check for Binary search & lower_bound/upper_bound?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-43","q":"What is the most important mastery check for Two pointers & sliding windows?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-44","q":"What is the most important mastery check for Prefix sums & range-query thinking?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-45","q":"What is the most important mastery check for Recursion, backtracking & pruning?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-46","q":"What is the most important mastery check for Binary trees, traversals & BSTs?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-47","q":"What is the most important mastery check for Heaps & priority_queue?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-48","q":"What is the most important mastery check for Tries for prefix search?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-49","q":"What is the most important mastery check for Graphs: representations, BFS & DFS?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-50","q":"What is the most important mastery check for Topological sort & cycle detection?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-51","q":"What is the most important mastery check for Disjoint Set Union & minimum spanning trees?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-52","q":"What is the most important mastery check for Shortest paths: BFS & Dijkstra?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-53","q":"What is the most important mastery check for Greedy algorithms & interval problems?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"},{"id":"cpp-q-54","q":"What is the most important mastery check for Dynamic programming: states, transitions & optimization?","options":["Explain the relevant C++ rule/invariant and predict behavior before running the code.","Memorize only the syntax shown in one example.","Assume every operation is O(1).","Avoid testing boundary cases."],"correct":0,"type":"mcq"}],"structured":{}}</script>
+<script defer src="../assets/assessment-practice.js?v=20260822-v567"></script>
+<script defer src="../assets/github-integration.js?v=20260822-v567"></script>
+<script defer src="../assets/assessment-layout-fix.js?v=20260822-v567"></script>
+<script defer src="../assets/universal-reveal-solutions.js?v=20260822-v567"></script>
+<script defer src="../assets/reveal-solution-explanations.js?v=20260822-v567"></script>
+<script defer src="../assets/assessment-expanded-descriptions.js?v=20260822-v567"></script>
+<script defer src="../assets/exercise-direct-publish.js?v=20260822-v567"></script>
+<script defer src="../assets/universal-run-output.js?v=20260822-v567"></script>
+<script defer src="../assets/final-exercise-toolbar.js?v=20260822-v567"></script>
+<script id="csai-project-data" type="application/json">{"courseId":"cpp-dsa","courseTitle":"C++ Programming & DSA","defaultLanguage":"cpp","projects":[{"id":"cpp-p1","title":"C++ CLI Grade & Statistics Analyzer","description":"Build a command-line program that reads student scores, validates input, computes statistics, and writes a report.","requirements":["Functions and clear types","std::vector/std::string","Input validation","File output","At least five tests"],"starter":"","language":"cpp"},{"id":"cpp-p2","title":"OOP Library Management System","description":"Design an object-oriented library system with books, members, loans, polymorphic notifications, and persistent storage.","requirements":["Classes and invariants","Constructors/destructors","Inheritance or composition justified","Exceptions or result handling","File persistence","README design explanation"],"starter":"","language":"cpp"},{"id":"cpp-p3","title":"Modern C++ Resource-Safe Toolkit","description":"Build a small reusable toolkit that demonstrates templates, STL algorithms, lambdas, RAII, smart pointers, and move-aware types.","requirements":["Templates","STL algorithms","Lambdas","unique_ptr/shared_ptr only when ownership requires them","No raw owning pointers","Compiler warnings clean"],"starter":"","language":"cpp"},{"id":"cpp-p4","title":"DSA Implementation Library in C++","description":"Implement and test core data structures and algorithms without hiding the logic behind ready-made equivalents.","requirements":["Linked list","Stack/queue","Hashing or custom map exercise","Sorting/searching","Tree/heap","Complexity notes"],"starter":"","language":"cpp"},{"id":"cpp-p5","title":"Graph Route Planner","description":"Build a weighted graph route planner with BFS/DFS exploration and Dijkstra shortest paths.","requirements":["Adjacency list","BFS and DFS","Dijkstra","Unreachable-node handling","Path reconstruction","Complexity analysis"],"starter":"","language":"cpp"},{"id":"cpp-p6","title":"C++ DSA Interview Capstone","description":"Solve a curated set of array, hash, tree, graph, greedy, backtracking, and dynamic-programming problems in one documented portfolio project.","requirements":["At least 12 solved problems","Multiple DSA patterns","Tests and edge cases","Time/space complexity for every solution","Readable C++17+ code","README explaining patterns and lessons learned"],"starter":"","language":"cpp"}]}</script>
+<script defer src="../assets/course-project-workspace.js?v=20260822-v571"></script>
+<script defer src="../assets/example-learning-tools.js?v=20260822-v567"></script>
+<script defer src="../assets/practice-publish-completer.js?v=20260823-v573"></script>
+
+<!-- csai-production-augmentation -->
+<script src="../assets/adaptive-practice-layer.js?v=20260822-v567" defer></script>
+<script src="../assets/project-readme-layer.js?v=20260822-v567" defer></script>
+<!-- /csai-production-augmentation -->
+<script src="/assets/oa-assessment-fallback.js?v=20260811-1" defer></script>
+<script src="/assets/oa-assessment-upgrade.js?v=20260811-1" defer></script>
+
+<script src="/assets/python-only-ui.js?v=20260811-2" defer></script>
+
+<script defer src="../assets/study-examples.js?v=20260824-v574"></script>
+</body></html>

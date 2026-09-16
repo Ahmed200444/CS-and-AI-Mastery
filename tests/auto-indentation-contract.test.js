@@ -1,0 +1,23 @@
+const fs=require('fs'),path=require('path'),vm=require('vm'),assert=require('assert');
+const root=path.join(__dirname,'..');
+const asset=fs.readFileSync(path.join(root,'assets/universal-editable-code.js'),'utf8');
+assert(asset.includes("data.csaiAutoIndent")||asset.includes("dataset.csaiAutoIndent"),'editable workspaces must be marked for auto indentation');
+assert(asset.includes("handleAutoIndentKeydown"),'automatic indentation key handler missing');
+assert(asset.includes("enhanceNode(raw)"),'newly created code editors must be enhanced before their first indentation keystroke');
+assert(asset.includes("computeEnterPlan"),'indentation planning engine missing');
+assert(asset.includes("e.key==='Enter'"),'Enter must be intercepted for automatic indentation');
+assert(asset.includes("e.key===':'&&lang==='python'"),'Python else/elif/except/finally auto-dedent missing');
+assert(asset.includes("/^[}\\])]$/"),'closing delimiter auto-dedent missing');
+assert(asset.includes("lang==='html'")&&asset.includes("tag+'>"),'HTML closing-tag auto-dedent missing');
+const context={window:{},document:{readyState:'loading',addEventListener(){},getElementById(){return null}},console,Event:function(){}};
+context.window.getSelection=()=>null;vm.createContext(context);vm.runInContext(asset,context);
+const plan=context.window.CSAIEditableCode.computeEnterPlan;
+let p=plan('if score >= 90:',15,15,'python');assert.strictEqual(p.insert,'\n    ','Python block should indent four spaces');
+p=plan('    if score >= 90:',19,19,'python');assert.strictEqual(p.insert,'\n        ','nested Python block should indent one extra level');
+p=plan('int main() {',12,12,'cpp');assert.strictEqual(p.insert,'\n    ','C++ brace block should indent four spaces');
+p=plan('    if (x) {',12,12,'cpp');assert.strictEqual(p.insert,'\n        ','nested C++ brace block should indent one extra level');
+p=plan('items = []',9,9,'python');assert.ok(p.paired&&p.insert==='\n    \n','paired brackets should open an indented blank line and keep the closer dedented');
+p=plan('    value = 1',13,13,'python');assert.strictEqual(p.insert,'\n    ','ordinary lines should preserve their current indentation');
+const courses=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith('.html'));
+for(const f of courses){const h=fs.readFileSync(path.join(root,'courses',f),'utf8');assert(h.includes('universal-editable-code.js?v=20260822-v567'),`${f}: missing current auto-indent editable layer`);}
+console.log(`Automatic indentation contract PASS — Enter auto-indents Python/C++/brackets across ${courses.length} course pages.`);

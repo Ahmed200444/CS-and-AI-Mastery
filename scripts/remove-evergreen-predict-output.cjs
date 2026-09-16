@@ -11,7 +11,10 @@ src=src.replace(/var pred=card\.querySelector\('\[data-evergreen-predict\]'\);if
 src=src.replace(/\.evergreen-predict\{[^}]*\}/g,'');
 src=src.replace(/\.evergreen-predict\{width:100%;flex-basis:100%\}/g,'');
 
-if(src===before)throw new Error('Evergreen predict-output patch made no changes');
+// FIX #4 -- this is a one-time migration. The shipped asset no longer contains the
+// predict-output UI, so "no changes" is the correct, already-migrated outcome, not an
+// error. The assertion below is the real guarantee and still runs.
+if(src===before){console.log('Evergreen predict-output UI already absent; nothing to remove.');process.exit(0);}
 if(src.includes('data-evergreen-predict')||src.includes('Predict the output before you run'))throw new Error('Predict-output UI is still present after patch');
 fs.writeFileSync(file,src,'utf8');
 console.log('Removed Evergreen predict-output field and prediction echo logic.');

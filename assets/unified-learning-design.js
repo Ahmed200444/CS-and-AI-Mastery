@@ -232,7 +232,9 @@
 
   function boot(){
     run();
-    observer = new MutationObserver(schedule);
+    var shellPage=!!(document.getElementById('hub')||document.getElementById('aiPathTrack')||document.getElementById('cePathTrack')||document.getElementById('fsPathTrack')||document.getElementById('companyPathsTrack'));
+    if(!shellPage)return;
+    observer = new MutationObserver(function(records){if(records.some(function(r){return r.addedNodes&&r.addedNodes.length;}))schedule();});
     observer.observe(document.body,{subtree:true,childList:true});
     window.addEventListener('hashchange',function(){ setTimeout(schedule,30); });
   }

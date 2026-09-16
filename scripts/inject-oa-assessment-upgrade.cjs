@@ -11,5 +11,5 @@ for(const file of fs.readdirSync(dir).filter(f=>f.endsWith('.html'))){
  html=h>=0?html.slice(0,h)+headTags+'\n'+html.slice(h):headTags+'\n'+html;
  b=html.toLowerCase().lastIndexOf('</body>');html=b>=0?html.slice(0,b)+bodyTags+'\n'+html.slice(b):html+'\n'+bodyTags+'\n';fs.writeFileSync(p,html,'utf8');count++;
 }
-if(count!==57)throw new Error(`Expected 57 course pages, injected ${count}`);
+if(count!==62)throw new Error(`Expected 62 course pages, injected ${count}`);
 console.log(`OA assessment experience injected into ${count} course pages. Lesson DOM/content was not modified.`);

@@ -1,0 +1,46 @@
+{
+  "release": "5.57",
+  "status": "PASS",
+  "curriculum": {
+    "courses": 62,
+    "lessons": 800,
+    "normalizedKeyIdeas": 3427,
+    "baseExampleSlots": 5040,
+    "nativeExamples": 895,
+    "exercises": 794,
+    "projectsAndCapstones": 271,
+    "knowledgeChecks": 1585
+  },
+  "depth": {
+    "minimumSourceExplanationWords": 90,
+    "medianSourceExplanationWords": 192,
+    "minimumRenderedTeachingBlockWords": 422,
+    "minimumPracticalObjectivesPerLesson": 3
+  },
+  "examples": {
+    "activeExactDuplicateGroups": 0,
+    "activeLiteralOnlyStructuralDuplicateGroups": 0,
+    "generatedCodePathsPassing": 432,
+    "generatedCodePathsTotal": 432,
+    "bigOCuratedExamples": 11,
+    "hiddenOopCompatibilityExamples": 9
+  },
+  "note": "The exact final ZIP was fresh-extracted and re-tested before delivery.",
+  "finalFreshExtraction": {
+    "npmTest": "PASS",
+    "staticLessonExampleAudit": "PASS",
+    "deepStudyReadyQA": "PASS",
+    "productionIntegrity": "PASS",
+    "purposeFirstAudit": "PASS",
+    "companyProblemSolvingAudit": "PASS",
+    "khdaPostUpdateAudit": "PASS",
+    "serverRelease": "5.57",
+    "serverFiles": 749,
+    "localGitHubBackend": true,
+    "homepageHttp": 200,
+    "githubSetupHttp": 200,
+    "githubStatusHttp": 200,
+    "coursePagesHttp200": 62,
+    "coursePagesTotal": 62
+  }
+}

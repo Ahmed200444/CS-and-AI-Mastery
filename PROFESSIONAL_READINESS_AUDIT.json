@@ -1,0 +1,634 @@
+{
+  "release": "5.46",
+  "totals": {
+    "courses": 62,
+    "lessons": 800,
+    "concepts": 3269,
+    "native_examples": 895,
+    "exercises": 794,
+    "projects_capstones": 271,
+    "quiz": 1585
+  },
+  "courses": [
+    {
+      "course_id": "advanced-computer-organization",
+      "title": "Advanced Computer Organization",
+      "lessons": 8,
+      "unique_key_ideas": 40,
+      "native_examples": 8,
+      "exercises": 12,
+      "projects_capstones": 4,
+      "knowledge_checks": 0
+    },
+    {
+      "course_id": "ai-agents",
+      "title": "AI Agents / Agentic AI",
+      "lessons": 21,
+      "unique_key_ideas": 79,
+      "native_examples": 21,
+      "exercises": 25,
+      "projects_capstones": 5,
+      "knowledge_checks": 42
+    },
+    {
+      "course_id": "ai-ml",
+      "title": "AI / Machine Learning",
+      "lessons": 12,
+      "unique_key_ideas": 48,
+      "native_examples": 12,
+      "exercises": 12,
+      "projects_capstones": 6,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "ai-system-design",
+      "title": "AI System Design",
+      "lessons": 15,
+      "unique_key_ideas": 47,
+      "native_examples": 15,
+      "exercises": 18,
+      "projects_capstones": 6,
+      "knowledge_checks": 20
+    },
+    {
+      "course_id": "apis",
+      "title": "APIs",
+      "lessons": 10,
+      "unique_key_ideas": 47,
+      "native_examples": 10,
+      "exercises": 9,
+      "projects_capstones": 4,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "backend",
+      "title": "Backend Development",
+      "lessons": 9,
+      "unique_key_ideas": 37,
+      "native_examples": 9,
+      "exercises": 9,
+      "projects_capstones": 5,
+      "knowledge_checks": 5
+    },
+    {
+      "course_id": "capstone",
+      "title": "Capstone Portfolio",
+      "lessons": 1,
+      "unique_key_ideas": 5,
+      "native_examples": 1,
+      "exercises": 3,
+      "projects_capstones": 3,
+      "knowledge_checks": 2
+    },
+    {
+      "course_id": "cicd",
+      "title": "CI/CD: Continuous Integration & Deployment",
+      "lessons": 15,
+      "unique_key_ideas": 61,
+      "native_examples": 15,
+      "exercises": 18,
+      "projects_capstones": 6,
+      "knowledge_checks": 20
+    },
+    {
+      "course_id": "classical-ai",
+      "title": "Classical AI: Search, Reasoning & Planning",
+      "lessons": 20,
+      "unique_key_ideas": 74,
+      "native_examples": 20,
+      "exercises": 20,
+      "projects_capstones": 4,
+      "knowledge_checks": 20
+    },
+    {
+      "course_id": "cloud-computing",
+      "title": "Cloud Computing",
+      "lessons": 8,
+      "unique_key_ideas": 35,
+      "native_examples": 8,
+      "exercises": 7,
+      "projects_capstones": 4,
+      "knowledge_checks": 5
+    },
+    {
+      "course_id": "company-prep",
+      "title": "Company Preparation",
+      "lessons": 10,
+      "unique_key_ideas": 46,
+      "native_examples": 10,
+      "exercises": 10,
+      "projects_capstones": 3,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "comparch-os",
+      "title": "Computer Architecture & Operating Systems",
+      "lessons": 8,
+      "unique_key_ideas": 35,
+      "native_examples": 8,
+      "exercises": 5,
+      "projects_capstones": 4,
+      "knowledge_checks": 21
+    },
+    {
+      "course_id": "computer-vision",
+      "title": "Computer Vision",
+      "lessons": 9,
+      "unique_key_ideas": 35,
+      "native_examples": 9,
+      "exercises": 9,
+      "projects_capstones": 3,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "cpp-dsa",
+      "title": "C++ Programming & DSA",
+      "lessons": 54,
+      "unique_key_ideas": 162,
+      "native_examples": 54,
+      "exercises": 54,
+      "projects_capstones": 6,
+      "knowledge_checks": 54
+    },
+    {
+      "course_id": "cybersecurity",
+      "title": "Cybersecurity Fundamentals",
+      "lessons": 10,
+      "unique_key_ideas": 45,
+      "native_examples": 10,
+      "exercises": 10,
+      "projects_capstones": 3,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "data-engineering",
+      "title": "Data Engineering & Data Pipelines",
+      "lessons": 17,
+      "unique_key_ideas": 72,
+      "native_examples": 17,
+      "exercises": 18,
+      "projects_capstones": 6,
+      "knowledge_checks": 20
+    },
+    {
+      "course_id": "data-science",
+      "title": "Data Science",
+      "lessons": 11,
+      "unique_key_ideas": 49,
+      "native_examples": 11,
+      "exercises": 9,
+      "projects_capstones": 3,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "databases",
+      "title": "Databases",
+      "lessons": 15,
+      "unique_key_ideas": 74,
+      "native_examples": 15,
+      "exercises": 8,
+      "projects_capstones": 4,
+      "knowledge_checks": 5
+    },
+    {
+      "course_id": "debugging",
+      "title": "Debugging",
+      "lessons": 9,
+      "unique_key_ideas": 34,
+      "native_examples": 9,
+      "exercises": 7,
+      "projects_capstones": 4,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "deep-learning",
+      "title": "Deep Learning",
+      "lessons": 10,
+      "unique_key_ideas": 43,
+      "native_examples": 10,
+      "exercises": 12,
+      "projects_capstones": 6,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "deployment",
+      "title": "Model & App Deployment",
+      "lessons": 10,
+      "unique_key_ideas": 43,
+      "native_examples": 10,
+      "exercises": 8,
+      "projects_capstones": 4,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "diffusion",
+      "title": "Diffusion Models",
+      "lessons": 12,
+      "unique_key_ideas": 46,
+      "native_examples": 12,
+      "exercises": 10,
+      "projects_capstones": 3,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "digital-hardware",
+      "title": "Digital Systems & Computer Hardware",
+      "lessons": 15,
+      "unique_key_ideas": 87,
+      "native_examples": 15,
+      "exercises": 18,
+      "projects_capstones": 7,
+      "knowledge_checks": 18
+    },
+    {
+      "course_id": "distributed-systems",
+      "title": "Distributed Systems & Concurrency",
+      "lessons": 17,
+      "unique_key_ideas": 72,
+      "native_examples": 17,
+      "exercises": 18,
+      "projects_capstones": 6,
+      "knowledge_checks": 21
+    },
+    {
+      "course_id": "docker",
+      "title": "Docker",
+      "lessons": 8,
+      "unique_key_ideas": 34,
+      "native_examples": 8,
+      "exercises": 7,
+      "projects_capstones": 4,
+      "knowledge_checks": 5
+    },
+    {
+      "course_id": "dsa",
+      "title": "Data Structures & Algorithms",
+      "lessons": 20,
+      "unique_key_ideas": 104,
+      "native_examples": 67,
+      "exercises": 9,
+      "projects_capstones": 4,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "embedded-systems",
+      "title": "Embedded Systems & Microcontrollers",
+      "lessons": 8,
+      "unique_key_ideas": 39,
+      "native_examples": 8,
+      "exercises": 12,
+      "projects_capstones": 4,
+      "knowledge_checks": 0
+    },
+    {
+      "course_id": "frontend-dev",
+      "title": "Frontend Development",
+      "lessons": 7,
+      "unique_key_ideas": 30,
+      "native_examples": 7,
+      "exercises": 6,
+      "projects_capstones": 3,
+      "knowledge_checks": 5
+    },
+    {
+      "course_id": "gans",
+      "title": "GANs",
+      "lessons": 11,
+      "unique_key_ideas": 36,
+      "native_examples": 11,
+      "exercises": 10,
+      "projects_capstones": 3,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "generative-ai",
+      "title": "Generative AI",
+      "lessons": 9,
+      "unique_key_ideas": 39,
+      "native_examples": 9,
+      "exercises": 10,
+      "projects_capstones": 3,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "git",
+      "title": "Git & GitHub",
+      "lessons": 10,
+      "unique_key_ideas": 38,
+      "native_examples": 10,
+      "exercises": 8,
+      "projects_capstones": 4,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "huggingface",
+      "title": "Hugging Face",
+      "lessons": 14,
+      "unique_key_ideas": 56,
+      "native_examples": 14,
+      "exercises": 11,
+      "projects_capstones": 5,
+      "knowledge_checks": 34
+    },
+    {
+      "course_id": "influencing-without-authority",
+      "title": "Influencing Without Authority for Engineers",
+      "lessons": 15,
+      "unique_key_ideas": 50,
+      "native_examples": 15,
+      "exercises": 18,
+      "projects_capstones": 6,
+      "knowledge_checks": 20
+    },
+    {
+      "course_id": "interview-prep",
+      "title": "Interview Preparation",
+      "lessons": 9,
+      "unique_key_ideas": 39,
+      "native_examples": 9,
+      "exercises": 13,
+      "projects_capstones": 3,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "kubernetes",
+      "title": "Kubernetes",
+      "lessons": 12,
+      "unique_key_ideas": 49,
+      "native_examples": 12,
+      "exercises": 8,
+      "projects_capstones": 4,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "large-scale-ai",
+      "title": "Large-Scale AI Training & Inference",
+      "lessons": 22,
+      "unique_key_ideas": 82,
+      "native_examples": 22,
+      "exercises": 22,
+      "projects_capstones": 4,
+      "knowledge_checks": 22
+    },
+    {
+      "course_id": "linux",
+      "title": "Linux & Command Line",
+      "lessons": 12,
+      "unique_key_ideas": 56,
+      "native_examples": 12,
+      "exercises": 9,
+      "projects_capstones": 4,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "llm-evaluation-testing",
+      "title": "LLM Evaluation & Testing",
+      "lessons": 15,
+      "unique_key_ideas": 64,
+      "native_examples": 15,
+      "exercises": 18,
+      "projects_capstones": 6,
+      "knowledge_checks": 20
+    },
+    {
+      "course_id": "llms",
+      "title": "Large Language Models",
+      "lessons": 9,
+      "unique_key_ideas": 36,
+      "native_examples": 9,
+      "exercises": 13,
+      "projects_capstones": 7,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "mlops",
+      "title": "MLOps / Production AI",
+      "lessons": 17,
+      "unique_key_ideas": 62,
+      "native_examples": 17,
+      "exercises": 21,
+      "projects_capstones": 7,
+      "knowledge_checks": 23
+    },
+    {
+      "course_id": "networking",
+      "title": "Computer Networks",
+      "lessons": 13,
+      "unique_key_ideas": 71,
+      "native_examples": 13,
+      "exercises": 5,
+      "projects_capstones": 4,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "nlp",
+      "title": "NLP",
+      "lessons": 9,
+      "unique_key_ideas": 37,
+      "native_examples": 9,
+      "exercises": 9,
+      "projects_capstones": 3,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "observability",
+      "title": "Observability & Monitoring",
+      "lessons": 15,
+      "unique_key_ideas": 52,
+      "native_examples": 15,
+      "exercises": 18,
+      "projects_capstones": 6,
+      "knowledge_checks": 20
+    },
+    {
+      "course_id": "oop",
+      "title": "Object-Oriented Programming",
+      "lessons": 9,
+      "unique_key_ideas": 38,
+      "native_examples": 9,
+      "exercises": 9,
+      "projects_capstones": 4,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "problem-solving",
+      "title": "Problem Solving",
+      "lessons": 9,
+      "unique_key_ideas": 47,
+      "native_examples": 9,
+      "exercises": 9,
+      "projects_capstones": 4,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "prompt-engineering",
+      "title": "Prompt Engineering",
+      "lessons": 9,
+      "unique_key_ideas": 37,
+      "native_examples": 9,
+      "exercises": 10,
+      "projects_capstones": 3,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "python",
+      "title": "Python",
+      "lessons": 31,
+      "unique_key_ideas": 182,
+      "native_examples": 79,
+      "exercises": 17,
+      "projects_capstones": 8,
+      "knowledge_checks": 60
+    },
+    {
+      "course_id": "pytorch",
+      "title": "PyTorch",
+      "lessons": 9,
+      "unique_key_ideas": 32,
+      "native_examples": 9,
+      "exercises": 10,
+      "projects_capstones": 3,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "rag",
+      "title": "Retrieval-Augmented Generation",
+      "lessons": 10,
+      "unique_key_ideas": 42,
+      "native_examples": 10,
+      "exercises": 13,
+      "projects_capstones": 4,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "reinforcement-learning-post-training",
+      "title": "Reinforcement Learning & Modern LLM Post-Training",
+      "lessons": 26,
+      "unique_key_ideas": 86,
+      "native_examples": 26,
+      "exercises": 26,
+      "projects_capstones": 4,
+      "knowledge_checks": 26
+    },
+    {
+      "course_id": "resume-prep",
+      "title": "Resume Preparation",
+      "lessons": 9,
+      "unique_key_ideas": 44,
+      "native_examples": 9,
+      "exercises": 10,
+      "projects_capstones": 3,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "secure-ai-applications",
+      "title": "Secure AI Applications",
+      "lessons": 15,
+      "unique_key_ideas": 49,
+      "native_examples": 15,
+      "exercises": 18,
+      "projects_capstones": 6,
+      "knowledge_checks": 20
+    },
+    {
+      "course_id": "software-architecture",
+      "title": "Software Architecture & Design Patterns",
+      "lessons": 16,
+      "unique_key_ideas": 62,
+      "native_examples": 16,
+      "exercises": 18,
+      "projects_capstones": 6,
+      "knowledge_checks": 20
+    },
+    {
+      "course_id": "software-engineering-practice",
+      "title": "Software Engineering in Practice",
+      "lessons": 20,
+      "unique_key_ideas": 72,
+      "native_examples": 20,
+      "exercises": 20,
+      "projects_capstones": 4,
+      "knowledge_checks": 20
+    },
+    {
+      "course_id": "sql",
+      "title": "SQL",
+      "lessons": 12,
+      "unique_key_ideas": 48,
+      "native_examples": 12,
+      "exercises": 8,
+      "projects_capstones": 4,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "system-design",
+      "title": "System Design",
+      "lessons": 10,
+      "unique_key_ideas": 38,
+      "native_examples": 10,
+      "exercises": 9,
+      "projects_capstones": 4,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "systems-programming",
+      "title": "Systems Programming",
+      "lessons": 8,
+      "unique_key_ideas": 40,
+      "native_examples": 8,
+      "exercises": 14,
+      "projects_capstones": 4,
+      "knowledge_checks": 0
+    },
+    {
+      "course_id": "tensorflow",
+      "title": "TensorFlow",
+      "lessons": 9,
+      "unique_key_ideas": 35,
+      "native_examples": 9,
+      "exercises": 10,
+      "projects_capstones": 3,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "testing",
+      "title": "Testing",
+      "lessons": 11,
+      "unique_key_ideas": 35,
+      "native_examples": 11,
+      "exercises": 9,
+      "projects_capstones": 4,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "transformers",
+      "title": "Transformers",
+      "lessons": 9,
+      "unique_key_ideas": 33,
+      "native_examples": 9,
+      "exercises": 9,
+      "projects_capstones": 3,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "vaes",
+      "title": "VAEs",
+      "lessons": 11,
+      "unique_key_ideas": 40,
+      "native_examples": 11,
+      "exercises": 10,
+      "projects_capstones": 3,
+      "knowledge_checks": 30
+    },
+    {
+      "course_id": "web-dev",
+      "title": "Full-Stack Web Integration",
+      "lessons": 6,
+      "unique_key_ideas": 19,
+      "native_examples": 6,
+      "exercises": 9,
+      "projects_capstones": 4,
+      "knowledge_checks": 5
+    }
+  ]
+}
