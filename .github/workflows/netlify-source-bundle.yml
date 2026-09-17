@@ -13,10 +13,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Create source bundle
-        run: zip -qr netlify-source.zip . -x '.git/*' 'node_modules/*' 'netlify-source.zip'
+        run: zip -qr netlify-source.zip . -x '.git/*' 'node_modules/*' 'netlify-source.zip' 'mcp-runner/*'
+      - name: Prepare Netlify MCP runner
+        run: |
+          mkdir -p mcp-runner
+          cd mcp-runner
+          npm init -y >/dev/null 2>&1
+          npm install --no-audit --no-fund @netlify/mcp@1.15.1
       - uses: actions/upload-artifact@v4
         with:
-          name: netlify-source
-          path: netlify-source.zip
+          name: netlify-deploy-kit
+          path: |
+            netlify-source.zip
+            mcp-runner
           if-no-files-found: error
           retention-days: 1
