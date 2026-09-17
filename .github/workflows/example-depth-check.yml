@@ -132,18 +132,26 @@ jobs:
           node scripts/inject-study-examples.cjs &&
           node scripts/verify-study-examples.cjs &&
           node scripts/build-learning-quality-report.cjs
-      - name: Production build phase 6 - final verification
+      - name: Final verify - quality layer
+        run: node scripts/verify-final-quality-layer.cjs
+      - name: Final verify - first paint and unified design
         run: >-
-          node scripts/verify-final-quality-layer.cjs &&
           node scripts/inject-first-paint-runtime.cjs &&
-          node scripts/verify-unified-learning-design.cjs &&
-          node scripts/verify-python-only-platform.cjs &&
-          node scripts/verify-production-augmentation.cjs &&
-          node scripts/verify-runner-performance.cjs &&
-          node scripts/verify-oa-assessment-upgrade.cjs &&
-          node scripts/audit-production-integrity.cjs &&
+          node scripts/verify-unified-learning-design.cjs
+      - name: Final verify - Python platform
+        run: node scripts/verify-python-only-platform.cjs
+      - name: Final verify - production augmentation
+        run: node scripts/verify-production-augmentation.cjs
+      - name: Final verify - runner performance
+        run: node scripts/verify-runner-performance.cjs
+      - name: Final verify - OA assessment
+        run: node scripts/verify-oa-assessment-upgrade.cjs
+      - name: Final verify - production integrity
+        run: node scripts/audit-production-integrity.cjs
+      - name: Finalize homepage and mirrors
+        run: >-
           node scripts/inject-try-it-yourself-homepage.cjs &&
           node scripts/apply-performance-release.cjs &&
           node scripts/reexport-course-data-mirrors.cjs
-      - name: Production build phase 7 - repository contracts
+      - name: Production build final repository contracts
         run: npm test
