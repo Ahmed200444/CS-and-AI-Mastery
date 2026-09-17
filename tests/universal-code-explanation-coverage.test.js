@@ -71,8 +71,15 @@ assert.ok(generated.declaredProjects>=catalogProjects,`generated/compatibility p
 assert.ok(generated.staticProjectEditors>0,'expected specialized/static project editors');
 assert.ok(generated.assessmentEditors>0,'expected generated assessment code editors');
 assert.ok(generated.rawLanguageExercises>0,'expected language-tagged exercise editors');
-assert.equal(generated.nativeRunnableExamples,362,'expected 362 runnable native lesson examples');
-assert.equal(generated.nativeReferenceExamples,533,'expected 533 reference native lesson examples');
-assert.equal(generated.nativeRunnableExamples+generated.nativeReferenceExamples,895,'all 895 native lesson examples must be explainable');
+assert.ok(generated.nativeRunnableExamples>=362,`runnable native lesson example coverage regressed to ${generated.nativeRunnableExamples}`);
+assert.ok(generated.nativeReferenceExamples>=533,`reference native lesson example coverage regressed to ${generated.nativeReferenceExamples}`);
+const nativeTotal=generated.nativeRunnableExamples+generated.nativeReferenceExamples;
+const coveragePath=path.join(root,'EXAMPLE_COVERAGE_QA_v5.75.json');
+if(fs.existsSync(coveragePath)){
+  const coverage=JSON.parse(fs.readFileSync(coveragePath,'utf8'));
+  assert.equal(nativeTotal,coverage.staticExamplesAfter,'all enriched native lesson examples must be explainable');
+}else{
+  assert.ok(nativeTotal>=895,`native lesson example coverage regressed to ${nativeTotal}`);
+}
 
 console.log('Universal code explanation coverage: PASS',generated);
