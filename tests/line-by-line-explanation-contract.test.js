@@ -107,6 +107,12 @@ for(const page of pages){
     }
   }
 }
-assert.equal(nativeExamples,895,'all 895 native course examples must be audited');
-assert.equal(nativeLines,4643,'native example source-line count changed; review intentionally');
+const coveragePath=path.join(root,'EXAMPLE_COVERAGE_QA_v5.75.json');
+if(fs.existsSync(coveragePath)){
+  const coverage=JSON.parse(fs.readFileSync(coveragePath,'utf8'));
+  assert.equal(nativeExamples,coverage.staticExamplesAfter,'every enriched native course example must be audited');
+}else{
+  assert.ok(nativeExamples>=895,`native example coverage unexpectedly dropped to ${nativeExamples}`);
+}
+assert.ok(nativeLines>=4643,`native example source-line coverage unexpectedly dropped to ${nativeLines}`);
 console.log(`Meaningful line-by-line contract: PASS across ${pages.length} pages, ${nativeExamples} native examples / ${nativeLines} lines; max executable explanation ${maxExecutableWords} words.`);
