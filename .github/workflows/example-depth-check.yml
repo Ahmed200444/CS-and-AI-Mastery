@@ -1,0 +1,43 @@
+name: Example Depth Check
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/enrich-dsa-example-depth.cjs'
+      - 'courses/**'
+      - 'assets/study-examples.js'
+      - 'netlify.toml'
+      - '.github/workflows/example-depth-check.yml'
+  pull_request:
+    paths:
+      - 'scripts/enrich-dsa-example-depth.cjs'
+      - 'courses/**'
+      - 'assets/study-examples.js'
+      - 'netlify.toml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Syntax check example-depth script
+        run: node --check scripts/enrich-dsa-example-depth.cjs
+      - name: Run example-depth enrichment
+        run: node scripts/enrich-dsa-example-depth.cjs
+      - name: Verify DSA five-example floor
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const report=JSON.parse(fs.readFileSync('EXAMPLE_COVERAGE_QA_v5.75.json','utf8'));
+          if(report.status!=='PASS') throw new Error('Coverage report did not pass');
+          if(report.coursesAudited!==62) throw new Error(`Expected 62 courses, got ${report.coursesAudited}`);
+          for(const [id,count] of Object.entries(report.dsaStaticFiveExampleFloor||{})) {
+            if(count<5) throw new Error(`${id} has only ${count} static examples`);
+          }
+          console.log(`PASS: ${report.coursesAudited} courses / ${report.lessonsAudited} lessons audited; ${report.staticExamplesAdded} curated DSA examples added.`);
+          NODE
