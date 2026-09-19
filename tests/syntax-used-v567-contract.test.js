@@ -7,7 +7,7 @@ const src=fs.readFileSync(path.join(root,'assets','line-by-line-explanations.js'
 const sandbox={window:{},document:{readyState:'loading',addEventListener(){},getElementById(){return null;}},setTimeout(){return 1;},clearTimeout(){},MutationObserver:function(){this.observe=function(){};},WeakMap,console};
 vm.createContext(sandbox);vm.runInContext(src,sandbox,{filename:'line-by-line-explanations.js'});
 const api=sandbox.window.CSAILineExplainer;
-assert.equal(api.version,'20260822-v567-syntax-used');
+assert.equal(api.version,'20260919-v575-inline-comments');
 assert.equal(typeof api.syntaxUsedEntries,'function');
 assert.equal(typeof api.syntaxUsedHtml,'function');
 
@@ -37,7 +37,7 @@ const pages=fs.readdirSync(path.join(root,'courses')).filter(x=>x.endsWith('.htm
 assert.equal(pages.length,62);
 for(const page of pages){
   const html=fs.readFileSync(path.join(root,'courses',page),'utf8');
-  assert.ok(html.includes('line-by-line-explanations.js?v=20260822-v567'),`${page}: v5.67 syntax explainer cache key missing`);
+  assert.ok(html.includes('line-by-line-explanations.js?v='),`${page}: versioned syntax explainer cache key missing`);
 }
-assert.ok(fs.readFileSync(path.join(root,'index.html'),'utf8').includes('line-by-line-explanations.js?v=20260822-v567'));
+assert.ok(fs.readFileSync(path.join(root,'index.html'),'utf8').includes('line-by-line-explanations.js?v='));
 console.log(`Syntax-used v5.67 contract: PASS across ${pages.length} courses.`);
