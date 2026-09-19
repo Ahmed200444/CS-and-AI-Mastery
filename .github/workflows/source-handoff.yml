@@ -7,7 +7,7 @@ permissions:
 jobs:
   pack:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
       - name: Package source for deployment handoff
@@ -18,4 +18,13 @@ jobs:
             .
             !.git/**
             !node_modules/**
+            !netlify-mcp-runtime/**
+          retention-days: 1
+      - name: Prepare Netlify MCP runtime
+        run: npm install --prefix netlify-mcp-runtime @netlify/mcp@1.15.1 --no-audit --no-fund
+      - name: Package Netlify MCP runtime
+        uses: actions/upload-artifact@v4
+        with:
+          name: netlify-mcp-runtime
+          path: netlify-mcp-runtime
           retention-days: 1
