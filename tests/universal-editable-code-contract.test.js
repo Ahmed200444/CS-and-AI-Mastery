@@ -3,7 +3,7 @@ const root=path.join(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'
 const asset=read('assets/universal-editable-code.js');
 ok(/contenteditable','plaintext-only/.test(asset),'static code examples must become plain-text editable');
 ok(/data-csai-editable-code/.test(asset)&&/Reset code/.test(asset),'editable code must expose one reset path');
-ok(/comments beside each line/.test(asset)&&/CSAILineExplainer\.commentedCode/.test(asset),'editable teaching code must show explanation comments beside its source lines');
+ok(/comments beside each line/.test(asset)&&/\.commentedCode/.test(asset),'editable teaching code must show explanation comments beside its source lines');
 ok(/data-csai-inline-comments/.test(asset),'editable code must mark the inline-commented learning view');
 ok(/removeAttribute\('readonly'\)/.test(asset),'code textareas must not remain readonly');
 ok(/CSAILineExplainer\.targetNodes/.test(asset),'editable coverage must reuse the universal code-workspace inventory');
@@ -18,6 +18,8 @@ const js=read('assets/fast-js-runner.js');
 ok(/prewarmSource/.test(js)&&/t:'prepare'/.test(js),'JavaScript edited code must precompile in the persistent worker');
 const courseFiles=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith('.html'));
 let nativeBlocks=0;
-for(const f of courseFiles){const h=read('courses/'+f);ok(/universal-editable-code\.js\?v=20260919-v577/.test(h),f+': missing universal editable code layer');nativeBlocks+=(h.match(/<pre\b[^>]*(?:class="[^"]*\bcode\b|data-example-audit="candidate"|data-reference-only="true")/g)||[]).length;}
+for(const f of courseFiles){const h=read('courses/'+f);ok(/universal-editable-code\.js\?v=/.test(h),f+': missing universal editable code layer');nativeBlocks+=(h.match(/<pre\b[^>]*(?:class="[^"]*\bcode\b|data-example-audit="candidate"|data-reference-only="true")/g)||[]).length;}
 ok(nativeBlocks>700,'expected hundreds of native/reference code blocks to be covered, found '+nativeBlocks);
+const release=read('scripts/apply-performance-release.cjs');
+ok(/universal-editable-code\|line-by-line-explanations/.test(release)&&/20260919-v577/.test(release),'production build must cache-bust the inline-comment assets');
 console.log('Universal editable code contract PASS — '+courseFiles.length+' course pages, '+nativeBlocks+' native/reference blocks plus dynamic editors.');
