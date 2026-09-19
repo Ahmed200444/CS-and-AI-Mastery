@@ -25,13 +25,15 @@ const courseFiles=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith
 ok(courseFiles.length===62,'expected 62 static course pages');
 for(const f of courseFiles){const h=text('courses/'+f);const scripts=[...h.matchAll(/<script\b[^>]*src="([^"]+)"[^>]*>/gi)];ok(scripts.length>=2,`${f}: expected course scripts`);for(const m of scripts){const src=m[1];const critical=/runtime-inline\/courses-[^/]+-00[12]\.js/.test(src);if(!critical)ok(/\bdefer\b/i.test(m[0]),`${f}: non-critical script ${src} should be deferred`)}}
 
-const BUILD_TAG='20260822-v567',NEW_BUILD_TAG='20260822-v568',CPP_STYLE_TAG='20260822-v571',AUDIT_TAG='20260823-v573',LEARNING_TAG='20260824-v574';
+const BUILD_TAG='20260822-v567',NEW_BUILD_TAG='20260822-v568',CPP_STYLE_TAG='20260822-v571',AUDIT_TAG='20260823-v573',LEARNING_TAG='20260824-v574',INLINE_COMMENT_TAG='20260919-v577';
 for(const rel of ['index.html',...courseFiles.map(f=>'courses/'+f)]){
   const h=text(rel);
   for(const m of h.matchAll(/<script\b[^>]*src="([^"]+)"[^>]*>/gi)){
     if(/^(?:\.\.\/)?assets\//.test(m[1])){
+      const inlineCommentAsset=/(?:universal-editable-code|line-by-line-explanations)\.js/.test(m[1]);
       const expected=/try-it-yourself-v568\.js/.test(m[1])?NEW_BUILD_TAG:/study-examples\.js|conceptual-examples-v574\.js|program-questions-v574\.js/.test(m[1])?LEARNING_TAG:/practice-guidance\.js|practice-publish-completer\.js/.test(m[1])?AUDIT_TAG:/course-project-workspace\.js/.test(m[1])?CPP_STYLE_TAG:BUILD_TAG;
-      ok(m[1].includes('?v='+expected),`${rel}: local script is missing the expected cache-busting build tag: ${m[1]}`);
+      const tagged=m[1].includes('?v='+expected)||(inlineCommentAsset&&m[1].includes('?v='+INLINE_COMMENT_TAG));
+      ok(tagged,`${rel}: local script is missing the expected cache-busting build tag: ${m[1]}`);
     }
   }
 }
