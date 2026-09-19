@@ -1,0 +1,15 @@
+'use strict';
+const fs=require('fs');
+const path=require('path');
+const root=process.cwd();
+const file=path.join(root,'index.html');
+let html=fs.readFileSync(file,'utf8');
+html=html.replace(/\n?<!-- csai-studycore-export:start -->[\s\S]*?<!-- csai-studycore-export:end -->\n?/g,'\n');
+const block='<!-- csai-studycore-export:start -->\n<script src="assets/studycore-export.js?v=20260919-v576" defer></script>\n<!-- csai-studycore-export:end -->';
+const pos=html.toLowerCase().lastIndexOf('</body>');
+html=pos>=0?html.slice(0,pos)+block+'\n'+html.slice(pos):html+'\n'+block+'\n';
+fs.writeFileSync(file,html,'utf8');
+const final=fs.readFileSync(file,'utf8');
+if((final.match(/csai-studycore-export:start/g)||[]).length!==1)throw new Error('Expected exactly one StudyCore export injection.');
+if(!final.includes('assets/studycore-export.js?v=20260919-v576'))throw new Error('StudyCore export asset missing from index.');
+console.log('Injected the single main-page StudyCore export control.');
