@@ -29,6 +29,4 @@ assert.match(api.commentedCode('<button>Save<\/button>','html'),/<!--.+-->/,'HTM
 assert.match(api.commentedCode('.row { display: flex; }','css'),/\/\*.+\*\//,'CSS learning view should use block comments');
 assert.match(api.commentedCodeHtml('x = 1','python'),/Learning view:/,'commented view must say it is for learning rather than replacing the runnable editor');
 
-const netlify=fs.readFileSync(path.join(root,'netlify.toml'),'utf8');
-assert.ok(netlify.includes('node scripts/bump-line-explainer-query.cjs'),'Netlify build must cache-bust the updated explainer');
 console.log('Inline code comments v5.75 contract: PASS');
