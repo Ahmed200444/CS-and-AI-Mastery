@@ -16,7 +16,7 @@ const qualityCss=read('assets/final-quality-layer.css');
 const adaptiveCss=read('assets/adaptive-v4-live.css');
 const index=read('index.html');
 
-assert.ok(index.includes('line-by-line-explanations.js?v=20260822-v567'),'main website must load the universal line explainer');
+assert.ok(/line-by-line-explanations\.js\?v=/.test(index),'main website must load the versioned universal line explainer');
 assert.ok(line.includes('Open this section to build the explanation.'),'line explanations must render lazily');
 assert.ok(line.includes('data-csai-term-host'),'term glossary host must be present');
 assert.ok(!line.includes("rootMargin:'900px 0px'"),'closed lessons must not initialize explanation UI just because they approach the viewport');
