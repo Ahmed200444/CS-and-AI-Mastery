@@ -7,7 +7,7 @@ const src=fs.readFileSync(path.join(root,'assets','line-by-line-explanations.js'
 const sandbox={window:{},document:{readyState:'loading',addEventListener(){},getElementById(){return null;}},setTimeout(){return 1;},clearTimeout(){},MutationObserver:function(){this.observe=function(){};},WeakMap,console};
 vm.createContext(sandbox);vm.runInContext(src,sandbox,{filename:'line-by-line-explanations.js'});
 const api=sandbox.window.CSAILineExplainer;
-assert.equal(api.version,'20260919-v575-inline-comments');
+assert.equal(api.version,'20260919-v577-inline-editor-comments');
 assert.equal(typeof api.syntaxUsedEntries,'function');
 assert.equal(typeof api.syntaxUsedHtml,'function');
 
