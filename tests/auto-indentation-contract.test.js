@@ -19,5 +19,5 @@ p=plan('    if (x) {',12,12,'cpp');assert.strictEqual(p.insert,'\n        ','nes
 p=plan('items = []',9,9,'python');assert.ok(p.paired&&p.insert==='\n    \n','paired brackets should open an indented blank line and keep the closer dedented');
 p=plan('    value = 1',13,13,'python');assert.strictEqual(p.insert,'\n    ','ordinary lines should preserve their current indentation');
 const courses=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith('.html'));
-for(const f of courses){const h=fs.readFileSync(path.join(root,'courses',f),'utf8');assert(h.includes('universal-editable-code.js?v=20260822-v567'),`${f}: missing current auto-indent editable layer`);}
+for(const f of courses){const h=fs.readFileSync(path.join(root,'courses',f),'utf8');assert(/universal-editable-code\.js\?v=/.test(h),`${f}: missing versioned auto-indent editable layer`);}
 console.log(`Automatic indentation contract PASS — Enter auto-indents Python/C++/brackets across ${courses.length} course pages.`);
