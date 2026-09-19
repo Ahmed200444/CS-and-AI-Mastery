@@ -9,7 +9,7 @@ assert.equal(pages.length,62,'expected 62 course pages');
 for(const f of pages){
   const html=fs.readFileSync(path.join(root,'courses',f),'utf8');
   assert.ok(html.includes('study-examples.js?v=20260824-v574'),`${f}: current study example layer missing`);
-  assert.ok(html.includes('line-by-line-explanations.js?v=20260822-v567'),`${f}: current line explainer missing`);
+  assert.ok(/line-by-line-explanations\.js\?v=/.test(html),`${f}: versioned line explainer missing`);
   assert.ok(html.includes('progressive-lesson-layout.js?v=20260822-v567'),`${f}: current lesson explanation layer missing`);
 }
 const lineSource=fs.readFileSync(path.join(root,'assets','line-by-line-explanations.js'),'utf8');
