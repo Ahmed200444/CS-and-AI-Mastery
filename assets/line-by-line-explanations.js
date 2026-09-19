@@ -269,7 +269,7 @@ function splitSimpleStatements(v){
  var s=text(v),parts=[],cur='',quote='',depth=0,escNext=false;
  for(var i=0;i<s.length;i++){var ch=s[i];if(escNext){cur+=ch;escNext=false;continue;}if(quote){cur+=ch;if(ch==='\\')escNext=true;else if(ch===quote)quote='';continue;}if(ch==='"'||ch==="'"){quote=ch;cur+=ch;continue;}if(ch==='('||ch==='['||ch==='{')depth++;if(ch===')'||ch===']'||ch==='}')depth=Math.max(0,depth-1);if(ch===';'&&depth===0){if(cur.trim())parts.push(cur.trim());cur='';continue;}cur+=ch;}if(cur.trim())parts.push(cur.trim());return parts;
 }
-function makeContext(lang){return{lang:lang,types:Object.create(null),dictKeys:Object.create(null),values:Object.create(null),blocks:[]};}
+function makeContext(lang){return{lang:lang,types:Object.create(null),dictKeys:Object.create(null),values:Object.create(null),blocks:[],functionName:''};}
 function setType(ctx,name,type){if(ctx&&name)ctx.types[name]=type;}
 function rememberValue(ctx,name,value){if(ctx&&name)ctx.values[name]=clean(value);}
 function rememberDictKey(ctx,name,key){if(!ctx||!name)return;if(!ctx.dictKeys[name])ctx.dictKeys[name]=Object.create(null);ctx.dictKeys[name][key]=true;setType(ctx,name,'dict');}
@@ -279,7 +279,12 @@ function moduleExplanation(name){
  return map[name]||('tools provided by the `'+name+'` module');
 }
 function explainCondition(expr){
- var e=clean(expr).replace(/:$/,'');var m;
+ var e=clean(expr).replace(/:$/,'');var m,parts;
+ if((m=e.match(/^([A-Za-z_]\w*)\s*<\s*([A-Za-z_]\w*)\[1\]\s+and\s+\1\s*\+\s*([A-Za-z_]\w*)\s*>\s*\2\[0\]$/)))return'the proposed interval from `'+m[1]+'` to `'+m[1]+' + '+m[3]+'` overlaps this existing interval';
+ parts=e.split(/\s+and\s+/);if(parts.length>1)return parts.map(explainCondition).join(' and ');
+ parts=e.split(/\s+or\s+/);if(parts.length>1)return parts.map(explainCondition).join(' or ');
+ if((m=e.match(/^str\((.+)\)\.count\((.+)\)\s*>=\s*(\d+)$/)))return displayLiteral(m[2])+' appears at least '+m[3]+' times after '+displayLiteral(m[1])+' is converted to text';
+ if((m=e.match(/^(.+?)\s*%\s*(.+?)\s*==\s*0$/)))return displayLiteral(m[1])+' is divisible by '+displayLiteral(m[2])+' (remainder `0`)';
  if((m=e.match(/^(.+?)\s*>=\s*(.+)$/)))return displayLiteral(m[1])+' is at least '+displayLiteral(m[2]);
  if((m=e.match(/^(.+?)\s*<=\s*(.+)$/)))return displayLiteral(m[1])+' is at most '+displayLiteral(m[2]);
  if((m=e.match(/^(.+?)\s*==\s*(.+)$/)))return displayLiteral(m[1])+' equals '+displayLiteral(m[2]);
@@ -318,12 +323,13 @@ function pythonTeachingPurpose(raw,ctx){
  if((m=t.match(/^from\s+(\S+)\s+import\s+(.+)$/))){var what=clean(m[2]);if(m[1]==='collections'&&/\bCounter\b/.test(what))return'Imports `Counter`, a helper that counts how often items appear.';if(m[1]==='io'&&/\bStringIO\b/.test(what))return'Imports `StringIO`, an in-memory text stream that behaves like a text file without creating a real file.';return'Imports '+displayLiteral(what)+' from `'+m[1]+'` so it can be used directly.';}
  if(/^if\s+__name__\s*==/.test(t))return'Runs the indented startup code only when this file is executed directly.';
  if((m=t.match(/^async\s+def\s+([A-Za-z_]\w*)\s*\(([^)]*)\)/)))return'Defines async function `'+m[1]+'('+clean(m[2])+')`. Its indented code runs when the function is awaited.';
- if((m=t.match(/^def\s+([A-Za-z_]\w*)\s*\(([^)]*)\)/)))return'Defines function `'+m[1]+'('+clean(m[2])+')`. Its indented code runs when you call it.';
+ if((m=t.match(/^def\s+([A-Za-z_]\w*)\s*\(([^)]*)\)/))){if(ctx)ctx.functionName=m[1];return'Defines function `'+m[1]+'('+clean(m[2])+')`. Its indented code runs when you call it.';}
  if((m=t.match(/^class\s+([A-Za-z_]\w*)/)))return'Creates class `'+m[1]+'`, a blueprint for objects with related data and behavior.';
  if(/^@/.test(t))return'Applies this decorator to the function or class directly below it.';
  if(/^(?:[rubfRUBF]{0,2})(?:"""|''')[\s\S]*(?:"""|''')$/.test(t))return'This docstring explains what the surrounding function/class is meant to do. Python stores it as documentation.';
  if((m=t.match(/^([A-Za-z_]\w*)\s*:\s*([A-Za-z_][\w.\[\], |]*)$/)))return'Documents `'+m[1]+'` as type `'+clean(m[2])+'`; this helps readers and type-checking tools.';
  if((m=t.match(/^for\s+(.+?)\s+in\s+(.+?):\s*(.+)$/)))return'Takes each item from '+displayLiteral(m[2])+' one at a time, stores it in '+displayLiteral(m[1])+', then runs '+displayLiteral(m[3])+'.';
+ if((m=t.match(/^for\s+([A-Za-z_]\w*)\s*,\s*([A-Za-z_]\w*)\s+in\s+enumerate\((.+)\):$/)))return'Loops through '+displayLiteral(m[3])+' while `'+m[1]+'` receives each index and `'+m[2]+'` receives its value.';
  if((m=t.match(/^for\s+(.+?)\s+in\s+(.+):$/)))return'Takes each item from '+displayLiteral(m[2])+' one at a time, stores it in '+displayLiteral(m[1])+', and runs the indented block.';
  if(/^while\s+True\s*:/.test(t))return'Starts a loop that repeats until a `break` statement stops it.';
  if((m=t.match(/^while\s+(.+):$/)))return'Repeats the indented block while '+explainCondition(m[1])+'.';
@@ -337,7 +343,7 @@ function pythonTeachingPurpose(raw,ctx){
  if((m=t.match(/^except\s*([^:]*)\s*:/)))return m[1]?'Catches `'+clean(m[1])+'` errors from the `try` block so the program can handle them.':'Catches an error from the `try` block so the program can handle it.';
  if(/^finally\s*:/.test(t))return'Always runs the indented cleanup code, whether the `try` succeeded or failed.';
  if(/^with\s+/.test(t))return'Uses the resource in this line and automatically cleans it up when the block ends.';
- if((m=t.match(/^return(?:\s+(.+))?$/))){if(!m[1])return'Ends the function and returns no value.';var rm=pythonExpressionMeaning(m[1]);return rm?rm+' The function returns that result.':'Ends the function and sends '+displayLiteral(m[1])+' back to the caller.';}
+ if((m=t.match(/^return(?:\s+(.+))?$/))){if(!m[1])return'Ends the function and returns no value.';if(m[1]==='-1'&&ctx&&/(?:linear_search|binary_search)/.test(ctx.functionName||''))return'Returns `-1` to show that the target was not found.';var rm=pythonExpressionMeaning(m[1]);return rm?rm+' The function returns that result.':'Ends the function and sends '+displayLiteral(m[1])+' back to the caller.';}
  if(/^yield\b/.test(t))return'Produces one value from the generator, then pauses so it can continue later.';
  if(/^raise\b/.test(t))return'Raises an exception here to report an invalid or failed situation.';
  if((m=t.match(/^assert\s+(.+)$/)))return'Checks that '+explainCondition(m[1])+'. If not, Python raises `AssertionError`.';
@@ -348,6 +354,16 @@ function pythonTeachingPurpose(raw,ctx){
  if((m=t.match(/^del\s+(.+)$/)))return'Removes '+displayLiteral(m[1])+' from its current name or collection position.';
  if((m=t.match(/^global\s+(.+)$/)))return'Tells this function to use the module-level variable(s) '+displayLiteral(m[1])+' instead of creating locals.';
 
+ // Search variables use purpose-first explanations.
+ if(ctx&&/^(?:binary_search|first_at_least|lower_bound|upper_bound)$/.test(ctx.functionName||'')){
+  if(/^low\s*=\s*0$/.test(t))return'Starts the search at the first index by setting `low` to `0`.';
+  if(/^high\s*=\s*len\(.+\)\s*-\s*1$/.test(t))return'Sets `high` to the last valid index so the whole sorted collection starts inside the search range.';
+  if(/^high\s*=\s*len\(.+\)$/.test(t))return'Sets `high` just past the last index for this half-open search range.';
+  if(/^mid\s*=\s*\(low\s*\+\s*high\)\s*\/\/\s*2$/.test(t))return'Calculates the middle index of the current search range.';
+  if(/^low\s*=\s*mid\s*\+\s*1$/.test(t))return'Moves `low` just right of `mid`, discarding the lower half that cannot contain the answer.';
+  if(/^high\s*=\s*mid\s*-\s*1$/.test(t))return'Moves `high` just left of `mid`, discarding the upper half that cannot contain the target.';
+  if(/^high\s*=\s*mid$/.test(t))return'Moves the upper boundary to `mid` because `mid` could still be the first valid position.';
+ }
  // Explain common I/O/runtime helpers before generic assignment/call rules so beginners see what the unfamiliar name actually does.
  if((m=t.match(/^([A-Za-z_]\w*)\s*=\s*(?:io\.)?StringIO\((.*)\)$/)))return'Creates an in-memory text stream in `'+m[1]+'`. `StringIO` acts like a text file, but keeps the text in RAM.';
  if((m=t.match(/^([A-Za-z_]\w*)\s*=\s*sys\.stdout$/)))return'Saves Python’s current standard output stream in `'+m[1]+'`, usually so normal screen output can be restored later.';

@@ -47,6 +47,7 @@ jobs:
           node scripts/embed-catalog-data.cjs &&
           node scripts/inject-course-theme-toggle.cjs &&
           node scripts/check-index-inline-js.cjs course-theme &&
+          node scripts/sync-course-data-from-source.cjs &&
           node scripts/generate-static-course-pages.cjs
       - name: Production build phase 2 - enrich and audit examples
         run: >-

@@ -42,6 +42,42 @@ assert.deepEqual(Array.from(d,r=>r.purpose),[
   'Checks whether `age` is a key in `d`. It is not, so this prints `False` without an error.'
 ]);
 
+const packageCheck=api.explain(`def solution(packageCodes):
+    count = 0
+    for code in packageCodes:
+        if code % 3 == 0 and str(code).count("7") >= 2:
+            count += 1
+    return count`,'python');
+assert.match(packageCheck[3].purpose,/divisible by.*3/i);
+assert.match(packageCheck[3].purpose,/7.*at least 2 times|at least 2 times.*7/i);
+assert(!packageCheck[3].purpose.includes('…'),'compound-condition explanation must not truncate the important condition');
+
+const enumCheck=api.explain(`for i, num in enumerate(nums):
+    print(i, num)`,'python');
+assert.match(enumCheck[0].purpose,/index/i);
+assert.match(enumCheck[0].purpose,/value/i);
+
+const binaryCheck=api.explain(`def binary_search(nums, target):
+    low = 0
+    high = len(nums) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if nums[mid] == target:
+            return mid
+        elif nums[mid] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1`,'python');
+assert.match(binaryCheck[4].purpose,/middle index/i);
+assert.match(binaryCheck[8].purpose,/discarding the lower half/i);
+assert.match(binaryCheck[10].purpose,/discarding the upper half/i);
+assert.match(binaryCheck[11].purpose,/not found/i);
+
+const overlapCheck=api.explain(`if start < meeting[1] and start + length > meeting[0]:
+    free = False`,'python');
+assert.match(overlapCheck[0].purpose,/overlaps/i);
+
 const counts=api.explain(`counts = {}\nfor word in 'red blue red'.split():\n    counts[word] = counts.get(word, 0) + 1\nprint(counts)`,'python');
 assert.match(counts[0].purpose,/empty dictionary/i);
 assert.match(counts[1].purpose,/each item|one at a time/i);

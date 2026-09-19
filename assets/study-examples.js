@@ -1366,15 +1366,15 @@ function diverseProgram(topic,seed,cid){
   'history = []\nfor page in ["home", "courses", "dsa"]:\n    history.append(page)\nprint("back to:", history[-2])',
   'text = "([]{})"\nstack = []\npairs = {")": "(", "]": "[", "}": "{"}\nvalid = True\nfor char in text:\n    if char in "([{": stack.append(char)\n    elif not stack or stack.pop() != pairs[char]: valid = False; break\nprint(valid and not stack)',
   'actions = ["type A", "type B", "delete B"]\nundo = []\nfor action in actions: undo.append(action)\nprint("undo:", undo.pop())',
-  'values = [1, 2, 3, 4]\nstack = []\nfor value in values: stack.append(value)\nreversed_values = []\nwhile stack: reversed_values.append(stack.pop())\nprint(reversed_values)',
-  'stack = [(0, "start")]\nwhile stack:\n    depth, label = stack.pop()\n    print(depth, label)\n    if depth < 2: stack.append((depth + 1, label + ".child"))',
-  'tokens = ["3", "4", "+"]\nstack = []\nfor token in tokens:\n    if token.isdigit(): stack.append(int(token))\n    else: stack.append(stack.pop() + stack.pop())\nprint(stack[-1])',
+  'values = [1, 2, 3, 4]\nstack = []\nfor value in values:\n    stack.append(value)\nreversed_values = []\nwhile stack:\n    reversed_values.append(stack.pop())\nprint(reversed_values)',
+  'stack = [(0, "start")]\nwhile stack:\n    depth, label = stack.pop()\n    print(depth, label)\n    if depth < 2:\n        stack.append((depth + 1, label + ".child"))',
+  'tokens = ["3", "4", "+"]\nstack = []\nfor token in tokens:\n    if token.isdigit():\n        stack.append(int(token))\n    else:\n        stack.append(stack.pop() + stack.pop())\nprint(stack[-1])',
   'path = ["root", "settings", "privacy"]\nprint("current:", path[-1])\npath.pop()\nprint("parent:", path[-1])',
-  'work = ["compile", "test", "package"]\nstack = list(work)\nwhile stack: print("doing:", stack.pop())'
+  'work = ["compile", "test", "package"]\nstack = list(work)\nwhile stack:\n    print("doing:", stack.pop())'
  ];
  banks.queue=[
-  'from collections import deque\nrequests = deque(["A", "B", "C"])\nwhile requests: print("serve:", requests.popleft())',
-  'from collections import deque\nqueue = deque([(0, 0)])\nseen = {(0, 0)}\nwhile queue:\n    cell = queue.popleft()\n    print(cell)\n    if cell == (1, 0): break\n    nxt = (cell[0] + 1, cell[1])\n    if nxt not in seen: seen.add(nxt); queue.append(nxt)',
+  'from collections import deque\nrequests = deque(["A", "B", "C"])\nwhile requests:\n    print("serve:", requests.popleft())',
+  'from collections import deque\nqueue = deque([(0, 0)])\nseen = {(0, 0)}\nwhile queue:\n    cell = queue.popleft()\n    print(cell)\n    if cell == (1, 0):\n        break\n    nxt = (cell[0] + 1, cell[1])\n    if nxt not in seen:\n        seen.add(nxt)\n        queue.append(nxt)',
   'from collections import deque\nprinter = deque()\nfor job in ["report.pdf", "cv.pdf", "notes.pdf"]: printer.append(job)\nprint("next:", printer.popleft())',
   'from collections import deque\nevents = deque(maxlen=3)\nfor event in [1, 2, 3, 4, 5]: events.append(event)\nprint(list(events))',
   'from collections import deque\nline = deque(["Ali", "Maya"])\nline.append("Omar")\nprint(line.popleft(), list(line))',
@@ -1385,22 +1385,22 @@ function diverseProgram(topic,seed,cid){
  banks.linked=[
   'class Node:\n    def __init__(self, value, next_node=None): self.value, self.next = value, next_node\nhead = Node(1, Node(2, Node(3)))\nprint(head.next.next.value)',
   'class Node:\n    def __init__(self, value, next_node=None): self.value, self.next = value, next_node\nhead = Node("A", Node("B"))\nnew_head = Node("START", head)\nprint(new_head.value, new_head.next.value)',
-  'class Node:\n    def __init__(self, value, next_node=None): self.value, self.next = value, next_node\nhead = Node(10, Node(20))\nhead.next.next = Node(30)\ncur = head\nwhile cur: print(cur.value); cur = cur.next',
+  'class Node:\n    def __init__(self, value, next_node=None):\n        self.value = value\n        self.next = next_node\nhead = Node(10, Node(20))\nhead.next.next = Node(30)\ncur = head\nwhile cur:\n    print(cur.value)\n    cur = cur.next',
   'class Node:\n    def __init__(self, value, next_node=None): self.value, self.next = value, next_node\nhead = Node(5, Node(8, Node(13)))\ncur = head\nwhile cur and cur.value != 8: cur = cur.next\nprint(cur.value if cur else None)',
-  'class Node:\n    def __init__(self, value, next_node=None): self.value, self.next = value, next_node\nhead = Node(1, Node(2, Node(3)))\nhead.next = head.next.next\ncur = head\nwhile cur: print(cur.value); cur = cur.next',
-  'class Node:\n    def __init__(self, value, next_node=None): self.value, self.next = value, next_node\nhead = Node(2, Node(4, Node(6)))\ncount = 0\ncur = head\nwhile cur: count += 1; cur = cur.next\nprint(count)',
-  'class Node:\n    def __init__(self, value, next_node=None): self.value, self.next = value, next_node\nhead = Node(1, Node(2, Node(3)))\nvalues = []\ncur = head\nwhile cur: values.append(cur.value); cur = cur.next\nprint(values)',
+  'class Node:\n    def __init__(self, value, next_node=None):\n        self.value = value\n        self.next = next_node\nhead = Node(1, Node(2, Node(3)))\nhead.next = head.next.next\ncur = head\nwhile cur:\n    print(cur.value)\n    cur = cur.next',
+  'class Node:\n    def __init__(self, value, next_node=None):\n        self.value = value\n        self.next = next_node\nhead = Node(2, Node(4, Node(6)))\ncount = 0\ncur = head\nwhile cur:\n    count += 1\n    cur = cur.next\nprint(count)',
+  'class Node:\n    def __init__(self, value, next_node=None):\n        self.value = value\n        self.next = next_node\nhead = Node(1, Node(2, Node(3)))\nvalues = []\ncur = head\nwhile cur:\n    values.append(cur.value)\n    cur = cur.next\nprint(values)',
   'class Node:\n    def __init__(self, value, next_node=None): self.value, self.next = value, next_node\nhead = Node(1, Node(2, Node(3)))\nprev = None\ncur = head\nwhile cur:\n    nxt = cur.next; cur.next = prev; prev = cur; cur = nxt\nprint(prev.value, prev.next.value)'
  ];
  banks.binary=[
-  'nums = [2, 4, 7, 9, 13]\ntarget = 9\nleft, right = 0, len(nums)-1\nwhile left <= right:\n    mid = (left + right)//2\n    if nums[mid] == target: print(mid); break\n    if nums[mid] < target: left = mid + 1\n    else: right = mid - 1',
-  'nums = [10, 20, 30, 40, 50]\ntarget = 25\nleft, right = 0, len(nums)\nwhile left < right:\n    mid = (left + right)//2\n    if nums[mid] < target: left = mid + 1\n    else: right = mid\nprint("insert at", left)',
-  'nums = [1, 2, 2, 2, 4]\ntarget = 2\nleft, right = 0, len(nums)-1\nanswer = -1\nwhile left <= right:\n    mid=(left+right)//2\n    if nums[mid] >= target: answer=mid; right=mid-1\n    else: left=mid+1\nprint(answer)',
-  'pages = [5, 9, 12, 20, 28]\nlimit = 15\nleft, right = 0, len(pages)\nwhile left < right:\n    mid=(left+right)//2\n    if pages[mid] <= limit: left=mid+1\n    else: right=mid\nprint(pages[left] if left < len(pages) else None)',
-  'def can_finish(speed): return speed * 4 >= 37\nlo, hi = 1, 20\nwhile lo < hi:\n    mid=(lo+hi)//2\n    if can_finish(mid): hi=mid\n    else: lo=mid+1\nprint(lo)',
-  'nums=[3,6,9,12,15]\ntarget=8\nleft,right=0,len(nums)-1\nwhile left<=right:\n    mid=(left+right)//2\n    if nums[mid] < target: left=mid+1\n    else: right=mid-1\nprint("closest insertion index", left)',
-  'matrix_rows=[1,4,7,10,13]\ntarget=10\nlo,hi=0,len(matrix_rows)-1\nwhile lo<=hi:\n    mid=(lo+hi)//2\n    if matrix_rows[mid]==target: print("found row",mid); break\n    if matrix_rows[mid]<target: lo=mid+1\n    else: hi=mid-1',
-  'times=[8,12,16,20,24]\ncutoff=18\nlo,hi=0,len(times)\nwhile lo<hi:\n    mid=(lo+hi)//2\n    if times[mid] < cutoff: lo=mid+1\n    else: hi=mid\nprint(times[lo])'
+  'nums = [2, 4, 7, 9, 13]\ntarget = 9\nleft, right = 0, len(nums) - 1\nwhile left <= right:\n    mid = (left + right) // 2\n    if nums[mid] == target:\n        print(mid)\n        break\n    if nums[mid] < target:\n        left = mid + 1\n    else:\n        right = mid - 1',
+  'nums = [10, 20, 30, 40, 50]\ntarget = 25\nleft, right = 0, len(nums)\nwhile left < right:\n    mid = (left + right) // 2\n    if nums[mid] < target:\n        left = mid + 1\n    else:\n        right = mid\nprint("insert at", left)',
+  'nums = [1, 2, 2, 2, 4]\ntarget = 2\nleft, right = 0, len(nums) - 1\nanswer = -1\nwhile left <= right:\n    mid = (left + right) // 2\n    if nums[mid] >= target:\n        answer = mid\n        right = mid - 1\n    else:\n        left = mid + 1\nprint(answer)',
+  'pages = [5, 9, 12, 20, 28]\nlimit = 15\nleft, right = 0, len(pages)\nwhile left < right:\n    mid = (left + right) // 2\n    if pages[mid] <= limit:\n        left = mid + 1\n    else:\n        right = mid\nprint(pages[left] if left < len(pages) else None)',
+  'def can_finish(speed):\n    return speed * 4 >= 37\n\nlo, hi = 1, 20\nwhile lo < hi:\n    mid = (lo + hi) // 2\n    if can_finish(mid):\n        hi = mid\n    else:\n        lo = mid + 1\nprint(lo)',
+  'nums = [3, 6, 9, 12, 15]\ntarget = 8\nleft, right = 0, len(nums) - 1\nwhile left <= right:\n    mid = (left + right) // 2\n    if nums[mid] < target:\n        left = mid + 1\n    else:\n        right = mid - 1\nprint("closest insertion index", left)',
+  'matrix_rows = [1, 4, 7, 10, 13]\ntarget = 10\nlo, hi = 0, len(matrix_rows) - 1\nwhile lo <= hi:\n    mid = (lo + hi) // 2\n    if matrix_rows[mid] == target:\n        print("found row", mid)\n        break\n    if matrix_rows[mid] < target:\n        lo = mid + 1\n    else:\n        hi = mid - 1',
+  'times = [8, 12, 16, 20, 24]\ncutoff = 18\nlo, hi = 0, len(times)\nwhile lo < hi:\n    mid = (lo + hi) // 2\n    if times[mid] < cutoff:\n        lo = mid + 1\n    else:\n        hi = mid\nprint(times[lo])'
  ];
  banks.recursion=[
   'def factorial(n):\n    if n <= 1: return 1\n    return n * factorial(n-1)\nprint(factorial(5))',
@@ -1408,9 +1408,9 @@ function diverseProgram(topic,seed,cid){
   'def total(values):\n    if not values: return 0\n    return values[0] + total(values[1:])\nprint(total([2,4,6]))',
   'def reverse(text):\n    if len(text) <= 1: return text\n    return reverse(text[1:]) + text[0]\nprint(reverse("dsa"))',
   'def contains(values, target):\n    if not values: return False\n    return values[0] == target or contains(values[1:], target)\nprint(contains([3,7,9], 7))',
-  'def power(base, exp):\n    if exp == 0: return 1\n    return base * power(base, exp-1)\nprint(power(2, 5))',
+  'def power(base, exp):\n    if exp == 0:\n        return 1\n    return base * power(base, exp - 1)\nprint(power(2, 5))',
   'tree={"v":1,"left":{"v":2},"right":{"v":3}}\ndef visit(node):\n    if not node: return\n    print(node["v"])\n    visit(node.get("left")); visit(node.get("right"))\nvisit(tree)',
-  'def gcd(a,b):\n    if b == 0: return a\n    return gcd(b, a % b)\nprint(gcd(48,18))'
+  'def gcd(a, b):\n    if b == 0:\n        return a\n    return gcd(b, a % b)\nprint(gcd(48, 18))'
  ];
  banks.comprehension=[
   'nums = [1,2,3,4]\nprint([n*n for n in nums])',
