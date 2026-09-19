@@ -3,6 +3,7 @@
 if(window.CSAIEditableCode)return;
 
 var originals=new WeakMap(), toolbars=new WeakMap(), indentGuard=new WeakSet();
+var COMMENTABLE_LANGS=new Set(['python','javascript','typescript','cpp','c','java','sql','html','css','shell','yaml']);
 var INDENT_UNIT='    ';
 var PRE_FALLBACK=[
  '.lesson pre.code',
@@ -22,7 +23,7 @@ function addStyle(){
  [data-csai-editable-code="1"]{cursor:text;outline:none;caret-color:#fff;transition:border-color .12s ease,box-shadow .12s ease,background .12s ease}
  [data-csai-editable-code="1"]:focus{box-shadow:inset 0 0 0 1px rgba(64,170,255,.72),0 0 0 2px rgba(64,170,255,.10);background-color:#0b121d!important}
  .csai-editable-codebar{display:flex;align-items:center;justify-content:flex-end;gap:7px;padding:6px 9px;border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--panel) 94%,var(--bg));font:700 11px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
- .csai-editable-badge{margin-right:auto;color:var(--muted);font-weight:800}.csai-editable-badge:before{content:"✎";margin-right:5px;color:#64b5f6}
+ .csai-editable-badge{margin-right:auto;color:var(--muted);font-weight:800}.csai-editable-badge:before{content:"✎";margin-right:5px;color:#64b5f6}[data-csai-inline-comments="1"]{tab-size:4}
  .csai-editable-reset{border:1px solid var(--border);border-radius:7px;background:transparent;color:var(--text);padding:5px 8px;font:800 11px/1.2 inherit;cursor:pointer}.csai-editable-reset:hover{background:var(--pill)}
  textarea[data-csai-editable-code="1"]{resize:vertical}
  `;
@@ -56,6 +57,36 @@ function languageFor(node){
  if(!explicit&&wrap){explicit=String(wrap.getAttribute('data-language')||wrap.getAttribute('data-adaptive-lang')||'');var sel=wrap.querySelector&&wrap.querySelector('[data-project-lang]');if(!explicit&&sel)explicit=String(sel.value||'');}
  if(window.CSAILineExplainer&&typeof window.CSAILineExplainer.inferLanguage==='function'){try{explicit=window.CSAILineExplainer.inferLanguage(codeText(node),explicit,node)||explicit;}catch(_){}}
  return normalizeLang(explicit);
+}
+function explainedCode(raw,lang){
+ if(!COMMENTABLE_LANGS.has(lang))return String(raw||'');
+ var api=window.CSAILineExplainer;
+ if(!api||typeof api.commentedCode!=='function')return String(raw||'');
+ return api.commentedCode(String(raw||''),lang);
+}
+function applyInlineComments(node){
+ if(!node||node.dataset.csaiInlineComments==='1')return false;
+ var api=window.CSAILineExplainer;
+ if(!api||typeof api.commentedCode!=='function')return false;
+ var raw=originals.get(node);
+ if(raw==null){raw=codeText(node);originals.set(node,raw);}
+ var lang=languageFor(node);
+ if(!COMMENTABLE_LANGS.has(lang))return false;
+ var shown=explainedCode(raw,lang);
+ if('value' in node)node.value=shown;else node.textContent=shown;
+ node.dataset.csaiInlineComments='1';
+ node.setAttribute('data-csai-inline-comments','1');
+ return true;
+}
+function resetShownCode(node){
+ var raw=originals.get(node);
+ if(raw==null)return;
+ node.dataset.csaiInlineComments='';
+ node.removeAttribute('data-csai-inline-comments');
+ var shown=explainedCode(raw,languageFor(node));
+ if('value' in node)node.value=shown;else node.textContent=shown;
+ if(shown!==raw){node.dataset.csaiInlineComments='1';node.setAttribute('data-csai-inline-comments','1');}
+ node.dispatchEvent(new Event('input',{bubbles:true}));
 }
 function selectionOffsets(node){
  if(node&&'selectionStart' in node)return{start:node.selectionStart||0,end:node.selectionEnd||0};
@@ -115,7 +146,7 @@ function toolbarFor(node){
  var bar=document.createElement('div');
  bar.className='csai-editable-codebar';
  bar.setAttribute('data-csai-editable-toolbar','');
- bar.innerHTML='<span class="csai-editable-badge">Editable code</span><button type="button" class="csai-editable-reset" data-csai-reset-code>Reset code</button>';
+ bar.innerHTML='<span class="csai-editable-badge">Editable code · comments beside each line</span><button type="button" class="csai-editable-reset" data-csai-reset-code>Reset code</button>';
  var anchor=node;
  var shell=node.closest&&node.closest('.csai-vscode-shell');
  if(shell)anchor=shell;
@@ -123,7 +154,7 @@ function toolbarFor(node){
  bar.querySelector('[data-csai-reset-code]').addEventListener('click',function(){
    var original=originals.get(node);
    if(original==null)return;
-   setCode(node,original);
+   resetShownCode(node);
    if(window.CSAILineExplainer&&typeof window.CSAILineExplainer.refresh==='function')window.CSAILineExplainer.refresh(node);
    if(window.CSAIDiagnostics&&typeof window.CSAIDiagnostics.runLiveLint==='function'&&'value' in node)window.CSAIDiagnostics.runLiveLint(node);
    node.focus();
@@ -153,6 +184,7 @@ function enhancePre(pre){
  if(!pre.getAttribute('aria-label'))pre.setAttribute('aria-label','Editable code example');
  if(!pre.getAttribute('data-language')&&window.CSAILineExplainer&&typeof window.CSAILineExplainer.inferLanguage==='function'){try{pre.setAttribute('data-language',window.CSAILineExplainer.inferLanguage(pre.textContent||'','',pre));}catch(_){}}
  pre.setAttribute('tabindex','0');
+ applyInlineComments(pre);
  toolbarFor(pre);
  pre.addEventListener('paste',function(e){
    e.preventDefault();
@@ -176,9 +208,11 @@ function enhanceTextarea(area){
  if(area.disabled&&isCodeNode(area))area.disabled=false;
  area.spellcheck=false;
  if(!area.getAttribute('aria-label'))area.setAttribute('aria-label','Editable code');
+ applyInlineComments(area);
 }
 function enhanceNode(node){
  if(!isCodeNode(node))return;
+ if(node.dataset.csaiEditableCode==='1'){applyInlineComments(node);return;}
  if(node.tagName==='PRE')enhancePre(node);
  else if(node.tagName==='TEXTAREA')enhanceTextarea(node);
 }
@@ -205,6 +239,6 @@ function boot(){
  setTimeout(function(){enhance(document);},180);
  setTimeout(function(){enhance(document);},700);
 }
-window.CSAIEditableCode={enhance:enhance,isCodeNode:isCodeNode,computeEnterPlan:computeEnterPlan,languageFor:languageFor,version:'1.1-autoindent'};
+window.CSAIEditableCode={enhance:enhance,isCodeNode:isCodeNode,computeEnterPlan:computeEnterPlan,languageFor:languageFor,applyInlineComments:applyInlineComments,version:'1.2-inline-comments'};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();

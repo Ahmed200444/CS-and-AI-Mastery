@@ -1,7 +1,7 @@
 (function(){
 'use strict';
 
-var VERSION='20260919-v575-inline-comments';
+var VERSION='20260919-v577-inline-editor-comments';
 var updateTimers=new WeakMap(),editorSeq=0;
 
 function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
@@ -332,6 +332,7 @@ function pythonTeachingPurpose(raw,ctx){
  if((m=t.match(/^for\s+([A-Za-z_]\w*)\s*,\s*([A-Za-z_]\w*)\s+in\s+enumerate\((.+)\):$/)))return'Loops through '+displayLiteral(m[3])+' while `'+m[1]+'` receives each index and `'+m[2]+'` receives its value.';
  if((m=t.match(/^for\s+(.+?)\s+in\s+(.+):$/)))return'Takes each item from '+displayLiteral(m[2])+' one at a time, stores it in '+displayLiteral(m[1])+', and runs the indented block.';
  if(/^while\s+True\s*:/.test(t))return'Starts a loop that repeats until a `break` statement stops it.';
+ if((m=t.match(/^while\s+(l|left)\s*<\s*(r|right)\s*:$/)))return'Repeats while the left pointer `'+m[1]+'` is still before the right pointer `'+m[2]+'`.';
  if((m=t.match(/^while\s+(.+):$/)))return'Repeats the indented block while '+explainCondition(m[1])+'.';
  if((m=t.match(/^if\s+(.+?):\s*(.+)$/))){var action=pythonTeachingPurpose(m[2],ctx).replace(/^./,function(x){return x.toLowerCase();});return'If '+explainCondition(m[1])+', then '+action;}
  if((m=t.match(/^if\s+(.+):$/)))return'Checks whether '+explainCondition(m[1])+'. If yes, the indented block runs.';
@@ -379,6 +380,9 @@ function pythonTeachingPurpose(raw,ctx){
  if(/^exec\s*\(/.test(t))return'Runs Python code supplied as text. `exec` is useful for controlled examples/tools, but normal programs usually call functions directly.';
  if(/^compile\s*\(/.test(t))return'Converts source-code text into a Python code object so it can be executed or inspected.';
 
+ // Two-pointer examples use these names often; explain the movement instead of only the arithmetic.
+ if((m=t.match(/^(l|left)\s*(\+=)\s*1$/)))return'Moves the left pointer `'+m[1]+'` one position to the right.';
+ if((m=t.match(/^(r|right)\s*(-=)\s*1$/)))return'Moves the right pointer `'+m[1]+'` one position to the left.';
  // Compact one-line examples can contain multiple statements separated by semicolons.
  if(t.indexOf(';')>=0){var statements=splitSimpleStatements(t);if(statements.length>1){var targets=statements.map(function(part){var am=part.match(/^(.+?)\s*=\s*.+$/);return am?clean(am[1]):'';});if(targets.every(Boolean)){var shown=targets.map(displayLiteral);return'Updates '+(shown.length===2?shown.join(' and '):shown.slice(0,-1).join(', ')+', and '+shown[shown.length-1])+' in sequence for this step.';}var explanations=statements.slice(0,2).map(function(part){return pythonTeachingPurpose(part,ctx).replace(/[.]$/,'');});return explanations.join('; then ')+(statements.length>2?'; then continues the remaining statements in order':'')+'.';}}
  if((m=t.match(/^(.+?)\s*(\+=|-=|\*=|\/=|\/\/=|%=)\s*(.+)$/))){var opMap={'+=':'adds','-=':'subtracts','*=':'multiplies by','/=':'divides by','//=':'floor-divides by','%=':'takes the remainder with'};return'Updates '+displayLiteral(m[1])+': '+opMap[m[2]]+' '+displayLiteral(m[3])+' and saves the result back.';}
@@ -390,6 +394,7 @@ function pythonTeachingPurpose(raw,ctx){
  if((m=t.match(/^(.+?)\.extend\((.*)\)$/)))return'Adds every item from '+displayLiteral(m[2])+' to the end of '+displayLiteral(m[1])+'.';
 
  // Multiple assignment such as a, b = 6, 3.
+ if((m=t.match(/^(l|left)\s*,\s*(r|right)\s*=\s*0\s*,\s*len\(([^)]+)\)\s*-\s*1$/)))return'Sets `'+m[1]+'` to the first index and `'+m[2]+'` to the last index of `'+m[3]+'`.';
  if((m=t.match(/^([A-Za-z_]\w*(?:\s*,\s*[A-Za-z_]\w*)+)\s*=\s*(.+)$/))){var names=splitSimpleComma(m[1]),vals=splitSimpleComma(m[2]);if(names.length===vals.length){names.forEach(function(n,i){rememberValue(ctx,n,vals[i]);});return'Stores '+names.map(function(n,i){return displayLiteral(vals[i])+' in `'+n+'`';}).join(' and ')+'.';}}
  if((m=t.match(/^([A-Za-z_]\w*(?:\s*,\s*[A-Za-z_]\w*)+)\s*=\s*([A-Za-z_][\w.]*)\((.*)\)$/))){var targets=splitSimpleComma(m[1]);return'Calls `'+m[2]+'(...)` and unpacks its returned values into '+targets.map(function(n){return'`'+n+'`';}).join(', ')+'.';}
  if((m=t.match(/^([A-Za-z_]\w*(?:\s*,\s*[A-Za-z_]\w*)+)\s*=\s*([A-Za-z_]\w*)$/))){var targets2=splitSimpleComma(m[1]);return'Unpacks the values from `'+m[2]+'` into '+targets2.map(function(n){return'`'+n+'`';}).join(', ')+'.';}
@@ -710,18 +715,31 @@ function recordHtml(r){
  return '<li class="csai-line-item" data-line-number="'+r.number+'"><div class="csai-line-code"><span class="csai-line-number">Line '+r.number+'</span><code>'+esc(r.code)+'</code></div><p class="csai-line-purpose">'+esc(r.purpose)+'</p><details class="csai-line-syntax"><summary>Syntax</summary><ul>'+syntax.map(function(x){return'<li>'+esc(x)+'</li>';}).join('')+'</ul></details></li>';
 }
 function listHtml(code,lang){return explain(code,lang).map(recordHtml).join('');}
+function stripGeneratedComments(code){
+ return text(code).split(/\r?\n/).map(function(line){
+  return line
+   .replace(/\s{2,}# Explanation: .*$/,'')
+   .replace(/\s{2,}-- Explanation: .*$/,'')
+   .replace(/\s{2,}\/\/ Explanation: .*$/,'')
+   .replace(/\s{2,}\/\* Explanation: .* \*\/$/,'')
+   .replace(/\s{2,}<!-- Explanation: .* -->$/,'');
+ }).join('\n');
+}
 function inlineCommentFor(line,purpose,lang){
  var raw=text(line),note=clean(purpose);
  if(!raw.trim())return'';
+ // Preserve syntax/behavior in the few constructs where a trailing comment would change the program.
+ if(lang==='python'&&/\\\s*$/.test(raw))return raw;
  var suffix;
- if(lang==='python'||lang==='shell'||lang==='dockerfile'||lang==='yaml')suffix='# '+note;
- else if(lang==='sql')suffix='-- '+note;
- else if(lang==='html')suffix='<!-- '+note+' -->';
- else if(lang==='css')suffix='/* '+note+' */';
- else suffix='// '+note;
+ if(lang==='python'||lang==='shell'||lang==='yaml')suffix='# Explanation: '+note;
+ else if(lang==='sql')suffix='-- Explanation: '+note;
+ else if(lang==='html')suffix='<!-- Explanation: '+note+' -->';
+ else if(lang==='css')suffix='/* Explanation: '+note+' */';
+ else if(lang==='javascript'||lang==='typescript'||lang==='cpp'||lang==='c'||lang==='java')suffix='// Explanation: '+note;
+ else return raw;
  return raw.replace(/\s+$/,'')+'  '+suffix;
 }
-function commentedCode(code,lang){return explain(code,lang).map(function(r){return inlineCommentFor(r.code,r.purpose,lang);}).join('\n');}
+function commentedCode(code,lang){var cleanCode=stripGeneratedComments(code);return explain(cleanCode,lang).map(function(r){return inlineCommentFor(r.code,r.purpose,lang);}).join('\n');}
 function commentedCodeHtml(code,lang){return '<section class="csai-commented-code" data-csai-commented-code><div class="csai-commented-code-title">Code with comments</div><p class="csai-commented-code-note">Learning view: each source line includes its explanation as a comment. Keep using the clean code above to run or edit.</p><pre><code>'+esc(commentedCode(code,lang))+'</code></pre></section>';}
 function glossaryTerms(code,lang){var c=text(code),terms=[];function add(term,meaning){if(!terms.some(function(x){return x.term===term;}))terms.push({term:term,meaning:meaning});}
  if(lang==='python'){
@@ -901,7 +919,7 @@ function addStyle(){if(document.getElementById('csai-line-by-line-style'))return
 .csai-line-explanation{margin-top:14px;padding:12px 16px;border-top:1px solid var(--border);background:color-mix(in srgb,var(--panel) 96%,var(--bg));color:var(--text)}.csai-line-explanation>summary{display:flex;align-items:center;justify-content:space-between;gap:14px;cursor:pointer;font-weight:900;font-size:.96rem;list-style-position:inside}.csai-line-count{font-size:.72rem;font-weight:800;color:var(--muted);white-space:nowrap}.csai-line-explanation>ol{list-style:none;margin:10px 0 0;padding:0}.csai-line-lazy{margin:10px 0 0;color:var(--muted);font-size:.78rem}.csai-commented-code{margin:12px 0 4px;padding:12px;border:1px solid var(--border);border-radius:10px;background:var(--bg)}.csai-commented-code-title{font-weight:900}.csai-commented-code-note{margin:4px 0 9px;color:var(--muted);font-size:.76rem;line-height:1.45}.csai-commented-code pre{margin:0;padding:11px 12px;border:1px solid color-mix(in srgb,var(--border) 72%,transparent);border-radius:9px;background:color-mix(in srgb,var(--panel) 96%,var(--bg));overflow:auto}.csai-commented-code code{white-space:pre;font:650 12.5px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}.csai-syntax-used{margin:12px 0 4px;padding:12px;border:1px solid var(--border);border-radius:10px;background:var(--bg)}.csai-syntax-used>b{display:block}.csai-syntax-used-intro{margin:3px 0 10px;color:var(--muted);font-size:.76rem}.csai-syntax-used-list{display:grid;gap:9px}.csai-syntax-used-list article{padding:9px 10px;border:1px solid color-mix(in srgb,var(--border) 72%,transparent);border-radius:9px;background:color-mix(in srgb,var(--panel) 96%,var(--bg))}.csai-syntax-used-list strong{display:block;margin-bottom:4px}.csai-syntax-used-list p{margin:3px 0;line-height:1.45;font-size:.82rem}.csai-syntax-used-list code{font-size:.78rem}.csai-term-glossary{margin:12px 0 4px;padding:12px;border:1px solid var(--border);border-radius:10px;background:var(--bg)}.csai-term-glossary>b{display:block;margin-bottom:8px}.csai-term-glossary dl{display:grid;gap:8px;margin:0}.csai-term-glossary dl>div{display:grid;grid-template-columns:minmax(90px,150px) 1fr;gap:10px;align-items:start}.csai-term-glossary dt,.csai-term-glossary dd{margin:0}.csai-term-glossary dd{color:var(--muted);line-height:1.5}@media(max-width:620px){.csai-term-glossary dl>div{grid-template-columns:1fr}}.csai-line-item{margin:0;padding:12px 0 14px;border-bottom:1px solid color-mix(in srgb,var(--border) 72%,transparent);line-height:1.5}.csai-line-item:last-child{border-bottom:0}.csai-line-item.is-blank{padding:8px 0;opacity:.72}.csai-line-code{display:flex;align-items:flex-start;gap:9px;flex-wrap:wrap;margin-bottom:5px}.csai-line-number{display:inline-flex;flex:0 0 auto;padding:3px 7px;border-radius:999px;background:var(--pill);color:var(--pilltext);font-size:.68rem;font-weight:900}.csai-line-code code{white-space:pre-wrap;overflow-wrap:anywhere;font:650 12.5px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace}.csai-line-blank-note{color:var(--muted);font-size:.75rem}.csai-line-purpose{max-width:820px;margin:0;color:var(--text);line-height:1.5;font-size:.92rem}.csai-line-syntax{max-width:820px;margin-top:6px;color:var(--muted)}.csai-line-syntax>summary{cursor:pointer;width:max-content;font-size:.78rem;font-weight:850;color:var(--muted)}.csai-line-syntax>ul{margin:7px 0 0;padding-left:20px}.csai-line-syntax li{margin:5px 0;line-height:1.55}.csai-example-explain[data-csai-replaced-by-line],.evergreen-explain[data-csai-replaced-by-line],.csai-study-explain[data-csai-generic-hidden="1"],.adaptive-explain[data-csai-generic-hidden="1"]{display:none!important}\
 ';document.head.appendChild(s);}
 
-function codeFrom(node){if(!node)return'';return 'value' in node?text(node.value):text(node.textContent);}
+function codeFrom(node){if(!node)return'';var value='value' in node?text(node.value):text(node.textContent);return stripGeneratedComments(value);}
 function languageLabel(node,container){var label='';if(node&&node.getAttribute){label=text(node.getAttribute('data-language')||node.getAttribute('data-lang'));if(label)return label;}if(container){var n=container.querySelector('.lesson-run-lang,.csai-study-kind,.evergreen-example-head span,[data-lang-variant],[data-project-lang],[data-file-label],.cx-pm-field-label,.wd-file-name');label=n?text((n.value||n.textContent)||(n.getAttribute&&n.getAttribute('data-lang-variant'))):'';}return label;}
 function isReference(node){return node&&node.getAttribute&&node.getAttribute('data-reference-only')==='true';}
 function isWrittenResponse(node){if(!node||!node.matches)return false;if(node.matches('.oa-answer,[aria-label*="reasoning" i],[aria-label*="answer notes" i],[aria-label*="interview answer" i],[placeholder*="own words" i],[placeholder*="write your answer" i]'))return true;var task=node.closest('.oa-task');return !!(task&&node.matches('[data-editor]')&&!node.matches('.oa-editor')&&!task.querySelector('[data-run],[data-csai-oa-python-run]'));}
@@ -921,7 +939,7 @@ function targetNodes(root){root=root||document;var selectors=[
 function enhance(root){addStyle();targetNodes(root).forEach(refreshNode);}
 function schedule(node){if(!isCodeWorkspace(node)&&!(node&&node.getAttribute&&node.getAttribute('data-csai-line-editor-id')))return;clearTimeout(updateTimers.get(node));var t=setTimeout(function(){refreshNode(node);updateTimers.delete(node);},120);updateTimers.set(node,t);}
 
-window.CSAILineExplainer={version:VERSION,inferLanguage:inferLanguage,explain:explain,listHtml:listHtml,commentedCode:commentedCode,commentedCodeHtml:commentedCodeHtml,explanationHtml:explanationHtml,quickPurpose:quickPurposeFor,glossaryTerms:glossaryTerms,glossaryHtml:glossaryHtml,syntaxUsedEntries:syntaxUsedEntries,syntaxUsedHtml:syntaxUsedHtml,refresh:refreshNode,enhance:enhance,isCodeWorkspace:isCodeWorkspace,targetNodes:targetNodes};
+window.CSAILineExplainer={version:VERSION,inferLanguage:inferLanguage,explain:explain,listHtml:listHtml,commentedCode:commentedCode,stripGeneratedComments:stripGeneratedComments,commentedCodeHtml:commentedCodeHtml,explanationHtml:explanationHtml,quickPurpose:quickPurposeFor,glossaryTerms:glossaryTerms,glossaryHtml:glossaryHtml,syntaxUsedEntries:syntaxUsedEntries,syntaxUsedHtml:syntaxUsedHtml,refresh:refreshNode,enhance:enhance,isCodeWorkspace:isCodeWorkspace,targetNodes:targetNodes};
 
 function initialEnhance(){addStyle();var lessons=Array.from(document.querySelectorAll('.lesson'));/* v5.60: scrolling past a closed lesson must not build explanation UI. */lessons.filter(function(x){return x.open;}).forEach(enhance);}
 function boot(){initialEnhance();document.addEventListener('focusin',function(e){if(e.target&&isCodeWorkspace(e.target))refreshNode(e.target);},true);document.addEventListener('click',function(e){var n=e.target&&e.target.closest&&e.target.closest('pre.code,[data-csai-language-generated],.csai-language-code');if(n&&isCodeWorkspace(n))refreshNode(n);},true);document.addEventListener('toggle',function(e){if(e.target&&e.target.matches&&e.target.matches('.lesson')&&e.target.open)enhance(e.target);var block=e.target&&e.target.matches&&e.target.matches('[data-csai-line-explanation]')?e.target:null;if(block&&block.open)renderLazyBlock(block);},true);document.addEventListener('input',function(e){if(e.target&&(isCodeWorkspace(e.target)||(e.target.getAttribute&&e.target.getAttribute('data-csai-line-editor-id'))))schedule(e.target);},true);var pending=new Set(),flushTimer=0;new MutationObserver(function(records){records.forEach(function(r){Array.from(r.addedNodes||[]).forEach(function(n){if(n&&n.nodeType===1&&!n.matches('[data-csai-line-explanation],.csai-line-item,.csai-term-glossary'))pending.add(n);});});if(!pending.size)return;clearTimeout(flushTimer);flushTimer=setTimeout(function(){var batch=Array.from(pending);pending.clear();batch.forEach(function(n){enhance(n);});},40);}).observe(document.documentElement,{childList:true,subtree:true});}
