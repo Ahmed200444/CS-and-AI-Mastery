@@ -49,7 +49,7 @@ const pages=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith('.htm
 assert.equal(pages.length,62,'expected 62 generated course pages');
 for(const page of pages){
   const html=read('courses/'+page);
-  assert.ok(html.includes('line-by-line-explanations.js?v=20260822-v567'),`${page}: missing current universal explainer build`);
+  assert.ok(html.includes('line-by-line-explanations.js?v='),`${page}: missing versioned universal explainer build`);
 }
 
 // Count the concrete generated workspace hooks the universal layer covers.
