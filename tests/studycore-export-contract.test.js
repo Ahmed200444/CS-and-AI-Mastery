@@ -7,22 +7,38 @@ const root=path.resolve(__dirname,'..');
 const source=fs.readFileSync(path.join(root,'assets','studycore-export.js'),'utf8');
 assert.match(source,/Export to StudyCore/);
 assert.match(source,/one course at a time/i);
-assert.match(source,/masteryLessons/);
-assert.match(source,/masteryCommit/);
-assert.match(source,/masteryTarget/);
-assert.match(source,/Flashcards/);
+assert.match(source,/Download StudyCore file/);
+assert.match(source,/ChatGPT Work/);
+assert.match(source,/StudyCore-ready export/);
+assert.doesNotMatch(source,/studycore-git-|masteryLessons|masteryCommit|Continue in StudyCore/);
+
 const document={readyState:'loading',addEventListener(){},getElementById(){return null;}};
-const sandbox={window:{location:{href:''}},document,URLSearchParams,Map,Set,fetch:async()=>{throw new Error('not used')},console};
+const sandbox={window:{},document,Map,Set,Blob:function(){},URL:{createObjectURL(){return'blob:test'},revokeObjectURL(){}},setTimeout(){},console};
 vm.createContext(sandbox);
 vm.runInContext(source,sandbox,{filename:'studycore-export.js'});
 const api=sandbox.window.CSAIStudyCoreExport;
-assert(api&&typeof api.buildStudyCoreUrl==='function');
-const url=api.buildStudyCoreUrl('python',['py-loops','py-loops','py-lists'],'flashcards','a'.repeat(40),'5.76.0');
-assert.match(url,/masteryCourse=python/);
-assert.match(url,/masteryLessons=py-loops%2Cpy-lists/);
-assert.match(url,/masteryTarget=flashcards/);
-assert.match(url,/masteryCommit=/);
-assert(!url.includes('py-loops%2Cpy-loops'),'duplicate lesson ids must be removed');
-assert.throws(()=>api.buildStudyCoreUrl('python',[],'flashcards','a'.repeat(40),'5.76.0'),/at least one lesson/i);
-assert.throws(()=>api.buildStudyCoreUrl('../python',['py-loops'],'flashcards','a'.repeat(40),'5.76.0'),/Choose a course/i);
-console.log('StudyCore export contract PASS.');
+assert(api&&typeof api.buildStudyCoreMarkdown==='function');
+assert.equal(typeof api.exportFileName,'function');
+
+const course={
+  id:'python',
+  title:'Python',
+  lessons:[
+    {id:'py-loops',title:'Loops',objectives:['Use for loops'],explanation:'Loops repeat work.',concepts:['for loop','enumerate()'],examples:['for x in [1, 2]:\n    print(x)'],commonMistakes:['Using while when for is simpler.']},
+    {id:'py-lists',title:'Lists',objectives:['Use lists'],explanation:'Lists store ordered values.',concepts:['list'],examples:['nums = [1, 2, 3]']},
+    {id:'py-dicts',title:'Dictionaries',explanation:'Dictionaries map keys to values.'}
+  ]
+};
+const md=api.buildStudyCoreMarkdown(course,['py-lists','py-loops','py-loops'],'flashcards',{commit:'a'.repeat(40),version:'5.76.0'});
+assert.match(md,/CS & AI Mastery — Python/);
+assert.match(md,/StudyCore intent: flashcards/);
+assert.match(md,/py-lists, py-loops/);
+assert.match(md,/## Lesson 1 — Loops/);
+assert.match(md,/## Lesson 2 — Lists/);
+assert.match(md,/Loops repeat work\./);
+assert.match(md,/Using while when for is simpler\./);
+assert(!md.includes('Dictionaries map keys to values.'),'unselected lessons must not leak into the export');
+assert.equal(api.exportFileName(course,['py-loops'],'flashcards'),'cs-ai-mastery-python-py-loops-flashcards.md');
+assert.equal(api.exportFileName(course,['py-loops','py-lists'],'materials'),'cs-ai-mastery-python-2-lessons-materials.md');
+assert.throws(()=>api.buildStudyCoreMarkdown(course,[],'flashcards',{}),/at least one lesson/i);
+console.log('StudyCore export contract PASS — selected lessons download as a Work-friendly Markdown handoff without changing StudyCore.');

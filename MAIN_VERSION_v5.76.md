@@ -2,11 +2,13 @@
 
 Build date: 2026-09-19
 
-## StudyCore handoff
+## CS & AI Mastery → StudyCore handoff
 
-- One **Export to StudyCore** button lives on the CS & AI Mastery home page instead of adding export controls to every lesson.
-- The export dialog chooses one course and any subset of its lessons, or the whole course.
-- Exports are intentionally one course at a time so StudyCore flashcard source pools never mix unrelated courses by accident.
-- The handoff contains only course/lesson identifiers plus the exact CS & AI Mastery source commit and version; StudyCore re-loads its pinned structured source instead of trusting editable URL content.
-- The default target is grounded flashcards, with a materials-only option.
-- A build-time manifest records the exact deployed source commit so StudyCore can reject stale/mismatched handoffs instead of silently importing the wrong lesson version.
+- StudyCore itself is not modified.
+- The CS & AI Mastery home page keeps one focused **Export to StudyCore** control.
+- Choose a course and exactly the lessons you want, or select the whole course.
+- Choose **Flashcards** or **Materials only** as the intended StudyCore action.
+- The exporter downloads one StudyCore-ready Markdown file containing only the selected lesson material.
+- The file includes lesson objectives, explanation, key concepts, code examples, common mistakes, source version, and source commit.
+- Give the downloaded file to **ChatGPT Work** to import it into StudyCore. Flashcard exports tell Work to generate flashcards from that imported material.
+- No direct StudyCore URL parameters and no StudyCore repository changes are required.

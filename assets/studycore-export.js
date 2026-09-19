@@ -4,7 +4,6 @@
 var STYLE_ID='csai-studycore-export-style';
 var DIALOG_ID='csai-studycore-export-dialog';
 var BUTTON_ID='csai-studycore-export-button';
-var STUDYCORE_BASE='https://studycore-git-arena-01a0972b-studycore-ahmedalkadi02-3622.vercel.app';
 var catalogCache=null;
 var courseCache=new Map();
 var manifestCache=null;
@@ -42,19 +41,71 @@ async function course(id){
   return value;
 }
 
-function buildStudyCoreUrl(courseId,lessonIds,target,sourceCommit,sourceVersion){
-  courseId=safeId(courseId);
-  lessonIds=uniqueIds(lessonIds);
-  if(!courseId)throw new Error('Choose a course first.');
-  if(!lessonIds.length)throw new Error('Choose at least one lesson.');
-  var params=new URLSearchParams();
-  params.set('masteryCourse',courseId);
-  params.set('masteryLessons',lessonIds.join(','));
-  params.set('masteryTarget',target==='materials'?'materials':'flashcards');
-  if(sourceCommit)params.set('masteryCommit',String(sourceCommit));
-  if(sourceVersion)params.set('masteryVersion',String(sourceVersion));
-  params.set('masteryFrom','cs-ai-mastery');
-  return STUDYCORE_BASE+'/?'+params.toString();
+function mdText(value){return String(value==null?'':value).replace(/\r\n?/g,'\n').trim()}
+function mdList(values){return (Array.isArray(values)?values:[]).map(function(value){return'- '+mdText(value)}).join('\n')}
+function fenced(value){var text=mdText(value);var fence=text.indexOf('```')>=0?'````':'```';return fence+'\n'+text+'\n'+fence}
+function buildStudyCoreMarkdown(courseData,lessonIds,target,meta){
+  if(!courseData||!safeId(courseData.id)||!Array.isArray(courseData.lessons))throw new Error('Choose a valid course first.');
+  var ids=uniqueIds(lessonIds);
+  if(!ids.length)throw new Error('Choose at least one lesson.');
+  var wanted=new Set(ids);
+  var lessons=courseData.lessons.filter(function(lesson){return lesson&&wanted.has(safeId(lesson.id))});
+  if(!lessons.length)throw new Error('The selected lessons could not be found.');
+  if(lessons.length!==ids.length)throw new Error('One or more selected lessons are unavailable in this course.');
+  var intent=target==='materials'?'materials':'flashcards';
+  var title=mdText(courseData.title||courseData.name||courseData.id);
+  var lines=[
+    '# CS & AI Mastery — '+title,
+    '',
+    '> StudyCore-ready export generated from CS & AI Mastery.',
+    '> Intended StudyCore action: '+(intent==='flashcards'?'import this file as course material, then generate flashcards from only these selected lessons.':'import this file as course material.'),
+    '',
+    '## Export metadata',
+    '',
+    '- Source: CS & AI Mastery',
+    '- Repository: Ahmed200444/CS-and-AI-Mastery',
+    '- Course ID: '+courseData.id,
+    '- Course: '+title,
+    '- Selected lesson IDs: '+ids.join(', '),
+    '- StudyCore intent: '+intent,
+    '- Source version: '+mdText(meta&&meta.version||'unknown'),
+    '- Source commit: '+mdText(meta&&meta.commit||'unknown'),
+    ''
+  ];
+  lessons.forEach(function(lesson,index){
+    var lessonTitle=mdText(lesson.title||lesson.id||('Lesson '+(index+1)));
+    lines.push('## Lesson '+(index+1)+' — '+lessonTitle,'');
+    var objectives=Array.isArray(lesson.objectives)?lesson.objectives:[];
+    if(objectives.length)lines.push('### What you will learn','',mdList(objectives),'');
+    var explanation=mdText(lesson.explanation||lesson.explain||lesson.description||'');
+    if(explanation)lines.push('### Explanation','',explanation,'');
+    var concepts=Array.isArray(lesson.concepts)?lesson.concepts:[];
+    if(concepts.length)lines.push('### Key concepts','',mdList(concepts),'');
+    var examples=lesson.examples||lesson.example;
+    examples=Array.isArray(examples)?examples:(examples?[examples]:[]);
+    if(examples.length){
+      lines.push('### Examples','');
+      examples.forEach(function(example,exampleIndex){lines.push('#### Example '+(exampleIndex+1),'',fenced(example),'')});
+    }
+    var mistakes=lesson.commonMistakes||lesson.commonMistake;
+    mistakes=Array.isArray(mistakes)?mistakes:(mistakes?[mistakes]:[]);
+    if(mistakes.length)lines.push('### Common mistakes','',mdList(mistakes),'');
+  });
+  lines.push('---','','Exported for StudyCore from CS & AI Mastery.');
+  return lines.join('\n').replace(/\n{3,}/g,'\n\n').trim()+'\n';
+}
+function exportFileName(courseData,lessonIds,target){
+  var ids=uniqueIds(lessonIds),courseId=safeId(courseData&&courseData.id)||'course',intent=target==='materials'?'materials':'flashcards';
+  if(ids.length===1)return'cs-ai-mastery-'+courseId+'-'+ids[0]+'-'+intent+'.md';
+  return'cs-ai-mastery-'+courseId+'-'+ids.length+'-lessons-'+intent+'.md';
+}
+function downloadMarkdown(content,fileName){
+  var blob=new Blob([content],{type:'text/markdown;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;a.download=fileName;a.style.display='none';
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(function(){URL.revokeObjectURL(url)},1000);
 }
 
 function addStyle(){
@@ -84,7 +135,7 @@ async function openDialog(){
   overlay.setAttribute('role','dialog');
   overlay.setAttribute('aria-modal','true');
   overlay.setAttribute('aria-label','Export to StudyCore');
-  overlay.innerHTML='<section class="sce-panel"><header class="sce-head"><div><div class="sce-kicker">StudyCore handoff</div><h2>Export lessons to StudyCore</h2><p>Choose one course and exactly the lessons you want. StudyCore keeps this selection as the source for grounded flashcards.</p></div><button class="sce-close" type="button" aria-label="Close">×</button></header><div class="sce-body"><label class="sce-field"><span>Course</span><select data-sce-course><option value="">Loading courses…</option></select></label><div class="sce-toolbar"><strong data-sce-count>0 lessons selected</strong><button class="sce-small" type="button" data-sce-all>Select whole course</button><button class="sce-small" type="button" data-sce-clear>Clear</button></div><div class="sce-lessons" data-sce-lessons><div class="sce-note">Choose a course to load its lessons.</div></div><div class="sce-targets"><label class="sce-target"><input type="radio" name="sce-target" value="flashcards" checked><span><b>Flashcards</b><small>Import only the selected lesson content, then open Flashcards with the source scope locked to that selection.</small></span></label><label class="sce-target"><input type="radio" name="sce-target" value="materials"><span><b>Materials only</b><small>Add the selected lessons to StudyCore without immediately opening flashcard generation.</small></span></label></div><div class="sce-note">For accuracy, exports are one course at a time. That keeps Python, DSA, AI, and other subjects from being mixed into one flashcard source pool.</div><div class="sce-status" data-sce-status aria-live="polite"></div><div class="sce-actions"><button class="sce-cancel" type="button">Cancel</button><button class="sce-go" type="button" data-sce-go disabled>Continue in StudyCore</button></div></div></section>';
+  overlay.innerHTML='<section class="sce-panel"><header class="sce-head"><div><div class="sce-kicker">StudyCore handoff</div><h2>Export lessons to StudyCore</h2><p>Choose one course and exactly the lessons you want. CS & AI Mastery will download one Markdown file containing only the lessons you select. Give that file to ChatGPT Work to import into StudyCore.</p></div><button class="sce-close" type="button" aria-label="Close">×</button></header><div class="sce-body"><label class="sce-field"><span>Course</span><select data-sce-course><option value="">Loading courses…</option></select></label><div class="sce-toolbar"><strong data-sce-count>0 lessons selected</strong><button class="sce-small" type="button" data-sce-all>Select whole course</button><button class="sce-small" type="button" data-sce-clear>Clear</button></div><div class="sce-lessons" data-sce-lessons><div class="sce-note">Choose a course to load its lessons.</div></div><div class="sce-targets"><label class="sce-target"><input type="radio" name="sce-target" value="flashcards" checked><span><b>Flashcards</b><small>Mark the export so ChatGPT Work knows to import it as StudyCore material and generate flashcards from only these lessons.</small></span></label><label class="sce-target"><input type="radio" name="sce-target" value="materials"><span><b>Materials only</b><small>Mark the export for import as StudyCore material without requesting flashcards.</small></span></label></div><div class="sce-note">For accuracy, exports stay one course at a time. The downloaded .md file is directly readable by StudyCore and by ChatGPT Work.</div><div class="sce-status" data-sce-status aria-live="polite"></div><div class="sce-actions"><button class="sce-cancel" type="button">Cancel</button><button class="sce-go" type="button" data-sce-go disabled>Download StudyCore file</button></div></div></section>';
   document.body.appendChild(overlay);
   document.documentElement.style.overflow='hidden';
 
@@ -128,11 +179,13 @@ async function openDialog(){
       var target=(overlay.querySelector('input[name="sce-target"]:checked')||{}).value||'flashcards';
       go.disabled=true; status.textContent='Checking the export release…';
       Promise.all([manifest()]).then(function(values){
-        var m=values[0];
-        var url=buildStudyCoreUrl(loadedCourse.id,ids,target,m.commit,m.version);
-        status.textContent='Opening StudyCore with '+ids.length+' selected '+(ids.length===1?'lesson':'lessons')+'…';
-        window.location.href=url;
-      }).catch(function(error){status.textContent=error&&error.message?error.message:String(error);go.disabled=false});
+              var m=values[0];
+              var content=buildStudyCoreMarkdown(loadedCourse,ids,target,m);
+              var fileName=exportFileName(loadedCourse,ids,target);
+              downloadMarkdown(content,fileName);
+              status.textContent='Downloaded '+fileName+'. Give it to ChatGPT Work and ask it to import it into StudyCore'+(target==='flashcards'?' and generate flashcards from it.':'.');
+              go.disabled=false;
+            }).catch(function(error){status.textContent=error&&error.message?error.message:String(error);go.disabled=false});
     }
   });
   overlay.addEventListener('change',function(event){
@@ -169,6 +222,6 @@ function init(){
   row.appendChild(button);
 }
 
-window.CSAIStudyCoreExport={buildStudyCoreUrl:buildStudyCoreUrl,uniqueIds:uniqueIds,open:openDialog,studyCoreBase:STUDYCORE_BASE};
+window.CSAIStudyCoreExport={buildStudyCoreMarkdown:buildStudyCoreMarkdown,exportFileName:exportFileName,uniqueIds:uniqueIds,open:openDialog};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
