@@ -8,7 +8,8 @@ const source=fs.readFileSync(path.join(root,'assets','studycore-export.js'),'utf
 assert.match(source,/Export to StudyCore/);
 assert.match(source,/one course at a time/i);
 assert.match(source,/Download StudyCore file/);
-assert.match(source,/ChatGPT Work/);
+assert.doesNotMatch(source,/ChatGPT Work/);
+assert.match(source,/imported directly into StudyCore/i);
 assert.match(source,/StudyCore-ready export/);
 assert.doesNotMatch(source,/studycore-git-|masteryLessons|masteryCommit|Continue in StudyCore/);
 
@@ -41,4 +42,4 @@ assert(!md.includes('Dictionaries map keys to values.'),'unselected lessons must
 assert.equal(api.exportFileName(course,['py-loops'],'flashcards'),'cs-ai-mastery-python-py-loops-flashcards.md');
 assert.equal(api.exportFileName(course,['py-loops','py-lists'],'materials'),'cs-ai-mastery-python-2-lessons-materials.md');
 assert.throws(()=>api.buildStudyCoreMarkdown(course,[],'flashcards',{}),/at least one lesson/i);
-console.log('StudyCore export contract PASS — selected lessons download as a Work-friendly Markdown handoff without changing StudyCore.');
+console.log('StudyCore export contract PASS — selected lessons download as a StudyCore-ready Markdown export without changing StudyCore.');
