@@ -7,7 +7,7 @@ assert.equal(blocks.length,54,'expected all 54 native C++ lesson examples');
 blocks.forEach((code,i)=>{
   if(i!==32 && /#include|int\s+main\s*\(/.test(code)) assert(code.includes('using namespace std;'),`lesson ${i+1} should use using namespace std`);
   assert(!code.includes('std::'),`lesson ${i+1} should use the teaching namespace style, not std:: prefixes`);
-  assert(!/int\s+main\s*\([^)]*\)\s*\{[^\n]/.test(code),`lesson ${i+1} main should not be compressed onto one line`);
+  assert(!/int\s+main\s*\([^)]*\)\s*\{[^\r\n]/.test(code),`lesson ${i+1} main should not be compressed onto one line`);
   assert(!/\}\s*else\s+if\s*\([^)]*\)\s+[^\{\n]/.test(code),`lesson ${i+1} else-if body should be readable`);
 });
 const generated=read('assets/study-examples.js');

@@ -52,6 +52,9 @@ function buildStudyCoreMarkdown(courseData,lessonIds,target,meta){
   var lessons=courseData.lessons.filter(function(lesson){return lesson&&wanted.has(safeId(lesson.id))});
   if(!lessons.length)throw new Error('The selected lessons could not be found.');
   if(lessons.length!==ids.length)throw new Error('One or more selected lessons are unavailable in this course.');
+  // Lessons are always serialized in their course order. Keep the metadata in
+  // that exact order too, so StudyCore can safely retain every stable lesson ID.
+  var orderedIds=lessons.map(function(lesson){return safeId(lesson.id)});
   var intent=target==='materials'?'materials':'flashcards';
   var title=mdText(courseData.title||courseData.name||courseData.id);
   var lines=[
@@ -66,7 +69,7 @@ function buildStudyCoreMarkdown(courseData,lessonIds,target,meta){
     '- Repository: Ahmed200444/CS-and-AI-Mastery',
     '- Course ID: '+courseData.id,
     '- Course: '+title,
-    '- Selected lesson IDs: '+ids.join(', '),
+    '- Selected lesson IDs: '+orderedIds.join(', '),
     '- StudyCore intent: '+intent,
     '- Source version: '+mdText(meta&&meta.version||'unknown'),
     '- Source commit: '+mdText(meta&&meta.commit||'unknown'),

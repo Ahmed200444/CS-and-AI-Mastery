@@ -5,8 +5,9 @@ const file=path.join(process.cwd(),'assets','course-project-workspace.js');
 if(!fs.existsSync(file))throw new Error('assets/course-project-workspace.js is missing');
 
 let src=fs.readFileSync(file,'utf8');
-const broken="if(lang==='json'){try{var obj=JSON.parse(text);return{error:false,text:'JSON is valid.\\nTop-level type: '+(Array.isArray(obj)?'array':typeof obj)+'\\nProject check passed.'}}catch(e){return{error:true,text:'JSON error: '+e.message}}\n if(lang==='shell')";
-const fixed="if(lang==='json'){try{var obj=JSON.parse(text);return{error:false,text:'JSON is valid.\\nTop-level type: '+(Array.isArray(obj)?'array':typeof obj)+'\\nProject check passed.'}}catch(e){return{error:true,text:'JSON error: '+e.message}}}\n if(lang==='shell')";
+const lineBreak=src.includes('\r\n')?'\r\n':'\n';
+const broken="if(lang==='json'){try{var obj=JSON.parse(text);return{error:false,text:'JSON is valid.\\nTop-level type: '+(Array.isArray(obj)?'array':typeof obj)+'\\nProject check passed.'}}catch(e){return{error:true,text:'JSON error: '+e.message}}"+lineBreak+" if(lang==='shell')";
+const fixed="if(lang==='json'){try{var obj=JSON.parse(text);return{error:false,text:'JSON is valid.\\nTop-level type: '+(Array.isArray(obj)?'array':typeof obj)+'\\nProject check passed.'}}catch(e){return{error:true,text:'JSON error: '+e.message}}}"+lineBreak+" if(lang==='shell')";
 
 if(src.includes(broken)){
   src=src.replace(broken,fixed);
