@@ -33,7 +33,7 @@ const course={
 const md=api.buildStudyCoreMarkdown(course,['py-lists','py-loops','py-loops'],'flashcards',{commit:'a'.repeat(40),version:'5.76.0'});
 assert.match(md,/CS & AI Mastery — Python/);
 assert.match(md,/StudyCore intent: flashcards/);
-assert.match(md,/py-lists, py-loops/);
+assert.match(md,/py-loops, py-lists/);
 assert.match(md,/## Lesson 1 — Loops/);
 assert.match(md,/## Lesson 2 — Lists/);
 assert.match(md,/Loops repeat work\./);
