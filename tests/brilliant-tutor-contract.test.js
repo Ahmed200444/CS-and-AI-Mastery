@@ -1,0 +1,20 @@
+const fs=require('fs');
+const assert=require('assert');
+const ui=fs.readFileSync('assets/brilliant-tutor-v1.js','utf8');
+const fn=fs.readFileSync('netlify/functions/tutor.mjs','utf8');
+const inject=fs.readFileSync('scripts/inject-brilliant-tutor.cjs','utf8');
+const toml=fs.readFileSync('netlify.toml','utf8');
+
+assert(ui.includes("fetch('/api/tutor'"),'Tutor UI must call the same-origin tutor endpoint.');
+assert(ui.includes('SpeechRecognition')&&ui.includes('speechSynthesis'),'Tutor must support browser voice input/output.');
+assert(ui.includes('context(l)'),'Tutor must attach current lesson context.');
+assert(ui.includes("mode:'teach'"),'Tutor must have structured teaching modes.');
+assert(fn.includes('Netlify.env.get'),'Secrets must come from Netlify environment variables.');
+assert(!/GROQ_API_KEY\s*=\s*['"][^'"]+/.test(fn),'No provider key may be hard-coded.');
+assert(fn.includes('qwen/qwen3.8-27b'),'Groq model default must be explicit.');
+assert(fn.includes('gemini-3.8-flash'),'Gemini model default must be explicit.');
+assert(fn.includes('openrouter/free'),'OpenRouter must use the free router by default.');
+assert(fn.includes("provider:'guided'"),'Tutor must degrade to guided mode without an AI key.');
+assert(inject.includes('62 course pages'),'Injector must cover all generated courses.');
+assert(toml.includes('inject-brilliant-tutor.cjs'),'Netlify build must inject the tutor.');
+console.log('Brilliant-style tutor contract: PASS');
