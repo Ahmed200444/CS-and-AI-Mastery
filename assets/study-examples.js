@@ -251,10 +251,71 @@ function contextualConceptFallback(b,label){
  if(related.length)parts.push('It connects with '+related.join(' and ')+' in this lesson, so compare their roles instead of treating them as interchangeable.');
  return parts.slice(0,3).join(' ');
 }
+/* MATLAB is its own teaching language. Keep its definitions ahead of the broad
+   cross-course rules below (for example, "Command Window" must not match the
+   generic SQL "window" rule). */
+function matlabDefinition(raw){
+ var r=String(raw||'').trim(),t=norm(r);
+ if(t==='matlab')return'MATLAB is a numerical-computing environment and programming language for working with arrays, calculations, plots, and engineering data.';
+ if(/command window/.test(t))return'The Command Window is MATLAB\'s interactive area for entering commands and expressions and seeing their results immediately.';
+ if(t==='prompt')return'The `>>` prompt marks the place where MATLAB is ready to receive the next command or expression.';
+ if(/numerical computing/.test(t))return'Numerical computing uses algorithms and numeric data to calculate, analyze, and visualize engineering quantities. MATLAB supplies array operations and functions for this workflow.';
+ if(/row vector/.test(t))return'A row vector stores values across one row, for example `[2 4 10]`. Spaces or commas separate its elements.';
+ if(/column vector/.test(t))return'A column vector stores values down one column, for example `[2;4;10]`. Semicolons separate its rows.';
+ if(/colon operator/.test(t))return'The colon operator creates regularly spaced values with `start:step:end`; the end value is included only when the sequence reaches it exactly.';
+ if(/transpose/.test(t))return'Transpose changes rows into columns and columns into rows. For a real-valued vector, the apostrophe operator turns a row vector into a column vector or the reverse.';
+ if(/concatenation/.test(t))return'Concatenation joins arrays by placing them side by side or one above another. The dimensions along the joining direction must be compatible.';
+ if(/^matrix$/.test(t))return'A matrix is a rectangular MATLAB array arranged in rows and columns. Its dimensions determine which matrix operations are valid.';
+ if(/^rows?$/.test(t))return'Rows run horizontally across a MATLAB matrix. Semicolons in square brackets start a new row.';
+ if(/^columns?$/.test(t))return'Columns run vertically through a MATLAB matrix. A column vector is a matrix with one column.';
+ if(/matrix multiplication/.test(t))return'Matrix multiplication with `*` combines rows of the left matrix with columns of the right matrix. The left column count must equal the right row count.';
+ if(/dimensions?/.test(t))return'Matrix dimensions describe the number of rows and columns, written as rows-by-columns. They determine whether indexing and multiplication are valid.';
+ if(r==='.*'||r==='./'||r==='.^'||/element wise/.test(t))return'Element-wise operators apply the chosen arithmetic independently to matching array elements: `.*` multiplies, `./` divides, and `.^` raises each element to a power.';
+ if(/vectorization/.test(t))return'Vectorization expresses a repeated calculation with whole arrays and element-wise operators instead of writing an explicit loop for every element.';
+ if(/^script$|m file/.test(t))return'A MATLAB script is an `.m` file containing commands that run in sequence in the current workspace. It is useful for repeatable calculations and experiments.';
+ if(/sequence of commands/.test(t))return'A sequence of commands is executed from top to bottom, so each statement can use values created by earlier statements.';
+ if(/^comments?$/.test(t))return'A MATLAB comment starts with `%` and is ignored during execution. Use it to explain intent, units, or a non-obvious calculation.';
+ if(/function file/.test(t))return'A MATLAB function file packages reusable commands behind declared inputs and outputs. The primary function name should match the `.m` filename.';
+ if(/input variables?/.test(t))return'Input variables receive values supplied by the caller of a MATLAB function. They are local to that function unless deliberately shared another way.';
+ if(/output variables?/.test(t))return'Output variables hold the values a MATLAB function returns to its caller after the function body finishes.';
+ if(/local variables?/.test(t))return'Local variables exist inside a MATLAB function call and are separate from names in the caller workspace.';
+ if(/filename/.test(t))return'The MATLAB function name and its `.m` filename should agree so MATLAB can locate and call the intended function reliably.';
+ if(/^plot$/.test(t))return'`plot(x,y)` creates an XY graph by pairing values in `x` with corresponding values in `y`.';
+ if(/^xlabel$/.test(t))return'`xlabel` adds a descriptive label to the horizontal axis of a MATLAB plot.';
+ if(/^ylabel$/.test(t))return'`ylabel` adds a descriptive label to the vertical axis of a MATLAB plot.';
+ if(/^title$/.test(t))return'`title` adds a short description above a MATLAB plot so the reader knows what the graph represents.';
+ if(/^legend$/.test(t))return'`legend` identifies the plotted data series so multiple curves can be distinguished.';
+ if(/line style/.test(t))return'Line style controls how a plotted curve is drawn, such as a solid or dashed line, so multiple series can remain distinguishable.';
+ if(/relational/.test(t)||['<','<=','>','>=','==','~='].indexOf(r)>=0)return'Relational operators compare MATLAB values element by element and produce logical results that can drive a condition or mask.';
+ if(/logical/.test(t)||/^xor$/.test(t)||['~','&','|'].indexOf(r)>=0)return'Logical operators combine or reverse true/false conditions. `~` negates, `&` and `|` combine element-wise logical values, and `xor` is true when exactly one input is true.';
+ if(/^if$|^elseif$|^else$|conditional/.test(t))return'`if`, `elseif`, and `else` choose which MATLAB statements run based on logical conditions, allowing piecewise behavior.';
+ if(/^for$|loop variable|colon range/.test(t))return'A MATLAB `for` loop assigns each value from a range to its loop variable and runs the body once for each value.';
+ if(/indexing/.test(t))return'MATLAB indexing selects array elements, rows, or columns; unlike Python, MATLAB indices start at 1.';
+ if(/^while$|loop condition|state update/.test(t))return'A `while` loop repeats while its condition is true. Initialize the controlling state and update it inside the loop so the loop can terminate.';
+ if(/^switch$|^case$|otherwise/.test(t))return'`switch` compares one expression with discrete `case` values and runs the matching block; `otherwise` handles values with no matching case.';
+ return'';
+}
+function matlabPracticalUse(title,label,index){
+ var t=norm(label),m=diversityMode(index+1),uses;
+ if(/command window|prompt/.test(t))uses=['Test one expression and inspect its numeric result immediately.','Check a vector or scalar before placing the calculation in a script.','Compare the value before and after adding a semicolon.','Use the prompt to isolate a small calculation while debugging.'];
+ else if(/row vector|column vector|colon|transpose|concatenation/.test(t))uses=['Build sample measurements with a known orientation.','Convert a row of readings into a column for a matrix calculation.','Generate a regularly spaced engineering axis.','Join two compatible measurement vectors into one array.'];
+ else if(/matrix multiplication|matrix|rows|columns|dimension/.test(t))uses=['Check array dimensions before combining two engineering quantities.','Multiply a small matrix by a vector and inspect the result size.','Select one row or column to verify an intermediate calculation.','Use dimensions to explain why an attempted product is invalid.'];
+ else if(/element wise|vectorization|\.\*|\.\/|\.\^/.test(t))uses=['Apply one formula to every sample in a range.','Compare matrix multiplication with element-by-element multiplication.','Use a vectorized expression instead of repeating the same scalar calculation.','Inspect one element to verify the dotted operator was chosen correctly.'];
+ else if(/script|m file|sequence|comment/.test(t))uses=['Save a repeatable calculation as a `.m` script.','Add a comment describing units before running the calculation.','Rerun the same analysis after changing one input.','Separate setup commands from the result-producing commands.'];
+ else if(/function|input|output|local|filename/.test(t))uses=['Wrap a repeated engineering formula behind clear inputs and outputs.','Call the function with two different inputs and compare the returned values.','Verify that a local temporary variable does not leak into the caller workspace.','Rename a file and observe why the function name must still match it.'];
+ else if(/plot|xlabel|ylabel|title|legend|line style/.test(t))uses=['Plot two measured curves and label each series.','Add axis units and a title before sharing a graph.','Change a line style so overlapping curves remain readable.','Check that the x and y arrays have compatible lengths before plotting.'];
+ else if(/relational|logical|xor|if|elseif|else|conditional/.test(t))uses=['Route an engineering value into one of three piecewise formulas.','Test the boundary value where the selected branch changes.','Combine two conditions to decide whether a measurement is acceptable.','Use an explicit not-equal check for an invalid input.'];
+ else if(/for|loop variable|range|indexing/.test(t))uses=['Compute a value for every sample index.','Trace the first and last values produced by a stepped range.','Compare an explicit loop with the equivalent vectorized expression.','Check the one-based index used to store each loop result.'];
+ else if(/while|loop condition|state update/.test(t))uses=['Iterate until a numerical estimate crosses a threshold.','Trace the state before and after each update.','Test a starting value that should stop immediately.','Verify that the controlling value changes so the loop cannot run forever.'];
+ else if(/switch|case|otherwise/.test(t))uses=['Select a direction label from a discrete angle.','Test a known case and an unmatched value.','Keep fixed choices readable without a long chain of conditions.','Use `otherwise` to make an unsupported input visible.'];
+ else uses=['Apply this MATLAB idea to a small engineering calculation and inspect the resulting value or array.','Change one input and trace how the MATLAB result changes.','Check the relevant shape, value, or control-flow boundary before trusting the result.','Use a small MATLAB example to verify the rule before embedding it in a larger analysis.'];
+ return uses[m%uses.length];
+}
 function conceptDefinition(b,label){
  var t=norm(label),raw=String(label||'').trim(),title=lessonTitle(b.closest('.lesson')),cid=studyCourseId();
  /* v5.71: definitions belong to the exact concept. Generated example types get an explicit
     learning explanation, and unknown labels use lesson evidence instead of generic filler. */
+ if(cid==='matlab-engineering'){var native=matlabDefinition(raw);if(native)return native;}
  var expanded=expandedConceptDefinition(b,raw);if(expanded)return expanded;
  if(/^references?$|object references?|python references?/.test(t)){if(cid==='cpp-dsa'||cid==='systems-programming')return'A C++ reference is an alias for an existing object: after it is initialized, operations through the reference act on that same object. References are useful for passing or modifying objects without copying them, while still using normal variable syntax.';return'A Python reference is the connection from a variable name to an object. Assigning the same object to another name can make both names refer to that one object, so mutating it through either name can be visible through the other.';}
  if(/^identity$|object identity/.test(t))return'Identity asks whether two names refer to the exact same object. In Python, `is` checks identity, while `==` usually compares values.';
@@ -942,6 +1003,7 @@ function generatedForPlan(b,course,p,index,used){
    learner gets a realistic professional scenario with an observable success check. */
 function professionalBehavior(course,title,c){
  var cid=String(course||'').toLowerCase(), raw=String(c||'').trim(), t=norm((title||'')+' '+(c||'')), x=norm(c);
+ if(cid==='matlab-engineering')return matlabPracticalUse(title,raw,0);
  if(raw==='~'&&cid==='linux')return'Expand the home-directory shortcut to the current user’s home path and compare it with an absolute and a relative path before choosing a file location.';
  if(raw==='>>'&&cid==='linux')return'Append command output to an existing file without replacing its current contents, then verify the old content is still present before the new output.';
  if(raw==='=='&&cid==='python')return'Compare whether two values are equal while keeping equality separate from object identity, then predict the boolean result for equal-but-distinct objects.';
@@ -1105,6 +1167,7 @@ var EXAMPLE_DIVERSITY_VERSION='5.72';
 function diversityMode(seed){seed=Number(seed)||0;return ((seed%8)+8)%8;}
 function practicalUseFor(course,title,label,index){
  var cid=String(course||studyCourseId()||'').toLowerCase(),t=norm(label),m=diversityMode(index+1),uses;
+ if(cid==='matlab-engineering')return matlabPracticalUse(title,label,index);
  if(/integrated application/.test(t))return'Use this when one task requires several ideas from '+title+' together, so you can see how the operations interact instead of practicing them in isolation.';
  if(/edge case.*debug|debug.*edge case/.test(t))return'Use this when checking '+title+' with boundary, unusual, invalid, empty, missing, repeated, or failure input so you can verify behavior where normal assumptions often break.';
  if(/concept transfer/.test(t))return'Use this when a new problem looks different on the surface but relies on the same '+title+' principle, so you practice recognizing the idea instead of memorizing one example.';
