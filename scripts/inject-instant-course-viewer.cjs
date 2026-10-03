@@ -39,7 +39,7 @@ while (i < raw.length) {
   offsets[course.id] = [start, end];
 }
 const ids = Object.keys(offsets);
-if (ids.length !== 62) throw new Error(`Expected 62 course offsets, found ${ids.length}`);
+if (ids.length !== 64) throw new Error(`Expected 64 course offsets, found ${ids.length}`);
 const indexId = 'csai-course-offset-index';
 html = html.replace(new RegExp(`<script\\b[^>]*\\bid=["']${indexId}["'][^>]*>[\\s\\S]*?<\\/script>\\s*`, 'gi'), '');
 const offsetTag = `<script id="${indexId}">window.__CSAI_COURSE_OFFSETS__=${JSON.stringify(offsets)};</script>`;
