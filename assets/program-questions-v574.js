@@ -32,6 +32,8 @@ function tailoredQuestion(code,lang,title,label){var c=String(code||''),t=(title
   if(/\bGROUP\s+BY\b/i.test(c))return'Group the matching rows and calculate the summary shown below. What result should each group produce?';
   return'Run the SQL operation shown below on the lesson data. What rows or values should the query return or change?';
  }
+ if(lang==='armasm')return'Trace the ARM instructions below. What register values, flags, memory changes, or branch decisions should result?';
+ if(lang==='matlab')return'Evaluate the MATLAB statements below. What values, array dimensions, or plot should result?';
  if(lang==='cpp')return'Run the C++ program below and trace how the lesson concept changes the program state. What output or final value should prove it worked?';
  if(lang==='javascript')return'Run the JavaScript below with the shown data or page state. What value should be logged or what visible behavior should occur?';
  if(lang==='html')return'Build the HTML shown below. What structure or behavior should be visible in the page when it is correct?';
@@ -39,6 +41,7 @@ function tailoredQuestion(code,lang,title,label){var c=String(code||''),t=(title
  return'Run the program below and trace what it creates or changes. What final value, object state, or behavior should show that the '+title+' idea was used correctly?';
 }
 function existingQuestion(root){
+ var previous=root.previousElementSibling;if(root.matches&&root.matches('pre.code')&&previous&&previous.matches('.csai-learning-question'))return previous;
  var study=root.closest&&root.closest('.csai-study-example');
  if(study){var q=study.querySelector(':scope > .csai-learning-question,.csai-study-example-lazy-body > .csai-learning-question');if(q)return q;}
  return root.querySelector&&root.querySelector(':scope > .csai-learning-question');
@@ -54,7 +57,7 @@ function ensure(root){
  if(code.closest&&code.closest('[data-csai-try-it-yourself],.csai-try-it-yourself'))return;
  var q=existingQuestion(root);
  if(q){if(q.nextElementSibling!==code)code.insertAdjacentElement('beforebegin',q);return;}
- var host=study||root,text=codeText(code),lang=language(host,text),title=lessonTitle(root),label=labelFor(host),question='';
+ var host=study||root,text=codeText(code),lang=language(code,text),title=lessonTitle(root),label=labelFor(host),question='';
  if(study&&window.CSAIStudyExampleContent&&typeof window.CSAIStudyExampleContent.studyQuestionFor==='function'){
   try{question=clean(window.CSAIStudyExampleContent.studyQuestionFor(study,0));}catch(_e){}
  }

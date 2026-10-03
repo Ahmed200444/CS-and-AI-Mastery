@@ -8,8 +8,8 @@ function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){retur
 function norm(v){return String(v||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim();}
 function clamp(n,a,b){return Math.max(a,Math.min(b,n));}
 function uniq(xs){var seen={};return xs.filter(function(x){x=String(x||'').trim();var k=x.toLowerCase();if(!x||seen[k])return false;seen[k]=1;return true;});}
-function lessonTitle(lesson){var n=lesson.querySelector('summary .title,summary');return String(n&&n.textContent||'Lesson').replace(/\s+Complete\s*$/i,'').trim();}
-function body(lesson){return lesson.querySelector('.body');}
+function lessonTitle(lesson){var n=lesson&&lesson.querySelector('summary .title,summary');return String(n&&n.textContent||'Lesson').replace(/\s+Complete\s*$/i,'').trim();}
+function body(lesson){return lesson&&lesson.querySelector('.body');}
 function headingList(b,label){var hs=Array.from(b.querySelectorAll('h3'));var h=hs.find(function(x){return norm(x.textContent)===norm(label);});if(!h)return[];var n=h.nextElementSibling;if(!n||!/^UL|OL$/.test(n.tagName))return[];return Array.from(n.querySelectorAll('li')).map(function(x){return x.textContent.trim();}).filter(Boolean);}
 function concepts(b){var h=Array.from(b.querySelectorAll('h3')).find(function(x){return /key concepts/i.test(x.textContent||'');});var n=h&&h.nextElementSibling;var xs=n?Array.from(n.querySelectorAll('.pill')).map(function(x){return x.textContent.trim();}):[];if(!xs.length)xs=Array.from(b.querySelectorAll('.meta .pill')).map(function(x){return x.textContent.trim();});return uniq(xs);}
 function objectives(b){return uniq(headingList(b,'What you will learn'));}
@@ -1544,7 +1544,7 @@ function studyQuestionStyle(){
 }
 function langNameForQuestion(lang){
  lang=String(lang||'').toLowerCase();
- if(lang==='cpp'||lang==='c++')return'C++';if(lang==='javascript'||lang==='js')return'JavaScript';if(lang==='sql')return'SQL';if(lang==='html')return'HTML';if(lang==='css')return'CSS';if(lang==='shell'||lang==='bash')return'command-line';return'Python';
+ if(lang==='armasm')return'ARM assembly';if(lang==='matlab')return'MATLAB';if(lang==='cpp'||lang==='c++')return'C++';if(lang==='javascript'||lang==='js')return'JavaScript';if(lang==='sql')return'SQL';if(lang==='html')return'HTML';if(lang==='css')return'CSS';if(lang==='shell'||lang==='bash')return'command-line';return'Python';
 }
 function sentenceUse(use){
  use=String(use||'').replace(/`([^`]+)`/g,'$1').replace(/\s+/g,' ').trim().replace(/[.]+$/,'');
@@ -1578,6 +1578,8 @@ function studyQuestionFor(card,index){
  if(/deque\s*\(/.test(c)&&/popleft\s*\(/.test(c))return'You need to process items in the same order they arrive. For the queue shown below, what item should be removed first and what should remain afterward?';
  if(/\.append\s*\(/.test(c)&&/\.pop\s*\(/.test(c)&&!/popleft/.test(c)&&/stack/i.test(c+' '+t))return'You need last-in, first-out behavior. After the shown values are pushed and popped, what value should come out first and what should remain on the stack?';
  if(/def\s+\w+\([^)]*\):[\s\S]*\b\w+\([^)]*-[ ]*1\)/.test(c)||/recurs/.test(t))return'Use the recursive rule shown below to solve the problem by reducing it to a smaller version until the base case is reached. What result should the shown input return?';
+ if(lang==='armasm')return'Trace the instructions below in order. What register, flag, memory, or control-flow changes should each instruction produce?';
+ if(lang==='matlab')return'Evaluate the MATLAB statements below in order. What values, array dimensions, or plot should they produce?';
  if(lang==='sql'){
   if(/\bJOIN\b/i.test(c))return'You have related data stored in more than one table. Write a query that combines the matching rows shown by this example. Which columns or rows should appear in the result?';
   if(/\bGROUP\s+BY\b/i.test(c))return'You need one summary result per group of related rows. What grouped values should this query calculate and return?';
@@ -1643,9 +1645,9 @@ function buildLesson(lesson){
  if(includeNative){
   uniqueSources.forEach(function(src){var c=nativeSourceCard(b,index,total,src,'Additional course-native example');if(c){list.appendChild(c);index++;}});
  }
- prepareLazyStudyExamples(set);
  var anchor=sources.heading;
  if(anchor)anchor.insertAdjacentElement('beforebegin',set);else{var mistake=Array.from(b.children).find(function(n){return /common mistake/i.test(n.textContent||'');});if(mistake)b.insertBefore(set,mistake);else b.appendChild(set);}
+ prepareLazyStudyExamples(set);
  set.querySelectorAll('.csai-study-code').forEach(function(area){area.defaultValue=area.value;});
 }
 
