@@ -12,10 +12,10 @@ need(asset.includes('tests\\s+passed'),'exercise-pass tracking missing');
 need(asset.includes('Continue studying'),'clickable Continue action missing');
 need(asset.includes('location.hash'),'direct lesson hash navigation missing');
 const courses=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith('.html'));
-need(courses.length===62,`expected 62 generated course pages, got ${courses.length}`);
+need(courses.length===64,`expected 64 generated course pages, got ${courses.length}`);
 let lessons=0, controls=0;
 for(const f of courses){const t=fs.readFileSync(path.join(root,'courses',f),'utf8');need(t.includes('../assets/progress-resume.js?v=20260822-v567'),`${f}: resume tracker missing`);const lessonMatches=t.match(/data-lesson=\"[^\"]+\"/g)||[];const completeMatches=t.match(/data-complete(?:=\"\")?/g)||[];lessons+=lessonMatches.length;controls+=completeMatches.length;}
-need(lessons===800,`expected 800 lesson rows, got ${lessons}`);
-need(controls>=800,`expected completion controls for all 800 lessons, got ${controls}`);
+need(lessons===824,`expected 824 lesson rows, got ${lessons}`);
+need(controls>=824,`expected completion controls for all 824 lessons, got ${controls}`);
 const index=fs.readFileSync(path.join(root,'index.html'),'utf8');need(index.includes('assets/progress-resume.js?v=20260822-v567'),'homepage resume tracker missing');
 console.log(`Progress/resume contract passed across ${courses.length} course pages and all ${lessons} lessons.`);
