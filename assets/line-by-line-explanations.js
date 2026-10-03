@@ -27,7 +27,8 @@ function inferLanguage(code,label,node){
  if(/json/.test(l)||(/[{}]/.test(c)&&(c.match(/"[^"\n]+"\s*:/g)||[]).length>=1&&!/=\s*\{/.test(c)))return'json';
  var yamlMatches=c.match(/^\s*(?:-\s+)?[A-Za-z_][\w.-]*:\s*.*$/gm)||[];
  if(/ya?ml/.test(l)||yamlMatches.length>=3||(yamlMatches.length>=2&&!/[{};]/.test(c)))return'yaml';
- if(/arm\s*assembly|\bassembly\b/.test(l)||/(^|\n)\s*(?:[A-Za-z_]\w*\s+)?(?:AREA|ENTRY|END|RN|EQU|MOVS?|MVN|ADDS?|ADC|SUBS?|SBC|RSB|RSC|AND|ORR|EOR|BIC|LSL|LSR|ASR|ROR|CMP|CMN|TST|TEQ|LDR|STR|LDM\w*|STM\w*|PUSH|POP|BLT|BLE|BGT|BGE|BEQ|BNE|B|BL|BX|SVC)\b/im.test(c))return'armasm';\n if(/css/.test(l)||/(^|\n)\s*(?:[.#][A-Za-z_-][\w-]*|[A-Za-z][\w-]*(?:\s+[A-Za-z][\w-]*)*)[^=\n]*\{[^\n]*\}/m.test(c)||/(^|\n)\s*(?:[.#][A-Za-z_-][\w-]*|[A-Za-z][\w-]*(?:\s+[A-Za-z][\w-]*)*)[^=\n]*\{\s*$/m.test(c)||/@media\s*\(/.test(c))return'css';
+ if(/arm\s*assembly|\bassembly\b/.test(l)||/(^|\n)\s*(?:[A-Za-z_]\w*\s+)?(?:AREA|ENTRY|END|RN|EQU|MOVS?|MVN|ADDS?|ADC|SUBS?|SBC|RSB|RSC|AND|ORR|EOR|BIC|LSL|LSR|ASR|ROR|CMP|CMN|TST|TEQ|LDR|STR|LDM\w*|STM\w*|PUSH|POP|BLT|BLE|BGT|BGE|BEQ|BNE|B|BL|BX|SVC)\b/im.test(c))return'armasm';
+ if(/css/.test(l)||/(^|\n)\s*(?:[.#][A-Za-z_-][\w-]*|[A-Za-z][\w-]*(?:\s+[A-Za-z][\w-]*)*)[^=\n]*\{[^\n]*\}/m.test(c)||/(^|\n)\s*(?:[.#][A-Za-z_-][\w-]*|[A-Za-z][\w-]*(?:\s+[A-Za-z][\w-]*)*)[^=\n]*\{\s*$/m.test(c)||/@media\s*\(/.test(c))return'css';
  return'text';
 }
 function generalSyntax(line,lang){
