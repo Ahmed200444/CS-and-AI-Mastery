@@ -236,7 +236,7 @@ function addStyle(){
   '.matlab-file-panel{display:none;min-height:180px}',
   '.matlab-file-panel.is-active{display:flex;flex:1;min-width:0}',
   '.matlab-file-panel pre{width:100%}',
-  '.matlab-single-file{padding:6px 10px;background:#17212c;color:#c6d1da;border-bottom:1px solid #344352;font:700 12px/1.2 ui-monospace,monospace}'
+  '.matlab-single-file{padding:6px 10px;background:#17212c;color:#c6d1da;border-bottom:1px solid #344352;font:700 12px/1.2 ui-monospace,monospace}',
   '.matlab-preview-btn{border:1px solid #17649a;border-radius:8px;background:#17649a;color:#fff;padding:8px 14px;font:800 13px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;display:inline-flex;align-items:center;gap:6px}',
   '.matlab-preview-btn:hover{filter:brightness(1.1)}',
   '.matlab-preview-btn:disabled{opacity:.58;cursor:wait}',
