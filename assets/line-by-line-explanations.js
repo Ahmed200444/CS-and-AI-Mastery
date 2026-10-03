@@ -12,6 +12,10 @@ function indentation(line){var m=text(line).match(/^[\t ]*/);return m?m[0].repla
 
 function inferLanguage(code,label,node){
  var c=text(code),l=(text(label)+' '+text(node&&node.getAttribute&&node.getAttribute('data-language'))+' '+text(node&&node.getAttribute&&node.getAttribute('data-lang'))).toLowerCase();
+ // An explicit MATLAB label must win over generic `function` detection below.
+ // MATLAB function files otherwise get mistaken for JavaScript and receive the
+ // wrong line-by-line teaching explanations.
+ if(/matlab/.test(l))return'matlab';
  if(/c\+\+|\bcpp\b/.test(l)||/#include\s*[<"]|\bstd::|\bcout\s*<<|\bcin\s*>>|\bvector\s*</.test(c)||/(^|\n)\s*(?:template\s*<|namespace\s+\w+|enum\s+class\s+|public\s*:|private\s*:|protected\s*:|#pragma\s+once)/m.test(c)||/(^|\n)\s*(?:long\s+long|unsigned\s+\w+|int|double|float|bool|char|void|std::string)\s+[A-Za-z_]\w*\s*\([^)]*\)\s*[;{]/m.test(c))return'cpp';
  if(/\bjava\b/.test(l)||/\bpublic\s+static\s+void\s+main\s*\(|\bSystem\.out\.println\s*\(/.test(c))return'java';
  if(/python/.test(l)||/(^|\n)\s*(async\s+def\s+|def\s+|class\s+\w+.*:|from\s+\S+\s+import\s+|import\s+|for\s+.+\s+in\s+.+:|while\s+.+:|if\s+.+:|elif\s+.+:|else\s*:|try\s*:|except\b.*:|finally\s*:|with\s+|print\s*\()/m.test(c)||/\b(len|range|enumerate|zip|divmod|input|dict|list|set|tuple)\s*\(/.test(c)||/\b(cursor\.execute|\.objects\.(?:get|filter|create)|f["']SELECT|execute\("SELECT)/.test(c))return'python';

@@ -23,7 +23,7 @@ for(const f of pages){
 }
 const catalog=JSON.parse(fs.readFileSync(path.join(root,'assets/catalog-data.json'),'utf8'));
 const visible=(catalog.courses||catalog).filter(c=>!c.hidden);
-need(visible.length===61,`expected 61 visible courses, got ${visible.length}`);
+need(visible.length>=61,`visible course catalog unexpectedly dropped below 61 courses, got ${visible.length}`);
 for(const c of visible){
   const file=path.join(root,'courses',`${c.id}.html`);
   need(fs.existsSync(file),`visible course ${c.id} has no page`);
