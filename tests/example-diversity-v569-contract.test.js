@@ -24,7 +24,7 @@ for(const token of ['SELECT country, COUNT(*)','ROW_NUMBER() OVER','LEFT JOIN','
   assert(asset.includes(token),`missing cross-course diversity case: ${token}`);
 }
 const courses=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith('.html'));
-assert.equal(courses.length,65,'expected 65 course pages');
+assert.equal(courses.length,65,'expected 62 committed or 65 generated course pages');
 let lessons=0;
 for(const f of courses){
   const h=read('courses/'+f);
