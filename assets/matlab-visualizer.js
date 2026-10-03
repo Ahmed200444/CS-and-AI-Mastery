@@ -161,6 +161,7 @@ function addStyle(){
   '@media(max-width:860px){.matlab-workbench{grid-template-columns:1fr}}',
   '.matlab-pane{display:flex;flex-direction:column;min-width:0}',
   '.matlab-pane-editor{border-right:1px solid var(--border);background:var(--code)}',
+  '.matlab-pane-command{background:var(--panel)}',
   '@media(max-width:860px){.matlab-pane-editor{border-right:none;border-bottom:1px solid var(--border)}}',
   '.matlab-pane-header{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--pill);color:var(--pilltext);font-size:.8rem;font-weight:800;letter-spacing:.02em;border-bottom:1px solid var(--border)}',
   '.matlab-pane-header-editor{background:#17212c;color:#c6d1da;border-color:#344352}',
