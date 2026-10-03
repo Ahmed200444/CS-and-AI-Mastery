@@ -57,3 +57,22 @@ const orderingContext={};vm.createContext(orderingContext);vm.runInContext(order
 orderingContext.appendInOrder(toolbar,actions);orderingContext.appendInOrder(toolbar,actions);assert.equal(moves,0);
 toolbar.children.reverse();orderingContext.appendInOrder(toolbar,actions);assert.deepEqual(toolbar.children,actions);assert.equal(moves,3);
 console.log('Toolbar observer regression passed: stable order performs no DOM mutations.');
+// The catalog decorator also observes its own catalog subtree. It must not
+// replace an identical eyebrow text node and reschedule itself indefinitely.
+const redesign=fs.readFileSync('assets/product-redesign-v2.js','utf8');
+const decorator=redesign.slice(redesign.indexOf('function decorateCatalog()'),redesign.indexOf('function activeKey()'));
+let eyeWrites=0,eyeText='Legacy catalog';const eye={get textContent(){return eyeText;},set textContent(v){eyeWrites++;eyeText=v;}};
+const head={querySelector(s){return s==='.cx-cat-eyebrow'?eye:null;}};
+const view={querySelector(s){return s==='.cx-cat-head'?head:null;}};
+const track={querySelector(){return view;}};
+const redesignContext={document:{getElementById(){return track;}}};vm.createContext(redesignContext);vm.runInContext(decorator,redesignContext);
+redesignContext.decorateCatalog();redesignContext.decorateCatalog();redesignContext.decorateCatalog();assert.equal(eyeWrites,1);
+console.log('Catalog decoration regression passed: identical eyebrow text stays untouched.');
+// Wrapping a PRE in both an editor and runner can leave one question outside
+// and one inside. Keep a single owner-scoped question after re-enhancement.
+let removedQuestions=0;const outerQuestion={matches(){return true;}};
+let remainingQuestions=[];const innerQuestion={remove(){removedQuestions++;remainingQuestions=[];}};remainingQuestions=[innerQuestion];
+const owner={querySelectorAll(){return remainingQuestions;},previousElementSibling:outerQuestion};
+const wrappedPre={...pre,closest(selector){return selector==='.csai-editor-shell,.lesson-run-card'?owner:null;},insertAdjacentElement(){throw Error('Must reuse the existing question');}};
+questions.enhance(wrappedPre);questions.enhance(wrappedPre);assert.equal(removedQuestions,1);
+console.log('Nested editor/runner question duplication regression passed.');

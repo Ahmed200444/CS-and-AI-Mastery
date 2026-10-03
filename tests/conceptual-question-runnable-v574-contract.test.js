@@ -51,7 +51,7 @@ for(const marker of [
 assert.ok(!/\bRequired\b/.test(questions),'program questions must not show a Required label');
 assert.ok(!/\boptional\b/i.test(questions),'program questions must not be optional');
 assert.ok(questions.includes("if(root.matches&&root.matches('pre.code')&&root.closest&&root.closest('.lesson-run-card'))return"),'raw code scan must avoid duplicating questions inside runner cards');
-assert.ok(questions.includes('.csai-study-example-lazy-body > .csai-learning-question'),'program-question layer must reuse the generated question after lazy study-card hydration instead of duplicating it');
+assert.ok(questions.includes("owner.querySelectorAll('.csai-learning-question')"),'program-question layer must reuse questions across lazy cards and nested editor/runner wrappers');
 
 const study=read('assets/study-examples.js');
 assert.ok(study.includes('window.CSAIStudyExampleContent={'),'study-example concept/question helper API must be exported');

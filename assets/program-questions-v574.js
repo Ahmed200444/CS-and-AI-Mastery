@@ -41,13 +41,15 @@ function tailoredQuestion(code,lang,title,label){var c=String(code||''),t=(title
  return'Run the program below and trace what it creates or changes. What final value, object state, or behavior should show that the '+title+' idea was used correctly?';
 }
 function existingQuestion(root){
- var previous=root.previousElementSibling;if(root.matches&&root.matches('pre.code')&&previous&&previous.matches('.csai-learning-question'))return previous;
  var study=root.closest&&root.closest('.csai-study-example');
- if(study){var q=study.querySelector(':scope > .csai-learning-question,.csai-study-example-lazy-body > .csai-learning-question,.csai-learning-question');if(q)return q;}
- return root.querySelector&&root.querySelector(':scope > .csai-learning-question');
+ var owner=study||(root.closest&&root.closest('.csai-editor-shell,.lesson-run-card'))||root;
+ var questions=owner.querySelectorAll?Array.from(owner.querySelectorAll('.csai-learning-question')):[];
+ var previous=owner.previousElementSibling;if(previous&&previous.matches('.csai-learning-question'))questions.unshift(previous);
+ var keep=questions[0];questions.slice(1).forEach(function(q){if(q!==keep)q.remove();});return keep;
 }
 function ensure(root){
  if(!root||root.nodeType!==1)return;
+ existingQuestion(root);
  if(root.matches&&root.matches('pre.code')&&root.closest&&root.closest('.lesson-run-card'))return;
  var study=root.matches&&root.matches('.csai-study-example')?root:(root.closest&&root.closest('.csai-study-example'));
  if(study&&root.classList.contains('lesson-run-card')&&existingQuestion(root))return;

@@ -9,10 +9,10 @@ for(const c of courses){
  for(const group of ['exercises','quiz','projects'])for(const [i,item] of (c[group]||[]).entries())unique(group,item.q||item.prompt||item.description,c.id+':'+i,45);
 }
 let pages=0,lessons=0;
-for(const name of fs.readdirSync('courses').filter(n=>n.endsWith('.html'))){
- const html=fs.readFileSync('courses/'+name,'utf8');const seenScripts=new Set(),seenObjectives=new Set();
+for(const file of ['index.html',...fs.readdirSync('courses').filter(n=>n.endsWith('.html')).map(n=>'courses/'+n)]){
+ const name=file,html=fs.readFileSync(file,'utf8');const seenScripts=new Set(),seenObjectives=new Set();
  for(const m of html.matchAll(/<script\b[^>]*src=["']([^"']+)["']/g)){const src=m[1].split('?')[0];assert(!seenScripts.has(src),name+': duplicate module '+src);seenScripts.add(src);}
- for(const m of html.matchAll(/<h3>What you will learn<\/h3>\s*<ul>([\s\S]*?)<\/ul>/g))for(const li of m[1].matchAll(/<li\b[^>]*>([\s\S]*?)<\/li>/g)){const text=normalized(li[1].replace(/<[^>]*>/g,' '));if(text.length>65){assert(!seenObjectives.has(text),name+': repeated objective '+text);seenObjectives.add(text);}}
- lessons+=(html.match(/data-lesson="/g)||[]).length;pages++;
+ for(const m of (file==='index.html'?'':html).matchAll(/<h3>What you will learn<\/h3>\s*<ul>([\s\S]*?)<\/ul>/g))for(const li of m[1].matchAll(/<li\b[^>]*>([\s\S]*?)<\/li>/g)){const text=normalized(li[1].replace(/<[^>]*>/g,' '));if(text.length>65){assert(!seenObjectives.has(text),name+': repeated objective '+text);seenObjectives.add(text);}}
+ if(file!=='index.html'){lessons+=(html.match(/data-lesson="/g)||[]).length;pages++;}
 }
 console.log(`Platform repetition audit passed: ${courses.length} visible courses, ${pages} preserved course pages, ${lessons} lessons; unique authored explanations/examples/prompts and consolidated objectives/modules.`);
