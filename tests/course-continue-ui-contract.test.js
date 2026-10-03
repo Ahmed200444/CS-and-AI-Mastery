@@ -14,7 +14,7 @@ for(const token of [
   'history.replaceState'
 ]) need(asset.includes(token),`course Continue UI missing behavior: ${token}`);
 const pages=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith('.html'));
-need(pages.length===62,`expected 62 generated course pages, got ${pages.length}`);
+need(pages.length===65,`expected 65 generated course pages, got ${pages.length}`);
 for(const f of pages){
   const html=fs.readFileSync(path.join(root,'courses',f),'utf8');
   need(html.includes('class="hero"'),`${f}: course hero missing`);
