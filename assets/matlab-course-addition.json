@@ -195,15 +195,17 @@
       ],
       "objectives": [
         "Write a function declaration",
-        "Distinguish inputs and outputs",
-        "Explain local variables",
-        "Match function name and filename"
+        "Keep a function file separate from the main script",
+        "Call the function from a script",
+        "Run the script from the Command Window",
+        "Match the function name and .m filename"
       ],
-      "explanation": "Function files package commands for repeated use. The lecture syntax is function [outputs] = function_name(inputs). Function variables are local, and the function name should match the .m filename.",
+      "explanation": "A MATLAB function belongs in its own .m function file, while the main script is a separate .m file that calls it. Both files are edited in the Editor. The Command Window is separate: it is where you run the script by name and see output, variables, and figures.",
       "examples": [
-        "function y = f2(x) % Function definition with input x\ny = 1 - x.*exp(-x); % Local calculation\nend % End of function"
+        "% file: calculate_average.m\nfunction average = calculate_average(numbers) % Define a reusable function with one input\ntotal = sum(numbers); % Add all values in the input array\ncount = length(numbers); % Count how many values are in the array\naverage = total / count; % Return the arithmetic mean\nend % End the function file\n\n% file: grades.m\nsam = [87 81 94 90 79]; % Store Sam's grades in the main script\nann = [80 91 88 92 93]; % Store Ann's grades in the main script\nsam_average = calculate_average(sam) % Call the function file from the script and display the result\nann_average = calculate_average(ann) % Call the same function with a second array"
       ],
       "commonMistakes": [
+        "Putting the main script in the Command Window pane instead of keeping it as a separate .m file in the Editor.",
         "Saving the function under a filename that does not match the function name."
       ],
       "lecture": {
@@ -401,7 +403,7 @@
     {
       "id": "mat-ex-07",
       "title": "Write a function file",
-      "prompt": "Create a one-input/one-output function and state its correct filename.",
+      "prompt": "Create a function .m file and a separate driver/main script .m file, call the function from the script, then run the script by name from the Command Window.",
       "lessonId": "mat-06"
     },
     {
