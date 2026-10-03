@@ -41,7 +41,7 @@ if (!fs.existsSync(catalogPath)) throw new Error('catalog-data.json is missing')
 if (!fs.existsSync(courseDataDir)) throw new Error('course-data directory is missing');
 
 const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
-if (!catalog || !Array.isArray(catalog.courses) || catalog.courses.length !== 64) {
+if (!catalog || !Array.isArray(catalog.courses) || catalog.courses.length !==65) {
   throw new Error(`Expected 64 catalog courses, found ${catalog && catalog.courses ? catalog.courses.length : 0}`);
 }
 
@@ -128,7 +128,7 @@ html = bodyEnd >= 0 ? html.slice(0, bodyEnd) + navTag + '\n' + html.slice(bodyEn
 fs.writeFileSync(indexPath, html, 'utf8');
 
 const generated = fs.readdirSync(outDir).filter(name => name.endsWith('.html'));
-if (generated.length !== 64) throw new Error(`Expected 64 static course pages, generated ${generated.length}`);
+if (generated.length !==65) throw new Error(`Expected 64 static course pages, generated ${generated.length}`);
 const pythonPage = fs.readFileSync(path.join(outDir, 'python.html'), 'utf8');
 if (!pythonPage.includes('Python') || !pythonPage.includes('Variables &amp; types') && !pythonPage.includes('Variables & types')) throw new Error('Python static page validation failed');
 const finalIndex = fs.readFileSync(indexPath, 'utf8');
