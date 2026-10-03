@@ -19,7 +19,7 @@ for(const file of files){
  html=html.slice(0,at)+'\n'+tag+'\n'+html.slice(at);
  fs.writeFileSync(file,html,'utf8');fixed++;
 }
-if(fixed!==65)throw new Error(`Expected index + 64 course pages, fixed ${fixed}`);
+if(fixed!==66)throw new Error(`Expected index + 65 course pages, fixed ${fixed}`);
 console.log(`Python-only runtime moved to the real final body boundary in ${fixed} HTML files and legacy preview strings were repaired.`);
 require('./inject-study-examples.cjs');
 require('./verify-study-examples.cjs');
