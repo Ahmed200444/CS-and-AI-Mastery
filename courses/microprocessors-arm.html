@@ -1,0 +1,1056 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Microprocessors &amp; ARM Architecture — CS & AI Mastery</title><script>(function(){try{var t=localStorage.getItem('cs-ai-mastery-theme')||localStorage.getItem('theme')||'light';document.documentElement.dataset.theme=t==='dark'?'dark':'light'}catch(e){document.documentElement.dataset.theme='light'}})();</script><style>
+:root{color-scheme:light;--bg:#f4f7fb;--panel:#fff;--text:#172231;--muted:#5d6c7c;--border:#d8e1ea;--pill:#e8f1f8;--pilltext:#174b72;--accent:#17649a;--code:#101827;--note:#fff7e7}
+html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#edf3f8;--muted:#c6d1da;--border:#344352;--pill:#223446;--pilltext:#b9dcf5;--accent:#4da3df;--code:#0b111b;--note:#2b2417}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:1100px;margin:auto;padding:18px 20px 110px}.top{position:sticky;top:0;z-index:4;display:flex;justify-content:space-between;gap:10px;padding:10px 0;background:var(--bg)}.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid #b8c7d6;border-radius:9px;padding:9px 13px;background:var(--panel);color:var(--text);font:inherit;font-weight:800;cursor:pointer}.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.hero,.card,.lesson{background:var(--panel);border:1px solid var(--border);border-radius:15px;color:var(--text)}.hero{padding:22px;margin:8px 0 16px}.kicker{font-size:.74rem;letter-spacing:.1em;font-weight:900;color:var(--accent)}.hero h1{margin:5px 0 8px;font-size:clamp(2rem,4vw,3.2rem);line-height:1.08}.muted{color:var(--muted)}.meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.pill{padding:4px 8px;border-radius:999px;background:var(--pill);color:var(--pilltext);font-size:.78rem;font-weight:800}.progress{height:10px;border-radius:999px;background:var(--border);overflow:hidden;margin:14px 0 5px}.progress span{display:block;height:100%;background:#16805b}.lessons{display:grid;gap:11px}.lesson{overflow:hidden}.lesson summary{display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;font-weight:850}.num{display:grid;place-items:center;min-width:34px;height:28px;border-radius:8px;background:var(--pill);color:var(--pilltext)}.title{flex:1}.check{display:flex;gap:6px;align-items:center;font-size:.82rem;font-weight:700}.body{padding:0 16px 18px}.body h3{margin:17px 0 7px;font-size:1rem}.body p,.body li{line-height:1.68}.code{white-space:pre-wrap;overflow:auto;padding:13px;border-radius:10px;background:var(--code);color:#f4f7fb;font:500 .86rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}.note{margin-top:12px;padding:12px;border-left:4px solid #d28b23;border-radius:8px;background:var(--note)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}.card{padding:17px}.card h2{margin:0 0 10px}.item{padding:12px;margin:9px 0;border-radius:10px;background:var(--bg);border:1px solid var(--border)}.answer{width:100%;min-height:90px;margin-top:8px;padding:10px;border:1px solid #aebdca;border-radius:8px;background:transparent;color:inherit;font:inherit}.theme{position:fixed;right:22px;bottom:22px;z-index:20;border:1px solid #b8c7d6;border-radius:999px;padding:10px 16px;background:var(--panel);color:var(--text);font:800 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.16);cursor:pointer}.empty{padding:17px;border:1px dashed var(--border);border-radius:10px}.hero-icon{margin-right:.25em}@media(max-width:720px){.wrap{padding:10px 10px 100px}.grid{grid-template-columns:1fr}.top .btn{flex:1}.lesson summary{flex-wrap:wrap;align-items:flex-start}.check{width:100%;padding-left:44px}.theme{right:14px;bottom:14px;padding:10px 14px}}
+</style>
+
+
+
+<script defer src="../assets/universal-editable-code.js?v=20260919-v577&learning=20261003-v584"></script>
+<script defer src="../assets/runner-performance-guard.js?v=20260822-v567"></script>
+<script defer src="../assets/calm-study-flow.js?v=20260822-v567"></script>
+<script defer src="../assets/progressive-lesson-layout.js?v=20260822-v567"></script>
+<script defer src="../assets/python-inline-terminal.js?v=20260822-v567"></script>
+<script defer src="../assets/vscode-diagnostics.js?v=20260822-v567"></script>
+<script defer src="../assets/progress-resume.js?v=20260822-v567"></script>
+<script defer src="../assets/try-it-yourself-v568.js?v=20260822-v568"></script>
+<script defer src="../assets/conceptual-examples-v574.js?v=20260824-v574&learning=20261003-v584"></script>
+<script defer src="../assets/program-questions-v574.js?v=20260824-v574&learning=20261003-v584"></script>
+<script defer src="../assets/exam-style-problem-statements-v565.js?v=20260822-v567"></script>
+<script defer src="../assets/practice-guidance.js?v=20260823-v573"></script>
+<script defer src="../assets/purpose-first-prompts.js?v=20260822-v567"></script>
+
+<link rel="stylesheet" href="../assets/final-quality-layer.css?v=20260822-v567">
+<script src="../assets/smart-code-editor.js?v=20260822-v567" defer></script>
+<script src="../assets/portfolio-publish-controls.js?v=20260822-v567&learning=20261003-v584" defer></script>
+
+<!-- csai-unified-design:start -->
+<link rel="stylesheet" href="../assets/unified-learning-design.css?v=20260822-v567">
+<link rel="stylesheet" href="../assets/product-redesign-v2.css?v=20260822-v567">
+<link rel="stylesheet" href="../assets/adaptive-v4-live.css?v=20260822-v567">
+<link rel="stylesheet" href="../assets/hero-polish.css?v=20260822-v567">
+<script>document.documentElement.classList.add('csai-unified-design')</script>
+<script src="../assets/unified-learning-design.js?v=20260822-v567" defer></script>
+<script src="../assets/product-redesign-v2.js?v=20260822-v567&learning=20261003-v584" defer></script>
+<script src="../assets/adaptive-v4-live.js?v=20260822-v567&learning=20261003-v584" defer></script>
+<script src="../assets/hero-polish.js?v=20260822-v567" defer></script>
+<!-- csai-unified-design:end -->
+<link rel="stylesheet" href="/assets/oa-assessment-fallback.css?v=20260811-1">
+<link rel="stylesheet" href="/assets/oa-assessment-upgrade.css?v=20260811-1">
+</head><body>
+<main class="wrap"><div class="top"><a class="btn" href="/#courses">← All courses</a><a class="btn primary" href="/#hub">Home</a></div>
+<section class="hero"><div class="kicker">COURSE</div><h1><span class="hero-icon">🖥️</span>Microprocessors &amp; ARM Architecture</h1><p class="muted">Microprocessor fundamentals, system components, memory hierarchy, performance, RISC, ARM architecture, registers, modes, CPSR, and endianness.</p><div class="meta"><span class="pill">10 lessons</span><span class="pill">16 syllabus labs</span><span class="pill">12 exercises</span><span class="pill">24 checkpoints</span><span class="pill">4 projects</span></div><div class="progress"><span data-progress-bar style="width:0%"></span></div><div class="muted" data-progress-status>0 of 10 lessons complete</div></section>
+<section class="card" style="margin-bottom:14px" aria-label="Lecture order"><h2>Follow your lecture order</h2><ol><li>Introduction</li><li>ARM Architecture</li><li><a href="arm-assembly.html">Instructions — Part 1</a></li><li><a href="arm-assembly.html">Instructions — Part 2</a></li><li><a href="arm-assembly.html">Functions</a></li><li><a href="arm-assembly.html">Exceptions</a></li></ol><p class="muted">Lessons show their source slide range. Repeated topics are grouped at their first substantial treatment.</p></section>
+<section class="lessons"><details class="lesson" data-lesson="mpr-01" open>
+<summary><span class="num">01</span><span class="title">Microprocessor fundamentals &amp; the CPU</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
+<div class="body">
+<p class="muted" data-lecture-order="1"><b>Introduction</b> · slides 4–4<br><small>01.Lecture_Introduction (2)(1).pdf</small></p>
+<h3>What you will learn</h3><ul><li>Define a microprocessor</li><li>Explain the CPU&#39;s role in a computer</li><li>Relate transistors to processor implementation</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>A microprocessor is a computer&#39;s CPU implemented on a single integrated circuit. It fetches and executes instructions, performs arithmetic and logical work, and coordinates data movement with memory and I/O. Modern processors contain very large numbers of transistors connected to implement datapaths, control logic, caches, and other structures.</p></section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">microprocessor</span><span class="pill">CPU</span><span class="pill">transistor</span><span class="pill">instruction execution</span><span class="pill">single chip</span></div>
+<h3>Example</h3><pre class="code" data-language="python" data-example-audit="reference" data-reference-only="true">pc = 0x00001000  # Program counter holds next instruction address
+instruction = 0xE2801005  # Fetched instruction (ADD r1, r0, #5)
+opcode = (instruction &gt;&gt; 21) &amp; 0xF  # Decode opcode bits 24:21
+print(hex(pc), opcode)  # Execute and log operation</pre>
+<div class="note"><b>Common mistake:</b> Treating a microprocessor as the entire computer rather than the CPU that works with memory and I/O.</div>
+</div></details><details class="lesson" data-lesson="mpr-02" >
+<summary><span class="num">02</span><span class="title">From early computers to modern microprocessors</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
+<div class="body">
+<p class="muted" data-lecture-order="1"><b>Introduction</b> · slides 5–39<br><small>01.Lecture_Introduction (2)(1).pdf</small></p>
+<h3>What you will learn</h3><ul><li>Identify major hardware milestones</li><li>Explain why integration changed computers</li><li>Connect transistor scaling to processor capability</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Processor development moved from large vacuum-tube systems to transistors, integrated circuits, and then complete CPUs on a chip. Integration reduced size and cost while allowing much larger transistor counts and more capable processors.</p></section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">ENIAC</span><span class="pill">transistor</span><span class="pill">integrated circuit</span><span class="pill">Intel 4004</span><span class="pill">scaling</span></div>
+<h3>Example</h3><pre class="code" data-language="python" data-example-audit="reference" data-reference-only="true"># Scaling from Intel 4004 to modern 64-bit ARM
+bus_widths = [4, 8, 16, 32, 64]  # Address bus bit widths
+# Iterate over bus widths to calculate capacity
+for bits in bus_widths:
+    addressable_bytes = 1 &lt;&lt; bits  # 2^N bytes total addressable address space
+    print(bits, addressable_bytes)  # Output bit width and byte capacity</pre>
+<div class="note"><b>Common mistake:</b> Memorizing dates without understanding the architectural change each technology made possible.</div>
+</div></details><details class="lesson" data-lesson="mpr-03" >
+<summary><span class="num">03</span><span class="title">Computer components, microprocessors, microcontrollers &amp; SoCs</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
+<div class="body">
+<p class="muted" data-lecture-order="1"><b>Introduction</b> · slides 40–53<br><small>01.Lecture_Introduction (2)(1).pdf</small></p>
+<h3>What you will learn</h3><ul><li>Identify major computer components</li><li>Distinguish a microprocessor from a microcontroller</li><li>Explain what a system-on-chip integrates</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>A computer system combines the processor with memory and I/O support. Cache keeps frequently needed data close to the CPU, DRAM provides larger working memory, and platform logic connects components and peripherals. A microcontroller integrates a CPU with memory and peripherals, while a system-on-chip integrates still more system functions.</p></section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">cache</span><span class="pill">DRAM</span><span class="pill">chipset</span><span class="pill">motherboard</span><span class="pill">microcontroller</span><span class="pill">SoC</span></div>
+<h3>Example</h3><pre class="code" data-language="python" data-example-audit="reference" data-reference-only="true">sram_base = 0x40000000  # On-chip SRAM starting address
+flash_base = 0x00000000  # On-chip Flash starting address
+gpio_base = 0xE0028000  # Memory-mapped GPIO peripheral base
+print(hex(flash_base), hex(sram_base), hex(gpio_base))  # Output memory regions</pre>
+<div class="note"><b>Common mistake:</b> Assuming microprocessors, microcontrollers, and SoCs differ only in speed rather than in integration and intended use.</div>
+</div></details><details class="lesson" data-lesson="mpr-04" >
+<summary><span class="num">04</span><span class="title">Memory hierarchy &amp; cache evolution</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
+<div class="body">
+<p class="muted" data-lecture-order="1"><b>Introduction</b> · slides 54–57<br><small>01.Lecture_Introduction (2)(1).pdf</small></p>
+<h3>What you will learn</h3><ul><li>Order the main memory hierarchy</li><li>Explain why caches exist</li><li>Describe the trend toward on-chip caches</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Memory is organized as a hierarchy because no single technology is simultaneously the fastest, largest, and cheapest. Registers are closest to execution, then caches, then main memory. Processor history moved caches from the motherboard toward on-die L1, L2, and L3 levels.</p></section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">registers</span><span class="pill">L1 cache</span><span class="pill">L2 cache</span><span class="pill">L3 cache</span><span class="pill">DRAM</span><span class="pill">locality</span></div>
+<h3>Example</h3><pre class="code" data-language="python" data-example-audit="reference" data-reference-only="true"># Memory hierarchy levels with latency
+hierarchy = [(&quot;Registers&quot;, 1), (&quot;L1 Cache&quot;, 4), (&quot;L2 Cache&quot;, 12), (&quot;DRAM&quot;, 120)]  # Level latencies
+# Iterate across memory hierarchy
+for name, latency in hierarchy:
+    print(name, latency)  # Print level name and access cycle latency</pre>
+<div class="note"><b>Common mistake:</b> Thinking every memory access costs the same amount of time.</div>
+</div></details><details class="lesson" data-lesson="mpr-05" >
+<summary><span class="num">05</span><span class="title">Architecture vs microarchitecture</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
+<div class="body">
+<p class="muted" data-lecture-order="1"><b>Introduction</b> · slides 58–78<br><small>01.Lecture_Introduction (2)(1).pdf</small></p>
+<h3>What you will learn</h3><ul><li>Distinguish architecture from microarchitecture</li><li>Explain how two processors can share an ISA</li><li>Identify common microarchitectural features</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Architecture defines the programmer-visible contract, including instructions, registers, data types, and behavior. Microarchitecture is how a particular processor implements that contract. Two processors can execute the same instruction set while using different caches, pipelines, issue widths, or out-of-order machinery.</p></section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">ISA</span><span class="pill">architecture</span><span class="pill">microarchitecture</span><span class="pill">pipeline</span><span class="pill">cache</span><span class="pill">out-of-order execution</span></div>
+<h3>Example</h3><pre class="code" data-language="python" data-example-audit="reference" data-reference-only="true">instructions = 100  # Total instructions in workload
+pipeline_cycles = 5 + (instructions - 1)  # 5-cycle fill latency + 1 cycle per subsequent instruction
+print(instructions, pipeline_cycles)  # Output instruction count and cycle total</pre>
+<div class="note"><b>Common mistake:</b> Using &#39;architecture&#39; and &#39;microarchitecture&#39; as interchangeable words.</div>
+</div></details><details class="lesson" data-lesson="mpr-06" >
+<summary><span class="num">06</span><span class="title">Processor performance: time, clock rate &amp; IPC</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
+<div class="body">
+<p class="muted" data-lecture-order="1"><b>Introduction</b> · slides 79–80<br><small>01.Lecture_Introduction (2)(1).pdf</small></p>
+<h3>What you will learn</h3><ul><li>Use execution time as the primary performance measure</li><li>Relate IPC/CPI and clock rate to performance</li><li>Explain why deeper pipelines have trade-offs</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Processor performance is fundamentally about how long a workload takes. Clock frequency affects cycles per second, while IPC describes how much instruction work completes per cycle. Pipelining can raise frequency, dependencies and stalls reduce IPC, and superscalar or out-of-order execution can expose more parallel work.</p></section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">execution time</span><span class="pill">clock rate</span><span class="pill">IPC</span><span class="pill">CPI</span><span class="pill">pipeline</span><span class="pill">superscalar</span></div>
+<h3>Example</h3><pre class="code" data-language="python" data-example-audit="reference" data-reference-only="true">instr_count = 1_000_000  # Total dynamic instruction count
+cpi = 1.25  # Average cycles per instruction
+clock_mhz = 50.0  # Clock frequency in MHz
+exec_time_sec = (instr_count * cpi) / (clock_mhz * 1e6)  # Compute execution time
+print(exec_time_sec)  # Output total duration in seconds</pre>
+<div class="note"><b>Common mistake:</b> Assuming a higher clock rate automatically means a faster processor for every program.</div>
+</div></details><details class="lesson" data-lesson="mpr-07" >
+<summary><span class="num">07</span><span class="title">RISC principles &amp; ARM architecture</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
+<div class="body">
+<p class="muted" data-lecture-order="2"><b>ARM Architecture</b> · slides 6–21<br><small>02.Lecture_ARM_Architecture02 (3)(1).pdf</small></p>
+<h3>What you will learn</h3><ul><li>Explain the classic RISC philosophy</li><li>Describe ARM&#39;s load-store organization</li><li>Connect ARM design choices to embedded systems</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Classic RISC uses regular instructions, many registers, and explicit loads/stores for memory access. ARM data-processing instructions mainly use registers, while LDR and STR move data between registers and memory. A modern processor may be internally complex while preserving this programmer-visible architecture.</p></section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">RISC</span><span class="pill">load-store</span><span class="pill">register file</span><span class="pill">fixed-length instruction</span><span class="pill">embedded systems</span></div>
+<h3>Example</h3><pre class="code" data-language="armasm" data-example-audit="candidate" >        MOV r0, #0x4000 ; Set base address pointer
+        MOV r1, #25 ; Set initial data value
+        STR r1, [r0] ; Store value from register to memory
+        LDR r2, [r0] ; Load value from memory into register
+        ADD r2, r2, #5 ; Process data inside register file
+stop    B stop ; Halt execution</pre>
+<div class="note"><b>Common mistake:</b> Interpreting RISC as &#39;every real instruction always completes in exactly one physical clock cycle.&#39;</div>
+</div></details><details class="lesson" data-lesson="mpr-08" >
+<summary><span class="num">08</span><span class="title">ARM data sizes, instruction sets &amp; state</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
+<div class="body">
+<p class="muted" data-lecture-order="2"><b>ARM Architecture</b> · slides 22–22<br><small>02.Lecture_ARM_Architecture02 (3)(1).pdf</small></p>
+<h3>What you will learn</h3><ul><li>Recall ARM data-size terminology</li><li>Distinguish ARM and Thumb instruction encodings</li><li>Explain why instruction-set state matters</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>In the 32-bit ARM material, a halfword is 16 bits, a word is 32 bits, and a doubleword is 64 bits. Classic ARM instructions are 32 bits wide, while Thumb/Thumb-2 use a mixture of compact 16-bit and 32-bit encodings. Execution state controls which encodings the processor interprets.</p></section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">word</span><span class="pill">halfword</span><span class="pill">doubleword</span><span class="pill">ARM state</span><span class="pill">Thumb</span><span class="pill">Thumb-2</span></div>
+<h3>Example</h3><pre class="code" data-language="armasm" data-example-audit="candidate" >        MOV r0, #0x2000 ; Set memory buffer pointer
+        MOV r1, #0xFF ; Set byte value 255
+        STRB r1, [r0] ; Store byte to memory
+        MOV r2, #0x1234 ; Set 16-bit halfword value
+        STRH r2, [r0, #2] ; Store halfword at offset 2
+stop    B stop ; Halt execution</pre>
+<div class="note"><b>Common mistake:</b> Confusing instruction encoding size with the size of the data being processed.</div>
+</div></details><details class="lesson" data-lesson="mpr-09" >
+<summary><span class="num">09</span><span class="title">ARM programmer model &amp; registers</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
+<div class="body">
+<p class="muted" data-lecture-order="2"><b>ARM Architecture</b> · slides 23–29<br><small>02.Lecture_ARM_Architecture02 (3)(1).pdf</small></p>
+<h3>What you will learn</h3><ul><li>Identify the main programmer-visible registers</li><li>Explain the roles of SP, LR, and PC</li><li>Explain why some modes use banked registers</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Classic ARM exposes general-purpose registers plus special roles for R13 as stack pointer, R14 as link register, and R15 as program counter. CPSR records current status/control information. Privileged exception modes can access an SPSR and selected banked registers so handlers can preserve state and use their own stack/link context.</p></section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">R0-R12</span><span class="pill">SP</span><span class="pill">LR</span><span class="pill">PC</span><span class="pill">CPSR</span><span class="pill">SPSR</span><span class="pill">banked registers</span></div>
+<h3>Example</h3><pre class="code" data-language="armasm" data-example-audit="candidate" >        MOV r0, #10 ; Load general purpose register r0
+        MOV r1, #20 ; Load general purpose register r1
+        ADDS r2, r0, r1 ; Add r0 and r1 into r2 and update CPSR flags
+        MOV r13, #0x1000 ; Initialize stack pointer SP
+        MOV r14, #0x0000 ; Initialize link register LR
+stop    B stop ; Halt execution</pre>
+<div class="note"><b>Common mistake:</b> Assuming every processor mode sees exactly the same physical SP, LR, and saved-status registers.</div>
+</div></details><details class="lesson" data-lesson="mpr-10" >
+<summary><span class="num">10</span><span class="title">Processor modes, CPSR, endianness &amp; exception overview</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
+<div class="body">
+<p class="muted" data-lecture-order="2"><b>ARM Architecture</b> · slides 30–45<br><small>02.Lecture_ARM_Architecture02 (3)(1).pdf</small></p>
+<h3>What you will learn</h3><ul><li>Name the major classic ARM modes</li><li>Interpret key CPSR fields</li><li>Distinguish little-endian and big-endian storage</li><li>Explain why exceptions change mode</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Classic ARM has User mode and privileged modes including System, Supervisor, IRQ, FIQ, Abort, and Undefined. CPSR holds condition flags, execution state, interrupt masks, and mode bits. Little-endian stores the least-significant byte at the lower address; big-endian reverses that order. Exceptions enter an appropriate privileged mode so handlers can use protected state.</p></section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">User mode</span><span class="pill">SVC</span><span class="pill">IRQ</span><span class="pill">FIQ</span><span class="pill">Abort</span><span class="pill">Undefined</span><span class="pill">CPSR</span><span class="pill">endianness</span></div>
+<h3>Example</h3><pre class="code" data-language="python" data-example-audit="reference" data-reference-only="true">val = 0x12345678  # 32-bit test word
+little_endian = [val &amp; 0xFF, (val &gt;&gt; 8) &amp; 0xFF, (val &gt;&gt; 16) &amp; 0xFF, (val &gt;&gt; 24) &amp; 0xFF]  # LSB first
+big_endian = [(val &gt;&gt; 24) &amp; 0xFF, (val &gt;&gt; 16) &amp; 0xFF, (val &gt;&gt; 8) &amp; 0xFF, val &amp; 0xFF]  # MSB first
+print(little_endian)  # Output little-endian byte array
+print(big_endian)  # Output big-endian byte array</pre>
+<div class="note"><b>Common mistake:</b> Reading the ARM I and F CPSR bits as interrupt-enable bits; in classic ARM, a set mask bit masks/disables that interrupt.</div>
+</div></details></section>
+
+<section class="card eece340-lab-track" style="margin-top:16px;border-left:4px solid var(--accent)" id="eece340-labs">
+<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:12px">
+<div>
+<span class="pill" style="background:var(--accent);color:#fff;font-weight:900">EECE 340 SYLLABUS LAB TRACK</span>
+<h2 style="margin:6px 0 4px">Microprocessor &amp; ARM Architecture Laboratory Track</h2>
+<p class="muted" style="margin:0">Complete 16-module university laboratory sequence aligned with the EECE 340 syllabus and lab exam.</p>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px">
+<span class="pill">Homework: 10%</span>
+<span class="pill">Quizzes: 15%</span>
+<span class="pill">Midterm: 25%</span>
+<span class="pill">Lab Work: 10%</span>
+<span class="pill">Lab Exam: 15%</span>
+<span class="pill">Final Exam: 25%</span>
+</div>
+</div>
+<div class="labs-list" style="display:grid;gap:10px">
+<details class="lesson lab-card" data-lab="eece340-lab-01" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+<summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
+<span><b>Lab 01:</b> C++ and ARM Calling Convention Lab</span>
+<span class="pill" style="font-size:.74rem">armasm</span>
+</summary>
+<div class="body" style="padding-top:12px">
+<p class="muted"><b>Syllabus topic:</b> C++ comparison and mixed C++/assembly programming; AAPCS calling standard · <b>Weight:</b> Lab Work (10%), Final Exam (25%)</p>
+<p><b>Objective:</b> Understand the ARM Architecture Procedure Call Standard (AAPCS): arguments passed in R0–R3, return value in R0, preserving callee-saved registers R4–R11 on the stack, and maintaining 8-byte stack alignment.</p>
+<p><b>Problem Statement:</b> Implement an AAPCS-compliant ARM assembly subroutine compute_polynomial that calculates a * x^2 + b * x + c, where a is in R0, b is in R1, c is in R2, and x is in R3. Preserve any non-volatile registers used and return the 32-bit integer result in R0.</p>
+<h3>Starter code</h3>
+<pre class="code" data-language="armasm" data-example-audit="reference" data-reference-only="true">        AREA PolyCode, CODE, READONLY ; Declare code section
+        EXPORT compute_polynomial ; Export function name for C++ linkage
+compute_polynomial ; Function entry point
+        PUSH {r4, lr} ; Preserve callee-saved register r4 and link register
+        MUL r4, r3, r3 ; Compute x^2 = x * x and store in r4
+        MUL r0, r0, r4 ; Compute a * x^2 and store in r0
+        MLA r0, r1, r3, r0 ; Compute (b * x) + (a * x^2) and store in r0
+        ADD r0, r0, r2 ; Add constant c to accumulate final polynomial
+        POP {r4, pc} ; Restore r4 and return by popping saved lr into pc
+        END ; Mark end of assembly source</pre>
+<div class="item" style="margin-top:10px"><b>Expected state &amp; output:</b> With inputs a=2, b=3, c=4, x=5: computes 2*(25) + 3*(5) + 4 = 69. R0 = 69 (0x00000045), R4 restored, SP balanced.</div>
+<div class="note"><b>Boundary / Failure case:</b> Large operand values (e.g. a=10000, x=1000) cause 32-bit integer multiplication overflow; callers passing 5 or more parameters must pass the 5th+ argument on the stack.</div>
+<div class="item" style="background:var(--panel);border-left:3px solid #17649a"><b>Browser model vs. Keil/ARM7 hardware:</b> Browser tracer models 32-bit register and stack behavior; Keil/ARM7 hardware toolchains enforce 8-byte stack alignment at external boundaries and check AAPCS frame records.</div>
+<p style="margin-top:10px"><b>Submission checkpoint:</b> Verify that R4 is restored to its caller value and R0 contains 69 when tested with (2, 3, 4, 5).</p>
+<details style="margin-top:10px"><summary class="btn" style="cursor:pointer">Reveal Authored Solution</summary>
+<div style="margin-top:10px">
+<p><b>Authored Explanation:</b> The subroutine follows AAPCS by receiving arguments in R0-R3, using non-volatile registers R4-R5 safely by saving them on entry and restoring them on exit, calculating the quadratic term, and returning the result in R0.</p>
+<pre class="code" data-language="armasm" data-example-audit="reference" data-reference-only="true">        AREA PolyCode, CODE, READONLY ; Declare code section
+        EXPORT compute_polynomial ; Export function for C++ linkage
+compute_polynomial ; Function entry point
+        PUSH {r4-r5, lr} ; Save non-volatile registers r4, r5, and link register
+        MUL r4, r3, r3 ; r4 = x * x (x^2)
+        MUL r5, r0, r4 ; r5 = a * x^2
+        MLA r0, r1, r3, r5 ; r0 = (b * x) + (a * x^2)
+        ADD r0, r0, r2 ; r0 = (a * x^2 + b * x) + c
+        POP {r4-r5, pc} ; Restore non-volatile registers and return
+        END ; End of assembly file</pre>
+</div>
+</details>
+</div></details><details class="lesson lab-card" data-lab="eece340-lab-02" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+<summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
+<span><b>Lab 02:</b> Assembler Directives, Macros, Constants &amp; Literal Pool Lab</span>
+<span class="pill" style="font-size:.74rem">armasm</span>
+</summary>
+<div class="body" style="padding-top:12px">
+<p class="muted"><b>Syllabus topic:</b> Assembler directives, macros, constants, and literal pools · <b>Weight:</b> Homework (10%), Lab Work (10%)</p>
+<p><b>Objective:</b> Master assembler directives (AREA, ENTRY, END, ALIGN, SPACE, DCD, DCB), symbolic definitions (EQU, RN), macro definitions (MACRO, MEND), and literal pool placement (LTORG).</p>
+<p><b>Problem Statement:</b> Define symbolic bounds MIN_BOUND EQU 10 and MAX_BOUND EQU 100, register alias val RN 0, clamp val between bounds using conditional instructions, define an aligned lookup table with DCD, and place LTORG to dump literal constants.</p>
+<h3>Starter code</h3>
+<pre class="code" data-language="armasm" data-example-audit="reference" data-reference-only="true">MIN_BOUND EQU 10 ; Define symbolic lower bound constant
+MAX_BOUND EQU 100 ; Define symbolic upper bound constant
+val RN 0 ; Create readable alias for register r0
+tmp RN 1 ; Create readable alias for register r1
+
+        AREA DirectivesLab, CODE, READONLY ; Declare read-only code area
+        ENTRY ; Specify execution entry point
+start ; Entry label
+        MOV val, #5 ; Load test value below lower bound
+        CMP val, #MIN_BOUND ; Compare test value against minimum bound
+        MOVLT val, #MIN_BOUND ; Clamp to minimum if value is less than bound
+        CMP val, #MAX_BOUND ; Compare test value against maximum bound
+        MOVGT val, #MAX_BOUND ; Clamp to maximum if value exceeds bound
+        LDR tmp, =0x12345678 ; Load 32-bit constant from literal pool
+        LTORG ; Force assembler to dump literal pool here
+stop B stop ; Infinite loop halting processor
+        END ; End of assembly file</pre>
+<div class="item" style="margin-top:10px"><b>Expected state &amp; output:</b> val (R0) is clamped from 5 to 10 (0x0000000A); tmp (R1) is loaded with 0x12345678; literal pool is placed immediately following LTORG.</div>
+<div class="note"><b>Boundary / Failure case:</b> Placing LDR rX, =constant more than 4095 bytes from literal pool without LTORG causes assembler error &#39;Literal pool out of range&#39;; missing ALIGN 4 after DCB strings causes unaligned word reads.</div>
+<div class="item" style="background:var(--panel);border-left:3px solid #17649a"><b>Browser model vs. Keil/ARM7 hardware:</b> Browser tracer resolves basic literals; Keil armasm evaluates multi-pass macro expansions, literal pool offsets, and flags unaligned section boundaries.</div>
+<p style="margin-top:10px"><b>Submission checkpoint:</b> Verify clamping for test inputs 5, 50, and 150, confirming R0 is bounded in [10, 100].</p>
+<details style="margin-top:10px"><summary class="btn" style="cursor:pointer">Reveal Authored Solution</summary>
+<div style="margin-top:10px">
+<p><b>Authored Explanation:</b> EQU and RN define meaningful constants and register names; conditional moves perform branchless clamping; LTORG forces immediate allocation of literal table data.</p>
+<pre class="code" data-language="armasm" data-example-audit="reference" data-reference-only="true">MIN_VAL EQU 10 ; Define minimum clamp value
+MAX_VAL EQU 100 ; Define maximum clamp value
+input RN 0 ; Input/output register alias
+limit RN 1 ; Scratch limit register alias
+
+        AREA ClampArea, CODE, READONLY ; Define code area
+        ENTRY ; Set entry point
+main ; Main entry label
+        MOV input, #150 ; Load test value exceeding upper bound
+        MOV limit, #MIN_VAL ; Load lower bound into scratch register
+        CMP input, limit ; Check if input is below lower bound
+        MOVLT input, limit ; Clamp input up to lower bound if less
+        MOV limit, #MAX_VAL ; Load upper bound into scratch register
+        CMP input, limit ; Check if input exceeds upper bound
+        MOVGT input, limit ; Clamp input down to upper bound if greater
+        LDR r2, =0xAABBCCDD ; Request 32-bit literal constant
+        LTORG ; Place literal pool before code end
+trap B trap ; Terminate in spin loop
+        END ; End of assembly source</pre>
+</div>
+</details>
+</div></details><details class="lesson lab-card" data-lab="eece340-lab-03" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+<summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
+<span><b>Lab 03:</b> ARM Arithmetic &amp; Data Movement Lab</span>
+<span class="pill" style="font-size:.74rem">armasm</span>
+</summary>
+<div class="body" style="padding-top:12px">
+<p class="muted"><b>Syllabus topic:</b> Data-processing instructions, 64-bit multiword arithmetic, barrel shifter · <b>Weight:</b> Midterm (25%), Quizzes (15%)</p>
+<p><b>Objective:</b> Implement multi-word (64-bit) addition and subtraction using ADDS, ADC, SUBS, SBC, and apply flexible second operand barrel shifter transformations (LSL, LSR, ASR, ROR).</p>
+<p><b>Problem Statement:</b> Implement a 64-bit unsigned addition: operand 1 in (R1:R0, where R1 is MSW, R0 is LSW) and operand 2 in (R3:R2, where R3 is MSW, R2 is LSW). Add lower words with ADDS to set carry, add upper words with ADC, and multiply the sum by 8 using barrel shifting.</p>
+<h3>Starter code</h3>
+<pre class="code" data-language="armasm" data-example-audit="reference" data-reference-only="true">        AREA MultiWord, CODE, READONLY ; Declare code area
+        ENTRY ; Entry point
+start ; Program start
+        MOV r0, #0xFFFFFFFF ; Set lower 32 bits of operand 1
+        MOV r1, #0x00000001 ; Set upper 32 bits of operand 1
+        MOV r2, #0x00000001 ; Set lower 32 bits of operand 2
+        MOV r3, #0x00000000 ; Set upper 32 bits of operand 2
+        ADDS r0, r0, r2 ; Add lower words and update Carry flag (C=1)
+        ADC r1, r1, r3 ; Add upper words including Carry flag
+        MOV r4, r0, LSL #3 ; Shift lower sum left by 3 (multiply by 8)
+stop B stop ; Halt execution
+        END ; End of assembly source</pre>
+<div class="item" style="margin-top:10px"><b>Expected state &amp; output:</b> Lower word R0 overflows to 0x00000000 with C=1; Upper word R1 becomes 1 + 0 + 1 = 2; 64-bit result is 0x0000000200000000.</div>
+<div class="note"><b>Boundary / Failure case:</b> 64-bit overflow occurs when MSW addition generates a carry out of bit 63; signed subtraction requires monitoring the V (overflow) flag.</div>
+<div class="item" style="background:var(--panel);border-left:3px solid #17649a"><b>Browser model vs. Keil/ARM7 hardware:</b> Browser models 32-bit register updates and status flags; hardware ARM7 pipeline executes barrel shifter operations simultaneously with the ALU in a single cycle.</div>
+<p style="margin-top:10px"><b>Submission checkpoint:</b> Verify that lower word carry propagates into upper word, yielding R1:R0 = 0x00000002:0x00000000.</p>
+<details style="margin-top:10px"><summary class="btn" style="cursor:pointer">Reveal Authored Solution</summary>
+<div style="margin-top:10px">
+<p><b>Authored Explanation:</b> ADDS writes arithmetic status to CPSR; ADC reads the carry flag to complete 64-bit addition; SUBS/SBC perform the corresponding multi-word subtraction.</p>
+<pre class="code" data-language="armasm" data-example-audit="reference" data-reference-only="true">        AREA Arith64, CODE, READONLY ; Code section
+        ENTRY ; Program entry
+run ; Label run
+        MOV r0, #0xFFFFFFFE ; Lower word 1: 0xFFFFFFFE
+        MOV r1, #0x00000005 ; Upper word 1: 5
+        MOV r2, #0x00000004 ; Lower word 2: 4
+        MOV r3, #0x00000002 ; Upper word 2: 2
+        ADDS r0, r0, r2 ; Lower sum: 0x00000002, sets Carry flag C=1
+        ADC r1, r1, r3 ; Upper sum: 5 + 2 + 1 = 8 (0x00000008)
+        SUBS r4, r0, #0x00000010 ; Subtract 16 from lower word, checks borrow
+        SBC r5, r1, #0 ; Subtract borrow from upper word
+halt B halt ; Loop forever
+        END ; Source termination</pre>
+</div>
+</details>
+</div></details><details class="lesson lab-card" data-lab="eece340-lab-04" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+<summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
+<span><b>Lab 04:</b> Load/Store &amp; Addressing Modes Lab</span>
+<span class="pill" style="font-size:.74rem">armasm</span>
+</summary>
+<div class="body" style="padding-top:12px">
+<p class="muted"><b>Syllabus topic:</b> Load/store instructions, pre/post indexed addressing modes, byte/halfword transfers · <b>Weight:</b> Midterm (25%), Lab Exam (15%)</p>
+<p><b>Objective:</b> Master ARM addressing modes: offset addressing [Rn, #k], pre-indexed writeback [Rn, #k]!, post-indexed [Rn], #k, scaled register offset, and byte/halfword transfers (LDRB, STRB, LDRH, STRH).</p>
+<p><b>Problem Statement:</b> Write an ARM assembly routine that reads a word from memory starting at 0x1000, doubles the value, and stores the updated word to destination memory 0x2000 using post-indexed reading and pre-indexed writeback storing.</p>
+<h3>Starter code</h3>
+<pre class="code" data-language="armasm" data-example-audit="reference" data-reference-only="true">        AREA AddressingLab, CODE, READONLY ; Declare code area
+        ENTRY ; Entry point
+start ; Start label
+        MOV r0, #0x1000 ; Source buffer base pointer
+        MOV r1, #0x2000 ; Destination buffer base pointer
+        MOV r2, #42 ; Value to write into test memory
+        STR r2, [r0] ; Store test value at source address
+        LDR r3, [r0], #4 ; Post-indexed load: r3=[r0], then r0=r0+4
+        ADD r3, r3, r3 ; Double loaded value (r3 = 42 * 2 = 84)
+        STR r3, [r1, #4]! ; Pre-indexed store: r1=r1+4, then [r1]=r3
+stop B stop ; Halt
+        END ; End of file</pre>
+<div class="item" style="margin-top:10px"><b>Expected state &amp; output:</b> R0 advances to 0x1004; R1 advances to 0x2004; Memory at 0x1000 holds 42; Memory at 0x2004 holds 84.</div>
+<div class="note"><b>Boundary / Failure case:</b> Non-word-aligned addresses (e.g. 0x1001 for a word transfer) cause data rotation on classic ARM7 or Alignment Abort exception on Cortex cores.</div>
+<div class="item" style="background:var(--panel);border-left:3px solid #17649a"><b>Browser model vs. Keil/ARM7 hardware:</b> Browser memory model enforces 4-byte word alignment; ARM7 hardware rotates unaligned word reads based on address bits [1:0].</div>
+<p style="margin-top:10px"><b>Submission checkpoint:</b> Verify that R0 advances by 4 after load and R1 advances by 4 before store.</p>
+<details style="margin-top:10px"><summary class="btn" style="cursor:pointer">Reveal Authored Solution</summary>
+<div style="margin-top:10px">
+<p><b>Authored Explanation:</b> Post-indexed addressing [r0], #4 transfers the current word then increments the pointer; pre-indexed writeback [r1, #4]! updates the base register before the write.</p>
+<pre class="code" data-language="armasm" data-example-audit="reference" data-reference-only="true">        AREA ArrayCopy, CODE, READONLY ; Define code area
+        ENTRY ; Program entry
+main ; Entry point
+        MOV r0, #0x1000 ; Source base pointer
+        MOV r1, #0x2000 ; Destination base pointer
+        MOV r2, #10 ; Element 1 value
+        STR r2, [r0, #0] ; Store element 1
+        MOV r2, #20 ; Element 2 value
+        STR r2, [r0, #4] ; Store element 2
+        LDR r3, [r0], #4 ; Load element 1, advance r0 to 0x1004
+        STR r3, [r1], #4 ; Store element 1, advance r1 to 0x2004
+        LDR r3, [r0], #4 ; Load element 2, advance r0 to 0x1008
+        STR r3, [r1], #4 ; Store element 2, advance r1 to 0x2008
+spin B spin ; Halt
+        END ; File end</pre>
+</div>
+</details>
+</div></details><details class="lesson lab-card" data-lab="eece340-lab-05" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+<summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
+<span><b>Lab 05:</b> Control Flow, Loops, Branches &amp; Jump Tables Lab</span>
+<span class="pill" style="font-size:.74rem">armasm</span>
+</summary>
+<div class="body" style="padding-top:12px">
+<p class="muted"><b>Syllabus topic:</b> Control flow, loops, branches, condition codes, jump tables · <b>Weight:</b> Homework (10%), Lab Exam (15%)</p>
+<p><b>Objective:</b> Construct structured loops (while/for/do-while), multi-way decision trees with condition codes, and efficient jump tables using PC modification for command dispatch.</p>
+<p><b>Problem Statement:</b> Implement a command dispatcher that takes an opcode (0, 1, or 2) in R0, checks bounds (range 0–2), uses branching to execute handle_add (opcode 0: R3 = R1 + R2), handle_sub (opcode 1: R3 = R1 - R2), or handle_and (opcode 2: R3 = R1 AND R2), returning 0xFFFFFFFF for invalid opcodes.</p>
+<h3>Starter code</h3>
+<pre class="code" data-language="armasm" data-example-audit="reference" data-reference-only="true">        AREA JumpTableLab, CODE, READONLY ; Declare code area
+        ENTRY ; Program entry
+start ; Main entry
+        MOV r0, #1 ; Test opcode: 1 (subtract command)
+        MOV r1, #50 ; Operand 1 = 50
+        MOV r2, #20 ; Operand 2 = 20
+        CMP r0, #2 ; Verify opcode is within valid range (0..2)
+        BHI invalid ; Branch if unsigned higher than maximum opcode
+        CMP r0, #0 ; Check for opcode 0
+        BEQ handle_add ; Jump to addition handler
+        CMP r0, #1 ; Check for opcode 1
+        BEQ handle_sub ; Jump to subtraction handler
+        B handle_and ; Opcode 2 falls through to bitwise AND handler
+handle_add ; Addition handler label
+        ADD r3, r1, r2 ; r3 = 50 + 20 = 70
+        B done ; Complete dispatch
+handle_sub ; Subtraction handler label
+        SUB r3, r1, r2 ; r3 = 50 - 20 = 30
+        B done ; Complete dispatch
+handle_and ; Bitwise AND handler label
+        AND r3, r1, r2 ; r3 = 50 AND 20
+        B done ; Complete dispatch
+invalid ; Invalid opcode handler label
+        MOV r3, #-1 ; Error indicator 0xFFFFFFFF
+done B done ; Halt
+        END ; File end</pre>
+<div class="item" style="margin-top:10px"><b>Expected state &amp; output:</b> Opcode 1 executes handle_sub, resulting in R3 = 30 (0x0000001E). Opcode 5 branches to invalid setting R3 = 0xFFFFFFFF.</div>
+<div class="note"><b>Boundary / Failure case:</b> Negative opcodes or values &gt;= 3 without BHI unsigned check branch into undefined routines; off-by-one table indexing.</div>
+<div class="item" style="background:var(--panel);border-left:3px solid #17649a"><b>Browser model vs. Keil/ARM7 hardware:</b> Browser tracer models control flow and register updates; hardware pipelines fetch instructions 2 words ahead, requiring PC compensation when writing to R15 directly.</div>
+<p style="margin-top:10px"><b>Submission checkpoint:</b> Test opcodes 0, 1, 2, and 5 to verify correct branching and error trap.</p>
+<details style="margin-top:10px"><summary class="btn" style="cursor:pointer">Reveal Authored Solution</summary>
+<div style="margin-top:10px">
+<p><b>Authored Explanation:</b> Range validation with CMP and BHI prevents out-of-bounds execution; conditional branches route control to dedicated handler blocks.</p>
+<pre class="code" data-language="armasm" data-example-audit="reference" data-reference-only="true">        AREA Dispatch, CODE, READONLY ; Declare code area
+        ENTRY ; Entry point
+main ; Entry label
+        MOV r0, #0 ; Command opcode 0 (ADD)
+        MOV r1, #15 ; Input A = 15
+        MOV r2, #25 ; Input B = 25
+        CMP r0, #2 ; Range test against max valid opcode
+        BHI error_trap ; Branch if out of range
+        CMP r0, #0 ; Test for opcode 0
+        BEQ do_add ; Branch to addition handler
+        CMP r0, #1 ; Test for opcode 1
+        BEQ do_sub ; Branch to subtraction handler
+        AND r3, r1, r2 ; Opcode 2: bitwise AND
+        B exit ; Exit
+do_add ADD r3, r1, r2 ; r3 = 15 + 25 = 40
+        B exit ; Exit
+do_sub SUB r3, r1, r2 ; r3 = 15 - 25 = -10
+        B exit ; Exit
+error_trap ; Trap invalid opcode label
+        MOV r3, #-1 ; Set error return code
+exit B exit ; Halt
+        END ; Source end</pre>
+</div>
+</details>
+</div></details><details class="lesson lab-card" data-lab="eece340-lab-06" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+<summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
+<span><b>Lab 06:</b> Address Decoding &amp; Memory Interfacing Lab</span>
+<span class="pill" style="font-size:.74rem">python</span>
+</summary>
+<div class="body" style="padding-top:12px">
+<p class="muted"><b>Syllabus topic:</b> Address decoding, memory map partitioning, chip select logic, bus aliasing · <b>Weight:</b> Midterm (25%), Final Exam (25%)</p>
+<p><b>Objective:</b> Design and verify address decoding logic for a microprocessor memory system, partitioning 32-bit address space into Flash ROM, SRAM, and Memory-Mapped Peripherals while checking for aliasing.</p>
+<p><b>Problem Statement:</b> Model address decoding for a system with 64 KB ROM at 0x00000000-0x0000FFFF, 128 KB SRAM at 0x40000000-0x4001FFFF, and 4 KB MMIO at 0xE0000000-0xE0000FFF. Write a Python decoder model that verifies chip-select lines CS_ROM, CS_SRAM, CS_MMIO and flags unmapped access.</p>
+<h3>Starter code</h3>
+<pre class="code" data-language="python" data-example-audit="reference" data-reference-only="true"># Address decoding model for 32-bit microprocessor bus
+def decode_address(address):  # Function to decode address
+    cs_rom = (address &gt;= 0x00000000) and (address &lt;= 0x0000FFFF)  # 64 KB Flash ROM
+    cs_sram = (address &gt;= 0x40000000) and (address &lt;= 0x4001FFFF)  # 128 KB SRAM
+    cs_mmio = (address &gt;= 0xE0000000) and (address &lt;= 0xE0000FFF)  # 4 KB MMIO registers
+    if cs_rom:  # Check ROM range
+        return &quot;CS_ROM&quot;  # Return ROM chip select
+    elif cs_sram:  # Check SRAM range
+        return &quot;CS_SRAM&quot;  # Return SRAM chip select
+    elif cs_mmio:  # Check MMIO range
+        return &quot;CS_MMIO&quot;  # Return MMIO chip select
+    else:  # Unmapped space
+        return &quot;BUS_ERROR&quot;  # Return unmapped error
+# Test address range verification
+for test_addr in [0x00001000, 0x40005000, 0xE0000020, 0x20000000]:  # Test addresses
+    print(f&quot;{hex(test_addr)} -&gt; {decode_address(test_addr)}&quot;)  # Print decoded result</pre>
+<div class="item" style="margin-top:10px"><b>Expected state &amp; output:</b> 0x00001000 -&gt; CS_ROM; 0x40005000 -&gt; CS_SRAM; 0xE0000020 -&gt; CS_MMIO; 0x20000000 -&gt; BUS_ERROR.</div>
+<div class="note"><b>Boundary / Failure case:</b> Accessing 0x00010000 (just 1 byte past 64 KB ROM) must return BUS_ERROR, preventing memory overrun.</div>
+<div class="item" style="background:var(--panel);border-left:3px solid #17649a"><b>Browser model vs. Keil/ARM7 hardware:</b> In physical hardware, 74LS138 decoders or FPGA logic implement these Boolean equations; incomplete decoding causes address aliasing where one device mirrors across multiple address ranges.</div>
+<p style="margin-top:10px"><b>Submission checkpoint:</b> Verify that valid ranges assert exactly one chip select and unmapped addresses trigger BUS_ERROR.</p>
+<details style="margin-top:10px"><summary class="btn" style="cursor:pointer">Reveal Authored Solution</summary>
+<div style="margin-top:10px">
+<p><b>Authored Explanation:</b> The address decoder slices the top address bits to produce mutual exclusive chip select assertions and traps invalid accesses.</p>
+<pre class="code" data-language="python" data-example-audit="reference" data-reference-only="true"># Full address decoding verification
+def check_memory_space(addr):  # Function to inspect memory space
+    # Decode upper address bits [31:16]
+    upper = addr &gt;&gt; 16  # Extract upper 16 bits
+    if upper == 0x0000:  # ROM region 0x0000xxxx
+        return &quot;FLASH_ROM_SELECTED&quot;  # Flash ROM selected
+    elif 0x4000 &lt;= upper &lt;= 0x4001:  # SRAM region 0x4000xxxx-0x4001xxxx
+        return &quot;SRAM_SELECTED&quot;  # SRAM selected
+    elif upper == 0xE000:  # MMIO region 0xE000xxxx
+        return &quot;PERIPHERAL_SELECTED&quot;  # Peripheral selected
+    return &quot;ILLEGAL_ADDRESS_FAULT&quot;  # Unmapped access
+
+print(check_memory_space(0x40001234))  # Test SRAM address</pre>
+</div>
+</details>
+</div></details><details class="lesson lab-card" data-lab="eece340-lab-07" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+<summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
+<span><b>Lab 07:</b> Bus Transactions &amp; System Timing Lab</span>
+<span class="pill" style="font-size:.74rem">python</span>
+</summary>
+<div class="body" style="padding-top:12px">
+<p class="muted"><b>Syllabus topic:</b> System timing, bus transactions, setup/hold times, wait state calculations · <b>Weight:</b> Midterm (25%), Final Exam (25%)</p>
+<p><b>Objective:</b> Analyze bus read and write cycles, compute required wait states based on clock period and memory access time (tACC), and verify setup and hold timing margins.</p>
+<p><b>Problem Statement:</b> A 50 MHz ARM processor has a clock cycle period T_cyc = 20 ns. External memory has an access time t_ACC = 75 ns. Write a timing model to calculate required wait states N_wait = ceil((t_ACC - T_cyc) / T_cyc) and simulate the bus cycle phases (Address, Wait States, Data Latch).</p>
+<h3>Starter code</h3>
+<pre class="code" data-language="python" data-example-audit="reference" data-reference-only="true"># Bus timing and wait state calculator
+import math  # Math utility for ceiling function
+
+clock_freq_mhz = 50.0  # CPU clock frequency in MHz
+t_cyc_ns = 1000.0 / clock_freq_mhz  # Clock cycle period = 20.0 ns
+t_acc_ns = 75.0  # External memory access time = 75.0 ns
+
+# Compute wait states required beyond 1 base cycle
+wait_states = math.ceil((t_acc_ns - t_cyc_ns) / t_cyc_ns)  # ceil((75-20)/20) = 3
+total_cycles = 1 + wait_states + 1  # Address phase (1) + Wait (3) + Latch (1)
+total_time_ns = total_cycles * t_cyc_ns  # Total bus cycle duration
+
+print(f&quot;Clock period: {t_cyc_ns} ns&quot;)  # Output period
+print(f&quot;Wait states required: {wait_states}&quot;)  # Output wait states
+print(f&quot;Total bus cycle duration: {total_time_ns} ns&quot;)  # Output total duration</pre>
+<div class="item" style="margin-top:10px"><b>Expected state &amp; output:</b> Clock period = 20.0 ns; Wait states = 3; Total bus cycles = 5; Total duration = 100.0 ns (satisfies 75 ns t_ACC with 25 ns margin).</div>
+<div class="note"><b>Boundary / Failure case:</b> Configuring 0 wait states on a 75 ns memory causes setup time violation and data corruption on the read data bus.</div>
+<div class="item" style="background:var(--panel);border-left:3px solid #17649a"><b>Browser model vs. Keil/ARM7 hardware:</b> Physical boards require oscilloscope / logic analyzer verification of t_AS, t_ACC, and t_H; memory controllers insert hardware wait states by pulling the nWAIT / READY line low.</div>
+<p style="margin-top:10px"><b>Submission checkpoint:</b> Calculate wait states for a 100 MHz CPU with 45 ns memory and verify total transaction duration.</p>
+<details style="margin-top:10px"><summary class="btn" style="cursor:pointer">Reveal Authored Solution</summary>
+<div style="margin-top:10px">
+<p><b>Authored Explanation:</b> The processor extends the bus cycle by inserting wait states (TW) until the memory device&#39;s access time requirement is met before latching data.</p>
+<pre class="code" data-language="python" data-example-audit="reference" data-reference-only="true"># Bus transaction phase simulation
+def simulate_bus_read(clock_mhz, mem_access_ns):  # Calculate transaction phases
+    t_clk = 1000.0 / clock_mhz  # Clock cycle in ns
+    n_wait = max(0, int((mem_access_ns - t_clk + t_clk - 1) // t_clk))  # Integer ceil
+    phases = [&quot;T1: ADDRESS_DRIVE&quot;]  # Address drive phase
+    for i in range(n_wait):  # Insert required wait states
+        phases.append(f&quot;TW{i+1}: WAIT_STATE&quot;)  # Wait state insertion
+    phases.append(&quot;T2: DATA_LATCH&quot;)  # Data latch phase
+    return n_wait, (len(phases) * t_clk), phases  # Return wait count, duration, log
+
+wait_count, duration, log = simulate_bus_read(50, 75)  # Run simulation for 50MHz / 75ns
+print(f&quot;Wait count: {wait_count}, Duration: {duration} ns&quot;)  # Print timing results</pre>
+</div>
+</details>
+</div></details><details class="lesson lab-card" data-lab="eece340-lab-08" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+<summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
+<span><b>Lab 08:</b> SRAM &amp; DRAM Interface Lab</span>
+<span class="pill" style="font-size:.74rem">python</span>
+</summary>
+<div class="body" style="padding-top:12px">
+<p class="muted"><b>Syllabus topic:</b> Static RAM and dynamic RAM interfacing, RAS/CAS timing, refresh cycles · <b>Weight:</b> Midterm (25%), Final Exam (25%)</p>
+<p><b>Objective:</b> Understand SRAM (static latch) vs DRAM (capacitor storage) interfacing, row/column address multiplexing (RAS/CAS), and periodic refresh scheduling within 64 ms retention limits.</p>
+<p><b>Problem Statement:</b> Model a DRAM memory controller that decodes a 32-bit physical address into Bank, Row, and Column addresses, and schedules refresh operations every 7.81 microseconds across 8192 rows (64 ms total retention).</p>
+<h3>Starter code</h3>
+<pre class="code" data-language="python" data-example-audit="reference" data-reference-only="true"># DRAM row/column decoding and refresh timing model
+TOTAL_ROWS = 8192  # 8192 rows in DRAM array
+RETENTION_TIME_MS = 64.0  # Maximum retention time = 64 ms
+REFRESH_INTERVAL_US = (RETENTION_TIME_MS * 1000.0) / TOTAL_ROWS  # 7.8125 us
+
+def decode_dram_addr(phys_addr):  # Decode physical address to DRAM coordinates
+    col = phys_addr &amp; 0x3FF  # 10 bits column address (bits 9:0)
+    row = (phys_addr &gt;&gt; 10) &amp; 0x1FFF  # 13 bits row address (bits 22:10)
+    bank = (phys_addr &gt;&gt; 23) &amp; 0x3  # 2 bits bank address (bits 24:23)
+    return bank, row, col  # Return bank, row, and column
+
+bank, row, col = decode_dram_addr(0x00A12340)  # Test address
+print(f&quot;Bank: {bank}, Row: {row}, Col: {col}&quot;)  # Print decoded components
+print(f&quot;Refresh interval: {REFRESH_INTERVAL_US:.2f} us per row&quot;)  # Print refresh rate</pre>
+<div class="item" style="margin-top:10px"><b>Expected state &amp; output:</b> For address 0x00A12340: Bank = 1, Row = 2098, Col = 832; Refresh interval = 7.81 us per row.</div>
+<div class="note"><b>Boundary / Failure case:</b> Missing a refresh cycle due to continuous bus transactions causes capacitive discharge and bit corruption in dynamic cells.</div>
+<div class="item" style="background:var(--panel);border-left:3px solid #17649a"><b>Browser model vs. Keil/ARM7 hardware:</b> SRAM interfaces directly with static chip-select and write-enable lines; DRAM controllers require specialized auto-refresh counters, row precharge (tRP), and CAS latency (CL) state machines.</div>
+<p style="margin-top:10px"><b>Submission checkpoint:</b> Verify that 8192 rows refreshed at 7.8125 us intervals complete a full refresh cycle within 64 ms.</p>
+<details style="margin-top:10px"><summary class="btn" style="cursor:pointer">Reveal Authored Solution</summary>
+<div style="margin-top:10px">
+<p><b>Authored Explanation:</b> DRAM multiplexes addresses on shared pins using RAS# and CAS# strobes; open row page hits execute with low latency while page misses require precharge and activate cycles.</p>
+<pre class="code" data-language="python" data-example-audit="reference" data-reference-only="true"># DRAM memory controller state machine simulation
+def process_dram_request(is_page_hit):  # Calculate latency based on page status
+    if is_page_hit:  # Open row page hit
+        return 2  # CAS Latency only: 2 cycles
+    else:  # Row page miss
+        return 6  # Precharge (2) + Activate (2) + CAS Latency (2) = 6 cycles
+
+print(f&quot;Page hit latency: {process_dram_request(True)} cycles&quot;)  # Test page hit
+print(f&quot;Page miss latency: {process_dram_request(False)} cycles&quot;)  # Test page miss</pre>
+</div>
+</details>
+</div></details><details class="lesson lab-card" data-lab="eece340-lab-09" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+<summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
+<span><b>Lab 09:</b> Parallel, Serial &amp; Analog I/O Lab</span>
+<span class="pill" style="font-size:.74rem">armasm</span>
+</summary>
+<div class="body" style="padding-top:12px">
+<p class="muted"><b>Syllabus topic:</b> Parallel I/O, UART serial I/O, ADC/DAC analog I/O quantization · <b>Weight:</b> Lab Work (10%), Final Exam (25%)</p>
+<p><b>Objective:</b> Program GPIO parallel I/O ports, configure UART serial communication (transmitter holding register polling), and calculate ADC successive-approximation quantization.</p>
+<p><b>Problem Statement:</b> Write an ARM assembly polling routine for a UART peripheral (Base 0xE000C000): poll Line Status Register (LSR at offset 0x14) bit 5 (Transmitter Empty THRE), write character &#39;A&#39; (0x41) to Transmitter Holding Register (THR at offset 0x00).</p>
+<h3>Starter code</h3>
+<pre class="code" data-language="armasm" data-example-audit="reference" data-reference-only="true">UART_BASE EQU 0xE000C000 ; UART0 base address
+LSR_OFFSET EQU 0x14 ; Line status register offset
+THR_OFFSET EQU 0x00 ; Transmitter holding register offset
+THRE_BIT EQU 0x20 ; Bit 5: Transmitter Holding Register Empty mask
+
+        AREA UartLab, CODE, READONLY ; Declare code area
+        ENTRY ; Entry point
+start ; Start label
+        LDR r0, =UART_BASE ; Load UART peripheral base address
+poll_tx ; Polling loop label
+        LDR r1, [r0, #LSR_OFFSET] ; Read Line Status Register
+        TST r1, #THRE_BIT ; Test bit 5 (THRE)
+        BEQ poll_tx ; If zero, transmitter is busy, continue polling
+        MOV r2, #0x41 ; Load ASCII character &#39;A&#39;
+        STR r2, [r0, #THR_OFFSET] ; Write character to transmit holding register
+stop B stop ; Halt
+        END ; End of source</pre>
+<div class="item" style="margin-top:10px"><b>Expected state &amp; output:</b> Polling loop reads LSR until THRE bit 5 is high; writes ASCII &#39;A&#39; (0x41) into THR; transmit sequence completes.</div>
+<div class="note"><b>Boundary / Failure case:</b> Writing to THR before previous transmission completes causes FIFO overflow / character overwrite; ADC sampling rate exceeding maximum conversion bandwidth causes signal aliasing.</div>
+<div class="item" style="background:var(--panel);border-left:3px solid #17649a"><b>Browser model vs. Keil/ARM7 hardware:</b> Browser models register read/write polling; physical UART connects to MAX232 / FTDI level shifters with precise baud rate clock dividers.</div>
+<p style="margin-top:10px"><b>Submission checkpoint:</b> Verify that TST checks bit 5 and BEQ branches while busy until bit 5 becomes 1.</p>
+<details style="margin-top:10px"><summary class="btn" style="cursor:pointer">Reveal Authored Solution</summary>
+<div style="margin-top:10px">
+<p><b>Authored Explanation:</b> The polling driver checks the hardware status flag before each write, preventing data corruption and buffer overruns.</p>
+<pre class="code" data-language="armasm" data-example-audit="reference" data-reference-only="true">        AREA IoDriver, CODE, READONLY ; Code area
+        ENTRY ; Entry point
+main ; Entry label
+        MOV r0, #0x2000 ; Simulated UART base
+        MOV r1, #0x20 ; Set simulated THRE status ready bit
+        STR r1, [r0, #0x14] ; Write ready status to simulated LSR
+        LDR r2, [r0, #0x14] ; Read status
+        TST r2, #0x20 ; Test ready bit
+        MOVNE r3, #0x48 ; If ready, load ASCII &#39;H&#39; (0x48)
+        STRNE r3, [r0, #0x00] ; Transmit character
+halt B halt ; Loop forever
+        END ; End of assembly</pre>
+</div>
+</details>
+</div></details><details class="lesson lab-card" data-lab="eece340-lab-10" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+<summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
+<span><b>Lab 10:</b> Memory-Mapped Peripherals Lab</span>
+<span class="pill" style="font-size:.74rem">armasm</span>
+</summary>
+<div class="body" style="padding-top:12px">
+<p class="muted"><b>Syllabus topic:</b> Memory-mapped peripherals, control/status registers, bit masking with BIC/ORR/TST · <b>Weight:</b> Lab Work (10%), Lab Exam (15%)</p>
+<p><b>Objective:</b> Control hardware timer and GPIO peripherals through memory-mapped register offsets using bit manipulation (ORR to set bits, BIC to clear bits, TST to inspect bits) without corrupting reserved register fields.</p>
+<p><b>Problem Statement:</b> Configure an on-chip timer at base 0x40004000: enable timer and reset counter in Timer Control Register (TCR at offset 0x04), set Match Register 0 (MR0 at offset 0x18) to 10000, and configure Match Control Register (MCR at offset 0x14) to generate an interrupt and reset counter on match.</p>
+<h3>Starter code</h3>
+<pre class="code" data-language="armasm" data-example-audit="reference" data-reference-only="true">TIMER_BASE EQU 0x40004000 ; Timer 0 peripheral base address
+TCR_OFF EQU 0x04 ; Timer control register offset
+MCR_OFF EQU 0x14 ; Match control register offset
+MR0_OFF EQU 0x18 ; Match register 0 offset
+
+        AREA TimerLab, CODE, READONLY ; Declare code area
+        ENTRY ; Entry point
+start ; Main entry
+        LDR r0, =TIMER_BASE ; Load peripheral base address
+        MOV r1, #10000 ; Set match comparison count (10000 ticks)
+        STR r1, [r0, #MR0_OFF] ; Write match value into MR0
+        MOV r1, #0x03 ; Bits 0 and 1: Interrupt and Reset on MR0 match
+        STR r1, [r0, #MCR_OFF] ; Configure Match Control Register
+        MOV r1, #0x01 ; Bit 0: Timer Enable
+        STR r1, [r0, #TCR_OFF] ; Enable timer counter in TCR
+stop B stop ; Halt
+        END ; End of source</pre>
+<div class="item" style="margin-top:10px"><b>Expected state &amp; output:</b> MR0 at [0x40004018] = 10000; MCR at [0x40004014] = 0x03; TCR at [0x40004004] = 0x01.</div>
+<div class="note"><b>Boundary / Failure case:</b> Using STR to write an entire word over a shared control register without read-modify-write (ORR/BIC) inadvertently clears adjacent peripheral configuration bits.</div>
+<div class="item" style="background:var(--panel);border-left:3px solid #17649a"><b>Browser model vs. Keil/ARM7 hardware:</b> Peripheral registers are mapped into physical memory space; C/C++ drivers must declare pointers with the &#39;volatile&#39; keyword to prevent compiler dead-code elimination.</div>
+<p style="margin-top:10px"><b>Submission checkpoint:</b> Verify that MR0, MCR, and TCR are written with the correct configuration values.</p>
+<details style="margin-top:10px"><summary class="btn" style="cursor:pointer">Reveal Authored Solution</summary>
+<div style="margin-top:10px">
+<p><b>Authored Explanation:</b> Bitwise ORR sets specific configuration bits while BIC clears selected bits without modifying unrelated control fields.</p>
+<pre class="code" data-language="armasm" data-example-audit="reference" data-reference-only="true">        AREA PeriConfig, CODE, READONLY ; Declare code area
+        ENTRY ; Program entry
+main ; Entry label
+        MOV r0, #0x3000 ; Base peripheral address
+        MOV r1, #0x00 ; Initialize register value
+        ORR r1, r1, #0x01 ; Set Bit 0 (Enable)
+        ORR r1, r1, #0x02 ; Set Bit 1 (Reset Counter)
+        STR r1, [r0, #0x04] ; Write to control register
+        BIC r1, r1, #0x02 ; Clear Bit 1 (Release Reset)
+        STR r1, [r0, #0x04] ; Update control register
+trap B trap ; Spin loop
+        END ; End of assembly</pre>
+</div>
+</details>
+</div></details><details class="lesson lab-card" data-lab="eece340-lab-11" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+<summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
+<span><b>Lab 11:</b> Interrupts, Vector Table &amp; DMA Lab</span>
+<span class="pill" style="font-size:.74rem">armasm</span>
+</summary>
+<div class="body" style="padding-top:12px">
+<p class="muted"><b>Syllabus topic:</b> Hardware/software interrupts, interrupt controller, vector tables, DMA transfers · <b>Weight:</b> Lab Exam (15%), Final Exam (25%)</p>
+<p><b>Objective:</b> Configure ARM exception vector tables (0x00000000–0x0000001C), implement an IRQ Interrupt Service Routine with register preservation, return using SUBS pc, lr, #4, and model DMA block transfers.</p>
+<p><b>Problem Statement:</b> Write an ARM assembly IRQ Interrupt Service Routine: preserve corrupted registers on the IRQ stack, increment an interrupt counter in SRAM at 0x40000000, clear the peripheral interrupt source, and return atomically using SUBS pc, lr, #4.</p>
+<h3>Starter code</h3>
+<pre class="code" data-language="armasm" data-example-audit="reference" data-reference-only="true">        AREA IrqHandler, CODE, READONLY ; Declare code area
+        EXPORT IRQ_Handler ; Export ISR name
+IRQ_Handler ; ISR entry point
+        SUB lr, lr, #4 ; Adjust link register for pipeline offset
+        STMFD sp!, {r0-r3, lr} ; Save working registers and adjusted return address
+        MOV r0, #0x40000000 ; Load interrupt tick counter memory address
+        LDR r1, [r0] ; Read current tick count
+        ADD r1, r1, #1 ; Increment tick count
+        STR r1, [r0] ; Store updated tick count
+        LDMFD sp!, {r0-r3, pc}^ ; Restore registers and restore CPSR from SPSR (atomic return)
+        END ; End of source</pre>
+<div class="item" style="margin-top:10px"><b>Expected state &amp; output:</b> Interrupt counter at 0x40000000 incremented by 1; IRQ mode registers R0-R3 restored; PC restored to interrupted instruction; CPSR restored from SPSR.</div>
+<div class="note"><b>Boundary / Failure case:</b> Returning from IRQ with MOV pc, lr skips the interrupted instruction due to the 4-byte pipeline prefetch offset; nested interrupts require saving SPSR and LR_irq on stack before re-enabling interrupts.</div>
+<div class="item" style="background:var(--panel);border-left:3px solid #17649a"><b>Browser model vs. Keil/ARM7 hardware:</b> Browser models register preservation and return syntax; real hardware NVIC / VIC manages interrupt priority arbitration, hardware tail-chaining, and DMA cycle stealing.</div>
+<p style="margin-top:10px"><b>Submission checkpoint:</b> Verify that LDMFD with ^ restores CPSR from SPSR and returns to the exact interrupted instruction.</p>
+<details style="margin-top:10px"><summary class="btn" style="cursor:pointer">Reveal Authored Solution</summary>
+<div style="margin-top:10px">
+<p><b>Authored Explanation:</b> The ARM vector table maps 8 standard exception vectors at 4-byte intervals from 0x00000000 to 0x0000001C, branching to dedicated handlers.</p>
+<pre class="code" data-language="armasm" data-example-audit="reference" data-reference-only="true">        AREA VectorTable, CODE, READONLY ; Vector table area
+        ENTRY ; Entry point
+Vectors ; Vector table entry label
+        B Reset_Handler ; 0x00: Reset vector
+        B Undef_Handler ; 0x04: Undefined instruction
+        B SVC_Handler ; 0x08: Software interrupt
+        B Prefetch_Handler ; 0x0C: Prefetch abort
+        B Data_Handler ; 0x10: Data abort
+        NOP ; 0x14: Reserved vector
+        B IRQ_Handler ; 0x18: IRQ handler
+        B FIQ_Handler ; 0x1C: FIQ handler
+Reset_Handler ; Reset handler label
+Undef_Handler ; Undefined instruction handler label
+SVC_Handler ; Software interrupt handler label
+Prefetch_Handler ; Prefetch abort handler label
+Data_Handler ; Data abort handler label
+IRQ_Handler ; IRQ handler label
+FIQ_Handler ; FIQ handler label
+        B Reset_Handler ; Default loop
+        END ; End of vector table</pre>
+</div>
+</details>
+</div></details><details class="lesson lab-card" data-lab="eece340-lab-12" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+<summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
+<span><b>Lab 12:</b> Subroutine Calling, Stacks &amp; Reentrancy Lab</span>
+<span class="pill" style="font-size:.74rem">armasm</span>
+</summary>
+<div class="body" style="padding-top:12px">
+<p class="muted"><b>Syllabus topic:</b> Subroutines and stacks, STMFD/LDMFD, nested calling frames, reentrancy · <b>Weight:</b> Midterm (25%), Lab Exam (15%)</p>
+<p><b>Objective:</b> Implement subroutines using the ARM Full Descending (FD) stack, manage nested activation frames with STMFD / LDMFD, preserve link register LR and callee-saved registers (R4–R11), and implement recursion.</p>
+<p><b>Problem Statement:</b> Implement a recursive factorial function factorial(n) in ARM assembly: input n in R0, base case n &lt;= 1 returns 1, recursive step computes n * factorial(n - 1), managing the stack frame with STMFD sp!, {r4, lr} and LDMFD sp!, {r4, pc}.</p>
+<h3>Starter code</h3>
+<pre class="code" data-language="armasm" data-example-audit="reference" data-reference-only="true">        AREA FactLab, CODE, READONLY ; Declare code area
+        ENTRY ; Program entry
+start ; Entry point
+        MOV r0, #4 ; Compute factorial of 4 (4! = 24)
+        BL factorial ; Call factorial subroutine
+stop B stop ; Halt when finished
+
+factorial ; Subroutine entry
+        PUSH {r4, lr} ; Save callee register r4 and return address lr
+        MOV r4, r0 ; Save current argument n in r4
+        CMP r0, #1 ; Test for base case n &lt;= 1
+        BGT recurse ; If n &gt; 1, branch to recursive call
+        MOV r0, #1 ; Base case result = 1
+        POP {r4, pc} ; Restore r4 and return to caller
+recurse ; Recursive step label
+        SUB r0, r0, #1 ; Set argument = n - 1
+        BL factorial ; Recursive call: factorial(n - 1)
+        MUL r0, r4, r0 ; Compute n * factorial(n - 1)
+        POP {r4, pc} ; Restore r4 and return to caller
+        END ; End of source</pre>
+<div class="item" style="margin-top:10px"><b>Expected state &amp; output:</b> For n = 4: R0 = 24 (0x00000018); SP balanced and restored to starting stack pointer.</div>
+<div class="note"><b>Boundary / Failure case:</b> Input n = 0 must return 1; deep recursion without base case termination causes stack overflow into data memory.</div>
+<div class="item" style="background:var(--panel);border-left:3px solid #17649a"><b>Browser model vs. Keil/ARM7 hardware:</b> Browser tracer models recursive stack frames; real hardware triggers Data Abort or HardFault when stack exceeds physical RAM boundaries.</div>
+<p style="margin-top:10px"><b>Submission checkpoint:</b> Trace factorial(4) step by step, confirming stack growth and unwinding to final result 24.</p>
+<details style="margin-top:10px"><summary class="btn" style="cursor:pointer">Reveal Authored Solution</summary>
+<div style="margin-top:10px">
+<p><b>Authored Explanation:</b> STMFD saves context on stack allocation and LDMFD restores state and pops directly into PC to return from nested calls.</p>
+<pre class="code" data-language="armasm" data-example-audit="reference" data-reference-only="true">        AREA FactRecursive, CODE, READONLY ; Define code area
+        EXPORT factorial_func ; Export symbol
+factorial_func ; Subroutine entry label
+        STMFD sp!, {r4, lr} ; Push r4 and link register onto stack
+        MOV r4, r0 ; Preserve n in r4
+        CMP r0, #1 ; Check base case
+        BLE base_case ; Branch if n &lt;= 1
+        SUB r0, r0, #1 ; Prepare argument n - 1
+        BL factorial_func ; Compute factorial(n - 1)
+        MUL r0, r4, r0 ; Multiply: n * factorial(n - 1)
+        LDMFD sp!, {r4, pc} ; Pop r4 and return
+base_case ; Base case label
+        MOV r0, #1 ; Base case returns 1
+        LDMFD sp!, {r4, pc} ; Pop r4 and return
+        END ; Source end</pre>
+</div>
+</details>
+</div></details><details class="lesson lab-card" data-lab="eece340-lab-13" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+<summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
+<span><b>Lab 13:</b> Linked Lists &amp; Search Algorithms Lab</span>
+<span class="pill" style="font-size:.74rem">armasm</span>
+</summary>
+<div class="body" style="padding-top:12px">
+<p class="muted"><b>Syllabus topic:</b> Linked lists, dynamic pointer traversal in assembly, linear search, node manipulation · <b>Weight:</b> Lab Exam (15%), Final Exam (25%)</p>
+<p><b>Objective:</b> Implement dynamic linked list traversal in ARM assembly, where each node consists of a 32-bit integer value and a 32-bit pointer to the next node ([val, next_ptr]), performing linear search and NULL pointer checking.</p>
+<p><b>Problem Statement:</b> Write an ARM assembly function search_list that traverses a linked list starting at head address in R0, searches for target value in R1, returns the address of the matching node in R0 if found, or returns 0 (NULL) if not found.</p>
+<h3>Starter code</h3>
+<pre class="code" data-language="armasm" data-example-audit="reference" data-reference-only="true">        AREA LinkedListLab, CODE, READONLY ; Declare code area
+        ENTRY ; Program entry
+start ; Entry label
+        MOV r0, #0x1000 ; Head node pointer address
+        MOV r1, #42 ; Target value to search for
+search_list ; Traversal loop
+        CMP r0, #0 ; Check if current node pointer is NULL (0x0)
+        BEQ not_found ; If NULL, end of list reached without match
+        LDR r2, [r0] ; Load node-&gt;value from offset 0
+        CMP r2, r1 ; Compare node-&gt;value with target
+        BEQ found ; If equal, match found; return node address in r0
+        LDR r0, [r0, #4] ; Advance to next node: r0 = node-&gt;next
+        B search_list ; Repeat loop for next node
+not_found ; Target not found label
+        MOV r0, #0 ; Return NULL (0)
+found ; Target found label
+stop B stop ; Halt execution
+        END ; End of source</pre>
+<div class="item" style="margin-top:10px"><b>Expected state &amp; output:</b> If node with value 42 exists at 0x1008, R0 returns 0x1008; if target is absent, R0 returns 0x00000000.</div>
+<div class="note"><b>Boundary / Failure case:</b> Empty list (head = NULL / 0x0 on entry) immediately branches to not_found without dereferencing memory; circular list without loop limit causes infinite traversal.</div>
+<div class="item" style="background:var(--panel);border-left:3px solid #17649a"><b>Browser model vs. Keil/ARM7 hardware:</b> Browser tracer models pointer addresses in word memory; hardware MMU triggers Data Abort if software dereferences an unmapped NULL pointer at 0x00000000 without exception handlers.</div>
+<p style="margin-top:10px"><b>Submission checkpoint:</b> Verify that searching an empty list returns 0 and searching a 3-node list returns the correct node address.</p>
+<details style="margin-top:10px"><summary class="btn" style="cursor:pointer">Reveal Authored Solution</summary>
+<div style="margin-top:10px">
+<p><b>Authored Explanation:</b> The traversal routine checks for NULL before every dereference, reads node fields using offset addressing, and updates the pointer iteratively.</p>
+<pre class="code" data-language="armasm" data-example-audit="reference" data-reference-only="true">        AREA ListSearch, CODE, READONLY ; Code section
+        ENTRY ; Entry point
+main ; Entry label
+        MOV r0, #0x1000 ; Node 1 at 0x1000
+        MOV r1, #77 ; Target value = 77
+loop_traverse ; Node traversal loop label
+        CMP r0, #0 ; Is pointer NULL?
+        BEQ exit_null ; If NULL, return 0
+        LDR r2, [r0, #0] ; r2 = node-&gt;data
+        CMP r2, r1 ; Does node-&gt;data == target?
+        BEQ exit_found ; If match, return pointer in r0
+        LDR r0, [r0, #4] ; r0 = node-&gt;next pointer
+        B loop_traverse ; Loop
+exit_null ; Exit null label
+        MOV r0, #0 ; Return NULL
+exit_found ; Exit found label
+halt B halt ; Halt
+        END ; End of assembly</pre>
+</div>
+</details>
+</div></details><details class="lesson lab-card" data-lab="eece340-lab-14" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+<summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
+<span><b>Lab 14:</b> Mixed C++ &amp; Assembly Integration Lab</span>
+<span class="pill" style="font-size:.74rem">cpp</span>
+</summary>
+<div class="body" style="padding-top:12px">
+<p class="muted"><b>Syllabus topic:</b> Mixed C++/assembly programming, struct pointer passing, DSP filtering routines · <b>Weight:</b> Lab Work (10%), Final Exam (25%)</p>
+<p><b>Objective:</b> Bridge high-level C++ application code with optimized ARM assembly subroutines using extern &#39;C&#39; linkage, pass pointers to C++ structs/arrays, and compute digital signal processing operations.</p>
+<p><b>Problem Statement:</b> Create a mixed C++/Assembly digital signal processing module: C++ defines an array of integer samples and threshold, calls an external assembly function count_peaks(const int* samples, int length, int threshold), which counts how many samples exceed the threshold.</p>
+<h3>Starter code</h3>
+<pre class="code" data-language="cpp" data-example-audit="reference" data-reference-only="true">// C++ application harness calling ARM assembly routine
+#include &lt;iostream&gt; // Standard I/O stream
+#include &lt;vector&gt; // Standard vector container
+
+extern &quot;C&quot; { // Declare C linkage for assembly subroutine
+    int count_peaks(const int* samples, int length, int threshold); // Assembly signature
+} // End extern C block
+
+int main() { // Main entry point
+    std::vector&lt;int&gt; data = {10, 45, 20, 80, 15, 95, 30}; // Test sensor samples
+    int threshold = 40; // Peak detection threshold
+    int peaks = count_peaks(data.data(), data.size(), threshold); // Call assembly routine
+    std::cout &lt;&lt; &quot;Detected peaks above &quot; &lt;&lt; threshold &lt;&lt; &quot;: &quot; &lt;&lt; peaks &lt;&lt; std::endl; // Output
+    return 0; // Return success
+} // End of main function</pre>
+<div class="item" style="margin-top:10px"><b>Expected state &amp; output:</b> For samples {10, 45, 20, 80, 15, 95, 30} with threshold 40, returns peak count = 3 (values 45, 80, 95).</div>
+<div class="note"><b>Boundary / Failure case:</b> Passing length &lt;= 0 or null sample pointer must be checked on entry to prevent memory fault.</div>
+<div class="item" style="background:var(--panel);border-left:3px solid #17649a"><b>Browser model vs. Keil/ARM7 hardware:</b> Browser compiles C++ logic and simulates assembly calling; physical Keil/GCC toolchain links .cpp and .s object files into a single ELF/AXF binary.</div>
+<p style="margin-top:10px"><b>Submission checkpoint:</b> Verify that the assembly function receives pointer in R0, length in R1, threshold in R2, and returns count in R0.</p>
+<details style="margin-top:10px"><summary class="btn" style="cursor:pointer">Reveal Authored Solution</summary>
+<div style="margin-top:10px">
+<p><b>Authored Explanation:</b> extern &#39;C&#39; disables C++ name mangling, allowing the linker to match the assembly symbol name directly.</p>
+<pre class="code" data-language="cpp" data-example-audit="reference" data-reference-only="true">// Mixed C++ testbench
+#include &lt;iostream&gt; // Header for printing
+
+extern &quot;C&quot; int count_peaks(const int* samples, int length, int threshold) { // Extern C linkage
+    if (!samples || length &lt;= 0) return 0; // Guard against null or empty buffers
+    int count = 0; // Initialize counter
+    for (int i = 0; i &lt; length; ++i) { // Iterate through samples
+        if (samples[i] &gt; threshold) { // Check peak threshold
+            count++; // Increment peak count
+        } // End if block
+    } // End sample loop
+    return count; // Return total peaks
+} // End count_peaks function
+
+int main() { // Main entry point
+    int test_samples[5] = {12, 55, 33, 90, 10}; // Test buffer
+    std::cout &lt;&lt; &quot;Peaks: &quot; &lt;&lt; count_peaks(test_samples, 5, 50) &lt;&lt; std::endl; // Expected: 2
+    return 0; // Exit program
+} // End of main</pre>
+</div>
+</details>
+</div></details><details class="lesson lab-card" data-lab="eece340-lab-15" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+<summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
+<span><b>Lab 15:</b> ARM7/Keil &amp; University IoT/Cloud Guidance Lab</span>
+<span class="pill" style="font-size:.74rem">armasm</span>
+</summary>
+<div class="body" style="padding-top:12px">
+<p class="muted"><b>Syllabus topic:</b> ARM7/Keil board-oriented lab work, startup.s, scatter files, ARM University IoT/cloud telemetry · <b>Weight:</b> Homework (10%), Lab Work (10%)</p>
+<p><b>Objective:</b> Master the standard university embedded workflow: setting up a Keil uVision project for ARM7TDMI (LPC2148), configuring startup.s vector tables and stack spaces, memory scatter-loading files (.sct), and formatting UART telemetry for IoT cloud ingestion.</p>
+<p><b>Problem Statement:</b> Configure startup.s stack spaces for SVC and IRQ modes, set up Flash (0x00000000) and On-chip SRAM (0x40000000) scatter loading, and write a UART telemetry formatting routine that outputs a JSON payload for IoT cloud reporting.</p>
+<h3>Starter code</h3>
+<pre class="code" data-language="armasm" data-example-audit="reference" data-reference-only="true">; Keil uVision ARM7TDMI startup.s stack initialization
+SVC_STACK_SIZE EQU 0x00000100 ; 256 bytes SVC supervisor mode stack
+IRQ_STACK_SIZE EQU 0x00000100 ; 256 bytes IRQ interrupt mode stack
+RAM_TOP EQU 0x40004000 ; Top of internal SRAM (16 KB)
+
+        AREA STACKS, NOINIT, READWRITE, ALIGN=3 ; Stack allocation area
+SVC_Stack SPACE SVC_STACK_SIZE ; Allocate SVC stack space
+IRQ_Stack SPACE IRQ_STACK_SIZE ; Allocate IRQ stack space
+
+        AREA InitCode, CODE, READONLY ; Startup initialization code
+        ENTRY ; Reset entry point
+Reset_Start ; Reset entry label
+        LDR sp, =SVC_Stack + SVC_STACK_SIZE ; Initialize Supervisor Stack Pointer
+        MSR CPSR_c, #0xD2 ; Switch to IRQ mode with interrupts disabled
+        LDR sp, =IRQ_Stack + IRQ_STACK_SIZE ; Initialize IRQ Stack Pointer
+        MSR CPSR_c, #0xD3 ; Return to Supervisor mode
+stop B stop ; Spin until main application
+        END ; End of startup source</pre>
+<div class="item" style="margin-top:10px"><b>Expected state &amp; output:</b> SP_svc points to 0x40000100; SP_irq points to 0x40000200; CPU returns to Supervisor mode ready to branch to __main.</div>
+<div class="note"><b>Boundary / Failure case:</b> Stack underallocation causing stack collision between IRQ and SVC modes under heavy interrupt loads.</div>
+<div class="item" style="background:var(--panel);border-left:3px solid #17649a"><b>Browser model vs. Keil/ARM7 hardware:</b> Keil uVision provides JTAG ULINK in-circuit emulation, flash programming algorithms, and scatter loading; browser provides structural validation.</div>
+<p style="margin-top:10px"><b>Submission checkpoint:</b> Verify that MSR mode switches correctly set separate SP registers for SVC (0x13) and IRQ (0x12) modes.</p>
+<details style="margin-top:10px"><summary class="btn" style="cursor:pointer">Reveal Authored Solution</summary>
+<div style="margin-top:10px">
+<p><b>Authored Explanation:</b> Startup code initializes mode-banked stack pointers and memory controllers before jumping to user C/C++ code.</p>
+<pre class="code" data-language="armasm" data-example-audit="reference" data-reference-only="true">; Complete Keil ARM7 stack setup
+        AREA Startup, CODE, READONLY ; Startup code
+        ENTRY ; Entry point
+Reset ; Reset startup label
+        MOV r0, #0x40001000 ; Set base stack address in SRAM
+        MOV sp, r0 ; Initialize SP
+        MOV r1, #0 ; Clear status
+        BX lr ; Branch to main
+        END ; End of file</pre>
+</div>
+</details>
+</div></details><details class="lesson lab-card" data-lab="eece340-lab-16" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+<summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
+<span><b>Lab 16:</b> Timed Final Lab Exam Rehearsal</span>
+<span class="pill" style="font-size:.74rem">armasm</span>
+</summary>
+<div class="body" style="padding-top:12px">
+<p class="muted"><b>Syllabus topic:</b> Final lab-exam preparation, full 90-minute multi-part comprehensive practical exam · <b>Weight:</b> Lab Exam (15% Weight)</p>
+<p><b>Objective:</b> Rehearse a timed, comprehensive 90-minute university microprocessor lab exam problem combining address decoding, peripheral I/O control, interrupt service routine design, stack-safe subroutine calling, and error diagnostics.</p>
+<p><b>Problem Statement:</b> Complete the 3-part final lab exam problem: (Part A) Calculate the memory address range for a 32 KB SRAM starting at 0x40000000; (Part B) Write an ARM assembly ISR that reads sensor data at MMIO 0xE0004000, checks against limit 100, and sets alarm bit 0 at GPIO 0xE0028000; (Part C) Wrap the DSP routine in a stack-safe subroutine returning status in R0.</p>
+<h3>Starter code</h3>
+<pre class="code" data-language="armasm" data-example-audit="reference" data-reference-only="true">; Part B: ARM assembly final lab exam ISR
+SENSOR_ADDR EQU 0xE0004000 ; Memory-mapped sensor address
+GPIO_ADDR EQU 0xE0028000 ; Memory-mapped GPIO output address
+ALARM_LIMIT EQU 100 ; Sensor alarm threshold
+
+        AREA FinalExamLab, CODE, READONLY ; Declare code area
+        EXPORT Exam_ISR ; Export ISR symbol
+Exam_ISR ; ISR entry point
+        SUB lr, lr, #4 ; Adjust link register for IRQ pipeline
+        STMFD sp!, {r0-r3, lr} ; Save working registers and return address
+        LDR r0, =SENSOR_ADDR ; Load sensor base address
+        LDR r1, [r0] ; Read current sensor reading
+        CMP r1, #ALARM_LIMIT ; Compare sensor reading with threshold (100)
+        BLE clear_alarm ; If sensor &lt;= 100, clear alarm
+        LDR r2, =GPIO_ADDR ; Load GPIO base address
+        MOV r3, #0x01 ; Alarm bit mask (bit 0 = HIGH)
+        STR r3, [r2] ; Turn ON alarm LED on GPIO
+        B isr_done ; Finish ISR
+clear_alarm ; Clear alarm label
+        LDR r2, =GPIO_ADDR ; Load GPIO base address
+        MOV r3, #0x00 ; Clear alarm bit
+        STR r3, [r2] ; Turn OFF alarm LED
+isr_done ; ISR completion label
+        LDMFD sp!, {r0-r3, pc}^ ; Restore registers and return atomically
+        END ; End of exam assembly source</pre>
+<div class="item" style="margin-top:10px"><b>Expected state &amp; output:</b> Sensor reading &gt; 100 turns on GPIO bit 0; Sensor reading &lt;= 100 turns off GPIO bit 0; Part A address range: 0x40000000 to 0x40007FFF (32 KB = 32768 bytes).</div>
+<div class="note"><b>Boundary / Failure case:</b> Sensor reading exactly equal to 100 must not trigger alarm (BLE branch); stack unbalance in ISR will cause CPU crash on return.</div>
+<div class="item" style="background:var(--panel);border-left:3px solid #17649a"><b>Browser model vs. Keil/ARM7 hardware:</b> Full lab exam on real hardware is evaluated under Keil uVision with target board logic analyzer and oscilloscope verification.</div>
+<p style="margin-top:10px"><b>Submission checkpoint:</b> Verify all 3 parts: Part A address math, Part B ISR alarm control, and Part C stack-safe calling.</p>
+<details style="margin-top:10px"><summary class="btn" style="cursor:pointer">Reveal Authored Solution</summary>
+<div style="margin-top:10px">
+<p><b>Authored Explanation:</b> The comprehensive exam solution integrates conditional testing, memory-mapped I/O access, and atomic stack preservation under strict timing requirements.</p>
+<pre class="code" data-language="armasm" data-example-audit="reference" data-reference-only="true">; Final lab exam complete solution
+        AREA ExamComplete, CODE, READONLY ; Code area
+        ENTRY ; Entry point
+Start_Exam ; Exam entry label
+        MOV r0, #105 ; Test sensor value = 105 (&gt;100)
+        MOV r1, #0x5000 ; Simulated GPIO address
+        CMP r0, #100 ; Test threshold
+        MOVGT r2, #1 ; Alarm = ON if &gt; 100
+        MOVLE r2, #0 ; Alarm = OFF if &lt;= 100
+        STR r2, [r1] ; Store to GPIO
+stop_exam B stop_exam ; Halt
+        END ; End of solution</pre>
+</div>
+</details>
+</div></details>
+</div>
+</section>
+
+<div class="grid"><section class="card"><h2>Exercises</h2><div class="item"><b>CPU or complete computer?</b><p>Classify components as part of the processor or the wider computer system, then justify each choice.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Technology milestone chain</b><p>Order vacuum tubes, transistors, integrated circuits, and commercial microprocessors and explain what each step enabled.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Microprocessor vs microcontroller</b><p>Choose a microprocessor, microcontroller, or SoC-style design for several device scenarios and justify the trade-off.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Memory hierarchy ordering</b><p>Place registers, L1/L2/L3 cache, DRAM, and storage in a speed/capacity hierarchy.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Architecture or microarchitecture?</b><p>Classify instruction opcode, cache size, pipeline depth, register name, and out-of-order execution.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Execution-time calculation</b><p>Given instruction count, IPC, and clock frequency, calculate cycles and execution time.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Performance trade-off</b><p>Compare processors where one has higher clock frequency and another higher IPC.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Trace the ARM load-store model</b><p>Identify which actions require loads/stores and which can be register data processing.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>ARM size terminology</b><p>Convert byte, halfword, word, and doubleword quantities between bits and bytes.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Register-role map</b><p>State the conventional roles of R13, R14, R15, CPSR, and SPSR.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Mode transition reasoning</b><p>Given an IRQ or SVC event, identify the target mode and preserved state.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Endian byte layout</b><p>Lay out a 32-bit value under little-endian and big-endian ordering.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div></section><section class="card"><h2>Knowledge checks</h2><div class="item"><b>A microprocessor is best described as:</b><ol><li>A CPU implemented on a single chip</li><li>Only a cache controller</li><li>A complete motherboard</li><li>A storage device</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>Which task is central to a CPU?</b><ol><li>Fetch, decode, and execute instructions</li><li>Provide long-term disk storage</li><li>Act only as a network cable</li><li>Replace all peripherals</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>Which technology came before the integrated circuit?</b><ol><li>The transistor</li><li>The GPU</li><li>Flash memory</li><li>The SSD</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>Why did higher integration matter?</b><ol><li>More computing functions could fit into smaller, cheaper systems</li><li>It removed the need for instructions</li><li>It made all memory equally fast</li><li>It eliminated I/O</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>A microcontroller commonly integrates:</b><ol><li>CPU, memory, and peripherals</li><li>Only a CPU core</li><li>Only DRAM</li><li>Only a graphics display</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>A system-on-chip generally means:</b><ol><li>Many major system functions are integrated on one chip</li><li>The OS is stored in a text file</li><li>All programs use one instruction</li><li>The motherboard has no circuits</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>Which is usually closest to the execution units?</b><ol><li>Registers</li><li>DRAM</li><li>SSD</li><li>Network storage</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>Why are multiple cache levels used?</b><ol><li>To bridge the CPU/main-memory speed-capacity gap</li><li>To replace the instruction set</li><li>To create source code</li><li>To disable locality</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>Architecture primarily defines:</b><ol><li>The programmer-visible contract</li><li>Exact transistor placement</li><li>Package color</li><li>Operating-system wallpaper</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>Microarchitecture primarily describes:</b><ol><li>How a processor implements the architectural contract</li><li>Source-language grammar</li><li>Filesystem name</li><li>Network address</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>IPC means:</b><ol><li>Instructions per cycle</li><li>Interrupts per cache</li><li>Inputs per core</li><li>Instructions per compiler</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>A higher clock rate alone guarantees higher performance:</b><ol><li>False; IPC and workload behavior also matter</li><li>True for every workload</li><li>True only without cache</li><li>True only for interpreted languages</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>ARM is commonly described as a:</b><ol><li>Load-store RISC architecture</li><li>Stack-only CISC architecture</li><li>Database architecture</li><li>Network protocol</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>In a load-store architecture, arithmetic normally operates on:</b><ol><li>Registers</li><li>Disk sectors directly</li><li>Files directly</li><li>Network packets only</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>In this 32-bit ARM terminology, a word is:</b><ol><li>32 bits</li><li>8 bits</li><li>16 bits</li><li>64 bits</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>Thumb/Thumb-2 primarily provides:</b><ol><li>Compact instruction encodings including 16-bit forms</li><li>A new cache level</li><li>A filesystem</li><li>A replacement for registers</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>R13 is conventionally the:</b><ol><li>Stack pointer</li><li>Program counter</li><li>Link register</li><li>Status register</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>R14 is conventionally the:</b><ol><li>Link register</li><li>Stack pointer</li><li>Program counter</li><li>Data-abort vector</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>R15 is the:</b><ol><li>Program counter</li><li>Stack pointer</li><li>Link register</li><li>Saved program status register</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>Why do exception modes use banked state?</b><ol><li>To give handlers protected SP/LR/status context</li><li>To zero all registers</li><li>To disable memory</li><li>To remove return addresses</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>Which mode is entered for a normal-priority hardware interrupt in classic ARM?</b><ol><li>IRQ</li><li>User</li><li>System only</li><li>Undefined</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>CPSR contains:</b><ol><li>Condition flags and processor control/status fields</li><li>Only user data</li><li>Only cache lines</li><li>Only file descriptors</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>Little-endian memory places which byte at the lowest address?</b><ol><li>The least-significant byte</li><li>The most-significant byte</li><li>No byte</li><li>Always zero</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>In classic ARM CPSR, setting the I mask bit means:</b><ol><li>IRQ is masked/disabled</li><li>IRQ is forced immediately</li><li>FIQ is enabled</li><li>Thumb is selected</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div></section></div>
+<section class="card" style="margin-top:14px"><h2>Projects</h2><div class="item"><b>Microprocessor evolution study</b><p>Build a concise technical timeline linking technology milestones to architectural capability changes.</p></div><div class="item"><b>Memory hierarchy explorer</b><p>Build a Python model comparing relative access costs across registers, caches, and main memory.</p></div><div class="item"><b>CPU performance comparison lab</b><p>Build a Python calculator for instruction count, IPC/CPI, clock rate, cycles, and execution time.</p></div><div class="item"><b>ARM processor architecture study &amp; performance model</b><p>Create a structured architecture study combining the ARM programmer model, modes, CPSR, endianness, memory hierarchy, and a performance calculator.</p></div></section></main>
+<button class="theme" type="button" data-theme-toggle aria-label="Toggle light or dark theme"></button>
+<script type="application/json" id="course-page-meta">{"id":"microprocessors-arm","lessonIds":["mpr-01","mpr-02","mpr-03","mpr-04","mpr-05","mpr-06","mpr-07","mpr-08","mpr-09","mpr-10"]}</script>
+<script defer src="../assets/line-by-line-explanations.js?v=20260919-v577&learning=20261003-v584"></script>
+<script>(function(){'use strict';var KEY='cs-ai-mastery-theme',PROGRESS='courses_progress_v1',meta=JSON.parse(document.getElementById('course-page-meta').textContent),courseId=meta.id,lessonIds=meta.lessonIds;function read(){try{return JSON.parse(localStorage.getItem(PROGRESS)||'{}')||{}}catch(e){return{}}}function save(v){try{localStorage.setItem(PROGRESS,JSON.stringify(v))}catch(e){}}function update(){var p=read(),m=((p[courseId]||{}).lessons||{}),done=0;lessonIds.forEach(function(id){if(m[id])done++});var pct=lessonIds.length?Math.round(done/lessonIds.length*100):0;var bar=document.querySelector('[data-progress-bar]'),status=document.querySelector('[data-progress-status]');if(bar)bar.style.width=pct+'%';if(status)status.textContent=done+' of '+lessonIds.length+' lessons complete';document.querySelectorAll('[data-lesson]').forEach(function(el){var cb=el.querySelector('[data-complete]');if(cb)cb.checked=!!m[el.getAttribute('data-lesson')]})}document.addEventListener('change',function(e){if(!e.target.matches('[data-complete]'))return;var lesson=e.target.closest('[data-lesson]');if(!lesson)return;var p=read();p[courseId]=p[courseId]||{};p[courseId].lessons=p[courseId].lessons||{};p[courseId].lessons[lesson.getAttribute('data-lesson')]=!!e.target.checked;save(p);update()});function theme(){var t=document.documentElement.dataset.theme==='dark'?'dark':'light',b=document.querySelector('[data-theme-toggle]');if(b)b.textContent=t==='dark'?'☀️ Light':'🌙 Dark'}document.querySelector('[data-theme-toggle]').addEventListener('click',function(){var next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem(KEY,next);localStorage.setItem('theme',next)}catch(e){}theme()});update();theme()})();</script>
+<script defer src="../assets/runnable-lesson-example-fixes.js?v=20260822-v567"></script>
+<script defer src="../assets/lesson-example-runner.js?v=20260822-v567&learning=20261003-v584"></script>
+<script defer src="../assets/lesson-example-runner-guard.js?v=20260822-v567"></script>
+
+
+
+<script defer src="../assets/evergreen-learning-engine.js?v=20260822-v567"></script>
+<script defer src="../assets/evergreen-review-navigation.js?v=20260822-v567"></script>
+<script defer src="../assets/smart-evergreen-review.js?v=20260822-v567"></script>
+<script defer src="../assets/assessment-practice.js?v=20260822-v567&learning=20261003-v584"></script>
+<script defer src="../assets/github-integration.js?v=20260822-v567"></script>
+<script defer src="../assets/assessment-layout-fix.js?v=20260822-v567"></script>
+<script defer src="../assets/universal-reveal-solutions.js?v=20260822-v567"></script>
+<script defer src="../assets/reveal-solution-explanations.js?v=20260822-v567"></script>
+<script defer src="../assets/assessment-expanded-descriptions.js?v=20260822-v567"></script>
+<script defer src="../assets/exercise-direct-publish.js?v=20260822-v567"></script>
+<script defer src="../assets/universal-run-output.js?v=20260822-v567&learning=20261003-v584"></script>
+<script defer src="../assets/final-exercise-toolbar.js?v=20260822-v567&learning=20261003-v584"></script>
+<script defer src="../assets/course-project-workspace.js?v=20260822-v571"></script>
+<script defer src="../assets/example-learning-tools.js?v=20260822-v567"></script>
+<script defer src="../assets/practice-publish-completer.js?v=20260823-v573&learning=20261003-v584"></script>
+<script src="../assets/runtime-inline/courses-microprocessors-arm-001.js?v=20260822-v567"></script>
+
+
+
+
+
+
+<script id="csai-assessment-data" type="application/json">{"courseId":"microprocessors-arm","courseTitle":"Microprocessors & ARM Architecture","defaultLanguage":"text","exercises":[{"id":"mpr-ex-01","title":"CPU or complete computer?","prompt":"Classify components as part of the processor or the wider computer system, then justify each choice.","lessonId":"mpr-01","type":"scenario-analysis"},{"id":"mpr-ex-02","title":"Technology milestone chain","prompt":"Order vacuum tubes, transistors, integrated circuits, and commercial microprocessors and explain what each step enabled.","lessonId":"mpr-02","type":"scenario-analysis"},{"id":"mpr-ex-03","title":"Microprocessor vs microcontroller","prompt":"Choose a microprocessor, microcontroller, or SoC-style design for several device scenarios and justify the trade-off.","lessonId":"mpr-03","type":"scenario-analysis"},{"id":"mpr-ex-04","title":"Memory hierarchy ordering","prompt":"Place registers, L1/L2/L3 cache, DRAM, and storage in a speed/capacity hierarchy.","lessonId":"mpr-04","type":"scenario-analysis"},{"id":"mpr-ex-05","title":"Architecture or microarchitecture?","prompt":"Classify instruction opcode, cache size, pipeline depth, register name, and out-of-order execution.","lessonId":"mpr-05","type":"scenario-analysis"},{"id":"mpr-ex-06","title":"Execution-time calculation","prompt":"Given instruction count, IPC, and clock frequency, calculate cycles and execution time.","lessonId":"mpr-06","type":"scenario-analysis"},{"id":"mpr-ex-07","title":"Performance trade-off","prompt":"Compare processors where one has higher clock frequency and another higher IPC.","lessonId":"mpr-06","type":"scenario-analysis"},{"id":"mpr-ex-08","title":"Trace the ARM load-store model","prompt":"Identify which actions require loads/stores and which can be register data processing.","lessonId":"mpr-07","type":"scenario-analysis"},{"id":"mpr-ex-09","title":"ARM size terminology","prompt":"Convert byte, halfword, word, and doubleword quantities between bits and bytes.","lessonId":"mpr-08","type":"scenario-analysis"},{"id":"mpr-ex-10","title":"Register-role map","prompt":"State the conventional roles of R13, R14, R15, CPSR, and SPSR.","lessonId":"mpr-09","type":"scenario-analysis"},{"id":"mpr-ex-11","title":"Mode transition reasoning","prompt":"Given an IRQ or SVC event, identify the target mode and preserved state.","lessonId":"mpr-10","type":"scenario-analysis"},{"id":"mpr-ex-12","title":"Endian byte layout","prompt":"Lay out a 32-bit value under little-endian and big-endian ordering.","lessonId":"mpr-10","type":"scenario-analysis"}],"quiz":[{"q":"A microprocessor is best described as:","options":["A CPU implemented on a single chip","Only a cache controller","A complete motherboard","A storage device"],"correct":0,"type":"mcq"},{"q":"Which task is central to a CPU?","options":["Fetch, decode, and execute instructions","Provide long-term disk storage","Act only as a network cable","Replace all peripherals"],"correct":0,"type":"mcq"},{"q":"Which technology came before the integrated circuit?","options":["The transistor","The GPU","Flash memory","The SSD"],"correct":0,"type":"mcq"},{"q":"Why did higher integration matter?","options":["More computing functions could fit into smaller, cheaper systems","It removed the need for instructions","It made all memory equally fast","It eliminated I/O"],"correct":0,"type":"mcq"},{"q":"A microcontroller commonly integrates:","options":["CPU, memory, and peripherals","Only a CPU core","Only DRAM","Only a graphics display"],"correct":0,"type":"mcq"},{"q":"A system-on-chip generally means:","options":["Many major system functions are integrated on one chip","The OS is stored in a text file","All programs use one instruction","The motherboard has no circuits"],"correct":0,"type":"mcq"},{"q":"Which is usually closest to the execution units?","options":["Registers","DRAM","SSD","Network storage"],"correct":0,"type":"mcq"},{"q":"Why are multiple cache levels used?","options":["To bridge the CPU/main-memory speed-capacity gap","To replace the instruction set","To create source code","To disable locality"],"correct":0,"type":"mcq"},{"q":"Architecture primarily defines:","options":["The programmer-visible contract","Exact transistor placement","Package color","Operating-system wallpaper"],"correct":0,"type":"mcq"},{"q":"Microarchitecture primarily describes:","options":["How a processor implements the architectural contract","Source-language grammar","Filesystem name","Network address"],"correct":0,"type":"mcq"},{"q":"IPC means:","options":["Instructions per cycle","Interrupts per cache","Inputs per core","Instructions per compiler"],"correct":0,"type":"mcq"},{"q":"A higher clock rate alone guarantees higher performance:","options":["False; IPC and workload behavior also matter","True for every workload","True only without cache","True only for interpreted languages"],"correct":0,"type":"mcq"},{"q":"ARM is commonly described as a:","options":["Load-store RISC architecture","Stack-only CISC architecture","Database architecture","Network protocol"],"correct":0,"type":"mcq"},{"q":"In a load-store architecture, arithmetic normally operates on:","options":["Registers","Disk sectors directly","Files directly","Network packets only"],"correct":0,"type":"mcq"},{"q":"In this 32-bit ARM terminology, a word is:","options":["32 bits","8 bits","16 bits","64 bits"],"correct":0,"type":"mcq"},{"q":"Thumb/Thumb-2 primarily provides:","options":["Compact instruction encodings including 16-bit forms","A new cache level","A filesystem","A replacement for registers"],"correct":0,"type":"mcq"},{"q":"R13 is conventionally the:","options":["Stack pointer","Program counter","Link register","Status register"],"correct":0,"type":"mcq"},{"q":"R14 is conventionally the:","options":["Link register","Stack pointer","Program counter","Data-abort vector"],"correct":0,"type":"mcq"},{"q":"R15 is the:","options":["Program counter","Stack pointer","Link register","Saved program status register"],"correct":0,"type":"mcq"},{"q":"Why do exception modes use banked state?","options":["To give handlers protected SP/LR/status context","To zero all registers","To disable memory","To remove return addresses"],"correct":0,"type":"mcq"},{"q":"Which mode is entered for a normal-priority hardware interrupt in classic ARM?","options":["IRQ","User","System only","Undefined"],"correct":0,"type":"mcq"},{"q":"CPSR contains:","options":["Condition flags and processor control/status fields","Only user data","Only cache lines","Only file descriptors"],"correct":0,"type":"mcq"},{"q":"Little-endian memory places which byte at the lowest address?","options":["The least-significant byte","The most-significant byte","No byte","Always zero"],"correct":0,"type":"mcq"},{"q":"In classic ARM CPSR, setting the I mask bit means:","options":["IRQ is masked/disabled","IRQ is forced immediately","FIQ is enabled","Thumb is selected"],"correct":0,"type":"mcq"}],"structured":{}}</script>
+
+
+
+
+
+
+
+
+
+<script id="csai-project-data" type="application/json">{"courseId":"microprocessors-arm","courseTitle":"Microprocessors & ARM Architecture","defaultLanguage":"text","projects":[{"id":"mpr-p1","title":"Microprocessor evolution study","description":"Build a concise technical timeline linking technology milestones to architectural capability changes.","requirements":["At least five milestones","Separate technology from architectural consequence","Comparison table","Tie conclusions to the supplied lecture topics"],"starter":"","language":"text"},{"id":"mpr-p2","title":"Memory hierarchy explorer","description":"Build a Python model comparing relative access costs across registers, caches, and main memory.","requirements":["Configurable hierarchy values","At least three scenarios","Clear computed output","Written interpretation"],"starter":"","language":"python"},{"id":"mpr-p3","title":"CPU performance comparison lab","description":"Build a Python calculator for instruction count, IPC/CPI, clock rate, cycles, and execution time.","requirements":["Multiple processor cases","Compute cycles and execution time","Compare clock-vs-IPC trade-offs","Validation tests"],"starter":"","language":"python"},{"id":"mpr-capstone","title":"ARM processor architecture study & performance model","description":"Create a structured architecture study combining the ARM programmer model, modes, CPSR, endianness, memory hierarchy, and a performance calculator.","requirements":["Programmer-model diagram or table","Mode/CPSR reference","Endian worked example","Performance model with at least three cases","Memory-hierarchy analysis","Technical README explaining assumptions"],"starter":"","language":"python"}]}</script>
+
+
+
+
+<!-- csai-production-augmentation -->
+<script src="../assets/adaptive-practice-layer.js?v=20260822-v567&learning=20261003-v584" defer></script>
+<script src="../assets/project-readme-layer.js?v=20260822-v567" defer></script>
+<!-- /csai-production-augmentation -->
+<script src="/assets/oa-assessment-fallback.js?v=20260811-1" defer></script>
+<script src="/assets/oa-assessment-upgrade.js?v=20260811-1" defer></script>
+
+<script src="/assets/python-only-ui.js?v=20260811-2" defer></script>
+
+<script defer src="../assets/study-examples.js?v=20260824-v574&learning=20261003-v584"></script>
+
+<script defer src="../assets/brilliant-tutor-v1.js?v=20260822-v567"></script>
+<script defer src="../assets/lesson-recall.js?v=20261003-v578"></script>
+</body></html>

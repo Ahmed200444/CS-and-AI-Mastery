@@ -36,7 +36,7 @@
       ],
       "explanation": "MATLAB is a numerical-computing environment and programming language for manipulating, analyzing, and visualizing data. Commands and expressions can be entered at the >> prompt in the Command Window.",
       "examples": [
-        "r = 8/10\nu = 0:0.1:10;\nz = 5*sin(u);"
+        "r = 8/10; % Compute scalar ratio\nu = 0:0.1:10; % Generate sample vector from 0 to 10\nz = 5*sin(u); % Scale sine waveform by 5"
       ],
       "commonMistakes": [
         "Assuming every command must be saved in a script before it can be tested."
@@ -69,7 +69,7 @@
       ],
       "explanation": "Square brackets create vectors. Spaces or commas separate elements in a row, semicolons create a new row, and start:step:end creates regularly spaced values.",
       "examples": [
-        "r = [2 4 10];\ny = [2 4 10]';\nt = 5:0.1:30;\nv = 5*r;\nw = r + v;\nu = [r w];"
+        "r = [2 4 10]; % Define row vector\ny = [2 4 10]'; % Transpose row into column vector\nt = 5:0.1:30; % Define time range with 0.1 step\nv = 5*r; % Scalar multiply row vector\nw = r + v; % Vector addition\nu = [r w]; % Horizontal concatenation"
       ],
       "commonMistakes": [
         "Confusing row separators with element separators."
@@ -102,7 +102,7 @@
       ],
       "explanation": "Matrices use semicolons between rows. Ordinary * performs matrix multiplication, so the inner dimensions must be compatible.",
       "examples": [
-        "A = [6 -2; 10 3; 4 7];\nB = [9 8; -5 12];\nC = A*B"
+        "A = [6 -2; 10 3; 4 7]; % Define 3x2 matrix\nB = [9 8; -5 12]; % Define 2x2 matrix\nC = A*B; % Matrix multiplication (3x2 * 2x2 = 3x2)"
       ],
       "commonMistakes": [
         "Using * when element-by-element multiplication is intended."
@@ -135,7 +135,7 @@
       ],
       "explanation": "Dotted operators apply multiplication, division, or powers element by element. They let one expression operate across an entire vector.",
       "examples": [
-        "a = 1:5;\nb = 3:7;\nc1 = a .* b;\nc2 = a ./ b;\nc3 = a .^ b;\nx = 0:0.01:1;\ny = exp(-x).*sin(x)./sqrt(x.^2 + 1);"
+        "a = 1:5; % Vector from 1 to 5\nb = 3:7; % Vector from 3 to 7\nc1 = a .* b; % Element-wise multiplication\nc2 = a ./ b; % Element-wise division\nc3 = a .^ b; % Element-wise exponentiation\nx = 0:0.01:1; % Define x domain\ny = exp(-x).*sin(x)./sqrt(x.^2 + 1); % Vectorized expression"
       ],
       "commonMistakes": [
         "Leaving out the dot when the intended operation is element by element."
@@ -167,7 +167,7 @@
       ],
       "explanation": "A script file stores a sequence of MATLAB commands for reuse. The lecture shows running a saved script by typing its filename without the .m extension.",
       "examples": [
-        "% prod_abc.m\nA = [1 4; 2 5];\nB = [3 6; 1 2];\nC = A*B"
+        "% prod_abc.m script file\nA = [1 4; 2 5]; % Define matrix A\nB = [3 6; 1 2]; % Define matrix B\nC = A*B; % Compute product C"
       ],
       "commonMistakes": [
         "Treating a script as if it had function-local inputs and outputs."
@@ -201,7 +201,7 @@
       ],
       "explanation": "Function files package commands for repeated use. The lecture syntax is function [outputs] = function_name(inputs). Function variables are local, and the function name should match the .m filename.",
       "examples": [
-        "function y = f2(x)\ny = 1 - x.*exp(-x);\nend"
+        "function y = f2(x) % Function definition with input x\ny = 1 - x.*exp(-x); % Local calculation\nend % End of function"
       ],
       "commonMistakes": [
         "Saving the function under a filename that does not match the function name."
@@ -236,7 +236,7 @@
       ],
       "explanation": "plot(x,y) creates an XY graph. xlabel, ylabel, and title describe it; multiple curves can be shown together and legend identifies them.",
       "examples": [
-        "x = 0:0.01:2;\ny = sinh(x);\nz = tanh(x);\nplot(x,y,x,z,'--');\nxlabel('x');\nylabel('Hyperbolic sine and tangent');\nlegend('sinh(x)','tanh(x)');"
+        "x = 0:0.01:2; % Time domain\ny = sinh(x); % Hyperbolic sine\nz = tanh(x); % Hyperbolic tangent\nplot(x,y,x,z,'--'); % Multi-curve plot\nxlabel('x'); % X-axis label\nylabel('Hyperbolic sine and tangent'); % Y-axis label\nlegend('sinh(x)','tanh(x)'); % Curve legends"
       ],
       "commonMistakes": [
         "Showing multiple curves without labels or a legend."
@@ -277,7 +277,7 @@
       ],
       "explanation": "MATLAB conditionals choose statements from logical expressions. The lecture covers relational operators, logical NOT/AND/OR/xor, and if/elseif/else for piecewise behavior.",
       "examples": [
-        "if x >= 5\n    y = log(x);\nelseif x >= 0\n    y = sqrt(x);\nelse\n    y = exp(x) - 1;\nend"
+        "if x >= 5 % Check upper threshold\n    y = log(x); % Natural log for high values\nelseif x >= 0 % Check positive threshold\n    y = sqrt(x); % Square root for non-negative values\nelse % Negative values\n    y = exp(x) - 1; % Exponential for negative values\nend % End if structure"
       ],
       "commonMistakes": [
         "Using = for equality testing instead of ==."
@@ -310,7 +310,7 @@
       ],
       "explanation": "The lecture gives for loop_variable = m:s:n. The step s may be negative and defaults to one when omitted. It also contrasts explicit loops with implied/vectorized array operations.",
       "examples": [
-        "x = 0:5:100;\ny = cos(x);\nfor k = 1:21\n    xv = (k-1)*5;\n    y2(k) = cos(xv);\nend"
+        "x = 0:5:100; % Degree angles\ny = cos(x); % Compute cosine vector\nfor k = 1:21 % Loop through 21 entries\n    xv = (k-1)*5; % Current angle\n    y2(k) = cos(xv); % Store element\nend % End for loop"
       ],
       "commonMistakes": [
         "Forgetting MATLAB indexing starts at 1 in the explicit-loop example."
@@ -344,7 +344,7 @@
       ],
       "explanation": "while is used when repetition stops after a condition changes rather than after a known number of passes. Its controlling value must be initialized and changed. switch provides a readable alternative for discrete cases.",
       "examples": [
-        "x = 5;\nwhile x < 25\n    disp(x)\n    x = 2*x - 1;\nend\n\nswitch angle\n    case 45\n        disp('Northeast')\n    otherwise\n        disp('Direction Unknown')\nend"
+        "x = 5; % Initial condition\nwhile x < 25 % Loop while under limit\n    disp(x); % Output current value\n    x = 2*x - 1; % Update step\nend % End while loop\n\nswitch angle % Switch on angle variable\n    case 45 % Case 45 degrees\n        disp('Northeast'); % Display direction\n    otherwise % Default case\n        disp('Direction Unknown'); % Unknown direction\nend % End switch"
       ],
       "commonMistakes": [
         "Writing a while loop whose controlling value never changes."

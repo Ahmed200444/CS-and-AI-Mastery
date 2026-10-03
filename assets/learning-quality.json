@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "coursePages": 62,
-  "evergreenPages": 62,
-  "studyExamplePages": 62,
-  "lessons": 800,
+  "coursePages": 65,
+  "evergreenPages": 65,
+  "studyExamplePages": 65,
+  "lessons": 848,
   "expandedLessons": 0,
-  "sourceExamples": 895,
-  "studyExamplesPlannedMinimum": 4000,
-  "studyExamplesPlannedMaximum": 6400,
+  "sourceExamples": 999,
+  "studyExamplesPlannedMinimum": 4240,
+  "studyExamplesPlannedMaximum": 6784,
   "promise": "Every generated lesson loads the current Study Examples system, which provides a distinct example for every key concept plus integration and edge-case practice.",
   "courses": [
     {
@@ -53,6 +53,15 @@
       "sourceExamples": 10,
       "studyExamplesPlannedMinimum": 50,
       "studyExamplesPlannedMaximum": 80,
+      "evergreenLayer": true
+    },
+    {
+      "id": "arm-assembly",
+      "lessons": 12,
+      "expandedLessons": 0,
+      "sourceExamples": 12,
+      "studyExamplesPlannedMinimum": 60,
+      "studyExamplesPlannedMaximum": 96,
       "evergreenLayer": true
     },
     {
@@ -239,7 +248,7 @@
       "id": "dsa",
       "lessons": 20,
       "expandedLessons": 0,
-      "sourceExamples": 67,
+      "sourceExamples": 107,
       "studyExamplesPlannedMinimum": 100,
       "studyExamplesPlannedMaximum": 160,
       "evergreenLayer": true
@@ -359,6 +368,24 @@
       "sourceExamples": 9,
       "studyExamplesPlannedMinimum": 45,
       "studyExamplesPlannedMaximum": 72,
+      "evergreenLayer": true
+    },
+    {
+      "id": "matlab-engineering",
+      "lessons": 10,
+      "expandedLessons": 0,
+      "sourceExamples": 10,
+      "studyExamplesPlannedMinimum": 50,
+      "studyExamplesPlannedMaximum": 80,
+      "evergreenLayer": true
+    },
+    {
+      "id": "microprocessors-arm",
+      "lessons": 26,
+      "expandedLessons": 0,
+      "sourceExamples": 42,
+      "studyExamplesPlannedMinimum": 130,
+      "studyExamplesPlannedMaximum": 208,
       "evergreenLayer": true
     },
     {

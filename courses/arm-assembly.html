@@ -1,0 +1,271 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ARM Assembly Programming — CS & AI Mastery</title><script>(function(){try{var t=localStorage.getItem('cs-ai-mastery-theme')||localStorage.getItem('theme')||'light';document.documentElement.dataset.theme=t==='dark'?'dark':'light'}catch(e){document.documentElement.dataset.theme='light'}})();</script><style>
+:root{color-scheme:light;--bg:#f4f7fb;--panel:#fff;--text:#172231;--muted:#5d6c7c;--border:#d8e1ea;--pill:#e8f1f8;--pilltext:#174b72;--accent:#17649a;--code:#101827;--note:#fff7e7}
+html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#edf3f8;--muted:#c6d1da;--border:#344352;--pill:#223446;--pilltext:#b9dcf5;--accent:#4da3df;--code:#0b111b;--note:#2b2417}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:1100px;margin:auto;padding:18px 20px 110px}.top{position:sticky;top:0;z-index:4;display:flex;justify-content:space-between;gap:10px;padding:10px 0;background:var(--bg)}.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid #b8c7d6;border-radius:9px;padding:9px 13px;background:var(--panel);color:var(--text);font:inherit;font-weight:800;cursor:pointer}.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.hero,.card,.lesson{background:var(--panel);border:1px solid var(--border);border-radius:15px;color:var(--text)}.hero{padding:22px;margin:8px 0 16px}.kicker{font-size:.74rem;letter-spacing:.1em;font-weight:900;color:var(--accent)}.hero h1{margin:5px 0 8px;font-size:clamp(2rem,4vw,3.2rem);line-height:1.08}.muted{color:var(--muted)}.meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.pill{padding:4px 8px;border-radius:999px;background:var(--pill);color:var(--pilltext);font-size:.78rem;font-weight:800}.progress{height:10px;border-radius:999px;background:var(--border);overflow:hidden;margin:14px 0 5px}.progress span{display:block;height:100%;background:#16805b}.lessons{display:grid;gap:11px}.lesson{overflow:hidden}.lesson summary{display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;font-weight:850}.num{display:grid;place-items:center;min-width:34px;height:28px;border-radius:8px;background:var(--pill);color:var(--pilltext)}.title{flex:1}.check{display:flex;gap:6px;align-items:center;font-size:.82rem;font-weight:700}.body{padding:0 16px 18px}.body h3{margin:17px 0 7px;font-size:1rem}.body p,.body li{line-height:1.68}.code{white-space:pre-wrap;overflow:auto;padding:13px;border-radius:10px;background:var(--code);color:#f4f7fb;font:500 .86rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}.note{margin-top:12px;padding:12px;border-left:4px solid #d28b23;border-radius:8px;background:var(--note)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}.card{padding:17px}.card h2{margin:0 0 10px}.item{padding:12px;margin:9px 0;border-radius:10px;background:var(--bg);border:1px solid var(--border)}.answer{width:100%;min-height:90px;margin-top:8px;padding:10px;border:1px solid #aebdca;border-radius:8px;background:transparent;color:inherit;font:inherit}.theme{position:fixed;right:22px;bottom:22px;z-index:20;border:1px solid #b8c7d6;border-radius:999px;padding:10px 16px;background:var(--panel);color:var(--text);font:800 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.16);cursor:pointer}.empty{padding:17px;border:1px dashed var(--border);border-radius:10px}.hero-icon{margin-right:.25em}@media(max-width:720px){.wrap{padding:10px 10px 100px}.grid{grid-template-columns:1fr}.top .btn{flex:1}.lesson summary{flex-wrap:wrap;align-items:flex-start}.check{width:100%;padding-left:44px}.theme{right:14px;bottom:14px;padding:10px 14px}}
+</style>
+
+
+
+<script defer src="../assets/universal-editable-code.js?v=20260919-v577&learning=20261003-v584"></script>
+<script defer src="../assets/runner-performance-guard.js?v=20260822-v567"></script>
+<script defer src="../assets/calm-study-flow.js?v=20260822-v567"></script>
+<script defer src="../assets/progressive-lesson-layout.js?v=20260822-v567"></script>
+<script defer src="../assets/python-inline-terminal.js?v=20260822-v567"></script>
+<script defer src="../assets/vscode-diagnostics.js?v=20260822-v567"></script>
+<script defer src="../assets/progress-resume.js?v=20260822-v567"></script>
+<script defer src="../assets/try-it-yourself-v568.js?v=20260822-v568"></script>
+<script defer src="../assets/conceptual-examples-v574.js?v=20260824-v574&learning=20261003-v584"></script>
+<script defer src="../assets/program-questions-v574.js?v=20260824-v574&learning=20261003-v584"></script>
+<script defer src="../assets/exam-style-problem-statements-v565.js?v=20260822-v567"></script>
+<script defer src="../assets/practice-guidance.js?v=20260823-v573"></script>
+<script defer src="../assets/purpose-first-prompts.js?v=20260822-v567"></script>
+
+<link rel="stylesheet" href="../assets/final-quality-layer.css?v=20260822-v567">
+<script src="../assets/smart-code-editor.js?v=20260822-v567" defer></script>
+<script src="../assets/portfolio-publish-controls.js?v=20260822-v567&learning=20261003-v584" defer></script>
+
+<!-- csai-unified-design:start -->
+<link rel="stylesheet" href="../assets/unified-learning-design.css?v=20260822-v567">
+<link rel="stylesheet" href="../assets/product-redesign-v2.css?v=20260822-v567">
+<link rel="stylesheet" href="../assets/adaptive-v4-live.css?v=20260822-v567">
+<link rel="stylesheet" href="../assets/hero-polish.css?v=20260822-v567">
+<script>document.documentElement.classList.add('csai-unified-design')</script>
+<script src="../assets/unified-learning-design.js?v=20260822-v567" defer></script>
+<script src="../assets/product-redesign-v2.js?v=20260822-v567&learning=20261003-v584" defer></script>
+<script src="../assets/adaptive-v4-live.js?v=20260822-v567&learning=20261003-v584" defer></script>
+<script src="../assets/hero-polish.js?v=20260822-v567" defer></script>
+<!-- csai-unified-design:end -->
+<link rel="stylesheet" href="/assets/oa-assessment-fallback.css?v=20260811-1">
+<link rel="stylesheet" href="/assets/oa-assessment-upgrade.css?v=20260811-1">
+</head><body>
+<main class="wrap"><div class="top"><a class="btn" href="/#courses">← All courses</a><a class="btn primary" href="/#hub">Home</a></div>
+<section class="hero"><div class="kicker">COURSE</div><h1><span class="hero-icon">⚙️</span>ARM Assembly Programming</h1><p class="muted">ARM assembly syntax, data processing, barrel shifts, flags, condition codes, branches, memory addressing, stacks, functions, and exceptions.</p><div class="meta"><span class="pill">12 lessons</span><span class="pill">12 exercises</span><span class="pill">24 checkpoints</span><span class="pill">4 projects</span></div><div class="progress"><span data-progress-bar style="width:0%"></span></div><div class="muted" data-progress-status>0 of 12 lessons complete</div></section>
+<section class="card" style="margin-bottom:14px" aria-label="Lecture order"><h2>Follow your lecture order</h2><ol><li><a href="microprocessors-arm.html">Introduction</a></li><li><a href="microprocessors-arm.html">ARM Architecture</a></li><li>Instructions — Part 1</li><li>Instructions — Part 2</li><li>Functions</li><li>Exceptions</li></ol><p class="muted">Lessons show their source slide range. Repeated topics are grouped at their first substantial treatment.</p></section>
+<section class="lessons"><details class="lesson" data-lesson="arm-01" open>
+<summary><span class="num">01</span><span class="title">ARM assembly structure, syntax &amp; directives</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
+<div class="body">
+<p class="muted" data-lecture-order="3"><b>Instructions — Part 1</b> · slides 7–25<br><small>03.Lecture_ARM_Instructions_part1 (1)(1).pdf</small></p>
+<h3>What you will learn</h3><ul><li>Read destination/source operand order</li><li>Use common assembler directives</li><li>Distinguish directives from CPU instructions</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>ARM assembly source combines processor instructions with assembler directives. Most data-processing instructions place the destination first, followed by source operands. AREA, ENTRY, RN, EQU, ALIGN, SPACE, and END help the assembler organize code/data or define names; they are not operations executed by the CPU.</p></section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">AREA</span><span class="pill">ENTRY</span><span class="pill">END</span><span class="pill">RN</span><span class="pill">EQU</span><span class="pill">ALIGN</span><span class="pill">register operands</span></div>
+<h3>Example</h3><pre class="code" data-language="armasm" data-example-audit="candidate">        AREA Prog1, CODE, READONLY
+        ENTRY
+counter RN 0
+limit   EQU 5
+        MOV counter, #0
+stop    B stop
+        END</pre>
+<div class="note"><b>Common mistake:</b> Treating assembler directives such as AREA or EQU as instructions executed by the ARM core.</div>
+</div></details><details class="lesson" data-lesson="arm-02" >
+<summary><span class="num">02</span><span class="title">Registers, immediates, MOV &amp; MVN</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
+<div class="body">
+<p class="muted" data-lecture-order="3"><b>Instructions — Part 1</b> · slides 9–15<br><small>03.Lecture_ARM_Instructions_part1 (1)(1).pdf</small></p>
+<h3>What you will learn</h3><ul><li>Move values between registers</li><li>Load simple immediate values</li><li>Explain MOV versus MVN</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Data-processing instructions work primarily on registers. MOV copies an operand into a destination register, while MVN writes the bitwise complement. Immediate operands use # in the lecture syntax. Remember the destination-first pattern when tracing instructions.</p></section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">register</span><span class="pill">immediate</span><span class="pill">MOV</span><span class="pill">MVN</span><span class="pill">destination</span><span class="pill">source</span></div>
+<h3>Example</h3><pre class="code" data-language="armasm" data-example-audit="candidate">        MOV r0, #17
+        MOV r1, r0
+        MVN r2, r1</pre>
+<div class="note"><b>Common mistake:</b> Reading MOV r0, r1 as copying r0 into r1.</div>
+</div></details><details class="lesson" data-lesson="arm-09" >
+<summary><span class="num">03</span><span class="title">LDR/STR &amp; ARM addressing modes</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
+<div class="body">
+<p class="muted" data-lecture-order="3"><b>Instructions — Part 1</b> · slides 26–43<br><small>03.Lecture_ARM_Instructions_part1 (1)(1).pdf</small></p>
+<h3>What you will learn</h3><ul><li>Load and store words/bytes/halfwords</li><li>Calculate effective addresses</li><li>Distinguish pre-indexed and post-indexed write-back</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>ARM is a load-store architecture, so memory values move into registers before most data processing. LDR/STR transfer words, with byte and halfword variants. Addressing modes combine a base register with an offset; pre-indexing forms the address before access, while post-indexing uses the base first and updates it afterward.</p></section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">LDR</span><span class="pill">STR</span><span class="pill">LDRB</span><span class="pill">STRB</span><span class="pill">LDRH</span><span class="pill">STRH</span><span class="pill">pre-index</span><span class="pill">post-index</span></div>
+<h3>Example</h3><pre class="code" data-language="armasm" data-example-audit="candidate">        MOV r2, #0x1000
+        MOV r0, #17
+        STR r0, [r2]
+        MOV r0, #23
+        STR r0, [r2, #4]
+        LDR r1, [r2]
+        LDR r3, [r2, #4]
+        STR r3, [r2, #8]
+        LDR r4, [r2], #4</pre>
+<div class="note"><b>Common mistake:</b> Confusing the address in the base register with the data loaded from memory.</div>
+</div></details><details class="lesson" data-lesson="arm-05" >
+<summary><span class="num">04</span><span class="title">Barrel shifter: LSL, LSR, ASR &amp; ROR</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
+<div class="body">
+<p class="muted" data-lecture-order="3"><b>Instructions — Part 1</b> · slides 44–48<br><small>03.Lecture_ARM_Instructions_part1 (1)(1).pdf</small></p>
+<h3>What you will learn</h3><ul><li>Trace logical and arithmetic shifts</li><li>Explain rotate-right</li><li>Combine a shift with a data-processing instruction</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>ARM can shift the second operand as part of many data-processing instructions. LSL shifts left, LSR shifts right with zero fill, ASR preserves the sign bit for signed values, and ROR rotates bits around. Combining ALU work with a shift is a characteristic ARM feature.</p></section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">LSL</span><span class="pill">LSR</span><span class="pill">ASR</span><span class="pill">ROR</span><span class="pill">barrel shifter</span><span class="pill">Operand2</span></div>
+<h3>Example</h3><pre class="code" data-language="armasm" data-example-audit="candidate">        MOV r0, #7
+        MOV r1, r0, LSL #1
+        MOV r2, r1, LSR #2
+        ADD r3, r0, r0, LSL #4</pre>
+<div class="note"><b>Common mistake:</b> Assuming LSR and ASR are identical for values whose top bit is 1.</div>
+</div></details><details class="lesson" data-lesson="arm-06" >
+<summary><span class="num">05</span><span class="title">CPSR flags &amp; the S suffix</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
+<div class="body">
+<p class="muted" data-lecture-order="4"><b>Instructions — Part 2</b> · slides 2–6<br><small>03.Lecture_ARM_Instructions_part2 (2)(1).pdf</small></p>
+<h3>What you will learn</h3><ul><li>Explain N, Z, C, and V</li><li>Use the S suffix to update flags</li><li>Separate signed overflow from unsigned carry</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>N reflects the result sign bit, Z indicates zero, C records carry/no-borrow information and shifted-out bits, and V reports signed arithmetic overflow. Many data-processing instructions update flags only when the S suffix is requested.</p></section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">N flag</span><span class="pill">Z flag</span><span class="pill">C flag</span><span class="pill">V flag</span><span class="pill">CPSR</span><span class="pill">S suffix</span></div>
+<h3>Example</h3><pre class="code" data-language="armasm" data-example-audit="candidate">        MOV  r0, #5
+        SUBS r1, r0, #5
+        MOVS r2, #-1</pre>
+<div class="note"><b>Common mistake:</b> Treating C and V as the same condition.</div>
+</div></details><details class="lesson" data-lesson="arm-07" >
+<summary><span class="num">06</span><span class="title">CMP, CMN, TST, TEQ &amp; conditional execution</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
+<div class="body">
+<p class="muted" data-lecture-order="4"><b>Instructions — Part 2</b> · slides 7–10<br><small>03.Lecture_ARM_Instructions_part2 (2)(1).pdf</small></p>
+<h3>What you will learn</h3><ul><li>Use comparison instructions to set flags</li><li>Choose a condition code from flag results</li><li>Explain conditional instruction execution</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>CMP behaves like subtraction for flag setting, CMN like addition, TST like bitwise AND, and TEQ like XOR. They update flags without keeping a normal destination result. Conditional suffixes such as EQ or NE make an instruction execute only when its flag condition is satisfied.</p></section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">CMP</span><span class="pill">CMN</span><span class="pill">TST</span><span class="pill">TEQ</span><span class="pill">EQ</span><span class="pill">NE</span><span class="pill">LT</span><span class="pill">GT</span></div>
+<h3>Example</h3><pre class="code" data-language="armasm" data-example-audit="candidate">        MOV r0, #2
+        CMP r0, #2
+        MOVEQ r1, #1
+        MOVNE r1, #0
+        TST r0, #2</pre>
+<div class="note"><b>Common mistake:</b> Expecting CMP to store a normal subtraction result.</div>
+</div></details><details class="lesson" data-lesson="arm-04" >
+<summary><span class="num">07</span><span class="title">Logical operations &amp; bit manipulation</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
+<div class="body">
+<p class="muted" data-lecture-order="4"><b>Instructions — Part 2</b> · slides 11–15<br><small>03.Lecture_ARM_Instructions_part2 (2)(1).pdf</small></p>
+<h3>What you will learn</h3><ul><li>Apply bitwise AND/OR/XOR</li><li>Clear selected bits with BIC</li><li>Build and reason about masks</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>AND keeps bits selected by a mask, ORR sets selected bits, EOR performs XOR, and BIC clears bits selected by the second operand. These operations are central to packed flags and device/control registers.</p></section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">AND</span><span class="pill">ORR</span><span class="pill">EOR</span><span class="pill">BIC</span><span class="pill">MVN</span><span class="pill">bit mask</span></div>
+<h3>Example</h3><pre class="code" data-language="armasm" data-example-audit="candidate">        MOV r0, #0x0F
+        MOV r1, #0x03
+        AND r2, r0, r1
+        ORR r3, r0, #0x10
+        EOR r4, r0, r1
+        BIC r5, r0, #0x03</pre>
+<div class="note"><b>Common mistake:</b> Using arithmetic intuition for bit masks instead of tracing each bit position.</div>
+</div></details><details class="lesson" data-lesson="arm-03" >
+<summary><span class="num">08</span><span class="title">Arithmetic instructions: ADD, ADC, SUB, SBC, RSB &amp; RSC</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
+<div class="body">
+<p class="muted" data-lecture-order="4"><b>Instructions — Part 2</b> · slides 16–18<br><small>03.Lecture_ARM_Instructions_part2 (2)(1).pdf</small></p>
+<h3>What you will learn</h3><ul><li>Trace three-operand arithmetic</li><li>Explain add/subtract with carry</li><li>Use reverse subtraction correctly</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>ARM arithmetic instructions typically use a destination and two input operands. ADD and SUB perform basic arithmetic; ADC and SBC include carry state for multiword arithmetic. RSB reverses subtraction order, useful when the desired calculation is operand2 minus operand1.</p></section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">ADD</span><span class="pill">ADC</span><span class="pill">SUB</span><span class="pill">SBC</span><span class="pill">RSB</span><span class="pill">RSC</span><span class="pill">carry</span></div>
+<h3>Example</h3><pre class="code" data-language="armasm" data-example-audit="candidate">        MOV r1, #9
+        MOV r2, #4
+        ADD r0, r1, r2
+        SUB r3, r1, r2
+        RSB r4, r1, r2</pre>
+<div class="note"><b>Common mistake:</b> Applying normal SUB operand order to RSB.</div>
+</div></details><details class="lesson" data-lesson="arm-08" >
+<summary><span class="num">09</span><span class="title">Branches, if/else &amp; loops</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
+<div class="body">
+<p class="muted" data-lecture-order="4"><b>Instructions — Part 2</b> · slides 19–47<br><small>03.Lecture_ARM_Instructions_part2 (2)(1).pdf</small></p>
+<h3>What you will learn</h3><ul><li>Branch to labels</li><li>Translate decisions into branches</li><li>Trace while and do-while loops</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Branch instructions change control flow by loading a new PC value. Labels identify targets. Conditional branches combine flag tests with control flow, which implements if/else and loops. Testing before or after the body distinguishes pre-test and post-test loops.</p></section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">B</span><span class="pill">BL</span><span class="pill">BX</span><span class="pill">label</span><span class="pill">while loop</span><span class="pill">do-while</span></div>
+<h3>Example</h3><pre class="code" data-language="armasm" data-example-audit="candidate">j       RN 0
+        MOV j, #3
+loop    CMP j, #0
+        BLT done
+        SUB j, j, #1
+        B loop
+done    B done</pre>
+<div class="note"><b>Common mistake:</b> Forgetting that a loop must modify the state used by its termination condition.</div>
+</div></details><details class="lesson" data-lesson="arm-10" >
+<summary><span class="num">10</span><span class="title">LDM/STM, PUSH/POP &amp; the runtime stack</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
+<div class="body">
+<p class="muted" data-lecture-order="4"><b>Instructions — Part 2</b> · slides 99–113<br><small>03.Lecture_ARM_Instructions_part2 (2)(1).pdf</small></p>
+<h3>What you will learn</h3><ul><li>Transfer multiple registers</li><li>Explain multiple-addressing modes</li><li>Trace stack growth and PUSH/POP</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>LDM and STM move multiple registers between registers and memory. Addressing-mode suffixes specify increment/decrement and before/after behavior. PUSH and POP are stack-oriented aliases using R13/SP; in the convention shown in the lectures, PUSH corresponds to STMDB and POP to LDMIA, so the stack grows toward lower addresses.</p></section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">LDM</span><span class="pill">STM</span><span class="pill">PUSH</span><span class="pill">POP</span><span class="pill">SP</span><span class="pill">R13</span><span class="pill">IA</span><span class="pill">IB</span><span class="pill">DA</span><span class="pill">DB</span></div>
+<h3>Example</h3><pre class="code" data-language="armasm" data-example-audit="candidate">        LDR r3, =0x11111111
+        LDR r4, =0x22222222
+        PUSH {r3, r4}
+        POP  {r5, r6}</pre>
+<div class="note"><b>Common mistake:</b> Assuming textual register-list order controls memory ordering.</div>
+</div></details><details class="lesson" data-lesson="arm-11" >
+<summary><span class="num">11</span><span class="title">Subroutines, BL/BX LR &amp; parameter passing</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
+<div class="body">
+<p class="muted" data-lecture-order="5"><b>Functions</b> · slides 2–22<br><small>04.Functions(1).pdf</small></p>
+<h3>What you will learn</h3><ul><li>Call and return from a subroutine</li><li>Preserve registers across calls</li><li>Compare register, memory-block, and stack parameter passing</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>BL branches while saving a return address in LR/R14. A simple return can use BX LR. Subroutines preserve state according to the calling convention. Parameters can be passed in registers, through a referenced memory block, or on the stack; stack-based access must account for values pushed on entry.</p></section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">BL</span><span class="pill">BX LR</span><span class="pill">LR</span><span class="pill">callee state</span><span class="pill">parameters</span><span class="pill">stack</span></div>
+<h3>Example</h3><pre class="code" data-language="armasm" data-example-audit="candidate">main    MOV r0, #5
+        BL double
+        B stop
+
+double  PUSH {r1}
+        ADD r1, r0, r0
+        MOV r0, r1
+        POP {r1}
+        BX lr
+stop    B stop</pre>
+<div class="note"><b>Common mistake:</b> Calling another function without protecting LR when the current function still needs its own return address.</div>
+</div></details><details class="lesson" data-lesson="arm-12" >
+<summary><span class="num">12</span><span class="title">Exceptions, interrupts, vectors &amp; SVC</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
+<div class="body">
+<p class="muted" data-lecture-order="6"><b>Exceptions</b> · slides 2–13<br><small>05.Exceptions(1).pdf</small></p>
+<h3>What you will learn</h3><ul><li>List major classic ARM exception types</li><li>Trace automatic exception entry</li><li>Explain vector dispatch and return</li><li>Distinguish IRQ, FIQ, and SVC</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>On a classic ARM exception, CPSR is copied to the relevant SPSR, the processor changes mode, a return address is stored in mode-specific LR, and PC goes to an exception vector. The vector dispatches to a handler, which returns using the exception-appropriate sequence. SVC deliberately requests a privileged OS service.</p></section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">exception</span><span class="pill">SPSR</span><span class="pill">LR_mode</span><span class="pill">vector table</span><span class="pill">IRQ</span><span class="pill">FIQ</span><span class="pill">SVC</span></div>
+<h3>Example</h3><pre class="code" data-language="armasm" data-example-audit="candidate">0x00  Reset
+0x04  Undefined instruction
+0x08  SVC
+0x0C  Prefetch abort
+0x10  Data abort
+0x18  IRQ
+0x1C  FIQ</pre>
+<div class="note"><b>Common mistake:</b> Using the same unadjusted LR return sequence for every exception type.</div>
+</div></details></section>
+<div class="grid"><section class="card"><h2>Exercises</h2><div class="item"><b>Read an ARM source skeleton</b><p>Identify assembler directives, labels, and executable instructions.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>MOV/MVN register trace</b><p>Trace MOV and MVN instructions and write final register values.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Arithmetic register trace</b><p>Compute final values after ADD, SUB, carry-aware arithmetic, and RSB.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Bit-mask design</b><p>Use AND/ORR/EOR/BIC to test, set, toggle, and clear specified bits.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Shift and rotate trace</b><p>Trace LSL, LSR, ASR, and ROR on 32-bit patterns.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Flag prediction</b><p>Predict N, Z, C, and V for ADDS/SUBS-style operations.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Condition-code choice</b><p>Given CMP/TST results, choose a suitable condition code and explain why.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Translate a loop</b><p>Translate while or do-while pseudocode into ARM compare/branch structure.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Effective-address trace</b><p>Calculate addresses and base updates for pre/post-indexed LDR/STR.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Stack trace</b><p>Trace SP/register values through PUSH/POP and equivalent LDM/STM.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Function-call trace</b><p>Trace BL, LR, register preservation, parameters, and BX LR through nested calls.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div><div class="item"><b>Exception-entry trace</b><p>Given IRQ, FIQ, or SVC, list state changes, vector target, and return information.</p><textarea class="answer" placeholder="Write code or notes here..."></textarea></div></section><section class="card"><h2>Knowledge checks</h2><div class="item"><b>AREA, ENTRY, EQU, and END are primarily:</b><ol><li>Assembler directives</li><li>ALU instructions</li><li>Cache policies</li><li>Interrupt types</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>For a typical three-operand ARM data-processing instruction, the first register is usually:</b><ol><li>The destination</li><li>Always the second source</li><li>Always SP</li><li>Always PC</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>MOV r0, r1 means:</b><ol><li>Copy r1 into r0</li><li>Copy r0 into r1</li><li>Add r0 and r1</li><li>Store r0 to memory</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>MVN writes:</b><ol><li>The bitwise complement of its operand</li><li>A memory address only</li><li>The stack pointer</li><li>The program counter only</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>RSB r0, r1, r2 computes:</b><ol><li>r2 - r1</li><li>r1 - r2</li><li>r1 + r2</li><li>r1 XOR r2</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>ADC is useful when:</b><ol><li>A carry from a previous arithmetic step must be included</li><li>No registers are available</li><li>Only memory-to-memory arithmetic is allowed</li><li>A branch must be unconditional</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>BIC is commonly used to:</b><ol><li>Clear selected bits</li><li>Multiply values</li><li>Call a function</li><li>Load a word</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>EOR performs:</b><ol><li>Bitwise XOR</li><li>Bitwise AND</li><li>Addition</li><li>A branch</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>ASR differs from LSR because ASR:</b><ol><li>Preserves the sign bit when shifting right</li><li>Always shifts left</li><li>Rotates instead of shifts</li><li>Does not use registers</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>ARM&#39;s barrel shifter can often:</b><ol><li>Shift an operand as part of another data-processing instruction</li><li>Only run after a branch</li><li>Access disk directly</li><li>Replace CPSR</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>The Z flag is set when the relevant result is:</b><ol><li>Zero</li><li>Negative only</li><li>Unsigned carry only</li><li>A memory address</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>The V flag represents:</b><ol><li>Signed arithmetic overflow</li><li>A zero result</li><li>A cache miss</li><li>Vector-table enable</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>CMP primarily:</b><ol><li>Updates condition flags based on a subtraction-like comparison</li><li>Stores a normal subtraction result</li><li>Pushes registers</li><li>Loads memory</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>TST primarily uses which logical operation for flag testing?</b><ol><li>AND</li><li>OR</li><li>ADD</li><li>SUB</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>A conditional branch uses:</b><ol><li>Condition flags and a condition code</li><li>Only the stack pointer</li><li>Only DRAM</li><li>Only assembler directives</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>A do-while style loop differs from a while loop because its body:</b><ol><li>Executes before the termination test</li><li>Can never repeat</li><li>Cannot use branches</li><li>Must use FIQ</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>LDR is used to:</b><ol><li>Load data from memory into a register</li><li>Store a register to memory</li><li>Call a function</li><li>Clear CPSR</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>Post-indexed addressing generally:</b><ol><li>Uses the current base address, then updates the base</li><li>Updates the base before the access only</li><li>Never changes the base</li><li>Always uses PC</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>PUSH is associated with:</b><ol><li>Saving registers on the stack</li><li>Loading a branch target only</li><li>Changing endianness</li><li>Setting V only</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>In the stack convention shown in the lectures, the stack grows toward:</b><ol><li>Lower addresses</li><li>Higher addresses only</li><li>The program counter</li><li>The vector table</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>BL does what in addition to branching?</b><ol><li>Saves a return address in LR</li><li>Clears all registers</li><li>Disables every exception</li><li>Stores to DRAM automatically</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>A simple subroutine commonly returns with:</b><ol><li>BX LR</li><li>LDR SP, SP</li><li>CMP PC, LR</li><li>SVC LR</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>On classic ARM exception entry, CPSR is copied into:</b><ol><li>The exception mode&#39;s SPSR</li><li>R0</li><li>The cache</li><li>The vector table itself</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div><div class="item"><b>SVC is used to:</b><ol><li>Request a privileged software service by raising a software exception</li><li>Perform a logical shift</li><li>Store multiple registers</li><li>Change byte order directly</li></ol><textarea class="answer" placeholder="Write your answer..."></textarea></div></section></div>
+<section class="card" style="margin-top:14px"><h2>Projects</h2><div class="item"><b>ARM instruction trace workbook</b><p>Create documented ARM snippets covering arithmetic, masks, shifts, flags, and conditional execution. Predict state before checking it in the university simulator.</p></div><div class="item"><b>Array &amp; string routine pack</b><p>Design ARM routines that traverse an integer array and a zero-terminated string using load/store addressing, loops, and clear calling conventions.</p></div><div class="item"><b>Function &amp; stack lab</b><p>Design a multi-function ARM program that passes parameters in registers and on the stack, preserves state, and traces SP/LR across nested calls.</p></div><div class="item"><b>ARM assembly mini-runtime &amp; interrupt design</b><p>Design a cohesive ARM assembly program combining data processing, memory access, loops, subroutines, stack discipline, and a documented exception/interrupt handler path.</p></div></section></main>
+<button class="theme" type="button" data-theme-toggle aria-label="Toggle light or dark theme"></button>
+<script type="application/json" id="course-page-meta">{"id":"arm-assembly","lessonIds":["arm-01","arm-02","arm-09","arm-05","arm-06","arm-07","arm-04","arm-03","arm-08","arm-10","arm-11","arm-12"]}</script>
+<script defer src="../assets/line-by-line-explanations.js?v=20260919-v577&learning=20261003-v584"></script>
+<script>(function(){'use strict';var KEY='cs-ai-mastery-theme',PROGRESS='courses_progress_v1',meta=JSON.parse(document.getElementById('course-page-meta').textContent),courseId=meta.id,lessonIds=meta.lessonIds;function read(){try{return JSON.parse(localStorage.getItem(PROGRESS)||'{}')||{}}catch(e){return{}}}function save(v){try{localStorage.setItem(PROGRESS,JSON.stringify(v))}catch(e){}}function update(){var p=read(),m=((p[courseId]||{}).lessons||{}),done=0;lessonIds.forEach(function(id){if(m[id])done++});var pct=lessonIds.length?Math.round(done/lessonIds.length*100):0;var bar=document.querySelector('[data-progress-bar]'),status=document.querySelector('[data-progress-status]');if(bar)bar.style.width=pct+'%';if(status)status.textContent=done+' of '+lessonIds.length+' lessons complete';document.querySelectorAll('[data-lesson]').forEach(function(el){var cb=el.querySelector('[data-complete]');if(cb)cb.checked=!!m[el.getAttribute('data-lesson')]})}document.addEventListener('change',function(e){if(!e.target.matches('[data-complete]'))return;var lesson=e.target.closest('[data-lesson]');if(!lesson)return;var p=read();p[courseId]=p[courseId]||{};p[courseId].lessons=p[courseId].lessons||{};p[courseId].lessons[lesson.getAttribute('data-lesson')]=!!e.target.checked;save(p);update()});function theme(){var t=document.documentElement.dataset.theme==='dark'?'dark':'light',b=document.querySelector('[data-theme-toggle]');if(b)b.textContent=t==='dark'?'☀️ Light':'🌙 Dark'}document.querySelector('[data-theme-toggle]').addEventListener('click',function(){var next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem(KEY,next);localStorage.setItem('theme',next)}catch(e){}theme()});update();theme()})();</script><script defer src="../assets/runnable-lesson-example-fixes.js?v=20260822-v567"></script>
+<script defer src="../assets/lesson-example-runner.js?v=20260822-v567&learning=20261003-v584"></script>
+<script defer src="../assets/lesson-example-runner-guard.js?v=20260822-v567"></script>
+<script defer src="../assets/evergreen-learning-engine.js?v=20260822-v567"></script>
+<script defer src="../assets/evergreen-review-navigation.js?v=20260822-v567"></script>
+<script defer src="../assets/smart-evergreen-review.js?v=20260822-v567"></script>
+<script defer src="../assets/assessment-practice.js?v=20260822-v567&learning=20261003-v584"></script>
+<script defer src="../assets/github-integration.js?v=20260822-v567"></script>
+<script defer src="../assets/assessment-layout-fix.js?v=20260822-v567"></script>
+<script defer src="../assets/universal-reveal-solutions.js?v=20260822-v567"></script>
+<script defer src="../assets/reveal-solution-explanations.js?v=20260822-v567"></script>
+<script defer src="../assets/assessment-expanded-descriptions.js?v=20260822-v567"></script>
+<script defer src="../assets/exercise-direct-publish.js?v=20260822-v567"></script>
+<script defer src="../assets/universal-run-output.js?v=20260822-v567&learning=20261003-v584"></script>
+<script defer src="../assets/final-exercise-toolbar.js?v=20260822-v567&learning=20261003-v584"></script>
+<script defer src="../assets/course-project-workspace.js?v=20260822-v571"></script>
+<script defer src="../assets/example-learning-tools.js?v=20260822-v567"></script>
+<script defer src="../assets/practice-publish-completer.js?v=20260823-v573&learning=20261003-v584"></script>
+<script src="../assets/runtime-inline/courses-arm-assembly-001.js?v=20260822-v567"></script>
+
+
+
+
+
+
+<script id="csai-assessment-data" type="application/json">{"courseId":"arm-assembly","courseTitle":"ARM Assembly Programming","defaultLanguage":"text","exercises":[{"id":"arm-ex-01","title":"Read an ARM source skeleton","prompt":"Identify assembler directives, labels, and executable instructions.","lessonId":"arm-01","type":"scenario-analysis"},{"id":"arm-ex-02","title":"MOV/MVN register trace","prompt":"Trace MOV and MVN instructions and write final register values.","lessonId":"arm-02","type":"scenario-analysis"},{"id":"arm-ex-03","title":"Arithmetic register trace","prompt":"Compute final values after ADD, SUB, carry-aware arithmetic, and RSB.","lessonId":"arm-03","type":"scenario-analysis"},{"id":"arm-ex-04","title":"Bit-mask design","prompt":"Use AND/ORR/EOR/BIC to test, set, toggle, and clear specified bits.","lessonId":"arm-04","type":"scenario-analysis"},{"id":"arm-ex-05","title":"Shift and rotate trace","prompt":"Trace LSL, LSR, ASR, and ROR on 32-bit patterns.","lessonId":"arm-05","type":"scenario-analysis"},{"id":"arm-ex-06","title":"Flag prediction","prompt":"Predict N, Z, C, and V for ADDS/SUBS-style operations.","lessonId":"arm-06","type":"scenario-analysis"},{"id":"arm-ex-07","title":"Condition-code choice","prompt":"Given CMP/TST results, choose a suitable condition code and explain why.","lessonId":"arm-07","type":"scenario-analysis"},{"id":"arm-ex-08","title":"Translate a loop","prompt":"Translate while or do-while pseudocode into ARM compare/branch structure.","lessonId":"arm-08","type":"scenario-analysis"},{"id":"arm-ex-09","title":"Effective-address trace","prompt":"Calculate addresses and base updates for pre/post-indexed LDR/STR.","lessonId":"arm-09","type":"scenario-analysis"},{"id":"arm-ex-10","title":"Stack trace","prompt":"Trace SP/register values through PUSH/POP and equivalent LDM/STM.","lessonId":"arm-10","type":"scenario-analysis"},{"id":"arm-ex-11","title":"Function-call trace","prompt":"Trace BL, LR, register preservation, parameters, and BX LR through nested calls.","lessonId":"arm-11","type":"scenario-analysis"},{"id":"arm-ex-12","title":"Exception-entry trace","prompt":"Given IRQ, FIQ, or SVC, list state changes, vector target, and return information.","lessonId":"arm-12","type":"scenario-analysis"}],"quiz":[{"q":"AREA, ENTRY, EQU, and END are primarily:","options":["Assembler directives","ALU instructions","Cache policies","Interrupt types"],"correct":0,"type":"mcq","explanation":"AREA organizes a section, ENTRY marks an entry point, EQU defines a constant, and END ends the source. These direct the assembler rather than perform CPU calculations.","lessonId":"arm-01"},{"q":"For a typical three-operand ARM data-processing instruction, the first register is usually:","options":["The destination","Always the second source","Always SP","Always PC"],"correct":0,"type":"mcq","explanation":"In ADD r0, r1, r2, r0 receives the result while r1 and r2 supply values. Read the operands from destination to sources.","lessonId":"arm-01"},{"q":"MOV r0, r1 means:","options":["Copy r1 into r0","Copy r0 into r1","Add r0 and r1","Store r0 to memory"],"correct":0,"type":"mcq","explanation":"MOV r0, r1 reads r1 and writes its value into r0. r1 is unchanged.","lessonId":"arm-02"},{"q":"MVN writes:","options":["The bitwise complement of its operand","A memory address only","The stack pointer","The program counter only"],"correct":0,"type":"mcq","explanation":"MVN flips every bit of the source. In a 32-bit register, MVN applied to 0 gives 0xFFFFFFFF, not 1.","lessonId":"arm-02"},{"q":"RSB r0, r1, r2 computes:","options":["r2 - r1","r1 - r2","r1 + r2","r1 XOR r2"],"correct":0,"type":"mcq","explanation":"RSB reverses the usual SUB order: RSB r0, r1, r2 stores r2 minus r1 in r0.","lessonId":"arm-03"},{"q":"ADC is useful when:","options":["A carry from a previous arithmetic step must be included","No registers are available","Only memory-to-memory arithmetic is allowed","A branch must be unconditional"],"correct":0,"type":"mcq","explanation":"ADC computes operand1 + operand2 + C. This lets the carry from a low-word addition feed a high-word addition.","lessonId":"arm-03"},{"q":"BIC is commonly used to:","options":["Clear selected bits","Multiply values","Call a function","Load a word"],"correct":0,"type":"mcq","explanation":"BIC computes operand1 AND NOT operand2. A 1 in the mask therefore clears the corresponding destination bit.","lessonId":"arm-04"},{"q":"EOR performs:","options":["Bitwise XOR","Bitwise AND","Addition","A branch"],"correct":0,"type":"mcq","explanation":"EOR sets a result bit when the two corresponding input bits differ; equal bits produce 0.","lessonId":"arm-04"},{"q":"ASR differs from LSR because ASR:","options":["Preserves the sign bit when shifting right","Always shifts left","Rotates instead of shifts","Does not use registers"],"correct":0,"type":"mcq","explanation":"ASR replicates the top/sign bit while shifting right. LSR shifts zeros into the high positions.","lessonId":"arm-05"},{"q":"ARM's barrel shifter can often:","options":["Shift an operand as part of another data-processing instruction","Only run after a branch","Access disk directly","Replace CPSR"],"correct":0,"type":"mcq","explanation":"ADD r0, r1, r2, LSL #2 shifts r2 left by two before adding it to r1. The shifted value need not be stored in a separate register.","lessonId":"arm-05"},{"q":"The Z flag is set when the relevant result is:","options":["Zero","Negative only","Unsigned carry only","A memory address"],"correct":0,"type":"mcq","explanation":"Z is 1 when the flag-setting operation produces zero. A plain instruction without S usually leaves these flags unchanged.","lessonId":"arm-06"},{"q":"The V flag represents:","options":["Signed arithmetic overflow","A zero result","A cache miss","Vector-table enable"],"correct":0,"type":"mcq","explanation":"V indicates that the mathematical signed result cannot fit in a signed 32-bit value. It is different from unsigned carry C.","lessonId":"arm-06"},{"q":"CMP primarily:","options":["Updates condition flags based on a subtraction-like comparison","Stores a normal subtraction result","Pushes registers","Loads memory"],"correct":0,"type":"mcq","explanation":"CMP uses a subtraction to set NZCV but discards the arithmetic result. It does not overwrite either compared register.","lessonId":"arm-07"},{"q":"TST primarily uses which logical operation for flag testing?","options":["AND","OR","ADD","SUB"],"correct":0,"type":"mcq","explanation":"TST calculates a bitwise AND for the flags without saving that AND result in a destination register.","lessonId":"arm-07"},{"q":"A conditional branch uses:","options":["Condition flags and a condition code","Only the stack pointer","Only DRAM","Only assembler directives"],"correct":0,"type":"mcq","explanation":"The condition suffix reads flags set earlier. BEQ tests Z=1; BLT tests N different from V for a signed comparison.","lessonId":"arm-08"},{"q":"A do-while style loop differs from a while loop because its body:","options":["Executes before the termination test","Can never repeat","Cannot use branches","Must use FIQ"],"correct":0,"type":"mcq","explanation":"A do-while style loop places its test after the body, so the body runs at least once. A while style loop can skip the body when its first test fails.","lessonId":"arm-08"},{"q":"LDR is used to:","options":["Load data from memory into a register","Store a register to memory","Call a function","Clear CPSR"],"correct":0,"type":"mcq","explanation":"LDR reads the word at an effective memory address and places it in the destination register. STR transfers a register value in the opposite direction.","lessonId":"arm-09"},{"q":"Post-indexed addressing generally:","options":["Uses the current base address, then updates the base","Updates the base before the access only","Never changes the base","Always uses PC"],"correct":0,"type":"mcq","explanation":"LDR r0, [r1], #4 loads using the old address in r1, then increases r1 by four. The offset is outside the brackets.","lessonId":"arm-09"},{"q":"PUSH is associated with:","options":["Saving registers on the stack","Loading a branch target only","Changing endianness","Setting V only"],"correct":0,"type":"mcq","explanation":"PUSH preserves register values in memory on the stack and adjusts SP. It is useful before a subroutine changes values the caller needs.","lessonId":"arm-10"},{"q":"In the stack convention shown in the lectures, the stack grows toward:","options":["Lower addresses","Higher addresses only","The program counter","The vector table"],"correct":0,"type":"mcq","explanation":"In the full descending convention, reserving stack space decreases SP; releasing it increases SP. Lower memory addresses hold newer stack entries.","lessonId":"arm-10"},{"q":"BL does what in addition to branching?","options":["Saves a return address in LR","Clears all registers","Disables every exception","Stores to DRAM automatically"],"correct":0,"type":"mcq","explanation":"BL saves the address of the instruction after the call in LR before transferring control. A nested call must preserve a needed earlier LR.","lessonId":"arm-11"},{"q":"A simple subroutine commonly returns with:","options":["BX LR","LDR SP, SP","CMP PC, LR","SVC LR"],"correct":0,"type":"mcq","explanation":"BX LR branches to the saved return address. LR must still hold the intended return address for this to work.","lessonId":"arm-11"},{"q":"On classic ARM exception entry, CPSR is copied into:","options":["The exception mode's SPSR","R0","The cache","The vector table itself"],"correct":0,"type":"mcq","explanation":"Classic ARM exception entry saves the old CPSR in the target mode SPSR so the handler can later restore the interrupted status. The tracer does not model exception entry.","lessonId":"arm-12"},{"q":"SVC is used to:","options":["Request a privileged software service by raising a software exception","Perform a logical shift","Store multiple registers","Change byte order directly"],"correct":0,"type":"mcq","explanation":"SVC deliberately raises a software exception to request a supervisor service. It is not an ordinary BL subroutine call; handling depends on the execution environment.","lessonId":"arm-12"}],"structured":{}}</script>
+
+
+
+
+
+
+
+
+
+<script id="csai-project-data" type="application/json">{"courseId":"arm-assembly","courseTitle":"ARM Assembly Programming","defaultLanguage":"text","projects":[{"id":"arm-p1","title":"ARM instruction trace workbook","description":"Create documented ARM snippets covering arithmetic, masks, shifts, flags, and conditional execution. Predict state before checking it in the university simulator.","requirements":["At least eight ARM snippets","Register/flag trace for each","At least one edge case per instruction family","No unexplained final answers"],"starter":"","language":"text"},{"id":"arm-p2","title":"Array & string routine pack","description":"Design ARM routines that traverse an integer array and a zero-terminated string using load/store addressing, loops, and clear calling conventions.","requirements":["At least three routines","Use pre/post-indexing where appropriate","Document register inputs/outputs","Preserve required registers and test boundary cases"],"starter":"","language":"text"},{"id":"arm-p3","title":"Function & stack lab","description":"Design a multi-function ARM program that passes parameters in registers and on the stack, preserves state, and traces SP/LR across nested calls.","requirements":["At least three subroutines","One nested call","Register-save/restore plan","Complete SP/LR trace and return reasoning"],"starter":"","language":"text"},{"id":"arm-capstone","title":"ARM assembly mini-runtime & interrupt design","description":"Design a cohesive ARM assembly program combining data processing, memory access, loops, subroutines, stack discipline, and a documented exception/interrupt handler path.","requirements":["Main routine plus reusable subroutines","Array or string memory processing","Explicit calling convention and stack trace","Flag-driven conditional control","Vector/handler design for at least one exception","Verification plan using the university ARM simulator"],"starter":"","language":"text"}]}</script>
+
+
+
+
+<!-- csai-production-augmentation -->
+<script src="../assets/adaptive-practice-layer.js?v=20260822-v567&learning=20261003-v584" defer></script>
+<script src="../assets/project-readme-layer.js?v=20260822-v567" defer></script>
+<!-- /csai-production-augmentation -->
+<script src="/assets/oa-assessment-fallback.js?v=20260811-1" defer></script>
+<script src="/assets/oa-assessment-upgrade.js?v=20260811-1" defer></script>
+
+<script src="/assets/python-only-ui.js?v=20260811-2" defer></script>
+
+<script defer src="../assets/study-examples.js?v=20260824-v574&learning=20261003-v584"></script>
+
+<script defer src="../assets/brilliant-tutor-v1.js?v=20260822-v567"></script>
+<script defer src="../assets/arm-trace-engine.js?v=20261003-v578"></script>
+<script defer src="../assets/arm-trace-ui.js?v=20261003-v578"></script>
+<script defer src="../assets/lesson-recall.js?v=20261003-v578"></script>
+</body></html>

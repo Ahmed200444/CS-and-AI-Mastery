@@ -88,7 +88,9 @@ function makeGuide(course){
   return g;
 }
 fs.mkdirSync(guideDir,{recursive:true});
-fs.writeFileSync(path.join(guideDir,'matlab-engineering.json'),JSON.stringify(makeGuide(matlab),null,2)+'\n','utf8');
+for(const c of additions){
+  fs.writeFileSync(path.join(guideDir,c.id+'.json'),JSON.stringify(makeGuide(c),null,2)+'\n','utf8');
+}
 
 const guideIndex=JSON.parse(fs.readFileSync(guideIndexPath,'utf8'));
 guideIndex.courses=arr(guideIndex.courses).filter(x=>!ids.has(x.id));

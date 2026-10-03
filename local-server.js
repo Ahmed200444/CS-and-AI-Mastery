@@ -38,7 +38,7 @@ async function serve(req,res){
 const s=http.createServer((req,res)=>{serve(req,res).catch(error=>{console.error(error);if(!res.headersSent){const body=Buffer.from(JSON.stringify({error:error.message||'Local server error'}));res.writeHead(500,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','Content-Length':String(body.length)});res.end(body);}else res.end();});});
 s.keepAliveTimeout=65000;s.headersTimeout=66000;
 s.on('error',e=>{if(e.code==='EADDRINUSE'){console.error('\nAnother CS & AI Mastery study server is already using port '+PORT+'.');console.error('Close the OLD black START_SITE window first, then double-click START_SITE.bat again.');console.error('This prevents your browser from accidentally opening an older ZIP.\n');process.exit(2)}console.error(e);process.exit(1)});
-s.listen(PORT,'127.0.0.1',()=>{
+s.listen(PORT, process.env.HOST || '0.0.0.0', () => {
   const url=`http://127.0.0.1:${PORT}/index.html?build=${BUILD_ID}`;
   const ghInstalled=localGitHub.commandExists('gh'),ghConnected=!!localGitHub.getToken(),runtimeStats=runtimeCache.stats();
   console.log('\nCS & AI Mastery - instant local study server');
