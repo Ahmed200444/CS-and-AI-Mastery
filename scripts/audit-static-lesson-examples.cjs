@@ -145,6 +145,6 @@ for(const file of fs.readdirSync(dir).filter(f=>f.endsWith('.html'))){
   fs.writeFileSync(full,html,'utf8');
 }
 
-if(pages!==62)throw new Error(`Expected 62 course pages, audited ${pages}`);
+if(pages!==64)throw new Error(`Expected 64 course pages, audited ${pages}`);
 if(total===0)throw new Error('No lesson code examples were found to audit');
 console.log(`Audited ${total} lesson examples across ${pages} courses: ${candidates} runnable candidates, ${references} reference-only, ${repaired} repaired example(s).`);
