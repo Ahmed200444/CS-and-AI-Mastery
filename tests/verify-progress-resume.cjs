@@ -15,7 +15,8 @@ const courses=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith('.h
 need(courses.length===62||courses.length===65,`expected 62 committed or 65 generated course pages, got ${courses.length}`);
 let lessons=0, controls=0;
 for(const f of courses){const t=fs.readFileSync(path.join(root,'courses',f),'utf8');need(t.includes('../assets/progress-resume.js?v=20260822-v567'),`${f}: resume tracker missing`);const lessonMatches=t.match(/data-lesson=\"[^\"]+\"/g)||[];const completeMatches=t.match(/data-complete(?:=\"\")?/g)||[];lessons+=lessonMatches.length;controls+=completeMatches.length;}
-const expectedLessons=courses.length===65?832:800;\nneed(lessons===expectedLessons,`expected ${expectedLessons} lesson rows, got ${lessons}`);
+const expectedLessons=courses.length===65?832:800;
+need(lessons===expectedLessons,`expected ${expectedLessons} lesson rows, got ${lessons}`);
 need(controls>=expectedLessons,`expected completion controls for all ${expectedLessons} lessons, got ${controls}`);
 const index=fs.readFileSync(path.join(root,'index.html'),'utf8');need(index.includes('assets/progress-resume.js?v=20260822-v567'),'homepage resume tracker missing');
 console.log(`Progress/resume contract passed across ${courses.length} course pages and all ${lessons} lessons.`);
