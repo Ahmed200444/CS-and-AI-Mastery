@@ -42,5 +42,5 @@ if(fs.existsSync(index))updateHtml(index,false);
 const dir=path.join(root,'courses');
 const pages=fs.existsSync(dir)?fs.readdirSync(dir).filter(x=>x.endsWith('.html')):[];
 for(const name of pages)updateHtml(path.join(dir,name),true);
-if(pages.length!==62)throw new Error(`Expected 62 course pages, found ${pages.length}`);
+if(pages.length!==64)throw new Error(`Expected 64 course pages, found ${pages.length}`);
 console.log(`Applied final performance release tag ${TAG} to index + ${pages.length} course pages.`);
