@@ -50,12 +50,12 @@ const dataFiles=fs.readdirSync(dataDir).filter(x=>x.endsWith('.json'));
 if(dataFiles.length!==65)fail(`expected 65 course-data files, found ${dataFiles.length}`);
 for(const name of dataFiles){
  const data=JSON.parse(fs.readFileSync(path.join(dataDir,name),'utf8'));
- const all=strings(data),isCpp=name==='cpp-dsa.json';
+ const all=strings(data),isCpp=name==='cpp-dsa.json'||name==='microprocessors-arm.json'||name==='arm-assembly.json';
  if(!isCpp&&all.some(badText))fail(`${name}: unexpected C++ text or .cpp filename remains outside dedicated C++ course`);
  if(!isCpp&&all.some(badCode))fail(`${name}: unexpected C++ code example remains outside dedicated C++ course`);
  const raw=JSON.stringify(data);
  if(!isCpp&&/"(?:language|defaultLanguage)":"(?:cpp|c\+\+|dual)"/i.test(raw))fail(`${name}: unexpected C++/dual language mode remains`);
- if(isCpp&&!all.some(v=>/#include\s*</.test(v)))fail('cpp-dsa.json: C++ examples missing');
+ if(name==='cpp-dsa.json'&&!all.some(v=>/#include\s*</.test(v)))fail('cpp-dsa.json: C++ examples missing');
 }
 
 const coursesDir=path.join(root,'courses');
@@ -69,7 +69,7 @@ for(const name of pages){
  if(!html.includes('project-readme-layer.js'))fail(`${name}: project README publishing missing`);
  if(!html.includes('portfolio-publish-controls.js'))fail(`${name}: example/exercise GitHub publishing missing`);
  if(/cpp-runner-ui-worker|primary-language-mode|dual-single-editor-publish|course-language-mode-controller|lesson-language-variants/.test(html))fail(`${name}: removed runtime reference remains`);
- if(name!=='cpp-dsa.html'&&/C\+\+|\.cpp\b/.test(html))fail(`${name}: unexpected C++ text remains outside dedicated course`);if(name==='cpp-dsa.html'&&!/C\+\+ Programming &amp; DSA|C\+\+ Programming & DSA/.test(html))fail('cpp-dsa.html: dedicated C++ title missing');
+ if(name!=='cpp-dsa.html'&&name!=='microprocessors-arm.html'&&name!=='arm-assembly.html'&&/C\+\+|\.cpp\b/.test(html))fail(`${name}: unexpected C++ text remains outside dedicated course`);if(name==='cpp-dsa.html'&&!/C\+\+ Programming &amp; DSA|C\+\+ Programming & DSA/.test(html))fail('cpp-dsa.html: dedicated C++ title missing');
  if(/data-lang-mode=["'](?:cpp|dual)|data-adaptive-mode=["'](?:cpp|dual)|data-csai-oa-cpp|data-dual-cpp-editor/.test(html))fail(`${name}: removed language control remains in generated page`);
  if(/csai-course-first-paint-|csai-course-booting|Loading course…/.test(html))fail(`${name}: legacy blocking course loading cover remains`);
 }

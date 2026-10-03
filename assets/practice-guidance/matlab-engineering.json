@@ -1,0 +1,3386 @@
+{
+  "schemaVersion": 2,
+  "purpose": "Exam-style requirement briefs for every course learning item; no finished solutions or answer keys are stored here.",
+  "id": "matlab-engineering",
+  "title": "MATLAB for Engineering",
+  "course": {
+    "title": "Course requirements — what you must be able to do",
+    "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+    "plainEnglishTitle": "In plain English",
+    "plainEnglish": [
+      "Understand MATLAB for Engineering, predict the behavior, and transfer the idea to a fresh case.",
+      "Do not memorize a finished trace or example; explain why each important step happens."
+    ],
+    "focus": [
+      "concept behavior",
+      "correct syntax or rule choice",
+      "verification"
+    ],
+    "tools": [
+      "MATLAB",
+      "engineering"
+    ],
+    "requirements": [
+      "Apply MATLAB for Engineering to a fresh problem rather than only recognizing a completed example.",
+      "Explain the relevant data, operator, control-flow, plotting, register, memory, flag, timing, or architecture behavior in plain language.",
+      "Predict the expected result before relying on a supplied answer or simulator.",
+      "Check a normal case and an important boundary or failure case.",
+      "Choose the relevant operation, instruction, rule, or control structure deliberately.",
+      "Verify the final observable result with explicit evidence.",
+      "State assumptions and tool-specific syntax clearly."
+    ],
+    "steps": [
+      "Apply MATLAB for Engineering to a fresh problem rather than only recognizing a completed example.",
+      "Explain the relevant data, operator, control-flow, plotting, register, memory, flag, timing, or architecture behavior in plain language.",
+      "Predict the expected result before relying on a supplied answer or simulator.",
+      "Check a normal case and an important boundary or failure case.",
+      "Choose the relevant operation, instruction, rule, or control structure deliberately.",
+      "Verify the final observable result with explicit evidence.",
+      "State assumptions and tool-specific syntax clearly."
+    ],
+    "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+    "question": "What should happen in MATLAB for Engineering, and what evidence would prove it?",
+    "why": "This item exists so you can apply MATLAB for Engineering in engineering work rather than memorize syntax.",
+    "workScenario": "An engineering or low-level systems task depends on MATLAB for Engineering.",
+    "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+    "engineerProcess": [
+      "Restate the requirement.",
+      "Identify inputs and expected outputs/state.",
+      "Choose the relevant construct.",
+      "Predict the result.",
+      "Check a boundary case.",
+      "Document the evidence."
+    ],
+    "acceptanceCriteria": [
+      "The required observable result is correct.",
+      "The chosen construct fits the task.",
+      "A repeatable calculation, trace, or plot verifies the behavior."
+    ]
+  },
+  "lessons": {
+    "mat-01": {
+      "title": "MATLAB environment & command window",
+      "practice": {
+        "title": "Lesson requirements — what you must be able to do",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand MATLAB environment & command window, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "MATLAB",
+          "Command Window",
+          "prompt",
+          "numerical computing"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in MATLAB environment & command window, and what evidence would prove it?",
+        "why": "This item exists so you can apply MATLAB environment & command window in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on MATLAB environment & command window.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example requirements — what you must do",
+          "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+          "plainEnglishTitle": "In plain English",
+          "plainEnglish": [
+            "Understand MATLAB environment & command window example 1, predict the behavior, and transfer the idea to a fresh case.",
+            "Do not memorize a finished trace or example; explain why each important step happens."
+          ],
+          "focus": [
+            "concept behavior",
+            "correct syntax or rule choice",
+            "verification"
+          ],
+          "tools": [
+            "MATLAB",
+            "Command Window",
+            "prompt",
+            "numerical computing"
+          ],
+          "requirements": [
+            "Predict the important output, value, state, control-flow path, or visual result before checking it.",
+            "Explain each important operation in plain language.",
+            "Change one meaningful input, operand, address, range, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "steps": [
+            "Predict the important output, value, state, control-flow path, or visual result before checking it.",
+            "Explain each important operation in plain language.",
+            "Change one meaningful input, operand, address, range, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+          "question": "What should happen in MATLAB environment & command window example 1, and what evidence would prove it?",
+          "why": "This item exists so you can apply MATLAB environment & command window example 1 in engineering work rather than memorize syntax.",
+          "workScenario": "An engineering or low-level systems task depends on MATLAB environment & command window example 1.",
+          "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+          "engineerProcess": [
+            "Restate the requirement.",
+            "Identify inputs and expected outputs/state.",
+            "Choose the relevant construct.",
+            "Predict the result.",
+            "Check a boundary case.",
+            "Document the evidence."
+          ],
+          "acceptanceCriteria": [
+            "The required observable result is correct.",
+            "The chosen construct fits the task.",
+            "A repeatable calculation, trace, or plot verifies the behavior."
+          ]
+        }
+      ]
+    },
+    "mat-02": {
+      "title": "Vectors, ranges & transpose",
+      "practice": {
+        "title": "Lesson requirements — what you must be able to do",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand Vectors, ranges & transpose, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "row vector",
+          "column vector",
+          "colon operator",
+          "transpose",
+          "concatenation"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in Vectors, ranges & transpose, and what evidence would prove it?",
+        "why": "This item exists so you can apply Vectors, ranges & transpose in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on Vectors, ranges & transpose.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example requirements — what you must do",
+          "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+          "plainEnglishTitle": "In plain English",
+          "plainEnglish": [
+            "Understand Vectors, ranges & transpose example 1, predict the behavior, and transfer the idea to a fresh case.",
+            "Do not memorize a finished trace or example; explain why each important step happens."
+          ],
+          "focus": [
+            "concept behavior",
+            "correct syntax or rule choice",
+            "verification"
+          ],
+          "tools": [
+            "row vector",
+            "column vector",
+            "colon operator",
+            "transpose",
+            "concatenation"
+          ],
+          "requirements": [
+            "Predict the important output, value, state, control-flow path, or visual result before checking it.",
+            "Explain each important operation in plain language.",
+            "Change one meaningful input, operand, address, range, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "steps": [
+            "Predict the important output, value, state, control-flow path, or visual result before checking it.",
+            "Explain each important operation in plain language.",
+            "Change one meaningful input, operand, address, range, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+          "question": "What should happen in Vectors, ranges & transpose example 1, and what evidence would prove it?",
+          "why": "This item exists so you can apply Vectors, ranges & transpose example 1 in engineering work rather than memorize syntax.",
+          "workScenario": "An engineering or low-level systems task depends on Vectors, ranges & transpose example 1.",
+          "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+          "engineerProcess": [
+            "Restate the requirement.",
+            "Identify inputs and expected outputs/state.",
+            "Choose the relevant construct.",
+            "Predict the result.",
+            "Check a boundary case.",
+            "Document the evidence."
+          ],
+          "acceptanceCriteria": [
+            "The required observable result is correct.",
+            "The chosen construct fits the task.",
+            "A repeatable calculation, trace, or plot verifies the behavior."
+          ]
+        }
+      ]
+    },
+    "mat-03": {
+      "title": "Matrices & matrix multiplication",
+      "practice": {
+        "title": "Lesson requirements — what you must be able to do",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand Matrices & matrix multiplication, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "matrix",
+          "rows",
+          "columns",
+          "matrix multiplication",
+          "dimensions"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in Matrices & matrix multiplication, and what evidence would prove it?",
+        "why": "This item exists so you can apply Matrices & matrix multiplication in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on Matrices & matrix multiplication.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example requirements — what you must do",
+          "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+          "plainEnglishTitle": "In plain English",
+          "plainEnglish": [
+            "Understand Matrices & matrix multiplication example 1, predict the behavior, and transfer the idea to a fresh case.",
+            "Do not memorize a finished trace or example; explain why each important step happens."
+          ],
+          "focus": [
+            "concept behavior",
+            "correct syntax or rule choice",
+            "verification"
+          ],
+          "tools": [
+            "matrix",
+            "rows",
+            "columns",
+            "matrix multiplication",
+            "dimensions"
+          ],
+          "requirements": [
+            "Predict the important output, value, state, control-flow path, or visual result before checking it.",
+            "Explain each important operation in plain language.",
+            "Change one meaningful input, operand, address, range, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "steps": [
+            "Predict the important output, value, state, control-flow path, or visual result before checking it.",
+            "Explain each important operation in plain language.",
+            "Change one meaningful input, operand, address, range, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+          "question": "What should happen in Matrices & matrix multiplication example 1, and what evidence would prove it?",
+          "why": "This item exists so you can apply Matrices & matrix multiplication example 1 in engineering work rather than memorize syntax.",
+          "workScenario": "An engineering or low-level systems task depends on Matrices & matrix multiplication example 1.",
+          "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+          "engineerProcess": [
+            "Restate the requirement.",
+            "Identify inputs and expected outputs/state.",
+            "Choose the relevant construct.",
+            "Predict the result.",
+            "Check a boundary case.",
+            "Document the evidence."
+          ],
+          "acceptanceCriteria": [
+            "The required observable result is correct.",
+            "The chosen construct fits the task.",
+            "A repeatable calculation, trace, or plot verifies the behavior."
+          ]
+        }
+      ]
+    },
+    "mat-04": {
+      "title": "Element-wise array operations & vectorization",
+      "practice": {
+        "title": "Lesson requirements — what you must be able to do",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand Element-wise array operations & vectorization, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          ".*",
+          "./",
+          ".^",
+          "element-wise",
+          "vectorization"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in Element-wise array operations & vectorization, and what evidence would prove it?",
+        "why": "This item exists so you can apply Element-wise array operations & vectorization in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on Element-wise array operations & vectorization.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example requirements — what you must do",
+          "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+          "plainEnglishTitle": "In plain English",
+          "plainEnglish": [
+            "Understand Element-wise array operations & vectorization example 1, predict the behavior, and transfer the idea to a fresh case.",
+            "Do not memorize a finished trace or example; explain why each important step happens."
+          ],
+          "focus": [
+            "concept behavior",
+            "correct syntax or rule choice",
+            "verification"
+          ],
+          "tools": [
+            ".*",
+            "./",
+            ".^",
+            "element-wise",
+            "vectorization"
+          ],
+          "requirements": [
+            "Predict the important output, value, state, control-flow path, or visual result before checking it.",
+            "Explain each important operation in plain language.",
+            "Change one meaningful input, operand, address, range, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "steps": [
+            "Predict the important output, value, state, control-flow path, or visual result before checking it.",
+            "Explain each important operation in plain language.",
+            "Change one meaningful input, operand, address, range, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+          "question": "What should happen in Element-wise array operations & vectorization example 1, and what evidence would prove it?",
+          "why": "This item exists so you can apply Element-wise array operations & vectorization example 1 in engineering work rather than memorize syntax.",
+          "workScenario": "An engineering or low-level systems task depends on Element-wise array operations & vectorization example 1.",
+          "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+          "engineerProcess": [
+            "Restate the requirement.",
+            "Identify inputs and expected outputs/state.",
+            "Choose the relevant construct.",
+            "Predict the result.",
+            "Check a boundary case.",
+            "Document the evidence."
+          ],
+          "acceptanceCriteria": [
+            "The required observable result is correct.",
+            "The chosen construct fits the task.",
+            "A repeatable calculation, trace, or plot verifies the behavior."
+          ]
+        }
+      ]
+    },
+    "mat-05": {
+      "title": "Scripts & M-files",
+      "practice": {
+        "title": "Lesson requirements — what you must be able to do",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand Scripts & M-files, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "script",
+          "M-file",
+          "sequence of commands",
+          "comments"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in Scripts & M-files, and what evidence would prove it?",
+        "why": "This item exists so you can apply Scripts & M-files in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on Scripts & M-files.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example requirements — what you must do",
+          "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+          "plainEnglishTitle": "In plain English",
+          "plainEnglish": [
+            "Understand Scripts & M-files example 1, predict the behavior, and transfer the idea to a fresh case.",
+            "Do not memorize a finished trace or example; explain why each important step happens."
+          ],
+          "focus": [
+            "concept behavior",
+            "correct syntax or rule choice",
+            "verification"
+          ],
+          "tools": [
+            "script",
+            "M-file",
+            "sequence of commands",
+            "comments"
+          ],
+          "requirements": [
+            "Predict the important output, value, state, control-flow path, or visual result before checking it.",
+            "Explain each important operation in plain language.",
+            "Change one meaningful input, operand, address, range, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "steps": [
+            "Predict the important output, value, state, control-flow path, or visual result before checking it.",
+            "Explain each important operation in plain language.",
+            "Change one meaningful input, operand, address, range, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+          "question": "What should happen in Scripts & M-files example 1, and what evidence would prove it?",
+          "why": "This item exists so you can apply Scripts & M-files example 1 in engineering work rather than memorize syntax.",
+          "workScenario": "An engineering or low-level systems task depends on Scripts & M-files example 1.",
+          "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+          "engineerProcess": [
+            "Restate the requirement.",
+            "Identify inputs and expected outputs/state.",
+            "Choose the relevant construct.",
+            "Predict the result.",
+            "Check a boundary case.",
+            "Document the evidence."
+          ],
+          "acceptanceCriteria": [
+            "The required observable result is correct.",
+            "The chosen construct fits the task.",
+            "A repeatable calculation, trace, or plot verifies the behavior."
+          ]
+        }
+      ]
+    },
+    "mat-06": {
+      "title": "Function files & local variables",
+      "practice": {
+        "title": "Lesson requirements — what you must be able to do",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand Function files & local variables, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "function file",
+          "input variables",
+          "output variables",
+          "local variables",
+          "filename"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in Function files & local variables, and what evidence would prove it?",
+        "why": "This item exists so you can apply Function files & local variables in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on Function files & local variables.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example requirements — what you must do",
+          "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+          "plainEnglishTitle": "In plain English",
+          "plainEnglish": [
+            "Understand Function files & local variables example 1, predict the behavior, and transfer the idea to a fresh case.",
+            "Do not memorize a finished trace or example; explain why each important step happens."
+          ],
+          "focus": [
+            "concept behavior",
+            "correct syntax or rule choice",
+            "verification"
+          ],
+          "tools": [
+            "function file",
+            "input variables",
+            "output variables",
+            "local variables",
+            "filename"
+          ],
+          "requirements": [
+            "Predict the important output, value, state, control-flow path, or visual result before checking it.",
+            "Explain each important operation in plain language.",
+            "Change one meaningful input, operand, address, range, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "steps": [
+            "Predict the important output, value, state, control-flow path, or visual result before checking it.",
+            "Explain each important operation in plain language.",
+            "Change one meaningful input, operand, address, range, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+          "question": "What should happen in Function files & local variables example 1, and what evidence would prove it?",
+          "why": "This item exists so you can apply Function files & local variables example 1 in engineering work rather than memorize syntax.",
+          "workScenario": "An engineering or low-level systems task depends on Function files & local variables example 1.",
+          "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+          "engineerProcess": [
+            "Restate the requirement.",
+            "Identify inputs and expected outputs/state.",
+            "Choose the relevant construct.",
+            "Predict the result.",
+            "Check a boundary case.",
+            "Document the evidence."
+          ],
+          "acceptanceCriteria": [
+            "The required observable result is correct.",
+            "The chosen construct fits the task.",
+            "A repeatable calculation, trace, or plot verifies the behavior."
+          ]
+        }
+      ]
+    },
+    "mat-07": {
+      "title": "Plotting functions & data",
+      "practice": {
+        "title": "Lesson requirements — what you must be able to do",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand Plotting functions & data, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "plot",
+          "xlabel",
+          "ylabel",
+          "title",
+          "legend",
+          "line style"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in Plotting functions & data, and what evidence would prove it?",
+        "why": "This item exists so you can apply Plotting functions & data in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on Plotting functions & data.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example requirements — what you must do",
+          "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+          "plainEnglishTitle": "In plain English",
+          "plainEnglish": [
+            "Understand Plotting functions & data example 1, predict the behavior, and transfer the idea to a fresh case.",
+            "Do not memorize a finished trace or example; explain why each important step happens."
+          ],
+          "focus": [
+            "concept behavior",
+            "correct syntax or rule choice",
+            "verification"
+          ],
+          "tools": [
+            "plot",
+            "xlabel",
+            "ylabel",
+            "title",
+            "legend",
+            "line style"
+          ],
+          "requirements": [
+            "Predict the important output, value, state, control-flow path, or visual result before checking it.",
+            "Explain each important operation in plain language.",
+            "Change one meaningful input, operand, address, range, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "steps": [
+            "Predict the important output, value, state, control-flow path, or visual result before checking it.",
+            "Explain each important operation in plain language.",
+            "Change one meaningful input, operand, address, range, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+          "question": "What should happen in Plotting functions & data example 1, and what evidence would prove it?",
+          "why": "This item exists so you can apply Plotting functions & data example 1 in engineering work rather than memorize syntax.",
+          "workScenario": "An engineering or low-level systems task depends on Plotting functions & data example 1.",
+          "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+          "engineerProcess": [
+            "Restate the requirement.",
+            "Identify inputs and expected outputs/state.",
+            "Choose the relevant construct.",
+            "Predict the result.",
+            "Check a boundary case.",
+            "Document the evidence."
+          ],
+          "acceptanceCriteria": [
+            "The required observable result is correct.",
+            "The chosen construct fits the task.",
+            "A repeatable calculation, trace, or plot verifies the behavior."
+          ]
+        }
+      ]
+    },
+    "mat-08": {
+      "title": "Relational, logical & conditional statements",
+      "practice": {
+        "title": "Lesson requirements — what you must be able to do",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand Relational, logical & conditional statements, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "<",
+          "<=",
+          ">",
+          ">=",
+          "==",
+          "~=",
+          "~",
+          "&",
+          "|",
+          "xor"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in Relational, logical & conditional statements, and what evidence would prove it?",
+        "why": "This item exists so you can apply Relational, logical & conditional statements in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on Relational, logical & conditional statements.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example requirements — what you must do",
+          "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+          "plainEnglishTitle": "In plain English",
+          "plainEnglish": [
+            "Understand Relational, logical & conditional statements example 1, predict the behavior, and transfer the idea to a fresh case.",
+            "Do not memorize a finished trace or example; explain why each important step happens."
+          ],
+          "focus": [
+            "concept behavior",
+            "correct syntax or rule choice",
+            "verification"
+          ],
+          "tools": [
+            "<",
+            "<=",
+            ">",
+            ">=",
+            "==",
+            "~=",
+            "~",
+            "&",
+            "|",
+            "xor"
+          ],
+          "requirements": [
+            "Predict the important output, value, state, control-flow path, or visual result before checking it.",
+            "Explain each important operation in plain language.",
+            "Change one meaningful input, operand, address, range, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "steps": [
+            "Predict the important output, value, state, control-flow path, or visual result before checking it.",
+            "Explain each important operation in plain language.",
+            "Change one meaningful input, operand, address, range, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+          "question": "What should happen in Relational, logical & conditional statements example 1, and what evidence would prove it?",
+          "why": "This item exists so you can apply Relational, logical & conditional statements example 1 in engineering work rather than memorize syntax.",
+          "workScenario": "An engineering or low-level systems task depends on Relational, logical & conditional statements example 1.",
+          "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+          "engineerProcess": [
+            "Restate the requirement.",
+            "Identify inputs and expected outputs/state.",
+            "Choose the relevant construct.",
+            "Predict the result.",
+            "Check a boundary case.",
+            "Document the evidence."
+          ],
+          "acceptanceCriteria": [
+            "The required observable result is correct.",
+            "The chosen construct fits the task.",
+            "A repeatable calculation, trace, or plot verifies the behavior."
+          ]
+        }
+      ]
+    },
+    "mat-09": {
+      "title": "for loops, ranges & implied loops",
+      "practice": {
+        "title": "Lesson requirements — what you must be able to do",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand for loops, ranges & implied loops, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "for",
+          "colon range",
+          "loop variable",
+          "vectorization",
+          "indexing"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in for loops, ranges & implied loops, and what evidence would prove it?",
+        "why": "This item exists so you can apply for loops, ranges & implied loops in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on for loops, ranges & implied loops.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example requirements — what you must do",
+          "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+          "plainEnglishTitle": "In plain English",
+          "plainEnglish": [
+            "Understand for loops, ranges & implied loops example 1, predict the behavior, and transfer the idea to a fresh case.",
+            "Do not memorize a finished trace or example; explain why each important step happens."
+          ],
+          "focus": [
+            "concept behavior",
+            "correct syntax or rule choice",
+            "verification"
+          ],
+          "tools": [
+            "for",
+            "colon range",
+            "loop variable",
+            "vectorization",
+            "indexing"
+          ],
+          "requirements": [
+            "Predict the important output, value, state, control-flow path, or visual result before checking it.",
+            "Explain each important operation in plain language.",
+            "Change one meaningful input, operand, address, range, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "steps": [
+            "Predict the important output, value, state, control-flow path, or visual result before checking it.",
+            "Explain each important operation in plain language.",
+            "Change one meaningful input, operand, address, range, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+          "question": "What should happen in for loops, ranges & implied loops example 1, and what evidence would prove it?",
+          "why": "This item exists so you can apply for loops, ranges & implied loops example 1 in engineering work rather than memorize syntax.",
+          "workScenario": "An engineering or low-level systems task depends on for loops, ranges & implied loops example 1.",
+          "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+          "engineerProcess": [
+            "Restate the requirement.",
+            "Identify inputs and expected outputs/state.",
+            "Choose the relevant construct.",
+            "Predict the result.",
+            "Check a boundary case.",
+            "Document the evidence."
+          ],
+          "acceptanceCriteria": [
+            "The required observable result is correct.",
+            "The chosen construct fits the task.",
+            "A repeatable calculation, trace, or plot verifies the behavior."
+          ]
+        }
+      ]
+    },
+    "mat-10": {
+      "title": "while loops & switch structures",
+      "practice": {
+        "title": "Lesson requirements — what you must be able to do",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand while loops & switch structures, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "while",
+          "loop condition",
+          "state update",
+          "switch",
+          "case",
+          "otherwise"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in while loops & switch structures, and what evidence would prove it?",
+        "why": "This item exists so you can apply while loops & switch structures in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on while loops & switch structures.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example requirements — what you must do",
+          "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+          "plainEnglishTitle": "In plain English",
+          "plainEnglish": [
+            "Understand while loops & switch structures example 1, predict the behavior, and transfer the idea to a fresh case.",
+            "Do not memorize a finished trace or example; explain why each important step happens."
+          ],
+          "focus": [
+            "concept behavior",
+            "correct syntax or rule choice",
+            "verification"
+          ],
+          "tools": [
+            "while",
+            "loop condition",
+            "state update",
+            "switch",
+            "case",
+            "otherwise"
+          ],
+          "requirements": [
+            "Predict the important output, value, state, control-flow path, or visual result before checking it.",
+            "Explain each important operation in plain language.",
+            "Change one meaningful input, operand, address, range, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "steps": [
+            "Predict the important output, value, state, control-flow path, or visual result before checking it.",
+            "Explain each important operation in plain language.",
+            "Change one meaningful input, operand, address, range, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+          "question": "What should happen in while loops & switch structures example 1, and what evidence would prove it?",
+          "why": "This item exists so you can apply while loops & switch structures example 1 in engineering work rather than memorize syntax.",
+          "workScenario": "An engineering or low-level systems task depends on while loops & switch structures example 1.",
+          "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+          "engineerProcess": [
+            "Restate the requirement.",
+            "Identify inputs and expected outputs/state.",
+            "Choose the relevant construct.",
+            "Predict the result.",
+            "Check a boundary case.",
+            "Document the evidence."
+          ],
+          "acceptanceCriteria": [
+            "The required observable result is correct.",
+            "The chosen construct fits the task.",
+            "A repeatable calculation, trace, or plot verifies the behavior."
+          ]
+        }
+      ]
+    }
+  },
+  "exercises": [
+    {
+      "id": "mat-ex-01",
+      "title": "Command-window calculations",
+      "practice": {
+        "title": "Exercise question — what you must do",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand Command-window calculations, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "MATLAB",
+          "Command Window",
+          "prompt",
+          "numerical computing"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in Command-window calculations, and what evidence would prove it?",
+        "why": "This item exists so you can apply Command-window calculations in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on Command-window calculations.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "mat-ex-02",
+      "title": "Build row and column vectors",
+      "practice": {
+        "title": "Exercise question — what you must do",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand Build row and column vectors, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "row vector",
+          "column vector",
+          "colon operator",
+          "transpose",
+          "concatenation"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in Build row and column vectors, and what evidence would prove it?",
+        "why": "This item exists so you can apply Build row and column vectors in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on Build row and column vectors.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "mat-ex-03",
+      "title": "Matrix product check",
+      "practice": {
+        "title": "Exercise question — what you must do",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand Matrix product check, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "matrix",
+          "rows",
+          "columns",
+          "matrix multiplication",
+          "dimensions"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in Matrix product check, and what evidence would prove it?",
+        "why": "This item exists so you can apply Matrix product check in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on Matrix product check.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "mat-ex-04",
+      "title": "Choose * or .*",
+      "practice": {
+        "title": "Exercise question — what you must do",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand Choose * or .*, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          ".*",
+          "./",
+          ".^",
+          "element-wise",
+          "vectorization"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in Choose * or .*, and what evidence would prove it?",
+        "why": "This item exists so you can apply Choose * or .* in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on Choose * or .*.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "mat-ex-05",
+      "title": "Vectorized engineering expression",
+      "practice": {
+        "title": "Exercise question — what you must do",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand Vectorized engineering expression, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          ".*",
+          "./",
+          ".^",
+          "element-wise",
+          "vectorization"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in Vectorized engineering expression, and what evidence would prove it?",
+        "why": "This item exists so you can apply Vectorized engineering expression in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on Vectorized engineering expression.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "mat-ex-06",
+      "title": "Convert commands into a script",
+      "practice": {
+        "title": "Exercise question — what you must do",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand Convert commands into a script, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "script",
+          "M-file",
+          "sequence of commands",
+          "comments"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in Convert commands into a script, and what evidence would prove it?",
+        "why": "This item exists so you can apply Convert commands into a script in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on Convert commands into a script.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "mat-ex-07",
+      "title": "Write a function file",
+      "practice": {
+        "title": "Exercise question — what you must do",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand Write a function file, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "function file",
+          "input variables",
+          "output variables",
+          "local variables",
+          "filename"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in Write a function file, and what evidence would prove it?",
+        "why": "This item exists so you can apply Write a function file in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on Write a function file.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "mat-ex-08",
+      "title": "Label a plot",
+      "practice": {
+        "title": "Exercise question — what you must do",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand Label a plot, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "plot",
+          "xlabel",
+          "ylabel",
+          "title",
+          "legend",
+          "line style"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in Label a plot, and what evidence would prove it?",
+        "why": "This item exists so you can apply Label a plot in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on Label a plot.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "mat-ex-09",
+      "title": "Piecewise function",
+      "practice": {
+        "title": "Exercise question — what you must do",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand Piecewise function, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "<",
+          "<=",
+          ">",
+          ">=",
+          "==",
+          "~=",
+          "~",
+          "&",
+          "|",
+          "xor"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in Piecewise function, and what evidence would prove it?",
+        "why": "This item exists so you can apply Piecewise function in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on Piecewise function.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "mat-ex-10",
+      "title": "for-loop trace",
+      "practice": {
+        "title": "Exercise question — what you must do",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand for-loop trace, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "for",
+          "colon range",
+          "loop variable",
+          "vectorization",
+          "indexing"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in for-loop trace, and what evidence would prove it?",
+        "why": "This item exists so you can apply for-loop trace in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on for-loop trace.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "mat-ex-11",
+      "title": "while-loop trace",
+      "practice": {
+        "title": "Exercise question — what you must do",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand while-loop trace, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "while",
+          "loop condition",
+          "state update",
+          "switch",
+          "case",
+          "otherwise"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in while-loop trace, and what evidence would prove it?",
+        "why": "This item exists so you can apply while-loop trace in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on while-loop trace.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "mat-ex-12",
+      "title": "switch direction selector",
+      "practice": {
+        "title": "Exercise question — what you must do",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand switch direction selector, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "while",
+          "loop condition",
+          "state update",
+          "switch",
+          "case",
+          "otherwise"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in switch direction selector, and what evidence would prove it?",
+        "why": "This item exists so you can apply switch direction selector in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on switch direction selector.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    }
+  ],
+  "projects": [
+    {
+      "id": "mat-p1",
+      "title": "Engineering data & plotting worksheet",
+      "practice": {
+        "title": "Project question — what your finished work must do",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand Engineering data & plotting worksheet, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "MATLAB",
+          "verification",
+          "README"
+        ],
+        "requirements": [
+          "Restate the required behavior before implementation.",
+          "Satisfy every listed project requirement.",
+          "Verify normal behavior and at least one boundary or failure case.",
+          "Document assumptions, evidence, run steps, and limitations clearly."
+        ],
+        "steps": [
+          "Restate the required behavior before implementation.",
+          "Satisfy every listed project requirement.",
+          "Verify normal behavior and at least one boundary or failure case.",
+          "Document assumptions, evidence, run steps, and limitations clearly."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in Engineering data & plotting worksheet, and what evidence would prove it?",
+        "why": "This item exists so you can apply Engineering data & plotting worksheet in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on Engineering data & plotting worksheet.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "mat-p2",
+      "title": "Matrix and function toolkit",
+      "practice": {
+        "title": "Project question — what your finished work must do",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand Matrix and function toolkit, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "MATLAB",
+          "verification",
+          "README"
+        ],
+        "requirements": [
+          "Restate the required behavior before implementation.",
+          "Satisfy every listed project requirement.",
+          "Verify normal behavior and at least one boundary or failure case.",
+          "Document assumptions, evidence, run steps, and limitations clearly."
+        ],
+        "steps": [
+          "Restate the required behavior before implementation.",
+          "Satisfy every listed project requirement.",
+          "Verify normal behavior and at least one boundary or failure case.",
+          "Document assumptions, evidence, run steps, and limitations clearly."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in Matrix and function toolkit, and what evidence would prove it?",
+        "why": "This item exists so you can apply Matrix and function toolkit in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on Matrix and function toolkit.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "mat-p3",
+      "title": "Control-flow practice program",
+      "practice": {
+        "title": "Project question — what your finished work must do",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand Control-flow practice program, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "MATLAB",
+          "verification",
+          "README"
+        ],
+        "requirements": [
+          "Restate the required behavior before implementation.",
+          "Satisfy every listed project requirement.",
+          "Verify normal behavior and at least one boundary or failure case.",
+          "Document assumptions, evidence, run steps, and limitations clearly."
+        ],
+        "steps": [
+          "Restate the required behavior before implementation.",
+          "Satisfy every listed project requirement.",
+          "Verify normal behavior and at least one boundary or failure case.",
+          "Document assumptions, evidence, run steps, and limitations clearly."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in Control-flow practice program, and what evidence would prove it?",
+        "why": "This item exists so you can apply Control-flow practice program in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on Control-flow practice program.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "mat-capstone",
+      "title": "MATLAB engineering analysis mini-project",
+      "practice": {
+        "title": "Project question — what your finished work must do",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand MATLAB engineering analysis mini-project, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "MATLAB",
+          "verification",
+          "README"
+        ],
+        "requirements": [
+          "Restate the required behavior before implementation.",
+          "Satisfy every listed project requirement.",
+          "Verify normal behavior and at least one boundary or failure case.",
+          "Document assumptions, evidence, run steps, and limitations clearly."
+        ],
+        "steps": [
+          "Restate the required behavior before implementation.",
+          "Satisfy every listed project requirement.",
+          "Verify normal behavior and at least one boundary or failure case.",
+          "Document assumptions, evidence, run steps, and limitations clearly."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in MATLAB engineering analysis mini-project, and what evidence would prove it?",
+        "why": "This item exists so you can apply MATLAB engineering analysis mini-project in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on MATLAB engineering analysis mini-project.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "id": "quiz-1",
+      "title": "MATLAB is presented as:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand MATLAB is presented as:, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "MATLAB",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in MATLAB is presented as:, and what evidence would prove it?",
+        "why": "This item exists so you can apply MATLAB is presented as: in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on MATLAB is presented as:.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "quiz-2",
+      "title": "Commands can be entered at:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand Commands can be entered at:, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "MATLAB",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in Commands can be entered at:, and what evidence would prove it?",
+        "why": "This item exists so you can apply Commands can be entered at: in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on Commands can be entered at:.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "quiz-3",
+      "title": "Which creates a row vector?",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand Which creates a row vector?, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "MATLAB",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in Which creates a row vector?, and what evidence would prove it?",
+        "why": "This item exists so you can apply Which creates a row vector? in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on Which creates a row vector?.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "quiz-4",
+      "title": "Which creates a column vector?",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand Which creates a column vector?, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "MATLAB",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in Which creates a column vector?, and what evidence would prove it?",
+        "why": "This item exists so you can apply Which creates a column vector? in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on Which creates a column vector?.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "quiz-5",
+      "title": "5:0.1:30 means:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand 5:0.1:30 means:, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "MATLAB",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in 5:0.1:30 means:, and what evidence would prove it?",
+        "why": "This item exists so you can apply 5:0.1:30 means: in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on 5:0.1:30 means:.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "quiz-6",
+      "title": "A*B represents:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand A*B represents:, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "MATLAB",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in A*B represents:, and what evidence would prove it?",
+        "why": "This item exists so you can apply A*B represents: in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on A*B represents:.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "quiz-7",
+      "title": "a.*b represents:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand a.*b represents:, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "MATLAB",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in a.*b represents:, and what evidence would prove it?",
+        "why": "This item exists so you can apply a.*b represents: in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on a.*b represents:.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "quiz-8",
+      "title": "a.^b represents:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand a.^b represents:, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "MATLAB",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in a.^b represents:, and what evidence would prove it?",
+        "why": "This item exists so you can apply a.^b represents: in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on a.^b represents:.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "quiz-9",
+      "title": "A script file contains:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand A script file contains:, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "MATLAB",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in A script file contains:, and what evidence would prove it?",
+        "why": "This item exists so you can apply A script file contains: in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on A script file contains:.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "quiz-10",
+      "title": "A function file is useful when:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand A function file is useful when:, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "MATLAB",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in A function file is useful when:, and what evidence would prove it?",
+        "why": "This item exists so you can apply A function file is useful when: in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on A function file is useful when:.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "quiz-11",
+      "title": "Function variables are described as:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand Function variables are described as:, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "MATLAB",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in Function variables are described as:, and what evidence would prove it?",
+        "why": "This item exists so you can apply Function variables are described as: in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on Function variables are described as:.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "quiz-12",
+      "title": "For one output, square brackets are:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand For one output, square brackets are:, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "MATLAB",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in For one output, square brackets are:, and what evidence would prove it?",
+        "why": "This item exists so you can apply For one output, square brackets are: in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on For one output, square brackets are:.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "quiz-13",
+      "title": "The function name should match:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand The function name should match:, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "MATLAB",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in The function name should match:, and what evidence would prove it?",
+        "why": "This item exists so you can apply The function name should match: in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on The function name should match:.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "quiz-14",
+      "title": "plot(x,y) is used for:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand plot(x,y) is used for:, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "MATLAB",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in plot(x,y) is used for:, and what evidence would prove it?",
+        "why": "This item exists so you can apply plot(x,y) is used for: in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on plot(x,y) is used for:.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "quiz-15",
+      "title": "legend is used to:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand legend is used to:, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "MATLAB",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in legend is used to:, and what evidence would prove it?",
+        "why": "This item exists so you can apply legend is used to: in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on legend is used to:.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "quiz-16",
+      "title": "~= means:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand ~= means:, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "MATLAB",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in ~= means:, and what evidence would prove it?",
+        "why": "This item exists so you can apply ~= means: in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on ~= means:.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "quiz-17",
+      "title": "== means:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand == means:, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "MATLAB",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in == means:, and what evidence would prove it?",
+        "why": "This item exists so you can apply == means: in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on == means:.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "quiz-18",
+      "title": "elseif is used to:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand elseif is used to:, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "MATLAB",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in elseif is used to:, and what evidence would prove it?",
+        "why": "This item exists so you can apply elseif is used to: in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on elseif is used to:.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "quiz-19",
+      "title": "In m:s:n, s is:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand In m:s:n, s is:, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "MATLAB",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in In m:s:n, s is:, and what evidence would prove it?",
+        "why": "This item exists so you can apply In m:s:n, s is: in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on In m:s:n, s is:.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "quiz-20",
+      "title": "If s is omitted, it defaults to:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand If s is omitted, it defaults to:, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "MATLAB",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in If s is omitted, it defaults to:, and what evidence would prove it?",
+        "why": "This item exists so you can apply If s is omitted, it defaults to: in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on If s is omitted, it defaults to:.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "quiz-21",
+      "title": "while is especially useful when:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand while is especially useful when:, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "MATLAB",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in while is especially useful when:, and what evidence would prove it?",
+        "why": "This item exists so you can apply while is especially useful when: in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on while is especially useful when:.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "quiz-22",
+      "title": "A while loop's controlling value should:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand A while loop's controlling value should:, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "MATLAB",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in A while loop's controlling value should:, and what evidence would prove it?",
+        "why": "This item exists so you can apply A while loop's controlling value should: in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on A while loop's controlling value should:.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "quiz-23",
+      "title": "switch is useful when:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand switch is useful when:, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "MATLAB",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in switch is useful when:, and what evidence would prove it?",
+        "why": "This item exists so you can apply switch is useful when: in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on switch is useful when:.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    },
+    {
+      "id": "quiz-24",
+      "title": "otherwise handles:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines competent work without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand otherwise handles:, predict the behavior, and transfer the idea to a fresh case.",
+          "Do not memorize a finished trace or example; explain why each important step happens."
+        ],
+        "focus": [
+          "concept behavior",
+          "correct syntax or rule choice",
+          "verification"
+        ],
+        "tools": [
+          "MATLAB",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain language.",
+          "Choose the relevant command, operator, instruction, rule, or control structure.",
+          "Work through the expected state change, value, or execution path.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "Move on when you can satisfy these requirements with a fresh example without copying the supplied one.",
+        "question": "What should happen in otherwise handles:, and what evidence would prove it?",
+        "why": "This item exists so you can apply otherwise handles: in engineering work rather than memorize syntax.",
+        "workScenario": "An engineering or low-level systems task depends on otherwise handles:.",
+        "workTask": "Define the desired result, choose the relevant construct, predict the behavior, then verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Identify inputs and expected outputs/state.",
+          "Choose the relevant construct.",
+          "Predict the result.",
+          "Check a boundary case.",
+          "Document the evidence."
+        ],
+        "acceptanceCriteria": [
+          "The required observable result is correct.",
+          "The chosen construct fits the task.",
+          "A repeatable calculation, trace, or plot verifies the behavior."
+        ]
+      }
+    }
+  ]
+}

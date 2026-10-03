@@ -260,24 +260,151 @@ function armPurpose(t){
  if(!clean(t))return'Blank line for spacing.';
  if(/^\s*;/.test(t))return'Assembler comment for the reader; the processor does not execute it.';
  var vector=clean(t).match(/^(0x[\da-f]+)\s+(.+)$/i);if(vector)return'Classic ARM vector offset `'+vector[1]+'` dispatches `'+vector[2]+'` to its handler; this row is a reference table entry.';
- var s=clean(t).split(';')[0].trim(),m=s.match(/^([A-Za-z][A-Za-z0-9]*)\b\s*(.*)$/);if(!m)return'This is ARM reference material, a label, or a data definition rather than a processor operation.';
- if(!/^(AREA|ENTRY|END|ALIGN|SPACE|MOV|MVN|ADD|ADC|SUB|SBC|RSB|RSC|AND|ORR|EOR|BIC|CMP|CMN|TST|TEQ|LDR|STR|PUSH|POP|LSL|LSR|ASR|ROR|LDM|STM|SVC|B$|BL$|BX$|B(?:EQ|NE|LT|LE|GT|GE|HI|LS|HS|LO|CS|CC|MI|PL|VS|VC)$)/i.test(m[1])){m=s.match(/^[A-Za-z_]\w*:?\s+([A-Za-z][A-Za-z0-9]*)\b\s*(.*)$/);if(!m)return'This label names a position in the instruction sequence; it does not itself change a register.';}
- m=[m[0],null,m[1],m[2]];
- var op=m[2].toUpperCase(),rest=clean(m[3]);
- var operands=splitSimpleComma(rest),conditions={EQ:'Z=1',NE:'Z=0',CS:'C=1',HS:'C=1',CC:'C=0',LO:'C=0',MI:'N=1',PL:'N=0',VS:'V=1',VC:'V=0',HI:'C=1 and Z=0',LS:'C=0 or Z=1',GE:'N=V',LT:'N differs from V',GT:'Z=0 and N=V',LE:'Z=1 or N differs from V'};
- var branch=op.match(/^B(EQ|NE|CS|HS|CC|LO|MI|PL|VS|VC|HI|LS|GE|LT|GT|LE)$/);if(branch)return'Branches to `'+rest+'` when condition `'+branch[1]+'` holds: '+conditions[branch[1]]+'. Otherwise execution continues with the next instruction.';
+ 
+ var raw=clean(t).split(';')[0].trim();
+ if(!raw)return'Assembler comment for the reader; the processor does not execute it.';
+
+ var conditions={EQ:'Z=1',NE:'Z=0',CS:'C=1',HS:'C=1',CC:'C=0',LO:'C=0',MI:'N=1',PL:'N=0',VS:'V=1',VC:'V=0',HI:'C=1 and Z=0',LS:'C=0 or Z=1',GE:'N=V',LT:'N differs from V',GT:'Z=0 and N=V',LE:'Z=1 or N differs from V'};
+ var knownDirectives=/^(AREA|ENTRY|END|ALIGN|SPACE|DCD|DCB|DCW|EQU|RN|EXPORT|IMPORT|GLOBAL|LTORG|MACRO|MEND|MEXIT)$/i;
+ var knownInstructions=/^(MOV|MVN|ADD|ADC|SUB|SBC|RSB|RSC|MUL|MLA|UMULL|UMLAL|SMULL|SMLAL|AND|ORR|EOR|BIC|CMP|CMN|TST|TEQ|LDR|STR|LDRB|STRB|LDRH|STRH|LDRSB|LDRSH|PUSH|POP|LDM|STM|LDMFD|STMFD|LDMIA|STMIA|LDMDB|STMDB|SVC|SWI|MRS|MSR|NOP|B|BL|BX|BLX)(EQ|NE|CS|HS|CC|LO|MI|PL|VS|VC|HI|LS|GE|LT|GT|LE)?(S)?$/i;
+
+ var op='',rest='';
+ var firstWordMatch=raw.match(/^([A-Za-z_]\w*)\b\s*(.*)$/);
+ if(firstWordMatch&&(knownDirectives.test(firstWordMatch[1])||knownInstructions.test(firstWordMatch[1]))){
+   op=firstWordMatch[1].toUpperCase();
+   rest=clean(firstWordMatch[2]);
+ } else {
+   var labelMatch=raw.match(/^([A-Za-z_]\w*):?\s+(.*)$/);
+   if(labelMatch){
+     var secondWordMatch=labelMatch[2].match(/^([A-Za-z_]\w*)\b\s*(.*)$/);
+     if(secondWordMatch&&(knownDirectives.test(secondWordMatch[1])||knownInstructions.test(secondWordMatch[1]))){
+       op=secondWordMatch[1].toUpperCase();
+       rest=clean(secondWordMatch[2]);
+     } else {
+       return'Label `'+labelMatch[1]+'` marks this location in the assembly sequence; it does not change registers.';
+     }
+   } else {
+     return'Label `'+raw.replace(/:$/,'')+'` names this position in the assembly sequence; it does not itself change a register.';
+   }
+ }
+
+ var operands=splitSimpleComma(rest);
+ var branch=op.match(/^B(EQ|NE|CS|HS|CC|LO|MI|PL|VS|VC|HI|LS|GE|LT|GT|LE)$/);
+ if(branch)return'Branches to `'+rest+'` when condition `'+branch[1]+'` holds: '+conditions[branch[1]]+'. Otherwise execution continues with the next instruction.';
+
  var detailed=op.match(/^(MOV|MVN|ADD|ADC|SUB|SBC|RSB|RSC|AND|ORR|EOR|BIC)(EQ|NE|CS|HS|CC|LO|MI|PL|VS|VC|HI|LS|GE|LT|GT|LE)?(S)?$/);
  if(detailed&&!detailed[2]&&operands.length===(/^(MOV|MVN)$/.test(detailed[1])?2:3)){
   var base=detailed[1],a=operands[1],b=operands[2],calculation={ADD:a+' + '+b,ADC:a+' + '+b+' + C',SUB:a+' - '+b,SBC:a+' - '+b+' - (1-C)',RSB:b+' - '+a,RSC:b+' - '+a+' - (1-C)',AND:a+' AND '+b,ORR:a+' OR '+b,EOR:a+' XOR '+b,BIC:a+' AND NOT '+b};
-  return(base==='MOV'?'Copies `'+a+'` into `'+operands[0]+'`.':base==='MVN'?'Stores bitwise NOT of `'+a+'` in `'+operands[0]+'`.':'Stores `'+calculation[base]+'` in `'+operands[0]+'`.')+(detailed[3]?' The S suffix also updates flags.':'');
+  return(base==='MOV'?'Copies `'+a+'` into `'+operands[0]+'`.':base==='MVN'?'Stores bitwise NOT of `'+a+'` in `'+operands[0]+'`.':'Stores `'+calculation[base]+'` in `'+operands[0]+'`.')+((detailed[3]||/S$/.test(op))?' The S suffix also updates flags.':'');
  }
- var map={AREA:'Declares an ARM assembler area/section and its attributes.',ENTRY:'Marks the program entry point for the assembler/linker.',END:'Marks the end of the assembly source file.',RN:'Assigns a readable alias to a register number.',EQU:'Defines a symbolic constant with a fixed value.',MOV:'Copies an immediate value or register value into the destination register.',MOVS:'Moves a value and updates the condition flags from the result.',MVN:'Writes the bitwise NOT of the source value into the destination register.',ADD:'Adds the source operands and stores the result in the destination register.',ADDS:'Adds the operands, stores the result, and updates condition flags.',ADC:'Adds the operands plus the current carry flag.',SUB:'Subtracts the source operand from the first operand and stores the result.',SUBS:'Subtracts the operands, stores the result, and updates condition flags.',SBC:'Subtracts using the carry/borrow state from the status flags.',RSB:'Performs reverse subtraction: the second source minus the first source.',RSC:'Performs reverse subtraction using the carry/borrow state.',AND:'Performs bitwise AND on the source operands.',ORR:'Performs bitwise OR on the source operands.',EOR:'Performs bitwise exclusive OR on the source operands.',BIC:'Clears selected bits by ANDing with the inverted mask.',CMP:'Compares two values by subtracting them only to update condition flags.',CMN:'Compares by adding the operands only to update condition flags.',TST:'Tests selected bits with AND and updates flags without storing a result.',TEQ:'Tests bit differences with XOR and updates flags without storing a result.',LDR:'Loads a value from memory or a literal address/value into a register.',STR:'Stores a register value into memory.',PUSH:'Pushes the listed registers onto the stack.',POP:'Pops values from the stack into the listed registers.',B:'Branches to the target label.',BL:'Branches to a subroutine and saves the return address in LR.',BX:'Branches to the address held in a register, commonly LR when returning.',BLT:'Branches when the signed less-than condition is true.',BLE:'Branches when the signed less-than-or-equal condition is true.',BGT:'Branches when the signed greater-than condition is true.',BGE:'Branches when the signed greater-than-or-equal condition is true.',BEQ:'Branches when the zero/equal condition is true.',BNE:'Branches when the zero/equal condition is false.',SVC:'Requests a supervisor call exception.'};
+
+ var map={
+   AREA:'Declares an ARM assembler area/section and its attributes.',
+   ENTRY:'Marks the program entry point for the assembler/linker.',
+   END:'Marks the end of the assembly source file.',
+   RN:'Assigns a readable alias to a register number.',
+   EQU:'Defines a symbolic constant with a fixed value.',
+   EXPORT:'Exports a symbol for external linkage across translation units.',
+   GLOBAL:'Declares a global symbol accessible from other modules.',
+   IMPORT:'Imports an external symbol defined in another object file.',
+   ALIGN:'Aligns the current memory location counter to the specified boundary.',
+   SPACE:'Reserves an uninitialized block of memory bytes.',
+   DCD:'Allocates one or more 32-bit words of data in memory.',
+   DCB:'Allocates one or more bytes or string data in memory.',
+   DCW:'Allocates one or more 16-bit halfwords of data in memory.',
+   LTORG:'Instructs the assembler to dump the literal pool at this location.',
+   MACRO:'Begins a macro definition block for source expansion.',
+   MEND:'Ends a macro definition block.',
+   MEXIT:'Exits early from a macro expansion.',
+   NOP:'Performs no operation, consuming one instruction cycle.',
+   MOV:'Copies an immediate value or register value into the destination register.',
+   MOVS:'Moves a value and updates the condition flags from the result.',
+   MVN:'Writes the bitwise NOT of the source value into the destination register.',
+   MVNS:'Writes bitwise NOT and updates condition flags from the result.',
+   ADD:'Adds the source operands and stores the result in the destination register.',
+   ADDS:'Adds the operands, stores the result, and updates condition flags.',
+   ADC:'Adds the operands plus the current carry flag.',
+   ADCS:'Adds operands plus carry flag and updates condition flags.',
+   SUB:'Subtracts the source operand from the first operand and stores the result.',
+   SUBS:'Subtracts the operands, stores the result, and updates condition flags.',
+   SBC:'Subtracts using the carry/borrow state from the status flags.',
+   SBCS:'Subtracts with carry/borrow state and updates condition flags.',
+   RSB:'Performs reverse subtraction: the second source minus the first source.',
+   RSBS:'Performs reverse subtraction and updates condition flags.',
+   RSC:'Performs reverse subtraction using the carry/borrow state.',
+   RSCS:'Performs reverse subtraction with carry and updates condition flags.',
+   MUL:'Multiplies two 32-bit registers and stores the 32-bit product.',
+   MULS:'Multiplies two registers and updates negative and zero flags.',
+   MLA:'Multiplies two registers, adds an accumulator, and stores the result.',
+   MLAS:'Multiplies, accumulates, and updates condition flags.',
+   UMULL:'Multiplies two 32-bit unsigned registers producing a 64-bit result.',
+   UMLAL:'Multiplies two unsigned registers and accumulates into a 64-bit pair.',
+   SMULL:'Multiplies two 32-bit signed registers producing a 64-bit result.',
+   SMLAL:'Multiplies two signed registers and accumulates into a 64-bit pair.',
+   AND:'Performs bitwise AND on the source operands.',
+   ANDS:'Performs bitwise AND and updates condition flags.',
+   ORR:'Performs bitwise OR on the source operands.',
+   ORRS:'Performs bitwise OR and updates condition flags.',
+   EOR:'Performs bitwise exclusive OR on the source operands.',
+   EORS:'Performs bitwise exclusive OR and updates condition flags.',
+   BIC:'Clears selected bits by ANDing with the inverted mask.',
+   BICS:'Clears selected bits and updates condition flags.',
+   CMP:'Compares two values by subtracting them only to update condition flags.',
+   CMN:'Compares by adding the operands only to update condition flags.',
+   TST:'Tests selected bits with AND and updates flags without storing a result.',
+   TEQ:'Tests bit differences with XOR and updates flags without storing a result.',
+   LDR:'Loads a value from memory or a literal address/value into a register.',
+   LDRB:'Loads an 8-bit byte from memory zero-extended into a 32-bit register.',
+   LDRH:'Loads a 16-bit halfword from memory zero-extended into a register.',
+   LDRSB:'Loads a signed byte from memory sign-extended into a register.',
+   LDRSH:'Loads a signed halfword from memory sign-extended into a register.',
+   STR:'Stores a register value into memory.',
+   STRB:'Stores the least significant byte of a register into memory.',
+   STRH:'Stores the least significant halfword of a register into memory.',
+   PUSH:'Pushes the listed registers onto the stack.',
+   POP:'Pops values from the stack into the listed registers.',
+   LDM:'Loads multiple registers from consecutive memory locations.',
+   STM:'Stores multiple registers to consecutive memory locations.',
+   LDMFD:'Pops multiple registers from a full descending stack.',
+   STMFD:'Pushes multiple registers onto a full descending stack.',
+   LDMIA:'Loads multiple registers incrementing address after each transfer.',
+   STMIA:'Stores multiple registers incrementing address after each transfer.',
+   LDMDB:'Loads multiple registers decrementing address before each transfer.',
+   STMDB:'Stores multiple registers decrementing address before each transfer.',
+   MRS:'Copies the current program status register (CPSR/SPSR) into a register.',
+   MSR:'Writes a general register or immediate into status register fields.',
+   B:'Branches to the target label.',
+   BL:'Branches to a subroutine and saves the return address in LR.',
+   BX:'Branches to the address held in a register, commonly LR when returning.',
+   BLX:'Branches to a subroutine with address in register, switching CPU state.',
+   BLT:'Branches when the signed less-than condition is true.',
+   BLE:'Branches when the signed less-than-or-equal condition is true.',
+   BGT:'Branches when the signed greater-than condition is true.',
+   BGE:'Branches when the signed greater-than-or-equal condition is true.',
+   BEQ:'Branches when the zero/equal condition is true.',
+   BNE:'Branches when the zero/equal condition is false.',
+   BCS:'Branches when the carry flag is set.',
+   BCC:'Branches when the carry flag is clear.',
+   BMI:'Branches when the negative flag is set.',
+   BPL:'Branches when the negative flag is clear.',
+   BVS:'Branches when the overflow flag is set.',
+   BVC:'Branches when the overflow flag is clear.',
+   BHI:'Branches when unsigned higher (C=1 and Z=0).',
+   BLS:'Branches when unsigned lower or same (C=0 or Z=1).',
+   SVC:'Requests a supervisor call exception.',
+   SWI:'Requests a software interrupt exception.'
+ };
+
  if(/^LSL$|^LSR$|^ASR$|^ROR$/.test(op))return'Applies the ARM barrel shifter operation `'+op+'` to move or rotate the operand bits.';
- if(/^LDM/.test(op))return'Loads multiple registers from consecutive memory locations using the selected ARM addressing mode.';
- if(/^STM/.test(op))return'Stores multiple registers to consecutive memory locations using the selected ARM addressing mode.';
- var conditional=op.match(/^(MOV|MVN|ADD|ADC|SUB|SBC|RSB|RSC|AND|ORR|EOR|BIC|LDR|STR)(EQ|NE|CS|HS|CC|LO|MI|PL|VS|VC|HI|LS|GE|LT|GT|LE)(S)?$/);
- if(conditional)return armPurpose(conditional[1]+(conditional[3]?'S':'')+' '+rest)+' It runs when condition `'+conditional[2]+'` holds: '+conditions[conditional[2]]+'.';
  if(map[op])return map[op];
+
+ var condMatch=op.match(/^(MOV|MVN|ADD|ADC|SUB|SBC|RSB|RSC|MUL|MLA|AND|ORR|EOR|BIC|LDR|STR|LDRB|STRB|LDRH|STRH|LDMFD|STMFD|LDMIA|STMIA|PUSH|POP|BX|BL)(EQ|NE|CS|HS|CC|LO|MI|PL|VS|VC|HI|LS|GE|LT|GT|LE)(S)?$/);
+ if(condMatch){
+   var baseOp=condMatch[1]+(condMatch[3]?'S':'');
+   var baseText=map[baseOp]||map[condMatch[1]]||('Executes `'+baseOp+'` with operands `'+rest+'`.');
+   return baseText+' It runs when condition `'+condMatch[2]+'` holds: '+conditions[condMatch[2]]+'.';
+ }
+
  if(/S$/.test(op)&&map[op.slice(0,-1)])return map[op.slice(0,-1)]+' The S suffix updates condition flags.';
  return 'This ARM instruction/directive `'+op+'` uses operands `'+rest+'`; consult the lesson for its supported form.';
 }
@@ -537,12 +664,15 @@ function pythonTeachingPurpose(raw,ctx){
 function cppTeachingPurpose(raw,lang,ctx){
  var t=clean(stripInlineComment(raw,lang)),original=clean(raw),m,isJava=lang==='java';
  if(!isJava){
+  if(/^extern\s+"C"\s*\{?$/i.test(t))return'Declares C linkage (`extern "C"`), disabling C++ name mangling for cross-language compatibility.';
+  if((m=t.match(/^extern\s+"C"\s+(.+)$/i)))return'Declares C linkage (`extern "C"`) for `'+clean(m[1])+'` to interoperate with assembly.';
   if(/\bmain\s*\(/.test(t))return'Defines `main()`, the function where a C++ program starts running.';
   if((m=t.match(/^namespace\s+([\w:]+)\s*\{/)))return'Opens namespace `'+m[1]+'`, grouping names to avoid collisions with other code.';
   if((m=t.match(/^enum\s+class\s+(\w+)\s*\{/))){if(ctx)ctx.enumOpen=true;return'Defines scoped enumeration `'+m[1]+'`; its named choices follow inside the braces.';}
   if(ctx&&ctx.enumOpen){if(/^}/.test(t)){ctx.enumOpen=false;return'Closes the scoped enumeration definition.';}if(/^\w+(?:\s*=\s*\d+)?(?:\s*,\s*\w+(?:\s*=\s*\d+)?)*,?$/.test(t))return'Declares the named enumeration choices `'+t.replace(/,$/,'')+'`; each represents one value of this type.';}
   if((m=t.match(/^(?:public|private|protected):\s*(.+)$/)))return'Sets member access, then '+cppTeachingPurpose(m[1],lang,ctx).replace(/^./,function(ch){return ch.toLowerCase();});
   if((m=t.match(/^(?:\+\+|--)([\w.]+(?:\[[^\]]+\])*)\s*;$/)))return(/^(?:\+\+)/.test(t)?'Increases ':'Decreases ')+displayLiteral(m[1])+' by 1 and stores the updated value.';
+  if((m=t.match(/^([\w.]+(?:\[[^\]]+\])*)(\+\+|--)\s*;$/)))return(m[2]==='++'?'Increments ':'Decrements ')+displayLiteral(m[1])+' by 1.';
   if(/^return\s*;$/.test(t))return'Ends this function immediately without returning a value.';
   if(/^try\s*\{$/.test(t))return'Starts a block whose exceptions can be handled by the following catch clauses.';
   if((m=t.match(/^catch\s*\((.+)\)\s*\{/)))return'Handles a matching exception from the try block using `'+clean(m[1])+'`.';
@@ -776,9 +906,12 @@ function syntaxFor(line,lang){
   if(/\[/.test(arm))notes.push('`[base, offset]` describes a memory address, not a list. No offset means the address held in base. `!` writes the adjusted address back; an offset after `]` adjusts base after the transfer.');
   if(/\{/.test(arm))notes.push('`{r3, r4}` is a register list. PUSH/POP transfer words in register-number order; SP tracks the full descending stack.');
   if(/\bLDR\w*\s+\w+\s*,\s*=/i.test(arm))notes.push('`LDR destination, =value` is an assembler pseudo-instruction for loading a value or address; `=` here is not ordinary variable assignment.');
-  if(/\b(?:ADD|ADC|SUB|SBC|RSB|RSC|AND|ORR|EOR|BIC)\w*\s/i.test(arm))notes.push('The first register is the destination. The following source operands supply the calculation; RSB/RSC reverse subtraction order.');
+  if(/\b(?:ADD|ADC|SUB|SBC|RSB|RSC|MUL|MLA|AND|ORR|EOR|BIC)\w*\s/i.test(arm))notes.push('The first register is the destination. The following source operands supply the calculation; RSB/RSC reverse subtraction order.');
   if(/\b(?:CMP|CMN|TST|TEQ)\b/i.test(arm))notes.push('These two-operand tests update flags without storing the arithmetic or logical result in a destination register.');
   if(/\b(?:LSL|LSR|ASR|ROR)\b/i.test(arm))notes.push('The shifter transforms the source operand before the main operation; LSL/LSR shift in zeros, ASR preserves the sign, and ROR rotates bits.');
+  if(/\b(?:DCD|DCB|DCW|SPACE|ALIGN)\b/i.test(arm))notes.push('Data-definition directives allocate bytes/words in memory; ALIGN restores word/halfword boundary.');
+  if(/\b(?:EXPORT|IMPORT|GLOBAL)\b/i.test(arm))notes.push('Symbol linkage directives control visibility across object files and modules.');
+  if(/\b(?:MACRO|MEND|LTORG)\b/i.test(arm))notes.push('Macro and literal pool directives instruct the assembler during source transformation.');
   return notes.length?notes:[armPurpose(arm)];
  }
  if(lang==='python'&&/^#/.test(original))return['`#` starts a Python comment. Everything after it on that line is ignored when the program runs.'];

@@ -1,0 +1,352 @@
+{
+  "release": "5.75-example-depth",
+  "status": "PASS",
+  "coursesAudited": 65,
+  "lessonsAudited": 832,
+  "staticExamplesBefore": 999,
+  "staticExamplesAfter": 999,
+  "staticExamplesAdded": 0,
+  "universalStudyLayer": {
+    "policy": "one example per key concept plus integration/debug examples, minimum five per lesson",
+    "verifiedSeparatelyBy": "scripts/verify-study-examples.cjs"
+  },
+  "dsaStaticFiveExampleFloor": {
+    "dsa-hash-maps": 5,
+    "dsa-two-pointers": 5,
+    "dsa-recursion-backtracking": 5,
+    "dsa-heaps-priority-queues": 5,
+    "dsa-divide-conquer": 5,
+    "dsa-greedy": 5,
+    "dsa-dynamic-programming": 5,
+    "dsa-intervals-sweep": 5,
+    "dsa-monotonic-stack-queue": 5,
+    "dsa-build-set-hash-table": 5
+  },
+  "courseStatsBeforeEnrichment": [
+    {
+      "course": "advanced-computer-organization",
+      "lessons": 8,
+      "staticExamples": 8
+    },
+    {
+      "course": "ai-agents",
+      "lessons": 21,
+      "staticExamples": 21
+    },
+    {
+      "course": "ai-ml",
+      "lessons": 12,
+      "staticExamples": 12
+    },
+    {
+      "course": "ai-system-design",
+      "lessons": 15,
+      "staticExamples": 15
+    },
+    {
+      "course": "apis",
+      "lessons": 10,
+      "staticExamples": 10
+    },
+    {
+      "course": "arm-assembly",
+      "lessons": 12,
+      "staticExamples": 12
+    },
+    {
+      "course": "backend",
+      "lessons": 9,
+      "staticExamples": 9
+    },
+    {
+      "course": "capstone",
+      "lessons": 1,
+      "staticExamples": 1
+    },
+    {
+      "course": "cicd",
+      "lessons": 15,
+      "staticExamples": 15
+    },
+    {
+      "course": "classical-ai",
+      "lessons": 20,
+      "staticExamples": 20
+    },
+    {
+      "course": "cloud-computing",
+      "lessons": 8,
+      "staticExamples": 8
+    },
+    {
+      "course": "company-prep",
+      "lessons": 10,
+      "staticExamples": 10
+    },
+    {
+      "course": "comparch-os",
+      "lessons": 8,
+      "staticExamples": 8
+    },
+    {
+      "course": "computer-vision",
+      "lessons": 9,
+      "staticExamples": 9
+    },
+    {
+      "course": "cpp-dsa",
+      "lessons": 54,
+      "staticExamples": 54
+    },
+    {
+      "course": "cybersecurity",
+      "lessons": 10,
+      "staticExamples": 10
+    },
+    {
+      "course": "data-engineering",
+      "lessons": 17,
+      "staticExamples": 17
+    },
+    {
+      "course": "data-science",
+      "lessons": 11,
+      "staticExamples": 11
+    },
+    {
+      "course": "databases",
+      "lessons": 15,
+      "staticExamples": 15
+    },
+    {
+      "course": "debugging",
+      "lessons": 9,
+      "staticExamples": 9
+    },
+    {
+      "course": "deep-learning",
+      "lessons": 10,
+      "staticExamples": 10
+    },
+    {
+      "course": "deployment",
+      "lessons": 10,
+      "staticExamples": 10
+    },
+    {
+      "course": "diffusion",
+      "lessons": 12,
+      "staticExamples": 12
+    },
+    {
+      "course": "digital-hardware",
+      "lessons": 15,
+      "staticExamples": 15
+    },
+    {
+      "course": "distributed-systems",
+      "lessons": 17,
+      "staticExamples": 17
+    },
+    {
+      "course": "docker",
+      "lessons": 8,
+      "staticExamples": 8
+    },
+    {
+      "course": "dsa",
+      "lessons": 20,
+      "staticExamples": 107
+    },
+    {
+      "course": "embedded-systems",
+      "lessons": 8,
+      "staticExamples": 8
+    },
+    {
+      "course": "frontend-dev",
+      "lessons": 7,
+      "staticExamples": 7
+    },
+    {
+      "course": "gans",
+      "lessons": 11,
+      "staticExamples": 11
+    },
+    {
+      "course": "generative-ai",
+      "lessons": 9,
+      "staticExamples": 9
+    },
+    {
+      "course": "git",
+      "lessons": 10,
+      "staticExamples": 10
+    },
+    {
+      "course": "huggingface",
+      "lessons": 14,
+      "staticExamples": 14
+    },
+    {
+      "course": "influencing-without-authority",
+      "lessons": 15,
+      "staticExamples": 15
+    },
+    {
+      "course": "interview-prep",
+      "lessons": 9,
+      "staticExamples": 9
+    },
+    {
+      "course": "kubernetes",
+      "lessons": 12,
+      "staticExamples": 12
+    },
+    {
+      "course": "large-scale-ai",
+      "lessons": 22,
+      "staticExamples": 22
+    },
+    {
+      "course": "linux",
+      "lessons": 12,
+      "staticExamples": 12
+    },
+    {
+      "course": "llm-evaluation-testing",
+      "lessons": 15,
+      "staticExamples": 15
+    },
+    {
+      "course": "llms",
+      "lessons": 9,
+      "staticExamples": 9
+    },
+    {
+      "course": "matlab-engineering",
+      "lessons": 10,
+      "staticExamples": 10
+    },
+    {
+      "course": "microprocessors-arm",
+      "lessons": 10,
+      "staticExamples": 42
+    },
+    {
+      "course": "mlops",
+      "lessons": 17,
+      "staticExamples": 17
+    },
+    {
+      "course": "networking",
+      "lessons": 13,
+      "staticExamples": 13
+    },
+    {
+      "course": "nlp",
+      "lessons": 9,
+      "staticExamples": 9
+    },
+    {
+      "course": "observability",
+      "lessons": 15,
+      "staticExamples": 15
+    },
+    {
+      "course": "oop",
+      "lessons": 9,
+      "staticExamples": 9
+    },
+    {
+      "course": "problem-solving",
+      "lessons": 9,
+      "staticExamples": 9
+    },
+    {
+      "course": "prompt-engineering",
+      "lessons": 9,
+      "staticExamples": 9
+    },
+    {
+      "course": "python",
+      "lessons": 31,
+      "staticExamples": 79
+    },
+    {
+      "course": "pytorch",
+      "lessons": 9,
+      "staticExamples": 9
+    },
+    {
+      "course": "rag",
+      "lessons": 10,
+      "staticExamples": 10
+    },
+    {
+      "course": "reinforcement-learning-post-training",
+      "lessons": 26,
+      "staticExamples": 26
+    },
+    {
+      "course": "resume-prep",
+      "lessons": 9,
+      "staticExamples": 9
+    },
+    {
+      "course": "secure-ai-applications",
+      "lessons": 15,
+      "staticExamples": 15
+    },
+    {
+      "course": "software-architecture",
+      "lessons": 16,
+      "staticExamples": 16
+    },
+    {
+      "course": "software-engineering-practice",
+      "lessons": 20,
+      "staticExamples": 20
+    },
+    {
+      "course": "sql",
+      "lessons": 12,
+      "staticExamples": 12
+    },
+    {
+      "course": "system-design",
+      "lessons": 10,
+      "staticExamples": 10
+    },
+    {
+      "course": "systems-programming",
+      "lessons": 8,
+      "staticExamples": 8
+    },
+    {
+      "course": "tensorflow",
+      "lessons": 9,
+      "staticExamples": 9
+    },
+    {
+      "course": "testing",
+      "lessons": 11,
+      "staticExamples": 11
+    },
+    {
+      "course": "transformers",
+      "lessons": 9,
+      "staticExamples": 9
+    },
+    {
+      "course": "vaes",
+      "lessons": 11,
+      "staticExamples": 11
+    },
+    {
+      "course": "web-dev",
+      "lessons": 6,
+      "staticExamples": 6
+    }
+  ]
+}

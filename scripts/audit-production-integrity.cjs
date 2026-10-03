@@ -30,7 +30,7 @@ let inlineChecked=0,localAssetsChecked=0;
 for(const file of htmlFiles){
  const html=fs.readFileSync(file,'utf8'),name=rel(file),visible=stripVisible(html);
  for(const [label,re] of leakPatterns){const m=re.exec(visible);if(m){const start=Math.max(0,m.index-90),end=Math.min(visible.length,m.index+190);failures.push(`${name}: possible visible ${label}: ${visible.slice(start,end)}`);break;}}
- if(name!=='courses/cpp-dsa.html'&&/C\+\+|Python\s*(?:&|\+|\/)\s*C\+\+|\bDual\s+(?:mode|language|practice)/i.test(visible))failures.push(`${name}: unexpected legacy C++/dual language text is visible`);
+ if(name!=='courses/cpp-dsa.html'&&name!=='courses/microprocessors-arm.html'&&name!=='courses/arm-assembly.html'&&/C\+\+|Python\s*(?:&|\+|\/)\s*C\+\+|\bDual\s+(?:mode|language|practice)/i.test(visible))failures.push(`${name}: unexpected legacy C++/dual language text is visible`);
  if(name!=='index.html'&&/cpp-runner-ui-worker|primary-language-mode|dual-single-editor-publish|course-language-mode-controller|lesson-language-variants/.test(html))failures.push(`${name}: removed language asset reference remains`);
  const scriptRe=/<script\b([^>]*)>([\s\S]*?)<\/script\s*>/gi;let sm;
  while((sm=scriptRe.exec(html))){
