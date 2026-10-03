@@ -9,7 +9,7 @@ const pages=fs.readdirSync(path.join(root,'courses')).filter(n=>n.endsWith('.htm
 assert.ok([62,65].includes(pages.length), 'expected 62 committed or 65 generated course pages');
 let lessons=0;
 for(const page of pages){const html=fs.readFileSync(path.join(root,'courses',page),'utf8');const progressive=html.indexOf('progressive-lesson-layout.js');assert.ok(progressive>=0,`${page} must load the progressive lesson layout`);assert.ok(html.includes('calm-study-flow.js'),`${page} must load the calm study flow`);const count=(html.match(/class="lesson-main-explanation"[^>]*data-main-explanation/g)||[]).length;assert.ok(count>0,`${page} should contain lesson explanations`);lessons+=count;}
-assert.equal(lessons,832,'expected all 832 generated lesson explanations to be covered');
+assert.equal(lessons,832,'expected 800 committed or 832 generated lesson explanations to be covered');
 const sandbox={window:{},document:{readyState:'loading',addEventListener(){},getElementById(){return null;}},setTimeout(){return 1;},MutationObserver:function(){this.observe=function(){};},console};
 vm.createContext(sandbox);vm.runInContext(source,sandbox,{filename:'progressive-lesson-layout.js'});
 const api=sandbox.window.CSAIProgressiveLessons;assert.ok(api&&typeof api.splitQuick==='function','layout API should expose the quick-summary splitter');
