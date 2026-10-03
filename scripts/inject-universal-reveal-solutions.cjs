@@ -17,5 +17,5 @@ for(const file of fs.readdirSync(dir).filter(name=>name.endsWith('.html'))){
   count++;
 }
 
-if(count!==62)throw new Error(`Expected 62 course pages, updated ${count}`);
+if(count!==65)throw new Error(`Expected 65 course pages, updated ${count}`);
 console.log(`Added universal Reveal solution controls to ${count} course pages.`);

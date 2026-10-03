@@ -33,6 +33,7 @@ jobs:
         run: node --check scripts/enrich-dsa-example-depth.cjs
       - name: Production build phase 1 - prepare pages
         run: >-
+          node scripts/merge-arm-course-additions.cjs &&
           node --check scripts/sanitize-inline-script-closures.cjs &&
           node scripts/sanitize-inline-script-closures.cjs &&
           node scripts/check-index-inline-js.cjs source &&
@@ -60,7 +61,7 @@ jobs:
           const fs=require('fs');
           const report=JSON.parse(fs.readFileSync('EXAMPLE_COVERAGE_QA_v5.75.json','utf8'));
           if(report.status!=='PASS') throw new Error('Coverage report did not pass');
-          if(report.coursesAudited!==62) throw new Error(`Expected 62 courses, got ${report.coursesAudited}`);
+          if(report.coursesAudited!==65) throw new Error(`Expected 65 courses, got ${report.coursesAudited}`);
           for(const [id,count] of Object.entries(report.dsaStaticFiveExampleFloor||{})) {
             if(count<5) throw new Error(`${id} has only ${count} static examples`);
           }

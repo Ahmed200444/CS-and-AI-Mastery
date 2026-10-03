@@ -8,7 +8,7 @@ const homeTag='<script defer src="assets/brilliant-tutor-v1.js?v=20260927-v1"></
 const files=[indexPath];
 if(!fs.existsSync(coursesDir))throw new Error('courses directory missing before tutor injection');
 for(const name of fs.readdirSync(coursesDir).filter(function(x){return x.endsWith('.html');}))files.push(path.join(coursesDir,name));
-if(files.length!==63)throw new Error('Expected index + 62 course pages, found '+files.length);
+if(files.length!==66)throw new Error('Expected index + 65 course pages, found '+files.length);
 for(const file of files){
  let html=fs.readFileSync(file,'utf8');
  html=html.replace(/\s*<script\b[^>]*src=["'](?:\.\.\/|\/)?assets\/brilliant-tutor-v1\.js[^"']*["'][^>]*><\/script>\s*/gi,'\n');
@@ -17,4 +17,4 @@ for(const file of files){
  html=html.slice(0,at)+'\n'+(file===indexPath?homeTag:courseTag)+'\n'+html.slice(at);
  fs.writeFileSync(file,html,'utf8');
 }
-console.log('Injected the lesson-aware tutor into the homepage and all 62 course pages.');
+console.log('Injected the lesson-aware tutor into the homepage and all 65 course pages.');

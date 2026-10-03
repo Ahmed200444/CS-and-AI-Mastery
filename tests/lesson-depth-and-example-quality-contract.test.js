@@ -5,7 +5,7 @@ const assert = require('assert');
 const root = path.resolve(__dirname, '..');
 const coursesDir = path.join(root, 'courses');
 const pages = fs.readdirSync(coursesDir).filter(name => name.endsWith('.html'));
-assert.strictEqual(pages.length, 62, 'expected all 62 course/track pages');
+assert.ok(pages.length===62||pages.length===65, 'expected 62 committed or 65 generated course/track pages');
 
 let lessonCount = 0;
 for (const name of pages) {

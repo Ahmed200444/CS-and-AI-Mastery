@@ -9,8 +9,8 @@ function badText(v){return /C\+\+|Python\s*(?:&|\+|\/)\s*C\+\+|\.cpp\b/.test(Str
 function badCode(v){return /#include\s*[<"]|\bstd::|\bcout\s*<<|\bcin\s*>>|\busing\s+namespace\s+std\b/.test(String(v||''));}
 
 const readme=read('README.md');
-if(!/62 generated course pages/.test(readme))fail('README does not say 62 generated course pages');
-if(!/62-course set/.test(readme))fail('README repository structure does not say 62-course set');
+if(!/65 generated course pages/.test(readme))fail('README does not say 65 generated course pages');
+if(!/65-course set/.test(readme))fail('README repository structure does not say 65-course set');
 if(/54 generated course pages|54-course set/.test(readme))fail('README still contains old 54-course count');if(!/C\+\+ Programming & DSA/.test(readme))fail('README missing dedicated C++ course');
 
 const pkg=JSON.parse(read('package.json'));
@@ -44,10 +44,10 @@ if(!/C\+\+/.test(projectReadme)||!/g\+\+/.test(projectReadme)||!/cpp/.test(proje
 if(!/Smart README/.test(projectReadme)||!/Published code \+ recruiter-ready README/.test(projectReadme))fail('Smart README project publishing is incomplete');
 
 const catalog=JSON.parse(read('assets/catalog-data.json'));
-if(!Array.isArray(catalog.courses)||catalog.courses.length!==62)fail(`catalog expected 62 courses, found ${catalog.courses&&catalog.courses.length}`);
+if(!Array.isArray(catalog.courses)||catalog.courses.length!==65)fail(`catalog expected 65 courses, found ${catalog.courses&&catalog.courses.length}`);
 const dataDir=path.join(root,'assets','course-data');
 const dataFiles=fs.readdirSync(dataDir).filter(x=>x.endsWith('.json'));
-if(dataFiles.length!==62)fail(`expected 62 course-data files, found ${dataFiles.length}`);
+if(dataFiles.length!==65)fail(`expected 65 course-data files, found ${dataFiles.length}`);
 for(const name of dataFiles){
  const data=JSON.parse(fs.readFileSync(path.join(dataDir,name),'utf8'));
  const all=strings(data),isCpp=name==='cpp-dsa.json';
@@ -60,7 +60,7 @@ for(const name of dataFiles){
 
 const coursesDir=path.join(root,'courses');
 const pages=fs.readdirSync(coursesDir).filter(x=>x.endsWith('.html'));
-if(pages.length!==62)fail(`expected 62 course pages, found ${pages.length}`);
+if(pages.length!==65)fail(`expected 65 course pages, found ${pages.length}`);
 for(const name of pages){
  const html=fs.readFileSync(path.join(coursesDir,name),'utf8');
  if(!html.includes('adaptive-practice-layer.js'))fail(`${name}: Python adaptive runtime missing`);
@@ -82,4 +82,4 @@ if(/\bDual\s+(?:mode|practice|language)/i.test(visible))fail('index.html still e
 if(!index.includes('\"id\":\"cpp-dsa\"')||!index.includes('C++ Programming & DSA'))fail('index.html embedded catalog does not expose dedicated C++ course');
 
 if(failures.length){console.error('Python-only platform verification failed:');failures.slice(0,160).forEach(x=>console.error(' - '+x));if(failures.length>160)console.error(` - ... ${failures.length-160} more`);process.exit(1)}
-console.log('Primary-Python + dedicated-C++ platform verified: 62 courses, dedicated C++/DSA runtime plus Python runtime, immediate static course first paint, attached GitHub + README controls for examples/exercises, Smart README project publishing, and corrected README count.');
+console.log('Primary-Python + dedicated-C++ platform verified: 65 courses, dedicated C++/DSA runtime plus Python runtime, immediate static course first paint, attached GitHub + README controls for examples/exercises, Smart README project publishing, and corrected README count.');

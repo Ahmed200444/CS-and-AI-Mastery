@@ -52,7 +52,7 @@ function ensureRun(task,toolbar){
 }
 
 function ensurePublish(task,toolbar){
-  var buttons=task.querySelectorAll('[data-publish]');
+  var buttons=task.querySelectorAll('[data-publish],[data-final-publish]');
   var publish=one(buttons);
   if(!publish){
     publish=document.createElement('button');
@@ -62,16 +62,16 @@ function ensurePublish(task,toolbar){
     publish.textContent='Publish to GitHub';
     toolbar.appendChild(publish);
   }
-  removeOthers(task.querySelectorAll('[data-publish]'),publish);
+  removeOthers(task.querySelectorAll('[data-publish],[data-final-publish]'),publish);
   publish.classList.add('oa-btn','publish');
   publish.textContent='Publish to GitHub';
   return publish;
 }
 
 function appendInOrder(toolbar,buttons){
-  buttons.filter(Boolean).forEach(function(btn){
-    if(btn.parentNode!==toolbar||toolbar.lastElementChild!==btn)toolbar.appendChild(btn);
-  });
+  var ordered=buttons.filter(Boolean),current=Array.from(toolbar.children).filter(function(btn){return ordered.indexOf(btn)!==-1;});
+  if(current.length===ordered.length&&current.every(function(btn,i){return btn===ordered[i];}))return;
+  ordered.forEach(function(btn){toolbar.appendChild(btn);});
 }
 
 function normalizeTask(task,index){

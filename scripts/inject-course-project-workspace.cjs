@@ -32,7 +32,7 @@ function normalizeProject(p,index,defaultLanguage){
 }
 
 const files=fs.readdirSync(coursesDir).filter(f=>f.endsWith('.html'));
-if(files.length!==62)throw new Error(`Expected 62 course pages, found ${files.length}`);
+if(files.length!==65)throw new Error(`Expected 65 course pages, found ${files.length}`);
 let updated=0,totalProjects=0;
 for(const file of files){
  const id=file.replace(/\.html$/,'');
@@ -63,5 +63,5 @@ for(const file of files){
  fs.writeFileSync(full,html,'utf8');
  updated++;
 }
-if(updated!==62)throw new Error(`Expected to update 62 course pages, updated ${updated}`);
+if(updated!==65)throw new Error(`Expected to update 65 course pages, updated ${updated}`);
 console.log(`Injected project workspaces into ${updated} course pages (${totalProjects} projects/capstones total). Evergreen location guidance is enabled at each course header.`);

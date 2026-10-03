@@ -16,5 +16,5 @@ for(const file of fs.readdirSync(dir).filter(name=>name.endsWith('.html'))){
   fs.writeFileSync(full,html,'utf8');
   pages++;
 }
-if(pages!==62)throw new Error(`Expected 62 course pages, enhanced ${pages}`);
+if(pages!==65)throw new Error(`Expected 65 course pages, enhanced ${pages}`);
 console.log(`Evergreen Mastery Lab enabled on ${pages} course pages.`);

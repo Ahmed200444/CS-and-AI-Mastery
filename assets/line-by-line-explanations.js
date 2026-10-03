@@ -12,6 +12,16 @@ function indentation(line){var m=text(line).match(/^[\t ]*/);return m?m[0].repla
 
 function inferLanguage(code,label,node){
  var c=text(code),l=(text(label)+' '+text(node&&node.getAttribute&&node.getAttribute('data-language'))+' '+text(node&&node.getAttribute&&node.getAttribute('data-lang'))).toLowerCase();
+ var explicit=clean(label||(node&&node.getAttribute&&node.getAttribute('data-language'))||(node&&node.getAttribute&&node.getAttribute('data-lang'))).toLowerCase();
+ var names={js:'javascript',ts:'typescript',bash:'shell',terminal:'shell','c++':'cpp',assembly:'armasm'};
+ explicit=names[explicit]||explicit;
+ if(/^(python|javascript|typescript|cpp|java|sql|html|css|shell|dockerfile|json|yaml|http|matlab|armasm)$/.test(explicit))return explicit;
+ if(/^#!.*\b(?:ba|z|da)?sh\b/m.test(c))return'shell';
+ // An explicit MATLAB label must win over generic `function` detection below.
+ // MATLAB function files otherwise get mistaken for JavaScript and receive the
+ // wrong line-by-line teaching explanations.
+ if(/matlab/.test(l))return'matlab';
+ if(/\barmasm\b|arm\s*assembly/.test(l))return'armasm';
  if(/c\+\+|\bcpp\b/.test(l)||/#include\s*[<"]|\bstd::|\bcout\s*<<|\bcin\s*>>|\bvector\s*</.test(c)||/(^|\n)\s*(?:template\s*<|namespace\s+\w+|enum\s+class\s+|public\s*:|private\s*:|protected\s*:|#pragma\s+once)/m.test(c)||/(^|\n)\s*(?:long\s+long|unsigned\s+\w+|int|double|float|bool|char|void|std::string)\s+[A-Za-z_]\w*\s*\([^)]*\)\s*[;{]/m.test(c))return'cpp';
  if(/\bjava\b/.test(l)||/\bpublic\s+static\s+void\s+main\s*\(|\bSystem\.out\.println\s*\(/.test(c))return'java';
  if(/python/.test(l)||/(^|\n)\s*(async\s+def\s+|def\s+|class\s+\w+.*:|from\s+\S+\s+import\s+|import\s+|for\s+.+\s+in\s+.+:|while\s+.+:|if\s+.+:|elif\s+.+:|else\s*:|try\s*:|except\b.*:|finally\s*:|with\s+|print\s*\()/m.test(c)||/\b(len|range|enumerate|zip|divmod|input|dict|list|set|tuple)\s*\(/.test(c)||/\b(cursor\.execute|\.objects\.(?:get|filter|create)|f["']SELECT|execute\("SELECT)/.test(c))return'python';
@@ -23,40 +33,62 @@ function inferLanguage(code,label,node){
  if(/sql/.test(l)||/(^|\n)\s*(SELECT\b|INSERT\s+INTO\b|UPDATE\s+\w+\b|DELETE\s+FROM\b|CREATE\s+(?:TABLE|INDEX)\b|ALTER\s+TABLE\b|DROP\s+TABLE\b|WITH\s+\w+\s+AS\b|BEGIN\s+TRANSACTION\b|COMMIT\b|EXPLAIN\s+SELECT\b)/im.test(c))return'sql';
  if(/dockerfile/.test(l)||/^\s*FROM\s+\S+/m.test(c)&&(c.match(/^\s*(FROM|WORKDIR|COPY|RUN|CMD|ENTRYPOINT|EXPOSE|ENV|ARG)\b/gm)||[]).length>=2)return'dockerfile';
  if(/html/.test(l)||/<\/?[a-z][^>]*>/i.test(c))return'html';
+ if(/matlab/.test(l))return'matlab';
+ var matlabMarkers=0;
+ if(/\.\*|\.\/|\.\^/.test(c))matlabMarkers++;
+ if(/(^|\n)\s*function\s+(?:\[[^\]]+\]|[A-Za-z_]\w*)\s*=\s*[A-Za-z_]\w*\s*\(/m.test(c))matlabMarkers++;
+ if(/(^|\n)\s*(?:plot|xlabel|ylabel|legend|disp|sqrt|exp|log|sinh|tanh)\s*\(/m.test(c))matlabMarkers++;
+ if(/(^|\n)\s*(?:for\s+\w+\s*=|while\s+.+|if\s+.+|elseif\s+.+|switch\s+.+|case\s+.+|otherwise\s*$|end\s*$)/m.test(c))matlabMarkers++;
+ if(matlabMarkers>=2)return'matlab';
+
  if(/(^|\n)\s*[A-Za-z_]\w*(?:\[[^\n\]]+\]|\.[A-Za-z_]\w*)*\s*=\s*[^;\n]+/m.test(c)||/(^|\n)\s*[A-Za-z_]\w*(?:\s*,\s*[A-Za-z_]\w*)+\s*=\s*[^;\n]+/m.test(c)||/\b(?:fit|predict|transform|append|extend|items|get|split|deepcopy|copy|describe|value_counts|corr)\s*\(/.test(c)||/\b(?:transforms|torch|nn|F|np|pd)\.[A-Za-z_]\w*/.test(c))return'python';
  if(/json/.test(l)||(/[{}]/.test(c)&&(c.match(/"[^"\n]+"\s*:/g)||[]).length>=1&&!/=\s*\{/.test(c)))return'json';
  var yamlMatches=c.match(/^\s*(?:-\s+)?[A-Za-z_][\w.-]*:\s*.*$/gm)||[];
  if(/ya?ml/.test(l)||yamlMatches.length>=3||(yamlMatches.length>=2&&!/[{};]/.test(c)))return'yaml';
+ var armMatches=c.match(/^\s*(?:[A-Za-z_]\w*\s+)?(?:AREA|ENTRY|RN|EQU|MOVS?|MVN|ADDS?|ADC|SUBS?|SBC|RSB|RSC|AND|ORR|EOR|BIC|LSL|LSR|ASR|ROR|CMP|CMN|TST|TEQ|LDR|STR|LDM\w*|STM\w*|PUSH|POP|BLT|BLE|BGT|BGE|BEQ|BNE|B|BL|BX|SVC)\b.*$/gim)||[];
+ if(/arm\s*assembly|\bassembly\b/.test(l)||armMatches.length>=2)return'armasm';
  if(/css/.test(l)||/(^|\n)\s*(?:[.#][A-Za-z_-][\w-]*|[A-Za-z][\w-]*(?:\s+[A-Za-z][\w-]*)*)[^=\n]*\{[^\n]*\}/m.test(c)||/(^|\n)\s*(?:[.#][A-Za-z_-][\w-]*|[A-Za-z][\w-]*(?:\s+[A-Za-z][\w-]*)*)[^=\n]*\{\s*$/m.test(c)||/@media\s*\(/.test(c))return'css';
  return'text';
 }
+function syntaxTokens(line,lang){
+ var s=stripInlineComment(line,lang),quote='',out='',escaped=false;
+ for(var i=0;i<s.length;i++){var ch=s[i];
+  if(quote){out+=' ';if(escaped){escaped=false;continue;}if(ch==='\\'){escaped=true;continue;}if(ch===quote){if(lang==='matlab'&&s[i+1]===quote){out+=' ';i++;}else quote='';}continue;}
+  // MATLAB apostrophes after a value are transpose operators, not string openers.
+  if((ch==='"'||ch==="'"||ch==='`')&&!(lang==='matlab'&&ch==="'"&&/[\w\])}]/.test(s[i-1]||''))){quote=ch;out+=' ';}else out+=ch;
+ }
+ return out;
+}
 function generalSyntax(line,lang){
- var s=text(line),t=s.trim(),out=[];
+ var s=text(line),t=syntaxTokens(s,lang).trim(),out=[],program=/^(python|javascript|typescript|cpp|java|matlab)$/.test(lang),comparison=program||lang==='sql';
  if(!t)return['A blank line is not executed; it visually separates logical sections of the example.'];
  if(indentation(s)>0&&lang==='python')out.push('Leading spaces are significant in Python: this line belongs to the indented block opened above it.');
- if(/(^|[^=!<>])=([^=]|$)/.test(t)&&!/[<>:]=>/.test(t)&&lang!=='sql'&&lang!=='html'&&lang!=='css'&&lang!=='yaml')out.push('`=` is assignment: the value/expression on the right is stored in the name or target on the left.');
- if(/==/.test(t))out.push('`==` compares two values for equality and produces `True`/`False` (or the language equivalent).');
- if(/!=/.test(t))out.push('`!=` means “not equal to”.');
- if(/>=/.test(t))out.push('`>=` means “greater than or equal to”.');
- if(/<=/.test(t))out.push('`<=` means “less than or equal to”.');
- if(/(?<![<>])>(?!=)/.test(t)&&lang!=='html')out.push('`>` compares whether the left value is greater than the right value.');
- if(/(?<![<>])<(?!=)/.test(t)&&lang!=='html'&&!/^#include/.test(t))out.push('`<` compares whether the left value is less than the right value.');
+ if(program&&/(^|[^=!<>+*\/%-])=(?!=|>)/.test(t))out.push(lang==='python'?'`=` assigns a value; inside a Python call it can bind a named argument.':'`=` assigns the value on the right to the target on the left.');
+ if(comparison&&/(?<![=])==(?!=)/.test(t))out.push('`==` compares values for equality; the result is a Boolean or logical value.');
+ if(comparison&&/!=(?!=)/.test(t))out.push('`!=` means “not equal to”.');
+ if(comparison&&/>=/.test(t))out.push('`>=` means “greater than or equal to”.');
+ if(comparison&&/<=/.test(t))out.push('`<=` means “less than or equal to”.');
+ var comparisons=t;
+ if(lang==='cpp')comparisons=comparisons.replace(/#include\s*<[^>]+>|\b(?:vector|map|set|queue|stack|priority_queue|array|pair|unique_ptr|shared_ptr|unordered_map|greater)\s*<[^;=]+>/g,'');
+ if(/^(javascript|typescript)$/.test(lang)&&/(?:\breturn\s*|=\s*|^)\s*<[A-Za-z]/.test(t))comparisons=comparisons.replace(/<\/?[A-Za-z][^>]*>/g,'');
+ if(comparison&&/(?<![<>=-])>(?![=<>])/.test(comparisons))out.push('`>` compares whether the left value is greater than the right value.');
+ if(comparison&&/(?<![<>])<(?![=<>])/.test(comparisons)&&!/^#include/.test(t))out.push('`<` compares whether the left value is less than the right value.');
  if(/\+=/.test(t))out.push('`+=` updates the existing value by adding the right-hand value and storing the result back.');
  if(/-=/.test(t))out.push('`-=` subtracts the right-hand value from the current value and stores the result back.');
  if(/\*=/.test(t))out.push('`*=` multiplies the current value by the right-hand value and stores the result back.');
  if(/\/\//.test(t)&&lang==='python')out.push('`//` is floor division in Python: it divides and rounds down to an integer-like result.');
- if(/\*\*/.test(t))out.push('`**` is exponentiation in Python: `a ** b` means “a raised to the power b”.');
- if(/%/.test(t)&&!/^%/.test(t))out.push('`%` is commonly the remainder/modulo operator, useful for divisibility and cycles.');
- if(/\([^)]*\)/.test(t))out.push('Parentheses `(...)` group an expression or hold the arguments passed to a function/method call.');
- if(/\[[^\]]*\]/.test(t))out.push('Square brackets `[...]` can create a list or access an item, dictionary key, or slice, depending on context.');
- if(/\{[^}]*\}/.test(t)&&lang!=='css')out.push('Curly braces `{...}` create/group a mapping/object/set or delimit a code block, depending on the language.');
- if(/["'][^"']*["']/.test(t))out.push('Quotation marks create a string literal: text data written directly in the source code.');
- if(/\w+\.\w+/.test(t)&&lang!=='sql')out.push('The dot `.` accesses an attribute/property or method that belongs to the value/module/object on its left.');
+ if(/\*\*/.test(t)&&/^(python|javascript|typescript)$/.test(lang))out.push('`**` is exponentiation: `a ** b` means “a raised to the power b”.');
+ if(/%/.test(t)&&program&&lang!=='matlab')out.push('`%` computes a remainder; its sign rules depend on the language.');
+ if(/\([^)]*\)/.test(t)&&program)out.push(lang==='matlab'?'Parentheses call functions or index arrays in MATLAB; array indices start at 1.':'Parentheses `(...)` group an expression or hold function parameters/arguments.');
+ if(/\[[^\]]*\]/.test(t)&&program)out.push(lang==='matlab'?'Square brackets construct/concatenate a MATLAB array; spaces or commas separate columns, and semicolons separate rows.':lang==='cpp'||lang==='java'?'Square brackets declare an array size or access an indexed element; the first element has index 0.':'Square brackets create an array/list or access an indexed value, key, or slice, depending on the expression.');
+ if(/\{[^}]*\}/.test(t)&&(program||lang==='json'))out.push('Curly braces group an object/mapping/set or delimit a block, depending on the language.');
+ if(/["'][^"']*["']/.test(s)&&program)out.push('Quotation marks delimit text literals; punctuation inside that text is data, not an operator.');
+ if(/[A-Za-z_$][\w$]*\.[A-Za-z_$][\w$]*/.test(t)&&program)out.push('The dot `.` accesses an attribute/property or method of the value/module/object on its left.');
  if(/,/.test(t))out.push('A comma separates items, arguments, variables, columns, or values in the same construct.');
  if(/:\s*$/.test(t)&&lang==='python')out.push('The colon `:` opens an indented Python block such as a function, loop, condition, class, or exception handler.');
  if(/;\s*$/.test(t)&&(lang==='javascript'||lang==='typescript'||lang==='cpp'||lang==='java'))out.push('The semicolon `;` marks the end of this statement in this language.');
- if(/=>/.test(t))out.push('`=>` is JavaScript/TypeScript arrow-function syntax: parameters are on the left and the function body/result is on the right.');
- if(/::/.test(t))out.push('`::` is C++ scope-resolution syntax, used to access a name inside a namespace or type.');
+ if(/=>/.test(t)&&/^(javascript|typescript)$/.test(lang))out.push('`=>` defines an arrow function: parameters are on the left and its body/result is on the right.');
+ if(/::/.test(t)&&lang==='cpp')out.push('`::` is C++ scope resolution: it accesses a name inside a namespace or type.');
  if(/\|/.test(t)&&lang==='shell')out.push('The pipe `|` sends the output of the command on the left into the command on the right.');
  if(/&&/.test(t)&&lang==='shell')out.push('`&&` runs the next shell command only if the command before it succeeds.');
  if(/>>?/.test(t)&&lang==='shell')out.push('`>` redirects output to a file; `>>` appends instead of replacing the file.');
@@ -224,12 +256,75 @@ function dataPurpose(t,lang){
  return'This line is reference/configuration text. Read it as part of the surrounding example rather than executable source code.';
 }
 
+function armPurpose(t){
+ if(!clean(t))return'Blank line for spacing.';
+ if(/^\s*;/.test(t))return'Assembler comment for the reader; the processor does not execute it.';
+ var vector=clean(t).match(/^(0x[\da-f]+)\s+(.+)$/i);if(vector)return'Classic ARM vector offset `'+vector[1]+'` dispatches `'+vector[2]+'` to its handler; this row is a reference table entry.';
+ var s=clean(t).split(';')[0].trim(),m=s.match(/^([A-Za-z][A-Za-z0-9]*)\b\s*(.*)$/);if(!m)return'This is ARM reference material, a label, or a data definition rather than a processor operation.';
+ if(!/^(AREA|ENTRY|END|ALIGN|SPACE|MOV|MVN|ADD|ADC|SUB|SBC|RSB|RSC|AND|ORR|EOR|BIC|CMP|CMN|TST|TEQ|LDR|STR|PUSH|POP|LSL|LSR|ASR|ROR|LDM|STM|SVC|B$|BL$|BX$|B(?:EQ|NE|LT|LE|GT|GE|HI|LS|HS|LO|CS|CC|MI|PL|VS|VC)$)/i.test(m[1])){m=s.match(/^[A-Za-z_]\w*:?\s+([A-Za-z][A-Za-z0-9]*)\b\s*(.*)$/);if(!m)return'This label names a position in the instruction sequence; it does not itself change a register.';}
+ m=[m[0],null,m[1],m[2]];
+ var op=m[2].toUpperCase(),rest=clean(m[3]);
+ var operands=splitSimpleComma(rest),conditions={EQ:'Z=1',NE:'Z=0',CS:'C=1',HS:'C=1',CC:'C=0',LO:'C=0',MI:'N=1',PL:'N=0',VS:'V=1',VC:'V=0',HI:'C=1 and Z=0',LS:'C=0 or Z=1',GE:'N=V',LT:'N differs from V',GT:'Z=0 and N=V',LE:'Z=1 or N differs from V'};
+ var branch=op.match(/^B(EQ|NE|CS|HS|CC|LO|MI|PL|VS|VC|HI|LS|GE|LT|GT|LE)$/);if(branch)return'Branches to `'+rest+'` when condition `'+branch[1]+'` holds: '+conditions[branch[1]]+'. Otherwise execution continues with the next instruction.';
+ var detailed=op.match(/^(MOV|MVN|ADD|ADC|SUB|SBC|RSB|RSC|AND|ORR|EOR|BIC)(EQ|NE|CS|HS|CC|LO|MI|PL|VS|VC|HI|LS|GE|LT|GT|LE)?(S)?$/);
+ if(detailed&&!detailed[2]&&operands.length===(/^(MOV|MVN)$/.test(detailed[1])?2:3)){
+  var base=detailed[1],a=operands[1],b=operands[2],calculation={ADD:a+' + '+b,ADC:a+' + '+b+' + C',SUB:a+' - '+b,SBC:a+' - '+b+' - (1-C)',RSB:b+' - '+a,RSC:b+' - '+a+' - (1-C)',AND:a+' AND '+b,ORR:a+' OR '+b,EOR:a+' XOR '+b,BIC:a+' AND NOT '+b};
+  return(base==='MOV'?'Copies `'+a+'` into `'+operands[0]+'`.':base==='MVN'?'Stores bitwise NOT of `'+a+'` in `'+operands[0]+'`.':'Stores `'+calculation[base]+'` in `'+operands[0]+'`.')+(detailed[3]?' The S suffix also updates flags.':'');
+ }
+ var map={AREA:'Declares an ARM assembler area/section and its attributes.',ENTRY:'Marks the program entry point for the assembler/linker.',END:'Marks the end of the assembly source file.',RN:'Assigns a readable alias to a register number.',EQU:'Defines a symbolic constant with a fixed value.',MOV:'Copies an immediate value or register value into the destination register.',MOVS:'Moves a value and updates the condition flags from the result.',MVN:'Writes the bitwise NOT of the source value into the destination register.',ADD:'Adds the source operands and stores the result in the destination register.',ADDS:'Adds the operands, stores the result, and updates condition flags.',ADC:'Adds the operands plus the current carry flag.',SUB:'Subtracts the source operand from the first operand and stores the result.',SUBS:'Subtracts the operands, stores the result, and updates condition flags.',SBC:'Subtracts using the carry/borrow state from the status flags.',RSB:'Performs reverse subtraction: the second source minus the first source.',RSC:'Performs reverse subtraction using the carry/borrow state.',AND:'Performs bitwise AND on the source operands.',ORR:'Performs bitwise OR on the source operands.',EOR:'Performs bitwise exclusive OR on the source operands.',BIC:'Clears selected bits by ANDing with the inverted mask.',CMP:'Compares two values by subtracting them only to update condition flags.',CMN:'Compares by adding the operands only to update condition flags.',TST:'Tests selected bits with AND and updates flags without storing a result.',TEQ:'Tests bit differences with XOR and updates flags without storing a result.',LDR:'Loads a value from memory or a literal address/value into a register.',STR:'Stores a register value into memory.',PUSH:'Pushes the listed registers onto the stack.',POP:'Pops values from the stack into the listed registers.',B:'Branches to the target label.',BL:'Branches to a subroutine and saves the return address in LR.',BX:'Branches to the address held in a register, commonly LR when returning.',BLT:'Branches when the signed less-than condition is true.',BLE:'Branches when the signed less-than-or-equal condition is true.',BGT:'Branches when the signed greater-than condition is true.',BGE:'Branches when the signed greater-than-or-equal condition is true.',BEQ:'Branches when the zero/equal condition is true.',BNE:'Branches when the zero/equal condition is false.',SVC:'Requests a supervisor call exception.'};
+ if(/^LSL$|^LSR$|^ASR$|^ROR$/.test(op))return'Applies the ARM barrel shifter operation `'+op+'` to move or rotate the operand bits.';
+ if(/^LDM/.test(op))return'Loads multiple registers from consecutive memory locations using the selected ARM addressing mode.';
+ if(/^STM/.test(op))return'Stores multiple registers to consecutive memory locations using the selected ARM addressing mode.';
+ var conditional=op.match(/^(MOV|MVN|ADD|ADC|SUB|SBC|RSB|RSC|AND|ORR|EOR|BIC|LDR|STR)(EQ|NE|CS|HS|CC|LO|MI|PL|VS|VC|HI|LS|GE|LT|GT|LE)(S)?$/);
+ if(conditional)return armPurpose(conditional[1]+(conditional[3]?'S':'')+' '+rest)+' It runs when condition `'+conditional[2]+'` holds: '+conditions[conditional[2]]+'.';
+ if(map[op])return map[op];
+ if(/S$/.test(op)&&map[op.slice(0,-1)])return map[op.slice(0,-1)]+' The S suffix updates condition flags.';
+ return 'This ARM instruction/directive `'+op+'` uses operands `'+rest+'`; consult the lesson for its supported form.';
+}
+
+function matlabPurpose(t){
+ var original=clean(t),s=clean(stripInlineComment(t,'matlab')),m;
+ if(!original)return'Blank line for spacing.';
+ if(/^%/.test(original))return'MATLAB comment: '+displayLiteral(original.replace(/^%+\s*/,''))+'. MATLAB does not execute this text.';
+ if((m=s.match(/^function\s+(?:\[([^\]]+)\]|([A-Za-z_]\w*))\s*=\s*([A-Za-z_]\w*)\s*\(([^)]*)\)/i)))return'Defines function `'+m[3]+'` with inputs `'+clean(m[4])+'` and output `'+clean(m[1]||m[2])+'`; its variables are local.';
+ if((m=s.match(/^for\s+(\w+)\s*=\s*(.+)$/)))return'Assigns each value from `'+clean(m[2])+'` to `'+m[1]+'` and runs the loop body once for each value.';
+ if((m=s.match(/^while\s+(.+)$/)))return'Repeats the block while '+explainCondition(m[1])+'. The body must eventually make that condition false.';
+ if((m=s.match(/^if\s+(.+)$/)))return'Runs this branch only when '+explainCondition(m[1])+'.';
+ if((m=s.match(/^elseif\s+(.+)$/)))return'If earlier branches failed, runs this branch when '+explainCondition(m[1])+'.';
+ if(/^else\b/.test(s))return'Runs this branch when no earlier if/elseif condition was true.';
+ if((m=s.match(/^switch\s+(.+)$/)))return'Chooses a case by matching the value of `'+clean(m[1])+'`.';
+ if((m=s.match(/^case\s+(.+)$/)))return'Runs this switch branch when the selected value matches `'+clean(m[1])+'`.';
+ if(/^otherwise\b/.test(s))return'Runs this switch branch when no earlier case matched.';
+ if(/^end\b/i.test(s))return'Closes the current function, loop, conditional, or switch block.';
+ if((m=s.match(/^([A-Za-z_]\w*\([^=]+\))\s*=\s*(.+?);?$/)))return'Stores the result of '+displayLiteral(m[2])+' in '+displayLiteral(m[1])+'. MATLAB indices start at 1.';
+ if((m=s.match(/^([A-Za-z_]\w*)\s*=\s*(.+?);?$/))){
+  var name=m[1],expr=m[2].replace(/;$/,''),range=expr.match(/^([^:]+):(?:([^:]+):)?([^:]+)$/);
+  if(range)return'Creates row vector `'+name+'` from `'+clean(range[1])+'` toward `'+clean(range[3])+'` in steps of `'+clean(range[2]||'1')+'`.';
+  if(/^\[.*\]'$/.test(expr))return'Builds the listed row vector, then transposes it into column vector `'+name+'`.';
+  if(/^\[.*\]$/.test(expr))return'Builds array `'+name+'` from the listed values; semicolons separate rows and spaces/commas separate columns.';
+  if(/\.(?:\*|\/|\^)/.test(expr))return'Computes `'+shortCode(expr)+'` element by element and stores the resulting array in `'+name+'`.';
+  if((m=expr.match(/^(\w+)\s*\*\s*(\w+)$/)))return'Multiplies `'+m[1]+'` and `'+m[2]+'` using matrix multiplication, storing the result in `'+name+'`.';
+  if((m=expr.match(/^(sin|cos|sinh|tanh|sqrt|exp|log)\((.*)\)$/))){var meanings={sin:'sine (radians)',cos:'cosine (radians)',sinh:'hyperbolic sine',tanh:'hyperbolic tangent',sqrt:'square root',exp:'exponential e raised to each value',log:'natural logarithm'};return'Computes '+meanings[m[1]]+' for `'+shortCode(m[2])+'` and stores the values in `'+name+'`.';}
+  return'Computes '+displayLiteral(expr)+' and stores the result in `'+name+'`.';
+ }
+ if(/^plot\s*\(/i.test(s))return'Plots the supplied x/y pairs; each pair creates a curve and an optional line specification controls its appearance.';
+ if(/^xlabel\s*\(/i.test(s))return'Sets the plot’s horizontal axis label to the supplied text.';
+ if(/^ylabel\s*\(/i.test(s))return'Sets the plot’s vertical axis label to the supplied text.';
+ if(/^title\s*\(/i.test(s))return'Sets the title displayed above the current plot.';
+ if(/^legend\s*\(/i.test(s))return'Labels the plotted curves in their plotting order.';
+ if(/^disp\s*\(/i.test(s))return'Displays the supplied value or text in the Command Window.';
+ if((m=s.match(/^(\w+)\((.*)\);?$/)))return'Calls MATLAB function `'+m[1]+'` with '+displayLiteral(m[2])+'.';
+ return'MATLAB reference: '+displayLiteral(s)+'. Check the surrounding lesson for this form.';
+}
+
 function purposeFor(line,lang){var t=text(line).trim();if(!t)return'A blank line separates logical sections and makes the example easier to read; it does not execute.';
  if(lang==='python')return pythonPurpose(t);
  if(lang==='javascript'||lang==='typescript')return jsPurpose(t);
  if(lang==='sql')return sqlPurpose(t);
  if(lang==='html')return htmlPurpose(t);
  if(lang==='css')return cssPurpose(t);
+ if(lang==='armasm')return armPurpose(t);
+ if(lang==='matlab')return matlabPurpose(t);
  if(lang==='shell')return shellPurpose(t);
  if(lang==='cpp'||lang==='java')return cppPurpose(t,lang);
  if(lang==='dockerfile')return dockerPurpose(t);
@@ -243,8 +338,11 @@ function stripInlineComment(raw,lang){
   var ch=s[i],next=s[i+1]||'';
   if(escNext){escNext=false;continue;}
   if(quote){if(ch==='\\'){escNext=true;continue;}if(ch===quote)quote='';continue;}
-  if(ch==='"'||ch==="'"){quote=ch;continue;}
-  if(lang==='python'&&ch==='#')return s.slice(0,i).trimEnd();
+  if(ch==='"'||ch==="'"||ch==='`'){if(lang==='matlab'&&ch==="'"&&/[\w\])}]/.test(s[i-1]||''))continue;quote=ch;continue;}
+  if(/^(python|shell|yaml|dockerfile)$/.test(lang)&&ch==='#')return s.slice(0,i).trimEnd();
+  if(lang==='sql'&&ch==='-'&&next==='-')return s.slice(0,i).trimEnd();
+  if(lang==='matlab'&&ch==='%')return s.slice(0,i).trimEnd();
+  if(lang==='armasm'&&ch===';')return s.slice(0,i).trimEnd();
   if((lang==='javascript'||lang==='typescript'||lang==='cpp'||lang==='java')&&ch==='/'&&next==='/')return s.slice(0,i).trimEnd();
  }
  return s;
@@ -438,6 +536,32 @@ function pythonTeachingPurpose(raw,ctx){
 }
 function cppTeachingPurpose(raw,lang,ctx){
  var t=clean(stripInlineComment(raw,lang)),original=clean(raw),m,isJava=lang==='java';
+ if(!isJava){
+  if(/\bmain\s*\(/.test(t))return'Defines `main()`, the function where a C++ program starts running.';
+  if((m=t.match(/^namespace\s+([\w:]+)\s*\{/)))return'Opens namespace `'+m[1]+'`, grouping names to avoid collisions with other code.';
+  if((m=t.match(/^enum\s+class\s+(\w+)\s*\{/))){if(ctx)ctx.enumOpen=true;return'Defines scoped enumeration `'+m[1]+'`; its named choices follow inside the braces.';}
+  if(ctx&&ctx.enumOpen){if(/^}/.test(t)){ctx.enumOpen=false;return'Closes the scoped enumeration definition.';}if(/^\w+(?:\s*=\s*\d+)?(?:\s*,\s*\w+(?:\s*=\s*\d+)?)*,?$/.test(t))return'Declares the named enumeration choices `'+t.replace(/,$/,'')+'`; each represents one value of this type.';}
+  if((m=t.match(/^(?:public|private|protected):\s*(.+)$/)))return'Sets member access, then '+cppTeachingPurpose(m[1],lang,ctx).replace(/^./,function(ch){return ch.toLowerCase();});
+  if((m=t.match(/^(?:\+\+|--)([\w.]+(?:\[[^\]]+\])*)\s*;$/)))return(/^(?:\+\+)/.test(t)?'Increases ':'Decreases ')+displayLiteral(m[1])+' by 1 and stores the updated value.';
+  if(/^return\s*;$/.test(t))return'Ends this function immediately without returning a value.';
+  if(/^try\s*\{$/.test(t))return'Starts a block whose exceptions can be handled by the following catch clauses.';
+  if((m=t.match(/^catch\s*\((.+)\)\s*\{/)))return'Handles a matching exception from the try block using `'+clean(m[1])+'`.';
+  if(/^\}\);$/.test(t))return'Closes the callback body, then completes the enclosing function call.';
+  if(/^\);$/.test(t))return'Closes the multi-line function call and ends its statement.';
+  if((m=t.match(/^(?:virtual\s+)?~(\w+)\(\)\s*=\s*default;$/)))return'Requests the compiler-generated destructor for `'+m[1]+'`'+(/^virtual/.test(t)?'; virtual enables correct destruction through a base pointer.':'.');
+  if((m=t.match(/^virtual\s+(.+?)\s+(\w+)\([^)]*\)\s*const\s*=\s*0;$/)))return'Declares pure virtual method `'+m[2]+'`; concrete derived classes must implement it.';
+  if((m=t.match(/^(?:explicit\s+)?(\w+)\(([^)]*)\)\s*:\s*(.+)\s*\{/)))return'Defines constructor `'+m[1]+'`; its initializer list constructs members before the body runs.';
+  if((m=t.match(/^([\w:<>, ]+(?:\s*[&*])?)\s+(\w+)\([^)]*\)\s*(?:const\s*)?(?:override\s*)?\{$/)))return'Defines function `'+m[2]+'(...)` returning `'+clean(m[1])+'`'+(/\)\s*const/.test(t)?'; const prevents modification of ordinary members through this method.':'.');
+  if((m=t.match(/^\w+\s+operator([^\s(]+)\([^)]*\)\s*const\s*\{/)))return'Defines operator `'+m[1]+'` for this type, so the expression calls this method.';
+  if((m=t.match(/^using\s+(\w+)\s*=\s*(.+);$/)))return'Defines type alias `'+m[1]+'` for `'+clean(m[2])+'`, making later declarations shorter.';
+  if((m=t.match(/^auto\s+\[([^\]]+)\]\s*=\s*(.+);$/)))return'Unpacks the result of '+displayLiteral(m[2])+' into `'+clean(m[1])+'` using structured binding.';
+  if((m=t.match(/^auto\s*&\s*(\w+)\s*=\s*(.+);$/)))return'Binds reference `'+m[1]+'` to '+displayLiteral(m[2])+'; updating it changes that original value.';
+  if((m=t.match(/^(?:auto\s+(\w+)\s*=\s*)?([\w:]+)\((.+),\s*\[([^\]]*)\]\(([^)]*)\)\s*\{$/)))return'Calls `'+m[2]+'` with a lambda callback'+(m[4]?' capturing `'+clean(m[4])+'`':'')+(m[1]?'; the result is stored in `'+m[1]+'`.':'.');
+  if((m=t.match(/^([\w.]+(?:->\w+)*)\s*=\s*&?(\w+);$/))&&/[.>]/.test(m[1]))return'Sets '+displayLiteral(m[1])+' to '+(/=\s*&/.test(t)?'the address of ':'the value of ')+displayLiteral(m[2])+'.';
+  if((m=t.match(/^([\w:]+(?:<.+>)?\s*\*?)\s+(\w+)\s*=\s*(.+);$/))&&(/<|\*/.test(m[1])))return'Creates `'+m[2]+'` of type `'+clean(m[1])+'` and initializes it from '+displayLiteral(m[3])+'.';
+  if((m=t.match(/^([\w:]+(?:<.+>)?)\s+(.+)\s*;$/))&&/\w+\s*\{/.test(m[2]))return'Creates `'+clean(m[1])+'` object(s) using brace initialization with the listed starting values.';
+  if((m=t.match(/^([\w:]+<.+>)\s+(\w+)\s*;$/)))return'Creates container `'+m[2]+'` with type `'+clean(m[1])+'`; its template arguments select the stored types or ordering.';
+ }
  if(!t)return original?'Comment for the reader; the compiler ignores it.':'Blank line for spacing.';
  if(/^\/\//.test(original)){var c=original.replace(/^\/\//,'').trim();return c?'Comment for the reader: '+displayLiteral(c)+'. The compiler ignores it.':'Comment for the reader; the compiler ignores it.';}
  if(!isJava&&(m=t.match(/^#include\s*([<"])([^>"]+)[>"]/))){var headers={iostream:'Provides `std::cout` and `std::cin` for console output/input.',vector:'Provides `std::vector`, a resizable array.',string:'Provides `std::string` for text.',memory:'Provides smart pointers such as `std::unique_ptr` and `std::shared_ptr`.',algorithm:'Provides algorithms such as `sort`, `find`, and `reverse`.',unordered_map:'Provides hash-table dictionaries through `std::unordered_map`.',map:'Provides ordered key-value storage through `std::map`.',queue:'Provides queue data structures.',stack:'Provides stack data structures.',set:'Provides ordered sets of unique values.'};return'Includes `'+m[2]+'`. '+(headers[m[2]]||'This makes declarations from that header available to the program.');}
@@ -626,6 +750,8 @@ function teachingPurposeFor(line,lang,ctx){
  if(lang==='sql')return sqlTeachingPurpose(line);
  if(lang==='html')return htmlTeachingPurpose(line);
  if(lang==='css')return cssTeachingPurpose(line);
+ if(lang==='armasm')return armPurpose(text(line).trim());
+ if(lang==='matlab')return matlabPurpose(text(line).trim());
  if(lang==='shell')return shellTeachingPurpose(line);
  if(lang==='dockerfile'||lang==='json'||lang==='yaml'||lang==='text')return dataTeachingPurpose(line,lang);
  return'Explains the next operation or piece of structure in this example.';
@@ -638,10 +764,27 @@ function importNames(v){var xs=String(v||'').split(',').map(function(x){return c
 
 function syntaxFor(line,lang){
  var original=text(line).trim();
+ if(!original)return['A blank line separates sections; it is not executed.'];
+ if(lang==='text')return['This is conceptual reference text; its punctuation describes the idea rather than executable language syntax.'];
+ if(lang==='matlab'&&/^%/.test(original))return['`%` starts a MATLAB comment; it is not a remainder operator.'];
+ if(/^(shell|yaml|dockerfile)$/.test(lang)&&/^#/.test(original))return['`#` starts a comment in this format; its text is not executed.'];
+ if(lang==='armasm'){
+  var arm=stripInlineComment(line,lang),notes=[];
+  if(/^\s*;/.test(original))return ['`;` starts an ARM assembler comment; the processor does not execute it.'];
+  if(/\b(?:r(?:[0-9]|1[0-5])|sp|lr|pc)\b/i.test(arm))notes.push('Register names identify CPU storage: r0–r12 are general registers, r13/SP is the stack pointer, r14/LR holds a return address, and r15/PC is the program counter.');
+  if(/#/.test(arm))notes.push('`#` introduces an immediate number rather than a register. `0x` writes a hexadecimal value.');
+  if(/\[/.test(arm))notes.push('`[base, offset]` describes a memory address, not a list. No offset means the address held in base. `!` writes the adjusted address back; an offset after `]` adjusts base after the transfer.');
+  if(/\{/.test(arm))notes.push('`{r3, r4}` is a register list. PUSH/POP transfer words in register-number order; SP tracks the full descending stack.');
+  if(/\bLDR\w*\s+\w+\s*,\s*=/i.test(arm))notes.push('`LDR destination, =value` is an assembler pseudo-instruction for loading a value or address; `=` here is not ordinary variable assignment.');
+  if(/\b(?:ADD|ADC|SUB|SBC|RSB|RSC|AND|ORR|EOR|BIC)\w*\s/i.test(arm))notes.push('The first register is the destination. The following source operands supply the calculation; RSB/RSC reverse subtraction order.');
+  if(/\b(?:CMP|CMN|TST|TEQ)\b/i.test(arm))notes.push('These two-operand tests update flags without storing the arithmetic or logical result in a destination register.');
+  if(/\b(?:LSL|LSR|ASR|ROR)\b/i.test(arm))notes.push('The shifter transforms the source operand before the main operation; LSL/LSR shift in zeros, ASR preserves the sign, and ROR rotates bits.');
+  return notes.length?notes:[armPurpose(arm)];
+ }
  if(lang==='python'&&/^#/.test(original))return['`#` starts a Python comment. Everything after it on that line is ignored when the program runs.'];
  if((lang==='javascript'||lang==='typescript'||lang==='cpp'||lang==='java')&&/^\/\//.test(original))return['`//` starts a single-line comment. The compiler/runtime ignores the rest of that line.'];
  if(lang==='sql'&&/^--/.test(original))return['`--` starts a SQL comment. The database ignores the rest of that line.'];
- var syntaxLine=stripInlineComment(line,lang),t=text(syntaxLine).trim(),out=generalSyntax(syntaxLine,lang);
+ var syntaxLine=stripInlineComment(line,lang),t=lang==='json'?text(syntaxLine).trim():syntaxTokens(syntaxLine,lang).trim(),out=generalSyntax(syntaxLine,lang);
  if(!t)return out;
  if(lang==='python'){
   if(/^from\s+/.test(t))out.push('`from X import Y` means “look inside module X and bring name Y into the current file”.');
@@ -651,7 +794,7 @@ function syntaxFor(line,lang){
   if(/^for\s+/.test(t))out.push('`for target in iterable:` assigns each next iterable value to the target before running the indented body.');
   if(/^if\s+|^elif\s+|^while\s+/.test(t))out.push('The keyword is followed by a boolean expression; the trailing `:` opens the controlled indented block.');
   if(/^return\b/.test(t))out.push('`return` may be followed by any expression; that expression becomes the function call’s result.');
-  if(/\bf["']/.test(t))out.push('The `f` prefix creates an f-string; expressions inside `{...}` are evaluated and inserted into the text.');
+  if(/\bf["']/.test(syntaxLine))out.push('The `f` prefix creates an f-string; expressions inside `{...}` are evaluated and inserted into the text.');
   if(/\[[^\]]*:[^\]]*\]/.test(t))out.push('Inside `[...]`, a colon creates slice syntax `start:stop:step`; omitted parts use defaults.');
   if(/\b(True|False|None)\b/.test(t))out.push('`True` and `False` are Boolean literals; `None` represents the absence of a value.');
   if(/\b(and|or|not)\b/.test(t))out.push('`and`, `or`, and `not` combine or invert Boolean conditions.');
@@ -660,7 +803,7 @@ function syntaxFor(line,lang){
  }
  if(lang==='javascript'||lang==='typescript'){
   if(/^(const|let|var)\b/.test(t))out.push('The declaration keyword is followed by the variable name, then usually `=` and the initial value.');
-  if(/\$\{[^}]+\}/.test(t))out.push('Inside a template literal, `${...}` evaluates an expression and inserts its result into the string.');
+  if(/`[^`]*\$\{[^}]+\}/.test(syntaxLine))out.push('Inside a template literal, `${...}` evaluates an expression and inserts its result into the string.');
   if(/\?\./.test(t))out.push('`?.` is optional chaining: property/method access stops safely and returns `undefined` if the left side is nullish.');
   if(/\?\?/.test(t))out.push('`??` is nullish coalescing: it uses the right value only when the left value is `null` or `undefined`.');
   if(/===/.test(t))out.push('`===` checks strict equality without implicit type conversion.');
@@ -698,11 +841,21 @@ function syntaxFor(line,lang){
   if(/"[^"\n]+"\s*:/.test(t))out.push('JSON requires object keys to be quoted strings, followed by a colon and then the value.');
   if(/,\s*$/.test(t))out.push('The trailing comma separates this JSON item from the next item at the same level.');
  }
+ if(lang==='matlab'){
+  if(/\.\*/.test(t))out.push('`.*` multiplies corresponding array elements; `*` performs matrix multiplication.');
+  if(/\.\//.test(t))out.push('`./` divides corresponding array elements; `/` is matrix right division.');
+  if(/\.\^/.test(t))out.push('`.^` raises each array element to its corresponding power; `^` is matrix power.');
+  if(/~=/.test(t))out.push('`~=` compares values for inequality; `~` alone performs logical NOT.');
+  if(/\b\w+\s*=\s*[^:;]+:[^;]+/.test(t))out.push('`start:step:stop` creates a range toward stop; `start:stop` uses step 1. Stop is included only when a step reaches it.');
+  if(/[\w\])}]'/.test(t))out.push("The apostrophe transposes an array and conjugates complex entries; `.'` transposes without conjugation.");
+  if(/;\s*$/.test(t))out.push('A semicolon at the end suppresses Command Window display; the calculation still runs.');
+  if(/^end\b/.test(t))out.push('`end` closes a MATLAB control block or function; inside indexing it can represent the last index.');
+ }
  if(lang==='yaml'){
   if(/^\s+/.test(line))out.push('Indentation is structural in YAML: deeper indentation nests this value under the nearest less-indented parent key.');
   if(/:\s*/.test(t))out.push('The colon `:` separates a YAML key from its value or from an indented nested block.');
  }
- if(!out.length){var fallback={python:'This line follows Python statement/expression syntax; read keywords, names, operators, delimiters, and indentation from left to right.',javascript:'This line follows JavaScript statement/expression syntax; delimiters and operators determine how its parts are grouped.',typescript:'This line follows TypeScript/JavaScript syntax; type annotations, delimiters, and operators describe the value and operation.',http:'This line uses HTTP request/response notation: a method/status/header identifies what is being requested or returned.',sql:'This line follows SQL clause/expression syntax; keywords define the operation and identifiers/literals provide its data.',html:'This line follows HTML markup syntax; angle brackets define elements and attributes provide element metadata.',css:'This line follows CSS selector/declaration syntax; punctuation separates selectors, properties, values, and blocks.',shell:'This line follows command-line syntax: command first, then positional arguments, options/flags, and shell operators.',cpp:'This line follows C++ declaration/expression syntax; types, names, operators, delimiters, and braces define the statement.',java:'This line follows Java statement/expression syntax; types, names, operators, delimiters, and braces define the statement.',dockerfile:'This Dockerfile line uses an uppercase instruction keyword followed by the argument(s) for that build/runtime instruction.',json:'This line follows JSON data syntax using quoted keys/strings plus braces, brackets, colons, commas, or literal values.',yaml:'This line follows YAML key/value or sequence syntax; indentation determines nesting.',text:'This is reference text rather than executable syntax; punctuation is descriptive unless the lesson says otherwise.'};out.push(fallback[lang]||'This line uses the normal syntax of the example format to express its next operation or data item.');}
+ if(!out.length){var fallback={python:'This line follows Python statement/expression syntax; read keywords, names, operators, delimiters, and indentation from left to right.',javascript:'This line follows JavaScript statement/expression syntax; delimiters and operators determine how its parts are grouped.',typescript:'This line follows TypeScript/JavaScript syntax; type annotations, delimiters, and operators describe the value and operation.',http:'This line uses HTTP request/response notation: a method/status/header identifies what is being requested or returned.',sql:'This line follows SQL clause/expression syntax; keywords define the operation and identifiers/literals provide its data.',html:'This line follows HTML markup syntax; angle brackets define elements and attributes provide element metadata.',css:'This line follows CSS selector/declaration syntax; punctuation separates selectors, properties, values, and blocks.',shell:'This line follows command-line syntax: command first, then positional arguments, options/flags, and shell operators.',cpp:'This line follows C++ declaration/expression syntax; types, names, operators, delimiters, and braces define the statement.',java:'This line follows Java statement/expression syntax; types, names, operators, delimiters, and braces define the statement.',armasm:'This line uses ARM assembly syntax: an optional label, an instruction/directive mnemonic, then operands such as registers, immediates, labels, or addressing brackets.',matlab:'This line uses MATLAB syntax: assignments use `=`, functions use parentheses, dotted operators work element-by-element, and `end` closes blocks.',dockerfile:'This Dockerfile line uses an uppercase instruction keyword followed by the argument(s) for that build/runtime instruction.',json:'This line follows JSON data syntax using quoted keys/strings plus braces, brackets, colons, commas, or literal values.',yaml:'This line follows YAML key/value or sequence syntax; indentation determines nesting.',text:'This is reference text rather than executable syntax; punctuation is descriptive unless the lesson says otherwise.'};out.push(fallback[lang]||'This line uses the normal syntax of the example format to express its next operation or data item.');}
  return unique(out);
 }
 
@@ -719,6 +872,8 @@ function stripGeneratedComments(code){
  return text(code).split(/\r?\n/).map(function(line){
   return line
    .replace(/\s{2,}# Explanation: .*$/,'')
+   .replace(/\s{2,}% Explanation: .*$/,'')
+   .replace(/\s{2,}; Explanation: .*$/,'')
    .replace(/\s{2,}-- Explanation: .*$/,'')
    .replace(/\s{2,}\/\/ Explanation: .*$/,'')
    .replace(/\s{2,}\/\* Explanation: .* \*\/$/,'')
@@ -732,6 +887,8 @@ function inlineCommentFor(line,purpose,lang){
  if(lang==='python'&&/\\\s*$/.test(raw))return raw;
  var suffix;
  if(lang==='python'||lang==='shell'||lang==='yaml')suffix='# Explanation: '+note;
+ else if(lang==='matlab')suffix='% Explanation: '+note;
+ else if(lang==='armasm')suffix='; Explanation: '+note;
  else if(lang==='sql')suffix='-- Explanation: '+note;
  else if(lang==='html')suffix='<!-- Explanation: '+note+' -->';
  else if(lang==='css')suffix='/* Explanation: '+note+' */';
@@ -823,8 +980,22 @@ function glossaryTerms(code,lang){var c=text(code),terms=[];function add(term,me
  }
  return terms.slice(0,16);}
 function syntaxUsedEntries(code,lang){
- var c=text(code),entries=[];
+ var originalCode=text(code),c=lang==='python'?originalCode.split('\n').map(function(line){return syntaxTokens(line,lang);}).join('\n'):originalCode,entries=[];
  function add(name,syntax,what,used,why){if(entries.some(function(x){return x.name===name;}))return;entries.push({name:name,syntax:syntax,what:what,used:used,why:why});}
+ if(lang==='armasm'){
+  if(/\b(?:r\d+|sp|lr|pc)\b/i.test(c))add('Registers','r0–r15 / SP / LR / PC','Names 32-bit CPU registers; SP tracks the stack, LR holds a return address, and PC controls instruction flow.','The instructions name their source and destination registers.','Registers hold the values that ARM data-processing instructions operate on.');
+  if(/#/.test(c))add('Immediate operand','#value','Supplies a number in the instruction rather than reading another register.','The operands beginning with # are constants.','It lets the example initialize values or use a fixed arithmetic operand.');
+  if(/\[/.test(c))add('Word addressing','[base, #offset] / [base], #offset','Selects memory using a base register and optional offset; ! requests pre-index write-back.','The LDR/STR operands show the address and any base update.','ARM loads data into registers before processing it and stores results back to memory.');
+  if(/\b(?:CMP|CMN|TST|TEQ|ADDS|SUBS|MOVS|B(?:EQ|NE|LT|GT|GE|LE))\b/i.test(c))add('Flags and conditions','NZCV / condition suffix / S suffix','NZCV record negative, zero, carry/no-borrow and signed overflow; conditions read them.','The test or S-suffixed instruction updates flags used by later conditional instructions.','The flags connect a calculation or comparison to a decision about the next instruction.');
+ }
+ if(lang==='matlab'){
+  if(/\w+\s*=\s*[^;\n]+:[^;\n]+/.test(c))add('Range','start:step:stop','Builds values in regular steps toward stop; the default step is 1.','The colon expression supplies the sample points or loop values.','It avoids typing every value in a regular numerical sequence.');
+  if(/\[/.test(c))add('Array construction','[a b; c d]','Spaces/commas separate columns, semicolons separate rows.','The brackets combine the displayed values or arrays.','The calculation needs vectors or matrices as a single numerical value.');
+  if(/\.\*|\.\/|\.\^/.test(c))add('Element-wise operators','.* / ./ / .^','Apply multiplication, division or powers to corresponding elements instead of matrix operations.','The dotted operators calculate one result for each numerical sample.','They evaluate a formula over a whole array without an explicit loop.');
+  if(/\b\w+\([^=\n]*\)\s*=/.test(c))add('Array indexing','array(index) = value','MATLAB uses parentheses for indexing and the first index is 1.','The assignment writes the computed value into the selected element.','The loop builds an output array one position at a time.');
+  if(/[\w\])}]'/.test(c))add('Transpose',"A' / A.'",'The apostrophe transposes and conjugates complex values; dot-apostrophe only transposes.','The example changes row/column orientation.','Vector orientation affects array dimensions and matrix multiplication.');
+  if(/;\s*$/m.test(c))add('Suppress display','statement;','A final semicolon hides the Command Window display without skipping the calculation.','The semicolon-ended assignments still create their values.','It keeps output focused on results the example deliberately displays.');
+ }
  if(lang==='python'){
   var m;
   if((m=c.match(/\[[^\n\]]*\bfor\b[^\n\]]*\bin\b[^\n\]]*\]/)))add('List comprehension','[expression for item in iterable]','Builds a new list by evaluating an expression for each item, optionally with a filter.','This example uses '+m[0].trim()+'.','It is used here because the same transformation must be applied to several values and all results are needed as one list.');
@@ -847,7 +1018,7 @@ function syntaxUsedEntries(code,lang){
   if(/(^|[^%])%([^=]|$)/.test(c))add('Modulo `%`','a % b','Returns the remainder after division.','This example uses `%` in its numeric calculation.','It is used here to wrap or map a value into a limited repeating range, or to test divisibility.');
   if(/\bis\b/.test(c))add('Identity operator `is`','a is b','Checks whether two names refer to the exact same object, not merely equal values.','This example compares two references with `is`.','It is used here because the example cares about object identity rather than value equality.');
   if(/\[[^\]\n]*:[^\]\n]*\]/.test(c))add('Slicing','sequence[start:stop:step]','Selects a portion of a sequence without manually looping through every selected position.','This example uses slice notation inside square brackets.','It is used here because only a specific range or pattern of sequence items is needed.');
-  if(/\bf["'][^\n]*\{[^}]+\}/.test(c))add('f-string','f"text {expression}"','Builds a string and inserts evaluated Python expressions inside `{...}`.','This example uses an f-string to place values into text.','It is used here to create readable output without manually concatenating and converting each value.');
+  if(/\bf["'][^\n]*\{[^}]+\}/.test(originalCode))add('f-string','f"text {expression}"','Builds a string and inserts evaluated Python expressions inside `{...}`.','This example uses an f-string to place values into text.','It is used here to create readable output without manually concatenating and converting each value.');
   if(/(^|\n)\s*(?:from\s+\S+\s+import|import\s+)/m.test(c))add('Import','import module  /  from module import name','Makes code from another Python module available in the current file.','This example imports the module or names shown at the top of the code.','It is used here because the example needs functionality that is not defined locally.');
   if(entries.length<2&&/(^|\n)\s*[A-Za-z_]\w*\s*=\s*[^=]/m.test(c))add('Assignment','name = value','Stores or binds the value on the right to the name on the left.','This example assigns values to variables before using them.','It is used here to keep intermediate data/results available for later lines.');
   if(entries.length<2&&/\bprint\s*\(/.test(c))add('`print()`','print(value1, value2, ...)','Displays the supplied values in the program output.','This example calls `print(...)` to show its result.','It is used here so you can observe and verify what the program calculated.');
@@ -931,7 +1102,7 @@ function suppressDuplicateExplanations(container){if(!container)return;container
 function insertBlock(node,container,html,id){suppressDuplicateExplanations(container);var wrap=document.createElement('div');wrap.innerHTML=html;var block=wrap.firstElementChild;block.setAttribute('data-csai-line-owner',id);var anchor=node.closest('.csai-editor-shell,.wd-editor-shell,.cx-pm-editor-shell')||node;anchor.insertAdjacentElement('afterend',block);return block;}
 function dedupeOwned(container,id,keep){var blocks=ownedBlocks(container,id),chosen=keep&&keep.isConnected?keep:(blocks[0]||null);blocks.forEach(function(b){if(b!==chosen)b.remove();});return chosen;}
 function renderLazyBlock(block){if(!block||block.dataset.csaiLineRendered==='1')return;var code=block.__csaiCode||'',lang=block.__csaiLang||inferLanguage(code,'',null),list=block.querySelector('[data-csai-line-list]'),host=block.querySelector('[data-csai-term-host]'),syntaxHost=block.querySelector('[data-csai-syntax-used-host]'),commentHost=block.querySelector('[data-csai-commented-code-host]'),lazy=block.querySelector('[data-csai-line-lazy]');if(commentHost)commentHost.innerHTML=commentedCodeHtml(code,lang);if(syntaxHost)syntaxHost.innerHTML=syntaxUsedHtml(code,lang);if(host)host.innerHTML=glossaryHtml(code,lang);if(list)list.innerHTML=listHtml(code,lang);if(lazy)lazy.remove();block.dataset.csaiLineRendered='1';}
-function refreshNode(node){if(!node||!node.isConnected)return;var container=containerFor(node),existingId=node.getAttribute&&node.getAttribute('data-csai-line-editor-id');if(!container)return;if(!isCodeWorkspace(node)){if(existingId)ownedBlocks(container,existingId).forEach(function(b){b.remove();});if(node.removeAttribute){node.removeAttribute('data-csai-line-covered');node.removeAttribute('data-csai-line-language');}return;}var code=codeFrom(node),id=editorId(node);if(!code.trim()){ownedBlocks(container,id).forEach(function(b){b.remove();});return;}var lang=inferLanguage(code,languageLabel(node,container),node),current=ownedBlocks(container,id)[0],wasOpen=!!(current&&current.open),html=explanationHtml(code,lang);suppressDuplicateExplanations(container);var rendered;if(current){var wrap=document.createElement('div');wrap.innerHTML=html;rendered=wrap.firstElementChild;rendered.setAttribute('data-csai-line-owner',id);current.replaceWith(rendered);}else rendered=insertBlock(node,container,html,id);rendered.__csaiCode=code;rendered.__csaiLang=lang;if(wasOpen){rendered.open=true;renderLazyBlock(rendered);}dedupeOwned(container,id,rendered);node.setAttribute('data-csai-line-covered','1');node.setAttribute('data-csai-line-language',lang);container.setAttribute('data-csai-line-covered','1');}
+function refreshNode(node){if(!node||!node.isConnected)return;var container=containerFor(node),existingId=node.getAttribute&&node.getAttribute('data-csai-line-editor-id');if(!container)return;if(!isCodeWorkspace(node)){if(existingId)ownedBlocks(container,existingId).forEach(function(b){b.remove();});if(node.removeAttribute){node.removeAttribute('data-csai-line-covered');node.removeAttribute('data-csai-line-language');}return;}var code=codeFrom(node),id=editorId(node);if(!code.trim()){ownedBlocks(container,id).forEach(function(b){b.remove();});return;}var lang=inferLanguage(code,languageLabel(node,container),node),current=ownedBlocks(container,id)[0],wasOpen=!!(current&&current.open),html=explanationHtml(code,lang);ownedBlocks(document,id).forEach(function(block){if(block!==current)block.remove();});suppressDuplicateExplanations(container);var rendered;if(current){var wrap=document.createElement('div');wrap.innerHTML=html;rendered=wrap.firstElementChild;rendered.setAttribute('data-csai-line-owner',id);current.replaceWith(rendered);}else rendered=insertBlock(node,container,html,id);rendered.__csaiCode=code;rendered.__csaiLang=lang;if(wasOpen){rendered.open=true;renderLazyBlock(rendered);}dedupeOwned(container,id,rendered);node.setAttribute('data-csai-line-covered','1');node.setAttribute('data-csai-line-language',lang);container.setAttribute('data-csai-line-covered','1');}
 function targetNodes(root){root=root||document;var selectors=[
  '.lesson .csai-study-example textarea.csai-study-code','.lesson .csai-study-example pre','.lesson .csai-study-example textarea','.lesson .lesson-run-card pre.code','.lesson .evergreen-example textarea.evergreen-editor','.lesson .csai-lang-variant [data-csai-language-generated]','.lesson .csai-lang-variant .csai-language-code','.lesson pre.code','.lesson .adaptive-panel textarea.adaptive-code',
  'textarea[data-project-editor]','textarea[data-dual-editor]','textarea.csai-code-editor','textarea[data-evergreen-code]','textarea.oa-editor[data-editor]','textarea[aria-label="Code editor" i]','textarea[aria-label="SQL query editor" i]','textarea[aria-label="HTML editor" i]','textarea[aria-label="CSS editor" i]','textarea[aria-label="JavaScript editor" i]','textarea[aria-label="Git command" i]','textarea.answer','textarea.py[readonly]','textarea.wd-edit','textarea.cx-pm-edit','textarea.cx-projfb-edit'

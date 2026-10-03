@@ -1,0 +1,3442 @@
+{
+  "schemaVersion": 2,
+  "purpose": "Exam-style requirement briefs for every course learning item; no finished solutions or answer keys are stored here.",
+  "id": "microprocessors-arm",
+  "title": "Microprocessors & ARM Architecture",
+  "course": {
+    "title": "Course requirements — what you must be able to do",
+    "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+    "plainEnglishTitle": "In plain English",
+    "plainEnglish": [
+      "Understand the behavior behind Microprocessors & ARM Architecture, trace it with evidence, and transfer it to a fresh case.",
+      "Do not memorize a finished trace; explain why each important state change happens."
+    ],
+    "focus": [
+      "state and control-flow tracing",
+      "correct use of architecture rules",
+      "verification with explicit evidence"
+    ],
+    "tools": [
+      "ARM",
+      "processor",
+      "registers",
+      "microprocessor",
+      "CPU",
+      "transistor",
+      "instruction execution",
+      "single chip"
+    ],
+    "requirements": [
+      "Apply Microprocessors & ARM Architecture to a new problem instead of only recognizing a completed example.",
+      "Explain the important register, memory, flag, control-flow, timing, or architecture behavior in ordinary language.",
+      "Trace a normal case before relying on a simulator or supplied answer.",
+      "Trace at least one boundary or failure case.",
+      "Justify each major instruction, rule, or calculation.",
+      "Verify the final observable state or result with explicit evidence.",
+      "State assumptions clearly when browser execution cannot reproduce the target hardware."
+    ],
+    "steps": [
+      "Apply Microprocessors & ARM Architecture to a new problem instead of only recognizing a completed example.",
+      "Explain the important register, memory, flag, control-flow, timing, or architecture behavior in ordinary language.",
+      "Trace a normal case before relying on a simulator or supplied answer.",
+      "Trace at least one boundary or failure case.",
+      "Justify each major instruction, rule, or calculation.",
+      "Verify the final observable state or result with explicit evidence.",
+      "State assumptions clearly when browser execution cannot reproduce the target hardware."
+    ],
+    "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+    "question": "What does Microprocessors & ARM Architecture require the processor or program to do, and what evidence would prove your reasoning is correct?",
+    "why": "This item is included so you can apply Microprocessors & ARM Architecture to real low-level engineering work rather than memorize isolated syntax.",
+    "workScenario": "A low-level software or processor-behavior task depends on Microprocessors & ARM Architecture. You need to trace what the machine actually does.",
+    "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+    "engineerProcess": [
+      "Restate the requirement.",
+      "Trace registers, memory, flags, control flow, or timing as relevant.",
+      "Choose the smallest correct method.",
+      "Check a normal case.",
+      "Check a boundary/failure case.",
+      "Explain the evidence and assumptions."
+    ],
+    "acceptanceCriteria": [
+      "The required observable state or result is correct.",
+      "The relevant low-level constraints are respected.",
+      "A repeatable trace or calculation explains why the result is correct."
+    ]
+  },
+  "lessons": {
+    "mpr-01": {
+      "title": "Microprocessor fundamentals & the CPU",
+      "practice": {
+        "title": "Lesson requirements — what you must be able to do",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind Microprocessor fundamentals & the CPU, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "microprocessor",
+          "CPU",
+          "transistor",
+          "instruction execution",
+          "single chip",
+          "ARM"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does Microprocessor fundamentals & the CPU require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply Microprocessor fundamentals & the CPU to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on Microprocessor fundamentals & the CPU. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example requirements — what you must do",
+          "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+          "plainEnglishTitle": "In plain English",
+          "plainEnglish": [
+            "Understand the behavior behind Microprocessor fundamentals & the CPU example 1, trace it with evidence, and transfer it to a fresh case.",
+            "Do not memorize a finished trace; explain why each important state change happens."
+          ],
+          "focus": [
+            "state and control-flow tracing",
+            "correct use of architecture rules",
+            "verification with explicit evidence"
+          ],
+          "tools": [
+            "microprocessor",
+            "CPU",
+            "transistor",
+            "instruction execution",
+            "single chip",
+            "ARM"
+          ],
+          "requirements": [
+            "Predict the important register, memory, flag, output, or state changes before checking the example.",
+            "Explain each important operation in plain English.",
+            "Change one meaningful operand, input, address, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "steps": [
+            "Predict the important register, memory, flag, output, or state changes before checking the example.",
+            "Explain each important operation in plain English.",
+            "Change one meaningful operand, input, address, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+          "question": "What does Microprocessor fundamentals & the CPU example 1 require the processor or program to do, and what evidence would prove your reasoning is correct?",
+          "why": "This item is included so you can apply Microprocessor fundamentals & the CPU example 1 to real low-level engineering work rather than memorize isolated syntax.",
+          "workScenario": "A low-level software or processor-behavior task depends on Microprocessor fundamentals & the CPU example 1. You need to trace what the machine actually does.",
+          "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+          "engineerProcess": [
+            "Restate the requirement.",
+            "Trace registers, memory, flags, control flow, or timing as relevant.",
+            "Choose the smallest correct method.",
+            "Check a normal case.",
+            "Check a boundary/failure case.",
+            "Explain the evidence and assumptions."
+          ],
+          "acceptanceCriteria": [
+            "The required observable state or result is correct.",
+            "The relevant low-level constraints are respected.",
+            "A repeatable trace or calculation explains why the result is correct."
+          ]
+        }
+      ]
+    },
+    "mpr-02": {
+      "title": "From early computers to modern microprocessors",
+      "practice": {
+        "title": "Lesson requirements — what you must be able to do",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind From early computers to modern microprocessors, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ENIAC",
+          "transistor",
+          "integrated circuit",
+          "Intel 4004",
+          "scaling",
+          "ARM"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does From early computers to modern microprocessors require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply From early computers to modern microprocessors to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on From early computers to modern microprocessors. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example requirements — what you must do",
+          "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+          "plainEnglishTitle": "In plain English",
+          "plainEnglish": [
+            "Understand the behavior behind From early computers to modern microprocessors example 1, trace it with evidence, and transfer it to a fresh case.",
+            "Do not memorize a finished trace; explain why each important state change happens."
+          ],
+          "focus": [
+            "state and control-flow tracing",
+            "correct use of architecture rules",
+            "verification with explicit evidence"
+          ],
+          "tools": [
+            "ENIAC",
+            "transistor",
+            "integrated circuit",
+            "Intel 4004",
+            "scaling",
+            "ARM"
+          ],
+          "requirements": [
+            "Predict the important register, memory, flag, output, or state changes before checking the example.",
+            "Explain each important operation in plain English.",
+            "Change one meaningful operand, input, address, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "steps": [
+            "Predict the important register, memory, flag, output, or state changes before checking the example.",
+            "Explain each important operation in plain English.",
+            "Change one meaningful operand, input, address, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+          "question": "What does From early computers to modern microprocessors example 1 require the processor or program to do, and what evidence would prove your reasoning is correct?",
+          "why": "This item is included so you can apply From early computers to modern microprocessors example 1 to real low-level engineering work rather than memorize isolated syntax.",
+          "workScenario": "A low-level software or processor-behavior task depends on From early computers to modern microprocessors example 1. You need to trace what the machine actually does.",
+          "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+          "engineerProcess": [
+            "Restate the requirement.",
+            "Trace registers, memory, flags, control flow, or timing as relevant.",
+            "Choose the smallest correct method.",
+            "Check a normal case.",
+            "Check a boundary/failure case.",
+            "Explain the evidence and assumptions."
+          ],
+          "acceptanceCriteria": [
+            "The required observable state or result is correct.",
+            "The relevant low-level constraints are respected.",
+            "A repeatable trace or calculation explains why the result is correct."
+          ]
+        }
+      ]
+    },
+    "mpr-03": {
+      "title": "Computer components, microprocessors, microcontrollers & SoCs",
+      "practice": {
+        "title": "Lesson requirements — what you must be able to do",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind Computer components, microprocessors, microcontrollers & SoCs, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "cache",
+          "DRAM",
+          "chipset",
+          "motherboard",
+          "microcontroller",
+          "SoC",
+          "ARM"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does Computer components, microprocessors, microcontrollers & SoCs require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply Computer components, microprocessors, microcontrollers & SoCs to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on Computer components, microprocessors, microcontrollers & SoCs. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example requirements — what you must do",
+          "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+          "plainEnglishTitle": "In plain English",
+          "plainEnglish": [
+            "Understand the behavior behind Computer components, microprocessors, microcontrollers & SoCs example 1, trace it with evidence, and transfer it to a fresh case.",
+            "Do not memorize a finished trace; explain why each important state change happens."
+          ],
+          "focus": [
+            "state and control-flow tracing",
+            "correct use of architecture rules",
+            "verification with explicit evidence"
+          ],
+          "tools": [
+            "cache",
+            "DRAM",
+            "chipset",
+            "motherboard",
+            "microcontroller",
+            "SoC",
+            "ARM"
+          ],
+          "requirements": [
+            "Predict the important register, memory, flag, output, or state changes before checking the example.",
+            "Explain each important operation in plain English.",
+            "Change one meaningful operand, input, address, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "steps": [
+            "Predict the important register, memory, flag, output, or state changes before checking the example.",
+            "Explain each important operation in plain English.",
+            "Change one meaningful operand, input, address, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+          "question": "What does Computer components, microprocessors, microcontrollers & SoCs example 1 require the processor or program to do, and what evidence would prove your reasoning is correct?",
+          "why": "This item is included so you can apply Computer components, microprocessors, microcontrollers & SoCs example 1 to real low-level engineering work rather than memorize isolated syntax.",
+          "workScenario": "A low-level software or processor-behavior task depends on Computer components, microprocessors, microcontrollers & SoCs example 1. You need to trace what the machine actually does.",
+          "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+          "engineerProcess": [
+            "Restate the requirement.",
+            "Trace registers, memory, flags, control flow, or timing as relevant.",
+            "Choose the smallest correct method.",
+            "Check a normal case.",
+            "Check a boundary/failure case.",
+            "Explain the evidence and assumptions."
+          ],
+          "acceptanceCriteria": [
+            "The required observable state or result is correct.",
+            "The relevant low-level constraints are respected.",
+            "A repeatable trace or calculation explains why the result is correct."
+          ]
+        }
+      ]
+    },
+    "mpr-04": {
+      "title": "Memory hierarchy & cache evolution",
+      "practice": {
+        "title": "Lesson requirements — what you must be able to do",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind Memory hierarchy & cache evolution, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "registers",
+          "L1 cache",
+          "L2 cache",
+          "L3 cache",
+          "DRAM",
+          "locality",
+          "ARM"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does Memory hierarchy & cache evolution require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply Memory hierarchy & cache evolution to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on Memory hierarchy & cache evolution. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example requirements — what you must do",
+          "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+          "plainEnglishTitle": "In plain English",
+          "plainEnglish": [
+            "Understand the behavior behind Memory hierarchy & cache evolution example 1, trace it with evidence, and transfer it to a fresh case.",
+            "Do not memorize a finished trace; explain why each important state change happens."
+          ],
+          "focus": [
+            "state and control-flow tracing",
+            "correct use of architecture rules",
+            "verification with explicit evidence"
+          ],
+          "tools": [
+            "registers",
+            "L1 cache",
+            "L2 cache",
+            "L3 cache",
+            "DRAM",
+            "locality",
+            "ARM"
+          ],
+          "requirements": [
+            "Predict the important register, memory, flag, output, or state changes before checking the example.",
+            "Explain each important operation in plain English.",
+            "Change one meaningful operand, input, address, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "steps": [
+            "Predict the important register, memory, flag, output, or state changes before checking the example.",
+            "Explain each important operation in plain English.",
+            "Change one meaningful operand, input, address, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+          "question": "What does Memory hierarchy & cache evolution example 1 require the processor or program to do, and what evidence would prove your reasoning is correct?",
+          "why": "This item is included so you can apply Memory hierarchy & cache evolution example 1 to real low-level engineering work rather than memorize isolated syntax.",
+          "workScenario": "A low-level software or processor-behavior task depends on Memory hierarchy & cache evolution example 1. You need to trace what the machine actually does.",
+          "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+          "engineerProcess": [
+            "Restate the requirement.",
+            "Trace registers, memory, flags, control flow, or timing as relevant.",
+            "Choose the smallest correct method.",
+            "Check a normal case.",
+            "Check a boundary/failure case.",
+            "Explain the evidence and assumptions."
+          ],
+          "acceptanceCriteria": [
+            "The required observable state or result is correct.",
+            "The relevant low-level constraints are respected.",
+            "A repeatable trace or calculation explains why the result is correct."
+          ]
+        }
+      ]
+    },
+    "mpr-05": {
+      "title": "Architecture vs microarchitecture",
+      "practice": {
+        "title": "Lesson requirements — what you must be able to do",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind Architecture vs microarchitecture, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ISA",
+          "architecture",
+          "microarchitecture",
+          "pipeline",
+          "cache",
+          "out-of-order execution",
+          "ARM"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does Architecture vs microarchitecture require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply Architecture vs microarchitecture to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on Architecture vs microarchitecture. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example requirements — what you must do",
+          "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+          "plainEnglishTitle": "In plain English",
+          "plainEnglish": [
+            "Understand the behavior behind Architecture vs microarchitecture example 1, trace it with evidence, and transfer it to a fresh case.",
+            "Do not memorize a finished trace; explain why each important state change happens."
+          ],
+          "focus": [
+            "state and control-flow tracing",
+            "correct use of architecture rules",
+            "verification with explicit evidence"
+          ],
+          "tools": [
+            "ISA",
+            "architecture",
+            "microarchitecture",
+            "pipeline",
+            "cache",
+            "out-of-order execution",
+            "ARM"
+          ],
+          "requirements": [
+            "Predict the important register, memory, flag, output, or state changes before checking the example.",
+            "Explain each important operation in plain English.",
+            "Change one meaningful operand, input, address, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "steps": [
+            "Predict the important register, memory, flag, output, or state changes before checking the example.",
+            "Explain each important operation in plain English.",
+            "Change one meaningful operand, input, address, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+          "question": "What does Architecture vs microarchitecture example 1 require the processor or program to do, and what evidence would prove your reasoning is correct?",
+          "why": "This item is included so you can apply Architecture vs microarchitecture example 1 to real low-level engineering work rather than memorize isolated syntax.",
+          "workScenario": "A low-level software or processor-behavior task depends on Architecture vs microarchitecture example 1. You need to trace what the machine actually does.",
+          "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+          "engineerProcess": [
+            "Restate the requirement.",
+            "Trace registers, memory, flags, control flow, or timing as relevant.",
+            "Choose the smallest correct method.",
+            "Check a normal case.",
+            "Check a boundary/failure case.",
+            "Explain the evidence and assumptions."
+          ],
+          "acceptanceCriteria": [
+            "The required observable state or result is correct.",
+            "The relevant low-level constraints are respected.",
+            "A repeatable trace or calculation explains why the result is correct."
+          ]
+        }
+      ]
+    },
+    "mpr-06": {
+      "title": "Processor performance: time, clock rate & IPC",
+      "practice": {
+        "title": "Lesson requirements — what you must be able to do",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind Processor performance: time, clock rate & IPC, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "execution time",
+          "clock rate",
+          "IPC",
+          "CPI",
+          "pipeline",
+          "superscalar",
+          "ARM"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does Processor performance: time, clock rate & IPC require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply Processor performance: time, clock rate & IPC to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on Processor performance: time, clock rate & IPC. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example requirements — what you must do",
+          "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+          "plainEnglishTitle": "In plain English",
+          "plainEnglish": [
+            "Understand the behavior behind Processor performance: time, clock rate & IPC example 1, trace it with evidence, and transfer it to a fresh case.",
+            "Do not memorize a finished trace; explain why each important state change happens."
+          ],
+          "focus": [
+            "state and control-flow tracing",
+            "correct use of architecture rules",
+            "verification with explicit evidence"
+          ],
+          "tools": [
+            "execution time",
+            "clock rate",
+            "IPC",
+            "CPI",
+            "pipeline",
+            "superscalar",
+            "ARM"
+          ],
+          "requirements": [
+            "Predict the important register, memory, flag, output, or state changes before checking the example.",
+            "Explain each important operation in plain English.",
+            "Change one meaningful operand, input, address, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "steps": [
+            "Predict the important register, memory, flag, output, or state changes before checking the example.",
+            "Explain each important operation in plain English.",
+            "Change one meaningful operand, input, address, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+          "question": "What does Processor performance: time, clock rate & IPC example 1 require the processor or program to do, and what evidence would prove your reasoning is correct?",
+          "why": "This item is included so you can apply Processor performance: time, clock rate & IPC example 1 to real low-level engineering work rather than memorize isolated syntax.",
+          "workScenario": "A low-level software or processor-behavior task depends on Processor performance: time, clock rate & IPC example 1. You need to trace what the machine actually does.",
+          "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+          "engineerProcess": [
+            "Restate the requirement.",
+            "Trace registers, memory, flags, control flow, or timing as relevant.",
+            "Choose the smallest correct method.",
+            "Check a normal case.",
+            "Check a boundary/failure case.",
+            "Explain the evidence and assumptions."
+          ],
+          "acceptanceCriteria": [
+            "The required observable state or result is correct.",
+            "The relevant low-level constraints are respected.",
+            "A repeatable trace or calculation explains why the result is correct."
+          ]
+        }
+      ]
+    },
+    "mpr-07": {
+      "title": "RISC principles & ARM architecture",
+      "practice": {
+        "title": "Lesson requirements — what you must be able to do",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind RISC principles & ARM architecture, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "RISC",
+          "load-store",
+          "register file",
+          "fixed-length instruction",
+          "embedded systems",
+          "ARM"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does RISC principles & ARM architecture require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply RISC principles & ARM architecture to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on RISC principles & ARM architecture. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example requirements — what you must do",
+          "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+          "plainEnglishTitle": "In plain English",
+          "plainEnglish": [
+            "Understand the behavior behind RISC principles & ARM architecture example 1, trace it with evidence, and transfer it to a fresh case.",
+            "Do not memorize a finished trace; explain why each important state change happens."
+          ],
+          "focus": [
+            "state and control-flow tracing",
+            "correct use of architecture rules",
+            "verification with explicit evidence"
+          ],
+          "tools": [
+            "RISC",
+            "load-store",
+            "register file",
+            "fixed-length instruction",
+            "embedded systems",
+            "ARM"
+          ],
+          "requirements": [
+            "Predict the important register, memory, flag, output, or state changes before checking the example.",
+            "Explain each important operation in plain English.",
+            "Change one meaningful operand, input, address, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "steps": [
+            "Predict the important register, memory, flag, output, or state changes before checking the example.",
+            "Explain each important operation in plain English.",
+            "Change one meaningful operand, input, address, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+          "question": "What does RISC principles & ARM architecture example 1 require the processor or program to do, and what evidence would prove your reasoning is correct?",
+          "why": "This item is included so you can apply RISC principles & ARM architecture example 1 to real low-level engineering work rather than memorize isolated syntax.",
+          "workScenario": "A low-level software or processor-behavior task depends on RISC principles & ARM architecture example 1. You need to trace what the machine actually does.",
+          "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+          "engineerProcess": [
+            "Restate the requirement.",
+            "Trace registers, memory, flags, control flow, or timing as relevant.",
+            "Choose the smallest correct method.",
+            "Check a normal case.",
+            "Check a boundary/failure case.",
+            "Explain the evidence and assumptions."
+          ],
+          "acceptanceCriteria": [
+            "The required observable state or result is correct.",
+            "The relevant low-level constraints are respected.",
+            "A repeatable trace or calculation explains why the result is correct."
+          ]
+        }
+      ]
+    },
+    "mpr-08": {
+      "title": "ARM data sizes, instruction sets & state",
+      "practice": {
+        "title": "Lesson requirements — what you must be able to do",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind ARM data sizes, instruction sets & state, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "word",
+          "halfword",
+          "doubleword",
+          "ARM state",
+          "Thumb",
+          "Thumb-2",
+          "ARM"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does ARM data sizes, instruction sets & state require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply ARM data sizes, instruction sets & state to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on ARM data sizes, instruction sets & state. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example requirements — what you must do",
+          "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+          "plainEnglishTitle": "In plain English",
+          "plainEnglish": [
+            "Understand the behavior behind ARM data sizes, instruction sets & state example 1, trace it with evidence, and transfer it to a fresh case.",
+            "Do not memorize a finished trace; explain why each important state change happens."
+          ],
+          "focus": [
+            "state and control-flow tracing",
+            "correct use of architecture rules",
+            "verification with explicit evidence"
+          ],
+          "tools": [
+            "word",
+            "halfword",
+            "doubleword",
+            "ARM state",
+            "Thumb",
+            "Thumb-2",
+            "ARM"
+          ],
+          "requirements": [
+            "Predict the important register, memory, flag, output, or state changes before checking the example.",
+            "Explain each important operation in plain English.",
+            "Change one meaningful operand, input, address, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "steps": [
+            "Predict the important register, memory, flag, output, or state changes before checking the example.",
+            "Explain each important operation in plain English.",
+            "Change one meaningful operand, input, address, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+          "question": "What does ARM data sizes, instruction sets & state example 1 require the processor or program to do, and what evidence would prove your reasoning is correct?",
+          "why": "This item is included so you can apply ARM data sizes, instruction sets & state example 1 to real low-level engineering work rather than memorize isolated syntax.",
+          "workScenario": "A low-level software or processor-behavior task depends on ARM data sizes, instruction sets & state example 1. You need to trace what the machine actually does.",
+          "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+          "engineerProcess": [
+            "Restate the requirement.",
+            "Trace registers, memory, flags, control flow, or timing as relevant.",
+            "Choose the smallest correct method.",
+            "Check a normal case.",
+            "Check a boundary/failure case.",
+            "Explain the evidence and assumptions."
+          ],
+          "acceptanceCriteria": [
+            "The required observable state or result is correct.",
+            "The relevant low-level constraints are respected.",
+            "A repeatable trace or calculation explains why the result is correct."
+          ]
+        }
+      ]
+    },
+    "mpr-09": {
+      "title": "ARM programmer model & registers",
+      "practice": {
+        "title": "Lesson requirements — what you must be able to do",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind ARM programmer model & registers, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "R0-R12",
+          "SP",
+          "LR",
+          "PC",
+          "CPSR",
+          "SPSR",
+          "banked registers",
+          "ARM"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does ARM programmer model & registers require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply ARM programmer model & registers to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on ARM programmer model & registers. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example requirements — what you must do",
+          "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+          "plainEnglishTitle": "In plain English",
+          "plainEnglish": [
+            "Understand the behavior behind ARM programmer model & registers example 1, trace it with evidence, and transfer it to a fresh case.",
+            "Do not memorize a finished trace; explain why each important state change happens."
+          ],
+          "focus": [
+            "state and control-flow tracing",
+            "correct use of architecture rules",
+            "verification with explicit evidence"
+          ],
+          "tools": [
+            "R0-R12",
+            "SP",
+            "LR",
+            "PC",
+            "CPSR",
+            "SPSR",
+            "banked registers",
+            "ARM"
+          ],
+          "requirements": [
+            "Predict the important register, memory, flag, output, or state changes before checking the example.",
+            "Explain each important operation in plain English.",
+            "Change one meaningful operand, input, address, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "steps": [
+            "Predict the important register, memory, flag, output, or state changes before checking the example.",
+            "Explain each important operation in plain English.",
+            "Change one meaningful operand, input, address, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+          "question": "What does ARM programmer model & registers example 1 require the processor or program to do, and what evidence would prove your reasoning is correct?",
+          "why": "This item is included so you can apply ARM programmer model & registers example 1 to real low-level engineering work rather than memorize isolated syntax.",
+          "workScenario": "A low-level software or processor-behavior task depends on ARM programmer model & registers example 1. You need to trace what the machine actually does.",
+          "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+          "engineerProcess": [
+            "Restate the requirement.",
+            "Trace registers, memory, flags, control flow, or timing as relevant.",
+            "Choose the smallest correct method.",
+            "Check a normal case.",
+            "Check a boundary/failure case.",
+            "Explain the evidence and assumptions."
+          ],
+          "acceptanceCriteria": [
+            "The required observable state or result is correct.",
+            "The relevant low-level constraints are respected.",
+            "A repeatable trace or calculation explains why the result is correct."
+          ]
+        }
+      ]
+    },
+    "mpr-10": {
+      "title": "Processor modes, CPSR, endianness & exception overview",
+      "practice": {
+        "title": "Lesson requirements — what you must be able to do",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind Processor modes, CPSR, endianness & exception overview, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "User mode",
+          "SVC",
+          "IRQ",
+          "FIQ",
+          "Abort",
+          "Undefined",
+          "CPSR",
+          "endianness",
+          "ARM"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does Processor modes, CPSR, endianness & exception overview require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply Processor modes, CPSR, endianness & exception overview to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on Processor modes, CPSR, endianness & exception overview. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example requirements — what you must do",
+          "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+          "plainEnglishTitle": "In plain English",
+          "plainEnglish": [
+            "Understand the behavior behind Processor modes, CPSR, endianness & exception overview example 1, trace it with evidence, and transfer it to a fresh case.",
+            "Do not memorize a finished trace; explain why each important state change happens."
+          ],
+          "focus": [
+            "state and control-flow tracing",
+            "correct use of architecture rules",
+            "verification with explicit evidence"
+          ],
+          "tools": [
+            "User mode",
+            "SVC",
+            "IRQ",
+            "FIQ",
+            "Abort",
+            "Undefined",
+            "CPSR",
+            "endianness",
+            "ARM"
+          ],
+          "requirements": [
+            "Predict the important register, memory, flag, output, or state changes before checking the example.",
+            "Explain each important operation in plain English.",
+            "Change one meaningful operand, input, address, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "steps": [
+            "Predict the important register, memory, flag, output, or state changes before checking the example.",
+            "Explain each important operation in plain English.",
+            "Change one meaningful operand, input, address, or condition and predict the new result.",
+            "Identify one relevant edge case or common failure.",
+            "Create a separate small example using the same idea with different values."
+          ],
+          "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+          "question": "What does Processor modes, CPSR, endianness & exception overview example 1 require the processor or program to do, and what evidence would prove your reasoning is correct?",
+          "why": "This item is included so you can apply Processor modes, CPSR, endianness & exception overview example 1 to real low-level engineering work rather than memorize isolated syntax.",
+          "workScenario": "A low-level software or processor-behavior task depends on Processor modes, CPSR, endianness & exception overview example 1. You need to trace what the machine actually does.",
+          "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+          "engineerProcess": [
+            "Restate the requirement.",
+            "Trace registers, memory, flags, control flow, or timing as relevant.",
+            "Choose the smallest correct method.",
+            "Check a normal case.",
+            "Check a boundary/failure case.",
+            "Explain the evidence and assumptions."
+          ],
+          "acceptanceCriteria": [
+            "The required observable state or result is correct.",
+            "The relevant low-level constraints are respected.",
+            "A repeatable trace or calculation explains why the result is correct."
+          ]
+        }
+      ]
+    }
+  },
+  "exercises": [
+    {
+      "id": "mpr-ex-01",
+      "title": "CPU or complete computer?",
+      "practice": {
+        "title": "Exercise question — what you must do",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind CPU or complete computer?, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "microprocessor",
+          "CPU",
+          "transistor",
+          "instruction execution",
+          "single chip"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does CPU or complete computer? require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply CPU or complete computer? to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on CPU or complete computer?. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "mpr-ex-02",
+      "title": "Technology milestone chain",
+      "practice": {
+        "title": "Exercise question — what you must do",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind Technology milestone chain, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "ENIAC",
+          "transistor",
+          "integrated circuit",
+          "Intel 4004",
+          "scaling"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does Technology milestone chain require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply Technology milestone chain to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on Technology milestone chain. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "mpr-ex-03",
+      "title": "Microprocessor vs microcontroller",
+      "practice": {
+        "title": "Exercise question — what you must do",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind Microprocessor vs microcontroller, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "cache",
+          "DRAM",
+          "chipset",
+          "motherboard",
+          "microcontroller",
+          "SoC"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does Microprocessor vs microcontroller require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply Microprocessor vs microcontroller to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on Microprocessor vs microcontroller. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "mpr-ex-04",
+      "title": "Memory hierarchy ordering",
+      "practice": {
+        "title": "Exercise question — what you must do",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind Memory hierarchy ordering, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "registers",
+          "L1 cache",
+          "L2 cache",
+          "L3 cache",
+          "DRAM",
+          "locality"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does Memory hierarchy ordering require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply Memory hierarchy ordering to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on Memory hierarchy ordering. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "mpr-ex-05",
+      "title": "Architecture or microarchitecture?",
+      "practice": {
+        "title": "Exercise question — what you must do",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind Architecture or microarchitecture?, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "ISA",
+          "architecture",
+          "microarchitecture",
+          "pipeline",
+          "cache",
+          "out-of-order execution"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does Architecture or microarchitecture? require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply Architecture or microarchitecture? to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on Architecture or microarchitecture?. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "mpr-ex-06",
+      "title": "Execution-time calculation",
+      "practice": {
+        "title": "Exercise question — what you must do",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind Execution-time calculation, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "execution time",
+          "clock rate",
+          "IPC",
+          "CPI",
+          "pipeline",
+          "superscalar"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does Execution-time calculation require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply Execution-time calculation to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on Execution-time calculation. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "mpr-ex-07",
+      "title": "Performance trade-off",
+      "practice": {
+        "title": "Exercise question — what you must do",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind Performance trade-off, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "execution time",
+          "clock rate",
+          "IPC",
+          "CPI",
+          "pipeline",
+          "superscalar"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does Performance trade-off require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply Performance trade-off to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on Performance trade-off. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "mpr-ex-08",
+      "title": "Trace the ARM load-store model",
+      "practice": {
+        "title": "Exercise question — what you must do",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind Trace the ARM load-store model, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "RISC",
+          "load-store",
+          "register file",
+          "fixed-length instruction",
+          "embedded systems"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does Trace the ARM load-store model require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply Trace the ARM load-store model to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on Trace the ARM load-store model. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "mpr-ex-09",
+      "title": "ARM size terminology",
+      "practice": {
+        "title": "Exercise question — what you must do",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind ARM size terminology, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "word",
+          "halfword",
+          "doubleword",
+          "ARM state",
+          "Thumb",
+          "Thumb-2"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does ARM size terminology require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply ARM size terminology to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on ARM size terminology. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "mpr-ex-10",
+      "title": "Register-role map",
+      "practice": {
+        "title": "Exercise question — what you must do",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind Register-role map, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "R0-R12",
+          "SP",
+          "LR",
+          "PC",
+          "CPSR",
+          "SPSR",
+          "banked registers"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does Register-role map require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply Register-role map to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on Register-role map. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "mpr-ex-11",
+      "title": "Mode transition reasoning",
+      "practice": {
+        "title": "Exercise question — what you must do",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind Mode transition reasoning, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "User mode",
+          "SVC",
+          "IRQ",
+          "FIQ",
+          "Abort",
+          "Undefined",
+          "CPSR",
+          "endianness"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does Mode transition reasoning require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply Mode transition reasoning to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on Mode transition reasoning. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "mpr-ex-12",
+      "title": "Endian byte layout",
+      "practice": {
+        "title": "Exercise question — what you must do",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind Endian byte layout, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "User mode",
+          "SVC",
+          "IRQ",
+          "FIQ",
+          "Abort",
+          "Undefined",
+          "CPSR",
+          "endianness"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does Endian byte layout require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply Endian byte layout to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on Endian byte layout. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    }
+  ],
+  "projects": [
+    {
+      "id": "mpr-p1",
+      "title": "Microprocessor evolution study",
+      "practice": {
+        "title": "Project question — what your finished work must do",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind Microprocessor evolution study, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "verification",
+          "README"
+        ],
+        "requirements": [
+          "Restate the required behavior before implementation.",
+          "Satisfy every listed project requirement.",
+          "Verify normal behavior and at least one boundary or failure case.",
+          "Document assumptions, evidence, and limitations clearly."
+        ],
+        "steps": [
+          "Restate the required behavior before implementation.",
+          "Satisfy every listed project requirement.",
+          "Verify normal behavior and at least one boundary or failure case.",
+          "Document assumptions, evidence, and limitations clearly."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does Microprocessor evolution study require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply Microprocessor evolution study to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on Microprocessor evolution study. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "mpr-p2",
+      "title": "Memory hierarchy explorer",
+      "practice": {
+        "title": "Project question — what your finished work must do",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind Memory hierarchy explorer, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "verification",
+          "README"
+        ],
+        "requirements": [
+          "Restate the required behavior before implementation.",
+          "Satisfy every listed project requirement.",
+          "Verify normal behavior and at least one boundary or failure case.",
+          "Document assumptions, evidence, and limitations clearly."
+        ],
+        "steps": [
+          "Restate the required behavior before implementation.",
+          "Satisfy every listed project requirement.",
+          "Verify normal behavior and at least one boundary or failure case.",
+          "Document assumptions, evidence, and limitations clearly."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does Memory hierarchy explorer require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply Memory hierarchy explorer to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on Memory hierarchy explorer. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "mpr-p3",
+      "title": "CPU performance comparison lab",
+      "practice": {
+        "title": "Project question — what your finished work must do",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind CPU performance comparison lab, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "verification",
+          "README"
+        ],
+        "requirements": [
+          "Restate the required behavior before implementation.",
+          "Satisfy every listed project requirement.",
+          "Verify normal behavior and at least one boundary or failure case.",
+          "Document assumptions, evidence, and limitations clearly."
+        ],
+        "steps": [
+          "Restate the required behavior before implementation.",
+          "Satisfy every listed project requirement.",
+          "Verify normal behavior and at least one boundary or failure case.",
+          "Document assumptions, evidence, and limitations clearly."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does CPU performance comparison lab require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply CPU performance comparison lab to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on CPU performance comparison lab. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "mpr-capstone",
+      "title": "ARM processor architecture study & performance model",
+      "practice": {
+        "title": "Project question — what your finished work must do",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind ARM processor architecture study & performance model, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "verification",
+          "README"
+        ],
+        "requirements": [
+          "Restate the required behavior before implementation.",
+          "Satisfy every listed project requirement.",
+          "Verify normal behavior and at least one boundary or failure case.",
+          "Document assumptions, evidence, and limitations clearly."
+        ],
+        "steps": [
+          "Restate the required behavior before implementation.",
+          "Satisfy every listed project requirement.",
+          "Verify normal behavior and at least one boundary or failure case.",
+          "Document assumptions, evidence, and limitations clearly."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does ARM processor architecture study & performance model require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply ARM processor architecture study & performance model to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on ARM processor architecture study & performance model. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "id": "quiz-1",
+      "title": "A microprocessor is best described as:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind A microprocessor is best described as:, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does A microprocessor is best described as: require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply A microprocessor is best described as: to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on A microprocessor is best described as:. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "quiz-2",
+      "title": "Which task is central to a CPU?",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind Which task is central to a CPU?, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does Which task is central to a CPU? require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply Which task is central to a CPU? to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on Which task is central to a CPU?. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "quiz-3",
+      "title": "Which technology came before the integrated circuit?",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind Which technology came before the integrated circuit?, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does Which technology came before the integrated circuit? require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply Which technology came before the integrated circuit? to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on Which technology came before the integrated circuit?. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "quiz-4",
+      "title": "Why did higher integration matter?",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind Why did higher integration matter?, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does Why did higher integration matter? require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply Why did higher integration matter? to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on Why did higher integration matter?. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "quiz-5",
+      "title": "A microcontroller commonly integrates:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind A microcontroller commonly integrates:, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does A microcontroller commonly integrates: require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply A microcontroller commonly integrates: to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on A microcontroller commonly integrates:. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "quiz-6",
+      "title": "A system-on-chip generally means:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind A system-on-chip generally means:, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does A system-on-chip generally means: require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply A system-on-chip generally means: to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on A system-on-chip generally means:. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "quiz-7",
+      "title": "Which is usually closest to the execution units?",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind Which is usually closest to the execution units?, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does Which is usually closest to the execution units? require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply Which is usually closest to the execution units? to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on Which is usually closest to the execution units?. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "quiz-8",
+      "title": "Why are multiple cache levels used?",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind Why are multiple cache levels used?, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does Why are multiple cache levels used? require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply Why are multiple cache levels used? to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on Why are multiple cache levels used?. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "quiz-9",
+      "title": "Architecture primarily defines:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind Architecture primarily defines:, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does Architecture primarily defines: require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply Architecture primarily defines: to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on Architecture primarily defines:. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "quiz-10",
+      "title": "Microarchitecture primarily describes:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind Microarchitecture primarily describes:, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does Microarchitecture primarily describes: require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply Microarchitecture primarily describes: to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on Microarchitecture primarily describes:. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "quiz-11",
+      "title": "IPC means:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind IPC means:, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does IPC means: require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply IPC means: to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on IPC means:. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "quiz-12",
+      "title": "A higher clock rate alone guarantees higher performance:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind A higher clock rate alone guarantees higher performance:, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does A higher clock rate alone guarantees higher performance: require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply A higher clock rate alone guarantees higher performance: to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on A higher clock rate alone guarantees higher performance:. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "quiz-13",
+      "title": "ARM is commonly described as a:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind ARM is commonly described as a:, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does ARM is commonly described as a: require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply ARM is commonly described as a: to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on ARM is commonly described as a:. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "quiz-14",
+      "title": "In a load-store architecture, arithmetic normally operates on:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind In a load-store architecture, arithmetic normally operates on:, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does In a load-store architecture, arithmetic normally operates on: require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply In a load-store architecture, arithmetic normally operates on: to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on In a load-store architecture, arithmetic normally operates on:. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "quiz-15",
+      "title": "In this 32-bit ARM terminology, a word is:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind In this 32-bit ARM terminology, a word is:, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does In this 32-bit ARM terminology, a word is: require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply In this 32-bit ARM terminology, a word is: to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on In this 32-bit ARM terminology, a word is:. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "quiz-16",
+      "title": "Thumb/Thumb-2 primarily provides:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind Thumb/Thumb-2 primarily provides:, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does Thumb/Thumb-2 primarily provides: require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply Thumb/Thumb-2 primarily provides: to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on Thumb/Thumb-2 primarily provides:. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "quiz-17",
+      "title": "R13 is conventionally the:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind R13 is conventionally the:, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does R13 is conventionally the: require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply R13 is conventionally the: to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on R13 is conventionally the:. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "quiz-18",
+      "title": "R14 is conventionally the:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind R14 is conventionally the:, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does R14 is conventionally the: require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply R14 is conventionally the: to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on R14 is conventionally the:. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "quiz-19",
+      "title": "R15 is the:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind R15 is the:, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does R15 is the: require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply R15 is the: to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on R15 is the:. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "quiz-20",
+      "title": "Why do exception modes use banked state?",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind Why do exception modes use banked state?, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does Why do exception modes use banked state? require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply Why do exception modes use banked state? to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on Why do exception modes use banked state?. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "quiz-21",
+      "title": "Which mode is entered for a normal-priority hardware interrupt in classic ARM?",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind Which mode is entered for a normal-priority hardware interrupt in classic ARM?, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does Which mode is entered for a normal-priority hardware interrupt in classic ARM? require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply Which mode is entered for a normal-priority hardware interrupt in classic ARM? to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on Which mode is entered for a normal-priority hardware interrupt in classic ARM?. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "quiz-22",
+      "title": "CPSR contains:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind CPSR contains:, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does CPSR contains: require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply CPSR contains: to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on CPSR contains:. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "quiz-23",
+      "title": "Little-endian memory places which byte at the lowest address?",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind Little-endian memory places which byte at the lowest address?, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does Little-endian memory places which byte at the lowest address? require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply Little-endian memory places which byte at the lowest address? to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on Little-endian memory places which byte at the lowest address?. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    },
+    {
+      "id": "quiz-24",
+      "title": "In classic ARM CPSR, setting the I mask bit means:",
+      "practice": {
+        "title": "Knowledge-check requirements — what you must justify",
+        "intro": "Use this as an exam-style requirement brief. It defines what competent work must demonstrate without giving a finished solution.",
+        "plainEnglishTitle": "In plain English",
+        "plainEnglish": [
+          "Understand the behavior behind In classic ARM CPSR, setting the I mask bit means:, trace it with evidence, and transfer it to a fresh case.",
+          "Do not memorize a finished trace; explain why each important state change happens."
+        ],
+        "focus": [
+          "state and control-flow tracing",
+          "correct use of architecture rules",
+          "verification with explicit evidence"
+        ],
+        "tools": [
+          "ARM",
+          "reasoning"
+        ],
+        "requirements": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "steps": [
+          "State what the task is asking in plain English.",
+          "Choose the relevant rule, instruction, or architecture concept.",
+          "Work through the state change or calculation step by step.",
+          "Verify the final result against the stated requirement.",
+          "Explain why the result is correct rather than only giving the answer."
+        ],
+        "checkpoint": "You are ready to move on when you can satisfy these requirements on an unfamiliar small case without copying the supplied example.",
+        "question": "What does In classic ARM CPSR, setting the I mask bit means: require the processor or program to do, and what evidence would prove your reasoning is correct?",
+        "why": "This item is included so you can apply In classic ARM CPSR, setting the I mask bit means: to real low-level engineering work rather than memorize isolated syntax.",
+        "workScenario": "A low-level software or processor-behavior task depends on In classic ARM CPSR, setting the I mask bit means:. You need to trace what the machine actually does.",
+        "workTask": "Define the required state change, choose the relevant rule or instruction, trace the result, and verify it.",
+        "engineerProcess": [
+          "Restate the requirement.",
+          "Trace registers, memory, flags, control flow, or timing as relevant.",
+          "Choose the smallest correct method.",
+          "Check a normal case.",
+          "Check a boundary/failure case.",
+          "Explain the evidence and assumptions."
+        ],
+        "acceptanceCriteria": [
+          "The required observable state or result is correct.",
+          "The relevant low-level constraints are respected.",
+          "A repeatable trace or calculation explains why the result is correct."
+        ]
+      }
+    }
+  ]
+}

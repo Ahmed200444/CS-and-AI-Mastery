@@ -18,7 +18,7 @@ assert.ok(!toolsSource.includes('function explanationHtml('),'only one productio
 assert.ok(toolsSource.includes('window.CSAILineExplainer.refresh(pre)'),'other tools should delegate to the universal explainer');
 
 const pages=fs.readdirSync(path.join(root,'courses')).filter(n=>n.endsWith('.html'));
-assert.equal(pages.length,62,'expected 62 generated course pages including compatibility route');
+assert.ok([62,65].includes(pages.length), 'expected 62 committed or 65 generated course pages');
 for(const page of pages){
   const html=fs.readFileSync(path.join(root,'courses',page),'utf8');
   const line=html.indexOf('line-by-line-explanations.js');
@@ -128,7 +128,7 @@ for(const page of pages){
   const re=/<pre\b[^>]*class="[^"]*\bcode\b[^"]*"[^>]*(?:data-example-audit="(?:candidate|reference)"|data-reference-only="true")[^>]*>([\s\S]*?)<\/pre>/g;
   let m;
   while((m=re.exec(html))){
-    const code=decodeHtml(m[1]),lang=api.inferLanguage(code,'',null),rows=api.explain(code,lang),sourceLines=code.split(/\r?\n/);
+    const code=decodeHtml(m[1]),explicit=(m[0].match(/data-language="([^"]+)"/i)||[])[1]||'',lang=api.inferLanguage(code,explicit,null),rows=api.explain(code,lang),sourceLines=code.split(/\r?\n/);
     nativeExamples++;nativeLines+=sourceLines.length;
     assert.equal(rows.length,sourceLines.length,`${page}: every native source line must have one explanation record`);
     for(const row of rows){

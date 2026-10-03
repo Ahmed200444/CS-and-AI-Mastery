@@ -135,7 +135,7 @@ function decorateCatalog(){
   var head=view.querySelector('.cx-cat-head');
   if(head){
     var eye=head.querySelector('.cx-cat-eyebrow');
-    if(eye) eye.textContent='Course Catalog';
+    if(eye&&eye.textContent!=='Course Catalog') eye.textContent='Course Catalog';
     var title=head.querySelector('.cx-cat-h1');
     if(title && !/\d+/.test(title.textContent)) title.textContent='All '+getCourseCount()+' courses';
   }

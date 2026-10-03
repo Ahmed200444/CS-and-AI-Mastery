@@ -15,5 +15,5 @@ for(const file of fs.readdirSync(dir).filter(name=>name.endsWith('.html'))){
   fs.writeFileSync(full,html,'utf8');
   count++;
 }
-if(count!==62)throw new Error(`Expected 62 course pages, updated ${count}`);
+if(count!==65)throw new Error(`Expected 65 course pages, updated ${count}`);
 console.log(`Injected final unified exercise toolbar into ${count} course pages.`);

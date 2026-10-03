@@ -6,7 +6,7 @@ const root=path.resolve(__dirname,'..');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 
 const pages=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith('.html')).sort();
-assert.equal(pages.length,62,'v5.74 expects all 62 course pages');
+assert.ok([62,65].includes(pages.length),'expected 62 committed or 65 generated course pages');
 for(const f of pages){
   const h=read('courses/'+f);
   for(const tag of [
@@ -51,7 +51,7 @@ for(const marker of [
 assert.ok(!/\bRequired\b/.test(questions),'program questions must not show a Required label');
 assert.ok(!/\boptional\b/i.test(questions),'program questions must not be optional');
 assert.ok(questions.includes("if(root.matches&&root.matches('pre.code')&&root.closest&&root.closest('.lesson-run-card'))return"),'raw code scan must avoid duplicating questions inside runner cards');
-assert.ok(questions.includes('.csai-study-example-lazy-body > .csai-learning-question'),'program-question layer must reuse the generated question after lazy study-card hydration instead of duplicating it');
+assert.ok(questions.includes("owner.querySelectorAll('.csai-learning-question')"),'program-question layer must reuse questions across lazy cards and nested editor/runner wrappers');
 
 const study=read('assets/study-examples.js');
 assert.ok(study.includes('window.CSAIStudyExampleContent={'),'study-example concept/question helper API must be exported');
