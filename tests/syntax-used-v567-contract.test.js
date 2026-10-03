@@ -34,7 +34,7 @@ assert.ok(stringNames.includes('`strip()`'),'strip syntax must be taught when pr
 assert.ok(!stringNames.includes('`set()`'),'syntax that is absent must not be taught');
 
 const pages=fs.readdirSync(path.join(root,'courses')).filter(x=>x.endsWith('.html'));
-assert.equal(pages.length,62);
+assert.equal(pages.length,64);
 for(const page of pages){
   const html=fs.readFileSync(path.join(root,'courses',page),'utf8');
   assert.ok(html.includes('line-by-line-explanations.js?v='),`${page}: versioned syntax explainer cache key missing`);
