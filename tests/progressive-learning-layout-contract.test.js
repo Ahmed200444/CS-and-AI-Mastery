@@ -6,10 +6,10 @@ const root=path.resolve(__dirname,'..');
 const source=fs.readFileSync(path.join(root,'assets','progressive-lesson-layout.js'),'utf8');
 for(const marker of ['Quick explanation','Learn deeper','Today you will learn','Explain more simply','data-csai-progressive','MAX_QUICK_WORDS=55']) assert.ok(source.includes(marker),`missing calm-learning marker: ${marker}`);
 const pages=fs.readdirSync(path.join(root,'courses')).filter(n=>n.endsWith('.html'));
-assert.equal(pages.length,62,'expected 62 generated course pages including compatibility route');
+assert.equal(pages.length,65,'expected 65 generated course pages including compatibility route');
 let lessons=0;
 for(const page of pages){const html=fs.readFileSync(path.join(root,'courses',page),'utf8');const progressive=html.indexOf('progressive-lesson-layout.js');assert.ok(progressive>=0,`${page} must load the progressive lesson layout`);assert.ok(html.includes('calm-study-flow.js'),`${page} must load the calm study flow`);const count=(html.match(/class="lesson-main-explanation"[^>]*data-main-explanation/g)||[]).length;assert.ok(count>0,`${page} should contain lesson explanations`);lessons+=count;}
-assert.equal(lessons,800,'expected all 800 generated lesson explanations to be covered');
+assert.equal(lessons,832,'expected all 832 generated lesson explanations to be covered');
 const sandbox={window:{},document:{readyState:'loading',addEventListener(){},getElementById(){return null;}},setTimeout(){return 1;},MutationObserver:function(){this.observe=function(){};},console};
 vm.createContext(sandbox);vm.runInContext(source,sandbox,{filename:'progressive-lesson-layout.js'});
 const api=sandbox.window.CSAIProgressiveLessons;assert.ok(api&&typeof api.splitQuick==='function','layout API should expose the quick-summary splitter');
