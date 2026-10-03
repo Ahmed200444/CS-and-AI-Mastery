@@ -1,1 +1,791 @@
-{"id":"matlab-engineering","title":"MATLAB for Engineering","icon":"📐","blurb":"MATLAB basics for engineering: vectors, matrices, element-wise operations, scripts, functions, plots, conditionals, loops, and switch.","description":"A lecture-aligned MATLAB course based on the supplied MATLAB Basics and Applications in Engineering material.","category":"computer-engineering","level":"beginner","status":"available","available":true,"tier":"Computer Engineering & Systems","prerequisites":[],"estimatedHours":8,"tags":["MATLAB","engineering","numerical computing","arrays","plotting"],"schemaVersion":3,"lessons":[{"id":"mat-01","title":"MATLAB environment & command window","concepts":["MATLAB","Command Window","prompt","numerical computing"],"objectives":["Explain what MATLAB is used for","Enter expressions at the command prompt","Create a simple range"],"explanation":"MATLAB is a numerical-computing environment and programming language for manipulating, analyzing, and visualizing data. Commands and expressions can be entered at the >> prompt in the Command Window.","examples":["r = 8/10; % Compute scalar ratio\nu = 0:0.1:10; % Generate sample vector from 0 to 10\nz = 5*sin(u); % Scale sine waveform by 5"],"commonMistakes":["Assuming every command must be saved in a script before it can be tested."],"lecture":{"order":1,"title":"Windows and menus","file":"MatLab Introduction(1).pdf","courseId":"matlab-engineering","slides":[2,8]}},{"id":"mat-02","title":"Vectors, ranges & transpose","concepts":["row vector","column vector","colon operator","transpose","concatenation"],"objectives":["Create row and column vectors","Use start:step:end","Transpose and concatenate vectors"],"explanation":"Square brackets create vectors. Spaces or commas separate elements in a row, semicolons create a new row, and start:step:end creates regularly spaced values.","examples":["r = [2 4 10]; % Define row vector\ny = [2 4 10]'; % Transpose row into column vector\nt = 5:0.1:30; % Define time range with 0.1 step\nv = 5*r; % Scalar multiply row vector\nw = r + v; % Vector addition\nu = [r w]; % Horizontal concatenation"],"commonMistakes":["Confusing row separators with element separators."],"lecture":{"order":2,"title":"Basic operations and arrays","file":"MatLab Introduction(1).pdf","courseId":"matlab-engineering","slides":[9,9]}},{"id":"mat-03","title":"Matrices & matrix multiplication","concepts":["matrix","rows","columns","matrix multiplication","dimensions"],"objectives":["Create matrices","Check multiplication dimensions","Use matrix multiplication"],"explanation":"Matrices use semicolons between rows. Ordinary * performs matrix multiplication, so the inner dimensions must be compatible.","examples":["A = [6 -2; 10 3; 4 7]; % Define 3x2 matrix\nB = [9 8; -5 12]; % Define 2x2 matrix\nC = A*B; % Matrix multiplication (3x2 * 2x2 = 3x2)"],"commonMistakes":["Using * when element-by-element multiplication is intended."],"lecture":{"order":2,"title":"Basic operations and arrays","file":"MatLab Introduction(1).pdf","courseId":"matlab-engineering","slides":[10,10]}},{"id":"mat-04","title":"Element-wise array operations & vectorization","concepts":[".*","./",".^","element-wise","vectorization"],"objectives":["Distinguish matrix and element-wise operators","Use .*, ./, and .^","Write vectorized expressions"],"explanation":"Dotted operators apply multiplication, division, or powers element by element. They let one expression operate across an entire vector.","examples":["a = 1:5; % Vector from 1 to 5\nb = 3:7; % Vector from 3 to 7\nc1 = a .* b; % Element-wise multiplication\nc2 = a ./ b; % Element-wise division\nc3 = a .^ b; % Element-wise exponentiation\nx = 0:0.01:1; % Define x domain\ny = exp(-x).*sin(x)./sqrt(x.^2 + 1); % Vectorized expression"],"commonMistakes":["Leaving out the dot when the intended operation is element by element."],"lecture":{"order":2,"title":"Basic operations and arrays","file":"MatLab Introduction(1).pdf","courseId":"matlab-engineering","slides":[10,11]}},{"id":"mat-05","title":"Scripts & M-files","concepts":["script","M-file","sequence of commands","comments"],"objectives":["Explain when scripts are useful","Create a .m script","Run a script by name"],"explanation":"A script file stores a sequence of MATLAB commands for reuse. The lecture shows running a saved script by typing its filename without the .m extension.","examples":["% prod_abc.m script file\nA = [1 4; 2 5]; % Define matrix A\nB = [3 6; 1 2]; % Define matrix B\nC = A*B; % Compute product C"],"commonMistakes":["Treating a script as if it had function-local inputs and outputs."],"lecture":{"order":3,"title":"Files and functions","file":"MatLab Introduction(1).pdf","courseId":"matlab-engineering","slides":[12,14]}},{"id":"mat-06","title":"Function files & local variables","concepts":["function file","input variables","output variables","local variables","filename"],"objectives":["Write a function declaration","Distinguish inputs and outputs","Explain local variables","Match function name and filename"],"explanation":"Function files package commands for repeated use. The lecture syntax is function [outputs] = function_name(inputs). Function variables are local, and the function name should match the .m filename.","examples":["function y = f2(x) % Function definition with input x\ny = 1 - x.*exp(-x); % Local calculation\nend % End of function"],"commonMistakes":["Saving the function under a filename that does not match the function name."],"lecture":{"order":3,"title":"Files and functions","file":"MatLab Introduction(1).pdf","courseId":"matlab-engineering","slides":[15,18]}},{"id":"mat-07","title":"Plotting functions & data","concepts":["plot","xlabel","ylabel","title","legend","line style"],"objectives":["Create an x-y plot","Label axes and add a title","Plot multiple curves","Use legends"],"explanation":"plot(x,y) creates an XY graph. xlabel, ylabel, and title describe it; multiple curves can be shown together and legend identifies them.","examples":["x = 0:0.01:2; % Time domain\ny = sinh(x); % Hyperbolic sine\nz = tanh(x); % Hyperbolic tangent\nplot(x,y,x,z,'--'); % Multi-curve plot\nxlabel('x'); % X-axis label\nylabel('Hyperbolic sine and tangent'); % Y-axis label\nlegend('sinh(x)','tanh(x)'); % Curve legends"],"commonMistakes":["Showing multiple curves without labels or a legend."],"lecture":{"order":4,"title":"Plotting with MATLAB","file":"MatLab Introduction(1).pdf","courseId":"matlab-engineering","slides":[19,22]}},{"id":"mat-08","title":"Relational, logical & conditional statements","concepts":["<","<=",">",">=","==","~=","~","&","|","xor","if","elseif","else"],"objectives":["Use relational and logical operators","Write if statements","Use elseif and else"],"explanation":"MATLAB conditionals choose statements from logical expressions. The lecture covers relational operators, logical NOT/AND/OR/xor, and if/elseif/else for piecewise behavior.","examples":["if x >= 5 % Check upper threshold\n    y = log(x); % Natural log for high values\nelseif x >= 0 % Check positive threshold\n    y = sqrt(x); % Square root for non-negative values\nelse % Negative values\n    y = exp(x) - 1; % Exponential for negative values\nend % End if structure"],"commonMistakes":["Using = for equality testing instead of ==."],"lecture":{"order":5,"title":"Programming with MATLAB","file":"MatLab Introduction(1).pdf","courseId":"matlab-engineering","slides":[23,27]}},{"id":"mat-09","title":"for loops, ranges & implied loops","concepts":["for","colon range","loop variable","vectorization","indexing"],"objectives":["Write a for loop using m:s:n","Use positive and negative steps","Compare explicit loops with vectorized work"],"explanation":"The lecture gives for loop_variable = m:s:n. The step s may be negative and defaults to one when omitted. It also contrasts explicit loops with implied/vectorized array operations.","examples":["x = 0:5:100; % Degree angles\ny = cos(x); % Compute cosine vector\nfor k = 1:21 % Loop through 21 entries\n    xv = (k-1)*5; % Current angle\n    y2(k) = cos(xv); % Store element\nend % End for loop"],"commonMistakes":["Forgetting MATLAB indexing starts at 1 in the explicit-loop example."],"lecture":{"order":5,"title":"Programming with MATLAB","file":"MatLab Introduction(1).pdf","courseId":"matlab-engineering","slides":[28,29]}},{"id":"mat-10","title":"while loops & switch structures","concepts":["while","loop condition","state update","switch","case","otherwise"],"objectives":["Use while when the iteration count is unknown","Initialize and update loop state","Write switch/case/otherwise"],"explanation":"while is used when repetition stops after a condition changes rather than after a known number of passes. Its controlling value must be initialized and changed. switch provides a readable alternative for discrete cases.","examples":["x = 5; % Initial condition\nwhile x < 25 % Loop while under limit\n    disp(x); % Output current value\n    x = 2*x - 1; % Update step\nend % End while loop\n\nswitch angle % Switch on angle variable\n    case 45 % Case 45 degrees\n        disp('Northeast'); % Display direction\n    otherwise % Default case\n        disp('Direction Unknown'); % Unknown direction\nend % End switch"],"commonMistakes":["Writing a while loop whose controlling value never changes."],"lecture":{"order":5,"title":"Programming with MATLAB","file":"MatLab Introduction(1).pdf","courseId":"matlab-engineering","slides":[30,33]}}],"exercises":[{"id":"mat-ex-01","title":"Command-window calculations","prompt":"Evaluate scalar expressions and create a 0:0.1:10 range; explain semicolon behavior.","lessonId":"mat-01"},{"id":"mat-ex-02","title":"Build row and column vectors","prompt":"Create equivalent row and column vectors, then concatenate two row vectors.","lessonId":"mat-02"},{"id":"mat-ex-03","title":"Matrix product check","prompt":"Decide whether A*B is valid, state the result size, and compute it.","lessonId":"mat-03"},{"id":"mat-ex-04","title":"Choose * or .*","prompt":"Choose matrix or element-wise multiplication for several expressions and justify each.","lessonId":"mat-04"},{"id":"mat-ex-05","title":"Vectorized engineering expression","prompt":"Evaluate a supplied formula across a range using dotted operators.","lessonId":"mat-04"},{"id":"mat-ex-06","title":"Convert commands into a script","prompt":"Turn a multi-command calculation into a reusable .m script with comments.","lessonId":"mat-05"},{"id":"mat-ex-07","title":"Write a function file","prompt":"Create a one-input/one-output function and state its correct filename.","lessonId":"mat-06"},{"id":"mat-ex-08","title":"Label a plot","prompt":"Plot a function and add axis labels, title, and legend where needed.","lessonId":"mat-07"},{"id":"mat-ex-09","title":"Piecewise function","prompt":"Implement a three-region piecewise formula with if/elseif/else.","lessonId":"mat-08"},{"id":"mat-ex-10","title":"for-loop trace","prompt":"Trace positive-step and negative-step loop ranges.","lessonId":"mat-09"},{"id":"mat-ex-11","title":"while-loop trace","prompt":"Predict every displayed value and identify the terminating update.","lessonId":"mat-10"},{"id":"mat-ex-12","title":"switch direction selector","prompt":"Implement the lecture-style case selector with otherwise.","lessonId":"mat-10"}],"projects":[{"id":"mat-p1","title":"Engineering data & plotting worksheet","description":"Generate an engineering range, evaluate two vectorized functions, and plot them.","requirements":["Use vector/range construction","Use element-wise operators correctly","Plot at least two curves","Include title, axis labels, and legend"],"language":"text"},{"id":"mat-p2","title":"Matrix and function toolkit","description":"Create MATLAB function files for matrix calculations and scalar/vector engineering formulas.","requirements":["At least three functions","Correct input/output declarations","Demonstrate matrix and element-wise operations","Include a driver script"],"language":"text"},{"id":"mat-p3","title":"Control-flow practice program","description":"Use logical operators, a loop, and switch to process engineering-style inputs.","requirements":["Use if/elseif/else","Use for or while correctly","Use switch/case/otherwise","Show normal and boundary cases"],"language":"text"}],"capstone":{"id":"mat-capstone","title":"MATLAB engineering analysis mini-project","description":"Combine arrays, a user-defined function, control flow, and plotting into one reproducible engineering analysis.","requirements":["One main script and at least one function file","Vector or matrix calculations","At least one conditional","At least one loop or vectorized repeated calculation","A labeled plot","README with inputs, outputs, and run steps"],"language":"text"},"careerApplications":"Useful for engineering coursework, numerical analysis, simulation preparation, data visualization, and technical computing workflows.","quiz":[{"q":"MATLAB is presented as:","options":["A numerical computing environment and programming language","Only a word processor","Only a database server","Only an operating system"],"correct":0,"type":"mcq"},{"q":"Commands can be entered at:","options":["The >> prompt in the Command Window","Only inside a PDF","Only in a linker window","Only in switch"],"correct":0,"type":"mcq"},{"q":"Which creates a row vector?","options":["[2 4 10]","[2;4;10] only","{2 4 10}","(2 4 10)"],"correct":0,"type":"mcq"},{"q":"Which creates a column vector?","options":["[2;4;10]","[2 4 10]","2:4:10 only","plot(2,4,10)"],"correct":0,"type":"mcq"},{"q":"5:0.1:30 means:","options":["Start at 5, step by 0.1, stop at 30","Multiply 5 by 30","Create a 5x30 matrix","Repeat 0.1 five times"],"correct":0,"type":"mcq"},{"q":"A*B represents:","options":["Matrix multiplication","Always element-wise multiplication","String concatenation","Plotting"],"correct":0,"type":"mcq"},{"q":"a.*b represents:","options":["Element-by-element multiplication","Matrix transpose","A while loop","A function declaration"],"correct":0,"type":"mcq"},{"q":"a.^b represents:","options":["Element-by-element power","Matrix addition","A file save","Logical OR"],"correct":0,"type":"mcq"},{"q":"A script file contains:","options":["A sequence of MATLAB commands","Only one constant","Only a function header","Only plot colors"],"correct":0,"type":"mcq"},{"q":"A function file is useful when:","options":["Commands should be called repeatedly with inputs/outputs","No code should execute","Only comments are needed","A graph cannot be drawn"],"correct":0,"type":"mcq"},{"q":"Function variables are described as:","options":["Local to the function","Always global","Stored only in plots","Always strings"],"correct":0,"type":"mcq"},{"q":"For one output, square brackets are:","options":["Optional","Mandatory twice","Forbidden","A plotting operator"],"correct":0,"type":"mcq"},{"q":"The function name should match:","options":["The .m filename","The plot color","The vector length","The operating system"],"correct":0,"type":"mcq"},{"q":"plot(x,y) is used for:","options":["XY plotting","Matrix inversion only","Creating switch","Ending a loop"],"correct":0,"type":"mcq"},{"q":"legend is used to:","options":["Identify plotted data series","Start a function","Create a matrix product","Terminate while"],"correct":0,"type":"mcq"},{"q":"~= means:","options":["Not equal to","Equal to","Matrix multiply","Logical AND"],"correct":0,"type":"mcq"},{"q":"== means:","options":["Equal to","Assignment only","Not equal to","Transpose"],"correct":0,"type":"mcq"},{"q":"elseif is used to:","options":["Test another condition after earlier conditions fail","End every function","Create a matrix","Open a plot only"],"correct":0,"type":"mcq"},{"q":"In m:s:n, s is:","options":["The step/increment","The script filename","The matrix size","The switch value"],"correct":0,"type":"mcq"},{"q":"If s is omitted, it defaults to:","options":["1","0","-1","10"],"correct":0,"type":"mcq"},{"q":"while is especially useful when:","options":["The number of passes is not known in advance","The loop runs exactly once","No condition is needed","Only plots are used"],"correct":0,"type":"mcq"},{"q":"A while loop's controlling value should:","options":["Be initialized and changed appropriately","Never change","Always be a string","Always be zero"],"correct":0,"type":"mcq"},{"q":"switch is useful when:","options":["One expression is compared with discrete case values","Matrix multiplication is required","A function has no inputs","A plot needs a title"],"correct":0,"type":"mcq"},{"q":"otherwise handles:","options":["Values not matched by earlier cases","Only the first case","Matrix multiplication","Function outputs"],"correct":0,"type":"mcq"}],"lectureSequence":[{"order":1,"title":"Windows and menus","file":"MatLab Introduction(1).pdf","courseId":"matlab-engineering"},{"order":2,"title":"Basic operations and arrays","file":"MatLab Introduction(1).pdf","courseId":"matlab-engineering"},{"order":3,"title":"Files and functions","file":"MatLab Introduction(1).pdf","courseId":"matlab-engineering"},{"order":4,"title":"Plotting with MATLAB","file":"MatLab Introduction(1).pdf","courseId":"matlab-engineering"},{"order":5,"title":"Programming with MATLAB","file":"MatLab Introduction(1).pdf","courseId":"matlab-engineering"}]}
+{
+  "id": "matlab-engineering",
+  "title": "MATLAB for Engineering",
+  "icon": "📐",
+  "blurb": "MATLAB basics for engineering: vectors, matrices, element-wise operations, scripts, functions, plots, conditionals, loops, and switch.",
+  "description": "A lecture-aligned MATLAB course based on the supplied MATLAB Basics and Applications in Engineering material.",
+  "category": "computer-engineering",
+  "level": "beginner",
+  "status": "available",
+  "available": true,
+  "tier": "Computer Engineering & Systems",
+  "prerequisites": [],
+  "estimatedHours": 8,
+  "tags": [
+    "MATLAB",
+    "engineering",
+    "numerical computing",
+    "arrays",
+    "plotting"
+  ],
+  "schemaVersion": 3,
+  "lessons": [
+    {
+      "id": "mat-01",
+      "title": "MATLAB environment & command window",
+      "concepts": [
+        "MATLAB",
+        "Command Window",
+        "prompt",
+        "numerical computing"
+      ],
+      "objectives": [
+        "Explain what MATLAB is used for",
+        "Enter expressions at the command prompt",
+        "Create a simple range"
+      ],
+      "explanation": "MATLAB is a numerical-computing environment and programming language for manipulating, analyzing, and visualizing data. Commands and expressions can be entered at the >> prompt in the Command Window.",
+      "examples": [
+        "r = 8/10; % Compute scalar ratio\nu = 0:0.1:10; % Generate sample vector from 0 to 10\nz = 5*sin(u); % Scale sine waveform by 5"
+      ],
+      "commonMistakes": [
+        "Assuming every command must be saved in a script before it can be tested."
+      ],
+      "lecture": {
+        "order": 1,
+        "title": "Windows and menus",
+        "file": "MatLab Introduction(1).pdf",
+        "courseId": "matlab-engineering",
+        "slides": [
+          2,
+          8
+        ]
+      }
+    },
+    {
+      "id": "mat-02",
+      "title": "Vectors, ranges & transpose",
+      "concepts": [
+        "row vector",
+        "column vector",
+        "colon operator",
+        "transpose",
+        "concatenation"
+      ],
+      "objectives": [
+        "Create row and column vectors",
+        "Use start:step:end",
+        "Transpose and concatenate vectors"
+      ],
+      "explanation": "Square brackets create vectors. Spaces or commas separate elements in a row, semicolons create a new row, and start:step:end creates regularly spaced values.",
+      "examples": [
+        "r = [2 4 10]; % Define row vector\ny = [2 4 10]'; % Transpose row into column vector\nt = 5:0.1:30; % Define time range with 0.1 step\nv = 5*r; % Scalar multiply row vector\nw = r + v; % Vector addition\nu = [r w]; % Horizontal concatenation"
+      ],
+      "commonMistakes": [
+        "Confusing row separators with element separators."
+      ],
+      "lecture": {
+        "order": 2,
+        "title": "Basic operations and arrays",
+        "file": "MatLab Introduction(1).pdf",
+        "courseId": "matlab-engineering",
+        "slides": [
+          9,
+          9
+        ]
+      }
+    },
+    {
+      "id": "mat-03",
+      "title": "Matrices & matrix multiplication",
+      "concepts": [
+        "matrix",
+        "rows",
+        "columns",
+        "matrix multiplication",
+        "dimensions"
+      ],
+      "objectives": [
+        "Create matrices",
+        "Check multiplication dimensions",
+        "Use matrix multiplication"
+      ],
+      "explanation": "Matrices use semicolons between rows. Ordinary * performs matrix multiplication, so the inner dimensions must be compatible.",
+      "examples": [
+        "A = [6 -2; 10 3; 4 7]; % Define 3x2 matrix\nB = [9 8; -5 12]; % Define 2x2 matrix\nC = A*B; % Matrix multiplication (3x2 * 2x2 = 3x2)"
+      ],
+      "commonMistakes": [
+        "Using * when element-by-element multiplication is intended."
+      ],
+      "lecture": {
+        "order": 2,
+        "title": "Basic operations and arrays",
+        "file": "MatLab Introduction(1).pdf",
+        "courseId": "matlab-engineering",
+        "slides": [
+          10,
+          10
+        ]
+      }
+    },
+    {
+      "id": "mat-04",
+      "title": "Element-wise array operations & vectorization",
+      "concepts": [
+        ".*",
+        "./",
+        ".^",
+        "element-wise",
+        "vectorization"
+      ],
+      "objectives": [
+        "Distinguish matrix and element-wise operators",
+        "Use .*, ./, and .^",
+        "Write vectorized expressions"
+      ],
+      "explanation": "Dotted operators apply multiplication, division, or powers element by element. They let one expression operate across an entire vector.",
+      "examples": [
+        "a = 1:5; % Vector from 1 to 5\nb = 3:7; % Vector from 3 to 7\nc1 = a .* b; % Element-wise multiplication\nc2 = a ./ b; % Element-wise division\nc3 = a .^ b; % Element-wise exponentiation\nx = 0:0.01:1; % Define x domain\ny = exp(-x).*sin(x)./sqrt(x.^2 + 1); % Vectorized expression"
+      ],
+      "commonMistakes": [
+        "Leaving out the dot when the intended operation is element by element."
+      ],
+      "lecture": {
+        "order": 2,
+        "title": "Basic operations and arrays",
+        "file": "MatLab Introduction(1).pdf",
+        "courseId": "matlab-engineering",
+        "slides": [
+          10,
+          11
+        ]
+      }
+    },
+    {
+      "id": "mat-05",
+      "title": "Scripts & M-files",
+      "concepts": [
+        "script",
+        "M-file",
+        "sequence of commands",
+        "comments"
+      ],
+      "objectives": [
+        "Explain when scripts are useful",
+        "Create a .m script",
+        "Run a script by name"
+      ],
+      "explanation": "A script file stores a sequence of MATLAB commands for reuse. The lecture shows running a saved script by typing its filename without the .m extension.",
+      "examples": [
+        "% prod_abc.m script file\nA = [1 4; 2 5]; % Define matrix A\nB = [3 6; 1 2]; % Define matrix B\nC = A*B; % Compute product C"
+      ],
+      "commonMistakes": [
+        "Treating a script as if it had function-local inputs and outputs."
+      ],
+      "lecture": {
+        "order": 3,
+        "title": "Files and functions",
+        "file": "MatLab Introduction(1).pdf",
+        "courseId": "matlab-engineering",
+        "slides": [
+          12,
+          14
+        ]
+      }
+    },
+    {
+      "id": "mat-06",
+      "title": "Function files & local variables",
+      "concepts": [
+        "function file",
+        "input variables",
+        "output variables",
+        "local variables",
+        "filename"
+      ],
+      "objectives": [
+        "Write a function declaration",
+        "Keep a function file separate from the main script",
+        "Call the function from a script",
+        "Run the script from the Command Window",
+        "Match the function name and .m filename"
+      ],
+      "explanation": "A MATLAB function belongs in its own .m function file, while the main script is a separate .m file that calls it. Both files are edited in the Editor. The Command Window is separate: it is where you run the script by name and see output, variables, and figures.",
+      "examples": [
+        "% file: calculate_average.m\nfunction average = calculate_average(numbers) % Define a reusable function with one input\ntotal = sum(numbers); % Add all values in the input array\ncount = length(numbers); % Count how many values are in the array\naverage = total / count; % Return the arithmetic mean\nend % End the function file\n\n% file: grades.m\nsam = [87 81 94 90 79]; % Store Sam's grades in the main script\nann = [80 91 88 92 93]; % Store Ann's grades in the main script\nsam_average = calculate_average(sam) % Call the function file from the script and display the result\nann_average = calculate_average(ann) % Call the same function with a second array"
+      ],
+      "commonMistakes": [
+        "Putting the main script in the Command Window pane instead of keeping it as a separate .m file in the Editor.",
+        "Saving the function under a filename that does not match the function name."
+      ],
+      "lecture": {
+        "order": 3,
+        "title": "Files and functions",
+        "file": "MatLab Introduction(1).pdf",
+        "courseId": "matlab-engineering",
+        "slides": [
+          15,
+          18
+        ]
+      }
+    },
+    {
+      "id": "mat-07",
+      "title": "Plotting functions & data",
+      "concepts": [
+        "plot",
+        "xlabel",
+        "ylabel",
+        "title",
+        "legend",
+        "line style"
+      ],
+      "objectives": [
+        "Create an x-y plot",
+        "Label axes and add a title",
+        "Plot multiple curves",
+        "Use legends"
+      ],
+      "explanation": "plot(x,y) creates an XY graph. xlabel, ylabel, and title describe it; multiple curves can be shown together and legend identifies them.",
+      "examples": [
+        "x = 0:0.01:2; % Time domain\ny = sinh(x); % Hyperbolic sine\nz = tanh(x); % Hyperbolic tangent\nplot(x,y,x,z,'--'); % Multi-curve plot\nxlabel('x'); % X-axis label\nylabel('Hyperbolic sine and tangent'); % Y-axis label\nlegend('sinh(x)','tanh(x)'); % Curve legends"
+      ],
+      "commonMistakes": [
+        "Showing multiple curves without labels or a legend."
+      ],
+      "lecture": {
+        "order": 4,
+        "title": "Plotting with MATLAB",
+        "file": "MatLab Introduction(1).pdf",
+        "courseId": "matlab-engineering",
+        "slides": [
+          19,
+          22
+        ]
+      }
+    },
+    {
+      "id": "mat-08",
+      "title": "Relational, logical & conditional statements",
+      "concepts": [
+        "<",
+        "<=",
+        ">",
+        ">=",
+        "==",
+        "~=",
+        "~",
+        "&",
+        "|",
+        "xor",
+        "if",
+        "elseif",
+        "else"
+      ],
+      "objectives": [
+        "Use relational and logical operators",
+        "Write if statements",
+        "Use elseif and else"
+      ],
+      "explanation": "MATLAB conditionals choose statements from logical expressions. The lecture covers relational operators, logical NOT/AND/OR/xor, and if/elseif/else for piecewise behavior.",
+      "examples": [
+        "if x >= 5 % Check upper threshold\n    y = log(x); % Natural log for high values\nelseif x >= 0 % Check positive threshold\n    y = sqrt(x); % Square root for non-negative values\nelse % Negative values\n    y = exp(x) - 1; % Exponential for negative values\nend % End if structure"
+      ],
+      "commonMistakes": [
+        "Using = for equality testing instead of ==."
+      ],
+      "lecture": {
+        "order": 5,
+        "title": "Programming with MATLAB",
+        "file": "MatLab Introduction(1).pdf",
+        "courseId": "matlab-engineering",
+        "slides": [
+          23,
+          27
+        ]
+      }
+    },
+    {
+      "id": "mat-09",
+      "title": "for loops, ranges & implied loops",
+      "concepts": [
+        "for",
+        "colon range",
+        "loop variable",
+        "vectorization",
+        "indexing"
+      ],
+      "objectives": [
+        "Write a for loop using m:s:n",
+        "Use positive and negative steps",
+        "Compare explicit loops with vectorized work"
+      ],
+      "explanation": "The lecture gives for loop_variable = m:s:n. The step s may be negative and defaults to one when omitted. It also contrasts explicit loops with implied/vectorized array operations.",
+      "examples": [
+        "x = 0:5:100; % Degree angles\ny = cos(x); % Compute cosine vector\nfor k = 1:21 % Loop through 21 entries\n    xv = (k-1)*5; % Current angle\n    y2(k) = cos(xv); % Store element\nend % End for loop"
+      ],
+      "commonMistakes": [
+        "Forgetting MATLAB indexing starts at 1 in the explicit-loop example."
+      ],
+      "lecture": {
+        "order": 5,
+        "title": "Programming with MATLAB",
+        "file": "MatLab Introduction(1).pdf",
+        "courseId": "matlab-engineering",
+        "slides": [
+          28,
+          29
+        ]
+      }
+    },
+    {
+      "id": "mat-10",
+      "title": "while loops & switch structures",
+      "concepts": [
+        "while",
+        "loop condition",
+        "state update",
+        "switch",
+        "case",
+        "otherwise"
+      ],
+      "objectives": [
+        "Use while when the iteration count is unknown",
+        "Initialize and update loop state",
+        "Write switch/case/otherwise"
+      ],
+      "explanation": "while is used when repetition stops after a condition changes rather than after a known number of passes. Its controlling value must be initialized and changed. switch provides a readable alternative for discrete cases.",
+      "examples": [
+        "x = 5; % Initial condition\nwhile x < 25 % Loop while under limit\n    disp(x); % Output current value\n    x = 2*x - 1; % Update step\nend % End while loop\n\nswitch angle % Switch on angle variable\n    case 45 % Case 45 degrees\n        disp('Northeast'); % Display direction\n    otherwise % Default case\n        disp('Direction Unknown'); % Unknown direction\nend % End switch"
+      ],
+      "commonMistakes": [
+        "Writing a while loop whose controlling value never changes."
+      ],
+      "lecture": {
+        "order": 5,
+        "title": "Programming with MATLAB",
+        "file": "MatLab Introduction(1).pdf",
+        "courseId": "matlab-engineering",
+        "slides": [
+          30,
+          33
+        ]
+      }
+    }
+  ],
+  "exercises": [
+    {
+      "id": "mat-ex-01",
+      "title": "Command-window calculations",
+      "prompt": "Evaluate scalar expressions and create a 0:0.1:10 range; explain semicolon behavior.",
+      "lessonId": "mat-01"
+    },
+    {
+      "id": "mat-ex-02",
+      "title": "Build row and column vectors",
+      "prompt": "Create equivalent row and column vectors, then concatenate two row vectors.",
+      "lessonId": "mat-02"
+    },
+    {
+      "id": "mat-ex-03",
+      "title": "Matrix product check",
+      "prompt": "Decide whether A*B is valid, state the result size, and compute it.",
+      "lessonId": "mat-03"
+    },
+    {
+      "id": "mat-ex-04",
+      "title": "Choose * or .*",
+      "prompt": "Choose matrix or element-wise multiplication for several expressions and justify each.",
+      "lessonId": "mat-04"
+    },
+    {
+      "id": "mat-ex-05",
+      "title": "Vectorized engineering expression",
+      "prompt": "Evaluate a supplied formula across a range using dotted operators.",
+      "lessonId": "mat-04"
+    },
+    {
+      "id": "mat-ex-06",
+      "title": "Convert commands into a script",
+      "prompt": "Turn a multi-command calculation into a reusable .m script with comments.",
+      "lessonId": "mat-05"
+    },
+    {
+      "id": "mat-ex-07",
+      "title": "Write a function file",
+      "prompt": "Create a function .m file and a separate driver/main script .m file, call the function from the script, then run the script by name from the Command Window.",
+      "lessonId": "mat-06"
+    },
+    {
+      "id": "mat-ex-08",
+      "title": "Label a plot",
+      "prompt": "Plot a function and add axis labels, title, and legend where needed.",
+      "lessonId": "mat-07"
+    },
+    {
+      "id": "mat-ex-09",
+      "title": "Piecewise function",
+      "prompt": "Implement a three-region piecewise formula with if/elseif/else.",
+      "lessonId": "mat-08"
+    },
+    {
+      "id": "mat-ex-10",
+      "title": "for-loop trace",
+      "prompt": "Trace positive-step and negative-step loop ranges.",
+      "lessonId": "mat-09"
+    },
+    {
+      "id": "mat-ex-11",
+      "title": "while-loop trace",
+      "prompt": "Predict every displayed value and identify the terminating update.",
+      "lessonId": "mat-10"
+    },
+    {
+      "id": "mat-ex-12",
+      "title": "switch direction selector",
+      "prompt": "Implement the lecture-style case selector with otherwise.",
+      "lessonId": "mat-10"
+    }
+  ],
+  "projects": [
+    {
+      "id": "mat-p1",
+      "title": "Engineering data & plotting worksheet",
+      "description": "Generate an engineering range, evaluate two vectorized functions, and plot them.",
+      "requirements": [
+        "Use vector/range construction",
+        "Use element-wise operators correctly",
+        "Plot at least two curves",
+        "Include title, axis labels, and legend"
+      ],
+      "language": "text"
+    },
+    {
+      "id": "mat-p2",
+      "title": "Matrix and function toolkit",
+      "description": "Create MATLAB function files for matrix calculations and scalar/vector engineering formulas.",
+      "requirements": [
+        "At least three functions",
+        "Correct input/output declarations",
+        "Demonstrate matrix and element-wise operations",
+        "Include a driver script"
+      ],
+      "language": "text"
+    },
+    {
+      "id": "mat-p3",
+      "title": "Control-flow practice program",
+      "description": "Use logical operators, a loop, and switch to process engineering-style inputs.",
+      "requirements": [
+        "Use if/elseif/else",
+        "Use for or while correctly",
+        "Use switch/case/otherwise",
+        "Show normal and boundary cases"
+      ],
+      "language": "text"
+    }
+  ],
+  "capstone": {
+    "id": "mat-capstone",
+    "title": "MATLAB engineering analysis mini-project",
+    "description": "Combine arrays, a user-defined function, control flow, and plotting into one reproducible engineering analysis.",
+    "requirements": [
+      "One main script and at least one function file",
+      "Vector or matrix calculations",
+      "At least one conditional",
+      "At least one loop or vectorized repeated calculation",
+      "A labeled plot",
+      "README with inputs, outputs, and run steps"
+    ],
+    "language": "text"
+  },
+  "careerApplications": "Useful for engineering coursework, numerical analysis, simulation preparation, data visualization, and technical computing workflows.",
+  "quiz": [
+    {
+      "q": "MATLAB is presented as:",
+      "options": [
+        "A numerical computing environment and programming language",
+        "Only a word processor",
+        "Only a database server",
+        "Only an operating system"
+      ],
+      "correct": 0,
+      "type": "mcq"
+    },
+    {
+      "q": "Commands can be entered at:",
+      "options": [
+        "The >> prompt in the Command Window",
+        "Only inside a PDF",
+        "Only in a linker window",
+        "Only in switch"
+      ],
+      "correct": 0,
+      "type": "mcq"
+    },
+    {
+      "q": "Which creates a row vector?",
+      "options": [
+        "[2 4 10]",
+        "[2;4;10] only",
+        "{2 4 10}",
+        "(2 4 10)"
+      ],
+      "correct": 0,
+      "type": "mcq"
+    },
+    {
+      "q": "Which creates a column vector?",
+      "options": [
+        "[2;4;10]",
+        "[2 4 10]",
+        "2:4:10 only",
+        "plot(2,4,10)"
+      ],
+      "correct": 0,
+      "type": "mcq"
+    },
+    {
+      "q": "5:0.1:30 means:",
+      "options": [
+        "Start at 5, step by 0.1, stop at 30",
+        "Multiply 5 by 30",
+        "Create a 5x30 matrix",
+        "Repeat 0.1 five times"
+      ],
+      "correct": 0,
+      "type": "mcq"
+    },
+    {
+      "q": "A*B represents:",
+      "options": [
+        "Matrix multiplication",
+        "Always element-wise multiplication",
+        "String concatenation",
+        "Plotting"
+      ],
+      "correct": 0,
+      "type": "mcq"
+    },
+    {
+      "q": "a.*b represents:",
+      "options": [
+        "Element-by-element multiplication",
+        "Matrix transpose",
+        "A while loop",
+        "A function declaration"
+      ],
+      "correct": 0,
+      "type": "mcq"
+    },
+    {
+      "q": "a.^b represents:",
+      "options": [
+        "Element-by-element power",
+        "Matrix addition",
+        "A file save",
+        "Logical OR"
+      ],
+      "correct": 0,
+      "type": "mcq"
+    },
+    {
+      "q": "A script file contains:",
+      "options": [
+        "A sequence of MATLAB commands",
+        "Only one constant",
+        "Only a function header",
+        "Only plot colors"
+      ],
+      "correct": 0,
+      "type": "mcq"
+    },
+    {
+      "q": "A function file is useful when:",
+      "options": [
+        "Commands should be called repeatedly with inputs/outputs",
+        "No code should execute",
+        "Only comments are needed",
+        "A graph cannot be drawn"
+      ],
+      "correct": 0,
+      "type": "mcq"
+    },
+    {
+      "q": "Function variables are described as:",
+      "options": [
+        "Local to the function",
+        "Always global",
+        "Stored only in plots",
+        "Always strings"
+      ],
+      "correct": 0,
+      "type": "mcq"
+    },
+    {
+      "q": "For one output, square brackets are:",
+      "options": [
+        "Optional",
+        "Mandatory twice",
+        "Forbidden",
+        "A plotting operator"
+      ],
+      "correct": 0,
+      "type": "mcq"
+    },
+    {
+      "q": "The function name should match:",
+      "options": [
+        "The .m filename",
+        "The plot color",
+        "The vector length",
+        "The operating system"
+      ],
+      "correct": 0,
+      "type": "mcq"
+    },
+    {
+      "q": "plot(x,y) is used for:",
+      "options": [
+        "XY plotting",
+        "Matrix inversion only",
+        "Creating switch",
+        "Ending a loop"
+      ],
+      "correct": 0,
+      "type": "mcq"
+    },
+    {
+      "q": "legend is used to:",
+      "options": [
+        "Identify plotted data series",
+        "Start a function",
+        "Create a matrix product",
+        "Terminate while"
+      ],
+      "correct": 0,
+      "type": "mcq"
+    },
+    {
+      "q": "~= means:",
+      "options": [
+        "Not equal to",
+        "Equal to",
+        "Matrix multiply",
+        "Logical AND"
+      ],
+      "correct": 0,
+      "type": "mcq"
+    },
+    {
+      "q": "== means:",
+      "options": [
+        "Equal to",
+        "Assignment only",
+        "Not equal to",
+        "Transpose"
+      ],
+      "correct": 0,
+      "type": "mcq"
+    },
+    {
+      "q": "elseif is used to:",
+      "options": [
+        "Test another condition after earlier conditions fail",
+        "End every function",
+        "Create a matrix",
+        "Open a plot only"
+      ],
+      "correct": 0,
+      "type": "mcq"
+    },
+    {
+      "q": "In m:s:n, s is:",
+      "options": [
+        "The step/increment",
+        "The script filename",
+        "The matrix size",
+        "The switch value"
+      ],
+      "correct": 0,
+      "type": "mcq"
+    },
+    {
+      "q": "If s is omitted, it defaults to:",
+      "options": [
+        "1",
+        "0",
+        "-1",
+        "10"
+      ],
+      "correct": 0,
+      "type": "mcq"
+    },
+    {
+      "q": "while is especially useful when:",
+      "options": [
+        "The number of passes is not known in advance",
+        "The loop runs exactly once",
+        "No condition is needed",
+        "Only plots are used"
+      ],
+      "correct": 0,
+      "type": "mcq"
+    },
+    {
+      "q": "A while loop's controlling value should:",
+      "options": [
+        "Be initialized and changed appropriately",
+        "Never change",
+        "Always be a string",
+        "Always be zero"
+      ],
+      "correct": 0,
+      "type": "mcq"
+    },
+    {
+      "q": "switch is useful when:",
+      "options": [
+        "One expression is compared with discrete case values",
+        "Matrix multiplication is required",
+        "A function has no inputs",
+        "A plot needs a title"
+      ],
+      "correct": 0,
+      "type": "mcq"
+    },
+    {
+      "q": "otherwise handles:",
+      "options": [
+        "Values not matched by earlier cases",
+        "Only the first case",
+        "Matrix multiplication",
+        "Function outputs"
+      ],
+      "correct": 0,
+      "type": "mcq"
+    }
+  ],
+  "lectureSequence": [
+    {
+      "order": 1,
+      "title": "Windows and menus",
+      "file": "MatLab Introduction(1).pdf",
+      "courseId": "matlab-engineering"
+    },
+    {
+      "order": 2,
+      "title": "Basic operations and arrays",
+      "file": "MatLab Introduction(1).pdf",
+      "courseId": "matlab-engineering"
+    },
+    {
+      "order": 3,
+      "title": "Files and functions",
+      "file": "MatLab Introduction(1).pdf",
+      "courseId": "matlab-engineering"
+    },
+    {
+      "order": 4,
+      "title": "Plotting with MATLAB",
+      "file": "MatLab Introduction(1).pdf",
+      "courseId": "matlab-engineering"
+    },
+    {
+      "order": 5,
+      "title": "Programming with MATLAB",
+      "file": "MatLab Introduction(1).pdf",
+      "courseId": "matlab-engineering"
+    }
+  ]
+}
