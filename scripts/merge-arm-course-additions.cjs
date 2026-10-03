@@ -27,7 +27,7 @@ fs.writeFileSync(sourcePath,json,'utf8');
 let html=fs.readFileSync(indexPath,'utf8');
 const re=/(<script\b[^>]*\bid=["']coursedata["'][^>]*>)([\s\S]*?)(<\/script>)/i;
 if(!re.test(html))throw new Error('index coursedata island missing');
-html=html.replace(re,(all,a,b,c)=>a+json.replace(/<\\/script/gi,'<\\\\/script')+c);
+html=html.replace(re,(all,a,b,c)=>a+json.replace(/<\/script/gi,'<\\/script')+c);
 fs.writeFileSync(indexPath,html,'utf8');
 
 function arr(v){return Array.isArray(v)?v:[]}
