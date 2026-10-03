@@ -22,7 +22,7 @@ ok(!/course-speed-boost\.js|catalog-course-viewer\.js/.test(idx),'legacy delayed
 const runner=text('assets/lesson-example-runner.js');
 ok(/data-reference-only/.test(runner)&&/Reference example/.test(runner),'reference examples must not expose a misleading Run button');
 const courseFiles=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith('.html'));
-ok(courseFiles.length===62,'expected 62 static course pages');
+ok(courseFiles.length===65,'expected 62 static course pages');
 for(const f of courseFiles){const h=text('courses/'+f);const scripts=[...h.matchAll(/<script\b[^>]*src="([^"]+)"[^>]*>/gi)];ok(scripts.length>=2,`${f}: expected course scripts`);for(const m of scripts){const src=m[1];const critical=/runtime-inline\/courses-[^/]+-00[12]\.js/.test(src);if(!critical)ok(/\bdefer\b/i.test(m[0]),`${f}: non-critical script ${src} should be deferred`)}}
 
 const BUILD_TAG='20260822-v567',NEW_BUILD_TAG='20260822-v568',CPP_STYLE_TAG='20260822-v571',AUDIT_TAG='20260823-v573',LEARNING_TAG='20260824-v574',INLINE_COMMENT_TAG='20260919-v577';
