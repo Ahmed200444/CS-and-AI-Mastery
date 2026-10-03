@@ -6,6 +6,8 @@
  * language constructs used by this course instead of pretending that a browser
  * JavaScript engine is MATLAB. Arrays and matrices become tables; plot calls
  * become SVG charts; unsupported lines remain visible with an honest message.
+ * Displays the MATLAB Editor (Script Window) and Command Window / Main Window
+ * side-by-side in a true MATLAB desktop layout.
  */
 var FUNCTIONS={
  sin:Math.sin,cos:Math.cos,tan:Math.tan,sinh:Math.sinh,cosh:Math.cosh,tanh:Math.tanh,
@@ -136,14 +138,147 @@ function formatText(v){if(typeof v==='string')return v;if(!isArray(v))return Str
 function execute(source){var lines=prepared(source),state={env:Object.create(null),output:[],notes:[],plots:[]};try{executeRange(lines,0,lines.length,state,state.env);}catch(e){state.notes.push(e.message);}return state;}
 function tableHtml(name,value){var sh=shape(value),rows=isMatrix(value)?value:[isArray(value)?value:[value]],maxR=Math.min(rows.length,24),maxC=Math.min(sh[1],16),html='<details class="matlab-result-table" open><summary><b>'+esc(name)+'</b> · '+sh[0]+' × '+sh[1]+'</summary><div class="matlab-table-scroll"><table><thead><tr><th scope="col">row</th>';for(var c=0;c<maxC;c++)html+='<th scope="col">'+(c+1)+'</th>';html+='</tr></thead><tbody>';for(var r=0;r<maxR;r++){html+='<tr><th scope="row">'+(r+1)+'</th>';for(var j=0;j<maxC;j++)html+='<td>'+esc(formatText(rows[r]&&rows[r][j]!==undefined?rows[r][j]:''))+'</td>';html+='</tr>';}html+='</tbody></table></div>'+(sh[0]>maxR||sh[1]>maxC?'<small>Preview limited to '+maxR+' rows × '+maxC+' columns.</small>':'')+'</details>';return html;}
 function plotSvg(plot){var series=plot.series||[];if(!series.length)return'';var w=680,h=300,left=54,right=18,top=30,bottom=44,allX=[],allY=[];series.forEach(function(s){s.x.forEach(function(x){if(numeric(x))allX.push(x);});s.y.forEach(function(y){if(numeric(y))allY.push(y);});});if(!allX.length||!allY.length)return'';var xmin=Math.min.apply(Math,allX),xmax=Math.max.apply(Math,allX),ymin=Math.min.apply(Math,allY),ymax=Math.max.apply(Math,allY);if(xmin===xmax){xmin-=1;xmax+=1;}if(ymin===ymax){ymin-=1;ymax+=1;}function X(x){return left+(x-xmin)/(xmax-xmin)*(w-left-right);}function Y(y){return h-bottom-(y-ymin)/(ymax-ymin)*(h-top-bottom);}var s='<div class="matlab-plot-card"><div class="matlab-plot-heading">MATLAB figure preview</div><svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="MATLAB plot preview"><rect x="0" y="0" width="'+w+'" height="'+h+'" fill="var(--panel)"/><line x1="'+left+'" y1="'+(h-bottom)+'" x2="'+(w-right)+'" y2="'+(h-bottom)+'" stroke="var(--muted)"/><line x1="'+left+'" y1="'+top+'" x2="'+left+'" y2="'+(h-bottom)+'" stroke="var(--muted)"/><text x="'+(w/2)+'" y="'+(h-7)+'" text-anchor="middle" fill="currentColor">'+esc(plot.xlabel||'x')+'</text><text x="14" y="'+(h/2)+'" text-anchor="middle" transform="rotate(-90 14 '+(h/2)+')" fill="currentColor">'+esc(plot.ylabel||'y')+'</text>';if(plot.title)s+='<text x="'+(w/2)+'" y="18" text-anchor="middle" font-weight="700" fill="currentColor">'+esc(plot.title)+'</text>';series.forEach(function(curve,i){var n=Math.min(curve.x.length,curve.y.length),points=[];for(var k=0;k<n;k++)if(numeric(curve.x[k])&&numeric(curve.y[k]))points.push(X(curve.x[k]).toFixed(2)+','+Y(curve.y[k]).toFixed(2));if(points.length>1)s+='<polyline fill="none" stroke="'+COLORS[i%COLORS.length]+'" stroke-width="2" points="'+points.join(' ')+'"/>';});if(plot.legend&&plot.legend.length){plot.legend.forEach(function(label,i){s+='<line x1="'+(w-right-120)+'" y1="'+(top+12*i)+'" x2="'+(w-right-102)+'" y2="'+(top+12*i)+'" stroke="'+COLORS[i%COLORS.length]+'" stroke-width="2"/><text x="'+(w-right-97)+'" y="'+(top+4+12*i)+'" font-size="10" fill="currentColor">'+esc(label)+'</text>';});}return s+'</svg></div>';}
-function resultHtml(state){var keys=Object.keys(state.env),html='<div class="matlab-result-summary"><b>MATLAB preview complete</b><span>'+keys.length+' arrays/values · '+state.plots.length+' figure'+(state.plots.length===1?'':'s')+'</span></div>';if(state.output.length)html+='<div class="matlab-command-output"><b>Command Window output</b><pre>'+esc(state.output.join('\n'))+'</pre></div>';keys.forEach(function(k){var v=state.env[k];if(isArray(v)||numeric(v))html+=tableHtml(k,v);});state.plots.forEach(function(p){html+=plotSvg(p);});if(state.notes.length)html+='<details class="matlab-preview-notes" open><summary>Preview notes</summary><ul>'+state.notes.map(function(n){return'<li>'+esc(n)+'</li>';}).join('')+'</ul><p>This is a browser teaching preview. Use MATLAB or GNU Octave for features outside the supported course subset.</p></details>';return html;}
+function resultHtml(state){
+ var keys=Object.keys(state.env);
+ var html='<div class="matlab-result-summary"><b>Command Window &amp; Workspace Summary</b><span>'+keys.length+' variable'+(keys.length===1?'':'s')+' · '+state.plots.length+' figure'+(state.plots.length===1?'':'s')+'</span></div>';
+ if(state.output.length){
+  html+='<div class="matlab-command-output"><b>Command Window (&gt;&gt;) Output</b><pre><span class="matlab-prompt-line">&gt;&gt; </span>'+esc(state.output.join('\n\n'))+'</pre></div>';
+ } else {
+  html+='<div class="matlab-command-output"><b>Command Window (&gt;&gt;) Output</b><pre><span class="matlab-prompt-line">&gt;&gt; </span>Execution completed (output suppressed with semicolons).</pre></div>';
+ }
+ keys.forEach(function(k){var v=state.env[k];if(isArray(v)||numeric(v))html+=tableHtml(k,v);});
+ state.plots.forEach(function(p){html+=plotSvg(p);});
+ if(state.notes.length)html+='<details class="matlab-preview-notes" open><summary>Preview notes</summary><ul>'+state.notes.map(function(n){return'<li>'+esc(n)+'</li>';}).join('')+'</ul><p>This is a browser teaching preview. Use MATLAB or GNU Octave for features outside the supported course subset.</p></details>';
+ return html;
+}
 function sourceFor(node){var text='value' in node?node.value:node.textContent||'';if(root.CSAILineExplainer&&root.CSAILineExplainer.stripGeneratedComments)text=root.CSAILineExplainer.stripGeneratedComments(text);return text.replace(/^\s*%\s*Explanation:.*$/gm,'');}
-function addStyle(){if(document.getElementById('csai-matlab-visualizer-style'))return;var s=document.createElement('style');s.id='csai-matlab-visualizer-style';s.textContent='.matlab-preview-btn{border:1px solid #17649a;border-radius:8px;background:#17649a;color:#fff;padding:8px 12px;font:800 13px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer}.matlab-preview-btn:disabled{opacity:.58;cursor:wait}.matlab-preview-output{padding:12px;border-top:1px solid var(--border);background:var(--bg);color:var(--text);overflow:auto}.matlab-result-summary{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:9px}.matlab-result-summary span{color:var(--muted);font-size:.8rem}.matlab-command-output{margin:8px 0;padding:9px;border:1px solid var(--border);border-radius:8px}.matlab-command-output pre{margin:6px 0 0;white-space:pre-wrap}.matlab-result-table{margin:9px 0;border:1px solid var(--border);border-radius:8px;padding:8px}.matlab-result-table summary{cursor:pointer}.matlab-table-scroll{overflow:auto;margin-top:7px}.matlab-result-table table{border-collapse:collapse;min-width:260px;font:13px/1.45 ui-monospace,monospace}.matlab-result-table th,.matlab-result-table td{padding:4px 8px;border:1px solid var(--border);text-align:right;white-space:nowrap}.matlab-result-table th{background:var(--pill);color:var(--pilltext)}.matlab-result-table small{color:var(--muted)}.matlab-plot-card{margin:10px 0;border:1px solid var(--border);border-radius:8px;padding:7px;overflow:auto}.matlab-plot-heading{font-weight:800;margin:0 0 4px}.matlab-plot-card svg{display:block;min-width:520px;max-width:100%;height:auto}.matlab-preview-notes{margin-top:10px;color:var(--muted)}';document.head.appendChild(s);}
-function mount(node){if(node.dataset.matlabPreviewReady)return;node.dataset.matlabPreviewReady='1';var card=node.closest('.lesson-run-card')||node.closest('.csai-study-example')||node.parentElement;if(!card)return;var toolbar=card.querySelector('.lesson-run-toolbar,.csai-study-actions');if(!toolbar){toolbar=document.createElement('div');toolbar.className='lesson-run-toolbar';node.insertAdjacentElement('afterend',toolbar);}var button=document.createElement('button');button.type='button';button.className='matlab-preview-btn';button.textContent='▶ Preview MATLAB';button.setAttribute('data-matlab-preview','');toolbar.insertBefore(button,toolbar.firstChild);var out=card.querySelector('.lesson-run-output,[data-study-output]');if(!out){out=document.createElement('div');out.className='matlab-preview-output';node.insertAdjacentElement('afterend',out);}else{out.classList.add('matlab-preview-output');if(out.tagName==='PRE'){var replacement=document.createElement('div');replacement.className=out.className;out.replaceWith(replacement);out=replacement;}}
- function run(){button.disabled=true;var state=execute(sourceFor(node));out.innerHTML=resultHtml(state);button.disabled=false;}
- button.addEventListener('click',run);if(/\bplot\s*\(|\[[^\]]+;[^\]]+\]/.test(sourceFor(node)))setTimeout(run,0);}
- function scan(rootNode){var q=[];if(rootNode&&rootNode.matches&&rootNode.matches('pre[data-language="matlab"],textarea[data-language="matlab"]'))q.push(rootNode);if(rootNode&&rootNode.querySelectorAll)q=q.concat(Array.from(rootNode.querySelectorAll('pre[data-language="matlab"],textarea[data-language="matlab"]')));q.forEach(mount);}
- function boot(){addStyle();scan(document);new MutationObserver(function(records){records.forEach(function(r){Array.from(r.addedNodes||[]).forEach(function(n){if(n.nodeType===1)scan(n);});});}).observe(document.documentElement,{childList:true,subtree:true});}
- var api={execute:execute,renderResult:resultHtml};
- if(typeof module==='object'&&module.exports)module.exports=api;else{root.CSAIMatlabVisualizer=api;if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();}
+function addStyle(){
+ if(document.getElementById('csai-matlab-visualizer-style'))return;
+ var s=document.createElement('style');
+ s.id='csai-matlab-visualizer-style';
+ s.textContent=[
+  '.matlab-workbench{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:14px;margin:14px 0;border:1px solid var(--border);border-radius:12px;background:var(--panel);overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.04)}',
+  '@media(max-width:860px){.matlab-workbench{grid-template-columns:1fr}}',
+  '.matlab-pane{display:flex;flex-direction:column;min-width:0}',
+  '.matlab-pane-editor{border-right:1px solid var(--border);background:var(--code)}',
+  '@media(max-width:860px){.matlab-pane-editor{border-right:none;border-bottom:1px solid var(--border)}}',
+  '.matlab-pane-header{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--pill);color:var(--pilltext);font-size:.8rem;font-weight:800;letter-spacing:.02em;border-bottom:1px solid var(--border)}',
+  '.matlab-pane-header-editor{background:#17212c;color:#c6d1da;border-color:#344352}',
+  '.matlab-pane-body{padding:10px;flex:1;display:flex;flex-direction:column;overflow:auto}',
+  '.matlab-pane-body pre.code{margin:0;border:none;background:transparent;flex:1;font-size:.86rem;line-height:1.55;color:#f4f7fb}',
+  '.matlab-preview-btn{border:1px solid #17649a;border-radius:8px;background:#17649a;color:#fff;padding:8px 14px;font:800 13px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;display:inline-flex;align-items:center;gap:6px}',
+  '.matlab-preview-btn:hover{filter:brightness(1.1)}',
+  '.matlab-preview-btn:disabled{opacity:.58;cursor:wait}',
+  '.matlab-preview-output{padding:8px 4px;background:transparent;color:var(--text);overflow:auto;flex:1}',
+  '.matlab-result-summary{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:9px;font-size:.85rem}',
+  '.matlab-result-summary span{color:var(--muted);font-size:.8rem}',
+  '.matlab-command-output{margin:8px 0;padding:10px;border:1px solid var(--border);border-radius:8px;background:var(--bg)}',
+  '.matlab-command-output pre{margin:6px 0 0;white-space:pre-wrap;font:500 .86rem/1.5 ui-monospace,monospace}',
+  '.matlab-prompt-line{color:var(--accent);font-weight:700}',
+  '.matlab-result-table{margin:9px 0;border:1px solid var(--border);border-radius:8px;padding:8px;background:var(--panel)}',
+  '.matlab-result-table summary{cursor:pointer;font-size:.85rem}',
+  '.matlab-table-scroll{overflow:auto;margin-top:7px}',
+  '.matlab-result-table table{border-collapse:collapse;min-width:240px;width:100%;font:12px/1.4 ui-monospace,monospace}',
+  '.matlab-result-table th,.matlab-result-table td{padding:4px 7px;border:1px solid var(--border);text-align:right;white-space:nowrap}',
+  '.matlab-result-table th{background:var(--pill);color:var(--pilltext);font-weight:700}',
+  '.matlab-result-table small{color:var(--muted)}',
+  '.matlab-plot-card{margin:10px 0;border:1px solid var(--border);border-radius:8px;padding:8px;overflow:auto;background:var(--panel)}',
+  '.matlab-plot-heading{font-weight:800;font-size:.85rem;margin:0 0 6px}',
+  '.matlab-plot-card svg{display:block;min-width:320px;max-width:100%;height:auto}',
+  '.matlab-preview-notes{margin-top:10px;color:var(--muted);font-size:.82rem}'
+ ].join('');
+ document.head.appendChild(s);
+}
+function mount(node){
+ if(node.dataset.matlabPreviewReady)return;
+ node.dataset.matlabPreviewReady='1';
+ var card=node.closest('.lesson-run-card')||node.closest('.csai-study-example')||node.parentElement;
+ if(!card)return;
+
+ var existingWorkbench=node.closest('.matlab-workbench');
+ var workbench,editorPane,commandPane,out,button;
+
+ if(!existingWorkbench){
+  workbench=document.createElement('div');
+  workbench.className='matlab-workbench';
+
+  editorPane=document.createElement('div');
+  editorPane.className='matlab-pane matlab-pane-editor';
+  var editorHeader=document.createElement('div');
+  editorHeader.className='matlab-pane-header matlab-pane-header-editor';
+  editorHeader.innerHTML='<span>📄 MATLAB Editor — Script (.m) / Function</span><span style="font-size:.72rem;opacity:.8">Script Window</span>';
+  editorPane.appendChild(editorHeader);
+
+  var editorBody=document.createElement('div');
+  editorBody.className='matlab-pane-body';
+  node.parentNode.insertBefore(workbench,node);
+  editorBody.appendChild(node);
+  editorPane.appendChild(editorBody);
+
+  var toolbar=document.createElement('div');
+  toolbar.className='lesson-run-toolbar';
+  toolbar.style.padding='8px 10px';
+  toolbar.style.borderTop='1px solid #344352';
+  toolbar.style.background='#17212c';
+  button=document.createElement('button');
+  button.type='button';
+  button.className='matlab-preview-btn';
+  button.textContent='▶ Run Script / Evaluate';
+  button.setAttribute('data-matlab-preview','');
+  toolbar.appendChild(button);
+  editorPane.appendChild(toolbar);
+  workbench.appendChild(editorPane);
+
+  commandPane=document.createElement('div');
+  commandPane.className='matlab-pane matlab-pane-command';
+  var commandHeader=document.createElement('div');
+  commandHeader.className='matlab-pane-header';
+  commandHeader.innerHTML='<span>💻 Command Window &amp; Workspace</span><span style="font-size:.72rem;opacity:.8">Main Window (&gt;&gt;)</span>';
+  commandPane.appendChild(commandHeader);
+
+  var commandBody=document.createElement('div');
+  commandBody.className='matlab-pane-body';
+  out=document.createElement('div');
+  out.className='matlab-preview-output';
+  out.innerHTML='<div class="matlab-command-output"><b>Command Window (&gt;&gt;)</b><pre><span class="matlab-prompt-line">&gt;&gt; </span>Ready. Press <b>Run Script / Evaluate</b> to execute script.</pre></div>';
+  commandBody.appendChild(out);
+  commandPane.appendChild(commandBody);
+  workbench.appendChild(commandPane);
+ } else {
+  button=existingWorkbench.querySelector('.matlab-preview-btn');
+  out=existingWorkbench.querySelector('.matlab-preview-output');
+ }
+
+ function run(){
+  if(button)button.disabled=true;
+  var state=execute(sourceFor(node));
+  if(out)out.innerHTML=resultHtml(state);
+  if(button)button.disabled=false;
+ }
+
+ if(button)button.addEventListener('click',run);
+ if(/\bplot\s*\(|\[[^\]]+;[^\]]+\]/.test(sourceFor(node)))setTimeout(run,0);
+}
+function scan(rootNode){
+ var q=[];
+ if(rootNode&&rootNode.matches&&rootNode.matches('pre[data-language="matlab"],textarea[data-language="matlab"]'))q.push(rootNode);
+ if(rootNode&&rootNode.querySelectorAll)q=q.concat(Array.from(rootNode.querySelectorAll('pre[data-language="matlab"],textarea[data-language="matlab"]')));
+ q.forEach(mount);
+}
+function boot(){
+ addStyle();
+ scan(document);
+ new MutationObserver(function(records){
+  records.forEach(function(r){
+   Array.from(r.addedNodes||[]).forEach(function(n){if(n.nodeType===1)scan(n);});
+  });
+ }).observe(document.documentElement,{childList:true,subtree:true});
+}
+var api={execute:execute,renderResult:resultHtml};
+if(typeof module==='object'&&module.exports)module.exports=api;
+else{
+ root.CSAIMatlabVisualizer=api;
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});
+ else boot();
+}
 })(typeof window==='object'?window:globalThis);
