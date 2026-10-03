@@ -27,7 +27,8 @@ function inferLanguage(code,label,node){
  if(/json/.test(l)||(/[{}]/.test(c)&&(c.match(/"[^"\n]+"\s*:/g)||[]).length>=1&&!/=\s*\{/.test(c)))return'json';
  var yamlMatches=c.match(/^\s*(?:-\s+)?[A-Za-z_][\w.-]*:\s*.*$/gm)||[];
  if(/ya?ml/.test(l)||yamlMatches.length>=3||(yamlMatches.length>=2&&!/[{};]/.test(c)))return'yaml';
- var armMatches=c.match(/^\s*(?:[A-Za-z_]\w*\s+)?(?:AREA|ENTRY|RN|EQU|MOVS?|MVN|ADDS?|ADC|SUBS?|SBC|RSB|RSC|AND|ORR|EOR|BIC|LSL|LSR|ASR|ROR|CMP|CMN|TST|TEQ|LDR|STR|LDM\w*|STM\w*|PUSH|POP|BLT|BLE|BGT|BGE|BEQ|BNE|B|BL|BX|SVC)\b.*$/gim)||[];\n if(/arm\s*assembly|\bassembly\b/.test(l)||armMatches.length>=2)return'armasm';
+ var armMatches=c.match(/^\s*(?:[A-Za-z_]\w*\s+)?(?:AREA|ENTRY|RN|EQU|MOVS?|MVN|ADDS?|ADC|SUBS?|SBC|RSB|RSC|AND|ORR|EOR|BIC|LSL|LSR|ASR|ROR|CMP|CMN|TST|TEQ|LDR|STR|LDM\w*|STM\w*|PUSH|POP|BLT|BLE|BGT|BGE|BEQ|BNE|B|BL|BX|SVC)\b.*$/gim)||[];
+ if(/arm\s*assembly|\bassembly\b/.test(l)||armMatches.length>=2)return'armasm';
  if(/css/.test(l)||/(^|\n)\s*(?:[.#][A-Za-z_-][\w-]*|[A-Za-z][\w-]*(?:\s+[A-Za-z][\w-]*)*)[^=\n]*\{[^\n]*\}/m.test(c)||/(^|\n)\s*(?:[.#][A-Za-z_-][\w-]*|[A-Za-z][\w-]*(?:\s+[A-Za-z][\w-]*)*)[^=\n]*\{\s*$/m.test(c)||/@media\s*\(/.test(c))return'css';
  return'text';
 }
@@ -637,7 +638,8 @@ function teachingPurposeFor(line,lang,ctx){
  if(lang==='http')return httpTeachingPurpose(line);
  if(lang==='sql')return sqlTeachingPurpose(line);
  if(lang==='html')return htmlTeachingPurpose(line);
- if(lang==='css')return cssTeachingPurpose(line);\n if(lang==='armasm')return armPurpose(text(line).trim());
+ if(lang==='css')return cssTeachingPurpose(line);
+ if(lang==='armasm')return armPurpose(text(line).trim());
  if(lang==='shell')return shellTeachingPurpose(line);
  if(lang==='dockerfile'||lang==='json'||lang==='yaml'||lang==='text')return dataTeachingPurpose(line,lang);
  return'Explains the next operation or piece of structure in this example.';
