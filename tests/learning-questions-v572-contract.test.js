@@ -37,7 +37,7 @@ assert(guideFn.includes("kind==='example'||kind==='quiz'"),'practice guidance sh
 assert(!guideFn.includes('Required'),'new question-only UI must not say Required');
 
 const pages=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith('.html')).sort();
-assert.equal(pages.length,65,'expected 65 course pages');
+assert.equal(pages.length,65,'expected 62 committed or 65 generated course pages');
 let lessons=0;
 for(const f of pages){
   const h=read('courses/'+f);
