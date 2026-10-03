@@ -2,7 +2,7 @@
 // FIX #11/#12 -- verify-unified-learning-design.cjs requires every course page to reference a
 // runtime-inline/courses-<id>-NNN.js chunk whose contents contain
 //   document.documentElement.classList.add('csai-unified-design')
-// Every one of the 64 courses HAS such a chunk, but the shipped pages reference only a subset of
+// Every one of the 65 courses HAS such a chunk, but the shipped pages reference only a subset of
 // their chunks and the marker-bearing one is frequently not among them (e.g. rag.html references
 // -001 and -003 only). The generators used to emit this tag; because shipped pages are preserved
 // verbatim, this step attaches it.
@@ -54,6 +54,6 @@ for (const file of pages) {
   added += 1;
 }
 
-if (pages.length !== 64) throw new Error('Expected 64 course pages, found ' + pages.length);
-if (added + already !== 64) throw new Error('First-paint coverage incomplete: ' + (added + already) + '/64');
-console.log(`Unified-design first-paint runtime present on 64 course pages (${added} attached, ${already} already satisfied).`);
+if (pages.length !==65) throw new Error('Expected 65 course pages, found ' + pages.length);
+if (added + already !==65) throw new Error('First-paint coverage incomplete: ' + (added + already) + '/65');
+console.log(`Unified-design first-paint runtime present on 65 course pages (${added} attached, ${already} already satisfied).`);
