@@ -21,5 +21,5 @@ for(const file of fs.readdirSync(coursesDir).filter(f=>f.endsWith('.html'))){
  }
  fs.writeFileSync(p,html,'utf8');pages++;
 }
-if(pages!==64)throw new Error(`Expected 64 generated course pages, found ${pages}`);
+if(pages!==65)throw new Error(`Expected 65 generated course pages, found ${pages}`);
 console.log(`Assessment coverage ensured on ${pages} courses; added Python fallback exercise workspaces to ${fallbacks} course page(s).`);
