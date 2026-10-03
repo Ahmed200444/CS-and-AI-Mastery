@@ -14,6 +14,7 @@ ok(server.includes("'Cross-Origin-Opener-Policy':'same-origin'"),'local server m
 ok(server.includes("'Cross-Origin-Embedder-Policy':'require-corp'"),'local server must enable COEP');
 ok(netlify.includes('Cross-Origin-Opener-Policy = "same-origin"'),'Netlify must enable COOP');
 const pages=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith('.html'));ok([62,65].includes(pages.length),'expected 62 committed or 65 generated course pages');
-for(const f of pages){const t=read('courses/'+f);ok(t.includes('python-inline-terminal.js'),f+' must load inline terminal');ok(t.includes('runner-performance-guard.js'),f+' must load the performance guard');ok(t.indexOf('python-inline-terminal.js')<t.indexOf('adaptive-practice-layer.js'),f+' must start the single Python worker before adaptive lesson tooling');}
+const nonPythonUniversity=new Set(['arm-assembly.html','microprocessors-arm.html','matlab-engineering.html']);
+for(const f of pages){const t=read('courses/'+f);if(!nonPythonUniversity.has(f)){ok(t.includes('python-inline-terminal.js'),f+' must load inline terminal');ok(t.indexOf('python-inline-terminal.js')<t.indexOf('adaptive-practice-layer.js'),f+' must start the single Python worker before adaptive lesson tooling');}ok(t.includes('runner-performance-guard.js'),f+' must load the performance guard');}
 for(const f of ['adaptive-practice-layer.js','lesson-example-runner.js','evergreen-learning-engine.js','course-project-workspace.js','assessment-practice.js','example-learning-tools.js']){const t=read('assets/'+f);ok(!t.includes('_csai_window.prompt'),f+' must not fall back to a browser popup for Python input');}
 console.log('Interactive Python inline-terminal contract PASS');
