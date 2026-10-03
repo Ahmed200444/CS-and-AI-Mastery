@@ -3,7 +3,7 @@
 if(window.CSAIEditableCode)return;
 
 var originals=new WeakMap(), toolbars=new WeakMap(), indentGuard=new WeakSet();
-var COMMENTABLE_LANGS=new Set(['python','javascript','typescript','cpp','c','java','sql','html','css','shell','yaml']);
+var COMMENTABLE_LANGS=new Set(['python','javascript','typescript','cpp','c','java','sql','html','css','shell','yaml','armasm','matlab']);
 var INDENT_UNIT='    ';
 var PRE_FALLBACK=[
  '.lesson pre.code',

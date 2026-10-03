@@ -3,7 +3,7 @@ const fs=require('fs'),path=require('path');
 for(const file of ['index.html',...fs.readdirSync('courses').filter(n=>n.endsWith('.html')).map(n=>path.join('courses',n))]){
  const name=path.basename(file);let html=fs.readFileSync(file,'utf8');
  html=html.replace(/\s*<script\b[^>]*src=["'][^"']*assets\/(?:arm-trace-engine|arm-trace-ui|lesson-recall)\.js[^"']*["'][^>]*><\/script>/gi,'');
- html=html.replace(/(assets\/(?:line-by-line-explanations|assessment-practice|lesson-example-runner|study-examples)\.js\?v=[^"'&]+)(?:&learning=[^"']+)?/g,'$1&learning=20261003-v578');
+ html=html.replace(/(assets\/(?:line-by-line-explanations|assessment-practice|lesson-example-runner|study-examples|universal-editable-code)\.js\?v=[^"'&]+)(?:&learning=[^"']+)?/g,'$1&learning=20261003-v579');
  if(file==='index.html'){fs.writeFileSync(file,html);continue;}
  const tags=(name==='arm-assembly.html'?'<script defer src="../assets/arm-trace-engine.js?v=20261003-v578"></script>\n<script defer src="../assets/arm-trace-ui.js?v=20261003-v578"></script>\n':'')+'<script defer src="../assets/lesson-recall.js?v=20261003-v578"></script>\n';
  html=html.replace('</body>',tags+'</body>');fs.writeFileSync(file,html);

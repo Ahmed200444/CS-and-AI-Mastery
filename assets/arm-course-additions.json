@@ -54,7 +54,17 @@
         "commonMistakes": [
           "Treating a microprocessor as the entire computer rather than the CPU that works with memory and I/O."
         ],
-        "explain": "A microprocessor is a computer's CPU implemented on a single integrated circuit. It fetches and executes instructions, performs arithmetic and logical work, and coordinates data movement with memory and I/O. Modern processors contain very large numbers of transistors connected to implement datapaths, control logic, caches, and other structures."
+        "explain": "A microprocessor is a computer's CPU implemented on a single integrated circuit. It fetches and executes instructions, performs arithmetic and logical work, and coordinates data movement with memory and I/O. Modern processors contain very large numbers of transistors connected to implement datapaths, control logic, caches, and other structures.",
+        "lecture": {
+          "order": 1,
+          "title": "Introduction",
+          "file": "01.Lecture_Introduction (2)(1).pdf",
+          "courseId": "microprocessors-arm",
+          "slides": [
+            4,
+            4
+          ]
+        }
       },
       {
         "id": "mpr-02",
@@ -78,7 +88,17 @@
         "commonMistakes": [
           "Memorizing dates without understanding the architectural change each technology made possible."
         ],
-        "explain": "Processor development moved from large vacuum-tube systems to transistors, integrated circuits, and then complete CPUs on a chip. Integration reduced size and cost while allowing much larger transistor counts and more capable processors."
+        "explain": "Processor development moved from large vacuum-tube systems to transistors, integrated circuits, and then complete CPUs on a chip. Integration reduced size and cost while allowing much larger transistor counts and more capable processors.",
+        "lecture": {
+          "order": 1,
+          "title": "Introduction",
+          "file": "01.Lecture_Introduction (2)(1).pdf",
+          "courseId": "microprocessors-arm",
+          "slides": [
+            5,
+            39
+          ]
+        }
       },
       {
         "id": "mpr-03",
@@ -103,7 +123,17 @@
         "commonMistakes": [
           "Assuming microprocessors, microcontrollers, and SoCs differ only in speed rather than in integration and intended use."
         ],
-        "explain": "A computer system combines the processor with memory and I/O support. Cache keeps frequently needed data close to the CPU, DRAM provides larger working memory, and platform logic connects components and peripherals. A microcontroller integrates a CPU with memory and peripherals, while a system-on-chip integrates still more system functions."
+        "explain": "A computer system combines the processor with memory and I/O support. Cache keeps frequently needed data close to the CPU, DRAM provides larger working memory, and platform logic connects components and peripherals. A microcontroller integrates a CPU with memory and peripherals, while a system-on-chip integrates still more system functions.",
+        "lecture": {
+          "order": 1,
+          "title": "Introduction",
+          "file": "01.Lecture_Introduction (2)(1).pdf",
+          "courseId": "microprocessors-arm",
+          "slides": [
+            40,
+            53
+          ]
+        }
       },
       {
         "id": "mpr-04",
@@ -128,7 +158,17 @@
         "commonMistakes": [
           "Thinking every memory access costs the same amount of time."
         ],
-        "explain": "Memory is organized as a hierarchy because no single technology is simultaneously the fastest, largest, and cheapest. Registers are closest to execution, then caches, then main memory. Processor history moved caches from the motherboard toward on-die L1, L2, and L3 levels."
+        "explain": "Memory is organized as a hierarchy because no single technology is simultaneously the fastest, largest, and cheapest. Registers are closest to execution, then caches, then main memory. Processor history moved caches from the motherboard toward on-die L1, L2, and L3 levels.",
+        "lecture": {
+          "order": 1,
+          "title": "Introduction",
+          "file": "01.Lecture_Introduction (2)(1).pdf",
+          "courseId": "microprocessors-arm",
+          "slides": [
+            54,
+            57
+          ]
+        }
       },
       {
         "id": "mpr-05",
@@ -153,7 +193,17 @@
         "commonMistakes": [
           "Using 'architecture' and 'microarchitecture' as interchangeable words."
         ],
-        "explain": "Architecture defines the programmer-visible contract, including instructions, registers, data types, and behavior. Microarchitecture is how a particular processor implements that contract. Two processors can execute the same instruction set while using different caches, pipelines, issue widths, or out-of-order machinery."
+        "explain": "Architecture defines the programmer-visible contract, including instructions, registers, data types, and behavior. Microarchitecture is how a particular processor implements that contract. Two processors can execute the same instruction set while using different caches, pipelines, issue widths, or out-of-order machinery.",
+        "lecture": {
+          "order": 1,
+          "title": "Introduction",
+          "file": "01.Lecture_Introduction (2)(1).pdf",
+          "courseId": "microprocessors-arm",
+          "slides": [
+            58,
+            78
+          ]
+        }
       },
       {
         "id": "mpr-06",
@@ -178,7 +228,17 @@
         "commonMistakes": [
           "Assuming a higher clock rate automatically means a faster processor for every program."
         ],
-        "explain": "Processor performance is fundamentally about how long a workload takes. Clock frequency affects cycles per second, while IPC describes how much instruction work completes per cycle. Pipelining can raise frequency, dependencies and stalls reduce IPC, and superscalar or out-of-order execution can expose more parallel work."
+        "explain": "Processor performance is fundamentally about how long a workload takes. Clock frequency affects cycles per second, while IPC describes how much instruction work completes per cycle. Pipelining can raise frequency, dependencies and stalls reduce IPC, and superscalar or out-of-order execution can expose more parallel work.",
+        "lecture": {
+          "order": 1,
+          "title": "Introduction",
+          "file": "01.Lecture_Introduction (2)(1).pdf",
+          "courseId": "microprocessors-arm",
+          "slides": [
+            79,
+            80
+          ]
+        }
       },
       {
         "id": "mpr-07",
@@ -202,7 +262,17 @@
         "commonMistakes": [
           "Interpreting RISC as 'every real instruction always completes in exactly one physical clock cycle.'"
         ],
-        "explain": "Classic RISC uses regular instructions, many registers, and explicit loads/stores for memory access. ARM data-processing instructions mainly use registers, while LDR and STR move data between registers and memory. A modern processor may be internally complex while preserving this programmer-visible architecture."
+        "explain": "Classic RISC uses regular instructions, many registers, and explicit loads/stores for memory access. ARM data-processing instructions mainly use registers, while LDR and STR move data between registers and memory. A modern processor may be internally complex while preserving this programmer-visible architecture.",
+        "lecture": {
+          "order": 2,
+          "title": "ARM Architecture",
+          "file": "02.Lecture_ARM_Architecture02 (3)(1).pdf",
+          "courseId": "microprocessors-arm",
+          "slides": [
+            6,
+            21
+          ]
+        }
       },
       {
         "id": "mpr-08",
@@ -227,7 +297,17 @@
         "commonMistakes": [
           "Confusing instruction encoding size with the size of the data being processed."
         ],
-        "explain": "In the 32-bit ARM material, a halfword is 16 bits, a word is 32 bits, and a doubleword is 64 bits. Classic ARM instructions are 32 bits wide, while Thumb/Thumb-2 use a mixture of compact 16-bit and 32-bit encodings. Execution state controls which encodings the processor interprets."
+        "explain": "In the 32-bit ARM material, a halfword is 16 bits, a word is 32 bits, and a doubleword is 64 bits. Classic ARM instructions are 32 bits wide, while Thumb/Thumb-2 use a mixture of compact 16-bit and 32-bit encodings. Execution state controls which encodings the processor interprets.",
+        "lecture": {
+          "order": 2,
+          "title": "ARM Architecture",
+          "file": "02.Lecture_ARM_Architecture02 (3)(1).pdf",
+          "courseId": "microprocessors-arm",
+          "slides": [
+            22,
+            22
+          ]
+        }
       },
       {
         "id": "mpr-09",
@@ -253,7 +333,17 @@
         "commonMistakes": [
           "Assuming every processor mode sees exactly the same physical SP, LR, and saved-status registers."
         ],
-        "explain": "Classic ARM exposes general-purpose registers plus special roles for R13 as stack pointer, R14 as link register, and R15 as program counter. CPSR records current status/control information. Privileged exception modes can access an SPSR and selected banked registers so handlers can preserve state and use their own stack/link context."
+        "explain": "Classic ARM exposes general-purpose registers plus special roles for R13 as stack pointer, R14 as link register, and R15 as program counter. CPSR records current status/control information. Privileged exception modes can access an SPSR and selected banked registers so handlers can preserve state and use their own stack/link context.",
+        "lecture": {
+          "order": 2,
+          "title": "ARM Architecture",
+          "file": "02.Lecture_ARM_Architecture02 (3)(1).pdf",
+          "courseId": "microprocessors-arm",
+          "slides": [
+            23,
+            29
+          ]
+        }
       },
       {
         "id": "mpr-10",
@@ -281,7 +371,17 @@
         "commonMistakes": [
           "Reading the ARM I and F CPSR bits as interrupt-enable bits; in classic ARM, a set mask bit masks/disables that interrupt."
         ],
-        "explain": "Classic ARM has User mode and privileged modes including System, Supervisor, IRQ, FIQ, Abort, and Undefined. CPSR holds condition flags, execution state, interrupt masks, and mode bits. Little-endian stores the least-significant byte at the lower address; big-endian reverses that order. Exceptions enter an appropriate privileged mode so handlers can use protected state."
+        "explain": "Classic ARM has User mode and privileged modes including System, Supervisor, IRQ, FIQ, Abort, and Undefined. CPSR holds condition flags, execution state, interrupt masks, and mode bits. Little-endian stores the least-significant byte at the lower address; big-endian reverses that order. Exceptions enter an appropriate privileged mode so handlers can use protected state.",
+        "lecture": {
+          "order": 2,
+          "title": "ARM Architecture",
+          "file": "02.Lecture_ARM_Architecture02 (3)(1).pdf",
+          "courseId": "microprocessors-arm",
+          "slides": [
+            30,
+            45
+          ]
+        }
       }
     ],
     "exercises": [
@@ -676,6 +776,44 @@
         "correct": 0,
         "type": "mcq"
       }
+    ],
+    "lectureSequence": [
+      {
+        "order": 1,
+        "title": "Introduction",
+        "file": "01.Lecture_Introduction (2)(1).pdf",
+        "courseId": "microprocessors-arm"
+      },
+      {
+        "order": 2,
+        "title": "ARM Architecture",
+        "file": "02.Lecture_ARM_Architecture02 (3)(1).pdf",
+        "courseId": "microprocessors-arm"
+      },
+      {
+        "order": 3,
+        "title": "Instructions — Part 1",
+        "file": "03.Lecture_ARM_Instructions_part1 (1)(1).pdf",
+        "courseId": "arm-assembly"
+      },
+      {
+        "order": 4,
+        "title": "Instructions — Part 2",
+        "file": "03.Lecture_ARM_Instructions_part2 (2)(1).pdf",
+        "courseId": "arm-assembly"
+      },
+      {
+        "order": 5,
+        "title": "Functions",
+        "file": "04.Functions(1).pdf",
+        "courseId": "arm-assembly"
+      },
+      {
+        "order": 6,
+        "title": "Exceptions",
+        "file": "05.Exceptions(1).pdf",
+        "courseId": "arm-assembly"
+      }
     ]
   },
   {
@@ -702,14 +840,12 @@
     "schemaVersion": 3,
     "roadmap": {
       "beginner": [
-        "Program structure & registers",
-        "Data processing",
-        "Flags & conditions"
+        "Instructions Part 1: syntax, MOV/MVN, memory addressing, barrel shifter"
       ],
       "intermediate": [
-        "Control flow & memory",
-        "Stacks & functions",
-        "Exceptions & interrupts"
+        "Instructions Part 2: flags, comparisons, data processing, control flow, stacks",
+        "Functions: register saving and parameter passing",
+        "Exceptions: entry, vectors, priorities and SVC"
       ]
     },
     "lessons": [
@@ -737,7 +873,17 @@
         "commonMistakes": [
           "Treating assembler directives such as AREA or EQU as instructions executed by the ARM core."
         ],
-        "explain": "ARM assembly source combines processor instructions with assembler directives. Most data-processing instructions place the destination first, followed by source operands. AREA, ENTRY, RN, EQU, ALIGN, SPACE, and END help the assembler organize code/data or define names; they are not operations executed by the CPU."
+        "explain": "ARM assembly source combines processor instructions with assembler directives. Most data-processing instructions place the destination first, followed by source operands. AREA, ENTRY, RN, EQU, ALIGN, SPACE, and END help the assembler organize code/data or define names; they are not operations executed by the CPU.",
+        "lecture": {
+          "order": 3,
+          "title": "Instructions — Part 1",
+          "file": "03.Lecture_ARM_Instructions_part1 (1)(1).pdf",
+          "courseId": "arm-assembly",
+          "slides": [
+            7,
+            25
+          ]
+        }
       },
       {
         "id": "arm-02",
@@ -762,160 +908,17 @@
         "commonMistakes": [
           "Reading MOV r0, r1 as copying r0 into r1."
         ],
-        "explain": "Data-processing instructions work primarily on registers. MOV copies an operand into a destination register, while MVN writes the bitwise complement. Immediate operands use # in the lecture syntax. Remember the destination-first pattern when tracing instructions."
-      },
-      {
-        "id": "arm-03",
-        "title": "Arithmetic instructions: ADD, ADC, SUB, SBC, RSB & RSC",
-        "concepts": [
-          "ADD",
-          "ADC",
-          "SUB",
-          "SBC",
-          "RSB",
-          "RSC",
-          "carry"
-        ],
-        "objectives": [
-          "Trace three-operand arithmetic",
-          "Explain add/subtract with carry",
-          "Use reverse subtraction correctly"
-        ],
-        "explanation": "ARM arithmetic instructions typically use a destination and two input operands. ADD and SUB perform basic arithmetic; ADC and SBC include carry state for multiword arithmetic. RSB reverses subtraction order, useful when the desired calculation is operand2 minus operand1.",
-        "examples": [
-          "        MOV r1, #9\n        MOV r2, #4\n        ADD r0, r1, r2\n        SUB r3, r1, r2\n        RSB r4, r1, r2"
-        ],
-        "commonMistakes": [
-          "Applying normal SUB operand order to RSB."
-        ],
-        "explain": "ARM arithmetic instructions typically use a destination and two input operands. ADD and SUB perform basic arithmetic; ADC and SBC include carry state for multiword arithmetic. RSB reverses subtraction order, useful when the desired calculation is operand2 minus operand1."
-      },
-      {
-        "id": "arm-04",
-        "title": "Logical operations & bit manipulation",
-        "concepts": [
-          "AND",
-          "ORR",
-          "EOR",
-          "BIC",
-          "MVN",
-          "bit mask"
-        ],
-        "objectives": [
-          "Apply bitwise AND/OR/XOR",
-          "Clear selected bits with BIC",
-          "Build and reason about masks"
-        ],
-        "explanation": "AND keeps bits selected by a mask, ORR sets selected bits, EOR performs XOR, and BIC clears bits selected by the second operand. These operations are central to packed flags and device/control registers.",
-        "examples": [
-          "        MOV r0, #0x0F\n        MOV r1, #0x03\n        AND r2, r0, r1\n        ORR r3, r0, #0x10\n        EOR r4, r0, r1\n        BIC r5, r0, #0x03"
-        ],
-        "commonMistakes": [
-          "Using arithmetic intuition for bit masks instead of tracing each bit position."
-        ],
-        "explain": "AND keeps bits selected by a mask, ORR sets selected bits, EOR performs XOR, and BIC clears bits selected by the second operand. These operations are central to packed flags and device/control registers."
-      },
-      {
-        "id": "arm-05",
-        "title": "Barrel shifter: LSL, LSR, ASR & ROR",
-        "concepts": [
-          "LSL",
-          "LSR",
-          "ASR",
-          "ROR",
-          "barrel shifter",
-          "Operand2"
-        ],
-        "objectives": [
-          "Trace logical and arithmetic shifts",
-          "Explain rotate-right",
-          "Combine a shift with a data-processing instruction"
-        ],
-        "explanation": "ARM can shift the second operand as part of many data-processing instructions. LSL shifts left, LSR shifts right with zero fill, ASR preserves the sign bit for signed values, and ROR rotates bits around. Combining ALU work with a shift is a characteristic ARM feature.",
-        "examples": [
-          "        MOV r0, #7\n        MOV r1, r0, LSL #1\n        MOV r2, r1, LSR #2\n        ADD r3, r0, r0, LSL #4"
-        ],
-        "commonMistakes": [
-          "Assuming LSR and ASR are identical for values whose top bit is 1."
-        ],
-        "explain": "ARM can shift the second operand as part of many data-processing instructions. LSL shifts left, LSR shifts right with zero fill, ASR preserves the sign bit for signed values, and ROR rotates bits around. Combining ALU work with a shift is a characteristic ARM feature."
-      },
-      {
-        "id": "arm-06",
-        "title": "CPSR flags & the S suffix",
-        "concepts": [
-          "N flag",
-          "Z flag",
-          "C flag",
-          "V flag",
-          "CPSR",
-          "S suffix"
-        ],
-        "objectives": [
-          "Explain N, Z, C, and V",
-          "Use the S suffix to update flags",
-          "Separate signed overflow from unsigned carry"
-        ],
-        "explanation": "N reflects the result sign bit, Z indicates zero, C records carry/no-borrow information and shifted-out bits, and V reports signed arithmetic overflow. Many data-processing instructions update flags only when the S suffix is requested.",
-        "examples": [
-          "        MOV  r0, #5\n        SUBS r1, r0, #5\n        MOVS r2, #-1"
-        ],
-        "commonMistakes": [
-          "Treating C and V as the same condition."
-        ],
-        "explain": "N reflects the result sign bit, Z indicates zero, C records carry/no-borrow information and shifted-out bits, and V reports signed arithmetic overflow. Many data-processing instructions update flags only when the S suffix is requested."
-      },
-      {
-        "id": "arm-07",
-        "title": "CMP, CMN, TST, TEQ & conditional execution",
-        "concepts": [
-          "CMP",
-          "CMN",
-          "TST",
-          "TEQ",
-          "EQ",
-          "NE",
-          "LT",
-          "GT"
-        ],
-        "objectives": [
-          "Use comparison instructions to set flags",
-          "Choose a condition code from flag results",
-          "Explain conditional instruction execution"
-        ],
-        "explanation": "CMP behaves like subtraction for flag setting, CMN like addition, TST like bitwise AND, and TEQ like XOR. They update flags without keeping a normal destination result. Conditional suffixes such as EQ or NE make an instruction execute only when its flag condition is satisfied.",
-        "examples": [
-          "        MOV r0, #2\n        CMP r0, #2\n        MOVEQ r1, #1\n        MOVNE r1, #0\n        TST r0, #2"
-        ],
-        "commonMistakes": [
-          "Expecting CMP to store a normal subtraction result."
-        ],
-        "explain": "CMP behaves like subtraction for flag setting, CMN like addition, TST like bitwise AND, and TEQ like XOR. They update flags without keeping a normal destination result. Conditional suffixes such as EQ or NE make an instruction execute only when its flag condition is satisfied."
-      },
-      {
-        "id": "arm-08",
-        "title": "Branches, if/else & loops",
-        "concepts": [
-          "B",
-          "BL",
-          "BX",
-          "label",
-          "while loop",
-          "do-while"
-        ],
-        "objectives": [
-          "Branch to labels",
-          "Translate decisions into branches",
-          "Trace while and do-while loops"
-        ],
-        "explanation": "Branch instructions change control flow by loading a new PC value. Labels identify targets. Conditional branches combine flag tests with control flow, which implements if/else and loops. Testing before or after the body distinguishes pre-test and post-test loops.",
-        "examples": [
-          "j       RN 0\n        MOV j, #3\nloop    CMP j, #0\n        BLT done\n        SUB j, j, #1\n        B loop\ndone    B done"
-        ],
-        "commonMistakes": [
-          "Forgetting that a loop must modify the state used by its termination condition."
-        ],
-        "explain": "Branch instructions change control flow by loading a new PC value. Labels identify targets. Conditional branches combine flag tests with control flow, which implements if/else and loops. Testing before or after the body distinguishes pre-test and post-test loops."
+        "explain": "Data-processing instructions work primarily on registers. MOV copies an operand into a destination register, while MVN writes the bitwise complement. Immediate operands use # in the lecture syntax. Remember the destination-first pattern when tracing instructions.",
+        "lecture": {
+          "order": 3,
+          "title": "Instructions — Part 1",
+          "file": "03.Lecture_ARM_Instructions_part1 (1)(1).pdf",
+          "courseId": "arm-assembly",
+          "slides": [
+            9,
+            15
+          ]
+        }
       },
       {
         "id": "arm-09",
@@ -942,7 +945,230 @@
         "commonMistakes": [
           "Confusing the address in the base register with the data loaded from memory."
         ],
-        "explain": "ARM is a load-store architecture, so memory values move into registers before most data processing. LDR/STR transfer words, with byte and halfword variants. Addressing modes combine a base register with an offset; pre-indexing forms the address before access, while post-indexing uses the base first and updates it afterward."
+        "explain": "ARM is a load-store architecture, so memory values move into registers before most data processing. LDR/STR transfer words, with byte and halfword variants. Addressing modes combine a base register with an offset; pre-indexing forms the address before access, while post-indexing uses the base first and updates it afterward.",
+        "lecture": {
+          "order": 3,
+          "title": "Instructions — Part 1",
+          "file": "03.Lecture_ARM_Instructions_part1 (1)(1).pdf",
+          "courseId": "arm-assembly",
+          "slides": [
+            26,
+            43
+          ]
+        }
+      },
+      {
+        "id": "arm-05",
+        "title": "Barrel shifter: LSL, LSR, ASR & ROR",
+        "concepts": [
+          "LSL",
+          "LSR",
+          "ASR",
+          "ROR",
+          "barrel shifter",
+          "Operand2"
+        ],
+        "objectives": [
+          "Trace logical and arithmetic shifts",
+          "Explain rotate-right",
+          "Combine a shift with a data-processing instruction"
+        ],
+        "explanation": "ARM can shift the second operand as part of many data-processing instructions. LSL shifts left, LSR shifts right with zero fill, ASR preserves the sign bit for signed values, and ROR rotates bits around. Combining ALU work with a shift is a characteristic ARM feature.",
+        "examples": [
+          "        MOV r0, #7\n        MOV r1, r0, LSL #1\n        MOV r2, r1, LSR #2\n        ADD r3, r0, r0, LSL #4"
+        ],
+        "commonMistakes": [
+          "Assuming LSR and ASR are identical for values whose top bit is 1."
+        ],
+        "explain": "ARM can shift the second operand as part of many data-processing instructions. LSL shifts left, LSR shifts right with zero fill, ASR preserves the sign bit for signed values, and ROR rotates bits around. Combining ALU work with a shift is a characteristic ARM feature.",
+        "lecture": {
+          "order": 3,
+          "title": "Instructions — Part 1",
+          "file": "03.Lecture_ARM_Instructions_part1 (1)(1).pdf",
+          "courseId": "arm-assembly",
+          "slides": [
+            44,
+            48
+          ]
+        }
+      },
+      {
+        "id": "arm-06",
+        "title": "CPSR flags & the S suffix",
+        "concepts": [
+          "N flag",
+          "Z flag",
+          "C flag",
+          "V flag",
+          "CPSR",
+          "S suffix"
+        ],
+        "objectives": [
+          "Explain N, Z, C, and V",
+          "Use the S suffix to update flags",
+          "Separate signed overflow from unsigned carry"
+        ],
+        "explanation": "N reflects the result sign bit, Z indicates zero, C records carry/no-borrow information and shifted-out bits, and V reports signed arithmetic overflow. Many data-processing instructions update flags only when the S suffix is requested.",
+        "examples": [
+          "        MOV  r0, #5\n        SUBS r1, r0, #5\n        MOVS r2, #-1"
+        ],
+        "commonMistakes": [
+          "Treating C and V as the same condition."
+        ],
+        "explain": "N reflects the result sign bit, Z indicates zero, C records carry/no-borrow information and shifted-out bits, and V reports signed arithmetic overflow. Many data-processing instructions update flags only when the S suffix is requested.",
+        "lecture": {
+          "order": 4,
+          "title": "Instructions — Part 2",
+          "file": "03.Lecture_ARM_Instructions_part2 (2)(1).pdf",
+          "courseId": "arm-assembly",
+          "slides": [
+            2,
+            6
+          ]
+        }
+      },
+      {
+        "id": "arm-07",
+        "title": "CMP, CMN, TST, TEQ & conditional execution",
+        "concepts": [
+          "CMP",
+          "CMN",
+          "TST",
+          "TEQ",
+          "EQ",
+          "NE",
+          "LT",
+          "GT"
+        ],
+        "objectives": [
+          "Use comparison instructions to set flags",
+          "Choose a condition code from flag results",
+          "Explain conditional instruction execution"
+        ],
+        "explanation": "CMP behaves like subtraction for flag setting, CMN like addition, TST like bitwise AND, and TEQ like XOR. They update flags without keeping a normal destination result. Conditional suffixes such as EQ or NE make an instruction execute only when its flag condition is satisfied.",
+        "examples": [
+          "        MOV r0, #2\n        CMP r0, #2\n        MOVEQ r1, #1\n        MOVNE r1, #0\n        TST r0, #2"
+        ],
+        "commonMistakes": [
+          "Expecting CMP to store a normal subtraction result."
+        ],
+        "explain": "CMP behaves like subtraction for flag setting, CMN like addition, TST like bitwise AND, and TEQ like XOR. They update flags without keeping a normal destination result. Conditional suffixes such as EQ or NE make an instruction execute only when its flag condition is satisfied.",
+        "lecture": {
+          "order": 4,
+          "title": "Instructions — Part 2",
+          "file": "03.Lecture_ARM_Instructions_part2 (2)(1).pdf",
+          "courseId": "arm-assembly",
+          "slides": [
+            7,
+            10
+          ]
+        }
+      },
+      {
+        "id": "arm-04",
+        "title": "Logical operations & bit manipulation",
+        "concepts": [
+          "AND",
+          "ORR",
+          "EOR",
+          "BIC",
+          "MVN",
+          "bit mask"
+        ],
+        "objectives": [
+          "Apply bitwise AND/OR/XOR",
+          "Clear selected bits with BIC",
+          "Build and reason about masks"
+        ],
+        "explanation": "AND keeps bits selected by a mask, ORR sets selected bits, EOR performs XOR, and BIC clears bits selected by the second operand. These operations are central to packed flags and device/control registers.",
+        "examples": [
+          "        MOV r0, #0x0F\n        MOV r1, #0x03\n        AND r2, r0, r1\n        ORR r3, r0, #0x10\n        EOR r4, r0, r1\n        BIC r5, r0, #0x03"
+        ],
+        "commonMistakes": [
+          "Using arithmetic intuition for bit masks instead of tracing each bit position."
+        ],
+        "explain": "AND keeps bits selected by a mask, ORR sets selected bits, EOR performs XOR, and BIC clears bits selected by the second operand. These operations are central to packed flags and device/control registers.",
+        "lecture": {
+          "order": 4,
+          "title": "Instructions — Part 2",
+          "file": "03.Lecture_ARM_Instructions_part2 (2)(1).pdf",
+          "courseId": "arm-assembly",
+          "slides": [
+            11,
+            15
+          ]
+        }
+      },
+      {
+        "id": "arm-03",
+        "title": "Arithmetic instructions: ADD, ADC, SUB, SBC, RSB & RSC",
+        "concepts": [
+          "ADD",
+          "ADC",
+          "SUB",
+          "SBC",
+          "RSB",
+          "RSC",
+          "carry"
+        ],
+        "objectives": [
+          "Trace three-operand arithmetic",
+          "Explain add/subtract with carry",
+          "Use reverse subtraction correctly"
+        ],
+        "explanation": "ARM arithmetic instructions typically use a destination and two input operands. ADD and SUB perform basic arithmetic; ADC and SBC include carry state for multiword arithmetic. RSB reverses subtraction order, useful when the desired calculation is operand2 minus operand1.",
+        "examples": [
+          "        MOV r1, #9\n        MOV r2, #4\n        ADD r0, r1, r2\n        SUB r3, r1, r2\n        RSB r4, r1, r2"
+        ],
+        "commonMistakes": [
+          "Applying normal SUB operand order to RSB."
+        ],
+        "explain": "ARM arithmetic instructions typically use a destination and two input operands. ADD and SUB perform basic arithmetic; ADC and SBC include carry state for multiword arithmetic. RSB reverses subtraction order, useful when the desired calculation is operand2 minus operand1.",
+        "lecture": {
+          "order": 4,
+          "title": "Instructions — Part 2",
+          "file": "03.Lecture_ARM_Instructions_part2 (2)(1).pdf",
+          "courseId": "arm-assembly",
+          "slides": [
+            16,
+            18
+          ]
+        }
+      },
+      {
+        "id": "arm-08",
+        "title": "Branches, if/else & loops",
+        "concepts": [
+          "B",
+          "BL",
+          "BX",
+          "label",
+          "while loop",
+          "do-while"
+        ],
+        "objectives": [
+          "Branch to labels",
+          "Translate decisions into branches",
+          "Trace while and do-while loops"
+        ],
+        "explanation": "Branch instructions change control flow by loading a new PC value. Labels identify targets. Conditional branches combine flag tests with control flow, which implements if/else and loops. Testing before or after the body distinguishes pre-test and post-test loops.",
+        "examples": [
+          "j       RN 0\n        MOV j, #3\nloop    CMP j, #0\n        BLT done\n        SUB j, j, #1\n        B loop\ndone    B done"
+        ],
+        "commonMistakes": [
+          "Forgetting that a loop must modify the state used by its termination condition."
+        ],
+        "explain": "Branch instructions change control flow by loading a new PC value. Labels identify targets. Conditional branches combine flag tests with control flow, which implements if/else and loops. Testing before or after the body distinguishes pre-test and post-test loops.",
+        "lecture": {
+          "order": 4,
+          "title": "Instructions — Part 2",
+          "file": "03.Lecture_ARM_Instructions_part2 (2)(1).pdf",
+          "courseId": "arm-assembly",
+          "slides": [
+            19,
+            47
+          ]
+        }
       },
       {
         "id": "arm-10",
@@ -971,7 +1197,17 @@
         "commonMistakes": [
           "Assuming textual register-list order controls memory ordering."
         ],
-        "explain": "LDM and STM move multiple registers between registers and memory. Addressing-mode suffixes specify increment/decrement and before/after behavior. PUSH and POP are stack-oriented aliases using R13/SP; in the convention shown in the lectures, PUSH corresponds to STMDB and POP to LDMIA, so the stack grows toward lower addresses."
+        "explain": "LDM and STM move multiple registers between registers and memory. Addressing-mode suffixes specify increment/decrement and before/after behavior. PUSH and POP are stack-oriented aliases using R13/SP; in the convention shown in the lectures, PUSH corresponds to STMDB and POP to LDMIA, so the stack grows toward lower addresses.",
+        "lecture": {
+          "order": 4,
+          "title": "Instructions — Part 2",
+          "file": "03.Lecture_ARM_Instructions_part2 (2)(1).pdf",
+          "courseId": "arm-assembly",
+          "slides": [
+            99,
+            113
+          ]
+        }
       },
       {
         "id": "arm-11",
@@ -996,7 +1232,17 @@
         "commonMistakes": [
           "Calling another function without protecting LR when the current function still needs its own return address."
         ],
-        "explain": "BL branches while saving a return address in LR/R14. A simple return can use BX LR. Subroutines preserve state according to the calling convention. Parameters can be passed in registers, through a referenced memory block, or on the stack; stack-based access must account for values pushed on entry."
+        "explain": "BL branches while saving a return address in LR/R14. A simple return can use BX LR. Subroutines preserve state according to the calling convention. Parameters can be passed in registers, through a referenced memory block, or on the stack; stack-based access must account for values pushed on entry.",
+        "lecture": {
+          "order": 5,
+          "title": "Functions",
+          "file": "04.Functions(1).pdf",
+          "courseId": "arm-assembly",
+          "slides": [
+            2,
+            22
+          ]
+        }
       },
       {
         "id": "arm-12",
@@ -1023,7 +1269,17 @@
         "commonMistakes": [
           "Using the same unadjusted LR return sequence for every exception type."
         ],
-        "explain": "On a classic ARM exception, CPSR is copied to the relevant SPSR, the processor changes mode, a return address is stored in mode-specific LR, and PC goes to an exception vector. The vector dispatches to a handler, which returns using the exception-appropriate sequence. SVC deliberately requests a privileged OS service."
+        "explain": "On a classic ARM exception, CPSR is copied to the relevant SPSR, the processor changes mode, a return address is stored in mode-specific LR, and PC goes to an exception vector. The vector dispatches to a handler, which returns using the exception-appropriate sequence. SVC deliberately requests a privileged OS service.",
+        "lecture": {
+          "order": 6,
+          "title": "Exceptions",
+          "file": "05.Exceptions(1).pdf",
+          "courseId": "arm-assembly",
+          "slides": [
+            2,
+            13
+          ]
+        }
       }
     ],
     "exercises": [
@@ -1465,6 +1721,44 @@
         "type": "mcq",
         "explanation": "SVC deliberately raises a software exception to request a supervisor service. It is not an ordinary BL subroutine call; handling depends on the execution environment.",
         "lessonId": "arm-12"
+      }
+    ],
+    "lectureSequence": [
+      {
+        "order": 1,
+        "title": "Introduction",
+        "file": "01.Lecture_Introduction (2)(1).pdf",
+        "courseId": "microprocessors-arm"
+      },
+      {
+        "order": 2,
+        "title": "ARM Architecture",
+        "file": "02.Lecture_ARM_Architecture02 (3)(1).pdf",
+        "courseId": "microprocessors-arm"
+      },
+      {
+        "order": 3,
+        "title": "Instructions — Part 1",
+        "file": "03.Lecture_ARM_Instructions_part1 (1)(1).pdf",
+        "courseId": "arm-assembly"
+      },
+      {
+        "order": 4,
+        "title": "Instructions — Part 2",
+        "file": "03.Lecture_ARM_Instructions_part2 (2)(1).pdf",
+        "courseId": "arm-assembly"
+      },
+      {
+        "order": 5,
+        "title": "Functions",
+        "file": "04.Functions(1).pdf",
+        "courseId": "arm-assembly"
+      },
+      {
+        "order": 6,
+        "title": "Exceptions",
+        "file": "05.Exceptions(1).pdf",
+        "courseId": "arm-assembly"
       }
     ]
   }
