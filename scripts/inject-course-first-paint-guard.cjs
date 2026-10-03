@@ -5,7 +5,7 @@ const root=process.cwd();
 const coursesDir=path.join(root,'courses');
 if(!fs.existsSync(coursesDir))throw new Error('courses directory missing before course first-paint cleanup');
 const files=fs.readdirSync(coursesDir).filter(x=>x.endsWith('.html'));
-if(files.length!==64)throw new Error(`Expected 64 base course pages, found ${files.length}`);
+if(files.length!==65)throw new Error(`Expected 64 base course pages, found ${files.length}`);
 
 let cleaned=0;
 for(const name of files){
