@@ -10,7 +10,7 @@ function badCode(v){return /#include\s*[<"]|\bstd::|\bcout\s*<<|\bcin\s*>>|\busi
 
 const readme=read('README.md');
 if(!/65 generated course pages/.test(readme))fail('README does not say 65 generated course pages');
-if(!/62-course set/.test(readme))fail('README repository structure does not say 62-course set');
+if(!/65-course set/.test(readme))fail('README repository structure does not say 65-course set');
 if(/54 generated course pages|54-course set/.test(readme))fail('README still contains old 54-course count');if(!/C\+\+ Programming & DSA/.test(readme))fail('README missing dedicated C++ course');
 
 const pkg=JSON.parse(read('package.json'));
