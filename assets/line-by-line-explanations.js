@@ -240,7 +240,8 @@ function purposeFor(line,lang){var t=text(line).trim();if(!t)return'A blank line
  if(lang==='javascript'||lang==='typescript')return jsPurpose(t);
  if(lang==='sql')return sqlPurpose(t);
  if(lang==='html')return htmlPurpose(t);
- if(lang==='css')return cssPurpose(t);\n if(lang==='armasm')return armPurpose(t);
+ if(lang==='css')return cssPurpose(t);
+ if(lang==='armasm')return armPurpose(t);
  if(lang==='shell')return shellPurpose(t);
  if(lang==='cpp'||lang==='java')return cppPurpose(t,lang);
  if(lang==='dockerfile')return dockerPurpose(t);
