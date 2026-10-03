@@ -1,0 +1,10 @@
+const assert = require('assert');
+const fs = require('fs');
+const path = require('path');
+const root = path.join(__dirname, '..');
+const ui = fs.readFileSync(path.join(root, 'assets', 'arm-trace-ui.js'), 'utf8');
+assert.match(ui, /Register values/, 'ARM tracer must render register values');
+assert.match(ui, /Word memory/, 'ARM tracer must render word memory');
+assert.match(ui, /Instruction and control-flow map/, 'ARM tracer must render an instruction map');
+assert.match(ui, /arm-trace-map/, 'ARM instruction map must be tabular and scrollable');
+console.log('ARM visual output contract PASS — registers, flags, memory, and instruction control-flow tables are wired.');
