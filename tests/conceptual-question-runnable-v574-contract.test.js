@@ -6,7 +6,7 @@ const root=path.resolve(__dirname,'..');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 
 const pages=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith('.html')).sort();
-assert.equal(pages.length,62,'v5.74 expects all 62 course pages');
+assert.equal(pages.length,65,'v5.74 expects all 65 course pages');
 for(const f of pages){
   const h=read('courses/'+f);
   for(const tag of [
