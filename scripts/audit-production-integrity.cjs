@@ -52,7 +52,7 @@ for(const file of htmlFiles){
    if(!fs.existsSync(p))failures.push(`${name}: missing local asset ${ref}`);else localAssetsChecked++;
  }
 }
-if(htmlFiles.length!==65)failures.push(`expected index + 64 course pages = 65 HTML files, found ${htmlFiles.length}`);
+if(htmlFiles.length!==66)failures.push(`expected index + 65 course pages = 66 HTML files, found ${htmlFiles.length}`);
 const expectedAssets=['assets/adaptive-practice-layer.js','assets/project-readme-layer.js','assets/runner-performance-guard.js','assets/python-only-ui.js'];
 for(const a of expectedAssets)if(!fs.existsSync(path.join(root,a)))failures.push(`missing critical runtime ${a}`);
 const removedAssets=['assets/cpp-runner-ui-worker.js','assets/dual-single-editor-publish.js','assets/primary-language-mode.js','assets/course-language-mode-controller.js','assets/lesson-language-variants.js'];
