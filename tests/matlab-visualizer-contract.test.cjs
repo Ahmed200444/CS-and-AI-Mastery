@@ -13,7 +13,7 @@ assert.match(page, /matlab-visualizer\.js\?v=/, 'MATLAB page must load the visua
 assert.equal((page.match(/matlab-visualizer\.js/g) || []).length, 1, 'MATLAB visualizer must load once');
 assert.match(page, /MATLAB preview lab/, 'MATLAB page must explain the graph/table preview');
 
-const lessons = [...page.matchAll(/<details class="lesson" data-lesson="([^"]+)"[\\s\\S]*?<\\/details>/g)];
+const lessons = [...page.matchAll(/<details class="lesson" data-lesson="([^"]+)"[\s\S]*?<\/details>/g)];
 assert.equal(lessons.length, 10, 'MATLAB course must keep all 10 syllabus lessons');
 for (const lesson of lessons) {
   assert.match(lesson[0], /<(?:pre|textarea)[^>]*data-language="matlab"/i, `${lesson[1]} must include MATLAB source for its lesson workbench`);
