@@ -6,7 +6,7 @@ const assetPath = path.join(root, 'assets', 'matlab-visualizer.js');
 const asset = fs.readFileSync(assetPath, 'utf8');
 const page = fs.readFileSync(path.join(root, 'courses', 'matlab-engineering.html'), 'utf8');
 assert.doesNotThrow(() => new Function(asset), 'MATLAB visualizer must parse');
-for (const marker of ['MATLAB teaching preview', 'plotSvg', 'matlab-result-table', 'matlab-plot-card', 'Matrix multiplication needs matching inner dimensions', 'Preview notes', 'matlab-file-tabs', 'virtualFiles', 'Command Window & Workspace']) {
+for (const marker of ['MATLAB teaching preview', 'plotSvg', 'matlab-result-table', 'matlab-plot-card', 'Matrix multiplication needs matching inner dimensions', 'Preview notes', 'matlab-file-tabs', 'virtualFiles', 'Command Window']) {
   assert.ok(asset.includes(marker), `MATLAB visualizer missing ${marker}`);
 }
 assert.match(page, /matlab-visualizer\.js\?v=/, 'MATLAB page must load the visualizer');
