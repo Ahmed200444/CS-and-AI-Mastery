@@ -3,7 +3,7 @@ const path = require('path');
 const assert = (ok, msg) => { if (!ok) throw new Error(msg); };
 
 const pages = fs.readdirSync('courses').filter(file => file.endsWith('.html'));
-assert(pages.length === 62, `Expected 62 courses, found ${pages.length}`);
+assert(pages.length === 64, `Expected 64 courses, found ${pages.length}`);
 
 for (const file of pages) {
   const html = fs.readFileSync(path.join('courses', file), 'utf8');
@@ -33,7 +33,7 @@ for (const heading of [
 ]) {
   assert(readme.includes(heading), `README missing ${heading}`);
 }
-assert(readme.includes('62 generated course pages'), 'README course count must be 62');
+assert(readme.includes('64 generated course pages'), 'README course count must be 64');
 
 // student-code is user-owned portfolio output. A learner may legitimately delete
 // an individual published exercise, so production verification must never require
@@ -50,4 +50,4 @@ for (const file of [
   assert(!fs.existsSync(file), `Old flat copy still exists: ${file}`);
 }
 
-console.log('Final quality layer verification passed across all 62 courses.');
+console.log('Final quality layer verification passed across all 64 courses.');
