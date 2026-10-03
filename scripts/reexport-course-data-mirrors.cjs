@@ -43,8 +43,8 @@ for (const course of courses) {
   lessons += Array.isArray(course.lessons) ? course.lessons.length : 0;
 }
 
-if (written !== 62) throw new Error('Expected 62 course-data mirrors, wrote ' + written);
-if (lessons !== 800) throw new Error('Expected 800 lessons across the mirrors, found ' + lessons);
+if (written !== 64) throw new Error('Expected 64 course-data mirrors, wrote ' + written);
+if (lessons !== 824) throw new Error('Expected 824 lessons across the mirrors, found ' + lessons);
 
 // Prove the drift is gone for the course the contract checks.
 const mirror = JSON.parse(fs.readFileSync(path.join(outDir, 'software-engineering-practice.json'), 'utf8'));
