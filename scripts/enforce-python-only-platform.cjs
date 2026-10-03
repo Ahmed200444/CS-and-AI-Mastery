@@ -93,5 +93,5 @@ if(fs.existsSync(indexPath)){
  fs.writeFileSync(indexPath,html,'utf8');
 }
 if(cppPreserved!==1)throw new Error(`Dedicated C++ course page was not preserved (found ${cppPreserved})`);
-if(pageFiles!==64)throw new Error(`Python-only cleanup expected 64 course pages, found ${pageFiles}`);
+if(pageFiles!==65)throw new Error(`Python-only cleanup expected 65 course pages, found ${pageFiles}`);
 console.log(`Python-only platform cleanup complete: ${pageFiles} course pages and ${dataFiles} course-data files normalized.`);
