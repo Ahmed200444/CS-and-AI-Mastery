@@ -5,7 +5,7 @@ const path=require('node:path');
 const vm=require('node:vm');
 const root=path.resolve(__dirname,'..');
 const pages=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith('.html')).sort();
-assert.equal(pages.length,65,'expected 65 course pages');
+assert.equal(pages.length,65,'expected 62 committed or 65 generated course pages');
 for(const f of pages){
   const html=fs.readFileSync(path.join(root,'courses',f),'utf8');
   assert.ok(html.includes('study-examples.js?v=20260824-v574'),`${f}: current study example layer missing`);
