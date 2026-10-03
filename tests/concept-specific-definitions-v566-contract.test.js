@@ -4,7 +4,7 @@ const assert=require('assert');
 const root=path.resolve(__dirname,'..');
 const js=fs.readFileSync(path.join(root,'assets','study-examples.js'),'utf8');
 const courses=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith('.html'));
-assert.strictEqual(courses.length,62,'expected all 62 course pages');
+assert.strictEqual(courses.length,65,'expected all 65 course pages');
 for(const f of courses){
   const h=fs.readFileSync(path.join(root,'courses',f),'utf8');
   assert(h.includes('study-examples.js?v=20260824-v574'),`${f}: must load the v5.66 concept-specific example layer`);
@@ -26,4 +26,4 @@ for(const codeMarker of [
   "if(/^mutation$|mutability|mutable objects?/.test(t))return 'items = [1, 2]"
 ]) assert(js.includes(codeMarker),`missing practical concept code: ${codeMarker}`);
 assert(js.includes("['comparch-os','digital-hardware','advanced-computer-organization','embedded-systems'].includes(cid)&&/cache|cpi|pipeline|latency|throughput|branch|memory|tlb|architecture/.test(t)"),'generic memory words must not accidentally create computer-architecture code in unrelated courses');
-console.log('v5.66 concept-specific definitions/practical examples: OK across 62 courses');
+console.log('v5.66 concept-specific definitions/practical examples: OK across 65 courses');
