@@ -13,5 +13,5 @@ for(const course of courses){
   fs.writeFileSync(path.join(outDir,course.id+'.json'),JSON.stringify(course),'utf8');
   lessons+=Array.isArray(course.lessons)?course.lessons.length:0;
 }
-if(lessons!==822)throw new Error('Expected 832 lessons, found '+lessons);
+if(lessons!==832)throw new Error('Expected 832 lessons, found '+lessons);
 console.log('Synced 65 course mirrors from coursedata-source.json before static-page generation.');
