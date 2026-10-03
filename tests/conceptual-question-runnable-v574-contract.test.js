@@ -6,7 +6,7 @@ const root=path.resolve(__dirname,'..');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 
 const pages=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith('.html')).sort();
-assert.equal(pages.length,62,'v5.74 expects all 62 course pages');
+assert.equal(pages.length,64,'v5.74 expects all 64 course pages');
 for(const f of pages){
   const h=read('courses/'+f);
   for(const tag of [
@@ -70,4 +70,4 @@ assert.equal(JSON.parse(read('package.json')).version,'5.74.0','package version 
 assert.ok(read('local-server.js').includes("RELEASE='5.74'"),'local server must identify v5.74');
 assert.ok(read('desktop-launcher.js').includes("RELEASE = '5.74'"),'desktop launcher must identify v5.74');
 assert.ok(read('sw.js').includes('csai-v5-74-concepts-questions-runners'),'service worker cache must identify the v5.74 learning layer');
-console.log('v5.74 concept/question/runnable contract PASS — conceptual examples restored, questions sit above programs, and valid linked-list code is runnable across the current 62-course build.');
+console.log('v5.74 concept/question/runnable contract PASS — conceptual examples restored, questions sit above programs, and valid linked-list code is runnable across the current 64-course build.');

@@ -17,6 +17,6 @@ ok(ui.includes("out.push('text')")&&ui.includes("out.push('integer')")&&ui.inclu
 ok(diag.includes('This input must be a whole number. Enter digits such as 85 or -1, not letters.'),'diagnostics must explain invalid integer input');
 ok(diag.includes('This input must be a number. Enter something like 85 or 85.5.'),'diagnostics must explain invalid float input');
 const pages=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith('.html'));
-ok(pages.length===62,'expected 62 generated course pages');
+ok(pages.length===64,'expected 64 generated course pages');
 for(const f of pages){const h=read('courses/'+f);ok(h.includes('python-inline-terminal.js?v=20260822-v567'),f+' must load the recovered Python terminal build');}
 console.log('Python runner recovery/input validation PASS — stale input cannot lock later runs; numeric input validates before submission.');

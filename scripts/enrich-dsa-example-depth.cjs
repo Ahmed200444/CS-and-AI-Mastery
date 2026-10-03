@@ -439,7 +439,7 @@ print(load_factor)`
 
 if (!fs.existsSync(coursesDir)) throw new Error('courses directory is missing');
 const courseFiles = fs.readdirSync(coursesDir).filter(name => name.endsWith('.html')).sort();
-if (courseFiles.length !== 62) throw new Error(`Expected 62 course pages, found ${courseFiles.length}`);
+if (courseFiles.length !== 64) throw new Error(`Expected 64 course pages, found ${courseFiles.length}`);
 
 function lessonRanges(html) {
   const starts = [];

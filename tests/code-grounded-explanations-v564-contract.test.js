@@ -5,7 +5,7 @@ const path=require('node:path');
 const vm=require('node:vm');
 const root=path.resolve(__dirname,'..');
 const pages=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith('.html')).sort();
-assert.equal(pages.length,62,'expected 62 course pages');
+assert.equal(pages.length,64,'expected 64 course pages');
 for(const f of pages){
   const html=fs.readFileSync(path.join(root,'courses',f),'utf8');
   assert.ok(html.includes('study-examples.js?v=20260824-v574'),`${f}: current study example layer missing`);
@@ -52,4 +52,4 @@ assert.ok(progressive.includes('MAX_QUICK_WORDS=55'),'lesson quick explanations 
 assert.ok(progressive.includes('simpleExplanation'),'lesson layer must provide a shorter beginner-friendly version');
 assert.ok(progressive.includes('firstWords(plainify(first),28)'),'simple explanation should stay under about 28 words');
 
-console.log('Code-grounded explanations v5.64 contract PASS — 62 courses use actual-code-only example explanations and shorter lesson explanations.');
+console.log('Code-grounded explanations v5.64 contract PASS — 64 courses use actual-code-only example explanations and shorter lesson explanations.');

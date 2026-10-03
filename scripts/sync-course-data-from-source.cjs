@@ -5,7 +5,7 @@ const root=process.cwd();
 const sourcePath=path.join(root,'assets','coursedata-source.json');
 const outDir=path.join(root,'assets','course-data');
 const courses=JSON.parse(fs.readFileSync(sourcePath,'utf8'));
-if(!Array.isArray(courses)||courses.length!==62)throw new Error('Expected 62 courses in coursedata-source.json');
+if(!Array.isArray(courses)||courses.length!==64)throw new Error('Expected 64 courses in coursedata-source.json');
 fs.mkdirSync(outDir,{recursive:true});
 let lessons=0;
 for(const course of courses){
@@ -13,5 +13,5 @@ for(const course of courses){
   fs.writeFileSync(path.join(outDir,course.id+'.json'),JSON.stringify(course),'utf8');
   lessons+=Array.isArray(course.lessons)?course.lessons.length:0;
 }
-if(lessons!==800)throw new Error('Expected 800 lessons, found '+lessons);
-console.log('Synced 62 course mirrors from coursedata-source.json before static-page generation.');
+if(lessons!==824)throw new Error('Expected 824 lessons, found '+lessons);
+console.log('Synced 64 course mirrors from coursedata-source.json before static-page generation.');

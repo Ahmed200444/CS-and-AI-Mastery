@@ -2,7 +2,7 @@
 const fs=require('fs'),path=require('path'),assert=require('assert');
 const ROOT=path.resolve(__dirname,'..');
 const pages=fs.readdirSync(path.join(ROOT,'courses')).filter(f=>f.endsWith('.html')).sort();
-assert.equal(pages.length,62,'expected 62 course pages');
+assert.equal(pages.length,64,'expected 64 course pages');
 for(const f of pages){
   const h=fs.readFileSync(path.join(ROOT,'courses',f),'utf8');
   assert(h.includes('study-examples.js?v=20260824-v574'),`${f}: concise study-example build missing`);
@@ -21,4 +21,4 @@ for(const forbidden of ['Company problem before ','Company-style ticket:','Your 
 const guidance=fs.readFileSync(path.join(ROOT,'assets','practice-guidance.js'),'utf8');
 assert(guidance.includes('questionOnlyElement'),'practice guidance should render only the compact always-visible Question block');
 assert(!guidance.includes('<span class=\"csai-guide-required\">Required</span>'),'Question block must not display a Required badge');
-console.log('Concise example descriptions v5.64 contract PASS — 62 course pages use the minimal example UI.');
+console.log('Concise example descriptions v5.64 contract PASS — 64 course pages use the minimal example UI.');

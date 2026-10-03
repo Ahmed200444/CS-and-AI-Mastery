@@ -10,7 +10,7 @@ const homeTag='<script src="assets/study-examples.js?v=20260824-v574" defer></sc
 const files=[indexPath];
 if(!fs.existsSync(coursesDir))throw new Error('courses directory missing before study-example injection');
 for(const name of fs.readdirSync(coursesDir).filter(x=>x.endsWith('.html')))files.push(path.join(coursesDir,name));
-if(files.length!==63)throw new Error(`Expected index + 62 course pages, found ${files.length}`);
+if(files.length!==65)throw new Error(`Expected index + 64 course pages, found ${files.length}`);
 for(const file of files){
  let html=fs.readFileSync(file,'utf8');
  // FIX #27 -- tolerate both the ../assets/ and /assets/ prefixes and any attribute order, so
@@ -21,4 +21,4 @@ html=html.replace(/\s*<script\b[^>]*src=["'](?:\.\.\/|\/)?assets\/study-examples
  html=html.slice(0,at)+'\n'+(file===indexPath?homeTag:tag)+'\n'+html.slice(at);
  fs.writeFileSync(file,html,'utf8');
 }
-console.log('Injected the every-key-idea study layer into the homepage and all 62 course pages.');
+console.log('Injected the every-key-idea study layer into the homepage and all 64 course pages.');

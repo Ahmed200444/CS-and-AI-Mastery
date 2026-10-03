@@ -16,5 +16,5 @@ for(const file of fs.readdirSync(dir).filter(name=>name.endsWith('.html'))){
   fs.writeFileSync(full,html,'utf8');
   count++;
 }
-if(count!==62)throw new Error(`Expected 62 course pages, injected ${count}`);
+if(count!==64)throw new Error(`Expected 64 course pages, injected ${count}`);
 console.log(`Injected deep example tools and practice publishing into ${count} course pages.`);
