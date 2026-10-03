@@ -6,7 +6,7 @@ const vm=require('node:vm');
 const root=path.resolve(__dirname,'..');
 
 const pages=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith('.html')).sort();
-assert.equal(pages.length,62,'general audit expects 62 generated course pages');
+assert.equal(pages.length,65,'general audit expects 65 generated course pages');
 for(const f of pages){
   const h=fs.readFileSync(path.join(root,'courses',f),'utf8');
   for(const marker of [
@@ -17,7 +17,7 @@ for(const f of pages){
 }
 const canonical=JSON.parse(fs.readFileSync(path.join(root,'assets','coursedata-source.json'),'utf8'));
 const lessons=canonical.reduce((n,c)=>n+(c.lessons||[]).length,0);
-assert.equal(lessons,800,'general audit expects 800 lessons in canonical course data');
+assert.equal(lessons,832,'general audit expects 832 lessons in canonical course data');
 
 const pkg=JSON.parse(fs.readFileSync(path.join(root,'package.json'),'utf8'));
 assert.equal(pkg.version,'5.74.0','package version must be current v5.74');
@@ -60,4 +60,4 @@ const readme=fs.readFileSync(path.join(root,'README.md'),'utf8');
 assert.ok(!/2\/3 checks passed/i.test(readme),'old partial-check README wording must stay removed');
 assert.ok(!/core implementation/i.test(readme),'old core-implementation README wording must stay removed');
 
-console.log('v5.73 general project audit contract PASS — 62 courses / 800 lessons, current install/versioning, focused teaching UI, Big-O correction, and stack-trace concept isolation verified.');
+console.log('v5.73 general project audit contract PASS — 65 courses / 832 lessons, current install/versioning, focused teaching UI, Big-O correction, and stack-trace concept isolation verified.');
