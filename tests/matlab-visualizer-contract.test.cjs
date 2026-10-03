@@ -12,6 +12,16 @@ for (const marker of ['MATLAB teaching preview', 'plotSvg', 'matlab-result-table
 assert.match(page, /matlab-visualizer\.js\?v=/, 'MATLAB page must load the visualizer');
 assert.equal((page.match(/matlab-visualizer\.js/g) || []).length, 1, 'MATLAB visualizer must load once');
 assert.match(page, /MATLAB preview lab/, 'MATLAB page must explain the graph/table preview');
+
+const lessons = [...page.matchAll(/<details class="lesson" data-lesson="([^"]+)"[\\s\\S]*?<\\/details>/g)];
+assert.equal(lessons.length, 10, 'MATLAB course must keep all 10 syllabus lessons');
+for (const lesson of lessons) {
+  assert.match(lesson[0], /<(?:pre|textarea)[^>]*data-language="matlab"/i, `${lesson[1]} must include MATLAB source for its lesson workbench`);
+}
+assert.match(asset, /\.matlab-workbench\{display:grid;grid-template-columns:/, 'MATLAB workbench must use a two-column desktop layout');
+assert.match(asset, /\.matlab-pane-editor/, 'MATLAB workbench must include the Editor pane');
+assert.match(asset, /\.matlab-pane-command/, 'MATLAB workbench must include the Command Window/Workspace pane');
+assert.match(asset, /pre\[data-language="matlab"\],textarea\[data-language="matlab"\]/, 'visualizer must mount on every MATLAB lesson code block');
 const visualizer = require(assetPath);
 const plot = visualizer.execute("x = 0:0.1:1;\ny = sin(x);\nplot(x,y);\nxlabel('x');");
 assert.equal(plot.plots.length, 1, 'plot calls should produce one figure model');
