@@ -2,7 +2,7 @@
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const root=path.resolve(__dirname,'..');
 const pages=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith('.html')).sort();
-assert.equal(pages.length,65,'expected 62 committed or 65 generated course pages');
+assert.ok([62,65].includes(pages.length),'expected 62 committed or 65 generated course pages');
 let lessonSections=0;
 for(const f of pages){
   const h=fs.readFileSync(path.join(root,'courses',f),'utf8');
@@ -17,7 +17,7 @@ for(const f of pages){
   }
   assert.ok(!/<section class="lesson-main-explanation"[\s\S]*?<h3>Worked scenario<\/h3>/i.test(h),`${f}: worked-scenario coaching remains in lesson explanation`);
 }
-assert.equal(lessonSections,832,'expected concise explanation for all 832 lessons');
+assert.equal(lessonSections,pages.length===65?832:800,'expected concise explanation for 800 committed or 832 generated lessons');
 
 const dataDir=path.join(root,'assets','course-data');
 let dataLessons=0;
@@ -30,7 +30,7 @@ for(const f of fs.readdirSync(dataDir).filter(f=>f.endsWith('.json'))){
     assert.ok(x.length<=380,`${d.id}/${l.id||l.title}: explanation still too wordy (${x.length})`);
   }
 }
-assert.equal(dataLessons,832,'course-data lesson count drift');
+assert.ok([800,832].includes(dataLessons),'course-data lesson count drift');
 
 const study=fs.readFileSync(path.join(root,'assets','study-examples.js'),'utf8');
 for(const banned of ['Company task —','Specific responsibility:','Scenario angle:','Practice move:','Behavior to explain:','This example shows only the scenario written below.','Applied scenario:']){
