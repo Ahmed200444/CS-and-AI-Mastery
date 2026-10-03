@@ -15,6 +15,6 @@ assert(fn.includes('qwen/qwen3.8-27b'),'Groq model default must be explicit.');
 assert(fn.includes('gemini-3.8-flash'),'Gemini model default must be explicit.');
 assert(fn.includes('openrouter/free'),'OpenRouter must use the free router by default.');
 assert(fn.includes("provider:'guided'"),'Tutor must degrade to guided mode without an AI key.');
-assert(inject.includes('62 course pages'),'Injector must cover all generated courses.');
+assert(inject.includes('65 course pages'),'Injector must cover all generated courses.');
 assert(toml.includes('inject-brilliant-tutor.cjs'),'Netlify build must inject the tutor.');
 console.log('Brilliant-style tutor contract: PASS');
