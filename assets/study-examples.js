@@ -1647,6 +1647,7 @@ function buildLesson(lesson){
  }
  var anchor=sources.heading;
  if(anchor)anchor.insertAdjacentElement('beforebegin',set);else{var mistake=Array.from(b.children).find(function(n){return /common mistake/i.test(n.textContent||'');});if(mistake)b.insertBefore(set,mistake);else b.appendChild(set);}
+ var duplicateConcepts=b.querySelector('[data-csai-conceptual-examples]');if(duplicateConcepts)duplicateConcepts.remove();
  prepareLazyStudyExamples(set);
  set.querySelectorAll('.csai-study-code').forEach(function(area){area.defaultValue=area.value;});
 }

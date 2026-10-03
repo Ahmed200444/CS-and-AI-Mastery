@@ -43,7 +43,7 @@ function tailoredQuestion(code,lang,title,label){var c=String(code||''),t=(title
 function existingQuestion(root){
  var previous=root.previousElementSibling;if(root.matches&&root.matches('pre.code')&&previous&&previous.matches('.csai-learning-question'))return previous;
  var study=root.closest&&root.closest('.csai-study-example');
- if(study){var q=study.querySelector(':scope > .csai-learning-question,.csai-study-example-lazy-body > .csai-learning-question');if(q)return q;}
+ if(study){var q=study.querySelector(':scope > .csai-learning-question,.csai-study-example-lazy-body > .csai-learning-question,.csai-learning-question');if(q)return q;}
  return root.querySelector&&root.querySelector(':scope > .csai-learning-question');
 }
 function ensure(root){
@@ -56,7 +56,7 @@ function ensure(root){
  if(!code)return;
  if(code.closest&&code.closest('[data-csai-try-it-yourself],.csai-try-it-yourself'))return;
  var q=existingQuestion(root);
- if(q){if(q.nextElementSibling!==code)code.insertAdjacentElement('beforebegin',q);return;}
+ if(q)return;
  var host=study||root,text=codeText(code),lang=language(code,text),title=lessonTitle(root),label=labelFor(host),question='';
  if(study&&window.CSAIStudyExampleContent&&typeof window.CSAIStudyExampleContent.studyQuestionFor==='function'){
   try{question=clean(window.CSAIStudyExampleContent.studyQuestionFor(study,0));}catch(_e){}

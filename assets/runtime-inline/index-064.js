@@ -10,7 +10,7 @@
   function cxsave(){ try{ localStorage.setItem(CXLS, JSON.stringify(cxstate)); }catch(e){} }
   function rvload(){ try{ var r=localStorage.getItem(RVLS); if(r) recentIds=JSON.parse(r)||[]; }catch(e){ recentIds=[]; } }
   function rvsave(){ try{ localStorage.setItem(RVLS, JSON.stringify(recentIds)); }catch(e){} }
-  function cs(id){ if(!cxstate[id]) cxstate[id]={lessons:{},exercises:{},quiz:{},projects:{}}; if(!cxstate[id].projects) cxstate[id].projects={}; return cxstate[id]; }
+  function cs(id){ if(!cxstate[id]||typeof cxstate[id]!=='object') cxstate[id]={}; ['lessons','exercises','quiz','projects'].forEach(function(key){if(!cxstate[id][key]||typeof cxstate[id][key]!=='object')cxstate[id][key]={};}); return cxstate[id]; }
   var esc = function(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); };
   var byId = function(id){ return COURSES.find(function(c){return c.id===id;}); };
   window.byId = byId; // exposed read-only for the Full-Stack Path roadmap module (separate script) to reuse -- no behavior change

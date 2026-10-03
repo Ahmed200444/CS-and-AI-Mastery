@@ -38,7 +38,7 @@ let examples=0,lines=0;
 const pages=fs.readdirSync('courses').filter(n=>n.endsWith('.html'));
 assert.equal(pages.length,65);
 for(const name of pages){
- const html=fs.readFileSync('courses/'+name,'utf8');assert.match(html,/line-by-line-explanations\.js\?[^"']+learning=20261003-v580/);
+ const html=fs.readFileSync('courses/'+name,'utf8');assert.match(html,/line-by-line-explanations\.js\?[^"']+learning=20261003-v582/);
  let local=0;
  for(const m of html.matchAll(/<pre\b([^>]*\bclass="[^"]*\bcode\b[^"]*"[^>]*)>([\s\S]*?)<\/pre>/g)){
   const code=decode(m[2]),label=(m[1].match(/data-language="([^"]+)"/)||[])[1]||'',lang=api.inferLanguage(code,label),rows=api.explain(code,lang);

@@ -39,7 +39,7 @@ function useFor(body,title,concept,index){
 }
 function build(lesson){
  if(!lesson||lesson.getAttribute('data-csai-conceptual-v574')==='1')return;
- var body=lesson.querySelector(':scope > .body');if(!body)return;
+ var body=lesson.querySelector(':scope > .body');if(!body||body.querySelector('[data-study-example-set]'))return;
  var data=concepts(body);if(!data.host||!data.items.length)return;
  var title=lessonTitle(lesson),section=document.createElement('section');
  section.className='csai-conceptual-examples';section.setAttribute('data-csai-conceptual-examples','');

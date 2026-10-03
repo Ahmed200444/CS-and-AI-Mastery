@@ -29,3 +29,31 @@ const questions=load('assets/program-questions-v574.js',doc).CSAIProgramQuestion
 questions.enhance(pre);questions.enhance(pre);questions.enhance(pre);
 assert.equal(inserts,1);assert.match(previous.innerHTML,/ARM/);
 console.log('Browser lesson regressions passed: detached examples, active hero, repeated question enhancement.');
+// Standalone pages save partial progress maps. The catalog must preserve those
+// lesson records and count them without requiring exercise/quiz records.
+const catalog=fs.readFileSync('assets/runtime-inline/index-064.js','utf8');
+const csFunction=catalog.slice(catalog.indexOf('  function cs(id)'),catalog.indexOf('  var esc'));
+const countsFunction=catalog.slice(catalog.indexOf('  function counts(c)'),catalog.indexOf('  window.counts'));
+const fixture={cxstate:{arm:{lessons:{'arm-01':true}}},isAvailable(){return true;}};
+vm.createContext(fixture);vm.runInContext(csFunction+countsFunction,fixture);
+const progress=fixture.counts({id:'arm',lessons:[{id:'arm-01'},{id:'arm-02'}],exercises:[{}],quiz:[{}],projects:[]});
+assert.equal(progress.lDone,1);assert.equal(progress.eDone,0);assert.equal(progress.qDone,0);assert.equal(progress.pct,25);assert.equal(fixture.cxstate.arm.lessons['arm-01'],true);
+// Header synchronization must reach a fixed point so its observer does not
+// perpetually schedule animation frames and starve catalog interaction.
+const shell=fs.readFileSync('assets/adaptive-v4-live.js','utf8');
+const syncFunction=shell.slice(shell.indexOf('function sync()'),shell.indexOf('function queue()'));
+let crumbWrites=0,crumbText='Dashboard';
+const crumb={get textContent(){return crumbText;},set textContent(v){crumbWrites++;crumbText=v;}};
+const frame={scheduled:false,ensureShell(){},rebuildHome(){},catalog(){},polish(){},active(){return 'courses';},count(){return 64;},document:{querySelector(){return crumb;},querySelectorAll(){return [];}}};
+vm.createContext(frame);vm.runInContext(syncFunction,frame);frame.sync();frame.sync();frame.sync();
+assert.equal(crumbText,'All 64 Courses');assert.equal(crumbWrites,1);
+console.log('Catalog regressions passed: partial saved progress and settling header observer.');
+// Toolbar normalization must not detach and reappend every button on each
+// observer pass once their order is correct.
+const toolbarSource=fs.readFileSync('assets/final-exercise-toolbar.js','utf8');
+const ordering=toolbarSource.slice(toolbarSource.indexOf('function appendInOrder('),toolbarSource.indexOf('function normalizeTask('));
+let moves=0;const actions=[{id:'run'},{id:'submit'},{id:'publish'}];const toolbar={children:actions.slice(),appendChild(btn){moves++;this.children=this.children.filter(x=>x!==btn);this.children.push(btn);}};
+const orderingContext={};vm.createContext(orderingContext);vm.runInContext(ordering,orderingContext);
+orderingContext.appendInOrder(toolbar,actions);orderingContext.appendInOrder(toolbar,actions);assert.equal(moves,0);
+toolbar.children.reverse();orderingContext.appendInOrder(toolbar,actions);assert.deepEqual(toolbar.children,actions);assert.equal(moves,3);
+console.log('Toolbar observer regression passed: stable order performs no DOM mutations.');

@@ -57,7 +57,7 @@ function alreadyReady(root,existing,kind){
 }
 function attach(root,existing,kind){
  if(!root||!existing||root.closest('.project-card,.project-workspace,[data-project-card]'))return;
- if(alreadyReady(root,existing,kind))return;
+ if(alreadyReady(root,existing,kind)){dedupePublish(root,existing);return;}
  const toolbar=toolbarFor(root)||existing.parentElement;if(!toolbar)return;
  if(existing.dataset.finalPublishReady!=='1')existing.dataset.finalPublishReady='1';
  if(existing.dataset.finalKind!==kind)existing.dataset.finalKind=kind;
