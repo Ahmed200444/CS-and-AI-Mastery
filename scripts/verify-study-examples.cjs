@@ -41,7 +41,7 @@ else{
 }
 const coursesDir=path.join(root,'courses');
 const pages=fs.existsSync(coursesDir)?fs.readdirSync(coursesDir).filter(x=>x.endsWith('.html')):[];
-if(pages.length!==62)failures.push(`expected 62 course pages, found ${pages.length}`);
+if(pages.length!==65)failures.push(`expected 65 course pages, found ${pages.length}`);
 for(const name of pages){
  const html=fs.readFileSync(path.join(coursesDir,name),'utf8');
  const count=(html.match(/(?:\.\.\/|\/)assets\/study-examples\.js/g)||[]).length;
