@@ -5,7 +5,7 @@ const vm=require('node:vm');
 const root=path.resolve(__dirname,'..');
 const dataDir=path.join(root,'assets','course-data');
 const files=fs.readdirSync(dataDir).filter(f=>f.endsWith('.json')).sort();
-assert.equal(files.length,62,'expected 62 course-data files');
+assert.equal(files.length,64,'expected 64 course-data files');
 function norm(v){var raw=String(v||'').toLowerCase().trim();var words=raw.replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim();return words||raw.replace(/\s+/g,' ');}
 let lessons=0,concepts=0,planned=0,maxConcepts=0;
 for(const file of files){
@@ -18,7 +18,7 @@ for(const file of files){
     concepts+=cs.length;maxConcepts=Math.max(maxConcepts,cs.length);planned+=Math.max(5,cs.length+2);
   }
 }
-assert.equal(lessons,800,'expected all 800 lessons');
+assert.equal(lessons,824,'expected all 824 lessons');
 assert.equal(concepts,3427,'key-concept coverage drift including symbol-only concepts');
 assert.equal(planned,5040,'base concept-example plan drift');
 assert.equal(maxConcepts,14,'max concept count drift');
