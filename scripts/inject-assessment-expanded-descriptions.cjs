@@ -15,5 +15,5 @@ for(const file of fs.readdirSync(dir).filter(name=>name.endsWith('.html'))){
   fs.writeFileSync(full,html,'utf8');
   count++;
 }
-if(count!==64)throw new Error(`Expected 64 course pages, updated ${count}`);
+if(count!==65)throw new Error(`Expected 65 course pages, updated ${count}`);
 console.log(`Added expanded CodeSignal-style task descriptions to ${count} course pages.`);
