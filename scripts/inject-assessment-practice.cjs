@@ -185,5 +185,5 @@ for(const file of fs.readdirSync(coursesDir).filter(f=>f.endsWith('.html'))){
   injected++;
 }
 
-if(injected!==64)throw new Error(`Expected to enhance 64 course pages, enhanced ${injected}`);
+if(injected!==65)throw new Error(`Expected to enhance 65 course pages, enhanced ${injected}`);
 console.log(`Injected assessment-style practice + GitHub publishing into ${injected} static course pages; DSA includes ${codeSignalQuestions.length} CodeSignal-style questions.`);
