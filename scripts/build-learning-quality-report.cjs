@@ -6,7 +6,7 @@ const out=path.join(process.cwd(),'assets','learning-quality.json');
 if(!fs.existsSync(dir))throw new Error('courses directory is missing');
 
 const files=fs.readdirSync(dir).filter(name=>name.endsWith('.html'));
-if(files.length!==62)throw new Error(`Learning quality guard expected 62 courses, found ${files.length}`);
+if(files.length!==64)throw new Error(`Learning quality guard expected 64 courses, found ${files.length}`);
 
 let lessons=0,deepDives=0,codeExamples=0,evergreenPages=0,studyExamplePages=0;
 const courses=[];
