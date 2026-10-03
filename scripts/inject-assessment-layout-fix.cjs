@@ -13,5 +13,5 @@ for(const file of fs.readdirSync(dir).filter(name=>name.endsWith('.html'))){
   fs.writeFileSync(p,html,'utf8');
   count++;
 }
-if(count!==62)throw new Error(`Expected 62 static course pages, updated ${count}`);
+if(count!==64)throw new Error(`Expected 64 static course pages, updated ${count}`);
 console.log(`Applied full-width assessment layout to ${count} course pages.`);
