@@ -16,5 +16,5 @@ for(const file of fs.readdirSync(dir).filter(f=>f.endsWith('.html'))){const html
  if(!html.includes('runner-performance-guard.js'))throw new Error(`${file}: runner performance layer missing`);
  if(html.includes('csai-oa-fallback-assessment')){fallbacks++;if(!html.includes('data-csai-oa-python-run'))throw new Error(`${file}: fallback assessment is not Python runnable`);if(/data-csai-oa-cpp|\.cpp\b|C\+\+/.test(html))throw new Error(`${file}: fallback assessment still contains removed language content`)}
 }
-if(pages!==62||assessment!==62)throw new Error(`Expected assessment coverage on 62 courses; pages=${pages}, assessment=${assessment}`);
+if(pages!==64||assessment!==64)throw new Error(`Expected assessment coverage on 64 courses; pages=${pages}, assessment=${assessment}`);
 console.log(`OA assessment verification passed: ${pages} courses covered, ${fallbacks} Python fallback assessment page(s), lessons remain unscored, project README/GitHub and Python runner layers preserved.`);
