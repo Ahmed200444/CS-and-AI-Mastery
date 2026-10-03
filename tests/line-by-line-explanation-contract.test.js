@@ -128,7 +128,7 @@ for(const page of pages){
   const re=/<pre\b[^>]*class="[^"]*\bcode\b[^"]*"[^>]*(?:data-example-audit="(?:candidate|reference)"|data-reference-only="true")[^>]*>([\s\S]*?)<\/pre>/g;
   let m;
   while((m=re.exec(html))){
-    const code=decodeHtml(m[1]),lang=api.inferLanguage(code,'',null),rows=api.explain(code,lang),sourceLines=code.split(/\r?\n/);
+    const code=decodeHtml(m[1]),explicit=(m[0].match(/data-language="([^"]+)"/i)||[])[1]||'',lang=api.inferLanguage(code,explicit,null),rows=api.explain(code,lang),sourceLines=code.split(/\r?\n/);
     nativeExamples++;nativeLines+=sourceLines.length;
     assert.equal(rows.length,sourceLines.length,`${page}: every native source line must have one explanation record`);
     for(const row of rows){
