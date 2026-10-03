@@ -24,14 +24,14 @@ for(const token of ['SELECT country, COUNT(*)','ROW_NUMBER() OVER','LEFT JOIN','
   assert(asset.includes(token),`missing cross-course diversity case: ${token}`);
 }
 const courses=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith('.html'));
-assert.equal(courses.length,62,'expected 62 course pages');
+assert.equal(courses.length,65,'expected 65 course pages');
 let lessons=0;
 for(const f of courses){
   const h=read('courses/'+f);
   assert(h.includes('../assets/study-examples.js?v=20260824-v574'),`${f}: v5.71 diverse study-example asset not loaded`);
   lessons+=(h.match(/data-lesson="[^"]+"/g)||[]).length;
 }
-assert.equal(lessons,800,'expected 800 lessons');
+assert.equal(lessons,832,'expected 832 lessons');
 assert(read('index.html').includes('assets/study-examples.js?v=20260824-v574'),'homepage must load v5.71 diverse study-example asset');
 assert.equal(JSON.parse(read('package.json')).version,'5.74.0','package version must be 5.69.0');
 assert(read('local-server.js').includes("RELEASE='5.74'"),'server release must be 5.69');
