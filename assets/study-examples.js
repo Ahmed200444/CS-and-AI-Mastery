@@ -531,6 +531,7 @@ function courseAllowsGeneratedPython(id){return !!PYTHON_STUDY_COURSES[String(id
 function inferStudyLanguage(code,pre){
  var c=String(code||'').trim();if(!c)return'text';
  if(pre&&pre.getAttribute&&pre.getAttribute('data-reference-only')==='true')return'text';
+ var explicit=pre&&pre.getAttribute&&pre.getAttribute('data-language');if(explicit==='armasm'||explicit==='matlab')return explicit;
  if(/(^|\n)\s*[.#][A-Za-z_-][\w-]*\s*\{|@media\s*\(/.test(c))return'css';
  if(/<\/?[a-z][^>]*>/i.test(c))return'html';
  if(/\b(SELECT\s+|INSERT\s+INTO\s+|UPDATE\s+[A-Za-z_]|DELETE\s+FROM\s+|CREATE\s+TABLE\s+|ALTER\s+TABLE\s+|WITH\s+[A-Za-z_])/i.test(c))return'sql';

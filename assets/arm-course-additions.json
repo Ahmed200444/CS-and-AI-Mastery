@@ -937,7 +937,7 @@
         ],
         "explanation": "ARM is a load-store architecture, so memory values move into registers before most data processing. LDR/STR transfer words, with byte and halfword variants. Addressing modes combine a base register with an offset; pre-indexing forms the address before access, while post-indexing uses the base first and updates it afterward.",
         "examples": [
-          "        LDR r1, [r2]\n        LDR r3, [r2, #4]\n        STR r3, [r2, #8]\n        LDR r4, [r2], #4"
+          "        MOV r2, #0x1000\n        MOV r0, #17\n        STR r0, [r2]\n        MOV r0, #23\n        STR r0, [r2, #4]\n        LDR r1, [r2]\n        LDR r3, [r2, #4]\n        STR r3, [r2, #8]\n        LDR r4, [r2], #4"
         ],
         "commonMistakes": [
           "Confusing the address in the base register with the data loaded from memory."
@@ -1163,7 +1163,9 @@
           "Interrupt types"
         ],
         "correct": 0,
-        "type": "mcq"
+        "type": "mcq",
+        "explanation": "AREA organizes a section, ENTRY marks an entry point, EQU defines a constant, and END ends the source. These direct the assembler rather than perform CPU calculations.",
+        "lessonId": "arm-01"
       },
       {
         "q": "For a typical three-operand ARM data-processing instruction, the first register is usually:",
@@ -1174,7 +1176,9 @@
           "Always PC"
         ],
         "correct": 0,
-        "type": "mcq"
+        "type": "mcq",
+        "explanation": "In ADD r0, r1, r2, r0 receives the result while r1 and r2 supply values. Read the operands from destination to sources.",
+        "lessonId": "arm-01"
       },
       {
         "q": "MOV r0, r1 means:",
@@ -1185,7 +1189,9 @@
           "Store r0 to memory"
         ],
         "correct": 0,
-        "type": "mcq"
+        "type": "mcq",
+        "explanation": "MOV r0, r1 reads r1 and writes its value into r0. r1 is unchanged.",
+        "lessonId": "arm-02"
       },
       {
         "q": "MVN writes:",
@@ -1196,7 +1202,9 @@
           "The program counter only"
         ],
         "correct": 0,
-        "type": "mcq"
+        "type": "mcq",
+        "explanation": "MVN flips every bit of the source. In a 32-bit register, MVN applied to 0 gives 0xFFFFFFFF, not 1.",
+        "lessonId": "arm-02"
       },
       {
         "q": "RSB r0, r1, r2 computes:",
@@ -1207,7 +1215,9 @@
           "r1 XOR r2"
         ],
         "correct": 0,
-        "type": "mcq"
+        "type": "mcq",
+        "explanation": "RSB reverses the usual SUB order: RSB r0, r1, r2 stores r2 minus r1 in r0.",
+        "lessonId": "arm-03"
       },
       {
         "q": "ADC is useful when:",
@@ -1218,7 +1228,9 @@
           "A branch must be unconditional"
         ],
         "correct": 0,
-        "type": "mcq"
+        "type": "mcq",
+        "explanation": "ADC computes operand1 + operand2 + C. This lets the carry from a low-word addition feed a high-word addition.",
+        "lessonId": "arm-03"
       },
       {
         "q": "BIC is commonly used to:",
@@ -1229,7 +1241,9 @@
           "Load a word"
         ],
         "correct": 0,
-        "type": "mcq"
+        "type": "mcq",
+        "explanation": "BIC computes operand1 AND NOT operand2. A 1 in the mask therefore clears the corresponding destination bit.",
+        "lessonId": "arm-04"
       },
       {
         "q": "EOR performs:",
@@ -1240,7 +1254,9 @@
           "A branch"
         ],
         "correct": 0,
-        "type": "mcq"
+        "type": "mcq",
+        "explanation": "EOR sets a result bit when the two corresponding input bits differ; equal bits produce 0.",
+        "lessonId": "arm-04"
       },
       {
         "q": "ASR differs from LSR because ASR:",
@@ -1251,7 +1267,9 @@
           "Does not use registers"
         ],
         "correct": 0,
-        "type": "mcq"
+        "type": "mcq",
+        "explanation": "ASR replicates the top/sign bit while shifting right. LSR shifts zeros into the high positions.",
+        "lessonId": "arm-05"
       },
       {
         "q": "ARM's barrel shifter can often:",
@@ -1262,7 +1280,9 @@
           "Replace CPSR"
         ],
         "correct": 0,
-        "type": "mcq"
+        "type": "mcq",
+        "explanation": "ADD r0, r1, r2, LSL #2 shifts r2 left by two before adding it to r1. The shifted value need not be stored in a separate register.",
+        "lessonId": "arm-05"
       },
       {
         "q": "The Z flag is set when the relevant result is:",
@@ -1273,7 +1293,9 @@
           "A memory address"
         ],
         "correct": 0,
-        "type": "mcq"
+        "type": "mcq",
+        "explanation": "Z is 1 when the flag-setting operation produces zero. A plain instruction without S usually leaves these flags unchanged.",
+        "lessonId": "arm-06"
       },
       {
         "q": "The V flag represents:",
@@ -1284,7 +1306,9 @@
           "Vector-table enable"
         ],
         "correct": 0,
-        "type": "mcq"
+        "type": "mcq",
+        "explanation": "V indicates that the mathematical signed result cannot fit in a signed 32-bit value. It is different from unsigned carry C.",
+        "lessonId": "arm-06"
       },
       {
         "q": "CMP primarily:",
@@ -1295,7 +1319,9 @@
           "Loads memory"
         ],
         "correct": 0,
-        "type": "mcq"
+        "type": "mcq",
+        "explanation": "CMP uses a subtraction to set NZCV but discards the arithmetic result. It does not overwrite either compared register.",
+        "lessonId": "arm-07"
       },
       {
         "q": "TST primarily uses which logical operation for flag testing?",
@@ -1306,7 +1332,9 @@
           "SUB"
         ],
         "correct": 0,
-        "type": "mcq"
+        "type": "mcq",
+        "explanation": "TST calculates a bitwise AND for the flags without saving that AND result in a destination register.",
+        "lessonId": "arm-07"
       },
       {
         "q": "A conditional branch uses:",
@@ -1317,7 +1345,9 @@
           "Only assembler directives"
         ],
         "correct": 0,
-        "type": "mcq"
+        "type": "mcq",
+        "explanation": "The condition suffix reads flags set earlier. BEQ tests Z=1; BLT tests N different from V for a signed comparison.",
+        "lessonId": "arm-08"
       },
       {
         "q": "A do-while style loop differs from a while loop because its body:",
@@ -1328,7 +1358,9 @@
           "Must use FIQ"
         ],
         "correct": 0,
-        "type": "mcq"
+        "type": "mcq",
+        "explanation": "A do-while style loop places its test after the body, so the body runs at least once. A while style loop can skip the body when its first test fails.",
+        "lessonId": "arm-08"
       },
       {
         "q": "LDR is used to:",
@@ -1339,7 +1371,9 @@
           "Clear CPSR"
         ],
         "correct": 0,
-        "type": "mcq"
+        "type": "mcq",
+        "explanation": "LDR reads the word at an effective memory address and places it in the destination register. STR transfers a register value in the opposite direction.",
+        "lessonId": "arm-09"
       },
       {
         "q": "Post-indexed addressing generally:",
@@ -1350,7 +1384,9 @@
           "Always uses PC"
         ],
         "correct": 0,
-        "type": "mcq"
+        "type": "mcq",
+        "explanation": "LDR r0, [r1], #4 loads using the old address in r1, then increases r1 by four. The offset is outside the brackets.",
+        "lessonId": "arm-09"
       },
       {
         "q": "PUSH is associated with:",
@@ -1361,7 +1397,9 @@
           "Setting V only"
         ],
         "correct": 0,
-        "type": "mcq"
+        "type": "mcq",
+        "explanation": "PUSH preserves register values in memory on the stack and adjusts SP. It is useful before a subroutine changes values the caller needs.",
+        "lessonId": "arm-10"
       },
       {
         "q": "In the stack convention shown in the lectures, the stack grows toward:",
@@ -1372,7 +1410,9 @@
           "The vector table"
         ],
         "correct": 0,
-        "type": "mcq"
+        "type": "mcq",
+        "explanation": "In the full descending convention, reserving stack space decreases SP; releasing it increases SP. Lower memory addresses hold newer stack entries.",
+        "lessonId": "arm-10"
       },
       {
         "q": "BL does what in addition to branching?",
@@ -1383,7 +1423,9 @@
           "Stores to DRAM automatically"
         ],
         "correct": 0,
-        "type": "mcq"
+        "type": "mcq",
+        "explanation": "BL saves the address of the instruction after the call in LR before transferring control. A nested call must preserve a needed earlier LR.",
+        "lessonId": "arm-11"
       },
       {
         "q": "A simple subroutine commonly returns with:",
@@ -1394,7 +1436,9 @@
           "SVC LR"
         ],
         "correct": 0,
-        "type": "mcq"
+        "type": "mcq",
+        "explanation": "BX LR branches to the saved return address. LR must still hold the intended return address for this to work.",
+        "lessonId": "arm-11"
       },
       {
         "q": "On classic ARM exception entry, CPSR is copied into:",
@@ -1405,7 +1449,9 @@
           "The vector table itself"
         ],
         "correct": 0,
-        "type": "mcq"
+        "type": "mcq",
+        "explanation": "Classic ARM exception entry saves the old CPSR in the target mode SPSR so the handler can later restore the interrupted status. The tracer does not model exception entry.",
+        "lessonId": "arm-12"
       },
       {
         "q": "SVC is used to:",
@@ -1416,7 +1462,9 @@
           "Change byte order directly"
         ],
         "correct": 0,
-        "type": "mcq"
+        "type": "mcq",
+        "explanation": "SVC deliberately raises a software exception to request a supervisor service. It is not an ordinary BL subroutine call; handling depends on the execution environment.",
+        "lessonId": "arm-12"
       }
     ]
   }

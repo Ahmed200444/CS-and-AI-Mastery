@@ -16,6 +16,7 @@ function inferLanguage(code,label,node){
  // MATLAB function files otherwise get mistaken for JavaScript and receive the
  // wrong line-by-line teaching explanations.
  if(/matlab/.test(l))return'matlab';
+ if(/\barmasm\b|arm\s*assembly/.test(l))return'armasm';
  if(/c\+\+|\bcpp\b/.test(l)||/#include\s*[<"]|\bstd::|\bcout\s*<<|\bcin\s*>>|\bvector\s*</.test(c)||/(^|\n)\s*(?:template\s*<|namespace\s+\w+|enum\s+class\s+|public\s*:|private\s*:|protected\s*:|#pragma\s+once)/m.test(c)||/(^|\n)\s*(?:long\s+long|unsigned\s+\w+|int|double|float|bool|char|void|std::string)\s+[A-Za-z_]\w*\s*\([^)]*\)\s*[;{]/m.test(c))return'cpp';
  if(/\bjava\b/.test(l)||/\bpublic\s+static\s+void\s+main\s*\(|\bSystem\.out\.println\s*\(/.test(c))return'java';
  if(/python/.test(l)||/(^|\n)\s*(async\s+def\s+|def\s+|class\s+\w+.*:|from\s+\S+\s+import\s+|import\s+|for\s+.+\s+in\s+.+:|while\s+.+:|if\s+.+:|elif\s+.+:|else\s*:|try\s*:|except\b.*:|finally\s*:|with\s+|print\s*\()/m.test(c)||/\b(len|range|enumerate|zip|divmod|input|dict|list|set|tuple)\s*\(/.test(c)||/\b(cursor\.execute|\.objects\.(?:get|filter|create)|f["']SELECT|execute\("SELECT)/.test(c))return'python';
@@ -239,13 +240,19 @@ function dataPurpose(t,lang){
 }
 
 function armPurpose(t){
- var s=clean(t),m=s.match(/^(?:([A-Za-z_]\\w*)\\s+)?([A-Za-z][A-Za-z0-9]*)\\b\\s*(.*)$/);if(!m)return'This ARM assembly line contributes to the instruction sequence or data definition.';
+ var s=clean(t).split(';')[0].trim(),m=s.match(/^([A-Za-z][A-Za-z0-9]*)\b\s*(.*)$/);if(!m)return'This is ARM reference material, a label, or a data definition rather than a processor operation.';
+ if(!/^(AREA|ENTRY|END|ALIGN|SPACE|MOV|MVN|ADD|ADC|SUB|SBC|RSB|RSC|AND|ORR|EOR|BIC|CMP|CMN|TST|TEQ|LDR|STR|PUSH|POP|LSL|LSR|ASR|ROR|LDM|STM|SVC|B$|BL$|BX$|B(?:EQ|NE|LT|LE|GT|GE|HI|LS|HS|LO|CS|CC|MI|PL|VS|VC)$)/i.test(m[1])){m=s.match(/^[A-Za-z_]\w*:?\s+([A-Za-z][A-Za-z0-9]*)\b\s*(.*)$/);if(!m)return'This label names a position in the instruction sequence; it does not itself change a register.';}
+ m=[m[0],null,m[1],m[2]];
  var op=m[2].toUpperCase(),rest=clean(m[3]);
  var map={AREA:'Declares an ARM assembler area/section and its attributes.',ENTRY:'Marks the program entry point for the assembler/linker.',END:'Marks the end of the assembly source file.',RN:'Assigns a readable alias to a register number.',EQU:'Defines a symbolic constant with a fixed value.',MOV:'Copies an immediate value or register value into the destination register.',MOVS:'Moves a value and updates the condition flags from the result.',MVN:'Writes the bitwise NOT of the source value into the destination register.',ADD:'Adds the source operands and stores the result in the destination register.',ADDS:'Adds the operands, stores the result, and updates condition flags.',ADC:'Adds the operands plus the current carry flag.',SUB:'Subtracts the source operand from the first operand and stores the result.',SUBS:'Subtracts the operands, stores the result, and updates condition flags.',SBC:'Subtracts using the carry/borrow state from the status flags.',RSB:'Performs reverse subtraction: the second source minus the first source.',RSC:'Performs reverse subtraction using the carry/borrow state.',AND:'Performs bitwise AND on the source operands.',ORR:'Performs bitwise OR on the source operands.',EOR:'Performs bitwise exclusive OR on the source operands.',BIC:'Clears selected bits by ANDing with the inverted mask.',CMP:'Compares two values by subtracting them only to update condition flags.',CMN:'Compares by adding the operands only to update condition flags.',TST:'Tests selected bits with AND and updates flags without storing a result.',TEQ:'Tests bit differences with XOR and updates flags without storing a result.',LDR:'Loads a value from memory or a literal address/value into a register.',STR:'Stores a register value into memory.',PUSH:'Pushes the listed registers onto the stack.',POP:'Pops values from the stack into the listed registers.',B:'Branches to the target label.',BL:'Branches to a subroutine and saves the return address in LR.',BX:'Branches to the address held in a register, commonly LR when returning.',BLT:'Branches when the signed less-than condition is true.',BLE:'Branches when the signed less-than-or-equal condition is true.',BGT:'Branches when the signed greater-than condition is true.',BGE:'Branches when the signed greater-than-or-equal condition is true.',BEQ:'Branches when the zero/equal condition is true.',BNE:'Branches when the zero/equal condition is false.',SVC:'Requests a supervisor call exception.'};
  if(/^LSL$|^LSR$|^ASR$|^ROR$/.test(op))return'Applies the ARM barrel shifter operation `'+op+'` to move or rotate the operand bits.';
  if(/^LDM/.test(op))return'Loads multiple registers from consecutive memory locations using the selected ARM addressing mode.';
  if(/^STM/.test(op))return'Stores multiple registers to consecutive memory locations using the selected ARM addressing mode.';
- return map[op]||('Executes ARM instruction/directive `'+op+'`'+(rest?' with operands `'+rest+'`.':'.'));
+ var conditional=op.match(/^(MOV|MVN|ADD|ADC|SUB|SBC|RSB|RSC|AND|ORR|EOR|BIC|LDR|STR)(EQ|NE|CS|HS|CC|LO|MI|PL|VS|VC|HI|LS|GE|LT|GT|LE)(S)?$/);
+ if(conditional)return map[conditional[1]]+' It executes only when condition `'+conditional[2]+'` matches the current flags.'+(conditional[3]?' The S suffix updates flags.':'');
+ if(map[op])return map[op];
+ if(/S$/.test(op)&&map[op.slice(0,-1)])return map[op.slice(0,-1)]+' The S suffix updates condition flags.';
+ return 'This ARM instruction/directive `'+op+'` uses operands `'+rest+'`; consult the lesson for its supported form.';
 }
 
 function matlabPurpose(t){
@@ -295,6 +302,7 @@ function stripInlineComment(raw,lang){
   if(ch==='"'||ch==="'"){quote=ch;continue;}
   if(lang==='python'&&ch==='#')return s.slice(0,i).trimEnd();
   if(lang==='matlab'&&ch==='%')return s.slice(0,i).trimEnd();
+  if(lang==='armasm'&&ch===';')return s.slice(0,i).trimEnd();
   if((lang==='javascript'||lang==='typescript'||lang==='cpp'||lang==='java')&&ch==='/'&&next==='/')return s.slice(0,i).trimEnd();
  }
  return s;
@@ -690,6 +698,19 @@ function importNames(v){var xs=String(v||'').split(',').map(function(x){return c
 
 function syntaxFor(line,lang){
  var original=text(line).trim();
+ if(lang==='armasm'){
+  var arm=stripInlineComment(line,lang),notes=[];
+  if(/^\s*;/.test(original))return ['`;` starts an ARM assembler comment; the processor does not execute it.'];
+  if(/\b(?:r(?:[0-9]|1[0-5])|sp|lr|pc)\b/i.test(arm))notes.push('Register names identify CPU storage: r0–r12 are general registers, r13/SP is the stack pointer, r14/LR holds a return address, and r15/PC is the program counter.');
+  if(/#/.test(arm))notes.push('`#` introduces an immediate number rather than a register. `0x` writes a hexadecimal value.');
+  if(/\[/.test(arm))notes.push('`[base, offset]` describes a memory address, not a list. No offset means the address held in base. `!` writes the adjusted address back; an offset after `]` adjusts base after the transfer.');
+  if(/\{/.test(arm))notes.push('`{r3, r4}` is a register list. PUSH/POP transfer words in register-number order; SP tracks the full descending stack.');
+  if(/\bLDR\w*\s+\w+\s*,\s*=/i.test(arm))notes.push('`LDR destination, =value` is an assembler pseudo-instruction for loading a value or address; `=` here is not ordinary variable assignment.');
+  if(/\b(?:ADD|ADC|SUB|SBC|RSB|RSC|AND|ORR|EOR|BIC)\w*\s/i.test(arm))notes.push('The first register is the destination. The following source operands supply the calculation; RSB/RSC reverse subtraction order.');
+  if(/\b(?:CMP|CMN|TST|TEQ)\b/i.test(arm))notes.push('These two-operand tests update flags without storing the arithmetic or logical result in a destination register.');
+  if(/\b(?:LSL|LSR|ASR|ROR)\b/i.test(arm))notes.push('The shifter transforms the source operand before the main operation; LSL/LSR shift in zeros, ASR preserves the sign, and ROR rotates bits.');
+  return notes.length?notes:[armPurpose(arm)];
+ }
  if(lang==='python'&&/^#/.test(original))return['`#` starts a Python comment. Everything after it on that line is ignored when the program runs.'];
  if((lang==='javascript'||lang==='typescript'||lang==='cpp'||lang==='java')&&/^\/\//.test(original))return['`//` starts a single-line comment. The compiler/runtime ignores the rest of that line.'];
  if(lang==='sql'&&/^--/.test(original))return['`--` starts a SQL comment. The database ignores the rest of that line.'];
