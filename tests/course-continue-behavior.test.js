@@ -60,7 +60,7 @@ function runState(data,progress){
   return {box,rows,location,click,store};
 }
 const files=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith('.html')).sort();
-need(files.length===62,`expected 62 pages, got ${files.length}`);
+need(files.length===64,`expected 64 pages, got ${files.length}`);
 let fresh=0,partial=0,complete=0;
 for(const file of files){
   const d=pageData(file); const cid=d.meta.id;
