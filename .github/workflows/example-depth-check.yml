@@ -44,6 +44,7 @@ jobs:
           node scripts/inject-course-loader.cjs &&
           node scripts/check-index-inline-js.cjs course-loader &&
           node scripts/reorder-internship-catalog.cjs &&
+          node scripts/merge-added-courses.cjs &&
           node scripts/embed-catalog-data.cjs &&
           node scripts/inject-course-theme-toggle.cjs &&
           node scripts/check-index-inline-js.cjs course-theme &&
@@ -60,7 +61,7 @@ jobs:
           const fs=require('fs');
           const report=JSON.parse(fs.readFileSync('EXAMPLE_COVERAGE_QA_v5.75.json','utf8'));
           if(report.status!=='PASS') throw new Error('Coverage report did not pass');
-          if(report.coursesAudited!==62) throw new Error(`Expected 62 courses, got ${report.coursesAudited}`);
+          if(report.coursesAudited!==64) throw new Error(`Expected 64 courses, got ${report.coursesAudited}`);
           for(const [id,count] of Object.entries(report.dsaStaticFiveExampleFloor||{})) {
             if(count<5) throw new Error(`${id} has only ${count} static examples`);
           }
