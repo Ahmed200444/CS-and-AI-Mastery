@@ -25,7 +25,7 @@ const courseFiles=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith
 ok(courseFiles.length===62||courseFiles.length===65,'expected 62 committed or 65 generated static course pages');
 for(const f of courseFiles){const h=text('courses/'+f);const scripts=[...h.matchAll(/<script\b[^>]*src="([^"]+)"[^>]*>/gi)];ok(scripts.length>=2,`${f}: expected course scripts`);for(const m of scripts){const src=m[1];const critical=/runtime-inline\/courses-[^/]+-00[12]\.js/.test(src);if(!critical)ok(/\bdefer\b/i.test(m[0]),`${f}: non-critical script ${src} should be deferred`)}}
 
-const BUILD_TAG='20260822-v567',NEW_BUILD_TAG='20260822-v568',CPP_STYLE_TAG='20260822-v571',AUDIT_TAG='20260823-v573',LEARNING_TAG='20260824-v574',INLINE_COMMENT_TAG='20260919-v577',LINE_EXPLAIN_TAG='20261004-v581',MATLAB_TAG='20261004-v579';
+const BUILD_TAG='20260822-v567',NEW_BUILD_TAG='20260822-v568',CPP_STYLE_TAG='20260822-v571',AUDIT_TAG='20260823-v573',LEARNING_TAG='20260824-v574',INLINE_COMMENT_TAG='20260919-v577',LINE_EXPLAIN_TAG='20261004-v582',MATLAB_TAG='20261004-v579';
 for(const rel of ['index.html',...courseFiles.map(f=>'courses/'+f)]){
   const h=text(rel);
   for(const m of h.matchAll(/<script\b[^>]*src="([^"]+)"[^>]*>/gi)){
