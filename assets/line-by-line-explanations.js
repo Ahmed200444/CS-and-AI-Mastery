@@ -1,7 +1,7 @@
 (function(){
 'use strict';
 
-var VERSION='20261004-v583-teaching-syntax';
+var VERSION='20261004-v587-arm-indent';
 var updateTimers=new WeakMap(),editorSeq=0;
 
 function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
@@ -1041,11 +1041,13 @@ function armOpInfo(code){
 }
 function armLectureCode(code){
  var out=text(code).replace(/\b(r(?:[0-9]|1[0-5])|sp|lr|pc)\b/gi,function(x){return x.toUpperCase();});
- var lead=(out.match(/^\s*/)||[''])[0],trimmed=out.trim(),tokens=trimmed.split(/\s+/);
+ var trimmed=out.trim();
  if(!trimmed)return out;
- if(armKnownOp(tokens[0]))tokens[0]=tokens[0].toUpperCase();
- else if(tokens.length>1&&armKnownOp(tokens[1]))tokens[1]=tokens[1].toUpperCase();
- return lead+tokens.join(' ');
+ var info=armOpInfo(trimmed);
+ if(!info.op)return trimmed.replace(/\s+/g,' ');
+ var rest=info.rest?' '+info.rest:'';
+ if(info.label)return (info.label+'        ').slice(0,8)+info.op+rest;
+ return '        '+info.op+rest;
 }
 function armShortComment(code,purpose){
  var info=armOpInfo(code),op=info.op,rest=info.rest,args=splitSimpleComma(rest);
