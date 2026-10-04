@@ -31,7 +31,7 @@ assert.match(page, /grades\.m/, 'function lesson must show the main script as a 
 const visualizer = require(assetPath);
 const plot = visualizer.execute("x = 0:0.1:1;\ny = sin(x);\nplot(x,y);\nxlabel('x');");
 assert.equal(plot.plots.length, 1, 'plot calls should produce one figure model');
-const plottedHtml = visualizer.renderResult(visualizer.execute("x = 0:0.25:1;\\ny = x.^2;\\nplot(x,y);\\nxlabel('Time');\\nylabel('Value');\\ntitle('Quadratic');\\nlegend('x squared');"), 'plot_demo');
+const plottedHtml = visualizer.renderResult(visualizer.execute("x = 0:0.25:1;\ny = x.^2;\nplot(x,y);\nxlabel('Time');\nylabel('Value');\ntitle('Quadratic');\nlegend('x squared');"), 'plot_demo');
 assert.match(plottedHtml, /Quadratic/, 'figure preview must render its title');
 assert.match(plottedHtml, /Time/, 'figure preview must render the x-axis label');
 assert.match(plottedHtml, /Value/, 'figure preview must render the y-axis label');
@@ -45,6 +45,11 @@ assert.deepEqual(concat.env.u, [2,4,10,12,24,60], 'MATLAB horizontal concatenati
 const dims = visualizer.execute('Z = zeros(1,3);\ncols = size(Z,2);');
 assert.deepEqual(dims.env.Z, [0,0,0], 'zeros(1,3) must create a 1x3 row vector');
 assert.equal(dims.env.cols, 3, 'size(A,2) must return the column count');
+const matrixSum = visualizer.execute('A = [1 2; 3 4];\ns = sum(A);');
+assert.deepEqual(matrixSum.env.s, [4,6], 'sum(A) must reduce a matrix down its first non-singleton dimension');
+const singlePoint = visualizer.execute('x = linspace(2,8,1);\ny = linspace(2,8,0);');
+assert.deepEqual(singlePoint.env.x, [8], 'linspace(a,b,1) must return the endpoint b');
+assert.deepEqual(singlePoint.env.y, [], 'linspace(a,b,0) must return an empty row vector');
 const sourceCourse = JSON.parse(fs.readFileSync(path.join(root,'assets','coursedata-source.json'),'utf8')).find(course=>course.id==='matlab-engineering');
 const projectSource = sourceCourse.lessons.find(lesson=>lesson.id==='mat-06').examples[0];
 const files = visualizer.virtualFiles(projectSource);
