@@ -31,7 +31,11 @@ function cleanVisible(s){
   .replace(/\bThe lecture covers\b/g,'This lesson covers')
   .replace(/\bA engineering-focused\b/g,'An engineering-focused')
   .replace(/\ba engineering-focused\b/g,'an engineering-focused')
-  .replace(/\bPython versions changes\b/g,'Python versions change');
+  .replace(/\bPython versions changes\b/g,'Python versions change')
+  .replace(/, which is exactly\./g,'.')
+  .replace(/\bwhich is exactly\./g,'')
+  .replace(/\btools changes\b/gi,'tools change')
+  .replace(/\bfunction calling changes the behavior, result, or engineering decision in a concrete example\b/gi,'function calling changes how an application selects and executes external actions');
 }
 function lessonBounds(html,id){
  const marker='data-lesson="'+id+'"';
@@ -70,6 +74,7 @@ function sanitizePage(file){
  let html=fs.readFileSync(file,'utf8');
  html=html.replace(/<section class="card" style="margin-bottom:14px" aria-label="Lecture order">[\s\S]*?<\/section>\s*/gi,'');
  html=html.replace(/<p class="muted" data-lecture-order="[^"]*">[\s\S]*?<\/p>\s*/gi,'');
+ html=html.replace(/<section class="card" data-shared-study-checklist>[\s\S]*?<\/section>\s*/gi,'');
  html=html.replace(/<div style="display:flex;flex-wrap:wrap;gap:6px">\s*<span class="pill">Homework:[\s\S]*?<\/div>/gi,'');
  html=html.replace(/<p class="muted"><b>Syllabus topic:<\/b>\s*([\s\S]*?)\s*·\s*<b>Weight:<\/b>\s*([\s\S]*?)<\/p>/gi,'<p class="muted"><b>Topic:</b> $1</p>');
  html=html.replace(/EECE 340 SYLLABUS LAB TRACK/g,'MICROPROCESSOR &amp; ARM LAB TRACK');
