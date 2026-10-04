@@ -176,7 +176,33 @@ function execute(source){
  return state;
 }
 function tableHtml(name,value){var sh=shape(value),rows=isMatrix(value)?value:[isArray(value)?value:[value]],maxR=Math.min(rows.length,24),maxC=Math.min(sh[1],16),html='<details class="matlab-result-table" open><summary><b>'+esc(name)+'</b> · '+sh[0]+' × '+sh[1]+'</summary><div class="matlab-table-scroll"><table><thead><tr><th scope="col">row</th>';for(var c=0;c<maxC;c++)html+='<th scope="col">'+(c+1)+'</th>';html+='</tr></thead><tbody>';for(var r=0;r<maxR;r++){html+='<tr><th scope="row">'+(r+1)+'</th>';for(var j=0;j<maxC;j++)html+='<td>'+esc(formatText(rows[r]&&rows[r][j]!==undefined?rows[r][j]:''))+'</td>';html+='</tr>';}html+='</tbody></table></div>'+(sh[0]>maxR||sh[1]>maxC?'<small>Preview limited to '+maxR+' rows × '+maxC+' columns.</small>':'')+'</details>';return html;}
-function plotSvg(plot){var series=plot.series||[];if(!series.length)return'';var w=680,h=300,left=54,right=18,top=30,bottom=44,allX=[],allY=[];series.forEach(function(s){s.x.forEach(function(x){if(numeric(x))allX.push(x);});s.y.forEach(function(y){if(numeric(y))allY.push(y);});});if(!allX.length||!allY.length)return'';var xmin=Math.min.apply(Math,allX),xmax=Math.max.apply(Math,allX),ymin=Math.min.apply(Math,allY),ymax=Math.max.apply(Math,allY);if(xmin===xmax){xmin-=1;xmax+=1;}if(ymin===ymax){ymin-=1;ymax+=1;}function X(x){return left+(x-xmin)/(xmax-xmin)*(w-left-right);}function Y(y){return h-bottom-(y-ymin)/(ymax-ymin)*(h-top-bottom);}var s='<div class="matlab-plot-card"><div class="matlab-plot-heading">MATLAB figure preview</div><svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="MATLAB plot preview"><rect x="0" y="0" width="'+w+'" height="'+h+'" fill="var(--panel)"/><line x1="'+left+'" y1="'+(h-bottom)+'" x2="'+(w-right)+'" y2="'+(h-bottom)+'" stroke="var(--muted)"/><line x1="'+left+'" y1="'+top+'" x2="'+left+'" y2="'+(h-bottom)+'" stroke="var(--muted)"/><text x="'+(w/2)+'" y="'+(h-7)+'" text-anchor="middle" fill="currentColor">'+esc(plot.xlabel||'x')+'</text><text x="14" y="'+(h/2)+'" text-anchor="middle" transform="rotate(-90 14 '+(h/2)+')" fill="currentColor">'+esc(plot.ylabel||'y')+'</text>';if(plot.title)s+='<text x="'+(w/2)+'" y="18" text-anchor="middle" font-weight="700" fill="currentColor">'+esc(plot.title)+'</text>';series.forEach(function(curve,i){var n=Math.min(curve.x.length,curve.y.length),points=[];for(var k=0;k<n;k++)if(numeric(curve.x[k])&&numeric(curve.y[k]))points.push(X(curve.x[k]).toFixed(2)+','+Y(curve.y[k]).toFixed(2));if(points.length>1)s+='<polyline fill="none" stroke="'+COLORS[i%COLORS.length]+'" stroke-width="2" points="'+points.join(' ')+'"/>';});if(plot.legend&&plot.legend.length){plot.legend.forEach(function(label,i){s+='<line x1="'+(w-right-120)+'" y1="'+(top+12*i)+'" x2="'+(w-right-102)+'" y2="'+(top+12*i)+'" stroke="'+COLORS[i%COLORS.length]+'" stroke-width="2"/><text x="'+(w-right-97)+'" y="'+(top+4+12*i)+'" font-size="10" fill="currentColor">'+esc(label)+'</text>';});}return s+'</svg></div>';}
+function plotSvg(plot){
+ var series=plot.series||[];if(!series.length)return'';
+ var w=680,h=320,left=62,right=24,top=36,bottom=54,allX=[],allY=[];
+ series.forEach(function(curve){curve.x.forEach(function(x){if(numeric(x))allX.push(x);});curve.y.forEach(function(y){if(numeric(y))allY.push(y);});});
+ if(!allX.length||!allY.length)return'';
+ var xmin=Math.min.apply(Math,allX),xmax=Math.max.apply(Math,allX),ymin=Math.min.apply(Math,allY),ymax=Math.max.apply(Math,allY);
+ if(xmin===xmax){xmin-=1;xmax+=1;}if(ymin===ymax){ymin-=1;ymax+=1;}
+ var xpad=(xmax-xmin)*0.04,ypad=(ymax-ymin)*0.07;xmin-=xpad;xmax+=xpad;ymin-=ypad;ymax+=ypad;
+ function X(x){return left+(x-xmin)/(xmax-xmin)*(w-left-right);}
+ function Y(y){return h-bottom-(y-ymin)/(ymax-ymin)*(h-top-bottom);}
+ function fmt(v){var a=Math.abs(v);if((a>=10000)||(a>0&&a<0.001))return v.toExponential(2);var d=a>=100?0:a>=10?1:2;return String(Number(v.toFixed(d)));}
+ var title=plot.title||'MATLAB figure',s='<div class="matlab-plot-card"><div class="matlab-plot-heading">MATLAB figure preview</div><svg viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="xMidYMid meet" role="img" aria-label="'+esc(title)+'"><rect x="0" y="0" width="'+w+'" height="'+h+'" fill="var(--panel)"/>';
+ var ticks=5;
+ for(var i=0;i<ticks;i++){
+  var ratio=i/(ticks-1),xv=xmin+(xmax-xmin)*ratio,yv=ymin+(ymax-ymin)*ratio,xx=X(xv),yy=Y(yv);
+  s+='<line x1="'+xx.toFixed(2)+'" y1="'+top+'" x2="'+xx.toFixed(2)+'" y2="'+(h-bottom)+'" stroke="var(--border)" stroke-opacity=".55"/>';
+  s+='<line x1="'+left+'" y1="'+yy.toFixed(2)+'" x2="'+(w-right)+'" y2="'+yy.toFixed(2)+'" stroke="var(--border)" stroke-opacity=".55"/>';
+  s+='<text x="'+xx.toFixed(2)+'" y="'+(h-bottom+18)+'" text-anchor="middle" font-size="10" fill="var(--muted)">'+esc(fmt(xv))+'</text>';
+  s+='<text x="'+(left-8)+'" y="'+(yy+3).toFixed(2)+'" text-anchor="end" font-size="10" fill="var(--muted)">'+esc(fmt(yv))+'</text>';
+ }
+ s+='<line x1="'+left+'" y1="'+(h-bottom)+'" x2="'+(w-right)+'" y2="'+(h-bottom)+'" stroke="currentColor" stroke-width="1.2"/><line x1="'+left+'" y1="'+top+'" x2="'+left+'" y2="'+(h-bottom)+'" stroke="currentColor" stroke-width="1.2"/>';
+ s+='<text x="'+(w/2)+'" y="'+(h-10)+'" text-anchor="middle" font-size="12" fill="currentColor">'+esc(plot.xlabel||'x')+'</text><text x="16" y="'+(h/2)+'" text-anchor="middle" transform="rotate(-90 16 '+(h/2)+')" font-size="12" fill="currentColor">'+esc(plot.ylabel||'y')+'</text>';
+ s+='<text x="'+(w/2)+'" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">'+esc(title)+'</text>';
+ series.forEach(function(curve,index){var n=Math.min(curve.x.length,curve.y.length),points=[];for(var k=0;k<n;k++)if(numeric(curve.x[k])&&numeric(curve.y[k]))points.push(X(curve.x[k]).toFixed(2)+','+Y(curve.y[k]).toFixed(2));if(points.length>1)s+='<polyline fill="none" stroke="'+COLORS[index%COLORS.length]+'" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" points="'+points.join(' ')+'"/>';});
+ if(plot.legend&&plot.legend.length){var lx=w-right-132,ly=top+6;s+='<rect x="'+(lx-8)+'" y="'+(ly-12)+'" width="132" height="'+(18*plot.legend.length+10)+'" rx="6" fill="var(--panel)" stroke="var(--border)"/>';plot.legend.forEach(function(label,index){var y=ly+index*18;s+='<line x1="'+lx+'" y1="'+y+'" x2="'+(lx+20)+'" y2="'+y+'" stroke="'+COLORS[index%COLORS.length]+'" stroke-width="2.4"/><text x="'+(lx+26)+'" y="'+(y+4)+'" font-size="10" fill="currentColor">'+esc(label)+'</text>';});}
+ return s+'</svg></div>';
+}
 function resultHtml(state,command){
  var keys=Object.keys(state.env);
  var html='<div class="matlab-result-summary"><b>Command Window &amp; Workspace Summary</b><span>'+keys.length+' variable'+(keys.length===1?'':'s')+' · '+state.plots.length+' figure'+(state.plots.length===1?'':'s')+'</span></div>';
