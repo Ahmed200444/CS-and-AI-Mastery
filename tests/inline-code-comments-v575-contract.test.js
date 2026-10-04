@@ -9,7 +9,7 @@ for(const marker of [
   'Code with comments',
   'data-csai-commented-code-host',
   'commentedCode:commentedCode',
-  '20260919-v577-inline-editor-comments'
+  '20261004-v581-university-syntax'
 ]) assert.ok(source.includes(marker),'missing inline-comment learning-view marker: '+marker);
 
 const sandbox={window:{},document:{readyState:'loading',addEventListener(){},getElementById(){return null;}},setTimeout(){return 1;},clearTimeout(){},MutationObserver:function(){this.observe=function(){};},WeakMap,console};

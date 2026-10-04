@@ -1,7 +1,7 @@
 (function(){
 'use strict';
 
-var VERSION='20260919-v577-inline-editor-comments';
+var VERSION='20261004-v581-university-syntax';
 var updateTimers=new WeakMap(),editorSeq=0;
 
 function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
@@ -1004,6 +1004,7 @@ function listHtml(code,lang){return explain(code,lang).map(recordHtml).join('');
 function stripGeneratedComments(code){
  return text(code).split(/\r?\n/).map(function(line){
   return line
+   .replace(/\s{2,}[;%]\s.*\u2063$/,'')
    .replace(/\s{2,}# Explanation: .*$/,'')
    .replace(/\s{2,}% Explanation: .*$/,'')
    .replace(/\s{2,}; Explanation: .*$/,'')
@@ -1013,15 +1014,150 @@ function stripGeneratedComments(code){
    .replace(/\s{2,}<!-- Explanation: .* -->$/,'');
  }).join('\n');
 }
+function splitArmSourceComment(line){
+ var raw=text(line),quote='';
+ for(var i=0;i<raw.length;i++){
+  var ch=raw[i];
+  if(quote){if(ch===quote&&raw[i-1]!=='\\')quote='';continue;}
+  if(ch==='"'||ch==="'"){quote=ch;continue;}
+  if(ch===';')return{code:raw.slice(0,i),comment:clean(raw.slice(i+1))};
+ }
+ return{code:raw,comment:''};
+}
+function armKnownOp(op){
+ op=clean(op).replace(/:$/,'').toUpperCase();
+ if(/^(AREA|ENTRY|END|ALIGN|SPACE|DCD|DCB|DCW|EQU|RN|EXPORT|IMPORT|GLOBAL|LTORG|MACRO|MEND|MEXIT|ADR|SVC|SWI|MRS|MSR|NOP)$/.test(op))return true;
+ if(/^(MOV|MVN|ADD|ADC|SUB|SBC|RSB|RSC|MUL|MLA|UMULL|UMLAL|SMULL|SMLAL|AND|ORR|EOR|BIC|CMP|CMN|TST|TEQ|LDR|LDRB|LDRH|LDRSB|LDRSH|STR|STRB|STRH|PUSH|POP|LDM|STM|LDMFD|STMFD|LDMIA|STMIA|LDMDB|STMDB)(EQ|NE|CS|HS|CC|LO|MI|PL|VS|VC|HI|LS|GE|LT|GT|LE)?S?$/.test(op))return true;
+ return /^(B|BL|BX|BLX)(EQ|NE|CS|HS|CC|LO|MI|PL|VS|VC|HI|LS|GE|LT|GT|LE)?$/.test(op);
+}
+function armOpInfo(code){
+ var raw=text(code),trimmed=raw.trim();
+ if(!trimmed)return{label:'',op:'',rest:''};
+ var tokens=trimmed.split(/\s+/),label='',op='',opIndex=-1;
+ if(armKnownOp(tokens[0])){op=tokens[0];opIndex=0;}
+ else if(tokens.length>1&&armKnownOp(tokens[1])){label=tokens[0].replace(/:$/,'');op=tokens[1];opIndex=1;}
+ if(opIndex<0)return{label:tokens[0].replace(/:$/,''),op:'',rest:tokens.slice(1).join(' ')};
+ return{label:label,op:op.toUpperCase(),rest:tokens.slice(opIndex+1).join(' ')};
+}
+function armLectureCode(code){
+ var out=text(code).replace(/\b(r(?:[0-9]|1[0-5])|sp|lr|pc)\b/gi,function(x){return x.toUpperCase();});
+ var lead=(out.match(/^\s*/)||[''])[0],trimmed=out.trim(),tokens=trimmed.split(/\s+/);
+ if(!trimmed)return out;
+ if(armKnownOp(tokens[0]))tokens[0]=tokens[0].toUpperCase();
+ else if(tokens.length>1&&armKnownOp(tokens[1]))tokens[1]=tokens[1].toUpperCase();
+ return lead+tokens.join(' ');
+}
+function armShortComment(code,purpose){
+ var info=armOpInfo(code),op=info.op,rest=info.rest,args=splitSimpleComma(rest);
+ if(!op)return clean(purpose).replace(/[\x60]/g,'').replace(/[.]$/,'');
+ if(op==='AREA')return'code area / section';
+ if(op==='ENTRY')return'program entry point';
+ if(op==='END')return'end of source file';
+ if(op==='RN')return'register alias';
+ if(op==='EQU')return'define constant';
+ if(op==='SPACE')return'reserve storage';
+ if(op==='DCD')return'define 32-bit word data';
+ if(op==='DCB')return'define byte data';
+ if(op==='DCW')return'define 16-bit data';
+ if(op==='ALIGN')return'align next data/instruction';
+ if(op==='ADR'&&args.length>=2)return'load address of '+args[1]+' into '+args[0];
+ if(/^MOV/.test(op)&&args.length>=2)return'load '+args[0]+' with '+args[1];
+ if(/^LDR/.test(op)&&args.length>=2)return'load '+args[0]+' from '+args.slice(1).join(', ');
+ if(/^STR/.test(op)&&args.length>=2)return'store '+args[0]+' to '+args.slice(1).join(', ');
+ if(/^ADD/.test(op)&&args.length>=3)return'add '+args[1]+' and '+args[2];
+ if(/^SUB/.test(op)&&args.length>=3)return'subtract '+args[2]+' from '+args[1];
+ if(/^CMP/.test(op)&&args.length>=2)return'compare '+args[0]+' with '+args[1];
+ if(/^PUSH/.test(op))return'push registers onto stack';
+ if(/^POP/.test(op))return'pop registers from stack';
+ if(op==='BL'&&rest)return'call '+rest;
+ if(/^(B|BX|BLX)$/.test(op)&&rest)return'branch to '+rest;
+ if(/^B[A-Z]{2}$/.test(op)&&rest)return'branch to '+rest+' if condition is true';
+ if(op==='LTORG')return'place literal pool here';
+ if(op==='MACRO')return'begin macro';
+ if(op==='MEND')return'end macro';
+ var brief=clean(purpose).replace(/[\x60]/g,'').replace(/[.]$/,'');
+ return brief.split(/\s+/).slice(0,10).join(' ');
+}
+function armLectureLine(line,purpose){
+ var parts=splitArmSourceComment(line),code=armLectureCode(parts.code).replace(/\s+$/,'');
+ if(!code.trim())return parts.comment?'; '+parts.comment:'';
+ var generated=!parts.comment,note=parts.comment||armShortComment(code,purpose);
+ return note?code+'    ; '+note+(generated?'\u2063':''):code;
+}
+function splitMatlabSourceComment(line){
+ var raw=text(line),quote='';
+ for(var i=0;i<raw.length;i++){
+  var ch=raw[i];
+  if(quote){
+   if(ch===quote){
+    if(quote==="'"&&raw[i+1]==="'"){i++;continue;}
+    quote='';
+   }
+   continue;
+  }
+  if(ch==='"'){quote=ch;continue;}
+  if(ch==="'"){
+   if(/[\w\])}]/.test(raw[i-1]||''))continue;
+   quote=ch;continue;
+  }
+  if(ch==='%')return{code:raw.slice(0,i),comment:clean(raw.slice(i+1))};
+ }
+ return{code:raw,comment:''};
+}
+function matlabShortComment(code,purpose){
+ var raw=clean(code),plain=raw.replace(/;$/,'');
+ if(!plain)return'';
+ if(/^clc\s*;\s*close\s+all\s*;\s*clear(?:\s+all)?\s*;?$/i.test(raw))return'Clear Command Window, close figures, and clear variables';
+ if(/^clc\s*;?$/i.test(raw))return'Clear Command Window';
+ if(/^close\s+all\s*;?$/i.test(raw))return'Close all figure windows';
+ if(/^clear(?:\s+all)?\s*;?$/i.test(raw))return'Clear variables from Workspace';
+ var m=plain.match(/^function\s+(?:\[([^\]]+)\]|([A-Za-z_]\w*))\s*=\s*([A-Za-z_]\w*)\s*\(([^)]*)\)/i);
+ if(m)return'Define function '+m[3];
+ if(/^end\s*;?$/i.test(raw))return'End function or control block';
+ if(/^for\s+/i.test(plain))return'Start for loop';
+ if(/^while\s+/i.test(plain))return'Start while loop';
+ if(/^if\s+/i.test(plain))return'Run block when condition is true';
+ if(/^elseif\s+/i.test(plain))return'Check another condition';
+ if(/^else\s*$/i.test(plain))return'Run fallback block';
+ if(/^switch\s+/i.test(plain))return'Start switch selection';
+ if(/^case\s+/i.test(plain))return'Run matching case';
+ if(/^otherwise\s*$/i.test(plain))return'Run default case';
+ if((m=plain.match(/^([A-Za-z_]\w*)\s*=\s*\[([^\]]*)\]$/))){
+  var values=m[2].trim().split(/[\s,;]+/).filter(Boolean);
+  return values.length?'Store '+values.length+' values in '+m[1]:'Create array '+m[1];
+ }
+ if((m=plain.match(/^([A-Za-z_]\w*)\s*=\s*sum\s*\(([^)]+)\)$/i)))return'Add all values in '+clean(m[2]);
+ if((m=plain.match(/^([A-Za-z_]\w*)\s*=\s*length\s*\(([^)]+)\)$/i)))return'Count values in '+clean(m[2]);
+ if((m=plain.match(/^([A-Za-z_]\w*)\s*=\s*mean\s*\(([^)]+)\)$/i)))return'Calculate average of '+clean(m[2]);
+ if((m=plain.match(/^([A-Za-z_]\w*)\s*=\s*([A-Za-z_]\w*)\s*\/\s*([A-Za-z_]\w*)$/)))return'Calculate '+m[1]+' by division';
+ if((m=plain.match(/^([A-Za-z_]\w*)\s*=\s*([A-Za-z_]\w*)\s*\((.*)\)$/))){
+  return'Call '+m[2]+' and store result in '+m[1];
+ }
+ if(/^fprintf\s*\(/i.test(plain))return'Display formatted result';
+ if(/^disp\s*\(/i.test(plain))return'Display result';
+ if(/^plot\s*\(/i.test(plain))return'Plot the data';
+ if(/^xlabel\s*\(/i.test(plain))return'Label x-axis';
+ if(/^ylabel\s*\(/i.test(plain))return'Label y-axis';
+ if(/^title\s*\(/i.test(plain))return'Add plot title';
+ if(/^legend\s*\(/i.test(plain))return'Label plotted curves';
+ var brief=clean(purpose).replace(/[\x60]/g,'').replace(/[.]$/,'');
+ return brief.split(/\s+/).slice(0,11).join(' ');
+}
+function matlabLectureLine(line,purpose){
+ var parts=splitMatlabSourceComment(line),code=parts.code.replace(/\s+$/,'');
+ if(!code.trim())return parts.comment?'% '+parts.comment:'';
+ var generated=!parts.comment,note=parts.comment||matlabShortComment(code,purpose);
+ return note?code+'    % '+note+(generated?'\u2063':''):code;
+}
 function inlineCommentFor(line,purpose,lang){
  var raw=text(line),note=clean(purpose);
  if(!raw.trim())return'';
  // Preserve syntax/behavior in the few constructs where a trailing comment would change the program.
  if(lang==='python'&&/\\\s*$/.test(raw))return raw;
+ if(lang==='armasm')return armLectureLine(raw,note);
+ if(lang==='matlab')return matlabLectureLine(raw,note);
  var suffix;
  if(lang==='python'||lang==='shell'||lang==='yaml')suffix='# Explanation: '+note;
- else if(lang==='matlab')suffix='% Explanation: '+note;
- else if(lang==='armasm')suffix='; Explanation: '+note;
  else if(lang==='sql')suffix='-- Explanation: '+note;
  else if(lang==='html')suffix='<!-- Explanation: '+note+' -->';
  else if(lang==='css')suffix='/* Explanation: '+note+' */';
@@ -1030,7 +1166,12 @@ function inlineCommentFor(line,purpose,lang){
  return raw.replace(/\s+$/,'')+'  '+suffix;
 }
 function commentedCode(code,lang){var cleanCode=stripGeneratedComments(code);return explain(cleanCode,lang).map(function(r){return inlineCommentFor(r.code,r.purpose,lang);}).join('\n');}
-function commentedCodeHtml(code,lang){return '<section class="csai-commented-code" data-csai-commented-code><div class="csai-commented-code-title">Code with comments</div><p class="csai-commented-code-note">Learning view: each source line includes its explanation as a comment. Keep using the clean code above to run or edit.</p><pre><code>'+esc(commentedCode(code,lang))+'</code></pre></section>';}
+function commentedCodeHtml(code,lang){
+ var arm=lang==='armasm',matlab=lang==='matlab';
+ var title=arm?'Lecture-style ARM code':matlab?'Lecture-style MATLAB code':'Code with comments';
+ var note=arm?'ARMASM view: uppercase registers/mnemonics and short semicolon comments, matching the lecture-note style. The clean code above remains runnable.':matlab?'MATLAB view: normal MATLAB syntax with short percent comments, matching the university example style. The clean code above remains runnable.':'Learning view: each source line includes its explanation as a comment. Keep using the clean code above to run or edit.';
+ return '<section class="csai-commented-code" data-csai-commented-code><div class="csai-commented-code-title">'+title+'</div><p class="csai-commented-code-note">'+note+'</p><pre><code>'+esc(commentedCode(code,lang))+'</code></pre></section>';
+}
 function glossaryTerms(code,lang){var c=text(code),terms=[];function add(term,meaning){if(!terms.some(function(x){return x.term===term;}))terms.push({term:term,meaning:meaning});}
  if(lang==='python'){
   if(/\bimport\b|\bfrom\s+\S+\s+import\b/.test(c))add('import','Loads reusable code from a Python module so this program can use it.');
