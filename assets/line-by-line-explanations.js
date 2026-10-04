@@ -1,7 +1,7 @@
 (function(){
 'use strict';
 
-var VERSION='20261004-v581-university-syntax';
+var VERSION='20261004-v582-course-syntax';
 var updateTimers=new WeakMap(),editorSeq=0;
 
 function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
@@ -1169,7 +1169,7 @@ function commentedCode(code,lang){var cleanCode=stripGeneratedComments(code);ret
 function commentedCodeHtml(code,lang){
  var arm=lang==='armasm',matlab=lang==='matlab';
  var title=arm?'Lecture-style ARM code':matlab?'Lecture-style MATLAB code':'Code with comments';
- var note=arm?'ARMASM view: uppercase registers/mnemonics and short semicolon comments, matching the lecture-note style. The clean code above remains runnable.':matlab?'MATLAB view: normal MATLAB syntax with short percent comments, matching the university example style. The clean code above remains runnable.':'Learning view: each source line includes its explanation as a comment. Keep using the clean code above to run or edit.';
+ var note=arm?'ARMASM view: uppercase registers/mnemonics and short semicolon comments, matching the course example style. The clean code above remains runnable.':matlab?'MATLAB view: normal MATLAB syntax with short percent comments, matching the course example style. The clean code above remains runnable.':'Learning view: each source line includes its explanation as a comment. Keep using the clean code above to run or edit.';
  return '<section class="csai-commented-code" data-csai-commented-code><div class="csai-commented-code-title">'+title+'</div><p class="csai-commented-code-note">'+note+'</p><pre><code>'+esc(commentedCode(code,lang))+'</code></pre></section>';
 }
 function glossaryTerms(code,lang){var c=text(code),terms=[];function add(term,meaning){if(!terms.some(function(x){return x.term===term;}))terms.push({term:term,meaning:meaning});}
