@@ -1,7 +1,7 @@
 (function(){
 'use strict';
 
-var VERSION='20261004-v584-arm-indent';
+var VERSION='20261004-v587-arm-indent';
 var updateTimers=new WeakMap(),editorSeq=0;
 
 function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
