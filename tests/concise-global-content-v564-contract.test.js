@@ -6,7 +6,7 @@ assert.ok([62,65].includes(pages.length),'expected 62 committed or 65 generated 
 let lessonSections=0;
 for(const f of pages){
   const h=fs.readFileSync(path.join(root,'courses',f),'utf8');
-  assert.ok(h.includes('study-examples.js?v=20260824-v574'),`${f}: v5.64 study examples missing`);
+  assert.ok(/study-examples\.js\?v=(?:20260824-v574|20261004-v586)/.test(h),`${f}: v5.64 study examples missing`);
   assert.ok(h.includes('practice-guidance.js?v=20260823-v573'),`${f}: v5.64 guidance missing`);
   const sections=[...h.matchAll(/<section class="lesson-main-explanation"[^>]*>\s*<h3>Explanation<\/h3>\s*<p>([\s\S]*?)<\/p>\s*<\/section>/gi)];
   lessonSections+=sections.length;
