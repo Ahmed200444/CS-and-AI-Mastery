@@ -100,6 +100,31 @@ function syncLesson(html,lesson,courseId){
 
  return html.slice(0,b[0])+seg+html.slice(b[1]);
 }
+function exerciseHtml(item,index){
+ return '<div class="item"><b>'+esc(item.title||('Exercise '+(index+1)))+'</b><p>'+esc(item.prompt||item.description||'Complete this exercise using what you learned in the course.')+'</p>'+(item.hint?'<details><summary>Hint</summary><p>'+esc(item.hint)+'</p></details>':'')+'<textarea class="answer" placeholder="Write code or notes here..."></textarea></div>';
+}
+function quizHtml(item,index){
+ const question=item.q||item.question||item.prompt||('Question '+(index+1)),options=Array.isArray(item.options)?item.options:[];
+ return '<div class="item"><b>'+esc(question)+'</b>'+(options.length?'<ol>'+options.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ol>':'')+'<textarea class="answer" placeholder="Write your answer..."></textarea></div>';
+}
+function projectHtml(item,index){
+ return '<div class="item"><b>'+esc(item.title||item.name||('Project '+(index+1)))+'</b><p>'+esc(item.description||item.desc||item.prompt||'Build this project and document what you learned.')+'</p></div>';
+}
+function replaceCardContent(html,heading,content){
+ const h='<h2>'+heading+'</h2>',pos=html.indexOf(h);if(pos<0)return html;
+ const start=html.lastIndexOf('<section',pos),openEnd=html.indexOf('>',start),end=html.indexOf('</section>',pos);
+ if(start<0||openEnd<start||end<pos)return html;
+ return html.slice(0,openEnd+1)+h+content+html.slice(end);
+}
+function syncCourseItems(html,course){
+ const exercises=Array.isArray(course.exercises)?course.exercises:[];
+ const quiz=Array.isArray(course.quiz)?course.quiz:[];
+ const projects=(Array.isArray(course.projects)?course.projects.slice():[]).concat(course.capstone?[course.capstone]:[]);
+ html=replaceCardContent(html,'Exercises',exercises.length?exercises.map(exerciseHtml).join(''):'<p class="muted">No separate exercises are listed.</p>');
+ html=replaceCardContent(html,'Knowledge checks',quiz.length?quiz.map(quizHtml).join(''):'<p class="muted">No separate checkpoints are listed.</p>');
+ html=replaceCardContent(html,'Projects',projects.length?projects.map(projectHtml).join(''):'<p class="muted">No separate projects are listed.</p>');
+ return html;
+}
 function sanitizePage(file){
  const id=path.basename(file,'.html'),course=byId.get(id);
  let html=fs.readFileSync(file,'utf8');
@@ -120,6 +145,7 @@ function sanitizePage(file){
      html=html.replace(/(<section class="hero">[\s\S]*?<h1>[\s\S]*?<\/h1><p class="muted">)[\s\S]*?(<\/p>)/,'$1'+intro+'$2');
    }
    for(const lesson of course.lessons||[]) html=syncLesson(html,lesson,id);
+   html=syncCourseItems(html,course);
  }
  fs.writeFileSync(file,html,'utf8');
  return html;
