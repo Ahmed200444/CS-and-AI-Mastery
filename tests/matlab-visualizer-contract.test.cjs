@@ -21,6 +21,8 @@ for (const lesson of lessons) {
 assert.match(asset, /\.matlab-workbench\{display:grid;grid-template-columns:/, 'MATLAB workbench must use a two-column desktop layout');
 assert.match(asset, /\.matlab-pane-editor/, 'MATLAB workbench must include the Editor pane');
 assert.match(asset, /\.matlab-pane-command/, 'MATLAB workbench must include the Command Window/Workspace pane');
+assert.match(asset, /Results beside code/, 'MATLAB result tables and figures must be labeled as beside the Editor code');
+assert.match(asset, /grid-template-columns:minmax\(0,1\.05fr\) minmax\(420px,1fr\)/, 'MATLAB desktop layout must keep results beside code');
 assert.match(asset, /pre\[data-language="matlab"\],textarea\[data-language="matlab"\]/, 'visualizer must mount on every MATLAB lesson code block');
 assert.match(page, /calculate_average\.m/, 'function lesson must show the function as an Editor file');
 assert.match(page, /grades\.m/, 'function lesson must show the main script as a separate Editor file');
@@ -46,4 +48,4 @@ assert.equal(files[0].kind, 'function', 'calculate_average.m must be recognized 
 assert.equal(files[1].kind, 'script', 'grades.m must be recognized as the main script');
 const project = visualizer.execute(visualizer.runnableProjectSource(files));
 assert.equal(project.env.sam_average, 86.2, 'main script must be able to call the separate function file');
-console.log('MATLAB visualizer contract PASS — every lesson uses an Editor beside the Command Window, and function/main scripts stay as separate .m files.');
+console.log('MATLAB visualizer contract PASS — Editor code stays beside Command Window, Workspace tables and figures, with function/main scripts as separate .m files.');
