@@ -197,10 +197,10 @@ WHERE id IN (SELECT customer_id FROM orders WHERE total &gt; 100);</pre>
 <div class="note"><b>Common mistake:</b> Assuming LIKE &#39;smith%&#39; and LIKE &#39;%smith%&#39; behave the same -- the % placement changes whether it matches the start, end, or anywhere in the text.</div>
 </div></details><details class="lesson" data-lesson="sql-window-cte" >
 <summary><span class="num">12</span><span class="title">Window Functions &amp; CTEs</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Use CTEs to structure complex queries and window functions to compute running totals and rankings without collapsing rows</li><li>Explain how CTE changes the behavior, result, or engineering decision in a concrete example</li><li>Connect CTE with common table expression and predict what changes when one assumption changes</li></ul>
+<div class="body"><h3>What you will learn</h3><ul><li>Use CTEs to structure complex queries and window functions to compute running totals and rankings without collapsing rows</li></ul>
 <section class="lesson-main-explanation" data-main-explanation>
 <h3>Explanation</h3>
-<p>A CTE (Common Table Expression, written with WITH) names a subquery so you can reference it like a temporary table, making a complex multi-step query readable instead of deeply nested.</p>
+<p>A CTE (Common Table Expression, written using WITH) names a subquery so you can reference it like a temporary table, making a complex multi-step query readable instead of deeply nested.</p>
 </section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">CTE</span><span class="pill">common table expression</span><span class="pill">WITH clause</span><span class="pill">window function</span><span class="pill">OVER</span><span class="pill">PARTITION BY</span><span class="pill">ROW_NUMBER</span><span class="pill">RANK</span><span class="pill">running total</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">WITH monthly_totals AS (
