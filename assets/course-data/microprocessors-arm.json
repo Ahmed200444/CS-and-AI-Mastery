@@ -183,9 +183,10 @@
       "title": "RISC principles & ARM architecture",
       "concepts": [
         "RISC",
-        "load-store",
+        "load-store architecture",
         "register file",
-        "fixed-length instruction",
+        "data-processing instructions",
+        "LDR / STR",
         "embedded systems"
       ],
       "objectives": [
@@ -193,77 +194,76 @@
         "Describe ARM's load-store organization",
         "Connect ARM design choices to embedded systems"
       ],
-      "explanation": "Classic RISC uses regular instructions, many registers, and explicit loads/stores for memory access. ARM data-processing instructions mainly use registers, while LDR and STR move data between registers and memory. A modern processor may be internally complex while preserving this programmer-visible architecture.",
+      "explanation": "Classic RISC uses a regular instruction set, a large register file, and explicit loads/stores for memory access. ARM follows this load-store model: data-processing instructions operate mainly on registers, while LDR/STR move data between registers and memory. This architectural model is the foundation for writing ARM assembly.",
       "examples": [
         "        MOV r0, #0x4000 ; Set base address pointer\n        MOV r1, #25 ; Set initial data value\n        STR r1, [r0] ; Store value from register to memory\n        LDR r2, [r0] ; Load value from memory into register\n        ADD r2, r2, #5 ; Process data inside register file\nstop    B stop ; Halt execution"
       ],
       "commonMistakes": [
         "Interpreting RISC as 'every real instruction always completes in exactly one physical clock cycle.'"
       ],
-      "explain": "Classic RISC uses regular instructions, many registers, and explicit loads/stores for memory access. ARM data-processing instructions mainly use registers, while LDR and STR move data between registers and memory. A modern processor may be internally complex while preserving this programmer-visible architecture."
+      "explain": "Classic RISC uses a regular instruction set, a large register file, and explicit loads/stores for memory access. ARM follows this load-store model: data-processing instructions operate mainly on registers, while LDR/STR move data between registers and memory. This architectural model is the foundation for writing ARM assembly."
     },
     {
       "id": "mpr-08",
-      "title": "ARM data sizes, instruction sets & state",
+      "title": "ARM instruction families, data sizes & execution state",
       "concepts": [
-        "word",
-        "halfword",
-        "doubleword",
-        "ARM state",
-        "Thumb",
-        "Thumb-2"
+        "MOV / MVN",
+        "arithmetic instructions",
+        "logical instructions",
+        "barrel shifter",
+        "word / halfword / doubleword",
+        "ARM / Thumb state"
       ],
       "objectives": [
         "Recall ARM data-size terminology",
         "Distinguish ARM and Thumb instruction encodings",
         "Explain why instruction-set state matters"
       ],
-      "explanation": "In the 32-bit ARM material, a halfword is 16 bits, a word is 32 bits, and a doubleword is 64 bits. Classic ARM instructions are 32 bits wide, while Thumb/Thumb-2 use a mixture of compact 16-bit and 32-bit encodings. Execution state controls which encodings the processor interprets.",
+      "explanation": "ARM programming groups instructions into data movement, arithmetic, logical/bit-manipulation, shifts, comparisons, branches, and memory transfers. MOV/MVN move or invert values; ADD/SUB families perform arithmetic; AND/ORR/EOR/BIC manipulate bits; LSL/LSR/ASR/ROR shift Operand2. Classic ARM uses 32-bit instructions, while Thumb/Thumb-2 also use compact encodings. Halfword, word, and doubleword sizes are 16, 32, and 64 bits.",
       "examples": [
         "        MOV r0, #0x2000 ; Set memory buffer pointer\n        MOV r1, #0xFF ; Set byte value 255\n        STRB r1, [r0] ; Store byte to memory\n        MOV r2, #0x1234 ; Set 16-bit halfword value\n        STRH r2, [r0, #2] ; Store halfword at offset 2\nstop    B stop ; Halt execution"
       ],
       "commonMistakes": [
         "Confusing instruction encoding size with the size of the data being processed."
       ],
-      "explain": "In the 32-bit ARM material, a halfword is 16 bits, a word is 32 bits, and a doubleword is 64 bits. Classic ARM instructions are 32 bits wide, while Thumb/Thumb-2 use a mixture of compact 16-bit and 32-bit encodings. Execution state controls which encodings the processor interprets."
+      "explain": "ARM programming groups instructions into data movement, arithmetic, logical/bit-manipulation, shifts, comparisons, branches, and memory transfers. MOV/MVN move or invert values; ADD/SUB families perform arithmetic; AND/ORR/EOR/BIC manipulate bits; LSL/LSR/ASR/ROR shift Operand2. Classic ARM uses 32-bit instructions, while Thumb/Thumb-2 also use compact encodings. Halfword, word, and doubleword sizes are 16, 32, and 64 bits."
     },
     {
       "id": "mpr-09",
-      "title": "ARM programmer model & registers",
+      "title": "ARM programmer model, registers, stack & subroutines",
       "concepts": [
         "R0-R12",
-        "SP",
-        "LR",
-        "PC",
-        "CPSR",
-        "SPSR",
-        "banked registers"
+        "SP / R13",
+        "LR / R14",
+        "PC / R15",
+        "runtime stack",
+        "BL / BX LR",
+        "calling convention"
       ],
       "objectives": [
         "Identify the main programmer-visible registers",
         "Explain the roles of SP, LR, and PC",
         "Explain why some modes use banked registers"
       ],
-      "explanation": "Classic ARM exposes general-purpose registers plus special roles for R13 as stack pointer, R14 as link register, and R15 as program counter. CPSR records current status/control information. Privileged exception modes can access an SPSR and selected banked registers so handlers can preserve state and use their own stack/link context.",
+      "explanation": "Classic ARM exposes general-purpose registers plus R13/SP, R14/LR, and R15/PC. SP tracks the runtime stack, BL saves a return address in LR, and BX LR can return to the caller. Calling conventions define how parameters and preserved registers are handled so separately written routines work together safely.",
       "examples": [
         "        MOV r0, #10 ; Load general purpose register r0\n        MOV r1, #20 ; Load general purpose register r1\n        ADDS r2, r0, r1 ; Add r0 and r1 into r2 and update CPSR flags\n        MOV r13, #0x1000 ; Initialize stack pointer SP\n        MOV r14, #0x0000 ; Initialize link register LR\nstop    B stop ; Halt execution"
       ],
       "commonMistakes": [
         "Assuming every processor mode sees exactly the same physical SP, LR, and saved-status registers."
       ],
-      "explain": "Classic ARM exposes general-purpose registers plus special roles for R13 as stack pointer, R14 as link register, and R15 as program counter. CPSR records current status/control information. Privileged exception modes can access an SPSR and selected banked registers so handlers can preserve state and use their own stack/link context."
+      "explain": "Classic ARM exposes general-purpose registers plus R13/SP, R14/LR, and R15/PC. SP tracks the runtime stack, BL saves a return address in LR, and BX LR can return to the caller. Calling conventions define how parameters and preserved registers are handled so separately written routines work together safely."
     },
     {
       "id": "mpr-10",
-      "title": "Processor modes, CPSR, endianness & exception overview",
+      "title": "CPSR flags, processor modes, endianness & exceptions",
       "concepts": [
-        "User mode",
-        "SVC",
-        "IRQ",
-        "FIQ",
-        "Abort",
-        "Undefined",
+        "N / Z / C / V",
         "CPSR",
+        "condition codes",
+        "processor modes",
+        "vector table",
+        "SVC / IRQ / FIQ",
         "endianness"
       ],
       "objectives": [
@@ -272,14 +272,14 @@
         "Distinguish little-endian and big-endian storage",
         "Explain why exceptions change mode"
       ],
-      "explanation": "Classic ARM has User mode and privileged modes including System, Supervisor, IRQ, FIQ, Abort, and Undefined. CPSR holds condition flags, execution state, interrupt masks, and mode bits. Little-endian stores the least-significant byte at the lower address; big-endian reverses that order. Exceptions enter an appropriate privileged mode so handlers can use protected state.",
+      "explanation": "CPSR contains the N, Z, C, and V condition flags along with execution-state, interrupt-mask, and mode bits. Comparison and flag-setting instructions update these flags for conditional execution. Classic ARM exceptions save status, switch to a privileged mode, and transfer control through a vector table; SVC requests a privileged software service. Endianness determines byte order in memory.",
       "examples": [
         "val = 0x12345678  # 32-bit test word\nlittle_endian = [val & 0xFF, (val >> 8) & 0xFF, (val >> 16) & 0xFF, (val >> 24) & 0xFF]  # LSB first\nbig_endian = [(val >> 24) & 0xFF, (val >> 16) & 0xFF, (val >> 8) & 0xFF, val & 0xFF]  # MSB first\nprint(little_endian)  # Output little-endian byte array\nprint(big_endian)  # Output big-endian byte array"
       ],
       "commonMistakes": [
         "Reading the ARM I and F CPSR bits as interrupt-enable bits; in classic ARM, a set mask bit masks/disables that interrupt."
       ],
-      "explain": "Classic ARM has User mode and privileged modes including System, Supervisor, IRQ, FIQ, Abort, and Undefined. CPSR holds condition flags, execution state, interrupt masks, and mode bits. Little-endian stores the least-significant byte at the lower address; big-endian reverses that order. Exceptions enter an appropriate privileged mode so handlers can use protected state."
+      "explain": "CPSR contains the N, Z, C, and V condition flags along with execution-state, interrupt-mask, and mode bits. Comparison and flag-setting instructions update these flags for conditional execution. Classic ARM exceptions save status, switch to a privileged mode, and transfer control through a vector table; SVC requests a privileged software service. Endianness determines byte order in memory."
     }
   ],
   "exercises": [
