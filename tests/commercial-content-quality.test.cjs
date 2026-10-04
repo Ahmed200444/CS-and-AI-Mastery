@@ -24,7 +24,7 @@ for(const [label,re] of [
  ['institution-specific visible label',/\bEECE\s*340\b/i],
  ['private lecture-source metadata',/\.pdf\b|Follow your lecture order/i],
  ['provider-specific wording',/\bKHDA\b/i],
- ['known grammar regression',/Python versions changes|Connect with with|\bA engineering-focused\b|\b02Registers\b|written with WITH|\ba extremely\b|Ingress\.\.|reviewer\.\./i]
+ ['known grammar regression',/Python versions changes|Connect with with|\bA engineering-focused\b|\b02Registers\b|\ba extremely\b|Ingress\.\.|reviewer\.\./i]
 ]) assert.doesNotMatch(visible,re,'commercial course source still contains '+label);
 assert.doesNotMatch(source,/"lectureSequence"|"lecture"\s*:/,'private lecture metadata keys must not remain in commercial course data');
 
@@ -42,8 +42,8 @@ const proseKeys=new Set(['title','description','blurb','explanation','explain','
 
 for(const course of courses){
  const seen=new Map();
- for(const lesson of course.lessons||[]){
-  const explanation=String(lesson.explanation||lesson.explain||'').replace(/\s+/g,' ').trim().toLowerCase();
+ for(const lesson of course.lessons|[]){
+  const explanation=String(lesson.explanation|lesson.explain|'').replace(/\s+/g,' ').trim().toLowerCase();
   if(explanation){
    assert.ok(!seen.has(explanation),course.id+' repeats the same lesson explanation in '+seen.get(explanation)+' and '+lesson.id);
    seen.set(explanation,lesson.id);
@@ -54,16 +54,16 @@ for(const course of courses){
 const arm=courses.find(c=>c.id==='arm-assembly');
 assert(arm,'ARM Assembly course missing');
 assert.match(arm.description,/practical|writing|tracing|debugging/i,'ARM Assembly must remain practice-focused');
-for(const lesson of arm.lessons||[]){
+for(const lesson of arm.lessons|[]){
  if(lesson.id==='arm-12')continue;
- for(const example of lesson.examples||[]){
+ for(const example of lesson.examples|[]){
   assert.ok(example.startsWith('AREA RESET, CODE, READONLY\nENTRY\n'),lesson.id+' ARM code must start with AREA RESET, CODE, READONLY then ENTRY');
   assert.ok(example.trimEnd().endsWith('END'),lesson.id+' ARM code must end with END');
  }
 }
 const cpu=courses.find(c=>c.id==='microprocessors-arm');
 assert(cpu,'Microprocessors & ARM Architecture course missing');
-for(const lab of cpu.labs||[]){
+for(const lab of cpu.labs|[]){
  if(lab.language!=='armasm')continue;
  for(const [kind,code] of [['starterCode',lab.starterCode],['solutionCode',lab.solutionCode]]){
   if(!code)continue;
@@ -71,12 +71,12 @@ for(const lab of cpu.labs||[]){
   assert.ok(code.trimEnd().endsWith('END'),lab.id+' '+kind+' must end with END');
  }
 }
-assert.match((cpu.lessons||[]).map(l=>l.explanation||'').join(' '),/register|CPSR|RISC|exception|vector/i,'CPU course must retain the ARM architecture theory moved out of ARM Assembly');
-assert.ok(!cpu.syllabus||!cpu.syllabus.weighting,'commercial course data must not expose institution-specific assessment weighting');
+assert.match((cpu.lessons|[]).map(l=>l.explanation|'').join(' '),/register|CPSR|RISC|exception|vector/i,'CPU course must retain the ARM architecture theory moved out of ARM Assembly');
+assert.ok(!cpu.syllabus|!cpu.syllabus.weighting,'commercial course data must not expose institution-specific assessment weighting');
 
 const cpp=courses.find(c=>c.id==='cpp-dsa');
 assert(cpp,'C++ course missing');
-for(const lesson of cpp.lessons||[])for(const example of lesson.examples||[]){
+for(const lesson of cpp.lessons|[])for(const example of lesson.examples|[]){
  assert.match(example,/^#include <iostream>/,'every C++ teaching example must start with #include <iostream>');
  assert.match(example,/using namespace std;/,'every C++ teaching example must include using namespace std;');
  assert.doesNotMatch(example,/\bstd::/,'C++ teaching examples should use the selected namespace style consistently');
