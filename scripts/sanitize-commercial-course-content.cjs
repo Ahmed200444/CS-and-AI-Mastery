@@ -41,9 +41,11 @@ function lessonBounds(html,id){
  const marker='data-lesson="'+id+'"';
  const pos=html.indexOf(marker); if(pos<0)return null;
  const start=html.lastIndexOf('<details',pos); if(start<0)return null;
- const next=html.indexOf('<details class="lesson"',pos+marker.length);
- const sectionEnd=html.indexOf('</section>',pos+marker.length);
- const end=(next>=0&&sectionEnd>=0)?Math.min(next,sectionEnd):(next>=0?next:sectionEnd);
+ const rest=html.slice(pos+marker.length);
+ const nextRel=rest.search(/<details\b[^>]*class=["'][^"']*\blesson\b[^"']*["'][^>]*>/i);
+ const close=html.indexOf('</details>',pos+marker.length);
+ const next=nextRel>=0?pos+marker.length+nextRel:-1;
+ const end=close>=0&&(!next||next<0||close<next)?close+'</details>'.length:next;
  return end>start?[start,end]:null;
 }
 function exampleLanguage(courseId){
