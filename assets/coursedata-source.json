@@ -13998,12 +13998,12 @@
         "type": "mcq"
       },
       {
-        "q": "What does a load balancer do?",
+        "q": "Why is a load balancer used in a horizontally scaled service?",
         "options": [
-          "stores data permanently",
-          "distributes incoming requests across multiple servers",
-          "encrypts network traffic",
-          "compresses images"
+          "to store application data permanently",
+          "to distribute incoming requests across multiple service instances",
+          "to encrypt every database row",
+          "to compress static images"
         ],
         "correct": 1,
         "type": "mcq"
@@ -17055,12 +17055,12 @@
         "type": "mcq"
       },
       {
-        "q": "What is a context window?",
+        "q": "What happens when an LLM request exceeds the model's supported context window?",
         "options": [
-          "the total training dataset size",
-          "the maximum amount of text an LLM can consider at once",
-          "a type of tokenizer",
-          "the model's file size"
+          "the model automatically trains on the extra tokens",
+          "some input must be truncated, summarized, or otherwise kept within the supported token limit",
+          "the tokenizer switches to image mode",
+          "the model file grows permanently"
         ],
         "correct": 1,
         "type": "mcq"
@@ -37788,12 +37788,12 @@
         "type": "mcq"
       },
       {
-        "q": "What is a latent space?",
+        "q": "In a VAE, what does sampling a point from the learned latent space allow the decoder to do?",
         "options": [
-          "the raw input data",
-          "a compressed, learned representation capturing the essential structure of the data",
-          "a synonym for the loss function",
-          "the training dataset's file format"
+          "recover the raw training file byte-for-byte",
+          "generate a data-like sample from the learned latent representation",
+          "replace the KL term with a classification label",
+          "skip the decoder entirely"
         ],
         "correct": 1,
         "type": "mcq"
@@ -51179,12 +51179,12 @@
         "type": "mcq"
       },
       {
-        "q": "What is a cache hit?",
+        "q": "Why does a cache hit usually reduce average memory-access time?",
         "options": [
-          "The requested block is found in the relevant cache level",
-          "The CPU must always fetch from disk",
-          "A branch prediction is wrong",
-          "The TLB has no translation"
+          "the requested block is served from a faster cache level instead of a slower lower level",
+          "the CPU always fetches the block from disk",
+          "the branch predictor disables the cache",
+          "the TLB removes the data from memory"
         ],
         "correct": 0,
         "type": "mcq"
