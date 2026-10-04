@@ -31,7 +31,7 @@ assert.match(page, /grades\.m/, 'function lesson must show the main script as a 
 const visualizer = require(assetPath);
 const plot = visualizer.execute("x = 0:0.1:1;\ny = sin(x);\nplot(x,y);\nxlabel('x');");
 assert.equal(plot.plots.length, 1, 'plot calls should produce one figure model');
-const plottedHtml = visualizer.renderResult(visualizer.execute("x = 0:0.25:1;\\ny = x.^2;\\nplot(x,y);\\nxlabel('Time');\\nylabel('Value');\\ntitle('Quadratic');\\nlegend('x squared');"), 'plot_demo');
+const plottedHtml = visualizer.renderResult(visualizer.execute("x = 0:0.25:1;\ny = x.^2;\nplot(x,y);\nxlabel('Time');\nylabel('Value');\ntitle('Quadratic');\nlegend('x squared');"), 'plot_demo');
 assert.match(plottedHtml, /Quadratic/, 'figure preview must render its title');
 assert.match(plottedHtml, /Time/, 'figure preview must render the x-axis label');
 assert.match(plottedHtml, /Value/, 'figure preview must render the y-axis label');
