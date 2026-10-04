@@ -1,7 +1,7 @@
 (function(){
 'use strict';
 
-var VERSION='20261004-v582-course-syntax';
+var VERSION='20261004-v583-teaching-syntax';
 var updateTimers=new WeakMap(),editorSeq=0;
 
 function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
@@ -1165,7 +1165,38 @@ function inlineCommentFor(line,purpose,lang){
  else return raw;
  return raw.replace(/\s+$/,'')+'  '+suffix;
 }
-function commentedCode(code,lang){var cleanCode=stripGeneratedComments(code);return explain(cleanCode,lang).map(function(r){return inlineCommentFor(r.code,r.purpose,lang);}).join('\n');}
+function normalizeTeachingSource(code,lang){
+ var cleanCode=stripGeneratedComments(code),lines=cleanCode.replace(/\r/g,'').split('\n');
+ if(lang==='armasm'){
+  var body=lines.filter(function(line){
+   var bare=splitArmSourceComment(line).code.trim();
+   if(/^AREA\s+\S+\s*,\s*CODE\s*,\s*READONLY\s*$/i.test(bare))return false;
+   if(/^ENTRY\s*$/i.test(bare))return false;
+   if(/^END\s*$/i.test(bare))return false;
+   return true;
+  });
+  while(body.length&&!body[0].trim())body.shift();
+  while(body.length&&!body[body.length-1].trim())body.pop();
+  return ['AREA RESET, CODE, READONLY','ENTRY'].concat(body).concat(['END']).join('\n');
+ }
+ if(lang==='cpp'){
+  var body=lines.filter(function(line){
+   var t=line.trim();
+   return !/^#include\s*<iostream>\s*$/.test(t)&&!/^using\s+namespace\s+std\s*;\s*$/.test(t);
+  });
+  while(body.length&&!body[0].trim())body.shift();
+  while(body.length&&!body[body.length-1].trim())body.pop();
+  var includes=[],rest=[],seenNonInclude=false;
+  body.forEach(function(line){
+   if(!seenNonInclude&&/^\s*#include\b/.test(line)){includes.push(line.trim());return;}
+   if(line.trim())seenNonInclude=true;
+   rest.push(line);
+  });
+  return ['#include <iostream>'].concat(includes).concat(['using namespace std;','']).concat(rest).join('\n').replace(/\n{3,}/g,'\n\n');
+ }
+ return cleanCode;
+}
+function commentedCode(code,lang){var cleanCode=normalizeTeachingSource(code,lang);return explain(cleanCode,lang).map(function(r){return inlineCommentFor(r.code,r.purpose,lang);}).join('\n');}
 function commentedCodeHtml(code,lang){
  var arm=lang==='armasm',matlab=lang==='matlab';
  var title=arm?'Lecture-style ARM code':matlab?'Lecture-style MATLAB code':'Code with comments';
