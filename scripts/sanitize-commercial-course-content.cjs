@@ -46,27 +46,56 @@ function lessonBounds(html,id){
  const end=(next>=0&&sectionEnd>=0)?Math.min(next,sectionEnd):(next>=0?next:sectionEnd);
  return end>start?[start,end]:null;
 }
+function exampleLanguage(courseId){
+ if(courseId==='arm-assembly')return'armasm';
+ if(courseId==='matlab-engineering')return'matlab';
+ if(courseId==='cpp-dsa')return'cpp';
+ return'';
+}
 function syncLesson(html,lesson,courseId){
  const b=lessonBounds(html,lesson.id); if(!b)return html;
  let seg=html.slice(b[0],b[1]);
  seg=seg.replace(/<span class="title">[\s\S]*?<\/span>/, '<span class="title">'+esc(lesson.title||'Lesson')+'</span>');
- if(Array.isArray(lesson.objectives)){
-   const list='<h3>What you will learn</h3><ul>'+lesson.objectives.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul>';
-   if(/<h3>What you will learn<\/h3><ul>[\s\S]*?<\/ul>/.test(seg)) seg=seg.replace(/<h3>What you will learn<\/h3><ul>[\s\S]*?<\/ul>/,list);
- }
- if(lesson.explanation){
+
+ const objectives=Array.isArray(lesson.objectives)?lesson.objectives:[];
+ const objectiveHtml=objectives.length?'<h3>What you will learn</h3><ul>'+objectives.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul>':'';
+ if(/<h3>What you will learn<\/h3><ul>[\s\S]*?<\/ul>/.test(seg))seg=seg.replace(/<h3>What you will learn<\/h3><ul>[\s\S]*?<\/ul>/,objectiveHtml);
+ else if(objectiveHtml)seg=seg.replace(/<section class="lesson-main-explanation"/,objectiveHtml+'\n<section class="lesson-main-explanation"');
+
+ const explanation=lesson.explanation||lesson.explain||lesson.description||'';
+ if(explanation){
    const heading=courseId==='arm-assembly'?'Practice focus':'Explanation';
-   const section='<section class="lesson-main-explanation" data-main-explanation><h3>'+heading+'</h3><p>'+esc(lesson.explanation)+'</p></section>';
-   seg=seg.replace(/<section class="lesson-main-explanation"[^>]*>[\s\S]*?<\/section>/,section);
+   const section='<section class="lesson-main-explanation" data-main-explanation><h3>'+heading+'</h3><p>'+esc(explanation)+'</p></section>';
+   if(/<section class="lesson-main-explanation"[^>]*>[\s\S]*?<\/section>/.test(seg))seg=seg.replace(/<section class="lesson-main-explanation"[^>]*>[\s\S]*?<\/section>/,section);
  }
- if(Array.isArray(lesson.concepts)){
-   const meta='<h3>Key concepts</h3><div class="meta">'+lesson.concepts.map(v=>'<span class="pill">'+esc(v)+'</span>').join('')+'</div>';
-   if(/<h3>Key concepts<\/h3><div class="meta">[\s\S]*?<\/div>/.test(seg)) seg=seg.replace(/<h3>Key concepts<\/h3><div class="meta">[\s\S]*?<\/div>/,meta);
- }
- if(Array.isArray(lesson.commonMistakes)){
-   const note=lesson.commonMistakes.length?'<div class="note"><b>Common mistake:</b> '+esc(lesson.commonMistakes.join(' • '))+'</div>':'';
-   if(/<div class="note"><b>Common mistake:<\/b>[\s\S]*?<\/div>/.test(seg)) seg=seg.replace(/<div class="note"><b>Common mistake:<\/b>[\s\S]*?<\/div>/,note);
- }
+
+ const concepts=Array.isArray(lesson.concepts)?lesson.concepts:[];
+ const conceptHtml=concepts.length?'<h3>Key concepts</h3><div class="meta">'+concepts.map(v=>'<span class="pill">'+esc(v)+'</span>').join('')+'</div>':'';
+ if(/<h3>Key concepts<\/h3><div class="meta">[\s\S]*?<\/div>/.test(seg))seg=seg.replace(/<h3>Key concepts<\/h3><div class="meta">[\s\S]*?<\/div>/,conceptHtml);
+ else if(conceptHtml)seg=seg.replace(/<h3>Example<\/h3>/,conceptHtml+'\n<h3>Example</h3>');
+
+ const examples=Array.isArray(lesson.examples)?lesson.examples:(lesson.example?[lesson.example]:[]);
+ const exampleRegion=/<h3>Example<\/h3>[\s\S]*?(?=<div class="note"|<\/div><\/details>)/;
+ const current=(seg.match(exampleRegion)||[''])[0];
+ const attrs=[...current.matchAll(/<pre\b([^>]*)>/g)].map(m=>m[1]||'');
+ const lang=exampleLanguage(courseId);
+ const exampleHtml=examples.length?'<h3>Example</h3>'+examples.map((v,i)=>{
+   let a=attrs[i]||attrs[0]||' class="code" data-example-audit="candidate"';
+   if(!/\bclass=/.test(a))a=' class="code"'+a;
+   if(lang){
+     if(/\bdata-language=/.test(a))a=a.replace(/\bdata-language=(["'])[^"']*\1/,'data-language="'+lang+'"');
+     else a+=' data-language="'+lang+'"';
+   }
+   return '<pre'+a+'>'+esc(v)+'</pre>';
+ }).join(''):'';
+ if(exampleRegion.test(seg))seg=seg.replace(exampleRegion,exampleHtml);
+ else if(exampleHtml)seg=seg.replace(/<div class="note"/,exampleHtml+'\n<div class="note"');
+
+ const mistakes=Array.isArray(lesson.commonMistakes)?lesson.commonMistakes:(lesson.commonMistake?[lesson.commonMistake]:[]);
+ const note=mistakes.length?'<div class="note"><b>Common mistake:</b> '+esc(mistakes.join(' • '))+'</div>':'';
+ if(/<div class="note"><b>Common mistake:<\/b>[\s\S]*?<\/div>/.test(seg))seg=seg.replace(/<div class="note"><b>Common mistake:<\/b>[\s\S]*?<\/div>/,note);
+ else if(note)seg=seg.replace(/<\/div><\/details>\s*$/,note+'</div></details>');
+
  return html.slice(0,b[0])+seg+html.slice(b[1]);
 }
 function sanitizePage(file){
