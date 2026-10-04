@@ -25,7 +25,7 @@ assert.ok([62,65].includes(courses.length),'expected 62 committed or 65 generate
 let lessons=0;
 for(const f of courses){
   const h=read('courses/'+f);
-  assert(h.includes('../assets/study-examples.js?v=20260824-v574'),`${f}: must load v5.71 definition layer`);
+  assert(/\.\.\/assets\/study-examples\.js\?v=(?:20260824-v574|20261004-v586)/.test(h),`${f}: must load v5.71 definition layer`);
   lessons+=(h.match(/data-lesson="[^"]+"/g)||[]).length;
 }
 assert.strictEqual(lessons,courses.length===65?832:800,'expected 800 committed or 832 generated lessons');
