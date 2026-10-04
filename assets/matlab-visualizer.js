@@ -77,11 +77,11 @@ function makeRange(parts,env){
 }
 function evalFunction(name,args){
  name=name.toLowerCase();if(name==='pi')return Math.PI;
- if(name==='size'){var sh=shape(args[0]);return sh;}
+ if(name==='size'){var sh=shape(args[0]);if(args.length>1){var dim=Math.floor(scalar(args[1]));return dim===1?sh[0]:dim===2?sh[1]:1;}return sh;}
  if(name==='length'){var sh=shape(args[0]);return Math.max(sh[0],sh[1]);}
  if(name==='numel')return flatten(args[0]).length;
  if(name==='sum')return flatten(args[0]).reduce(function(total,value){return total+Number(value||0);},0);
- if(name==='zeros'||name==='ones'){var r=Math.max(0,Math.floor(scalar(args[0]||1))),c=args.length>1?Math.max(0,Math.floor(scalar(args[1]))):r;var fill=name==='ones'?1:0;return r===1?[fill]:Array.from({length:r},function(){return Array(c).fill(fill);});}
+ if(name==='zeros'||name==='ones'){var r=Math.max(0,Math.floor(scalar(args[0]||1))),c=args.length>1?Math.max(0,Math.floor(scalar(args[1]))):r;var fill=name==='ones'?1:0,rows=Array.from({length:r},function(){return Array(c).fill(fill);});return r===1?(rows[0]||[]):rows;}
  if(name==='linspace'){var start=scalar(args[0]),stop=scalar(args[1]),count=Math.floor(scalar(args[2]||100)),out=[];for(var i=0;i<Math.max(1,count);i++)out.push(count<=1?start:start+(stop-start)*i/(count-1));return out;}
  if(FUNCTIONS[name]){var f=FUNCTIONS[name];return each(args[0],function(x){return f(Number(x));});}
  return undefined;
@@ -92,7 +92,16 @@ function evalExpr(input,env){
  if(s[s.length-1]==="'"&&s.length>1&&!/^'.*'$/.test(s))return transpose(evalExpr(s.slice(0,-1),env));
  var colon=topParts(s,':');if(colon.length>1)return makeRange(colon,env);
  if(s[0]==='['&&s[s.length-1]===']'&&balanced(s)){
-  var rows=topParts(s.slice(1,-1),';').map(function(row){return arrayTokens(row).map(function(x){return evalExpr(x,env);});});
+  var rows=topParts(s.slice(1,-1),';').map(function(row){
+   var values=[];
+   arrayTokens(row).forEach(function(x){
+    var value=evalExpr(x,env);
+    if(isArray(value)&&!isMatrix(value))values=values.concat(value);
+    else if(isMatrix(value)&&value.length===1)values=values.concat(value[0]);
+    else values.push(value);
+   });
+   return values;
+  });
   if(rows.length===1)return rows[0];var width=rows[0].length;if(rows.some(function(r){return r.length!==width;}))throw Error('Rows in a MATLAB array literal must have the same length.');return rows;
  }
  var bin=findBinary(s,['||']);if(bin)return !!(evalExpr(s.slice(0,bin.index),env)||evalExpr(s.slice(bin.index+2),env));
@@ -121,6 +130,21 @@ function assignIndex(env,lhs,value){
  var m=lhs.match(/^([A-Za-z_]\w*)\((.*)\)$/);if(!m){env[lhs]=clone(value);return;}
  var name=m[1],idx=callArgs(m[2]).map(function(x){return Math.floor(scalar(evalExpr(x,env)))-1;});if(!idx.length)throw Error('An indexed assignment needs an index.');var base=env[name];if(!isArray(base))base=[];if(idx.length===1){var i=idx[0];while(base.length<=i)base.push(0);base[i]=clone(value);}else{if(!isMatrix(base))base=[base.slice()];var r=idx[0],c=idx[1];while(base.length<=r)base.push([]);while(base[r].length<=c)base[r].push(0);base[r][c]=clone(value);}env[name]=base;}
 function findAssignment(line){var d=0,q='';for(var i=0;i<line.length;i++){var c=line[i];if(q){if(c===q&&line[i-1]!== '\\')q='';continue;}if(c==='"'||c==="'"){q=c;continue;}if(c==='('||c==='[')d++;else if(c===')'||c===']')d--;else if(c==='='&&d===0&&line[i-1]!=='='&&line[i+1]!=='='){return{i:i};}}return null;}
+function formatFprintf(fmt,args){
+ var index=0;
+ var text=String(fmt).replace(/\\n/g,'\n').replace(/\\t/g,'\t');
+ return text.replace(/%([0-9]*)(?:\.([0-9]+))?([fdiugs%])/g,function(all,width,precision,type){
+  if(type==='%')return'%';
+  var value=args[index++];
+  if(type==='s')return String(value==null?'':value);
+  var n=scalar(value);
+  if(!Number.isFinite(n))return String(n);
+  if(type==='d'||type==='i'||type==='u')return String(Math.trunc(type==='u'?Math.max(0,n):n));
+  if(type==='f')return precision!=null?n.toFixed(Number(precision)):String(n);
+  if(type==='g')return precision!=null?Number(n.toPrecision(Number(precision))).toString():String(n);
+  return String(value);
+ });
+}
 function executeRange(lines,start,end,state,env){
  for(var i=start;i<end;i++){
   var line=lines[i].line;if(!line)continue;
@@ -131,7 +155,7 @@ function executeRange(lines,start,end,state,env){
   var sm=line.match(/^switch\s+(.+)$/i);if(sm){var stopSwitch=matchingEnd(lines,i),wanted=evalExpr(sm[1],env),chosen=-1,otherwise=-1;for(var sj=i+1;sj<stopSwitch;sj++){var sl=lines[sj].line,cm=sl.match(/^case\s+(.+)$/i);if(cm&&chosen<0&&scalar(evalExpr(cm[1],env))===scalar(wanted))chosen=sj+1;if(/^otherwise\b/i.test(sl))otherwise=sj+1;}var begin=chosen>=0?chosen:otherwise;if(begin>=0){var next=stopSwitch;for(var sk=begin;sk<stopSwitch;sk++){if(/^case\s+|^otherwise\b/i.test(lines[sk].line)){next=sk;break;}}executeRange(lines,begin,next,state,env);}i=stopSwitch;continue;}
   if(/^plot\s*\(/i.test(line)){var pm=line.match(/^plot\s*\((.*)\)\s*;?$/i);if(pm){var pa=callArgs(pm[1]),series=[];for(var pi=0;pi<pa.length;){var xv=evalExpr(pa[pi],env);if(typeof xv==='string'){pi++;continue;}var yv=pa[pi+1]!==undefined&&typeof evalExpr(pa[pi+1],env)!=='string'?evalExpr(pa[pi+1],env):xv;if(yv===xv){xv=Array.from({length:flatten(yv).length},function(_,k){return k+1;});pi++;}else pi+=2;series.push({x:flatten(xv),y:flatten(yv)});while(pi<pa.length&&/^['"]/.test(pa[pi]))pi++;}state.plots.push({series:series});}continue;}
   var callLine=line.match(/^(xlabel|ylabel|title|legend)\s*\((.*)\)\s*;?$/i);if(callLine){var args=callArgs(callLine[2]).map(function(x){return evalExpr(x,env);});var p=state.plots[state.plots.length-1]||(state.plots[state.plots.length]= {series:[]});if(callLine[1].toLowerCase()==='legend')p.legend=args.map(String);else p[callLine[1].toLowerCase()]=String(args[0]||'');continue;}
-  var disp=line.match(/^(disp|fprintf)\s*\((.*)\)\s*;?$/i);if(disp){var dv=evalExpr(callArgs(disp[2])[0],env);state.output.push(formatText(dv));continue;}
+  var disp=line.match(/^(disp|fprintf)\s*\((.*)\)\s*;?$/i);if(disp){var parts=callArgs(disp[2]);if(disp[1].toLowerCase()==='fprintf'){var fmt=evalExpr(parts[0],env),vals=parts.slice(1).map(function(x){return evalExpr(x,env);});state.output.push(formatFprintf(fmt,vals));}else{var dv=evalExpr(parts[0],env);state.output.push(formatText(dv));}continue;}
   var a=findAssignment(line);if(a){var lhs=clean(line.slice(0,a.i)),rhs=clean(line.slice(a.i+1).replace(/;\s*$/,'')),value=evalExpr(rhs,env);assignIndex(env,lhs,value);if(!/;\s*$/.test(line))state.output.push(lhs+' =\n'+formatText(value));continue;}
   if(!/^(end|else|elseif|case|otherwise)\b/i.test(line)){try{var val=evalExpr(line.replace(/;\s*$/,''),env);if(!/;\s*$/.test(line))state.output.push(formatText(val));}catch(e){state.notes.push('Line '+(i+1)+': '+e.message);}}
  }
@@ -413,7 +437,7 @@ function boot(){
   });
  }).observe(document.documentElement,{childList:true,subtree:true});
 }
-var api={execute:execute,renderResult:resultHtml,virtualFiles:virtualFiles,runnableProjectSource:runnableProjectSource};
+var api={execute:execute,renderResult:resultHtml,virtualFiles:virtualFiles,runnableProjectSource:runnableProjectSource,formatFprintf:formatFprintf};
 if(typeof module==='object'&&module.exports)module.exports=api;
 else{
  root.CSAIMatlabVisualizer=api;
