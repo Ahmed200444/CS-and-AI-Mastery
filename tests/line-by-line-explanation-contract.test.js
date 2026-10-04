@@ -149,7 +149,7 @@ for(const page of pages){
     for(const row of rows){
       assert.ok(row.purpose,`${page}: missing purpose for ${row.code}`);
       assert.ok(Array.isArray(row.syntax)&&row.syntax.length,`${page}: missing syntax help for ${row.code}`);
-      assert.ok(!banned.test(row.purpose),`${page}: shallow/generic explanation returned: ${row.purpose}`);
+      assert.ok(!banned.test(row.purpose),`${page}: shallow/generic explanation for ${JSON.stringify(row.code)} returned: ${row.purpose}`);
       if(lang!=='text'){
         const words=row.purpose.trim().split(/\s+/).length;
         maxExecutableWords=Math.max(maxExecutableWords,words);
