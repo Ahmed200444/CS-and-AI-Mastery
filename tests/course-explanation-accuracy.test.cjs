@@ -28,7 +28,7 @@ assert.equal(api.inferLanguage('#!/bin/bash\nFOLDER=$1',''),'shell');
 for(const [lang,source] of [['matlab',"A = [1 2]';\ny = A .* A;"],['armasm','MOV r0, #5\nADD r1, r0, #2']]){
  const commented=api.commentedCode(source,lang);assert.notEqual(commented,source);
  const stripped=api.stripGeneratedComments(commented);
- if(lang==='armasm')assert.equal(stripped,'MOV R0, #5\nADD R1, R0, #2','ARM lecture view intentionally normalizes instruction/register casing while preserving executable semantics');
+ if(lang==='armasm')assert.equal(stripped,'AREA RESET, CODE, READONLY\nENTRY\nMOV R0, #5\nADD R1, R0, #2\nEND','ARM teaching view standardizes the RESET program skeleton and instruction/register casing');
  else assert.equal(stripped,source);
  assert.equal(api.commentedCode(commented,lang),commented,'comments must not accumulate');
 }
