@@ -40,17 +40,7 @@
       ],
       "commonMistakes": [
         "Assuming every command must be saved in a script before it can be tested."
-      ],
-      "lecture": {
-        "order": 1,
-        "title": "Windows and menus",
-        "file": "MatLab Introduction(1).pdf",
-        "courseId": "matlab-engineering",
-        "slides": [
-          2,
-          8
-        ]
-      }
+      ]
     },
     {
       "id": "mat-02",
@@ -73,17 +63,7 @@
       ],
       "commonMistakes": [
         "Confusing row separators with element separators."
-      ],
-      "lecture": {
-        "order": 2,
-        "title": "Basic operations and arrays",
-        "file": "MatLab Introduction(1).pdf",
-        "courseId": "matlab-engineering",
-        "slides": [
-          9,
-          9
-        ]
-      }
+      ]
     },
     {
       "id": "mat-03",
@@ -106,17 +86,7 @@
       ],
       "commonMistakes": [
         "Using * when element-by-element multiplication is intended."
-      ],
-      "lecture": {
-        "order": 2,
-        "title": "Basic operations and arrays",
-        "file": "MatLab Introduction(1).pdf",
-        "courseId": "matlab-engineering",
-        "slides": [
-          10,
-          10
-        ]
-      }
+      ]
     },
     {
       "id": "mat-04",
@@ -139,17 +109,7 @@
       ],
       "commonMistakes": [
         "Leaving out the dot when the intended operation is element by element."
-      ],
-      "lecture": {
-        "order": 2,
-        "title": "Basic operations and arrays",
-        "file": "MatLab Introduction(1).pdf",
-        "courseId": "matlab-engineering",
-        "slides": [
-          10,
-          11
-        ]
-      }
+      ]
     },
     {
       "id": "mat-05",
@@ -171,17 +131,7 @@
       ],
       "commonMistakes": [
         "Treating a script as if it had function-local inputs and outputs."
-      ],
-      "lecture": {
-        "order": 3,
-        "title": "Files and functions",
-        "file": "MatLab Introduction(1).pdf",
-        "courseId": "matlab-engineering",
-        "slides": [
-          12,
-          14
-        ]
-      }
+      ]
     },
     {
       "id": "mat-06",
@@ -207,17 +157,7 @@
       "commonMistakes": [
         "Putting the main script in the Command Window pane instead of keeping it as a separate .m file in the Editor.",
         "Saving the function under a filename that does not match the function name."
-      ],
-      "lecture": {
-        "order": 3,
-        "title": "Files and functions",
-        "file": "MatLab Introduction(1).pdf",
-        "courseId": "matlab-engineering",
-        "slides": [
-          15,
-          18
-        ]
-      }
+      ]
     },
     {
       "id": "mat-07",
@@ -242,17 +182,7 @@
       ],
       "commonMistakes": [
         "Showing multiple curves without labels or a legend."
-      ],
-      "lecture": {
-        "order": 4,
-        "title": "Plotting with MATLAB",
-        "file": "MatLab Introduction(1).pdf",
-        "courseId": "matlab-engineering",
-        "slides": [
-          19,
-          22
-        ]
-      }
+      ]
     },
     {
       "id": "mat-08",
@@ -283,17 +213,7 @@
       ],
       "commonMistakes": [
         "Using = for equality testing instead of ==."
-      ],
-      "lecture": {
-        "order": 5,
-        "title": "Programming with MATLAB",
-        "file": "MatLab Introduction(1).pdf",
-        "courseId": "matlab-engineering",
-        "slides": [
-          23,
-          27
-        ]
-      }
+      ]
     },
     {
       "id": "mat-09",
@@ -316,17 +236,7 @@
       ],
       "commonMistakes": [
         "Forgetting MATLAB indexing starts at 1 in the explicit-loop example."
-      ],
-      "lecture": {
-        "order": 5,
-        "title": "Programming with MATLAB",
-        "file": "MatLab Introduction(1).pdf",
-        "courseId": "matlab-engineering",
-        "slides": [
-          28,
-          29
-        ]
-      }
+      ]
     },
     {
       "id": "mat-10",
@@ -350,17 +260,7 @@
       ],
       "commonMistakes": [
         "Writing a while loop whose controlling value never changes."
-      ],
-      "lecture": {
-        "order": 5,
-        "title": "Programming with MATLAB",
-        "file": "MatLab Introduction(1).pdf",
-        "courseId": "matlab-engineering",
-        "slides": [
-          30,
-          33
-        ]
-      }
+      ]
     }
   ],
   "exercises": [
@@ -754,38 +654,6 @@
       ],
       "correct": 0,
       "type": "mcq"
-    }
-  ],
-  "lectureSequence": [
-    {
-      "order": 1,
-      "title": "Windows and menus",
-      "file": "MatLab Introduction(1).pdf",
-      "courseId": "matlab-engineering"
-    },
-    {
-      "order": 2,
-      "title": "Basic operations and arrays",
-      "file": "MatLab Introduction(1).pdf",
-      "courseId": "matlab-engineering"
-    },
-    {
-      "order": 3,
-      "title": "Files and functions",
-      "file": "MatLab Introduction(1).pdf",
-      "courseId": "matlab-engineering"
-    },
-    {
-      "order": 4,
-      "title": "Plotting with MATLAB",
-      "file": "MatLab Introduction(1).pdf",
-      "courseId": "matlab-engineering"
-    },
-    {
-      "order": 5,
-      "title": "Programming with MATLAB",
-      "file": "MatLab Introduction(1).pdf",
-      "courseId": "matlab-engineering"
     }
   ]
 }
