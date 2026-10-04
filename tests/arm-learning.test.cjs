@@ -44,8 +44,14 @@ assert.ok(!armLecture.includes('; Explanation:'),'ARM learning view must not use
 assert.match(armLecture,/AREA RESET, CODE, READONLY\s+; code area \/ section/,'ARM learning view should use the standard RESET AREA header');
 assert.match(armLecture,/MOV R1, #5\s+; load R1 with #5/,'ARM learning view should uppercase registers and keep comments short');
 assert.match(armLecture,/LDR R2, Q\s+; load R2 from Q/,'ARM learning view should resemble university ARMASM examples');
+const armLines=armLecture.split('\n');
+assert.equal(armLines[0].slice(0,8),'        ','AREA must be indented to the instruction/directive column');
+assert.equal(armLines[1].slice(0,8),'        ','ENTRY must be indented to the instruction/directive column');
+assert.match(armLecture,/^counter\s+RN 0/m,'symbol definitions must stay in the label column');
+assert.match(armLecture,/^        MOV R1, #5/m,'unlabelled instructions must be indented');
+assert.match(armLecture,/^        END/m,'END must be indented like the lecture examples');
 const armExisting=api.commentedCode('LDR r1, Q ; load r1 with Q','armasm');
-assert.ok(armExisting.startsWith('AREA RESET, CODE, READONLY'),'single-instruction ARM examples must receive the standard program skeleton');
+assert.ok(armExisting.startsWith('        AREA RESET, CODE, READONLY'),'single-instruction ARM examples must receive the indented standard program skeleton');
 assert.match(armExisting,/LDR R1, Q\s+; load r1 with Q/,'existing lecture-style ARM comments should be preserved');
 assert.equal((armExisting.match(/load r1 with Q/g)||[]).length,1,'existing ARM source comment must not be duplicated');
 const cppTeaching=api.commentedCode('int main() {\n    cout << "ok" << endl;\n    return 0;\n}','cpp');
