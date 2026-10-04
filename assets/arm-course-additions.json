@@ -4,7 +4,7 @@
     "title": "Microprocessors & ARM Architecture",
     "icon": "🖥️",
     "blurb": "Microprocessor fundamentals, system components, memory hierarchy, performance, RISC, ARM architecture, registers, modes, CPSR, and endianness.",
-    "description": "A university-aligned microprocessors and ARM architecture course built from the supplied EECE340 lecture material.",
+    "description": "An engineering-focused microprocessors and ARM architecture course covering processor fundamentals, ARM architecture, memory, I/O, and practical low-level programming.",
     "category": "computer-engineering",
     "level": "beginner-intermediate",
     "status": "available",
@@ -15,8 +15,7 @@
     "tags": [
       "microprocessors",
       "ARM",
-      "computer architecture",
-      "EECE340"
+      "computer architecture"
     ],
     "schemaVersion": 3,
     "roadmap": {
@@ -54,17 +53,7 @@
         "commonMistakes": [
           "Treating a microprocessor as the entire computer rather than the CPU that works with memory and I/O."
         ],
-        "explain": "A microprocessor is a computer's CPU implemented on a single integrated circuit. It fetches and executes instructions, performs arithmetic and logical work, and coordinates data movement with memory and I/O. Modern processors contain very large numbers of transistors connected to implement datapaths, control logic, caches, and other structures.",
-        "lecture": {
-          "order": 1,
-          "title": "Introduction",
-          "file": "01.Lecture_Introduction (2)(1).pdf",
-          "courseId": "microprocessors-arm",
-          "slides": [
-            4,
-            4
-          ]
-        }
+        "explain": "A microprocessor is a computer's CPU implemented on a single integrated circuit. It fetches and executes instructions, performs arithmetic and logical work, and coordinates data movement with memory and I/O. Modern processors contain very large numbers of transistors connected to implement datapaths, control logic, caches, and other structures."
       },
       {
         "id": "mpr-02",
@@ -88,17 +77,7 @@
         "commonMistakes": [
           "Memorizing dates without understanding the architectural change each technology made possible."
         ],
-        "explain": "Processor development moved from large vacuum-tube systems to transistors, integrated circuits, and then complete CPUs on a chip. Integration reduced size and cost while allowing much larger transistor counts and more capable processors.",
-        "lecture": {
-          "order": 1,
-          "title": "Introduction",
-          "file": "01.Lecture_Introduction (2)(1).pdf",
-          "courseId": "microprocessors-arm",
-          "slides": [
-            5,
-            39
-          ]
-        }
+        "explain": "Processor development moved from large vacuum-tube systems to transistors, integrated circuits, and then complete CPUs on a chip. Integration reduced size and cost while allowing much larger transistor counts and more capable processors."
       },
       {
         "id": "mpr-03",
@@ -123,17 +102,7 @@
         "commonMistakes": [
           "Assuming microprocessors, microcontrollers, and SoCs differ only in speed rather than in integration and intended use."
         ],
-        "explain": "A computer system combines the processor with memory and I/O support. Cache keeps frequently needed data close to the CPU, DRAM provides larger working memory, and platform logic connects components and peripherals. A microcontroller integrates a CPU with memory and peripherals, while a system-on-chip integrates still more system functions.",
-        "lecture": {
-          "order": 1,
-          "title": "Introduction",
-          "file": "01.Lecture_Introduction (2)(1).pdf",
-          "courseId": "microprocessors-arm",
-          "slides": [
-            40,
-            53
-          ]
-        }
+        "explain": "A computer system combines the processor with memory and I/O support. Cache keeps frequently needed data close to the CPU, DRAM provides larger working memory, and platform logic connects components and peripherals. A microcontroller integrates a CPU with memory and peripherals, while a system-on-chip integrates still more system functions."
       },
       {
         "id": "mpr-04",
@@ -158,17 +127,7 @@
         "commonMistakes": [
           "Thinking every memory access costs the same amount of time."
         ],
-        "explain": "Memory is organized as a hierarchy because no single technology is simultaneously the fastest, largest, and cheapest. Registers are closest to execution, then caches, then main memory. Processor history moved caches from the motherboard toward on-die L1, L2, and L3 levels.",
-        "lecture": {
-          "order": 1,
-          "title": "Introduction",
-          "file": "01.Lecture_Introduction (2)(1).pdf",
-          "courseId": "microprocessors-arm",
-          "slides": [
-            54,
-            57
-          ]
-        }
+        "explain": "Memory is organized as a hierarchy because no single technology is simultaneously the fastest, largest, and cheapest. Registers are closest to execution, then caches, then main memory. Processor history moved caches from the motherboard toward on-die L1, L2, and L3 levels."
       },
       {
         "id": "mpr-05",
@@ -193,17 +152,7 @@
         "commonMistakes": [
           "Using 'architecture' and 'microarchitecture' as interchangeable words."
         ],
-        "explain": "Architecture defines the programmer-visible contract, including instructions, registers, data types, and behavior. Microarchitecture is how a particular processor implements that contract. Two processors can execute the same instruction set while using different caches, pipelines, issue widths, or out-of-order machinery.",
-        "lecture": {
-          "order": 1,
-          "title": "Introduction",
-          "file": "01.Lecture_Introduction (2)(1).pdf",
-          "courseId": "microprocessors-arm",
-          "slides": [
-            58,
-            78
-          ]
-        }
+        "explain": "Architecture defines the programmer-visible contract, including instructions, registers, data types, and behavior. Microarchitecture is how a particular processor implements that contract. Two processors can execute the same instruction set while using different caches, pipelines, issue widths, or out-of-order machinery."
       },
       {
         "id": "mpr-06",
@@ -228,17 +177,7 @@
         "commonMistakes": [
           "Assuming a higher clock rate automatically means a faster processor for every program."
         ],
-        "explain": "Processor performance is fundamentally about how long a workload takes. Clock frequency affects cycles per second, while IPC describes how much instruction work completes per cycle. Pipelining can raise frequency, dependencies and stalls reduce IPC, and superscalar or out-of-order execution can expose more parallel work.",
-        "lecture": {
-          "order": 1,
-          "title": "Introduction",
-          "file": "01.Lecture_Introduction (2)(1).pdf",
-          "courseId": "microprocessors-arm",
-          "slides": [
-            79,
-            80
-          ]
-        }
+        "explain": "Processor performance is fundamentally about how long a workload takes. Clock frequency affects cycles per second, while IPC describes how much instruction work completes per cycle. Pipelining can raise frequency, dependencies and stalls reduce IPC, and superscalar or out-of-order execution can expose more parallel work."
       },
       {
         "id": "mpr-07",
@@ -262,17 +201,7 @@
         "commonMistakes": [
           "Interpreting RISC as 'every real instruction always completes in exactly one physical clock cycle.'"
         ],
-        "explain": "Classic RISC uses regular instructions, many registers, and explicit loads/stores for memory access. ARM data-processing instructions mainly use registers, while LDR and STR move data between registers and memory. A modern processor may be internally complex while preserving this programmer-visible architecture.",
-        "lecture": {
-          "order": 2,
-          "title": "ARM Architecture",
-          "file": "02.Lecture_ARM_Architecture02 (3)(1).pdf",
-          "courseId": "microprocessors-arm",
-          "slides": [
-            6,
-            21
-          ]
-        }
+        "explain": "Classic RISC uses regular instructions, many registers, and explicit loads/stores for memory access. ARM data-processing instructions mainly use registers, while LDR and STR move data between registers and memory. A modern processor may be internally complex while preserving this programmer-visible architecture."
       },
       {
         "id": "mpr-08",
@@ -297,17 +226,7 @@
         "commonMistakes": [
           "Confusing instruction encoding size with the size of the data being processed."
         ],
-        "explain": "In the 32-bit ARM material, a halfword is 16 bits, a word is 32 bits, and a doubleword is 64 bits. Classic ARM instructions are 32 bits wide, while Thumb/Thumb-2 use a mixture of compact 16-bit and 32-bit encodings. Execution state controls which encodings the processor interprets.",
-        "lecture": {
-          "order": 2,
-          "title": "ARM Architecture",
-          "file": "02.Lecture_ARM_Architecture02 (3)(1).pdf",
-          "courseId": "microprocessors-arm",
-          "slides": [
-            22,
-            22
-          ]
-        }
+        "explain": "In the 32-bit ARM material, a halfword is 16 bits, a word is 32 bits, and a doubleword is 64 bits. Classic ARM instructions are 32 bits wide, while Thumb/Thumb-2 use a mixture of compact 16-bit and 32-bit encodings. Execution state controls which encodings the processor interprets."
       },
       {
         "id": "mpr-09",
@@ -333,17 +252,7 @@
         "commonMistakes": [
           "Assuming every processor mode sees exactly the same physical SP, LR, and saved-status registers."
         ],
-        "explain": "Classic ARM exposes general-purpose registers plus special roles for R13 as stack pointer, R14 as link register, and R15 as program counter. CPSR records current status/control information. Privileged exception modes can access an SPSR and selected banked registers so handlers can preserve state and use their own stack/link context.",
-        "lecture": {
-          "order": 2,
-          "title": "ARM Architecture",
-          "file": "02.Lecture_ARM_Architecture02 (3)(1).pdf",
-          "courseId": "microprocessors-arm",
-          "slides": [
-            23,
-            29
-          ]
-        }
+        "explain": "Classic ARM exposes general-purpose registers plus special roles for R13 as stack pointer, R14 as link register, and R15 as program counter. CPSR records current status/control information. Privileged exception modes can access an SPSR and selected banked registers so handlers can preserve state and use their own stack/link context."
       },
       {
         "id": "mpr-10",
@@ -371,17 +280,7 @@
         "commonMistakes": [
           "Reading the ARM I and F CPSR bits as interrupt-enable bits; in classic ARM, a set mask bit masks/disables that interrupt."
         ],
-        "explain": "Classic ARM has User mode and privileged modes including System, Supervisor, IRQ, FIQ, Abort, and Undefined. CPSR holds condition flags, execution state, interrupt masks, and mode bits. Little-endian stores the least-significant byte at the lower address; big-endian reverses that order. Exceptions enter an appropriate privileged mode so handlers can use protected state.",
-        "lecture": {
-          "order": 2,
-          "title": "ARM Architecture",
-          "file": "02.Lecture_ARM_Architecture02 (3)(1).pdf",
-          "courseId": "microprocessors-arm",
-          "slides": [
-            30,
-            45
-          ]
-        }
+        "explain": "Classic ARM has User mode and privileged modes including System, Supervisor, IRQ, FIQ, Abort, and Undefined. CPSR holds condition flags, execution state, interrupt masks, and mode bits. Little-endian stores the least-significant byte at the lower address; big-endian reverses that order. Exceptions enter an appropriate privileged mode so handlers can use protected state."
       }
     ],
     "exercises": [
@@ -777,46 +676,8 @@
         "type": "mcq"
       }
     ],
-    "lectureSequence": [
-      {
-        "order": 1,
-        "title": "Introduction",
-        "file": "01.Lecture_Introduction (2)(1).pdf",
-        "courseId": "microprocessors-arm"
-      },
-      {
-        "order": 2,
-        "title": "ARM Architecture",
-        "file": "02.Lecture_ARM_Architecture02 (3)(1).pdf",
-        "courseId": "microprocessors-arm"
-      },
-      {
-        "order": 3,
-        "title": "Instructions — Part 1",
-        "file": "03.Lecture_ARM_Instructions_part1 (1)(1).pdf",
-        "courseId": "arm-assembly"
-      },
-      {
-        "order": 4,
-        "title": "Instructions — Part 2",
-        "file": "03.Lecture_ARM_Instructions_part2 (2)(1).pdf",
-        "courseId": "arm-assembly"
-      },
-      {
-        "order": 5,
-        "title": "Functions",
-        "file": "04.Functions(1).pdf",
-        "courseId": "arm-assembly"
-      },
-      {
-        "order": 6,
-        "title": "Exceptions",
-        "file": "05.Exceptions(1).pdf",
-        "courseId": "arm-assembly"
-      }
-    ],
     "syllabus": {
-      "courseCode": "EECE340",
+      "courseCode": "Microprocessors & ARM",
       "courseTitle": "Microprocessors & ARM Architecture",
       "weighting": {
         "homework": 10,
@@ -830,10 +691,9 @@
     },
     "labs": [
       {
-        "id": "eece340-lab-01",
+        "id": "Microprocessors & ARM-lab-01",
         "title": "C++ and ARM Calling Convention Lab",
         "syllabusTopic": "C++ comparison and mixed C++/assembly programming; AAPCS calling standard",
-        "assessment": "Lab Work (10%), Final Exam (25%)",
         "language": "armasm",
         "supportingLanguage": "cpp",
         "objective": "Understand the ARM Architecture Procedure Call Standard (AAPCS): arguments passed in R0–R3, return value in R0, preserving callee-saved registers R4–R11 on the stack, and maintaining 8-byte stack alignment.",
@@ -847,10 +707,9 @@
         "solutionExplanation": "The subroutine follows AAPCS by receiving arguments in R0-R3, using non-volatile registers R4-R5 safely by saving them on entry and restoring them on exit, calculating the quadratic term, and returning the result in R0."
       },
       {
-        "id": "eece340-lab-02",
+        "id": "Microprocessors & ARM-lab-02",
         "title": "Assembler Directives, Macros, Constants & Literal Pool Lab",
         "syllabusTopic": "Assembler directives, macros, constants, and literal pools",
-        "assessment": "Homework (10%), Lab Work (10%)",
         "language": "armasm",
         "supportingLanguage": "armasm",
         "objective": "Master assembler directives (AREA, ENTRY, END, ALIGN, SPACE, DCD, DCB), symbolic definitions (EQU, RN), macro definitions (MACRO, MEND), and literal pool placement (LTORG).",
@@ -864,10 +723,9 @@
         "solutionExplanation": "EQU and RN define meaningful constants and register names; conditional moves perform branchless clamping; LTORG forces immediate allocation of literal table data."
       },
       {
-        "id": "eece340-lab-03",
+        "id": "Microprocessors & ARM-lab-03",
         "title": "ARM Arithmetic & Data Movement Lab",
         "syllabusTopic": "Data-processing instructions, 64-bit multiword arithmetic, barrel shifter",
-        "assessment": "Midterm (25%), Quizzes (15%)",
         "language": "armasm",
         "supportingLanguage": "armasm",
         "objective": "Implement multi-word (64-bit) addition and subtraction using ADDS, ADC, SUBS, SBC, and apply flexible second operand barrel shifter transformations (LSL, LSR, ASR, ROR).",
@@ -881,10 +739,9 @@
         "solutionExplanation": "ADDS writes arithmetic status to CPSR; ADC reads the carry flag to complete 64-bit addition; SUBS/SBC perform the corresponding multi-word subtraction."
       },
       {
-        "id": "eece340-lab-04",
+        "id": "Microprocessors & ARM-lab-04",
         "title": "Load/Store & Addressing Modes Lab",
         "syllabusTopic": "Load/store instructions, pre/post indexed addressing modes, byte/halfword transfers",
-        "assessment": "Midterm (25%), Lab Exam (15%)",
         "language": "armasm",
         "supportingLanguage": "armasm",
         "objective": "Master ARM addressing modes: offset addressing [Rn, #k], pre-indexed writeback [Rn, #k]!, post-indexed [Rn], #k, scaled register offset, and byte/halfword transfers (LDRB, STRB, LDRH, STRH).",
@@ -898,10 +755,9 @@
         "solutionExplanation": "Post-indexed addressing [r0], #4 transfers the current word then increments the pointer; pre-indexed writeback [r1, #4]! updates the base register before the write."
       },
       {
-        "id": "eece340-lab-05",
+        "id": "Microprocessors & ARM-lab-05",
         "title": "Control Flow, Loops, Branches & Jump Tables Lab",
         "syllabusTopic": "Control flow, loops, branches, condition codes, jump tables",
-        "assessment": "Homework (10%), Lab Exam (15%)",
         "language": "armasm",
         "supportingLanguage": "armasm",
         "objective": "Construct structured loops (while/for/do-while), multi-way decision trees with condition codes, and efficient jump tables using PC modification for command dispatch.",
@@ -915,10 +771,9 @@
         "solutionExplanation": "Range validation with CMP and BHI prevents out-of-bounds execution; conditional branches route control to dedicated handler blocks."
       },
       {
-        "id": "eece340-lab-06",
+        "id": "Microprocessors & ARM-lab-06",
         "title": "Address Decoding & Memory Interfacing Lab",
         "syllabusTopic": "Address decoding, memory map partitioning, chip select logic, bus aliasing",
-        "assessment": "Midterm (25%), Final Exam (25%)",
         "language": "python",
         "supportingLanguage": "armasm",
         "objective": "Design and verify address decoding logic for a microprocessor memory system, partitioning 32-bit address space into Flash ROM, SRAM, and Memory-Mapped Peripherals while checking for aliasing.",
@@ -932,10 +787,9 @@
         "solutionExplanation": "The address decoder slices the top address bits to produce mutual exclusive chip select assertions and traps invalid accesses."
       },
       {
-        "id": "eece340-lab-07",
+        "id": "Microprocessors & ARM-lab-07",
         "title": "Bus Transactions & System Timing Lab",
         "syllabusTopic": "System timing, bus transactions, setup/hold times, wait state calculations",
-        "assessment": "Midterm (25%), Final Exam (25%)",
         "language": "python",
         "supportingLanguage": "armasm",
         "objective": "Analyze bus read and write cycles, compute required wait states based on clock period and memory access time (tACC), and verify setup and hold timing margins.",
@@ -949,10 +803,9 @@
         "solutionExplanation": "The processor extends the bus cycle by inserting wait states (TW) until the memory device's access time requirement is met before latching data."
       },
       {
-        "id": "eece340-lab-08",
+        "id": "Microprocessors & ARM-lab-08",
         "title": "SRAM & DRAM Interface Lab",
         "syllabusTopic": "Static RAM and dynamic RAM interfacing, RAS/CAS timing, refresh cycles",
-        "assessment": "Midterm (25%), Final Exam (25%)",
         "language": "python",
         "supportingLanguage": "armasm",
         "objective": "Understand SRAM (static latch) vs DRAM (capacitor storage) interfacing, row/column address multiplexing (RAS/CAS), and periodic refresh scheduling within 64 ms retention limits.",
@@ -966,10 +819,9 @@
         "solutionExplanation": "DRAM multiplexes addresses on shared pins using RAS# and CAS# strobes; open row page hits execute with low latency while page misses require precharge and activate cycles."
       },
       {
-        "id": "eece340-lab-09",
+        "id": "Microprocessors & ARM-lab-09",
         "title": "Parallel, Serial & Analog I/O Lab",
         "syllabusTopic": "Parallel I/O, UART serial I/O, ADC/DAC analog I/O quantization",
-        "assessment": "Lab Work (10%), Final Exam (25%)",
         "language": "armasm",
         "supportingLanguage": "python",
         "objective": "Program GPIO parallel I/O ports, configure UART serial communication (transmitter holding register polling), and calculate ADC successive-approximation quantization.",
@@ -983,10 +835,9 @@
         "solutionExplanation": "The polling driver checks the hardware status flag before each write, preventing data corruption and buffer overruns."
       },
       {
-        "id": "eece340-lab-10",
+        "id": "Microprocessors & ARM-lab-10",
         "title": "Memory-Mapped Peripherals Lab",
         "syllabusTopic": "Memory-mapped peripherals, control/status registers, bit masking with BIC/ORR/TST",
-        "assessment": "Lab Work (10%), Lab Exam (15%)",
         "language": "armasm",
         "supportingLanguage": "armasm",
         "objective": "Control hardware timer and GPIO peripherals through memory-mapped register offsets using bit manipulation (ORR to set bits, BIC to clear bits, TST to inspect bits) without corrupting reserved register fields.",
@@ -1000,10 +851,9 @@
         "solutionExplanation": "Bitwise ORR sets specific configuration bits while BIC clears selected bits without modifying unrelated control fields."
       },
       {
-        "id": "eece340-lab-11",
+        "id": "Microprocessors & ARM-lab-11",
         "title": "Interrupts, Vector Table & DMA Lab",
         "syllabusTopic": "Hardware/software interrupts, interrupt controller, vector tables, DMA transfers",
-        "assessment": "Lab Exam (15%), Final Exam (25%)",
         "language": "armasm",
         "supportingLanguage": "python",
         "objective": "Configure ARM exception vector tables (0x00000000–0x0000001C), implement an IRQ Interrupt Service Routine with register preservation, return using SUBS pc, lr, #4, and model DMA block transfers.",
@@ -1017,10 +867,9 @@
         "solutionExplanation": "The ARM vector table maps 8 standard exception vectors at 4-byte intervals from 0x00000000 to 0x0000001C, branching to dedicated handlers."
       },
       {
-        "id": "eece340-lab-12",
+        "id": "Microprocessors & ARM-lab-12",
         "title": "Subroutine Calling, Stacks & Reentrancy Lab",
         "syllabusTopic": "Subroutines and stacks, STMFD/LDMFD, nested calling frames, reentrancy",
-        "assessment": "Midterm (25%), Lab Exam (15%)",
         "language": "armasm",
         "supportingLanguage": "armasm",
         "objective": "Implement subroutines using the ARM Full Descending (FD) stack, manage nested activation frames with STMFD / LDMFD, preserve link register LR and callee-saved registers (R4–R11), and implement recursion.",
@@ -1034,10 +883,9 @@
         "solutionExplanation": "STMFD saves context on stack allocation and LDMFD restores state and pops directly into PC to return from nested calls."
       },
       {
-        "id": "eece340-lab-13",
+        "id": "Microprocessors & ARM-lab-13",
         "title": "Linked Lists & Search Algorithms Lab",
         "syllabusTopic": "Linked lists, dynamic pointer traversal in assembly, linear search, node manipulation",
-        "assessment": "Lab Exam (15%), Final Exam (25%)",
         "language": "armasm",
         "supportingLanguage": "armasm",
         "objective": "Implement dynamic linked list traversal in ARM assembly, where each node consists of a 32-bit integer value and a 32-bit pointer to the next node ([val, next_ptr]), performing linear search and NULL pointer checking.",
@@ -1051,10 +899,9 @@
         "solutionExplanation": "The traversal routine checks for NULL before every dereference, reads node fields using offset addressing, and updates the pointer iteratively."
       },
       {
-        "id": "eece340-lab-14",
+        "id": "Microprocessors & ARM-lab-14",
         "title": "Mixed C++ & Assembly Integration Lab",
         "syllabusTopic": "Mixed C++/assembly programming, struct pointer passing, DSP filtering routines",
-        "assessment": "Lab Work (10%), Final Exam (25%)",
         "language": "cpp",
         "supportingLanguage": "armasm",
         "objective": "Bridge high-level C++ application code with optimized ARM assembly subroutines using extern 'C' linkage, pass pointers to C++ structs/arrays, and compute digital signal processing operations.",
@@ -1068,13 +915,12 @@
         "solutionExplanation": "extern 'C' disables C++ name mangling, allowing the linker to match the assembly symbol name directly."
       },
       {
-        "id": "eece340-lab-15",
-        "title": "ARM7/Keil & University IoT/Cloud Guidance Lab",
-        "syllabusTopic": "ARM7/Keil board-oriented lab work, startup.s, scatter files, ARM University IoT/cloud telemetry",
-        "assessment": "Homework (10%), Lab Work (10%)",
+        "id": "Microprocessors & ARM-lab-15",
+        "title": "ARM7/Keil & IoT/Cloud Guidance Lab",
+        "syllabusTopic": "ARM7/Keil board-oriented lab work, startup.s, scatter files, ARM IoT/cloud telemetry",
         "language": "armasm",
         "supportingLanguage": "cpp",
-        "objective": "Master the standard university embedded workflow: setting up a Keil uVision project for ARM7TDMI (LPC2148), configuring startup.s vector tables and stack spaces, memory scatter-loading files (.sct), and formatting UART telemetry for IoT cloud ingestion.",
+        "objective": "Master the standard embedded workflow: setting up a Keil uVision project for ARM7TDMI (LPC2148), configuring startup.s vector tables and stack spaces, memory scatter-loading files (.sct), and formatting UART telemetry for IoT cloud ingestion.",
         "problemStatement": "Configure startup.s stack spaces for SVC and IRQ modes, set up Flash (0x00000000) and On-chip SRAM (0x40000000) scatter loading, and write a UART telemetry formatting routine that outputs a JSON payload for IoT cloud reporting.",
         "starterCode": "; Keil uVision ARM7TDMI startup.s stack initialization\nSVC_STACK_SIZE EQU 0x00000100 ; 256 bytes SVC supervisor mode stack\nIRQ_STACK_SIZE EQU 0x00000100 ; 256 bytes IRQ interrupt mode stack\nRAM_TOP EQU 0x40004000 ; Top of internal SRAM (16 KB)\n\n        AREA STACKS, NOINIT, READWRITE, ALIGN=3 ; Stack allocation area\nSVC_Stack SPACE SVC_STACK_SIZE ; Allocate SVC stack space\nIRQ_Stack SPACE IRQ_STACK_SIZE ; Allocate IRQ stack space\n\n        AREA InitCode, CODE, READONLY ; Startup initialization code\n        ENTRY ; Reset entry point\nReset_Start ; Reset entry label\n        LDR sp, =SVC_Stack + SVC_STACK_SIZE ; Initialize Supervisor Stack Pointer\n        MSR CPSR_c, #0xD2 ; Switch to IRQ mode with interrupts disabled\n        LDR sp, =IRQ_Stack + IRQ_STACK_SIZE ; Initialize IRQ Stack Pointer\n        MSR CPSR_c, #0xD3 ; Return to Supervisor mode\nstop B stop ; Spin until main application\n        END ; End of startup source",
         "expectedState": "SP_svc points to 0x40000100; SP_irq points to 0x40000200; CPU returns to Supervisor mode ready to branch to __main.",
@@ -1085,13 +931,12 @@
         "solutionExplanation": "Startup code initializes mode-banked stack pointers and memory controllers before jumping to user C/C++ code."
       },
       {
-        "id": "eece340-lab-16",
-        "title": "Timed Final Lab Exam Rehearsal",
-        "syllabusTopic": "Final lab-exam preparation, full 90-minute multi-part comprehensive practical exam",
-        "assessment": "Lab Exam (15% Weight)",
+        "id": "Microprocessors & ARM-lab-16",
+        "title": "Timed Comprehensive Lab Rehearsal",
+        "syllabusTopic": "Comprehensive lab preparation with a timed multi-part practical exercise",
         "language": "armasm",
         "supportingLanguage": "cpp",
-        "objective": "Rehearse a timed, comprehensive 90-minute university microprocessor lab exam problem combining address decoding, peripheral I/O control, interrupt service routine design, stack-safe subroutine calling, and error diagnostics.",
+        "objective": "Rehearse a timed, comprehensive 90-minute microprocessor lab problem combining address decoding, peripheral I/O control, interrupt service routine design, stack-safe subroutine calling, and error diagnostics.",
         "problemStatement": "Complete the 3-part final lab exam problem: (Part A) Calculate the memory address range for a 32 KB SRAM starting at 0x40000000; (Part B) Write an ARM assembly ISR that reads sensor data at MMIO 0xE0004000, checks against limit 100, and sets alarm bit 0 at GPIO 0xE0028000; (Part C) Wrap the DSP routine in a stack-safe subroutine returning status in R0.",
         "starterCode": "; Part B: ARM assembly final lab exam ISR\nSENSOR_ADDR EQU 0xE0004000 ; Memory-mapped sensor address\nGPIO_ADDR EQU 0xE0028000 ; Memory-mapped GPIO output address\nALARM_LIMIT EQU 100 ; Sensor alarm threshold\n\n        AREA FinalExamLab, CODE, READONLY ; Declare code area\n        EXPORT Exam_ISR ; Export ISR symbol\nExam_ISR ; ISR entry point\n        SUB lr, lr, #4 ; Adjust link register for IRQ pipeline\n        STMFD sp!, {r0-r3, lr} ; Save working registers and return address\n        LDR r0, =SENSOR_ADDR ; Load sensor base address\n        LDR r1, [r0] ; Read current sensor reading\n        CMP r1, #ALARM_LIMIT ; Compare sensor reading with threshold (100)\n        BLE clear_alarm ; If sensor <= 100, clear alarm\n        LDR r2, =GPIO_ADDR ; Load GPIO base address\n        MOV r3, #0x01 ; Alarm bit mask (bit 0 = HIGH)\n        STR r3, [r2] ; Turn ON alarm LED on GPIO\n        B isr_done ; Finish ISR\nclear_alarm ; Clear alarm label\n        LDR r2, =GPIO_ADDR ; Load GPIO base address\n        MOV r3, #0x00 ; Clear alarm bit\n        STR r3, [r2] ; Turn OFF alarm LED\nisr_done ; ISR completion label\n        LDMFD sp!, {r0-r3, pc}^ ; Restore registers and return atomically\n        END ; End of exam assembly source",
         "expectedState": "Sensor reading > 100 turns on GPIO bit 0; Sensor reading <= 100 turns off GPIO bit 0; Part A address range: 0x40000000 to 0x40007FFF (32 KB = 32768 bytes).",
@@ -1108,7 +953,7 @@
     "title": "ARM Assembly Programming",
     "icon": "⚙️",
     "blurb": "ARM assembly syntax, data processing, barrel shifts, flags, condition codes, branches, memory addressing, stacks, functions, and exceptions.",
-    "description": "A university-aligned ARM assembly course built from the supplied instruction, function, and exception lecture material.",
+    "description": "A engineering-focused ARM assembly course built from the supplied instruction, function, and exception lecture material.",
     "category": "computer-engineering",
     "level": "intermediate",
     "status": "available",
@@ -1121,7 +966,7 @@
     "tags": [
       "ARM",
       "assembly",
-      "EECE340",
+      "Microprocessors & ARM",
       "low-level programming"
     ],
     "schemaVersion": 3,
@@ -1155,22 +1000,12 @@
         ],
         "explanation": "ARM assembly source combines processor instructions with assembler directives. Most data-processing instructions place the destination first, followed by source operands. AREA, ENTRY, RN, EQU, ALIGN, SPACE, and END help the assembler organize code/data or define names; they are not operations executed by the CPU.",
         "examples": [
-          "        AREA Prog1, CODE, READONLY ; Declare code area\n        ENTRY ; Mark entry point\ncounter RN 0 ; Alias register r0 as counter\nlimit   EQU 5 ; Define symbolic constant limit\n        MOV counter, #0 ; Initialize counter to 0\nstop    B stop ; Loop forever\n        END ; End of assembly"
+          "        AREA RESET, CODE, READONLY ; Declare code area\n        ENTRY ; Mark entry point\ncounter RN 0 ; Alias register r0 as counter\nlimit   EQU 5 ; Define symbolic constant limit\n        MOV counter, #0 ; Initialize counter to 0\nstop    B stop ; Loop forever\n        END ; End of assembly"
         ],
         "commonMistakes": [
           "Treating assembler directives such as AREA or EQU as instructions executed by the ARM core."
         ],
-        "explain": "ARM assembly source combines processor instructions with assembler directives. Most data-processing instructions place the destination first, followed by source operands. AREA, ENTRY, RN, EQU, ALIGN, SPACE, and END help the assembler organize code/data or define names; they are not operations executed by the CPU.",
-        "lecture": {
-          "order": 3,
-          "title": "Instructions — Part 1",
-          "file": "03.Lecture_ARM_Instructions_part1 (1)(1).pdf",
-          "courseId": "arm-assembly",
-          "slides": [
-            7,
-            25
-          ]
-        }
+        "explain": "ARM assembly source combines processor instructions with assembler directives. Most data-processing instructions place the destination first, followed by source operands. AREA, ENTRY, RN, EQU, ALIGN, SPACE, and END help the assembler organize code/data or define names; they are not operations executed by the CPU."
       },
       {
         "id": "arm-02",
@@ -1195,17 +1030,7 @@
         "commonMistakes": [
           "Reading MOV r0, r1 as copying r0 into r1."
         ],
-        "explain": "Data-processing instructions work primarily on registers. MOV copies an operand into a destination register, while MVN writes the bitwise complement. Immediate operands use # in the lecture syntax. Remember the destination-first pattern when tracing instructions.",
-        "lecture": {
-          "order": 3,
-          "title": "Instructions — Part 1",
-          "file": "03.Lecture_ARM_Instructions_part1 (1)(1).pdf",
-          "courseId": "arm-assembly",
-          "slides": [
-            9,
-            15
-          ]
-        }
+        "explain": "Data-processing instructions work primarily on registers. MOV copies an operand into a destination register, while MVN writes the bitwise complement. Immediate operands use # in the lecture syntax. Remember the destination-first pattern when tracing instructions."
       },
       {
         "id": "arm-09",
@@ -1232,17 +1057,7 @@
         "commonMistakes": [
           "Confusing the address in the base register with the data loaded from memory."
         ],
-        "explain": "ARM is a load-store architecture, so memory values move into registers before most data processing. LDR/STR transfer words, with byte and halfword variants. Addressing modes combine a base register with an offset; pre-indexing forms the address before access, while post-indexing uses the base first and updates it afterward.",
-        "lecture": {
-          "order": 3,
-          "title": "Instructions — Part 1",
-          "file": "03.Lecture_ARM_Instructions_part1 (1)(1).pdf",
-          "courseId": "arm-assembly",
-          "slides": [
-            26,
-            43
-          ]
-        }
+        "explain": "ARM is a load-store architecture, so memory values move into registers before most data processing. LDR/STR transfer words, with byte and halfword variants. Addressing modes combine a base register with an offset; pre-indexing forms the address before access, while post-indexing uses the base first and updates it afterward."
       },
       {
         "id": "arm-05",
@@ -1267,17 +1082,7 @@
         "commonMistakes": [
           "Assuming LSR and ASR are identical for values whose top bit is 1."
         ],
-        "explain": "ARM can shift the second operand as part of many data-processing instructions. LSL shifts left, LSR shifts right with zero fill, ASR preserves the sign bit for signed values, and ROR rotates bits around. Combining ALU work with a shift is a characteristic ARM feature.",
-        "lecture": {
-          "order": 3,
-          "title": "Instructions — Part 1",
-          "file": "03.Lecture_ARM_Instructions_part1 (1)(1).pdf",
-          "courseId": "arm-assembly",
-          "slides": [
-            44,
-            48
-          ]
-        }
+        "explain": "ARM can shift the second operand as part of many data-processing instructions. LSL shifts left, LSR shifts right with zero fill, ASR preserves the sign bit for signed values, and ROR rotates bits around. Combining ALU work with a shift is a characteristic ARM feature."
       },
       {
         "id": "arm-06",
@@ -1302,17 +1107,7 @@
         "commonMistakes": [
           "Treating C and V as the same condition."
         ],
-        "explain": "N reflects the result sign bit, Z indicates zero, C records carry/no-borrow information and shifted-out bits, and V reports signed arithmetic overflow. Many data-processing instructions update flags only when the S suffix is requested.",
-        "lecture": {
-          "order": 4,
-          "title": "Instructions — Part 2",
-          "file": "03.Lecture_ARM_Instructions_part2 (2)(1).pdf",
-          "courseId": "arm-assembly",
-          "slides": [
-            2,
-            6
-          ]
-        }
+        "explain": "N reflects the result sign bit, Z indicates zero, C records carry/no-borrow information and shifted-out bits, and V reports signed arithmetic overflow. Many data-processing instructions update flags only when the S suffix is requested."
       },
       {
         "id": "arm-07",
@@ -1339,17 +1134,7 @@
         "commonMistakes": [
           "Expecting CMP to store a normal subtraction result."
         ],
-        "explain": "CMP behaves like subtraction for flag setting, CMN like addition, TST like bitwise AND, and TEQ like XOR. They update flags without keeping a normal destination result. Conditional suffixes such as EQ or NE make an instruction execute only when its flag condition is satisfied.",
-        "lecture": {
-          "order": 4,
-          "title": "Instructions — Part 2",
-          "file": "03.Lecture_ARM_Instructions_part2 (2)(1).pdf",
-          "courseId": "arm-assembly",
-          "slides": [
-            7,
-            10
-          ]
-        }
+        "explain": "CMP behaves like subtraction for flag setting, CMN like addition, TST like bitwise AND, and TEQ like XOR. They update flags without keeping a normal destination result. Conditional suffixes such as EQ or NE make an instruction execute only when its flag condition is satisfied."
       },
       {
         "id": "arm-04",
@@ -1374,17 +1159,7 @@
         "commonMistakes": [
           "Using arithmetic intuition for bit masks instead of tracing each bit position."
         ],
-        "explain": "AND keeps bits selected by a mask, ORR sets selected bits, EOR performs XOR, and BIC clears bits selected by the second operand. These operations are central to packed flags and device/control registers.",
-        "lecture": {
-          "order": 4,
-          "title": "Instructions — Part 2",
-          "file": "03.Lecture_ARM_Instructions_part2 (2)(1).pdf",
-          "courseId": "arm-assembly",
-          "slides": [
-            11,
-            15
-          ]
-        }
+        "explain": "AND keeps bits selected by a mask, ORR sets selected bits, EOR performs XOR, and BIC clears bits selected by the second operand. These operations are central to packed flags and device/control registers."
       },
       {
         "id": "arm-03",
@@ -1410,17 +1185,7 @@
         "commonMistakes": [
           "Applying normal SUB operand order to RSB."
         ],
-        "explain": "ARM arithmetic instructions typically use a destination and two input operands. ADD and SUB perform basic arithmetic; ADC and SBC include carry state for multiword arithmetic. RSB reverses subtraction order, useful when the desired calculation is operand2 minus operand1.",
-        "lecture": {
-          "order": 4,
-          "title": "Instructions — Part 2",
-          "file": "03.Lecture_ARM_Instructions_part2 (2)(1).pdf",
-          "courseId": "arm-assembly",
-          "slides": [
-            16,
-            18
-          ]
-        }
+        "explain": "ARM arithmetic instructions typically use a destination and two input operands. ADD and SUB perform basic arithmetic; ADC and SBC include carry state for multiword arithmetic. RSB reverses subtraction order, useful when the desired calculation is operand2 minus operand1."
       },
       {
         "id": "arm-08",
@@ -1445,17 +1210,7 @@
         "commonMistakes": [
           "Forgetting that a loop must modify the state used by its termination condition."
         ],
-        "explain": "Branch instructions change control flow by loading a new PC value. Labels identify targets. Conditional branches combine flag tests with control flow, which implements if/else and loops. Testing before or after the body distinguishes pre-test and post-test loops.",
-        "lecture": {
-          "order": 4,
-          "title": "Instructions — Part 2",
-          "file": "03.Lecture_ARM_Instructions_part2 (2)(1).pdf",
-          "courseId": "arm-assembly",
-          "slides": [
-            19,
-            47
-          ]
-        }
+        "explain": "Branch instructions change control flow by loading a new PC value. Labels identify targets. Conditional branches combine flag tests with control flow, which implements if/else and loops. Testing before or after the body distinguishes pre-test and post-test loops."
       },
       {
         "id": "arm-10",
@@ -1484,17 +1239,7 @@
         "commonMistakes": [
           "Assuming textual register-list order controls memory ordering."
         ],
-        "explain": "LDM and STM move multiple registers between registers and memory. Addressing-mode suffixes specify increment/decrement and before/after behavior. PUSH and POP are stack-oriented aliases using R13/SP; in the convention shown in the lectures, PUSH corresponds to STMDB and POP to LDMIA, so the stack grows toward lower addresses.",
-        "lecture": {
-          "order": 4,
-          "title": "Instructions — Part 2",
-          "file": "03.Lecture_ARM_Instructions_part2 (2)(1).pdf",
-          "courseId": "arm-assembly",
-          "slides": [
-            99,
-            113
-          ]
-        }
+        "explain": "LDM and STM move multiple registers between registers and memory. Addressing-mode suffixes specify increment/decrement and before/after behavior. PUSH and POP are stack-oriented aliases using R13/SP; in the convention shown in the lectures, PUSH corresponds to STMDB and POP to LDMIA, so the stack grows toward lower addresses."
       },
       {
         "id": "arm-11",
@@ -1519,17 +1264,7 @@
         "commonMistakes": [
           "Calling another function without protecting LR when the current function still needs its own return address."
         ],
-        "explain": "BL branches while saving a return address in LR/R14. A simple return can use BX LR. Subroutines preserve state according to the calling convention. Parameters can be passed in registers, through a referenced memory block, or on the stack; stack-based access must account for values pushed on entry.",
-        "lecture": {
-          "order": 5,
-          "title": "Functions",
-          "file": "04.Functions(1).pdf",
-          "courseId": "arm-assembly",
-          "slides": [
-            2,
-            22
-          ]
-        }
+        "explain": "BL branches while saving a return address in LR/R14. A simple return can use BX LR. Subroutines preserve state according to the calling convention. Parameters can be passed in registers, through a referenced memory block, or on the stack; stack-based access must account for values pushed on entry."
       },
       {
         "id": "arm-12",
@@ -1556,17 +1291,7 @@
         "commonMistakes": [
           "Using the same unadjusted LR return sequence for every exception type."
         ],
-        "explain": "On a classic ARM exception, CPSR is copied to the relevant SPSR, the processor changes mode, a return address is stored in mode-specific LR, and PC goes to an exception vector. The vector dispatches to a handler, which returns using the exception-appropriate sequence. SVC deliberately requests a privileged OS service.",
-        "lecture": {
-          "order": 6,
-          "title": "Exceptions",
-          "file": "05.Exceptions(1).pdf",
-          "courseId": "arm-assembly",
-          "slides": [
-            2,
-            13
-          ]
-        }
+        "explain": "On a classic ARM exception, CPSR is copied to the relevant SPSR, the processor changes mode, a return address is stored in mode-specific LR, and PC goes to an exception vector. The vector dispatches to a handler, which returns using the exception-appropriate sequence. SVC deliberately requests a privileged OS service."
       }
     ],
     "exercises": [
@@ -2008,44 +1733,6 @@
         "type": "mcq",
         "explanation": "SVC deliberately raises a software exception to request a supervisor service. It is not an ordinary BL subroutine call; handling depends on the execution environment.",
         "lessonId": "arm-12"
-      }
-    ],
-    "lectureSequence": [
-      {
-        "order": 1,
-        "title": "Introduction",
-        "file": "01.Lecture_Introduction (2)(1).pdf",
-        "courseId": "microprocessors-arm"
-      },
-      {
-        "order": 2,
-        "title": "ARM Architecture",
-        "file": "02.Lecture_ARM_Architecture02 (3)(1).pdf",
-        "courseId": "microprocessors-arm"
-      },
-      {
-        "order": 3,
-        "title": "Instructions — Part 1",
-        "file": "03.Lecture_ARM_Instructions_part1 (1)(1).pdf",
-        "courseId": "arm-assembly"
-      },
-      {
-        "order": 4,
-        "title": "Instructions — Part 2",
-        "file": "03.Lecture_ARM_Instructions_part2 (2)(1).pdf",
-        "courseId": "arm-assembly"
-      },
-      {
-        "order": 5,
-        "title": "Functions",
-        "file": "04.Functions(1).pdf",
-        "courseId": "arm-assembly"
-      },
-      {
-        "order": 6,
-        "title": "Exceptions",
-        "file": "05.Exceptions(1).pdf",
-        "courseId": "arm-assembly"
       }
     ]
   }
