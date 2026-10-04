@@ -12,7 +12,8 @@ const TAG_RULES=[
   [/line-by-line-explanations\.js/,'20261004-v583'],
   [/universal-editable-code\.js/,'20260919-v577'],
   [/try-it-yourself-v568\.js/,'20260822-v568'],
-  [/(?:study-examples|conceptual-examples-v574|program-questions-v574)\.js/,'20260824-v574'],
+  [/study-examples\.js/,'20261004-v586'],
+  [/(?:conceptual-examples-v574|program-questions-v574)\.js/,'20260824-v574'],
   [/(?:practice-guidance|practice-publish-completer)\.js/,'20260823-v573'],
   [/course-project-workspace\.js/,'20260822-v571']
 ];
