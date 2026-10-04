@@ -32,6 +32,21 @@ vm.createContext(sandbox);vm.runInContext(source,sandbox,{filename:'line-by-line
 const api=sandbox.window.CSAILineExplainer;
 assert.ok(api&&typeof api.explain==='function','line explainer API should be available');
 
+const matlabLecture=api.commentedCode(`clc; close all; clear;
+sam = [87 81 94 90 79];
+total = sum(sam);
+count = length(sam);
+average = total / count;
+fprintf('Sam Average = %.2f\\n', average);`,'matlab');
+assert.ok(!matlabLecture.includes('% Explanation:'),'MATLAB learning view must not use verbose generated Explanation: comments');
+assert.match(matlabLecture,/clc; close all; clear;\s+% Clear Command Window, close figures, and clear variables/,'MATLAB learning view should use concise university-style comments');
+assert.match(matlabLecture,/sam = \[87 81 94 90 79\];\s+% Store 5 values in sam/,'MATLAB arrays should keep normal MATLAB syntax with a short comment');
+assert.match(matlabLecture,/total = sum\(sam\);\s+% Add all values in sam/,'MATLAB function calls should get short comments');
+assert.match(matlabLecture,/fprintf\([^\n]+\);\s+% Display formatted result/,'MATLAB display code should keep concise comments');
+const matlabExisting=api.commentedCode("x = 0:0.1:1; % Create x values",'matlab');
+assert.match(matlabExisting,/x = 0:0\.1:1;\s+% Create x values/,'existing MATLAB comments should be preserved');
+assert.equal((matlabExisting.match(/%/g)||[]).length,1,'existing MATLAB comments must not be duplicated');
+
 // Exact regression for the user's dictionary screenshot: explain meaning/effect, never restate syntax.
 const dictCode=`d = dict()          # {}\nd['name'] = 'Ada'\nprint('name' in d)   # True\nprint('age' in d)    # False -- no error raised`;
 const d=api.explain(dictCode,'python');
