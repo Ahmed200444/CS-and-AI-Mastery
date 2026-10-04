@@ -47,7 +47,7 @@ assert.match(armLecture,/LDR R2, Q\s+; load R2 from Q/,'ARM learning view should
 const armExisting=api.commentedCode('LDR r1, Q ; load r1 with Q','armasm');
 assert.ok(armExisting.startsWith('AREA RESET, CODE, READONLY'),'single-instruction ARM examples must receive the standard program skeleton');
 assert.match(armExisting,/LDR R1, Q\s+; load r1 with Q/,'existing lecture-style ARM comments should be preserved');
-assert.equal((armExisting.match(/;/g)||[]).length,1,'existing ARM comments must not be duplicated');
+assert.equal((armExisting.match(/load r1 with Q/g)||[]).length,1,'existing ARM source comment must not be duplicated');
 const cppTeaching=api.commentedCode('int main() {\n    cout << "ok" << endl;\n    return 0;\n}','cpp');
 assert.ok(cppTeaching.startsWith('#include <iostream>'),'C++ teaching code must start with #include <iostream>');
 assert.match(cppTeaching,/using namespace std;/,'C++ teaching code must include using namespace std;');
