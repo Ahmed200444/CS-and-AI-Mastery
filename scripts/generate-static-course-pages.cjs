@@ -55,6 +55,7 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 function courseExampleLanguage(course) {
   if (course && course.id === 'arm-assembly') return 'armasm';
   if (course && course.id === 'matlab-engineering') return 'matlab';
+  if (course && course.id === 'cpp-dsa') return 'cpp';
   return '';
 }
 
