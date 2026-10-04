@@ -5,7 +5,7 @@ const pages=fs.readdirSync(path.join(ROOT,'courses')).filter(f=>f.endsWith('.htm
 assert.ok([62,65].includes(pages.length),'expected 62 committed or 65 generated course pages');
 for(const f of pages){
   const h=fs.readFileSync(path.join(ROOT,'courses',f),'utf8');
-  assert(h.includes('study-examples.js?v=20260824-v574'),`${f}: concise study-example build missing`);
+  assert(/study-examples\.js\?v=(?:20260824-v574|20261004-v586)/.test(h),`${f}: concise study-example build missing`);
   assert(h.includes('practice-guidance.js?v=20260823-v573'),`${f}: concise practice-guidance build missing`);
   assert(h.includes('purpose-first-prompts.js?v=20260822-v567'),`${f}: concise purpose cleanup build missing`);
 }
