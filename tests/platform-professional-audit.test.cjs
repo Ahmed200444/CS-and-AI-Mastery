@@ -118,10 +118,13 @@ const pages=fs.readdirSync(path.join(root,'courses')).filter(n=>n.endsWith('.htm
 assert.equal(pages.length,65,'all 65 course pages must exist');
 for(const name of pages){
  const html=read('courses/'+name);
- assert.match(html,/<meta name="viewport"/,name+' needs responsive viewport metadata');
+ assert.match(html,/<meta\b[^>]*\bname=["']viewport["'][^>]*>/i,name+' needs responsive viewport metadata');
  assert.match(html,/data-progress|progress/i,name+' needs visible progress/resume UI');
  assert.match(html,/theme/i,name+' needs consistent theme support');
  assert.doesNotMatch(html,/Follow your lecture order|data-lecture-order|\bAhmed\b|\bDubai\b|\bKHDA\b/i,name+' exposes private/personal implementation content');
+ assert.doesNotMatch(html,/\b(?:[A-Za-z]{3,})\s+\1\b/i,name+' contains a repeated word');
+ assert.doesNotMatch(html,/which is exactly\.|focus specifically on apply|input, state, or operation changes into a result|02Registers|written with WITH/i,name+' contains broken/generic teaching prose');
+ assert.doesNotMatch(html,/data-shared-study-checklist/i,name+' still contains the old duplicated generic study checklist');
 }
 
 const armUi=read('assets/arm-trace-ui.js');
