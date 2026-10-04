@@ -1,7 +1,7 @@
 (function(){
 'use strict';
 
-var VERSION='20261004-v580-arm-lecture-style';
+var VERSION='20261004-v581-university-syntax';
 var updateTimers=new WeakMap(),editorSeq=0;
 
 function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
@@ -1083,15 +1083,80 @@ function armLectureLine(line,purpose){
  var note=parts.comment||armShortComment(code,purpose);
  return note?code+'    ; '+note:code;
 }
+function splitMatlabSourceComment(line){
+ var raw=text(line),quote='';
+ for(var i=0;i<raw.length;i++){
+  var ch=raw[i];
+  if(quote){
+   if(ch===quote){
+    if(quote==="'"&&raw[i+1]==="'"){i++;continue;}
+    quote='';
+   }
+   continue;
+  }
+  if(ch==='"'){quote=ch;continue;}
+  if(ch==="'"){
+   if(/[\w\])}]/.test(raw[i-1]||''))continue;
+   quote=ch;continue;
+  }
+  if(ch==='%')return{code:raw.slice(0,i),comment:clean(raw.slice(i+1))};
+ }
+ return{code:raw,comment:''};
+}
+function matlabShortComment(code,purpose){
+ var raw=clean(code),plain=raw.replace(/;$/,'');
+ if(!plain)return'';
+ if(/^clc\s*;\s*close\s+all\s*;\s*clear(?:\s+all)?\s*;?$/i.test(raw))return'Clear Command Window, close figures, and clear variables';
+ if(/^clc\s*;?$/i.test(raw))return'Clear Command Window';
+ if(/^close\s+all\s*;?$/i.test(raw))return'Close all figure windows';
+ if(/^clear(?:\s+all)?\s*;?$/i.test(raw))return'Clear variables from Workspace';
+ var m=plain.match(/^function\s+(?:\[([^\]]+)\]|([A-Za-z_]\w*))\s*=\s*([A-Za-z_]\w*)\s*\(([^)]*)\)/i);
+ if(m)return'Define function '+m[3];
+ if(/^end\s*;?$/i.test(raw))return'End function or control block';
+ if(/^for\s+/i.test(plain))return'Start for loop';
+ if(/^while\s+/i.test(plain))return'Start while loop';
+ if(/^if\s+/i.test(plain))return'Run block when condition is true';
+ if(/^elseif\s+/i.test(plain))return'Check another condition';
+ if(/^else\s*$/i.test(plain))return'Run fallback block';
+ if(/^switch\s+/i.test(plain))return'Start switch selection';
+ if(/^case\s+/i.test(plain))return'Run matching case';
+ if(/^otherwise\s*$/i.test(plain))return'Run default case';
+ if((m=plain.match(/^([A-Za-z_]\w*)\s*=\s*\[([^\]]*)\]$/))){
+  var values=m[2].trim().split(/[\s,;]+/).filter(Boolean);
+  return values.length?'Store '+values.length+' values in '+m[1]:'Create array '+m[1];
+ }
+ if((m=plain.match(/^([A-Za-z_]\w*)\s*=\s*sum\s*\(([^)]+)\)$/i)))return'Add all values in '+clean(m[2]);
+ if((m=plain.match(/^([A-Za-z_]\w*)\s*=\s*length\s*\(([^)]+)\)$/i)))return'Count values in '+clean(m[2]);
+ if((m=plain.match(/^([A-Za-z_]\w*)\s*=\s*mean\s*\(([^)]+)\)$/i)))return'Calculate average of '+clean(m[2]);
+ if((m=plain.match(/^([A-Za-z_]\w*)\s*=\s*([A-Za-z_]\w*)\s*\/\s*([A-Za-z_]\w*)$/)))return'Calculate '+m[1]+' by division';
+ if((m=plain.match(/^([A-Za-z_]\w*)\s*=\s*([A-Za-z_]\w*)\s*\((.*)\)$/))){
+  return'Call '+m[2]+' and store result in '+m[1];
+ }
+ if(/^fprintf\s*\(/i.test(plain))return'Display formatted result';
+ if(/^disp\s*\(/i.test(plain))return'Display result';
+ if(/^plot\s*\(/i.test(plain))return'Plot the data';
+ if(/^xlabel\s*\(/i.test(plain))return'Label x-axis';
+ if(/^ylabel\s*\(/i.test(plain))return'Label y-axis';
+ if(/^title\s*\(/i.test(plain))return'Add plot title';
+ if(/^legend\s*\(/i.test(plain))return'Label plotted curves';
+ var brief=clean(purpose).replace(/[\x60]/g,'').replace(/[.]$/,'');
+ return brief.split(/\s+/).slice(0,11).join(' ');
+}
+function matlabLectureLine(line,purpose){
+ var parts=splitMatlabSourceComment(line),code=parts.code.replace(/\s+$/,'');
+ if(!code.trim())return parts.comment?'% '+parts.comment:'';
+ var note=parts.comment||matlabShortComment(code,purpose);
+ return note?code+'    % '+note:code;
+}
 function inlineCommentFor(line,purpose,lang){
  var raw=text(line),note=clean(purpose);
  if(!raw.trim())return'';
  // Preserve syntax/behavior in the few constructs where a trailing comment would change the program.
  if(lang==='python'&&/\\\s*$/.test(raw))return raw;
  if(lang==='armasm')return armLectureLine(raw,note);
+ if(lang==='matlab')return matlabLectureLine(raw,note);
  var suffix;
  if(lang==='python'||lang==='shell'||lang==='yaml')suffix='# Explanation: '+note;
- else if(lang==='matlab')suffix='% Explanation: '+note;
  else if(lang==='sql')suffix='-- Explanation: '+note;
  else if(lang==='html')suffix='<!-- Explanation: '+note+' -->';
  else if(lang==='css')suffix='/* Explanation: '+note+' */';
@@ -1101,8 +1166,10 @@ function inlineCommentFor(line,purpose,lang){
 }
 function commentedCode(code,lang){var cleanCode=stripGeneratedComments(code);return explain(cleanCode,lang).map(function(r){return inlineCommentFor(r.code,r.purpose,lang);}).join('\n');}
 function commentedCodeHtml(code,lang){
- var arm=lang==='armasm';
- return '<section class="csai-commented-code" data-csai-commented-code><div class="csai-commented-code-title">'+(arm?'Lecture-style ARM code':'Code with comments')+'</div><p class="csai-commented-code-note">'+(arm?'ARMASM view: uppercase registers/mnemonics and short semicolon comments, matching the lecture-note style. The clean code above remains runnable.':'Learning view: each source line includes its explanation as a comment. Keep using the clean code above to run or edit.')+'</p><pre><code>'+esc(commentedCode(code,lang))+'</code></pre></section>';
+ var arm=lang==='armasm',matlab=lang==='matlab';
+ var title=arm?'Lecture-style ARM code':matlab?'Lecture-style MATLAB code':'Code with comments';
+ var note=arm?'ARMASM view: uppercase registers/mnemonics and short semicolon comments, matching the lecture-note style. The clean code above remains runnable.':matlab?'MATLAB view: normal MATLAB syntax with short percent comments, matching the university example style. The clean code above remains runnable.':'Learning view: each source line includes its explanation as a comment. Keep using the clean code above to run or edit.';
+ return '<section class="csai-commented-code" data-csai-commented-code><div class="csai-commented-code-title">'+title+'</div><p class="csai-commented-code-note">'+note+'</p><pre><code>'+esc(commentedCode(code,lang))+'</code></pre></section>';
 }
 function glossaryTerms(code,lang){var c=text(code),terms=[];function add(term,meaning){if(!terms.some(function(x){return x.term===term;}))terms.push({term:term,meaning:meaning});}
  if(lang==='python'){
