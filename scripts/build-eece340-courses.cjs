@@ -289,17 +289,8 @@ const matlabData = JSON.parse(fs.readFileSync(matlabPath, 'utf8'));
 // 3. Update microprocessors-arm course
 const mprCourse = armData.find(c => c.id === 'microprocessors-arm');
 mprCourse.syllabus = {
-  courseCode: "EECE340",
-  courseTitle: "Microprocessors & ARM Architecture",
-  weighting: {
-    homework: 10,
-    quizzes: 15,
-    midterm: 25,
-    labWork: 10,
-    labExam: 15,
-    finalExam: 25,
-    total: 100
-  }
+  courseCode: "Microprocessors & ARM",
+  courseTitle: "Microprocessors & ARM Architecture"
 };
 mprCourse.labs = eece340Labs;
 
