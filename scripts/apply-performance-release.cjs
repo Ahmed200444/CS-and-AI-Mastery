@@ -9,7 +9,7 @@ const TAG_RULES=[
   [/(?:arm-trace-engine|arm-trace-ui)\.js/,'20261004-v584'],
   [/lesson-recall\.js/,'20261003-v578'],
   [/matlab-visualizer\.js/,'20261004-v585'],
-  [/line-by-line-explanations\.js/,'20261004-v583'],
+  [/line-by-line-explanations\.js/,'20261004-v587'],
   [/universal-editable-code\.js/,'20260919-v577'],
   [/try-it-yourself-v568\.js/,'20260822-v568'],
   [/study-examples\.js/,'20261004-v586'],
