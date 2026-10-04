@@ -996,7 +996,7 @@
         ],
         "explanation": "Practice building a minimal ARMASM file: define the code area, mark the entry point, create aliases or constants, execute instructions, and end the source.",
         "examples": [
-          "        AREA RESET, CODE, READONLY ; Declare code area\n        ENTRY ; Mark entry point\ncounter RN 0 ; Alias register r0 as counter\nlimit   EQU 5 ; Define symbolic constant limit\n        MOV counter, #0 ; Initialize counter to 0\nstop    B stop ; Loop forever\n        END ; End of assembly"
+          "AREA RESET, CODE, READONLY\nENTRY\ncounter RN 0 ; Alias register r0 as counter\nlimit   EQU 5 ; Define symbolic constant limit\n        MOV counter, #0 ; Initialize counter to 0\nstop    B stop ; Loop forever\nEND"
         ],
         "commonMistakes": [
           "Treating assembler directives such as AREA or EQU as instructions executed by the ARM core."
@@ -1018,7 +1018,7 @@
         ],
         "explanation": "Practice loading immediate values, copying register values, and producing a bitwise complement with MOV and MVN.",
         "examples": [
-          "        MOV r0, #17 ; Load immediate value 17 into r0\n        MOV r1, r0 ; Copy r0 into r1\n        MVN r2, r1 ; Bitwise NOT of r1 into r2"
+          "AREA RESET, CODE, READONLY\nENTRY\n        MOV r0, #17 ; Load immediate value 17 into r0\n        MOV r1, r0 ; Copy r0 into r1\n        MVN r2, r1 ; Bitwise NOT of r1 into r2\nEND"
         ],
         "commonMistakes": [
           "Reading MOV r0, r1 as copying r0 into r1."
@@ -1040,7 +1040,7 @@
         ],
         "explanation": "Practice loading and storing words, bytes, and halfwords while calculating base-plus-offset, pre-indexed, and post-indexed addresses.",
         "examples": [
-          "        MOV r2, #0x1000 ; Base pointer address\n        MOV r0, #17 ; Initial test value 17\n        STR r0, [r2] ; Store word to memory\n        MOV r0, #23 ; Second test value 23\n        STR r0, [r2, #4] ; Store word with offset 4\n        LDR r1, [r2] ; Load word from base\n        LDR r3, [r2, #4] ; Load word from offset 4\n        STR r3, [r2, #8] ; Store word to offset 8\n        LDR r4, [r2], #4 ; Post-indexed load and advance pointer"
+          "AREA RESET, CODE, READONLY\nENTRY\n        MOV r2, #0x1000 ; Base pointer address\n        MOV r0, #17 ; Initial test value 17\n        STR r0, [r2] ; Store word to memory\n        MOV r0, #23 ; Second test value 23\n        STR r0, [r2, #4] ; Store word with offset 4\n        LDR r1, [r2] ; Load word from base\n        LDR r3, [r2, #4] ; Load word from offset 4\n        STR r3, [r2, #8] ; Store word to offset 8\n        LDR r4, [r2], #4 ; Post-indexed load and advance pointer\nEND"
         ],
         "commonMistakes": [
           "Confusing the address in the base register with the data loaded from memory."
@@ -1062,7 +1062,7 @@
         ],
         "explanation": "Practice tracing left shifts, logical right shifts, arithmetic right shifts, and rotates, including a shifted Operand2 inside another instruction.",
         "examples": [
-          "        MOV r0, #7 ; Load value 7\n        MOV r1, r0, LSL #1 ; Shift left by 1 (multiply by 2)\n        MOV r2, r1, LSR #2 ; Shift right by 2 (divide by 4)\n        ADD r3, r0, r0, LSL #4 ; Multiply by 16 and add r0"
+          "AREA RESET, CODE, READONLY\nENTRY\n        MOV r0, #7 ; Load value 7\n        MOV r1, r0, LSL #1 ; Shift left by 1 (multiply by 2)\n        MOV r2, r1, LSR #2 ; Shift right by 2 (divide by 4)\n        ADD r3, r0, r0, LSL #4 ; Multiply by 16 and add r0\nEND"
         ],
         "commonMistakes": [
           "Assuming LSR and ASR are identical for values whose top bit is 1."
@@ -1084,7 +1084,7 @@
         ],
         "explanation": "Practice instructions that update CPSR flags and trace the resulting N, Z, C, and V values.",
         "examples": [
-          "        MOV  r0, #5 ; Set initial value 5\n        SUBS r1, r0, #5 ; Subtract 5 and update flags (Z=1)\n        MOVS r2, #-1 ; Move -1 and update flags (N=1)"
+          "AREA RESET, CODE, READONLY\nENTRY\n        MOV  r0, #5 ; Set initial value 5\n        SUBS r1, r0, #5 ; Subtract 5 and update flags (Z=1)\n        MOVS r2, #-1 ; Move -1 and update flags (N=1)\nEND"
         ],
         "commonMistakes": [
           "Treating C and V as the same condition."
@@ -1106,7 +1106,7 @@
         ],
         "explanation": "Practice setting flags with comparison or test instructions, then choosing the correct conditional instruction or branch.",
         "examples": [
-          "        MOV r0, #2 ; Load test value 2\n        CMP r0, #2 ; Compare r0 with 2 (sets Z=1)\n        MOVEQ r1, #1 ; Move 1 if equal (executed)\n        MOVNE r1, #0 ; Move 0 if not equal (skipped)\n        TST r0, #2 ; Bitwise test bit 1"
+          "AREA RESET, CODE, READONLY\nENTRY\n        MOV r0, #2 ; Load test value 2\n        CMP r0, #2 ; Compare r0 with 2 (sets Z=1)\n        MOVEQ r1, #1 ; Move 1 if equal (executed)\n        MOVNE r1, #0 ; Move 0 if not equal (skipped)\n        TST r0, #2 ; Bitwise test bit 1\nEND"
         ],
         "commonMistakes": [
           "Expecting CMP to store a normal subtraction result."
@@ -1128,7 +1128,7 @@
         ],
         "explanation": "Practice using AND, ORR, EOR, and BIC with masks to keep, set, toggle, or clear selected bits.",
         "examples": [
-          "        MOV r0, #0x0F ; Load bit mask 0x0F\n        MOV r1, #0x03 ; Load bit mask 0x03\n        AND r2, r0, r1 ; Bitwise AND: 0x03\n        ORR r3, r0, #0x10 ; Bitwise OR: 0x1F\n        EOR r4, r0, r1 ; Bitwise XOR: 0x0C\n        BIC r5, r0, #0x03 ; Bit clear lower 2 bits: 0x0C"
+          "AREA RESET, CODE, READONLY\nENTRY\n        MOV r0, #0x0F ; Load bit mask 0x0F\n        MOV r1, #0x03 ; Load bit mask 0x03\n        AND r2, r0, r1 ; Bitwise AND: 0x03\n        ORR r3, r0, #0x10 ; Bitwise OR: 0x1F\n        EOR r4, r0, r1 ; Bitwise XOR: 0x0C\n        BIC r5, r0, #0x03 ; Bit clear lower 2 bits: 0x0C\nEND"
         ],
         "commonMistakes": [
           "Using arithmetic intuition for bit masks instead of tracing each bit position."
@@ -1150,7 +1150,7 @@
         ],
         "explanation": "Practice three-operand arithmetic with ADD, ADC, SUB, SBC, RSB, and RSC, including carry-aware and reverse subtraction cases.",
         "examples": [
-          "        MOV r1, #9 ; Load operand 1\n        MOV r2, #4 ; Load operand 2\n        ADD r0, r1, r2 ; Add: 9 + 4 = 13\n        SUB r3, r1, r2 ; Subtract: 9 - 4 = 5\n        RSB r4, r1, r2 ; Reverse subtract: 4 - 9 = -5"
+          "AREA RESET, CODE, READONLY\nENTRY\n        MOV r1, #9 ; Load operand 1\n        MOV r2, #4 ; Load operand 2\n        ADD r0, r1, r2 ; Add: 9 + 4 = 13\n        SUB r3, r1, r2 ; Subtract: 9 - 4 = 5\n        RSB r4, r1, r2 ; Reverse subtract: 4 - 9 = -5\nEND"
         ],
         "commonMistakes": [
           "Applying normal SUB operand order to RSB."
@@ -1172,7 +1172,7 @@
         ],
         "explanation": "Practice labels, conditional branches, if/else control flow, and loops by tracing the program counter and loop state.",
         "examples": [
-          "j       RN 0 ; Alias register r0 as loop counter j\n        MOV j, #3 ; Initialize counter j to 3\nloop    CMP j, #0 ; Compare j with 0\n        BLT done ; Exit loop when j < 0\n        SUB j, j, #1 ; Decrement counter\n        B loop ; Repeat loop\ndone    B done ; Halt when loop finishes"
+          "AREA RESET, CODE, READONLY\nENTRY\nj       RN 0 ; Alias register r0 as loop counter j\n        MOV j, #3 ; Initialize counter j to 3\nloop    CMP j, #0 ; Compare j with 0\n        BLT done ; Exit loop when j < 0\n        SUB j, j, #1 ; Decrement counter\n        B loop ; Repeat loop\ndone    B done ; Halt when loop finishes\nEND"
         ],
         "commonMistakes": [
           "Forgetting that a loop must modify the state used by its termination condition."
@@ -1194,7 +1194,7 @@
         ],
         "explanation": "Practice LDM/STM and PUSH/POP while tracing SP and the memory addresses used by each transfer.",
         "examples": [
-          "        LDR r3, =0x11111111 ; Load literal value 1\n        LDR r4, =0x22222222 ; Load literal value 2\n        PUSH {r3, r4} ; Push r3 and r4 onto stack\n        POP  {r5, r6} ; Pop from stack into r5 and r6"
+          "AREA RESET, CODE, READONLY\nENTRY\n        LDR r3, =0x11111111 ; Load literal value 1\n        LDR r4, =0x22222222 ; Load literal value 2\n        PUSH {r3, r4} ; Push r3 and r4 onto stack\n        POP  {r5, r6} ; Pop from stack into r5 and r6\nEND"
         ],
         "commonMistakes": [
           "Assuming textual register-list order controls memory ordering."
@@ -1216,7 +1216,7 @@
         ],
         "explanation": "Practice BL, BX LR, register preservation, and parameter passing by tracing calls and returns.",
         "examples": [
-          "main    MOV r0, #5 ; Main function argument\n        BL double ; Branch with link to subroutine\n        B stop ; Halt execution\n\ndouble  PUSH {r1} ; Save caller register r1\n        ADD r1, r0, r0 ; Double value in r0\n        MOV r0, r1 ; Store return value in r0\n        POP {r1} ; Restore caller register r1\n        BX lr ; Return to caller\nstop    B stop ; Spin loop"
+          "AREA RESET, CODE, READONLY\nENTRY\nmain    MOV r0, #5 ; Main function argument\n        BL double ; Branch with link to subroutine\n        B stop ; Halt execution\n\ndouble  PUSH {r1} ; Save caller register r1\n        ADD r1, r0, r0 ; Double value in r0\n        MOV r0, r1 ; Store return value in r0\n        POP {r1} ; Restore caller register r1\n        BX lr ; Return to caller\nstop    B stop ; Spin loop\nEND"
         ],
         "commonMistakes": [
           "Calling another function without protecting LR when the current function still needs its own return address."
