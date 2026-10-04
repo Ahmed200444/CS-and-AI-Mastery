@@ -58,6 +58,29 @@ function languageFor(node){
  if(window.CSAILineExplainer&&typeof window.CSAILineExplainer.inferLanguage==='function'){try{explicit=window.CSAILineExplainer.inferLanguage(codeText(node),explicit,node)||explicit;}catch(_){}}
  return normalizeLang(explicit);
 }
+function normalizeTeachingSource(raw,lang){
+ var code=String(raw||'').replace(/\r/g,'');
+ if(lang==='armasm'){
+  var hasArea=/^\s*AREA\s+RESET\s*,\s*CODE\s*,\s*READONLY\b/im.test(code);
+  var hasEntry=/^\s*ENTRY\b/im.test(code);
+  var hasEnd=/^\s*END\b/im.test(code);
+  if(!hasArea)code='AREA RESET, CODE, READONLY\n'+code.replace(/^\s+/, '');
+  if(!hasEntry)code=code.replace(/^(\s*AREA\s+RESET\s*,\s*CODE\s*,\s*READONLY[^\n]*\n)/im,'$1ENTRY\n');
+  if(!hasEnd)code=code.replace(/\s*$/,'')+'\nEND';
+  return code;
+ }
+ if(lang==='cpp'){
+  if(!/^\s*#include\s*<iostream>/m.test(code))code='#include <iostream>\n'+code.replace(/^\s+/, '');
+  if(!/^\s*using\s+namespace\s+std\s*;/m.test(code)){
+    var lines=code.split('\n'),lastInclude=-1;
+    for(var i=0;i<lines.length;i++)if(/^\s*#include\b/.test(lines[i]))lastInclude=i;
+    lines.splice(lastInclude+1,0,'using namespace std;');
+    code=lines.join('\n');
+  }
+  return code;
+ }
+ return code;
+}
 function normalizeCoursePreamble(raw,lang){
  raw=String(raw==null?'':raw).replace(/^\uFEFF/,'');
  if(lang==='armasm'){

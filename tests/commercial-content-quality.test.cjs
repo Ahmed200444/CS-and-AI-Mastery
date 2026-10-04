@@ -24,7 +24,7 @@ for(const [label,re] of [
  ['institution-specific visible label',/\bEECE\s*340\b/i],
  ['private lecture-source metadata',/\.pdf\b|Follow your lecture order/i],
  ['provider-specific wording',/\bKHDA\b/i],
- ['known grammar regression',/Python versions changes|Connect with with|\bA engineering-focused\b|\b02Registers\b|written with WITH/i]
+ ['known grammar regression',/Python versions changes|Connect with with|\bA engineering-focused\b|\b02Registers\b|written with WITH|\ba extremely\b|Ingress\.\.|reviewer\.\./i]
 ]) assert.doesNotMatch(visible,re,'commercial course source still contains '+label);
 assert.doesNotMatch(source,/"lectureSequence"|"lecture"\s*:/,'private lecture metadata keys must not remain in commercial course data');
 
