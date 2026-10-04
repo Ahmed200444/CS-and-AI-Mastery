@@ -368,7 +368,9 @@ function mount(node){
   button.disabled=false;
  }
  button.addEventListener('click',run);
- if(/\bplot\s*\(|\[[^\]]+;[^\]]+\]/.test(runnableProjectSource(files)))setTimeout(run,0);
+ // Keep the live MATLAB result visible beside the Editor for every lesson.
+ // Simple scripts show Workspace/output; matrix lessons show tables; plot lessons show figures.
+ setTimeout(run,0);
 }
 function scan(rootNode){
  var q=[];
