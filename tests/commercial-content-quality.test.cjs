@@ -11,7 +11,7 @@ const source=JSON.stringify(courses);
 for(const [label,re] of [
  ['personal first name',/\bAhmed\b/i],
  ['personal location',/\bDubai\b/i],
- ['institution-specific label',/\bEECE\s*340\b|\bEECE340\b/i],
+ ['institution-specific visible label',/\bEECE\s*340\b/i],
  ['private lecture-source metadata',/"lectureSequence"|"lecture"\s*:|\.pdf\b|Follow your lecture order/i],
  ['provider-specific wording',/\bKHDA\b/i],
  ['known grammar regression',/Python versions changes|Connect with with|\bA engineering-focused\b|\b02Registers\b/i]
@@ -40,6 +40,14 @@ for(const lesson of arm.lessons||[]){
 }
 const cpu=courses.find(c=>c.id==='microprocessors-arm');
 assert(cpu,'Microprocessors & ARM Architecture course missing');
+for(const lab of cpu.labs||[]){
+ if(lab.language!=='armasm')continue;
+ for(const [kind,code] of [['starterCode',lab.starterCode],['solutionCode',lab.solutionCode]]){
+  if(!code)continue;
+  assert.ok(code.startsWith('AREA RESET, CODE, READONLY\nENTRY\n'),lab.id+' '+kind+' must start with the standard RESET skeleton');
+  assert.ok(code.trimEnd().endsWith('END'),lab.id+' '+kind+' must end with END');
+ }
+}
 assert.match((cpu.lessons||[]).map(l=>l.explanation||'').join(' '),/register|CPSR|RISC|exception|vector/i,'CPU course must retain the ARM architecture theory moved out of ARM Assembly');
 
 const cpp=courses.find(c=>c.id==='cpp-dsa');
