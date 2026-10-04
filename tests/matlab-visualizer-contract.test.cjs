@@ -23,6 +23,8 @@ assert.match(asset, /\.matlab-pane-editor/, 'MATLAB workbench must include the E
 assert.match(asset, /\.matlab-pane-command/, 'MATLAB workbench must include the Command Window/Workspace pane');
 assert.match(asset, /Results beside code/, 'MATLAB result tables and figures must be labeled as beside the Editor code');
 assert.match(asset, /grid-template-columns:minmax\(0,1\.05fr\) minmax\(420px,1fr\)/, 'MATLAB desktop layout must keep results beside code');
+assert.match(asset, /setTimeout\(run,0\)/, 'every MATLAB lesson must populate the beside-code result pane automatically');
+assert.match(asset, /Command Window · Workspace · Table\/Figure/, 'MATLAB result pane must clearly include tables and figures beside the Editor');
 assert.match(asset, /pre\[data-language="matlab"\],textarea\[data-language="matlab"\]/, 'visualizer must mount on every MATLAB lesson code block');
 assert.match(page, /calculate_average\.m/, 'function lesson must show the function as an Editor file');
 assert.match(page, /grades\.m/, 'function lesson must show the main script as a separate Editor file');
