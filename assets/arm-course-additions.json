@@ -220,14 +220,14 @@
           "Distinguish ARM and Thumb instruction encodings",
           "Explain why instruction-set state matters"
         ],
-        "explanation": "ARM programming groups instructions into data movement, arithmetic, logical/bit-manipulation, shifts, comparisons, branches, and memory transfers. MOV/MVN move or invert values; ADD/SUB families perform arithmetic; AND/ORR/EOR/BIC manipulate bits; LSL/LSR/ASR/ROR shift Operand2. Classic ARM uses 32-bit instructions, while Thumb/Thumb-2 also use compact encodings. Halfword, word, and doubleword sizes are 16, 32, and 64 bits.",
+        "explanation": "ARM instructions fall into data movement, arithmetic, logical and bit operations, shifts, comparisons, branches, and memory transfers. MOV/MVN move or invert values, ADD/SUB families calculate, AND/ORR/EOR/BIC change bits, and LSL/LSR/ASR/ROR shift Operand2. Classic ARM uses 32-bit instructions; Thumb/Thumb-2 add compact encodings. Halfword, word, and doubleword sizes are 16, 32, and 64 bits.",
         "examples": [
           "        MOV r0, #0x2000 ; Set memory buffer pointer\n        MOV r1, #0xFF ; Set byte value 255\n        STRB r1, [r0] ; Store byte to memory\n        MOV r2, #0x1234 ; Set 16-bit halfword value\n        STRH r2, [r0, #2] ; Store halfword at offset 2\nstop    B stop ; Halt execution"
         ],
         "commonMistakes": [
           "Confusing instruction encoding size with the size of the data being processed."
         ],
-        "explain": "ARM programming groups instructions into data movement, arithmetic, logical/bit-manipulation, shifts, comparisons, branches, and memory transfers. MOV/MVN move or invert values; ADD/SUB families perform arithmetic; AND/ORR/EOR/BIC manipulate bits; LSL/LSR/ASR/ROR shift Operand2. Classic ARM uses 32-bit instructions, while Thumb/Thumb-2 also use compact encodings. Halfword, word, and doubleword sizes are 16, 32, and 64 bits."
+        "explain": "ARM instructions fall into data movement, arithmetic, logical and bit operations, shifts, comparisons, branches, and memory transfers. MOV/MVN move or invert values, ADD/SUB families calculate, AND/ORR/EOR/BIC change bits, and LSL/LSR/ASR/ROR shift Operand2. Classic ARM uses 32-bit instructions; Thumb/Thumb-2 add compact encodings. Halfword, word, and doubleword sizes are 16, 32, and 64 bits."
       },
       {
         "id": "mpr-09",
@@ -273,14 +273,14 @@
           "Distinguish little-endian and big-endian storage",
           "Explain why exceptions change mode"
         ],
-        "explanation": "CPSR contains the N, Z, C, and V condition flags along with execution-state, interrupt-mask, and mode bits. Comparison and flag-setting instructions update these flags for conditional execution. Classic ARM exceptions save status, switch to a privileged mode, and transfer control through a vector table; SVC requests a privileged software service. Endianness determines byte order in memory.",
+        "explanation": "CPSR stores N, Z, C, and V plus execution-state, interrupt-mask, and mode bits. Comparisons and flag-setting instructions update NZCV for conditional execution. Exceptions save processor status, switch mode, and branch through the vector table; SVC requests a privileged software service. Endianness defines byte order in memory.",
         "examples": [
           "val = 0x12345678  # 32-bit test word\nlittle_endian = [val & 0xFF, (val >> 8) & 0xFF, (val >> 16) & 0xFF, (val >> 24) & 0xFF]  # LSB first\nbig_endian = [(val >> 24) & 0xFF, (val >> 16) & 0xFF, (val >> 8) & 0xFF, val & 0xFF]  # MSB first\nprint(little_endian)  # Output little-endian byte array\nprint(big_endian)  # Output big-endian byte array"
         ],
         "commonMistakes": [
           "Reading the ARM I and F CPSR bits as interrupt-enable bits; in classic ARM, a set mask bit masks/disables that interrupt."
         ],
-        "explain": "CPSR contains the N, Z, C, and V condition flags along with execution-state, interrupt-mask, and mode bits. Comparison and flag-setting instructions update these flags for conditional execution. Classic ARM exceptions save status, switch to a privileged mode, and transfer control through a vector table; SVC requests a privileged software service. Endianness determines byte order in memory."
+        "explain": "CPSR stores N, Z, C, and V plus execution-state, interrupt-mask, and mode bits. Comparisons and flag-setting instructions update NZCV for conditional execution. Exceptions save processor status, switch mode, and branch through the vector table; SVC requests a privileged software service. Endianness defines byte order in memory."
       }
     ],
     "exercises": [
