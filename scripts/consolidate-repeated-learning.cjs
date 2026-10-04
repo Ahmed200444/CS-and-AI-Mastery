@@ -1,22 +1,53 @@
 'use strict';
 const fs=require('fs'),path=require('path');
 const text=s=>s.replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();
-let moved=0,scriptCopies=0;
-for(const file of ['index.html',...fs.readdirSync('courses').filter(n=>n.endsWith('.html')).map(n=>path.join('courses',n))]){let html=fs.readFileSync(file,'utf8');
- // The build is repeatable: retain the existing common checklist when no
- // repeated objective remains, rather than discarding already consolidated text.
- const objective=/<h3>What you will learn<\/h3>\s*<ul>([\s\S]*?)<\/ul>/g,counts=new Map(),shared=new Map();
- for(const match of html.matchAll(objective))for(const li of match[1].matchAll(/<li\b[^>]*>([\s\S]*?)<\/li>/g)){const key=text(li[1]);if(key.length>65){counts.set(key,(counts.get(key)||0)+1);shared.set(key,li[0]);}}
- const repeated=new Set([...counts].filter(([,n])=>n>1).map(([key])=>key));
- if(file!=='index.html'&&repeated.size){
-  html=html.replace(objective,(all,body)=>all.replace(body,body.replace(/<li\b[^>]*>([\s\S]*?)<\/li>/g,(li,inner)=>{if(repeated.has(text(inner))){moved++;return '';}return li;})));
-  const checklist='<section class="card" data-shared-study-checklist><h2>Course study checklist</h2><ul>'+[...repeated].map(k=>shared.get(k)).join('')+'</ul></section>\n';
-  html=html.replace(/<section\b[^>]*data-shared-study-checklist[^>]*>[\s\S]*?<\/section>\s*/g,'');
-  html=html.replace(/(<section\b[^>]*class="lessons"[^>]*>)/,checklist+'$1');
+let removed=0,scriptCopies=0,proseFixes=0;
+
+function polishGeneratedProse(html){
+ const rules=[
+  [/, which is exactly\./g,'.'],
+  [/\bwhich is exactly\./g,''],
+  [/focus specifically on apply(?:ing)? this lesson idea/gi,'apply this lesson idea'],
+  [/input, state, or operation changes into a result/gi,'input or state changes into a result'],
+  [/\b02Registers\b/g,'Registers'],
+  [/written with WITH/gi,'written with the with statement']
+ ];
+ for(const [re,replacement] of rules){
+  const before=html;html=html.replace(re,replacement);if(html!==before)proseFixes++;
  }
- // Keep the first occurrence so blocking/deferred initialization order stays
- // unchanged. Version differences do not justify loading a module twice.
- const seen=new Set();html=html.replace(/<script\b[^>]*\bsrc=["']([^"']+)["'][^>]*>\s*<\/script>/g,(tag,src)=>{const key=src.split('?')[0];if(seen.has(key)){scriptCopies++;return '';}seen.add(key);return tag;});
- fs.writeFileSync(file,html);
+ return html;
 }
-console.log(`Repeated learning consolidated: ${moved} objective occurrences moved into one checklist per course; ${scriptCopies} duplicate script loads removed.`);
+
+for(const file of ['index.html',...fs.readdirSync('courses').filter(n=>n.endsWith('.html')).map(n=>path.join('courses',n))]){
+ let html=fs.readFileSync(file,'utf8');
+
+ // Remove any older generated checklist. Repeated objectives should not become
+ // another theory block; keep one useful occurrence and drop later duplicates.
+ html=html.replace(/<section\b[^>]*data-shared-study-checklist[^>]*>[\s\S]*?<\/section>\s*/g,'');
+
+ const objective=/<h3>What you will learn<\/h3>\s*<ul>([\s\S]*?)<\/ul>/g;
+ const seenObjectives=new Set();
+ if(file!=='index.html'){
+  html=html.replace(objective,(all,body)=>{
+   const cleaned=body.replace(/<li\b[^>]*>([\s\S]*?)<\/li>/g,(li,inner)=>{
+    const key=text(inner);
+    if(key.length>65&&seenObjectives.has(key)){removed++;return'';}
+    if(key.length>65)seenObjectives.add(key);
+    return li;
+   });
+   return all.replace(body,cleaned);
+  });
+ }
+
+ // Keep the first script occurrence so initialization order remains stable.
+ const seenScripts=new Set();
+ html=html.replace(/<script\b[^>]*\bsrc=["']([^"']+)["'][^>]*>\s*<\/script>/g,(tag,src)=>{
+  const key=src.split('?')[0];
+  if(seenScripts.has(key)){scriptCopies++;return'';}
+  seenScripts.add(key);return tag;
+ });
+
+ html=polishGeneratedProse(html);
+ fs.writeFileSync(file,html,'utf8');
+}
+console.log(`Repeated learning consolidated: ${removed} repeated objective occurrences removed; ${scriptCopies} duplicate script loads removed; ${proseFixes} generated-prose cleanup rules applied.`);

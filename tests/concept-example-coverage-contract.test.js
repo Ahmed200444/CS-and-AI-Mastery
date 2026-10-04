@@ -19,8 +19,8 @@ for(const file of files){
   }
 }
 assert.ok([800,832].includes(lessons),'expected 800 committed or 832 generated lessons');
-assert.ok([3427,3581].includes(concepts),'key-concept coverage drift including university-course additions');
-assert.ok([5040,5258].includes(planned),'base concept-example plan drift including university-course additions');
+assert.ok([3427,3583].includes(concepts),'key-concept coverage drift including university-course additions');
+assert.ok([5040,5260].includes(planned),'base concept-example plan drift including university-course additions');
 assert.equal(maxConcepts,14,'max concept count drift');
 
 const study=fs.readFileSync(path.join(root,'assets','study-examples.js'),'utf8');
@@ -37,7 +37,7 @@ const fixer=fs.readFileSync(path.join(root,'assets','runnable-lesson-example-fix
 assert.ok(!fixer.includes('BIG_O_EXAMPLE'),'Big-O must not be replaced by one shared snippet');
 assert.ok(!/pre\.textContent\s*=/.test(fixer),'classifier must never overwrite lesson example code');
 
-let runnable=study.replace(/\}\)\(\);\s*$/,"globalThis.__coverageAudit={bigOPlan,structureSignature};})();");
+let runnable=study.replace(/\}\)\(\);\s*$/,"globalThis.__coverageAudit={bigOPlan,structureSignature,nativeExampleFor};})();");
 const sandbox={document:{readyState:'loading',addEventListener(){},getElementById(){return null;}},location:{pathname:'/courses/dsa.html'},window:{},setTimeout(){},clearTimeout(){},MutationObserver:function(){this.observe=function(){}},console};
 vm.createContext(sandbox);vm.runInContext(runnable,sandbox);
 const plan=sandbox.__coverageAudit.bigOPlan();
@@ -47,4 +47,13 @@ for(const label of ['time complexity','space complexity','growth rate','Big-O','
 }
 const signatures=plan.map(x=>sandbox.__coverageAudit.structureSignature(x.code));
 assert.equal(new Set(signatures).size,plan.length,'Big-O examples must be structurally distinct');
+const joinExample=sandbox.__coverageAudit.nativeExampleFor('sql','JOIN',1);
+assert.equal(joinExample.language,'sql','SQL JOIN concept must receive a SQL example');
+assert.match(joinExample.code,/\bJOIN\b/i,'SQL JOIN concept must receive a JOIN example rather than unrelated GROUP BY code');
+const groupExample=sandbox.__coverageAudit.nativeExampleFor('sql','GROUP BY aggregation',2);
+assert.match(groupExample.code,/GROUP\s+BY/i,'SQL aggregation concept must receive GROUP BY code');
+const frontendExample=sandbox.__coverageAudit.nativeExampleFor('frontend-dev','DOM event listener',3);
+assert.equal(frontendExample.language,'javascript','DOM event concept must receive JavaScript');
+assert.ok(frontendExample.code.includes('\n'),'generated frontend code must contain real line separators');
+assert.ok(!frontendExample.code.includes('\\n'),'generated frontend code must not display literal backslash-n separators');
 console.log(`Concept-example coverage PASS — ${lessons} lessons, ${concepts} key concepts, ${planned} base concept/integration/edge example slots; Big-O has 11 distinct curated examples.`);

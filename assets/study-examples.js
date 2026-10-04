@@ -234,17 +234,13 @@ function fallbackShapeDefinition(raw,behavior,title){
  if(/metric|score|rate|ratio|accuracy|precision|recall|latency|throughput/.test(t))return raw+' is a measurement used to describe one aspect of behavior or performance. Its value only becomes useful when you know exactly what is being measured and what a higher or lower value means for the task.';
  if(/cost|complexity/.test(t))return raw+' describes how much time, memory, communication, or other work the related operation requires. Compare how that cost changes as the input or system scale changes rather than relying on one tiny run.';
  if(/failure|fault|error/.test(t))return raw+' describes a condition where the normal expected behavior is not achieved. The lesson focuses on how to recognize the condition, understand its effect, and keep the failure from silently producing an incorrect result.';
- if(lower&&lower!=='apply this lesson idea to a concrete engineering case and trace the starting state, the important decision or transformation, and an observable result')return'For '+raw+', the behavior to understand is this: '+lower+'. Trace the starting state, the rule or mechanism that acts on it, and the observable change so you can recognize the same idea in a new problem.';
+ if(lower)return raw+' is used in this lesson through a concrete operation or decision. '+lower.charAt(0).toUpperCase()+lower.slice(1);
  return'For '+raw+', focus on the exact rule, mechanism, or relationship that '+title+' is teaching. Identify what information it acts on, what it changes or decides, and what observable result distinguishes correct behavior from an incorrect one.';
 }
 function contextualConceptFallback(b,label){
  var raw=String(label||'').trim(),title=lessonTitle(b.closest('.lesson')),course=studyCourseId(),source=conceptSourceDefinition(b,raw);
  var behavior=professionalBehavior(course,title,raw),related=relatedConceptNames(b,raw,2),lesson=lessonConciseText(b);
- if(source){
-  var action=String(behavior||'').replace(/[.]$/,'').trim();
-  if(action)return shortSentences(source,480)+' For '+raw+', focus specifically on '+action.charAt(0).toLowerCase()+action.slice(1)+'.';
-  return source+' This example focuses specifically on '+raw+'.';
- }
+ if(source)return shortSentences(source,480);
  var first=fallbackShapeDefinition(raw,behavior,title),parts=[];
  if(lesson&&lesson!=='This is the main idea explained in this lesson.')parts.push(lesson);
  if(!parts.length||norm(parts.join(' ')).indexOf(norm(first).slice(0,48))<0)parts.push(first);
@@ -316,6 +312,35 @@ function conceptDefinition(b,label){
  /* v5.71: definitions belong to the exact concept. Generated example types get an explicit
     learning explanation, and unknown labels use lesson evidence instead of generic filler. */
  if(cid==='matlab-engineering'){var native=matlabDefinition(raw);if(native)return native;}
+ var lessonKey=norm(title);
+ if(cid==='python'&&/classes, objects|oop practice.*classes/.test(lessonKey)){
+  if(/^method$/.test(t))return'A method is a function defined inside a class. Calling it through an object lets the function work with that object and its state.';
+  if(/^instance method$/.test(t))return'An instance method receives the current object as its first parameter, conventionally named self, so it can read or change that instance’s attributes.';
+  if(/^class variable$/.test(t))return'A class variable is stored on the class and is shared as a default by its instances unless an instance shadows that name with its own attribute.';
+  if(/^special methods?$/.test(t))return'Special methods are double-underscore methods such as __init__ and __repr__ that let a class participate in built-in Python operations and object protocols.';
+  if(/^__repr__$/.test(t))return'__repr__ returns an unambiguous developer-facing string representation of an object. Python uses it with repr() and often when objects appear inside containers.';
+ }
+ if(cid==='python'&&/regular expressions/.test(lessonKey)){
+  if(/^re$/.test(t))return're is Python’s regular-expression module. It provides functions and compiled patterns for searching, matching, replacing, and splitting text with regex rules.';
+  if(/character classes/.test(t))return'A character class such as [A-Z] matches one character from a specified set or range, letting a pattern describe allowed characters precisely.';
+  if(/^quantifiers?$/.test(t))return'A regex quantifier controls repetition: * means zero or more, + means one or more, ? means optional, and braces such as {2,4} specify counts.';
+  if(/^dot$/.test(t))return'The regex dot matches one character other than a newline by default. Use it when any single character is acceptable at that position.';
+  if(/greedy matching/.test(t))return'Greedy matching makes a quantifier consume as much text as it can while still allowing the whole pattern to match. Adding ? after many quantifiers makes them lazy instead.';
+  if(/^groups?$/.test(t))return'Parentheses group part of a regex so it can be captured, quantified as a unit, or referenced later. Captured text is available from the resulting match object.';
+  if(/^anchors?$/.test(t))return'Regex anchors match positions rather than characters. The caret anchors the start and the dollar anchor matches the end of a string or line, depending on the flags used.';
+  if(/match objects?/.test(t))return'A match object records a successful regex match, including the matched text, capture groups, and start/end positions.';
+  if(/^substitution$/.test(t))return'Regex substitution uses re.sub() or a compiled pattern’s sub() method to replace text that matches a pattern with replacement text.';
+  if(/^split$/.test(t))return'Regex splitting uses re.split() or a compiled pattern’s split() method to divide text wherever the pattern matches.';
+  if(/^compile$/.test(t))return're.compile() creates a reusable regex pattern object, which is useful when the same pattern will be applied repeatedly or configured with flags.';
+  if(/^flags$/.test(t))return'Regex flags change matching rules. Examples include case-insensitive matching and multiline behavior for anchors; they can be passed to re functions or re.compile().';
+ }
+ if(cid==='dsa'&&/sorting i/.test(lessonKey)){
+  if(/bubble sort/.test(t))return'Bubble sort repeatedly compares adjacent items and swaps out-of-order pairs. After each pass, an extreme value moves toward its final end position; the basic algorithm is O(n²) and can be stable.';
+  if(/selection sort/.test(t))return'Selection sort repeatedly finds the smallest remaining item and swaps it into the next output position. It performs O(n²) comparisons and the usual swap-based version is not stable.';
+  if(/insertion sort/.test(t))return'Insertion sort grows a sorted prefix one item at a time, shifting larger items right until the current item can be inserted in the correct position. It is stable and works especially well on nearly sorted data.';
+  if(/^o\(n²\)$|^o\(n2\)$/.test(t))return'O(n²) means the amount of work grows roughly with the square of the input size, as in two nested full-range passes over n items.';
+  if(/^stability$/.test(t))return'A stable sorting algorithm keeps records with equal sort keys in the same relative order they had in the input.';
+ }
  var expanded=expandedConceptDefinition(b,raw);if(expanded)return expanded;
  if(/^references?$|object references?|python references?/.test(t)){if(cid==='cpp-dsa'||cid==='systems-programming')return'A C++ reference is an alias for an existing object: after it is initialized, operations through the reference act on that same object. References are useful for passing or modifying objects without copying them, while still using normal variable syntax.';return'A Python reference is the connection from a variable name to an object. Assigning the same object to another name can make both names refer to that one object, so mutating it through either name can be visible through the other.';}
  if(/^identity$|object identity/.test(t))return'Identity asks whether two names refer to the exact same object. In Python, `is` checks identity, while `==` usually compares values.';
@@ -1113,7 +1138,7 @@ function professionalBehavior(course,title,c){
  if(cid==='generative-ai'||cid==='gans'||cid==='vaes'||cid==='diffusion')return'Use a small generative-model example and trace the representation, training objective or noise/latent process, generated output, and evaluation risk.';
  if(cid==='digital-hardware'||cid==='advanced-computer-organization'||cid==='embedded-systems')return'Use a small hardware or embedded-system state and trace signals, timing, memory, device input/output, or the instruction/data path to the observable result.';
  if(cid==='interview-prep'||cid==='company-prep'||cid==='resume-prep'||cid==='influencing-without-authority')return'Use a realistic engineering-career situation and identify the evidence, decision, communication, or trade-off that would make the response strong and credible.';
- return'Apply this lesson idea to a concrete engineering case and trace the starting state, the important decision or transformation, and an observable result.';
+ return'Use '+raw+' in a concrete '+title+' task. Identify the input, apply the rule or operation, and verify the resulting value, state, or decision.';
 }
 function professionalScenario(course,title,c,index){
  var behavior=professionalBehavior(course,title,c);
@@ -1361,12 +1386,12 @@ function practicalUseFor(course,title,label,index){
  ];
  else{
   var behavior=professionalBehavior(cid,title,label);
-  if(behavior&&behavior!=='Apply this lesson idea to a concrete engineering case and trace the starting state, the important decision or transformation, and an observable result.')return behavior;
+  if(behavior)return behavior;
   uses=[
-   'Use '+label+' in a concrete '+title+' task where its effect can be observed and checked.',
-   'Use '+label+' when a '+title+' decision depends on the rule or behavior this concept represents.',
-   'Use '+label+' to trace how a '+title+' input, state, or operation changes into a result.',
-   'Use '+label+' when verifying whether a '+title+' implementation behaves correctly under a different input.'
+   'Use '+label+' in a concrete '+title+' task and check the result.',
+   'Use '+label+' when a '+title+' decision depends on this rule or operation.',
+   'Use '+label+' to compare the value or state before and after the operation.',
+   'Use '+label+' to verify that a '+title+' implementation behaves correctly for a different input.'
   ];
  }
  return uses[m%uses.length];
@@ -1521,51 +1546,70 @@ function diverseProgram(topic,seed,cid){
 }
 function program(topic,seed,cid){return diverseProgram(topic,seed,cid);}
 function diverseNativeExampleFor(course,topic,seed){
- course=String(course||'').toLowerCase();var m=diversityMode(seed);
+ course=String(course||'').toLowerCase();var m=diversityMode(seed),t=norm(topic);
  if(course==='sql'||course==='databases'){
-  var q=[
-   'SELECT name, age\nFROM students\nWHERE age >= 18\nORDER BY age DESC;',
-   'SELECT country, COUNT(*) AS customer_count\nFROM customers\nGROUP BY country\nORDER BY customer_count DESC;',
-   'SELECT c.name, o.item, o.total\nFROM customers AS c\nJOIN orders AS o ON o.customer_id = c.id;',
-   'WITH ranked AS (\n  SELECT category, price,\n         ROW_NUMBER() OVER (PARTITION BY category ORDER BY price DESC) AS rn\n  FROM products\n)\nSELECT category, price FROM ranked WHERE rn = 1;',
-   'SELECT p.name\nFROM products AS p\nLEFT JOIN order_items AS oi ON oi.product_id = p.id\nWHERE oi.product_id IS NULL;',
-   'WITH totals AS (\n  SELECT customer_id, SUM(total) AS spent\n  FROM orders GROUP BY customer_id\n)\nSELECT * FROM totals WHERE spent >= 500;',
-   'SELECT department, salary,\n       AVG(salary) OVER (PARTITION BY department) AS department_avg\nFROM employees;',
-   'SELECT name, created_at\nFROM users\nORDER BY created_at DESC;'
-  ]; return{language:'sql',code:q[m]};
+  var q={
+   filter:'SELECT name, age\nFROM students\nWHERE age >= 18\nORDER BY age DESC;',
+   group:'SELECT country, COUNT(*) AS customer_count\nFROM customers\nGROUP BY country\nORDER BY customer_count DESC;',
+   join:'SELECT c.name, o.item, o.total\nFROM customers AS c\nJOIN orders AS o ON o.customer_id = c.id;',
+   window:'SELECT department, salary,\n       AVG(salary) OVER (PARTITION BY department) AS department_avg\nFROM employees;',
+   cte:'WITH totals AS (\n  SELECT customer_id, SUM(total) AS spent\n  FROM orders\n  GROUP BY customer_id\n)\nSELECT customer_id, spent\nFROM totals\nWHERE spent >= 500;',
+   left:'SELECT p.name\nFROM products AS p\nLEFT JOIN order_items AS oi ON oi.product_id = p.id\nWHERE oi.product_id IS NULL;',
+   ranking:'WITH ranked AS (\n  SELECT category, price,\n         ROW_NUMBER() OVER (PARTITION BY category ORDER BY price DESC) AS rn\n  FROM products\n)\nSELECT category, price\nFROM ranked\nWHERE rn = 1;',
+   order:'SELECT name, created_at\nFROM users\nORDER BY created_at DESC;'
+  };
+  var code;
+  if(/left join|unmatched|missing related/.test(t))code=q.left;
+  else if(/join|relationship|foreign key/.test(t))code=q.join;
+  else if(/row number|row_number|rank|ranking/.test(t))code=q.ranking;
+  else if(/window|over|partition|running total/.test(t))code=q.window;
+  else if(/cte|common table|with clause/.test(t))code=q.cte;
+  else if(/group|aggregate|count|sum|avg|having/.test(t))code=q.group;
+  else if(/where|filter|predicate/.test(t))code=q.filter;
+  else if(/order|sort/.test(t))code=q.order;
+  else code=[q.filter,q.group,q.join,q.ranking,q.left,q.cte,q.window,q.order][m];
+  return{language:'sql',code:code};
  }
  if(course==='web-dev'||course==='frontend-dev'){
-  var w=[
-   {language:'html',code:'<main>\\n  <h1>Course dashboard</h1>\\n  <p>3 of 5 lessons complete</p>\\n</main>'},
-   {language:'html',code:'<form>\\n  <label for="email">Email</label>\\n  <input id="email" type="email" required>\\n  <button>Join</button>\\n</form>'},
-   {language:'javascript',code:'const scores = [72, 88, 91];\\nconsole.log(scores.filter(score => score >= 80));'},
-   {language:'javascript',code:'document.querySelector("#save").addEventListener("click", () => console.log("saved"));'},
-   {language:'css',code:'.cards {\\n  display: grid;\\n  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));\\n  gap: 1rem;\\n}'},
-   {language:'css',code:'.button:focus-visible {\\n  outline: 3px solid currentColor;\\n  outline-offset: 2px;\\n}'},
-   {language:'html',code:'<nav aria-label="Main navigation">\\n  <a href="#learn">Learn</a>\\n  <a href="#practice">Practice</a>\\n</nav>'},
-   {language:'javascript',code:'const prices = [10, 20, 30];\\nconsole.log(prices.reduce((sum, price) => sum + price, 0));'}
-  ]; return w[m];
+  var w={
+   semantic:{language:'html',code:'<main>\n  <h1>Course dashboard</h1>\n  <p>3 of 5 lessons complete</p>\n</main>'},
+   form:{language:'html',code:'<form>\n  <label for="email">Email</label>\n  <input id="email" type="email" required>\n  <button type="submit">Join</button>\n</form>'},
+   filter:{language:'javascript',code:'const scores = [72, 88, 91];\nconsole.log(scores.filter(score => score >= 80));'},
+   event:{language:'javascript',code:'document.querySelector("#save").addEventListener("click", () => {\n  console.log("saved");\n});'},
+   grid:{language:'css',code:'.cards {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));\n  gap: 1rem;\n}'},
+   focus:{language:'css',code:'.button:focus-visible {\n  outline: 3px solid currentColor;\n  outline-offset: 2px;\n}'},
+   nav:{language:'html',code:'<nav aria-label="Main navigation">\n  <a href="#learn">Learn</a>\n  <a href="#practice">Practice</a>\n</nav>'},
+   reduce:{language:'javascript',code:'const prices = [10, 20, 30];\nconsole.log(prices.reduce((sum, price) => sum + price, 0));'}
+  };
+  if(/accessib|focus|keyboard/.test(t))return w.focus;
+  if(/grid|layout|responsive|media|css|flex/.test(t))return w.grid;
+  if(/form|input|label/.test(t))return w.form;
+  if(/nav|semantic|html/.test(t))return /nav/.test(t)?w.nav:w.semantic;
+  if(/event|dom|listener|click/.test(t))return w.event;
+  if(/reduce|aggregate|sum/.test(t))return w.reduce;
+  if(/filter|array/.test(t))return w.filter;
+  return[w.semantic,w.form,w.filter,w.event,w.grid,w.focus,w.nav,w.reduce][m];
  }
  var banks={
   git:[
-   'git status\\ngit add src/app.py\\ngit commit -m "Add input validation"',
-   'git switch -c feature/readme\\ngit switch main\\ngit merge feature/readme',
-   'git diff\\ngit diff --staged\\ngit show HEAD',
-   'git log --oneline --graph --all\\ngit revert <commit-sha>\\ngit status',
-   'git restore --staged config.json\\ngit status',
-   'git branch -vv\\ngit remote -v',
-   'git stash push -m "wip"\\ngit stash list\\ngit stash pop',
-   'git fetch origin\\ngit log HEAD..origin/main --oneline'
+   'git status\ngit add src/app.py\ngit commit -m "Add input validation"',
+   'git switch -c feature/readme\ngit switch main\ngit merge feature/readme',
+   'git diff\ngit diff --staged\ngit show HEAD',
+   'git log --oneline --graph --all\ngit revert <commit-sha>\ngit status',
+   'git restore --staged config.json\ngit status',
+   'git branch -vv\ngit remote -v',
+   'git stash push -m "wip"\ngit stash list\ngit stash pop',
+   'git fetch origin\ngit log HEAD..origin/main --oneline'
   ],
   linux:[
-   'pwd\\nls -lah\\ncd projects',
+   'pwd\nls -lah\ncd projects',
    'grep -i "error" app.log | sort | uniq -c',
-   'find . -type f -name "*.py"\\nchmod u+x script.sh',
-   'ps aux | grep python\\ntail -f app.log',
-   'mkdir -p backups\\ncp config.json backups/config.json',
-   'head -n 5 data.csv\\ntail -n 5 data.csv',
-   'du -sh .\\ndf -h',
-   'printf "python\\\\nsql\\\\npython\\\\n" | sort | uniq'
+   'find . -type f -name "*.py"\nchmod u+x script.sh',
+   'ps aux | grep python\ntail -f app.log',
+   'mkdir -p backups\ncp config.json backups/config.json',
+   'head -n 5 data.csv\ntail -n 5 data.csv',
+   'du -sh .\ndf -h',
+   'printf "python\\nsql\\npython\\n" | sort | uniq'
   ],
   networking:[
    'ping -n 4 example.com','curl -I https://example.com','nslookup example.com','tracert example.com',
