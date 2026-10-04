@@ -58,6 +58,18 @@ function languageFor(node){
  if(window.CSAILineExplainer&&typeof window.CSAILineExplainer.inferLanguage==='function'){try{explicit=window.CSAILineExplainer.inferLanguage(codeText(node),explicit,node)||explicit;}catch(_){}}
  return normalizeLang(explicit);
 }
+function normalizeCoursePreamble(raw,lang){
+ raw=String(raw==null?'':raw).replace(/^\uFEFF/,'');
+ if(lang==='armasm'){
+   raw=raw.replace(/^\s*AREA\s+[^\r\n]+\r?\n?/im,'').replace(/^\s+/,'');
+   return 'AREA RESET, CODE, READONLY\n'+raw;
+ }
+ if(lang==='cpp'){
+   raw=raw.replace(/^\s*#include\s*<iostream>\s*\r?\n?/gmi,'').replace(/^\s*using\s+namespace\s+std\s*;\s*\r?\n?/gmi,'').replace(/^\s+/,'');
+   return '#include <iostream>\nusing namespace std;\n'+raw;
+ }
+ return raw;
+}
 function explainedCode(raw,lang){
  if(!COMMENTABLE_LANGS.has(lang))return String(raw||'');
  var api=window.CSAILineExplainer;
@@ -69,7 +81,7 @@ function applyInlineComments(node){
  var api=window.CSAILineExplainer;
  if(!api||typeof api.commentedCode!=='function')return false;
  var raw=originals.get(node);
- if(raw==null){raw=codeText(node);originals.set(node,raw);}
+ if(raw==null){raw=codeText(node);var detected=languageFor(node);raw=normalizeCoursePreamble(raw,detected);originals.set(node,raw);if(codeText(node)!==raw){if('value' in node)node.value=raw;else node.textContent=raw;}}
  var lang=languageFor(node);
  if(!COMMENTABLE_LANGS.has(lang))return false;
  var shown=explainedCode(raw,lang);
@@ -174,7 +186,7 @@ function insertPlainText(text){
 }
 function enhancePre(pre){
  if(pre.dataset.csaiEditableCode==='1')return;
- originals.set(pre,pre.textContent||'');
+ var raw=pre.textContent||'',lang=languageFor(pre);raw=normalizeCoursePreamble(raw,lang);if(pre.textContent!==raw)pre.textContent=raw;originals.set(pre,raw);
  pre.dataset.csaiEditableCode='1';
  pre.dataset.csaiAutoIndent='1';
  pre.setAttribute('contenteditable','plaintext-only');
@@ -201,7 +213,7 @@ function enhancePre(pre){
 }
 function enhanceTextarea(area){
  if(area.dataset.csaiEditableCode==='1')return;
- originals.set(area,area.value||'');
+ var raw=area.value||'',lang=languageFor(area);raw=normalizeCoursePreamble(raw,lang);if(area.value!==raw)area.value=raw;originals.set(area,raw);
  area.dataset.csaiEditableCode='1';
  area.dataset.csaiAutoIndent='1';
  if(area.hasAttribute('readonly'))area.removeAttribute('readonly');
@@ -239,6 +251,6 @@ function boot(){
  setTimeout(function(){enhance(document);},180);
  setTimeout(function(){enhance(document);},700);
 }
-window.CSAIEditableCode={enhance:enhance,isCodeNode:isCodeNode,computeEnterPlan:computeEnterPlan,languageFor:languageFor,applyInlineComments:applyInlineComments,version:'1.2-inline-comments'};
+window.CSAIEditableCode={enhance:enhance,isCodeNode:isCodeNode,computeEnterPlan:computeEnterPlan,languageFor:languageFor,applyInlineComments:applyInlineComments,normalizeCoursePreamble:normalizeCoursePreamble,version:'1.3-course-preambles'};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
