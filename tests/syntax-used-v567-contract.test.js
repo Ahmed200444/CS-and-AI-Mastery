@@ -7,7 +7,7 @@ const src=fs.readFileSync(path.join(root,'assets','line-by-line-explanations.js'
 const sandbox={window:{},document:{readyState:'loading',addEventListener(){},getElementById(){return null;}},setTimeout(){return 1;},clearTimeout(){},MutationObserver:function(){this.observe=function(){};},WeakMap,console};
 vm.createContext(sandbox);vm.runInContext(src,sandbox,{filename:'line-by-line-explanations.js'});
 const api=sandbox.window.CSAILineExplainer;
-assert.equal(api.version,'20261004-v581-university-syntax');
+assert.equal(api.version,'20261004-v582-course-syntax');
 assert.equal(typeof api.syntaxUsedEntries,'function');
 assert.equal(typeof api.syntaxUsedHtml,'function');
 
