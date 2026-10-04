@@ -40,20 +40,27 @@ assert.match(plottedHtml, /stroke-opacity="\.55"/, 'figure preview must render r
 assert.deepEqual(plot.env.x.slice(0, 3), [0, 0.1, 0.2], 'colon ranges should preserve MATLAB values');
 const matrix = visualizer.execute('A = [1 2; 3 4];\nB = [5; 6];\nC = A*B;');
 assert.deepEqual(matrix.env.C, [[17], [39]], 'matrix multiplication should preserve MATLAB row/column shape');
-const projectSource = `% file: calculate_average.m
-function average = calculate_average(numbers)
-total = sum(numbers);
-count = length(numbers);
-average = total / count;
-end
-
-% file: grades.m
-sam = [87 81 94 90 79];
-sam_average = calculate_average(sam)`;
+const concat = visualizer.execute('r = [2 4 10];\nw = [12 24 60];\nu = [r w];');
+assert.deepEqual(concat.env.u, [2,4,10,12,24,60], 'MATLAB horizontal concatenation must flatten compatible row vectors');
+const dims = visualizer.execute('Z = zeros(1,3);\ncols = size(Z,2);');
+assert.deepEqual(dims.env.Z, [0,0,0], 'zeros(1,3) must create a 1x3 row vector');
+assert.equal(dims.env.cols, 3, 'size(A,2) must return the column count');
+const sourceCourse = JSON.parse(fs.readFileSync(path.join(root,'assets','coursedata-source.json'),'utf8')).find(course=>course.id==='matlab-engineering');
+const projectSource = sourceCourse.lessons.find(lesson=>lesson.id==='mat-06').examples[0];
 const files = visualizer.virtualFiles(projectSource);
 assert.deepEqual(files.map(file => file.name), ['calculate_average.m', 'grades.m'], 'function and main script must remain separate Editor files');
 assert.equal(files[0].kind, 'function', 'calculate_average.m must be recognized as a function file');
 assert.equal(files[1].kind, 'script', 'grades.m must be recognized as the main script');
 const project = visualizer.execute(visualizer.runnableProjectSource(files));
-assert.equal(project.env.sam_average, 86.2, 'main script must be able to call the separate function file');
+assert.equal(project.env.sam_average, 86.2, 'main script must calculate Sam average correctly');
+assert.equal(project.env.ann_average, 88.8, 'main script must calculate Ann average correctly');
+assert.equal(project.env.mark_average, 80.2, 'main script must calculate Mark average correctly');
+assert.equal(project.env.sue_average, 93, 'main script must calculate Sue average correctly');
+assert.match(project.output.join('\n'), /Sam Average = 86\.20/, 'fprintf must substitute formatted numeric values');
+assert.match(project.output.join('\n'), /Sue Average = 93\.00/, 'fprintf must preserve requested decimal precision');
+for (const id of ['mat-08','mat-10']) {
+  const state=visualizer.execute(sourceCourse.lessons.find(lesson=>lesson.id===id).examples[0]);
+  assert.deepEqual(state.notes, [], id+' example must execute without preview errors');
+}
+
 console.log('MATLAB visualizer contract PASS — Editor code stays beside Command Window, Workspace tables and figures, with function/main scripts as separate .m files.');
