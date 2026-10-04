@@ -32,7 +32,7 @@ assert.equal(api.inferLanguage('MOV r0, #5','armasm'),'armasm');assert.equal(api
 assert.match(api.explain('MOV r0, #5','armasm')[0].purpose,/Copies/);
 assert.match(api.explain('count RN 0','armasm')[0].purpose,/alias/);
 assert.match(api.explain('MOVEQ r1, #1','armasm')[0].purpose,/condition.*EQ/);
-const armLecture=api.commentedCode(`AREA Prog1, CODE, READONLY
+const armLecture=api.commentedCode(`AREA RESET, CODE, READONLY
 ENTRY
 counter RN 0
 limit EQU 5
@@ -41,12 +41,16 @@ LDR r2, Q
 Stop B Stop
 END`,'armasm');
 assert.ok(!armLecture.includes('; Explanation:'),'ARM learning view must not use verbose generated Explanation: comments');
-assert.match(armLecture,/AREA Prog1, CODE, READONLY\s+; code area \/ section/,'ARM learning view should use concise lecture-style AREA comments');
+assert.match(armLecture,/AREA RESET, CODE, READONLY\s+; code area \/ section/,'ARM learning view should use the standard RESET AREA header');
 assert.match(armLecture,/MOV R1, #5\s+; load R1 with #5/,'ARM learning view should uppercase registers and keep comments short');
 assert.match(armLecture,/LDR R2, Q\s+; load R2 from Q/,'ARM learning view should resemble university ARMASM examples');
 const armExisting=api.commentedCode('LDR r1, Q ; load r1 with Q','armasm');
+assert.ok(armExisting.startsWith('AREA RESET, CODE, READONLY'),'single-instruction ARM examples must receive the standard program skeleton');
 assert.match(armExisting,/LDR R1, Q\s+; load r1 with Q/,'existing lecture-style ARM comments should be preserved');
-assert.equal((armExisting.match(/;/g)||[]).length,1,'existing ARM comments must not be duplicated');
+assert.equal((armExisting.match(/load r1 with Q/g)||[]).length,1,'existing ARM source comment must not be duplicated');
+const cppTeaching=api.commentedCode('int main() {\n    cout << "ok" << endl;\n    return 0;\n}','cpp');
+assert.ok(cppTeaching.startsWith('#include <iostream>'),'C++ teaching code must start with #include <iostream>');
+assert.match(cppTeaching,/using namespace std;/,'C++ teaching code must include using namespace std;');
 const explained=api.explain('LDR r0, [r1, #4]','armasm')[0];assert.ok(JSON.stringify(explained).includes('memory address'));assert.ok(!JSON.stringify(explained).includes('create a list'));
 const course=JSON.parse(fs.readFileSync('assets/arm-course-additions.json','utf8')).find(c=>c.id==='arm-assembly');
 for(const lesson of course.lessons.filter(l=>l.id!=='arm-12'))for(const example of lesson.examples){const result=run(example);assert.ok(result.halted,lesson.id+' example must finish at its end or explicit stop.');}

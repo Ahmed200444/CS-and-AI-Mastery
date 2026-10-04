@@ -19,8 +19,8 @@ for(const file of files){
   }
 }
 assert.ok([800,832].includes(lessons),'expected 800 committed or 832 generated lessons');
-assert.ok([3427,3628].includes(concepts),'key-concept coverage drift including university-course additions');
-assert.ok([5040,5305].includes(planned),'base concept-example plan drift including university-course additions');
+assert.ok([3427,3581].includes(concepts),'key-concept coverage drift including university-course additions');
+assert.ok([5040,5258].includes(planned),'base concept-example plan drift including university-course additions');
 assert.equal(maxConcepts,14,'max concept count drift');
 
 const study=fs.readFileSync(path.join(root,'assets','study-examples.js'),'utf8');

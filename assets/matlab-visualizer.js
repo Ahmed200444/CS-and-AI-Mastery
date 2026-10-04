@@ -220,7 +220,7 @@ function addStyle(){
  var s=document.createElement('style');
  s.id='csai-matlab-visualizer-style';
  s.textContent=[
-  '.matlab-workbench{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:14px;margin:14px 0;border:1px solid var(--border);border-radius:12px;background:var(--panel);overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.04)}',
+  '.matlab-workbench{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(420px,1fr);gap:14px;align-items:stretch;margin:14px 0;border:1px solid var(--border);border-radius:12px;background:var(--panel);overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.04)}',
   '@media(max-width:860px){.matlab-workbench{grid-template-columns:1fr}}',
   '.matlab-pane{display:flex;flex-direction:column;min-width:0}',
   '.matlab-pane-editor{border-right:1px solid var(--border);background:var(--code)}',
@@ -341,7 +341,7 @@ function mount(node){
  commandPane.className='matlab-pane matlab-pane-command';
  var commandHeader=document.createElement('div');
  commandHeader.className='matlab-pane-header';
- commandHeader.innerHTML='<span>Command Window &amp; Workspace</span><span style="font-size:.72rem;opacity:.8">Main Window (&gt;&gt;)</span>';
+ commandHeader.innerHTML='<span>Command Window · Workspace · Table/Figure</span><span style="font-size:.72rem;opacity:.8">Results beside code</span>';
  commandPane.appendChild(commandHeader);
  var commandBody=document.createElement('div');
  commandBody.className='matlab-pane-body';

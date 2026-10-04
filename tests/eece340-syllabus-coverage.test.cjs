@@ -101,15 +101,16 @@ for (const lab of mprCourse.labs) {
 const finalLab = mprCourse.labs.find(l => l.id === 'eece340-lab-16');
 assert.ok(finalLab, 'Lab 16 final lab exam rehearsal must exist');
 assert.match(finalLab.title, /final lab exam/i, 'Lab 16 must be a final lab exam rehearsal');
-assert.match(finalLab.assessment, /15%/, 'Lab 16 must represent the 15% lab exam weighting');
+assert.equal(audit.assessmentWeighting.labExam, 15, 'internal syllabus audit must retain the 15% lab-exam weighting');
 
 // 8. Verify generated microprocessors-arm.html contains the lab track
 const htmlPath = path.join(root, 'courses', 'microprocessors-arm.html');
 assert.ok(fs.existsSync(htmlPath), 'courses/microprocessors-arm.html must exist');
 const html = fs.readFileSync(htmlPath, 'utf8');
 
-assert.ok(html.includes('id="eece340-labs"'), 'html page must contain visible eece340-labs section');
-assert.ok(html.includes('EECE 340 SYLLABUS LAB TRACK'), 'html page must have EECE 340 lab track header');
+assert.ok(html.includes('id="microprocessor-arm-labs"'), 'html page must contain the generic microprocessor/ARM lab section');
+assert.ok(html.includes('Microprocessor &amp; ARM Laboratory Track'), 'commercial page must use the generic microprocessor lab-track heading');
+assert.ok(!html.includes('EECE 340 SYLLABUS LAB TRACK'), 'commercial page must not expose the institution-specific lab-track label');
 for (const id of requiredLabIds) {
   assert.ok(html.includes(`data-lab="${id}"`), `html page must contain lab card for ${id}`);
 }
@@ -122,4 +123,4 @@ assert.equal(matlabCourse.exercises.length, 12);
 assert.equal(matlabCourse.projects.length, 3);
 assert.ok(matlabCourse.capstone);
 
-console.log('EECE340 syllabus coverage contract PASS — all 27 syllabus requirements, 16 lab modules, line-by-line explanations, hardware notes, and assessment weights verified.');
+console.log('Microprocessors/ARM coverage contract PASS — all 27 internal syllabus requirements, 16 lab modules, line-by-line explanations, hardware notes, and private audit weighting verified without exposing it in the commercial course UI.');

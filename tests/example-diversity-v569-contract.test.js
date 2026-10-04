@@ -28,11 +28,11 @@ assert.ok([62,65].includes(courses.length),'expected 62 committed or 65 generate
 let lessons=0;
 for(const f of courses){
   const h=read('courses/'+f);
-  assert(h.includes('../assets/study-examples.js?v=20260824-v574'),`${f}: v5.71 diverse study-example asset not loaded`);
+  assert(/\.\.\/assets\/study-examples\.js\?v=(?:20260824-v574|20261004-v586)/.test(h),`${f}: v5.71 diverse study-example asset not loaded`);
   lessons+=(h.match(/data-lesson="[^"]+"/g)||[]).length;
 }
 assert.equal(lessons,courses.length===65?832:800,'expected 800 committed or 832 generated lessons');
-assert(read('index.html').includes('assets/study-examples.js?v=20260824-v574'),'homepage must load v5.71 diverse study-example asset');
+assert(/assets\/study-examples\.js\?v=(?:20260824-v574|20261004-v586)/.test(read('index.html')),'homepage must load v5.71 diverse study-example asset');
 assert.equal(JSON.parse(read('package.json')).version,'5.74.0','package version must be 5.69.0');
 assert(read('local-server.js').includes("RELEASE='5.74'"),'server release must be 5.69');
 assert(read('desktop-launcher.js').includes("RELEASE = '5.74'"),'desktop launcher release must be 5.69');

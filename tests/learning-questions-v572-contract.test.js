@@ -41,7 +41,7 @@ assert.ok([62,65].includes(pages.length),'expected 62 committed or 65 generated 
 let lessons=0;
 for(const f of pages){
   const h=read('courses/'+f);
-  assert(h.includes('../assets/study-examples.js?v=20260824-v574'),`${f}: v5.72 example questions not loaded`);
+  assert(/\.\.\/assets\/study-examples\.js\?v=(?:20260824-v574|20261004-v586)/.test(h),`${f}: v5.72 example questions not loaded`);
   assert(h.includes('../assets/practice-guidance.js?v=20260823-v573'),`${f}: v5.72 lesson/exercise/project questions not loaded`);
   lessons+=(h.match(/data-lesson="[^"]+"/g)||[]).length;
 }

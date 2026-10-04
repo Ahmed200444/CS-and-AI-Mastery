@@ -9,10 +9,8 @@ const pages=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith('.htm
 assert.ok([62,65].includes(pages.length),'general audit expects 62 committed or 65 generated course pages');
 for(const f of pages){
   const h=fs.readFileSync(path.join(root,'courses',f),'utf8');
-  for(const marker of [
-    'study-examples.js?v=20260824-v574',
-    'practice-guidance.js?v=20260823-v573'
-  ]) assert.ok(h.includes(marker),`${f}: stale modified learning asset tag: ${marker}`);
+  assert.ok(/study-examples\.js\?v=(?:20260824-v574|20261004-v586)/.test(h),`${f}: stale study-example asset tag`);
+  assert.ok(h.includes('practice-guidance.js?v=20260823-v573'),`${f}: stale practice-guidance asset tag`);
   if(h.includes('practice-publish-completer.js'))assert.ok(h.includes('practice-publish-completer.js?v=20260823-v573'),`${f}: stale practice-publish-completer cache tag`);
 }
 const canonical=JSON.parse(fs.readFileSync(path.join(root,'assets','coursedata-source.json'),'utf8'));

@@ -40,12 +40,10 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 </head><body>
 <main class="wrap"><div class="top"><a class="btn" href="/#courses">← All courses</a><a class="btn primary" href="/#hub">Home</a></div>
 <section class="hero"><div class="kicker">COURSE</div><h1><span class="hero-icon">📐</span>MATLAB for Engineering</h1><p class="muted">MATLAB basics for engineering: vectors, matrices, element-wise operations, scripts, functions, plots, conditionals, loops, and switch.</p><div class="meta"><span class="pill">10 lessons</span><span class="pill">12 exercises</span><span class="pill">24 checkpoints</span><span class="pill">4 projects</span></div><div class="progress"><span data-progress-bar style="width:0%"></span></div><div class="muted" data-progress-status>0 of 10 lessons complete</div></section>
-<section class="card" style="margin-bottom:14px" aria-label="Lecture order"><h2>Follow your lecture order</h2><ol><li>Windows and menus</li><li>Basic operations and arrays</li><li>Files and functions</li><li>Plotting with MATLAB</li><li>Programming with MATLAB</li></ol><p class="muted">Lessons show their source slide range. Repeated topics are grouped at their first substantial treatment.</p></section>
 <section class="card matlab-preview-intro" aria-label="MATLAB browser preview"><h2>MATLAB preview lab</h2><p>Features a side-by-side <b>Script / Editor Window (.m)</b> and <b>Command Window &amp; Workspace (&gt;&gt;)</b>. Run scripts, inspect live matrix/array values, and view figure plots directly in the lesson workbench. The preview follows the course examples in MATLAB syntax and labels unsupported features clearly; use MATLAB or GNU Octave for the full language.</p></section>
 <section class="lessons"><details class="lesson" data-lesson="mat-01" open>
 <summary><span class="num">01</span><span class="title">MATLAB environment &amp; command window</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="1"><b>Windows and menus</b> · slides 2–8<br><small>MatLab Introduction(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Explain what MATLAB is used for</li><li>Enter expressions at the command prompt</li><li>Create a simple range</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>MATLAB is a numerical-computing environment and programming language for manipulating, analyzing, and visualizing data. Commands and expressions can be entered at the &gt;&gt; prompt in the Command Window.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">MATLAB</span><span class="pill">Command Window</span><span class="pill">prompt</span><span class="pill">numerical computing</span></div>
@@ -56,7 +54,6 @@ z = 5*sin(u);</pre>
 </div></details><details class="lesson" data-lesson="mat-02" >
 <summary><span class="num">02</span><span class="title">Vectors, ranges &amp; transpose</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="2"><b>Basic operations and arrays</b> · slides 9–9<br><small>MatLab Introduction(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Create row and column vectors</li><li>Use start:step:end</li><li>Transpose and concatenate vectors</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Square brackets create vectors. Spaces or commas separate elements in a row, semicolons create a new row, and start:step:end creates regularly spaced values.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">row vector</span><span class="pill">column vector</span><span class="pill">colon operator</span><span class="pill">transpose</span><span class="pill">concatenation</span></div>
@@ -70,7 +67,6 @@ u = [r w];</pre>
 </div></details><details class="lesson" data-lesson="mat-03" >
 <summary><span class="num">03</span><span class="title">Matrices &amp; matrix multiplication</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="2"><b>Basic operations and arrays</b> · slides 10–10<br><small>MatLab Introduction(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Create matrices</li><li>Check multiplication dimensions</li><li>Use matrix multiplication</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Matrices use semicolons between rows. Ordinary * performs matrix multiplication, so the inner dimensions must be compatible.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">matrix</span><span class="pill">rows</span><span class="pill">columns</span><span class="pill">matrix multiplication</span><span class="pill">dimensions</span></div>
@@ -81,7 +77,6 @@ C = A*B</pre>
 </div></details><details class="lesson" data-lesson="mat-04" >
 <summary><span class="num">04</span><span class="title">Element-wise array operations &amp; vectorization</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="2"><b>Basic operations and arrays</b> · slides 10–11<br><small>MatLab Introduction(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Distinguish matrix and element-wise operators</li><li>Use .*, ./, and .^</li><li>Write vectorized expressions</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Dotted operators apply multiplication, division, or powers element by element. They let one expression operate across an entire vector.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">.*</span><span class="pill">./</span><span class="pill">.^</span><span class="pill">element-wise</span><span class="pill">vectorization</span></div>
@@ -96,7 +91,6 @@ y = exp(-x).*sin(x)./sqrt(x.^2 + 1);</pre>
 </div></details><details class="lesson" data-lesson="mat-05" >
 <summary><span class="num">05</span><span class="title">Scripts &amp; M-files</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="3"><b>Files and functions</b> · slides 12–14<br><small>MatLab Introduction(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Explain when scripts are useful</li><li>Create a .m script</li><li>Run a script by name</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>A script file stores a sequence of MATLAB commands for reuse. The lecture shows running a saved script by typing its filename without the .m extension.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">script</span><span class="pill">M-file</span><span class="pill">sequence of commands</span><span class="pill">comments</span></div>
@@ -108,7 +102,6 @@ C = A*B</pre>
 </div></details><details class="lesson" data-lesson="mat-06" >
 <summary><span class="num">06</span><span class="title">Function files &amp; local variables</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="3"><b>Files and functions</b> · slides 15–18<br><small>MatLab Introduction(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Write a function declaration</li><li>Keep a function file separate from the main script</li><li>Call the function from a script</li><li>Run the script from the Command Window</li><li>Match the function name and .m filename</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>A MATLAB function belongs in its own .m function file, while the main script is a separate .m file that calls it. Both files are edited in the Editor. The Command Window is separate: it is where you run the script by name and see output, variables, and figures.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">function file</span><span class="pill">input variables</span><span class="pill">output variables</span><span class="pill">local variables</span><span class="pill">filename</span></div>
@@ -128,7 +121,6 @@ ann_average = calculate_average(ann) % Call the same function with a second arra
 </div></details><details class="lesson" data-lesson="mat-07" >
 <summary><span class="num">07</span><span class="title">Plotting functions &amp; data</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="4"><b>Plotting with MATLAB</b> · slides 19–22<br><small>MatLab Introduction(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Create an x-y plot</li><li>Label axes and add a title</li><li>Plot multiple curves</li><li>Use legends</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>plot(x,y) creates an XY graph. xlabel, ylabel, and title describe it; multiple curves can be shown together and legend identifies them.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">plot</span><span class="pill">xlabel</span><span class="pill">ylabel</span><span class="pill">title</span><span class="pill">legend</span><span class="pill">line style</span></div>
@@ -143,7 +135,6 @@ legend(&#39;sinh(x)&#39;,&#39;tanh(x)&#39;);</pre>
 </div></details><details class="lesson" data-lesson="mat-08" >
 <summary><span class="num">08</span><span class="title">Relational, logical &amp; conditional statements</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="5"><b>Programming with MATLAB</b> · slides 23–27<br><small>MatLab Introduction(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Use relational and logical operators</li><li>Write if statements</li><li>Use elseif and else</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>MATLAB conditionals choose statements from logical expressions. The lecture covers relational operators, logical NOT/AND/OR/xor, and if/elseif/else for piecewise behavior.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">&lt;</span><span class="pill">&lt;=</span><span class="pill">&gt;</span><span class="pill">&gt;=</span><span class="pill">==</span><span class="pill">~=</span><span class="pill">~</span><span class="pill">&amp;</span><span class="pill">|</span><span class="pill">xor</span><span class="pill">if</span><span class="pill">elseif</span><span class="pill">else</span></div>
@@ -158,7 +149,6 @@ end</pre>
 </div></details><details class="lesson" data-lesson="mat-09" >
 <summary><span class="num">09</span><span class="title">for loops, ranges &amp; implied loops</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="5"><b>Programming with MATLAB</b> · slides 28–29<br><small>MatLab Introduction(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Write a for loop using m:s:n</li><li>Use positive and negative steps</li><li>Compare explicit loops with vectorized work</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>The lecture gives for loop_variable = m:s:n. The step s may be negative and defaults to one when omitted. It also contrasts explicit loops with implied/vectorized array operations.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">for</span><span class="pill">colon range</span><span class="pill">loop variable</span><span class="pill">vectorization</span><span class="pill">indexing</span></div>
@@ -172,7 +162,6 @@ end</pre>
 </div></details><details class="lesson" data-lesson="mat-10" >
 <summary><span class="num">10</span><span class="title">while loops &amp; switch structures</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="5"><b>Programming with MATLAB</b> · slides 30–33<br><small>MatLab Introduction(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Use while when the iteration count is unknown</li><li>Initialize and update loop state</li><li>Write switch/case/otherwise</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>while is used when repetition stops after a condition changes rather than after a known number of passes. Its controlling value must be initialized and changed. switch provides a readable alternative for discrete cases.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">while</span><span class="pill">loop condition</span><span class="pill">state update</span><span class="pill">switch</span><span class="pill">case</span><span class="pill">otherwise</span></div>

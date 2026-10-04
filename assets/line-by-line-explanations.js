@@ -1,7 +1,7 @@
 (function(){
 'use strict';
 
-var VERSION='20261004-v581-university-syntax';
+var VERSION='20261004-v583-teaching-syntax';
 var updateTimers=new WeakMap(),editorSeq=0;
 
 function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
@@ -1165,11 +1165,42 @@ function inlineCommentFor(line,purpose,lang){
  else return raw;
  return raw.replace(/\s+$/,'')+'  '+suffix;
 }
-function commentedCode(code,lang){var cleanCode=stripGeneratedComments(code);return explain(cleanCode,lang).map(function(r){return inlineCommentFor(r.code,r.purpose,lang);}).join('\n');}
+function normalizeTeachingSource(code,lang){
+ var cleanCode=stripGeneratedComments(code),lines=cleanCode.replace(/\r/g,'').split('\n');
+ if(lang==='armasm'){
+  var body=lines.filter(function(line){
+   var bare=splitArmSourceComment(line).code.trim();
+   if(/^AREA\s+\S+\s*,\s*CODE\s*,\s*READONLY\s*$/i.test(bare))return false;
+   if(/^ENTRY\s*$/i.test(bare))return false;
+   if(/^END\s*$/i.test(bare))return false;
+   return true;
+  });
+  while(body.length&&!body[0].trim())body.shift();
+  while(body.length&&!body[body.length-1].trim())body.pop();
+  return ['AREA RESET, CODE, READONLY','ENTRY'].concat(body).concat(['END']).join('\n');
+ }
+ if(lang==='cpp'){
+  var body=lines.filter(function(line){
+   var t=line.trim();
+   return !/^#include\s*<iostream>\s*$/.test(t)&&!/^using\s+namespace\s+std\s*;\s*$/.test(t);
+  });
+  while(body.length&&!body[0].trim())body.shift();
+  while(body.length&&!body[body.length-1].trim())body.pop();
+  var includes=[],rest=[],seenNonInclude=false;
+  body.forEach(function(line){
+   if(!seenNonInclude&&/^\s*#include\b/.test(line)){includes.push(line.trim());return;}
+   if(line.trim())seenNonInclude=true;
+   rest.push(line);
+  });
+  return ['#include <iostream>'].concat(includes).concat(['using namespace std;','']).concat(rest).join('\n').replace(/\n{3,}/g,'\n\n');
+ }
+ return cleanCode;
+}
+function commentedCode(code,lang){var cleanCode=normalizeTeachingSource(code,lang);return explain(cleanCode,lang).map(function(r){return inlineCommentFor(r.code,r.purpose,lang);}).join('\n');}
 function commentedCodeHtml(code,lang){
  var arm=lang==='armasm',matlab=lang==='matlab';
  var title=arm?'Lecture-style ARM code':matlab?'Lecture-style MATLAB code':'Code with comments';
- var note=arm?'ARMASM view: uppercase registers/mnemonics and short semicolon comments, matching the lecture-note style. The clean code above remains runnable.':matlab?'MATLAB view: normal MATLAB syntax with short percent comments, matching the university example style. The clean code above remains runnable.':'Learning view: each source line includes its explanation as a comment. Keep using the clean code above to run or edit.';
+ var note=arm?'ARMASM view: uppercase registers/mnemonics and short semicolon comments, matching the course example style. The clean code above remains runnable.':matlab?'MATLAB view: normal MATLAB syntax with short percent comments, matching the course example style. The clean code above remains runnable.':'Learning view: each source line includes its explanation as a comment. Keep using the clean code above to run or edit.';
  return '<section class="csai-commented-code" data-csai-commented-code><div class="csai-commented-code-title">'+title+'</div><p class="csai-commented-code-note">'+note+'</p><pre><code>'+esc(commentedCode(code,lang))+'</code></pre></section>';
 }
 function glossaryTerms(code,lang){var c=text(code),terms=[];function add(term,meaning){if(!terms.some(function(x){return x.term===term;}))terms.push({term:term,meaning:meaning});}
@@ -1384,7 +1415,7 @@ function targetNodes(root){root=root||document;var selectors=[
 function enhance(root){addStyle();targetNodes(root).forEach(refreshNode);}
 function schedule(node){if(!isCodeWorkspace(node)&&!(node&&node.getAttribute&&node.getAttribute('data-csai-line-editor-id')))return;clearTimeout(updateTimers.get(node));var t=setTimeout(function(){refreshNode(node);updateTimers.delete(node);},120);updateTimers.set(node,t);}
 
-window.CSAILineExplainer={version:VERSION,inferLanguage:inferLanguage,explain:explain,listHtml:listHtml,commentedCode:commentedCode,stripGeneratedComments:stripGeneratedComments,commentedCodeHtml:commentedCodeHtml,explanationHtml:explanationHtml,quickPurpose:quickPurposeFor,glossaryTerms:glossaryTerms,glossaryHtml:glossaryHtml,syntaxUsedEntries:syntaxUsedEntries,syntaxUsedHtml:syntaxUsedHtml,refresh:refreshNode,enhance:enhance,isCodeWorkspace:isCodeWorkspace,targetNodes:targetNodes};
+window.CSAILineExplainer={version:VERSION,inferLanguage:inferLanguage,explain:explain,listHtml:listHtml,normalizeTeachingSource:normalizeTeachingSource,commentedCode:commentedCode,stripGeneratedComments:stripGeneratedComments,commentedCodeHtml:commentedCodeHtml,explanationHtml:explanationHtml,quickPurpose:quickPurposeFor,glossaryTerms:glossaryTerms,glossaryHtml:glossaryHtml,syntaxUsedEntries:syntaxUsedEntries,syntaxUsedHtml:syntaxUsedHtml,refresh:refreshNode,enhance:enhance,isCodeWorkspace:isCodeWorkspace,targetNodes:targetNodes};
 
 function initialEnhance(){addStyle();var lessons=Array.from(document.querySelectorAll('.lesson'));/* v5.60: scrolling past a closed lesson must not build explanation UI. */lessons.filter(function(x){return x.open;}).forEach(enhance);}
 function boot(){initialEnhance();document.addEventListener('focusin',function(e){if(e.target&&isCodeWorkspace(e.target))refreshNode(e.target);},true);document.addEventListener('click',function(e){var n=e.target&&e.target.closest&&e.target.closest('pre.code,[data-csai-language-generated],.csai-language-code');if(n&&isCodeWorkspace(n))refreshNode(n);},true);document.addEventListener('toggle',function(e){if(e.target&&e.target.matches&&e.target.matches('.lesson')&&e.target.open)enhance(e.target);var block=e.target&&e.target.matches&&e.target.matches('[data-csai-line-explanation]')?e.target:null;if(block&&block.open)renderLazyBlock(block);},true);document.addEventListener('input',function(e){if(e.target&&(isCodeWorkspace(e.target)||(e.target.getAttribute&&e.target.getAttribute('data-csai-line-editor-id'))))schedule(e.target);},true);var pending=new Set(),flushTimer=0;new MutationObserver(function(records){records.forEach(function(r){Array.from(r.addedNodes||[]).forEach(function(n){if(n&&n.nodeType===1&&!n.matches('[data-csai-line-explanation],.csai-line-item,.csai-term-glossary'))pending.add(n);});});if(!pending.size)return;clearTimeout(flushTimer);flushTimer=setTimeout(function(){var batch=Array.from(pending);pending.clear();batch.forEach(function(n){enhance(n);});},40);}).observe(document.documentElement,{childList:true,subtree:true});}

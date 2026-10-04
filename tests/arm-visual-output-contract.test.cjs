@@ -7,4 +7,7 @@ assert.match(ui, /Register values/, 'ARM tracer must render register values');
 assert.match(ui, /Word memory/, 'ARM tracer must render word memory');
 assert.match(ui, /Instruction and control-flow map/, 'ARM tracer must render an instruction map');
 assert.match(ui, /arm-trace-map/, 'ARM instruction map must be tabular and scrollable');
+assert.match(ui, /arm-code-table-layout/, 'ARM code and register table must share a side-by-side desktop layout');
+assert.match(ui, /grid-template-columns:minmax\(0,1\.05fr\) minmax\(460px,1fr\)/, 'ARM desktop layout must place the table beside the code');
+assert.match(ui, /@media\(max-width:980px\).*arm-code-table-layout\{grid-template-columns:1fr\}/, 'ARM layout must stack on smaller screens');
 console.log('ARM visual output contract PASS — registers, flags, memory, and instruction control-flow tables are wired.');

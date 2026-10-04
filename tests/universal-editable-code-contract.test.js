@@ -21,5 +21,5 @@ let nativeBlocks=0;
 for(const f of courseFiles){const h=read('courses/'+f);ok(/universal-editable-code\.js\?v=/.test(h),f+': missing universal editable code layer');nativeBlocks+=(h.match(/<pre\b[^>]*(?:class="[^"]*\bcode\b|data-example-audit="candidate"|data-reference-only="true")/g)||[]).length;}
 ok(nativeBlocks>700,'expected hundreds of native/reference code blocks to be covered, found '+nativeBlocks);
 const release=read('scripts/apply-performance-release.cjs');
-ok(/line-by-line-explanations\\\.js\/,'20261004-v581'/.test(release)&&/universal-editable-code\\\.js\/,'20260919-v577'/.test(release),'production build must cache-bust both the university-syntax line explainer and universal editable-code assets');
+ok(/line-by-line-explanations\\\.js\/,'20261004-v583'/.test(release)&&/universal-editable-code\\\.js\/,'20260919-v577'/.test(release),'production build must cache-bust both the teaching-syntax line explainer and universal editable-code assets');
 console.log('Universal editable code contract PASS — '+courseFiles.length+' course pages, '+nativeBlocks+' native/reference blocks plus dynamic editors.');

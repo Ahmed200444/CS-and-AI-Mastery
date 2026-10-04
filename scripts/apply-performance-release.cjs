@@ -6,12 +6,14 @@ const root=process.cwd();
 // assets introduced by a later build pinned to their own tag.
 const TAG='20260822-v567';
 const TAG_RULES=[
-  [/(?:arm-trace-engine|arm-trace-ui|lesson-recall)\.js/,'20261003-v578'],
-  [/matlab-visualizer\.js/,'20261004-v579'],
-  [/line-by-line-explanations\.js/,'20261004-v581'],
+  [/(?:arm-trace-engine|arm-trace-ui)\.js/,'20261004-v584'],
+  [/lesson-recall\.js/,'20261003-v578'],
+  [/matlab-visualizer\.js/,'20261004-v585'],
+  [/line-by-line-explanations\.js/,'20261004-v583'],
   [/universal-editable-code\.js/,'20260919-v577'],
   [/try-it-yourself-v568\.js/,'20260822-v568'],
-  [/(?:study-examples|conceptual-examples-v574|program-questions-v574)\.js/,'20260824-v574'],
+  [/study-examples\.js/,'20261004-v586'],
+  [/(?:conceptual-examples-v574|program-questions-v574)\.js/,'20260824-v574'],
   [/(?:practice-guidance|practice-publish-completer)\.js/,'20260823-v573'],
   [/course-project-workspace\.js/,'20260822-v571']
 ];

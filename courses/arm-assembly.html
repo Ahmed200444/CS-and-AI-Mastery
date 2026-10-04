@@ -40,15 +40,13 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 </head><body>
 <main class="wrap"><div class="top"><a class="btn" href="/#courses">← All courses</a><a class="btn primary" href="/#hub">Home</a></div>
 <section class="hero"><div class="kicker">COURSE</div><h1><span class="hero-icon">⚙️</span>ARM Assembly Programming</h1><p class="muted">ARM assembly syntax, data processing, barrel shifts, flags, condition codes, branches, memory addressing, stacks, functions, and exceptions.</p><div class="meta"><span class="pill">12 lessons</span><span class="pill">12 exercises</span><span class="pill">24 checkpoints</span><span class="pill">4 projects</span></div><div class="progress"><span data-progress-bar style="width:0%"></span></div><div class="muted" data-progress-status>0 of 12 lessons complete</div></section>
-<section class="card" style="margin-bottom:14px" aria-label="Lecture order"><h2>Follow your lecture order</h2><ol><li><a href="microprocessors-arm.html">Introduction</a></li><li><a href="microprocessors-arm.html">ARM Architecture</a></li><li>Instructions — Part 1</li><li>Instructions — Part 2</li><li>Functions</li><li>Exceptions</li></ol><p class="muted">Lessons show their source slide range. Repeated topics are grouped at their first substantial treatment.</p></section>
 <section class="lessons"><details class="lesson" data-lesson="arm-01" open>
 <summary><span class="num">01</span><span class="title">ARM assembly structure, syntax &amp; directives</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="3"><b>Instructions — Part 1</b> · slides 7–25<br><small>03.Lecture_ARM_Instructions_part1 (1)(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Read destination/source operand order</li><li>Use common assembler directives</li><li>Distinguish directives from CPU instructions</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>ARM assembly source combines processor instructions with assembler directives. Most data-processing instructions place the destination first, followed by source operands. AREA, ENTRY, RN, EQU, ALIGN, SPACE, and END help the assembler organize code/data or define names; they are not operations executed by the CPU.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">AREA</span><span class="pill">ENTRY</span><span class="pill">END</span><span class="pill">RN</span><span class="pill">EQU</span><span class="pill">ALIGN</span><span class="pill">register operands</span></div>
-<h3>Example</h3><pre class="code" data-language="armasm" data-example-audit="candidate">        AREA Prog1, CODE, READONLY
+<h3>Example</h3><pre class="code" data-language="armasm" data-example-audit="candidate">        AREA RESET, CODE, READONLY
         ENTRY
 counter RN 0
 limit   EQU 5
@@ -59,9 +57,8 @@ stop    B stop
 </div></details><details class="lesson" data-lesson="arm-02" >
 <summary><span class="num">02</span><span class="title">Registers, immediates, MOV &amp; MVN</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="3"><b>Instructions — Part 1</b> · slides 9–15<br><small>03.Lecture_ARM_Instructions_part1 (1)(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Move values between registers</li><li>Load simple immediate values</li><li>Explain MOV versus MVN</li></ul>
-<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Data-processing instructions work primarily on registers. MOV copies an operand into a destination register, while MVN writes the bitwise complement. Immediate operands use # in the lecture syntax. Remember the destination-first pattern when tracing instructions.</p></section>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Data-processing instructions work primarily on registers. MOV copies an operand into a destination register, while MVN writes the bitwise complement. Immediate operands use # in ARMASM syntax. Use the destination-first pattern when tracing instructions.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">register</span><span class="pill">immediate</span><span class="pill">MOV</span><span class="pill">MVN</span><span class="pill">destination</span><span class="pill">source</span></div>
 <h3>Example</h3><pre class="code" data-language="armasm" data-example-audit="candidate">        MOV r0, #17
         MOV r1, r0
@@ -70,7 +67,6 @@ stop    B stop
 </div></details><details class="lesson" data-lesson="arm-09" >
 <summary><span class="num">03</span><span class="title">LDR/STR &amp; ARM addressing modes</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="3"><b>Instructions — Part 1</b> · slides 26–43<br><small>03.Lecture_ARM_Instructions_part1 (1)(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Load and store words/bytes/halfwords</li><li>Calculate effective addresses</li><li>Distinguish pre-indexed and post-indexed write-back</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>ARM is a load-store architecture, so memory values move into registers before most data processing. LDR/STR transfer words, with byte and halfword variants. Addressing modes combine a base register with an offset; pre-indexing forms the address before access, while post-indexing uses the base first and updates it afterward.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">LDR</span><span class="pill">STR</span><span class="pill">LDRB</span><span class="pill">STRB</span><span class="pill">LDRH</span><span class="pill">STRH</span><span class="pill">pre-index</span><span class="pill">post-index</span></div>
@@ -87,7 +83,6 @@ stop    B stop
 </div></details><details class="lesson" data-lesson="arm-05" >
 <summary><span class="num">04</span><span class="title">Barrel shifter: LSL, LSR, ASR &amp; ROR</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="3"><b>Instructions — Part 1</b> · slides 44–48<br><small>03.Lecture_ARM_Instructions_part1 (1)(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Trace logical and arithmetic shifts</li><li>Explain rotate-right</li><li>Combine a shift with a data-processing instruction</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>ARM can shift the second operand as part of many data-processing instructions. LSL shifts left, LSR shifts right with zero fill, ASR preserves the sign bit for signed values, and ROR rotates bits around. Combining ALU work with a shift is a characteristic ARM feature.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">LSL</span><span class="pill">LSR</span><span class="pill">ASR</span><span class="pill">ROR</span><span class="pill">barrel shifter</span><span class="pill">Operand2</span></div>
@@ -99,7 +94,6 @@ stop    B stop
 </div></details><details class="lesson" data-lesson="arm-06" >
 <summary><span class="num">05</span><span class="title">CPSR flags &amp; the S suffix</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="4"><b>Instructions — Part 2</b> · slides 2–6<br><small>03.Lecture_ARM_Instructions_part2 (2)(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Explain N, Z, C, and V</li><li>Use the S suffix to update flags</li><li>Separate signed overflow from unsigned carry</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>N reflects the result sign bit, Z indicates zero, C records carry/no-borrow information and shifted-out bits, and V reports signed arithmetic overflow. Many data-processing instructions update flags only when the S suffix is requested.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">N flag</span><span class="pill">Z flag</span><span class="pill">C flag</span><span class="pill">V flag</span><span class="pill">CPSR</span><span class="pill">S suffix</span></div>
@@ -110,7 +104,6 @@ stop    B stop
 </div></details><details class="lesson" data-lesson="arm-07" >
 <summary><span class="num">06</span><span class="title">CMP, CMN, TST, TEQ &amp; conditional execution</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="4"><b>Instructions — Part 2</b> · slides 7–10<br><small>03.Lecture_ARM_Instructions_part2 (2)(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Use comparison instructions to set flags</li><li>Choose a condition code from flag results</li><li>Explain conditional instruction execution</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>CMP behaves like subtraction for flag setting, CMN like addition, TST like bitwise AND, and TEQ like XOR. They update flags without keeping a normal destination result. Conditional suffixes such as EQ or NE make an instruction execute only when its flag condition is satisfied.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">CMP</span><span class="pill">CMN</span><span class="pill">TST</span><span class="pill">TEQ</span><span class="pill">EQ</span><span class="pill">NE</span><span class="pill">LT</span><span class="pill">GT</span></div>
@@ -123,7 +116,6 @@ stop    B stop
 </div></details><details class="lesson" data-lesson="arm-04" >
 <summary><span class="num">07</span><span class="title">Logical operations &amp; bit manipulation</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="4"><b>Instructions — Part 2</b> · slides 11–15<br><small>03.Lecture_ARM_Instructions_part2 (2)(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Apply bitwise AND/OR/XOR</li><li>Clear selected bits with BIC</li><li>Build and reason about masks</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>AND keeps bits selected by a mask, ORR sets selected bits, EOR performs XOR, and BIC clears bits selected by the second operand. These operations are central to packed flags and device/control registers.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">AND</span><span class="pill">ORR</span><span class="pill">EOR</span><span class="pill">BIC</span><span class="pill">MVN</span><span class="pill">bit mask</span></div>
@@ -137,7 +129,6 @@ stop    B stop
 </div></details><details class="lesson" data-lesson="arm-03" >
 <summary><span class="num">08</span><span class="title">Arithmetic instructions: ADD, ADC, SUB, SBC, RSB &amp; RSC</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="4"><b>Instructions — Part 2</b> · slides 16–18<br><small>03.Lecture_ARM_Instructions_part2 (2)(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Trace three-operand arithmetic</li><li>Explain add/subtract with carry</li><li>Use reverse subtraction correctly</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>ARM arithmetic instructions typically use a destination and two input operands. ADD and SUB perform basic arithmetic; ADC and SBC include carry state for multiword arithmetic. RSB reverses subtraction order, useful when the desired calculation is operand2 minus operand1.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">ADD</span><span class="pill">ADC</span><span class="pill">SUB</span><span class="pill">SBC</span><span class="pill">RSB</span><span class="pill">RSC</span><span class="pill">carry</span></div>
@@ -150,7 +141,6 @@ stop    B stop
 </div></details><details class="lesson" data-lesson="arm-08" >
 <summary><span class="num">09</span><span class="title">Branches, if/else &amp; loops</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="4"><b>Instructions — Part 2</b> · slides 19–47<br><small>03.Lecture_ARM_Instructions_part2 (2)(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Branch to labels</li><li>Translate decisions into branches</li><li>Trace while and do-while loops</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Branch instructions change control flow by loading a new PC value. Labels identify targets. Conditional branches combine flag tests with control flow, which implements if/else and loops. Testing before or after the body distinguishes pre-test and post-test loops.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">B</span><span class="pill">BL</span><span class="pill">BX</span><span class="pill">label</span><span class="pill">while loop</span><span class="pill">do-while</span></div>
@@ -165,7 +155,6 @@ done    B done</pre>
 </div></details><details class="lesson" data-lesson="arm-10" >
 <summary><span class="num">10</span><span class="title">LDM/STM, PUSH/POP &amp; the runtime stack</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="4"><b>Instructions — Part 2</b> · slides 99–113<br><small>03.Lecture_ARM_Instructions_part2 (2)(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Transfer multiple registers</li><li>Explain multiple-addressing modes</li><li>Trace stack growth and PUSH/POP</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>LDM and STM move multiple registers between registers and memory. Addressing-mode suffixes specify increment/decrement and before/after behavior. PUSH and POP are stack-oriented aliases using R13/SP; in the convention shown in the lectures, PUSH corresponds to STMDB and POP to LDMIA, so the stack grows toward lower addresses.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">LDM</span><span class="pill">STM</span><span class="pill">PUSH</span><span class="pill">POP</span><span class="pill">SP</span><span class="pill">R13</span><span class="pill">IA</span><span class="pill">IB</span><span class="pill">DA</span><span class="pill">DB</span></div>
@@ -177,7 +166,6 @@ done    B done</pre>
 </div></details><details class="lesson" data-lesson="arm-11" >
 <summary><span class="num">11</span><span class="title">Subroutines, BL/BX LR &amp; parameter passing</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="5"><b>Functions</b> · slides 2–22<br><small>04.Functions(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Call and return from a subroutine</li><li>Preserve registers across calls</li><li>Compare register, memory-block, and stack parameter passing</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>BL branches while saving a return address in LR/R14. A simple return can use BX LR. Subroutines preserve state according to the calling convention. Parameters can be passed in registers, through a referenced memory block, or on the stack; stack-based access must account for values pushed on entry.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">BL</span><span class="pill">BX LR</span><span class="pill">LR</span><span class="pill">callee state</span><span class="pill">parameters</span><span class="pill">stack</span></div>
@@ -195,7 +183,6 @@ stop    B stop</pre>
 </div></details><details class="lesson" data-lesson="arm-12" >
 <summary><span class="num">12</span><span class="title">Exceptions, interrupts, vectors &amp; SVC</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="6"><b>Exceptions</b> · slides 2–13<br><small>05.Exceptions(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>List major classic ARM exception types</li><li>Trace automatic exception entry</li><li>Explain vector dispatch and return</li><li>Distinguish IRQ, FIQ, and SVC</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>On a classic ARM exception, CPSR is copied to the relevant SPSR, the processor changes mode, a return address is stored in mode-specific LR, and PC goes to an exception vector. The vector dispatches to a handler, which returns using the exception-appropriate sequence. SVC deliberately requests a privileged OS service.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">exception</span><span class="pill">SPSR</span><span class="pill">LR_mode</span><span class="pill">vector table</span><span class="pill">IRQ</span><span class="pill">FIQ</span><span class="pill">SVC</span></div>

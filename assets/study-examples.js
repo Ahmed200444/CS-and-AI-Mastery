@@ -50,9 +50,9 @@ function legacyProgram(topic,seed,cid){cid=String(cid||studyCourseId()||'').toLo
  if(/list comprehension/.test(t))return 'nums = [1, 2, 3, 4]\nsquares = [n * n for n in nums]\nprint(squares)';
  if(/^membership$|membership test/.test(t))return 'seen = {1, 2, 3}\nprint(2 in seen)\nprint(5 in seen)';
  if(/variable|type|assignment|dynamic typing|boolean|bool/.test(t)){
-  if(mode===0)return 'age = '+(18+n.a)+'\nname = "Ahmed"\nis_student = True\nprint(name, age, is_student)\nprint(type(age).__name__)';
+  if(mode===0)return 'age = '+(18+n.a)+'\nname = "Alex"\nis_student = True\nprint(name, age, is_student)\nprint(type(age).__name__)';
   if(mode===1)return 'value = 12\nprint(value, type(value).__name__)\nvalue = "twelve"\nprint(value, type(value).__name__)';
-  if(mode===2)return 'profile = {"name": "Ahmed", "level": '+n.a+', "active": True}\nfor key, value in profile.items():\n    print(key, value, type(value).__name__)';
+  if(mode===2)return 'profile = {"name": "Alex", "level": '+n.a+', "active": True}\nfor key, value in profile.items():\n    print(key, value, type(value).__name__)';
   return 'score = '+(70+n.a)+'\npassed = score >= 60\nmessage = f"score={score}, passed={passed}"\nprint(message)';
  }
  if(/string|slice|format|f string/.test(t)){
@@ -69,14 +69,14 @@ function legacyProgram(topic,seed,cid){cid=String(cid||studyCourseId()||'').toLo
  }
  if(/function|parameter|argument|lambda|return/.test(t)){
   if(mode===0)return 'def transform(value, factor=2):\n    return value * factor\n\nprint(transform('+n.a+'))\nprint(transform('+n.b+', 3))';
-  if(mode===1)return 'def describe(name, score):\n    status = "pass" if score >= 60 else "retry"\n    return f"{name}: {status}"\n\nprint(describe("Ahmed", '+(55+n.a)+'))';
+  if(mode===1)return 'def describe(name, score):\n    status = "pass" if score >= 60 else "retry"\n    return f"{name}: {status}"\n\nprint(describe("Alex", '+(55+n.a)+'))';
   if(mode===2)return 'def average(values):\n    if not values:\n        return 0\n    return sum(values) / len(values)\n\nprint(average([10, 20, '+(20+n.a)+']))\nprint(average([]))';
   return 'square = lambda value: value * value\nvalues = [1, 2, 3, '+n.a+']\nprint([square(v) for v in values])';
  }
  if(/list|array|vector|comprehension|collection/.test(t)){
   if(mode===0)return 'nums = [1, 2, 3, 4, 5]\nsquares = [value * value for value in nums]\nprint(squares)';
   if(mode===1)return 'values = [8, 3, 8, 1, '+n.a+']\nunique = sorted(set(values))\nprint(unique)';
-  if(mode===2)return 'names = ["Ali", "Ahmed", "Maya", "Omar"]\nlong_names = [name for name in names if len(name) >= 5]\nprint(long_names)';
+  if(mode===2)return 'names = ["Ali", "Alex", "Maya", "Omar"]\nlong_names = [name for name in names if len(name) >= 5]\nprint(long_names)';
   return 'matrix = [[1, 2], [3, 4], ['+n.a+', '+n.b+']]\nflat = [value for row in matrix for value in row]\nprint(flat)';
  }
  if(/dictionary|hash|map|key value/.test(t)){
@@ -87,7 +87,7 @@ function legacyProgram(topic,seed,cid){cid=String(cid||studyCourseId()||'').toLo
  }
  if(/class|object|inherit|encaps|polymorph|oop/.test(t)){
   if(mode===0)return 'class Account:\n    def __init__(self, balance):\n        self.balance = balance\n    def deposit(self, amount):\n        self.balance += amount\n\naccount = Account(100)\naccount.deposit('+n.b+')\nprint(account.balance)';
-  if(mode===1)return 'class Student:\n    def __init__(self, name):\n        self.name = name\n        self.scores = []\n    def add_score(self, score):\n        self.scores.append(score)\n    def average(self):\n        return sum(self.scores) / len(self.scores)\n\ns = Student("Ahmed")\ns.add_score(80)\ns.add_score('+(80+n.a)+')\nprint(s.average())';
+  if(mode===1)return 'class Student:\n    def __init__(self, name):\n        self.name = name\n        self.scores = []\n    def add_score(self, score):\n        self.scores.append(score)\n    def average(self):\n        return sum(self.scores) / len(self.scores)\n\ns = Student("Alex")\ns.add_score(80)\ns.add_score('+(80+n.a)+')\nprint(s.average())';
   if(mode===2)return 'class Shape:\n    def area(self):\n        raise NotImplementedError\n\nclass Square(Shape):\n    def __init__(self, side):\n        self.side = side\n    def area(self):\n        return self.side ** 2\n\nprint(Square('+n.a+').area())';
   return 'class Counter:\n    def __init__(self):\n        self._value = 0\n    def increment(self):\n        self._value += 1\n    @property\n    def value(self):\n        return self._value\n\nc = Counter()\nfor _ in range('+n.a+'):\n    c.increment()\nprint(c.value)';
  }
@@ -115,7 +115,7 @@ function legacyProgram(topic,seed,cid){cid=String(cid||studyCourseId()||'').toLo
  }
  if(/interrupt|sensor|gpio|embedded|timer|adc|pwm|microcontroller/.test(t))return 'samples = [21.3, 21.8, 22.1, '+(23+seed/10).toFixed(1)+']\nlimit = 23.0\nfor tick, value in enumerate(samples):\n    state = "ALARM" if value > limit else "OK"\n    print(tick, value, state)';
  if(/sql|database|query|table|join|record/.test(t)){
-  if(mode<2)return 'rows = [{"name":"Ali","score":90},{"name":"Maya","score":84},{"name":"Ahmed","score":'+(80+n.a)+'}]\nselected = [row for row in rows if row["score"] >= 85]\nprint(selected)';
+  if(mode<2)return 'rows = [{"name":"Ali","score":90},{"name":"Maya","score":84},{"name":"Alex","score":'+(80+n.a)+'}]\nselected = [row for row in rows if row["score"] >= 85]\nprint(selected)';
   return 'orders = [{"user":"A","total":20},{"user":"B","total":35},{"user":"A","total":15}]\ntotals = {}\nfor order in orders:\n    totals[order["user"]] = totals.get(order["user"], 0) + order["total"]\nprint(totals)';
  }
  if(/html|css|web|dom|frontend|react/.test(t))return 'title = "CS & AI Mastery"\nitems = ["Learn", "Practice", "Build"]\nhtml = f"<h1>{title}</h1>" + "<ul>" + "".join(f"<li>{item}</li>" for item in items) + "</ul>"\nprint(html)';
@@ -1165,9 +1165,27 @@ function generatedForPlan(b,course,p,index,used){
    through a different practical operation or situation while staying faithful to its concept. */
 var EXAMPLE_DIVERSITY_VERSION='5.72';
 function diversityMode(seed){seed=Number(seed)||0;return ((seed%8)+8)%8;}
+function armAssemblyPracticeUse(title,label,index){
+ var t=norm(label),m=diversityMode(index+1),uses;
+ if(/area|entry|end|rn|equ|program skeleton/.test(t))uses=['Write the ARMASM file skeleton, then verify AREA, ENTRY, aliases/constants, and END are placed correctly.','Build a minimal ARMASM program and identify which lines are assembler directives rather than CPU instructions.','Add one register alias and one constant, then trace the first real instruction after ENTRY.','Check that the program begins with AREA RESET, CODE, READONLY and finishes with END.'];
+ else if(/mov|mvn|immediate/.test(t))uses=['Predict the destination register after MOV, then verify it with Step.','Change the immediate value and trace the new register result.','Use MVN and write the expected 32-bit complemented value before running it.','Copy one register to another and verify the source register stays unchanged.'];
+ else if(/ldr|str|address|memory|offset|index/.test(t))uses=['Calculate the effective address before each LDR or STR, then compare it with the tracer.','Store a word, load it back, and verify both the register and memory table.','Change the offset and predict which memory address is accessed.','Trace pre-indexed or post-indexed addressing and verify when the base register changes.'];
+ else if(/lsl|lsr|asr|ror|shift/.test(t))uses=['Predict the shifted bit pattern before stepping the instruction.','Compare logical and arithmetic right shift using a value with bit 31 set.','Use a shifted Operand2 inside ADD and calculate the result before running it.','Change the shift amount and verify the destination register.'];
+ else if(/flag|cpsr|n \/ z|c \/ v/.test(t))uses=['Predict N, Z, C, and V before executing the flag-setting instruction.','Choose input values that make Z become 1, then verify the flag table.','Choose values that produce signed overflow and check V.','Repeat the arithmetic with and without the S suffix and compare the flags.'];
+ else if(/cmp|cmn|tst|teq|condition/.test(t))uses=['Predict the flags after CMP or TST, then decide whether the following conditional instruction executes.','Change one operand so the condition becomes false and verify the instruction is skipped.','Trace one conditional branch and record the label reached.','Use the flag table to justify why the condition passes or fails.'];
+ else if(/and|orr|eor|bic|mask|bit/.test(t))uses=['Apply the mask by hand, then verify the destination register.','Use BIC to clear selected bits and compare the before/after hexadecimal values.','Use EOR to toggle selected bits and predict the result first.','Change the mask and verify which bits are kept, set, cleared, or toggled.'];
+ else if(/add|adc|sub|sbc|rsb|rsc|arithmetic/.test(t))uses=['Calculate the arithmetic result before stepping the instruction.','Trace a carry-aware ADD/ADC pair and verify C.','Compare SUB with RSB using the same operands.','Choose operands that exercise borrow or carry behavior and verify the flags.'];
+ else if(/branch|label|loop|if\/else/.test(t))uses=['Follow the labels and predict the next instruction before each Step.','Trace one complete loop and record how the loop register changes each iteration.','Change the comparison value so a different branch is taken.','Predict the final register values after the loop exits.'];
+ else if(/stack|push|pop|ldm|stm/.test(t))uses=['Record SP before and after PUSH/POP, then verify the changed addresses.','Predict which register value is stored at each stack address.','Push two registers, clear them, then pop into different registers and verify the result.','Trace the register-transfer order and the final SP value.'];
+ else if(/subroutine|bl|bx|lr|parameter/.test(t))uses=['Trace BL, record LR, execute the subroutine, then verify BX LR returns to the caller.','Pass a value in R0, modify it in the subroutine, and verify the returned result.','Save a register before the subroutine changes it, then restore it before return.','Predict the call/return control flow before running the trace.'];
+ else if(/exception|vector|svc|irq|fiq|handler/.test(t))uses=['Match each exception with its vector-table entry and handler path.','Trace which vector entry is used for SVC, IRQ, or FIQ.','Identify the saved return/status state required by the handler.','Compare normal branch flow with exception-vector control transfer.'];
+ else uses=['Write a short ARMASM example for this instruction group and predict the changed register, flag, memory location, or control-flow target before stepping it.','Change one operand in the ARMASM example and predict the new machine state.','Trace the instruction sequence line by line and verify the final state in the register table.','Use the tracer to check a hand-calculated result for this ARM operation.'];
+ return uses[m%uses.length];
+}
 function practicalUseFor(course,title,label,index){
  var cid=String(course||studyCourseId()||'').toLowerCase(),t=norm(label),m=diversityMode(index+1),uses;
  if(cid==='matlab-engineering')return matlabPracticalUse(title,label,index);
+ if(cid==='arm-assembly')return armAssemblyPracticeUse(title,label,index);
  if(/integrated application/.test(t))return'Use this when one task requires several ideas from '+title+' together, so you can see how the operations interact instead of practicing them in isolation.';
  if(/edge case.*debug|debug.*edge case/.test(t))return'Use this when checking '+title+' with boundary, unusual, invalid, empty, missing, repeated, or failure input so you can verify behavior where normal assumptions often break.';
  if(/concept transfer/.test(t))return'Use this when a new problem looks different on the surface but relies on the same '+title+' principle, so you practice recognizing the idea instead of memorizing one example.';
@@ -1361,7 +1379,7 @@ function diverseProgram(topic,seed,cid){
   'rgb = (255, 120, 40)\nred, green, blue = rgb\nprint(red, green, blue)',
   'def min_max(values):\n    return min(values), max(values)\n\nlow, high = min_max([8, 2, 11, 4])\nprint(low, high)',
   'locations = {(25, 40): "lab", (10, 5): "office"}\nprint(locations[(25, 40)])',
-  'record = ("Ahmed", "Computer Engineering", 2028)\nfor field in record:\n    print(field)',
+  'record = ("Maya", "Software Engineering", 2028)\nfor field in record:\n    print(field)',
   'left, right = "A", "B"\nleft, right = right, left\nprint(left, right)',
   'dimensions = (1920, 1080)\nwidth, height = dimensions\nprint(width * height)',
   'schedule = (("Math", 9), ("Python", 11), ("DSA", 14))\nfor course, hour in schedule:\n    print(course, hour)'
@@ -1383,8 +1401,8 @@ function diverseProgram(topic,seed,cid){
   'config = {"theme": "dark", "language": "en"}\nprint(config.get("font_size", 14))',
   'orders = [{"user":"A","total":20},{"user":"B","total":35},{"user":"A","total":15}]\ntotals = {}\nfor order in orders:\n    totals[order["user"]] = totals.get(order["user"], 0) + order["total"]\nprint(totals)',
   'users = {"u1":{"name":"Ali","active":True},"u2":{"name":"Maya","active":False}}\nprint(users["u1"]["name"])',
-  'codes = {"AE": "UAE", "PS": "Palestine"}\nreverse = {name: code for code, name in codes.items()}\nprint(reverse)',
-  'profile = {"name":"Ahmed","skills":["python","sql"]}\nprofile["skills"].append("git")\nprint(profile)'
+  'codes = {"US": "United States", "CA": "Canada"}\nreverse = {name: code for code, name in codes.items()}\nprint(reverse)',
+  'profile = {"name":"Alex","skills":["python","sql"]}\nprofile["skills"].append("git")\nprint(profile)'
  ];
  banks.cond=[
   'age = 19\nif age >= 18:\n    print("adult")\nelse:\n    print("minor")',
@@ -1404,14 +1422,14 @@ function diverseProgram(topic,seed,cid){
   'attempts = 3\nwhile attempts > 0:\n    print(attempts)\n    attempts -= 1',
   'for row in range(2):\n    for col in range(3):\n        print(row, col)',
   'names = ["Ali", "Maya", "Omar"]\nscores = [82, 91, 76]\nfor name, score in zip(names, scores):\n    print(name, score)',
-  'profile = {"name":"Ahmed","level":3}\nfor key, value in profile.items():\n    print(key, value)'
+  'profile = {"name":"Alex","level":3}\nfor key, value in profile.items():\n    print(key, value)'
  ];
  banks.function=[
   'def area(width, height):\n    return width * height\nprint(area(4, 6))',
-  'def greet(name, greeting="Hello"):\n    return f"{greeting}, {name}"\nprint(greet("Ahmed"))',
+  'def greet(name, greeting="Hello"):\n    return f"{greeting}, {name}"\nprint(greet("Alex"))',
   'def min_max(values):\n    return min(values), max(values)\nlow, high = min_max([8, 2, 11])\nprint(low, high)',
   'def safe_average(values):\n    if not values:\n        return 0\n    return sum(values) / len(values)\nprint(safe_average([]))',
-  'def profile(name, *, active=True):\n    return {"name": name, "active": active}\nprint(profile("Ahmed", active=False))',
+  'def profile(name, *, active=True):\n    return {"name": name, "active": active}\nprint(profile("Alex", active=False))',
   'square = lambda value: value * value\nprint([square(v) for v in [1, 2, 3]])',
   'def discount(price, rate):\n    return price * (1 - rate)\nprint([discount(p, .1) for p in [100, 80]])',
   'def is_even(value):\n    return value % 2 == 0\nprint([v for v in [1,2,3,4] if is_even(v)])'
@@ -1560,10 +1578,12 @@ function diverseNativeExampleFor(course,topic,seed){
 function nativeExampleFor(course,topic,seed){return diverseNativeExampleFor(course,topic,seed);}
 function diverseBrief(b,label,programText,index){
  var course=studyCourseId(),title=lessonTitle(b.closest('.lesson')),meta=/integrated application|edge case.*debug|debug.*edge case|concept transfer/.test(norm(label)),heading=meta?'What you are learning':'Definition';
+ if(course==='arm-assembly')return '<div class="csai-study-brief csai-concept-brief"><b>Practice target</b><p>'+esc(practicalUseFor(course,title,label,index))+'</p><b class="csai-concept-use-label">Trace / check</b><p>'+esc(programText)+'</p></div>';
  return '<div class="csai-study-brief csai-concept-brief"><b>'+heading+'</b><p>'+esc(conceptDefinition(b,label))+'</p><b class="csai-concept-use-label">What this example shows</b><p>'+esc(programText)+'</p><b class="csai-concept-use-label">Why use it here</b><p>'+esc(practicalUseFor(course,title,label,index))+'</p></div>';
 }
 function conceptScenarioCard(b,index,total,label,kind){
  var title=lessonTitle(b.closest('.lesson'))+' — '+label,course=studyCourseId(),meta=/integrated application|edge case.*debug|debug.*edge case|concept transfer/.test(norm(label)),heading=meta?'What you are learning':'Definition';
+ if(course==='arm-assembly')return '<article class="csai-study-example csai-example-card csai-study-scenario" data-language="text" data-reference-only="true" data-concept-example="true" data-concept-name="'+esc(label)+'" data-diverse-use="true" data-title="'+esc(title)+'"><div class="csai-study-example-head"><div><span class="csai-study-number">Example '+(index+1)+' of '+total+'</span><h4>'+esc(label)+'</h4></div><span class="csai-study-kind">'+esc(kind||'Practice')+'</span></div><div class="csai-study-brief"><b>Practice target</b><p>'+esc(practicalUseFor(course,lessonTitle(b.closest('.lesson')),label,index))+'</p></div></article>';
  return '<article class="csai-study-example csai-example-card csai-study-scenario" data-language="text" data-reference-only="true" data-concept-example="true" data-concept-name="'+esc(label)+'" data-diverse-use="true" data-title="'+esc(title)+'"><div class="csai-study-example-head"><div><span class="csai-study-number">Example '+(index+1)+' of '+total+'</span><h4>'+esc(label)+'</h4></div><span class="csai-study-kind">'+esc(kind||'Concept')+'</span></div><div class="csai-study-brief"><b>'+heading+'</b><p>'+esc(conceptDefinition(b,label))+'</p><b class="csai-concept-use-label">Where you would use it</b><p>'+esc(practicalUseFor(course,lessonTitle(b.closest('.lesson')),label,index))+'</p></div></article>';
 }
 function pythonConceptCard(b,index,total,label,code,kind){
@@ -1695,7 +1715,7 @@ function buildLesson(lesson){
  var includeNative=!(course==='dsa'&&norm(title)==='big o notation');
  var total=(includeNative?uniqueSources.length:0)+plan.length,index=0,set=document.createElement('section');
  set.className='csai-study-set';set.setAttribute('data-study-example-set','');set.setAttribute('data-study-count',String(total));set.setAttribute('data-concept-coverage','complete');
- set.innerHTML='<div class="csai-study-set-head"><div><h3>Examples for every key idea</h3><p>Each example shows a different practical use of the lesson ideas.</p></div><span class="csai-study-count">'+total+' examples</span></div><div class="csai-study-coverage">Key ideas covered: '+concepts(b).length+' / '+concepts(b).length+'</div><div class="csai-study-list"></div>';
+ set.innerHTML=course==='arm-assembly'?'<div class="csai-study-set-head"><div><h3>ARM coding practice</h3><p>Write and trace instructions; theory is kept in Microprocessors & ARM Architecture.</p></div><span class="csai-study-count">'+total+' practices</span></div><div class="csai-study-coverage">Instruction groups practiced: '+concepts(b).length+' / '+concepts(b).length+'</div><div class="csai-study-list"></div>':'<div class="csai-study-set-head"><div><h3>Examples for every key idea</h3><p>Each example shows a different practical use of the lesson ideas.</p></div><span class="csai-study-count">'+total+' examples</span></div><div class="csai-study-coverage">Key ideas covered: '+concepts(b).length+' / '+concepts(b).length+'</div><div class="csai-study-list"></div>';
  var list=set.querySelector('.csai-study-list');
  /* Key-idea examples come first so the visible lesson follows the concept list one-for-one. */
  plan.forEach(function(p,pi){

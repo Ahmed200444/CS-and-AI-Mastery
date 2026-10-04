@@ -38,6 +38,7 @@ function useFor(body,title,concept,index){
  return fallbackUse(title,concept,index);
 }
 function build(lesson){
+ if(courseId()==='arm-assembly')return;
  if(!lesson||lesson.getAttribute('data-csai-conceptual-v574')==='1')return;
  var body=lesson.querySelector(':scope > .body');if(!body||body.querySelector('[data-study-example-set]'))return;
  var data=concepts(body);if(!data.host||!data.items.length)return;
