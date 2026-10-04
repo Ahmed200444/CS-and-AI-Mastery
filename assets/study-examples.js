@@ -1517,51 +1517,70 @@ function diverseProgram(topic,seed,cid){
 }
 function program(topic,seed,cid){return diverseProgram(topic,seed,cid);}
 function diverseNativeExampleFor(course,topic,seed){
- course=String(course||'').toLowerCase();var m=diversityMode(seed);
+ course=String(course||'').toLowerCase();var m=diversityMode(seed),t=norm(topic);
  if(course==='sql'||course==='databases'){
-  var q=[
-   'SELECT name, age\nFROM students\nWHERE age >= 18\nORDER BY age DESC;',
-   'SELECT country, COUNT(*) AS customer_count\nFROM customers\nGROUP BY country\nORDER BY customer_count DESC;',
-   'SELECT c.name, o.item, o.total\nFROM customers AS c\nJOIN orders AS o ON o.customer_id = c.id;',
-   'WITH ranked AS (\n  SELECT category, price,\n         ROW_NUMBER() OVER (PARTITION BY category ORDER BY price DESC) AS rn\n  FROM products\n)\nSELECT category, price FROM ranked WHERE rn = 1;',
-   'SELECT p.name\nFROM products AS p\nLEFT JOIN order_items AS oi ON oi.product_id = p.id\nWHERE oi.product_id IS NULL;',
-   'WITH totals AS (\n  SELECT customer_id, SUM(total) AS spent\n  FROM orders GROUP BY customer_id\n)\nSELECT * FROM totals WHERE spent >= 500;',
-   'SELECT department, salary,\n       AVG(salary) OVER (PARTITION BY department) AS department_avg\nFROM employees;',
-   'SELECT name, created_at\nFROM users\nORDER BY created_at DESC;'
-  ]; return{language:'sql',code:q[m]};
+  var q={
+   filter:'SELECT name, age\nFROM students\nWHERE age >= 18\nORDER BY age DESC;',
+   group:'SELECT country, COUNT(*) AS customer_count\nFROM customers\nGROUP BY country\nORDER BY customer_count DESC;',
+   join:'SELECT c.name, o.item, o.total\nFROM customers AS c\nJOIN orders AS o ON o.customer_id = c.id;',
+   window:'SELECT department, salary,\n       AVG(salary) OVER (PARTITION BY department) AS department_avg\nFROM employees;',
+   cte:'WITH totals AS (\n  SELECT customer_id, SUM(total) AS spent\n  FROM orders\n  GROUP BY customer_id\n)\nSELECT customer_id, spent\nFROM totals\nWHERE spent >= 500;',
+   left:'SELECT p.name\nFROM products AS p\nLEFT JOIN order_items AS oi ON oi.product_id = p.id\nWHERE oi.product_id IS NULL;',
+   ranking:'WITH ranked AS (\n  SELECT category, price,\n         ROW_NUMBER() OVER (PARTITION BY category ORDER BY price DESC) AS rn\n  FROM products\n)\nSELECT category, price\nFROM ranked\nWHERE rn = 1;',
+   order:'SELECT name, created_at\nFROM users\nORDER BY created_at DESC;'
+  };
+  var code;
+  if(/left join|unmatched|missing related/.test(t))code=q.left;
+  else if(/join|relationship|foreign key/.test(t))code=q.join;
+  else if(/row number|row_number|rank|ranking/.test(t))code=q.ranking;
+  else if(/window|over|partition|running total/.test(t))code=q.window;
+  else if(/cte|common table|with clause/.test(t))code=q.cte;
+  else if(/group|aggregate|count|sum|avg|having/.test(t))code=q.group;
+  else if(/where|filter|predicate/.test(t))code=q.filter;
+  else if(/order|sort/.test(t))code=q.order;
+  else code=[q.filter,q.group,q.join,q.ranking,q.left,q.cte,q.window,q.order][m];
+  return{language:'sql',code:code};
  }
  if(course==='web-dev'||course==='frontend-dev'){
-  var w=[
-   {language:'html',code:'<main>\\n  <h1>Course dashboard</h1>\\n  <p>3 of 5 lessons complete</p>\\n</main>'},
-   {language:'html',code:'<form>\\n  <label for="email">Email</label>\\n  <input id="email" type="email" required>\\n  <button>Join</button>\\n</form>'},
-   {language:'javascript',code:'const scores = [72, 88, 91];\\nconsole.log(scores.filter(score => score >= 80));'},
-   {language:'javascript',code:'document.querySelector("#save").addEventListener("click", () => console.log("saved"));'},
-   {language:'css',code:'.cards {\\n  display: grid;\\n  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));\\n  gap: 1rem;\\n}'},
-   {language:'css',code:'.button:focus-visible {\\n  outline: 3px solid currentColor;\\n  outline-offset: 2px;\\n}'},
-   {language:'html',code:'<nav aria-label="Main navigation">\\n  <a href="#learn">Learn</a>\\n  <a href="#practice">Practice</a>\\n</nav>'},
-   {language:'javascript',code:'const prices = [10, 20, 30];\\nconsole.log(prices.reduce((sum, price) => sum + price, 0));'}
-  ]; return w[m];
+  var w={
+   semantic:{language:'html',code:'<main>\n  <h1>Course dashboard</h1>\n  <p>3 of 5 lessons complete</p>\n</main>'},
+   form:{language:'html',code:'<form>\n  <label for="email">Email</label>\n  <input id="email" type="email" required>\n  <button type="submit">Join</button>\n</form>'},
+   filter:{language:'javascript',code:'const scores = [72, 88, 91];\nconsole.log(scores.filter(score => score >= 80));'},
+   event:{language:'javascript',code:'document.querySelector("#save").addEventListener("click", () => {\n  console.log("saved");\n});'},
+   grid:{language:'css',code:'.cards {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));\n  gap: 1rem;\n}'},
+   focus:{language:'css',code:'.button:focus-visible {\n  outline: 3px solid currentColor;\n  outline-offset: 2px;\n}'},
+   nav:{language:'html',code:'<nav aria-label="Main navigation">\n  <a href="#learn">Learn</a>\n  <a href="#practice">Practice</a>\n</nav>'},
+   reduce:{language:'javascript',code:'const prices = [10, 20, 30];\nconsole.log(prices.reduce((sum, price) => sum + price, 0));'}
+  };
+  if(/accessib|focus|keyboard/.test(t))return w.focus;
+  if(/grid|layout|responsive|media|css|flex/.test(t))return w.grid;
+  if(/form|input|label/.test(t))return w.form;
+  if(/nav|semantic|html/.test(t))return /nav/.test(t)?w.nav:w.semantic;
+  if(/event|dom|listener|click/.test(t))return w.event;
+  if(/reduce|aggregate|sum/.test(t))return w.reduce;
+  if(/filter|array/.test(t))return w.filter;
+  return[w.semantic,w.form,w.filter,w.event,w.grid,w.focus,w.nav,w.reduce][m];
  }
  var banks={
   git:[
-   'git status\\ngit add src/app.py\\ngit commit -m "Add input validation"',
-   'git switch -c feature/readme\\ngit switch main\\ngit merge feature/readme',
-   'git diff\\ngit diff --staged\\ngit show HEAD',
-   'git log --oneline --graph --all\\ngit revert <commit-sha>\\ngit status',
-   'git restore --staged config.json\\ngit status',
-   'git branch -vv\\ngit remote -v',
-   'git stash push -m "wip"\\ngit stash list\\ngit stash pop',
-   'git fetch origin\\ngit log HEAD..origin/main --oneline'
+   'git status\ngit add src/app.py\ngit commit -m "Add input validation"',
+   'git switch -c feature/readme\ngit switch main\ngit merge feature/readme',
+   'git diff\ngit diff --staged\ngit show HEAD',
+   'git log --oneline --graph --all\ngit revert <commit-sha>\ngit status',
+   'git restore --staged config.json\ngit status',
+   'git branch -vv\ngit remote -v',
+   'git stash push -m "wip"\ngit stash list\ngit stash pop',
+   'git fetch origin\ngit log HEAD..origin/main --oneline'
   ],
   linux:[
-   'pwd\\nls -lah\\ncd projects',
+   'pwd\nls -lah\ncd projects',
    'grep -i "error" app.log | sort | uniq -c',
-   'find . -type f -name "*.py"\\nchmod u+x script.sh',
-   'ps aux | grep python\\ntail -f app.log',
-   'mkdir -p backups\\ncp config.json backups/config.json',
-   'head -n 5 data.csv\\ntail -n 5 data.csv',
-   'du -sh .\\ndf -h',
-   'printf "python\\\\nsql\\\\npython\\\\n" | sort | uniq'
+   'find . -type f -name "*.py"\nchmod u+x script.sh',
+   'ps aux | grep python\ntail -f app.log',
+   'mkdir -p backups\ncp config.json backups/config.json',
+   'head -n 5 data.csv\ntail -n 5 data.csv',
+   'du -sh .\ndf -h',
+   'printf "python\\nsql\\npython\\n" | sort | uniq'
   ],
   networking:[
    'ping -n 4 example.com','curl -I https://example.com','nslookup example.com','tracert example.com',
