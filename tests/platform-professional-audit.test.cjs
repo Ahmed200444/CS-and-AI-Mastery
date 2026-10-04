@@ -123,7 +123,8 @@ for(const name of pages){
  assert.match(html,/theme/i,name+' needs consistent theme support');
  assert.doesNotMatch(html,/Follow your lecture order|data-lecture-order|\bAhmed\b|\bDubai\b|\bKHDA\b/i,name+' exposes private/personal implementation content');
  assert.doesNotMatch(html,/\b(?:[A-Za-z]{3,})\s+\1\b/i,name+' contains a repeated word');
- assert.doesNotMatch(html,/which is exactly\.|focus specifically on apply|input, state, or operation changes into a result|02Registers|written with WITH/i,name+' contains broken/generic teaching prose');
+ const badProse=html.match(/which is exactly\.|focus specifically on apply|input, state, or operation changes into a result|02Registers|written with WITH/i);
+ assert.ok(!badProse,name+' contains broken/generic teaching prose: '+(badProse&&badProse[0]));
  assert.doesNotMatch(html,/data-shared-study-checklist/i,name+' still contains the old duplicated generic study checklist');
 }
 
