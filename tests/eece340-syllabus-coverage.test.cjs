@@ -101,7 +101,7 @@ for (const lab of mprCourse.labs) {
 const finalLab = mprCourse.labs.find(l => l.id === 'eece340-lab-16');
 assert.ok(finalLab, 'Lab 16 final lab exam rehearsal must exist');
 assert.match(finalLab.title, /final lab exam/i, 'Lab 16 must be a final lab exam rehearsal');
-assert.match(finalLab.assessment, /15%/, 'Lab 16 must represent the 15% lab exam weighting');
+assert.equal(audit.assessmentWeighting.labExam, 15, 'internal syllabus audit must retain the 15% lab-exam weighting');
 
 // 8. Verify generated microprocessors-arm.html contains the lab track
 const htmlPath = path.join(root, 'courses', 'microprocessors-arm.html');
@@ -109,7 +109,8 @@ assert.ok(fs.existsSync(htmlPath), 'courses/microprocessors-arm.html must exist'
 const html = fs.readFileSync(htmlPath, 'utf8');
 
 assert.ok(html.includes('id="eece340-labs"'), 'html page must contain visible eece340-labs section');
-assert.ok(html.includes('EECE 340 SYLLABUS LAB TRACK'), 'html page must have EECE 340 lab track header');
+assert.ok(html.includes('MICROPROCESSOR &amp; ARM LAB TRACK'), 'commercial page must use the generic microprocessor lab-track header');
+assert.ok(!html.includes('EECE 340 SYLLABUS LAB TRACK'), 'commercial page must not expose the institution-specific lab-track label');
 for (const id of requiredLabIds) {
   assert.ok(html.includes(`data-lab="${id}"`), `html page must contain lab card for ${id}`);
 }
