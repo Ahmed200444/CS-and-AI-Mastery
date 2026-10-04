@@ -7,7 +7,7 @@ const courses=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith('.h
 assert.ok([62,65].includes(courses.length),'expected 62 committed or 65 generated course pages');
 for(const f of courses){
   const h=fs.readFileSync(path.join(root,'courses',f),'utf8');
-  assert(h.includes('study-examples.js?v=20260824-v574'),`${f}: must load the v5.66 concept-specific example layer`);
+  assert(/study-examples\.js\?v=(?:20260824-v574|20261004-v586)/.test(h),`${f}: must load the v5.66 concept-specific example layer`);
 }
 for(const phrase of [
   'A Python reference is the connection from a variable name to an object',
