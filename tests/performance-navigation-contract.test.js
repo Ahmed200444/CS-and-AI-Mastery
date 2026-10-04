@@ -35,7 +35,7 @@ for(const rel of ['index.html',...courseFiles.map(f=>'courses/'+f)]){
       const expected=/try-it-yourself-v568\.js/.test(m[1])?NEW_BUILD_TAG:/study-examples\.js|conceptual-examples-v574\.js|program-questions-v574\.js/.test(m[1])?LEARNING_TAG:/practice-guidance\.js|practice-publish-completer\.js/.test(m[1])?AUDIT_TAG:/course-project-workspace\.js/.test(m[1])?CPP_STYLE_TAG:/matlab-visualizer\.js/.test(m[1])?MATLAB_TAG:BUILD_TAG;
       const armTraceAsset=/(?:arm-trace-engine|arm-trace-ui)\.js/.test(m[1]);
       const lessonRecallAsset=/lesson-recall\.js/.test(m[1]);
-      const tagged=armTraceAsset?m[1].includes('?v=20261004-v584'):lessonRecallAsset?m[1].includes('?v=20261003-v578'):lineExplainAsset?(m[1].includes('?v='+LINE_EXPLAIN_TAG)||m[1].includes('?v=20260919-v577')):m[1].includes('?v='+expected)||(inlineCommentAsset&&m[1].includes('?v='+INLINE_COMMENT_TAG));
+      const tagged=armTraceAsset?(m[1].includes('?v=20261004-v584')||m[1].includes('?v=20261003-v578')):lessonRecallAsset?m[1].includes('?v=20261003-v578'):lineExplainAsset?(m[1].includes('?v='+LINE_EXPLAIN_TAG)||m[1].includes('?v=20260919-v577')):m[1].includes('?v='+expected)||(inlineCommentAsset&&m[1].includes('?v='+INLINE_COMMENT_TAG));
       ok(tagged,`${rel}: local script is missing the expected cache-busting build tag: ${m[1]}`);
     }
   }
