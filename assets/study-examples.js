@@ -50,9 +50,9 @@ function legacyProgram(topic,seed,cid){cid=String(cid||studyCourseId()||'').toLo
  if(/list comprehension/.test(t))return 'nums = [1, 2, 3, 4]\nsquares = [n * n for n in nums]\nprint(squares)';
  if(/^membership$|membership test/.test(t))return 'seen = {1, 2, 3}\nprint(2 in seen)\nprint(5 in seen)';
  if(/variable|type|assignment|dynamic typing|boolean|bool/.test(t)){
-  if(mode===0)return 'age = '+(18+n.a)+'\nname = "Ahmed"\nis_student = True\nprint(name, age, is_student)\nprint(type(age).__name__)';
+  if(mode===0)return 'age = '+(18+n.a)+'\nname = "Alex"\nis_student = True\nprint(name, age, is_student)\nprint(type(age).__name__)';
   if(mode===1)return 'value = 12\nprint(value, type(value).__name__)\nvalue = "twelve"\nprint(value, type(value).__name__)';
-  if(mode===2)return 'profile = {"name": "Ahmed", "level": '+n.a+', "active": True}\nfor key, value in profile.items():\n    print(key, value, type(value).__name__)';
+  if(mode===2)return 'profile = {"name": "Alex", "level": '+n.a+', "active": True}\nfor key, value in profile.items():\n    print(key, value, type(value).__name__)';
   return 'score = '+(70+n.a)+'\npassed = score >= 60\nmessage = f"score={score}, passed={passed}"\nprint(message)';
  }
  if(/string|slice|format|f string/.test(t)){
@@ -69,14 +69,14 @@ function legacyProgram(topic,seed,cid){cid=String(cid||studyCourseId()||'').toLo
  }
  if(/function|parameter|argument|lambda|return/.test(t)){
   if(mode===0)return 'def transform(value, factor=2):\n    return value * factor\n\nprint(transform('+n.a+'))\nprint(transform('+n.b+', 3))';
-  if(mode===1)return 'def describe(name, score):\n    status = "pass" if score >= 60 else "retry"\n    return f"{name}: {status}"\n\nprint(describe("Ahmed", '+(55+n.a)+'))';
+  if(mode===1)return 'def describe(name, score):\n    status = "pass" if score >= 60 else "retry"\n    return f"{name}: {status}"\n\nprint(describe("Alex", '+(55+n.a)+'))';
   if(mode===2)return 'def average(values):\n    if not values:\n        return 0\n    return sum(values) / len(values)\n\nprint(average([10, 20, '+(20+n.a)+']))\nprint(average([]))';
   return 'square = lambda value: value * value\nvalues = [1, 2, 3, '+n.a+']\nprint([square(v) for v in values])';
  }
  if(/list|array|vector|comprehension|collection/.test(t)){
   if(mode===0)return 'nums = [1, 2, 3, 4, 5]\nsquares = [value * value for value in nums]\nprint(squares)';
   if(mode===1)return 'values = [8, 3, 8, 1, '+n.a+']\nunique = sorted(set(values))\nprint(unique)';
-  if(mode===2)return 'names = ["Ali", "Ahmed", "Maya", "Omar"]\nlong_names = [name for name in names if len(name) >= 5]\nprint(long_names)';
+  if(mode===2)return 'names = ["Ali", "Alex", "Maya", "Omar"]\nlong_names = [name for name in names if len(name) >= 5]\nprint(long_names)';
   return 'matrix = [[1, 2], [3, 4], ['+n.a+', '+n.b+']]\nflat = [value for row in matrix for value in row]\nprint(flat)';
  }
  if(/dictionary|hash|map|key value/.test(t)){
@@ -87,7 +87,7 @@ function legacyProgram(topic,seed,cid){cid=String(cid||studyCourseId()||'').toLo
  }
  if(/class|object|inherit|encaps|polymorph|oop/.test(t)){
   if(mode===0)return 'class Account:\n    def __init__(self, balance):\n        self.balance = balance\n    def deposit(self, amount):\n        self.balance += amount\n\naccount = Account(100)\naccount.deposit('+n.b+')\nprint(account.balance)';
-  if(mode===1)return 'class Student:\n    def __init__(self, name):\n        self.name = name\n        self.scores = []\n    def add_score(self, score):\n        self.scores.append(score)\n    def average(self):\n        return sum(self.scores) / len(self.scores)\n\ns = Student("Ahmed")\ns.add_score(80)\ns.add_score('+(80+n.a)+')\nprint(s.average())';
+  if(mode===1)return 'class Student:\n    def __init__(self, name):\n        self.name = name\n        self.scores = []\n    def add_score(self, score):\n        self.scores.append(score)\n    def average(self):\n        return sum(self.scores) / len(self.scores)\n\ns = Student("Alex")\ns.add_score(80)\ns.add_score('+(80+n.a)+')\nprint(s.average())';
   if(mode===2)return 'class Shape:\n    def area(self):\n        raise NotImplementedError\n\nclass Square(Shape):\n    def __init__(self, side):\n        self.side = side\n    def area(self):\n        return self.side ** 2\n\nprint(Square('+n.a+').area())';
   return 'class Counter:\n    def __init__(self):\n        self._value = 0\n    def increment(self):\n        self._value += 1\n    @property\n    def value(self):\n        return self._value\n\nc = Counter()\nfor _ in range('+n.a+'):\n    c.increment()\nprint(c.value)';
  }
@@ -115,7 +115,7 @@ function legacyProgram(topic,seed,cid){cid=String(cid||studyCourseId()||'').toLo
  }
  if(/interrupt|sensor|gpio|embedded|timer|adc|pwm|microcontroller/.test(t))return 'samples = [21.3, 21.8, 22.1, '+(23+seed/10).toFixed(1)+']\nlimit = 23.0\nfor tick, value in enumerate(samples):\n    state = "ALARM" if value > limit else "OK"\n    print(tick, value, state)';
  if(/sql|database|query|table|join|record/.test(t)){
-  if(mode<2)return 'rows = [{"name":"Ali","score":90},{"name":"Maya","score":84},{"name":"Ahmed","score":'+(80+n.a)+'}]\nselected = [row for row in rows if row["score"] >= 85]\nprint(selected)';
+  if(mode<2)return 'rows = [{"name":"Ali","score":90},{"name":"Maya","score":84},{"name":"Alex","score":'+(80+n.a)+'}]\nselected = [row for row in rows if row["score"] >= 85]\nprint(selected)';
   return 'orders = [{"user":"A","total":20},{"user":"B","total":35},{"user":"A","total":15}]\ntotals = {}\nfor order in orders:\n    totals[order["user"]] = totals.get(order["user"], 0) + order["total"]\nprint(totals)';
  }
  if(/html|css|web|dom|frontend|react/.test(t))return 'title = "CS & AI Mastery"\nitems = ["Learn", "Practice", "Build"]\nhtml = f"<h1>{title}</h1>" + "<ul>" + "".join(f"<li>{item}</li>" for item in items) + "</ul>"\nprint(html)';
@@ -1361,7 +1361,7 @@ function diverseProgram(topic,seed,cid){
   'rgb = (255, 120, 40)\nred, green, blue = rgb\nprint(red, green, blue)',
   'def min_max(values):\n    return min(values), max(values)\n\nlow, high = min_max([8, 2, 11, 4])\nprint(low, high)',
   'locations = {(25, 40): "lab", (10, 5): "office"}\nprint(locations[(25, 40)])',
-  'record = ("Ahmed", "Computer Engineering", 2028)\nfor field in record:\n    print(field)',
+  'record = ("Maya", "Software Engineering", 2028)\nfor field in record:\n    print(field)',
   'left, right = "A", "B"\nleft, right = right, left\nprint(left, right)',
   'dimensions = (1920, 1080)\nwidth, height = dimensions\nprint(width * height)',
   'schedule = (("Math", 9), ("Python", 11), ("DSA", 14))\nfor course, hour in schedule:\n    print(course, hour)'
@@ -1383,8 +1383,8 @@ function diverseProgram(topic,seed,cid){
   'config = {"theme": "dark", "language": "en"}\nprint(config.get("font_size", 14))',
   'orders = [{"user":"A","total":20},{"user":"B","total":35},{"user":"A","total":15}]\ntotals = {}\nfor order in orders:\n    totals[order["user"]] = totals.get(order["user"], 0) + order["total"]\nprint(totals)',
   'users = {"u1":{"name":"Ali","active":True},"u2":{"name":"Maya","active":False}}\nprint(users["u1"]["name"])',
-  'codes = {"AE": "UAE", "PS": "Palestine"}\nreverse = {name: code for code, name in codes.items()}\nprint(reverse)',
-  'profile = {"name":"Ahmed","skills":["python","sql"]}\nprofile["skills"].append("git")\nprint(profile)'
+  'codes = {"US": "United States", "CA": "Canada"}\nreverse = {name: code for code, name in codes.items()}\nprint(reverse)',
+  'profile = {"name":"Alex","skills":["python","sql"]}\nprofile["skills"].append("git")\nprint(profile)'
  ];
  banks.cond=[
   'age = 19\nif age >= 18:\n    print("adult")\nelse:\n    print("minor")',
@@ -1404,14 +1404,14 @@ function diverseProgram(topic,seed,cid){
   'attempts = 3\nwhile attempts > 0:\n    print(attempts)\n    attempts -= 1',
   'for row in range(2):\n    for col in range(3):\n        print(row, col)',
   'names = ["Ali", "Maya", "Omar"]\nscores = [82, 91, 76]\nfor name, score in zip(names, scores):\n    print(name, score)',
-  'profile = {"name":"Ahmed","level":3}\nfor key, value in profile.items():\n    print(key, value)'
+  'profile = {"name":"Alex","level":3}\nfor key, value in profile.items():\n    print(key, value)'
  ];
  banks.function=[
   'def area(width, height):\n    return width * height\nprint(area(4, 6))',
-  'def greet(name, greeting="Hello"):\n    return f"{greeting}, {name}"\nprint(greet("Ahmed"))',
+  'def greet(name, greeting="Hello"):\n    return f"{greeting}, {name}"\nprint(greet("Alex"))',
   'def min_max(values):\n    return min(values), max(values)\nlow, high = min_max([8, 2, 11])\nprint(low, high)',
   'def safe_average(values):\n    if not values:\n        return 0\n    return sum(values) / len(values)\nprint(safe_average([]))',
-  'def profile(name, *, active=True):\n    return {"name": name, "active": active}\nprint(profile("Ahmed", active=False))',
+  'def profile(name, *, active=True):\n    return {"name": name, "active": active}\nprint(profile("Alex", active=False))',
   'square = lambda value: value * value\nprint([square(v) for v in [1, 2, 3]])',
   'def discount(price, rate):\n    return price * (1 - rate)\nprint([discount(p, .1) for p in [100, 80]])',
   'def is_even(value):\n    return value % 2 == 0\nprint([v for v in [1,2,3,4] if is_even(v)])'
