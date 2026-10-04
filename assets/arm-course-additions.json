@@ -678,16 +678,7 @@
     ],
     "syllabus": {
       "courseCode": "Microprocessors & ARM",
-      "courseTitle": "Microprocessors & ARM Architecture",
-      "weighting": {
-        "homework": 10,
-        "quizzes": 15,
-        "midterm": 25,
-        "labWork": 10,
-        "labExam": 15,
-        "finalExam": 25,
-        "total": 100
-      }
+      "courseTitle": "Microprocessors & ARM Architecture"
     },
     "labs": [
       {
