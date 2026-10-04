@@ -220,14 +220,14 @@
           "Distinguish ARM and Thumb instruction encodings",
           "Explain why instruction-set state matters"
         ],
-        "explanation": "ARM instructions fall into data movement, arithmetic, logical and bit operations, shifts, comparisons, branches, and memory transfers. MOV/MVN move or invert values, ADD/SUB families calculate, AND/ORR/EOR/BIC change bits, and LSL/LSR/ASR/ROR shift Operand2. Classic ARM uses 32-bit instructions; Thumb/Thumb-2 add compact encodings. Halfword, word, and doubleword sizes are 16, 32, and 64 bits.",
+        "explanation": "ARM instructions include data movement, arithmetic, logic, shifts, comparisons, branches, and memory transfers. MOV/MVN move or invert values; ADD/SUB calculate; AND/ORR/EOR/BIC change bits; LSL/LSR/ASR/ROR shift Operand2. Classic ARM uses 32-bit instructions; Thumb/Thumb-2 provide compact encodings. Common data sizes are 16, 32, and 64 bits.",
         "examples": [
           "        MOV r0, #0x2000 ; Set memory buffer pointer\n        MOV r1, #0xFF ; Set byte value 255\n        STRB r1, [r0] ; Store byte to memory\n        MOV r2, #0x1234 ; Set 16-bit halfword value\n        STRH r2, [r0, #2] ; Store halfword at offset 2\nstop    B stop ; Halt execution"
         ],
         "commonMistakes": [
           "Confusing instruction encoding size with the size of the data being processed."
         ],
-        "explain": "ARM instructions fall into data movement, arithmetic, logical and bit operations, shifts, comparisons, branches, and memory transfers. MOV/MVN move or invert values, ADD/SUB families calculate, AND/ORR/EOR/BIC change bits, and LSL/LSR/ASR/ROR shift Operand2. Classic ARM uses 32-bit instructions; Thumb/Thumb-2 add compact encodings. Halfword, word, and doubleword sizes are 16, 32, and 64 bits."
+        "explain": "ARM instructions include data movement, arithmetic, logic, shifts, comparisons, branches, and memory transfers. MOV/MVN move or invert values; ADD/SUB calculate; AND/ORR/EOR/BIC change bits; LSL/LSR/ASR/ROR shift Operand2. Classic ARM uses 32-bit instructions; Thumb/Thumb-2 provide compact encodings. Common data sizes are 16, 32, and 64 bits."
       },
       {
         "id": "mpr-09",
