@@ -234,17 +234,13 @@ function fallbackShapeDefinition(raw,behavior,title){
  if(/metric|score|rate|ratio|accuracy|precision|recall|latency|throughput/.test(t))return raw+' is a measurement used to describe one aspect of behavior or performance. Its value only becomes useful when you know exactly what is being measured and what a higher or lower value means for the task.';
  if(/cost|complexity/.test(t))return raw+' describes how much time, memory, communication, or other work the related operation requires. Compare how that cost changes as the input or system scale changes rather than relying on one tiny run.';
  if(/failure|fault|error/.test(t))return raw+' describes a condition where the normal expected behavior is not achieved. The lesson focuses on how to recognize the condition, understand its effect, and keep the failure from silently producing an incorrect result.';
- if(lower&&lower!=='apply this lesson idea to a concrete engineering case and trace the starting state, the important decision or transformation, and an observable result')return'For '+raw+', the behavior to understand is this: '+lower+'. Trace the starting state, the rule or mechanism that acts on it, and the observable change so you can recognize the same idea in a new problem.';
+ if(lower)return raw+' is used in this lesson through a concrete operation or decision. '+lower.charAt(0).toUpperCase()+lower.slice(1);
  return'For '+raw+', focus on the exact rule, mechanism, or relationship that '+title+' is teaching. Identify what information it acts on, what it changes or decides, and what observable result distinguishes correct behavior from an incorrect one.';
 }
 function contextualConceptFallback(b,label){
  var raw=String(label||'').trim(),title=lessonTitle(b.closest('.lesson')),course=studyCourseId(),source=conceptSourceDefinition(b,raw);
  var behavior=professionalBehavior(course,title,raw),related=relatedConceptNames(b,raw,2),lesson=lessonConciseText(b);
- if(source){
-  var action=String(behavior||'').replace(/[.]$/,'').trim();
-  if(action)return shortSentences(source,480)+' For '+raw+', focus specifically on '+action.charAt(0).toLowerCase()+action.slice(1)+'.';
-  return source+' This example focuses specifically on '+raw+'.';
- }
+ if(source)return shortSentences(source,480);
  var first=fallbackShapeDefinition(raw,behavior,title),parts=[];
  if(lesson&&lesson!=='This is the main idea explained in this lesson.')parts.push(lesson);
  if(!parts.length||norm(parts.join(' ')).indexOf(norm(first).slice(0,48))<0)parts.push(first);
@@ -1113,7 +1109,7 @@ function professionalBehavior(course,title,c){
  if(cid==='generative-ai'||cid==='gans'||cid==='vaes'||cid==='diffusion')return'Use a small generative-model example and trace the representation, training objective or noise/latent process, generated output, and evaluation risk.';
  if(cid==='digital-hardware'||cid==='advanced-computer-organization'||cid==='embedded-systems')return'Use a small hardware or embedded-system state and trace signals, timing, memory, device input/output, or the instruction/data path to the observable result.';
  if(cid==='interview-prep'||cid==='company-prep'||cid==='resume-prep'||cid==='influencing-without-authority')return'Use a realistic engineering-career situation and identify the evidence, decision, communication, or trade-off that would make the response strong and credible.';
- return'Apply this lesson idea to a concrete engineering case and trace the starting state, the important decision or transformation, and an observable result.';
+ return'Use '+raw+' in a concrete '+title+' task. Identify the input, apply the rule or operation, and verify the resulting value, state, or decision.';
 }
 function professionalScenario(course,title,c,index){
  var behavior=professionalBehavior(course,title,c);
@@ -1361,12 +1357,12 @@ function practicalUseFor(course,title,label,index){
  ];
  else{
   var behavior=professionalBehavior(cid,title,label);
-  if(behavior&&behavior!=='Apply this lesson idea to a concrete engineering case and trace the starting state, the important decision or transformation, and an observable result.')return behavior;
+  if(behavior)return behavior;
   uses=[
-   'Use '+label+' in a concrete '+title+' task where its effect can be observed and checked.',
-   'Use '+label+' when a '+title+' decision depends on the rule or behavior this concept represents.',
-   'Use '+label+' to trace how a '+title+' input, state, or operation changes into a result.',
-   'Use '+label+' when verifying whether a '+title+' implementation behaves correctly under a different input.'
+   'Use '+label+' in a concrete '+title+' task and check the result.',
+   'Use '+label+' when a '+title+' decision depends on this rule or operation.',
+   'Use '+label+' to compare the value or state before and after the operation.',
+   'Use '+label+' to verify that a '+title+' implementation behaves correctly for a different input.'
   ];
  }
  return uses[m%uses.length];
