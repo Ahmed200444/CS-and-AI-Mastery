@@ -12,7 +12,7 @@ function lessonSegment(html,id){
  assert.ok(start>=0&&close>start,'page has malformed lesson '+id);
  return html.slice(start,close+'</details>'.length);
 }
-let lessons=0,examples=0;
+let lessons=0,examples=0,exercises=0,quizzes=0,projects=0;
 for(const course of courses){
  const html=fs.readFileSync(path.join(root,'courses',course.id+'.html'),'utf8');
  for(const lesson of course.lessons||[]){
@@ -27,6 +27,26 @@ for(const course of courses){
   for(const example of lessonExamples){examples++;assert.ok(seg.includes(esc(example)),course.id+'/'+lesson.id+' example is stale');}
   for(const mistake of lesson.commonMistakes||[])assert.ok(seg.includes(esc(mistake)),course.id+'/'+lesson.id+' common mistake is stale');
  }
+ for(const [i,item] of (course.exercises||[]).entries()){
+  exercises++;
+  assert.ok(html.includes('<b>'+esc(item.title||('Exercise '+(i+1)))+'</b>'),course.id+' exercise title is stale');
+  assert.ok(html.includes('<p>'+esc(item.prompt||item.description||'Complete this exercise using what you learned in the course.')+'</p>'),course.id+' exercise prompt is stale');
+ }
+ for(const [i,item] of (course.quiz||[]).entries()){
+  quizzes++;
+  const q=item.q||item.question||item.prompt||('Question '+(i+1));
+  assert.ok(html.includes('<b>'+esc(q)+'</b>'),course.id+' quiz question is stale');
+  for(const option of item.options||[])assert.ok(html.includes('<li>'+esc(option)+'</li>'),course.id+' quiz option is stale');
+ }
+ const projectItems=(course.projects||[]).slice();if(course.capstone)projectItems.push(course.capstone);
+ for(const [i,item] of projectItems.entries()){
+  projects++;
+  assert.ok(html.includes('<b>'+esc(item.title||item.name||('Project '+(i+1)))+'</b>'),course.id+' project title is stale');
+  assert.ok(html.includes('<p>'+esc(item.description||item.desc||item.prompt||'Build this project and document what you learned.')+'</p>'),course.id+' project description is stale');
+ }
 }
 assert.equal(lessons,832,'all authored lessons must remain synchronized');
-console.log('Source/page synchronization PASS — '+lessons+' lessons and '+examples+' authored examples match canonical course data.');
+assert.equal(exercises,830,'all authored exercises must remain synchronized');
+assert.equal(quizzes,1657,'all authored quizzes must remain synchronized');
+assert.equal(projects,283,'all authored projects/capstones must remain synchronized');
+console.log('Source/page synchronization PASS — '+lessons+' lessons, '+examples+' examples, '+exercises+' exercises, '+quizzes+' quizzes, and '+projects+' projects/capstones match canonical course data.');
