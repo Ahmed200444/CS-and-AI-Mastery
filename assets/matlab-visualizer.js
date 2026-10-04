@@ -80,9 +80,21 @@ function evalFunction(name,args){
  if(name==='size'){var sh=shape(args[0]);if(args.length>1){var dim=Math.floor(scalar(args[1]));return dim===1?sh[0]:dim===2?sh[1]:1;}return sh;}
  if(name==='length'){var sh=shape(args[0]);return Math.max(sh[0],sh[1]);}
  if(name==='numel')return flatten(args[0]).length;
- if(name==='sum')return flatten(args[0]).reduce(function(total,value){return total+Number(value||0);},0);
+ if(name==='sum'){
+  var value=args[0],dim=args.length>1?Math.floor(scalar(args[1])):0;
+  if(isMatrix(value)){
+   var rows=value.length,cols=(value[0]||[]).length;
+   if(dim===2){
+    var byRow=value.map(function(row){return[row.reduce(function(total,x){return total+Number(x||0);},0)];});
+    return byRow.length===1?byRow[0][0]:byRow;
+   }
+   var byCol=Array.from({length:cols},function(_,j){var total=0;for(var i=0;i<rows;i++)total+=Number(value[i][j]||0);return total;});
+   return byCol.length===1?byCol[0]:byCol;
+  }
+  return flatten(value).reduce(function(total,x){return total+Number(x||0);},0);
+ }
  if(name==='zeros'||name==='ones'){var r=Math.max(0,Math.floor(scalar(args[0]||1))),c=args.length>1?Math.max(0,Math.floor(scalar(args[1]))):r;var fill=name==='ones'?1:0,rows=Array.from({length:r},function(){return Array(c).fill(fill);});return r===1?(rows[0]||[]):rows;}
- if(name==='linspace'){var start=scalar(args[0]),stop=scalar(args[1]),count=Math.floor(scalar(args[2]||100)),out=[];for(var i=0;i<Math.max(1,count);i++)out.push(count<=1?start:start+(stop-start)*i/(count-1));return out;}
+ if(name==='linspace'){var start=scalar(args[0]),stop=scalar(args[1]),count=args.length>2?Math.floor(scalar(args[2])):100,out=[];if(count<=0)return out;if(count===1)return[stop];for(var i=0;i<count;i++)out.push(start+(stop-start)*i/(count-1));return out;}
  if(FUNCTIONS[name]){var f=FUNCTIONS[name];return each(args[0],function(x){return f(Number(x));});}
  return undefined;
 }
