@@ -75,6 +75,8 @@ function sanitizePage(file){
  html=html.replace(/EECE 340 SYLLABUS LAB TRACK/g,'MICROPROCESSOR &amp; ARM LAB TRACK');
  html=html.replace(/Complete 16-module university laboratory sequence aligned with the EECE 340 syllabus and lab exam\./g,'Complete 16-module practical laboratory sequence covering microprocessor and ARM skills.');
  html=html.replace(/16 syllabus labs/gi,'16 labs');
+ // Keep responsive viewport metadata in the canonical order expected by quality checks.
+ html=html.replace(/<meta\s+content="width=device-width,initial-scale=1"\s+name="viewport"\s*\/>/i,'<meta name="viewport" content="width=device-width,initial-scale=1"/>');
  html=cleanVisible(html);
  if(course){
    if(course.blurb||course.description){
