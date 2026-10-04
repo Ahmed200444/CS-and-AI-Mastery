@@ -1004,6 +1004,7 @@ function listHtml(code,lang){return explain(code,lang).map(recordHtml).join('');
 function stripGeneratedComments(code){
  return text(code).split(/\r?\n/).map(function(line){
   return line
+   .replace(/\s{2,}[;%]\s.*\u2063$/,'')
    .replace(/\s{2,}# Explanation: .*$/,'')
    .replace(/\s{2,}% Explanation: .*$/,'')
    .replace(/\s{2,}; Explanation: .*$/,'')
@@ -1080,8 +1081,8 @@ function armShortComment(code,purpose){
 function armLectureLine(line,purpose){
  var parts=splitArmSourceComment(line),code=armLectureCode(parts.code).replace(/\s+$/,'');
  if(!code.trim())return parts.comment?'; '+parts.comment:'';
- var note=parts.comment||armShortComment(code,purpose);
- return note?code+'    ; '+note:code;
+ var generated=!parts.comment,note=parts.comment||armShortComment(code,purpose);
+ return note?code+'    ; '+note+(generated?'\u2063':''):code;
 }
 function splitMatlabSourceComment(line){
  var raw=text(line),quote='';
@@ -1145,8 +1146,8 @@ function matlabShortComment(code,purpose){
 function matlabLectureLine(line,purpose){
  var parts=splitMatlabSourceComment(line),code=parts.code.replace(/\s+$/,'');
  if(!code.trim())return parts.comment?'% '+parts.comment:'';
- var note=parts.comment||matlabShortComment(code,purpose);
- return note?code+'    % '+note:code;
+ var generated=!parts.comment,note=parts.comment||matlabShortComment(code,purpose);
+ return note?code+'    % '+note+(generated?'\u2063':''):code;
 }
 function inlineCommentFor(line,purpose,lang){
  var raw=text(line),note=clean(purpose);
