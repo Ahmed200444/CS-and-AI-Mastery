@@ -13,6 +13,8 @@ function cleanVisible(s){
   .replace(/Ahmed/gi,'Alex')
   .replace(/\bDubai\b/g,'Toronto')
   .replace(/\bKHDA-benchmarked\b/gi,'industry-focused')
+  .replace(/\bKHDA\b/gi,'professional training')
+  .replace(/\bAptech\b/gi,'professional curriculum')
   .replace(/\bAptech Beginner\s*(\d+)\s*[—-]\s*/gi,'Python Foundations $1 — ')
   .replace(/\bAptech Beginner\s*(\d+)/gi,'Python Foundations $1')
   .replace(/\bEECE340\b/g,'Microprocessors & ARM')
