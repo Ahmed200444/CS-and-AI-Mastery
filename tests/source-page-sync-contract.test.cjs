@@ -8,9 +8,9 @@ function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;',
 function lessonSegment(html,id){
  const marker='data-lesson="'+id+'"',pos=html.indexOf(marker);
  assert.ok(pos>=0,'page missing lesson '+id);
- const start=html.lastIndexOf('<details',pos),next=html.indexOf('<details class="lesson"',pos+marker.length),sectionEnd=html.indexOf('</section>',pos+marker.length);
- const end=(next>=0&&sectionEnd>=0)?Math.min(next,sectionEnd):(next>=0?next:sectionEnd);
- return html.slice(start,end);
+ const start=html.lastIndexOf('<details',pos),close=html.indexOf('</details>',pos+marker.length);
+ assert.ok(start>=0&&close>start,'page has malformed lesson '+id);
+ return html.slice(start,close+'</details>'.length);
 }
 let lessons=0,examples=0;
 for(const course of courses){
