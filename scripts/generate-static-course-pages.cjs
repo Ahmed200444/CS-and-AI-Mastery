@@ -87,6 +87,20 @@ function quizHtml(item, index) {
 function projectHtml(item, index) {
   return `<div class="item"><b>${esc(item.title || item.name || `Project ${index + 1}`)}</b><p>${esc(item.description || item.desc || item.prompt || 'Build this project and document what you learned.')}</p></div>`;
 }
+function labHtml(item, index) {
+  const lang = item.language || 'text';
+  const fields = [
+    item.objective ? `<p><b>Objective:</b> ${esc(item.objective)}</p>` : '',
+    item.problemStatement ? `<p><b>Task:</b> ${esc(item.problemStatement)}</p>` : '',
+    item.expectedState ? `<p><b>Expected result:</b> ${esc(item.expectedState)}</p>` : '',
+    item.boundaryCase ? `<p><b>Boundary case:</b> ${esc(item.boundaryCase)}</p>` : '',
+    item.hardwareNote ? `<p class="muted"><b>Hardware note:</b> ${esc(item.hardwareNote)}</p>` : '',
+    item.checkpoint ? `<p><b>Checkpoint:</b> ${esc(item.checkpoint)}</p>` : ''
+  ].join('');
+  const starter = item.starterCode ? `<h4>Starter code</h4><pre class="code" data-language="${esc(lang)}">${esc(item.starterCode)}</pre>` : '';
+  const solution = item.solutionCode ? `<details><summary>Solution</summary><pre class="code" data-language="${esc(lang)}">${esc(item.solutionCode)}</pre>${item.solutionExplanation ? `<p>${esc(item.solutionExplanation)}</p>` : ''}</details>` : '';
+  return `<article class="item" data-lab="${esc(item.id || `lab-${index + 1}`)}"><h3>${esc(item.title || `Lab ${index + 1}`)}</h3>${item.syllabusTopic ? `<p class="muted"><b>Topic:</b> ${esc(item.syllabusTopic)}</p>` : ''}${fields}${starter}${solution}</article>`;
+}
 
 function pageFor(course) {
   const lessons = lessonOrder(course);
@@ -94,11 +108,13 @@ function pageFor(course) {
   const quiz = arr(course.quiz);
   let projects = arr(course.projects).slice();
   if (course.capstone) projects.push(course.capstone);
+  const labs = arr(course.labs);
   const safeCourseJson = JSON.stringify({ id: course.id, lessonIds: lessons.map((entry, i) => entry.lesson.id || `lesson-${i}`) }).replace(/<\//g, '<\\/');
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(course.title || course.id)} — CS & AI Mastery</title>${THEME_HEAD}<style>${CSS}</style></head><body>
 <main class="wrap"><div class="top"><a class="btn" href="/#courses">← All courses</a><a class="btn primary" href="/#hub">Home</a></div>
 <section class="hero"><div class="kicker">COURSE</div><h1><span class="hero-icon">${esc(course.icon || '📘')}</span>${esc(course.title || course.id)}</h1><p class="muted">${esc(course.blurb || course.description || 'Complete the lessons in order and practise each concept.')}</p><div class="meta"><span class="pill">${lessons.length} lessons</span><span class="pill">${exercises.length} exercises</span><span class="pill">${quiz.length} checkpoints</span><span class="pill">${projects.length} projects</span></div><div class="progress"><span data-progress-bar style="width:0%"></span></div><div class="muted" data-progress-status>0 of ${lessons.length} lessons complete</div></section>
 <section class="lessons">${lessons.length ? lessons.map((entry, i) => lessonHtml(course, entry, i)).join('') : '<div class="empty">No lesson content is listed for this course yet.</div>'}</section>
+${labs.length ? `<section class="card" id="microprocessor-arm-labs" style="margin-top:16px"><div class="kicker">PRACTICAL LABS</div><h2>Microprocessor &amp; ARM Laboratory Track</h2><p class="muted">Complete ${labs.length} practical modules covering processor, memory, I/O, ARM, and low-level programming skills.</p><div class="labs-list">${labs.map(labHtml).join('')}</div></section>` : ''}
 <div class="grid"><section class="card"><h2>Exercises</h2>${exercises.length ? exercises.map(exerciseHtml).join('') : '<p class="muted">No separate exercises are listed.</p>'}</section><section class="card"><h2>Knowledge checks</h2>${quiz.length ? quiz.map(quizHtml).join('') : '<p class="muted">No separate checkpoints are listed.</p>'}</section></div>
 <section class="card" style="margin-top:14px"><h2>Projects</h2>${projects.length ? projects.map(projectHtml).join('') : '<p class="muted">No separate projects are listed.</p>'}</section></main>
 <button class="theme" type="button" data-theme-toggle aria-label="Toggle light or dark theme"></button>
