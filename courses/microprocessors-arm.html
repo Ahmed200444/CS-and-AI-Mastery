@@ -39,12 +39,10 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <link rel="stylesheet" href="/assets/oa-assessment-upgrade.css?v=20260811-1">
 </head><body>
 <main class="wrap"><div class="top"><a class="btn" href="/#courses">← All courses</a><a class="btn primary" href="/#hub">Home</a></div>
-<section class="hero"><div class="kicker">COURSE</div><h1><span class="hero-icon">🖥️</span>Microprocessors &amp; ARM Architecture</h1><p class="muted">Microprocessor fundamentals, system components, memory hierarchy, performance, RISC, ARM architecture, registers, modes, CPSR, and endianness.</p><div class="meta"><span class="pill">10 lessons</span><span class="pill">16 syllabus labs</span><span class="pill">12 exercises</span><span class="pill">24 checkpoints</span><span class="pill">4 projects</span></div><div class="progress"><span data-progress-bar style="width:0%"></span></div><div class="muted" data-progress-status>0 of 10 lessons complete</div></section>
-<section class="card" style="margin-bottom:14px" aria-label="Lecture order"><h2>Follow your lecture order</h2><ol><li>Introduction</li><li>ARM Architecture</li><li><a href="arm-assembly.html">Instructions — Part 1</a></li><li><a href="arm-assembly.html">Instructions — Part 2</a></li><li><a href="arm-assembly.html">Functions</a></li><li><a href="arm-assembly.html">Exceptions</a></li></ol><p class="muted">Lessons show their source slide range. Repeated topics are grouped at their first substantial treatment.</p></section>
+<section class="hero"><div class="kicker">COURSE</div><h1><span class="hero-icon">🖥️</span>Microprocessors &amp; ARM Architecture</h1><p class="muted">Microprocessor fundamentals, system components, memory hierarchy, performance, RISC, ARM architecture, registers, modes, CPSR, and endianness.</p><div class="meta"><span class="pill">10 lessons</span><span class="pill">16 labs</span><span class="pill">12 exercises</span><span class="pill">24 checkpoints</span><span class="pill">4 projects</span></div><div class="progress"><span data-progress-bar style="width:0%"></span></div><div class="muted" data-progress-status>0 of 10 lessons complete</div></section>
 <section class="lessons"><details class="lesson" data-lesson="mpr-01" open>
 <summary><span class="num">01</span><span class="title">Microprocessor fundamentals &amp; the CPU</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="1"><b>Introduction</b> · slides 4–4<br><small>01.Lecture_Introduction (2)(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Define a microprocessor</li><li>Explain the CPU&#39;s role in a computer</li><li>Relate transistors to processor implementation</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>A microprocessor is a computer&#39;s CPU implemented on a single integrated circuit. It fetches and executes instructions, performs arithmetic and logical work, and coordinates data movement with memory and I/O. Modern processors contain very large numbers of transistors connected to implement datapaths, control logic, caches, and other structures.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">microprocessor</span><span class="pill">CPU</span><span class="pill">transistor</span><span class="pill">instruction execution</span><span class="pill">single chip</span></div>
@@ -56,7 +54,6 @@ print(hex(pc), opcode)  # Execute and log operation</pre>
 </div></details><details class="lesson" data-lesson="mpr-02" >
 <summary><span class="num">02</span><span class="title">From early computers to modern microprocessors</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="1"><b>Introduction</b> · slides 5–39<br><small>01.Lecture_Introduction (2)(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Identify major hardware milestones</li><li>Explain why integration changed computers</li><li>Connect transistor scaling to processor capability</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Processor development moved from large vacuum-tube systems to transistors, integrated circuits, and then complete CPUs on a chip. Integration reduced size and cost while allowing much larger transistor counts and more capable processors.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">ENIAC</span><span class="pill">transistor</span><span class="pill">integrated circuit</span><span class="pill">Intel 4004</span><span class="pill">scaling</span></div>
@@ -70,7 +67,6 @@ for bits in bus_widths:
 </div></details><details class="lesson" data-lesson="mpr-03" >
 <summary><span class="num">03</span><span class="title">Computer components, microprocessors, microcontrollers &amp; SoCs</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="1"><b>Introduction</b> · slides 40–53<br><small>01.Lecture_Introduction (2)(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Identify major computer components</li><li>Distinguish a microprocessor from a microcontroller</li><li>Explain what a system-on-chip integrates</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>A computer system combines the processor with memory and I/O support. Cache keeps frequently needed data close to the CPU, DRAM provides larger working memory, and platform logic connects components and peripherals. A microcontroller integrates a CPU with memory and peripherals, while a system-on-chip integrates still more system functions.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">cache</span><span class="pill">DRAM</span><span class="pill">chipset</span><span class="pill">motherboard</span><span class="pill">microcontroller</span><span class="pill">SoC</span></div>
@@ -82,7 +78,6 @@ print(hex(flash_base), hex(sram_base), hex(gpio_base))  # Output memory regions<
 </div></details><details class="lesson" data-lesson="mpr-04" >
 <summary><span class="num">04</span><span class="title">Memory hierarchy &amp; cache evolution</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="1"><b>Introduction</b> · slides 54–57<br><small>01.Lecture_Introduction (2)(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Order the main memory hierarchy</li><li>Explain why caches exist</li><li>Describe the trend toward on-chip caches</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Memory is organized as a hierarchy because no single technology is simultaneously the fastest, largest, and cheapest. Registers are closest to execution, then caches, then main memory. Processor history moved caches from the motherboard toward on-die L1, L2, and L3 levels.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">registers</span><span class="pill">L1 cache</span><span class="pill">L2 cache</span><span class="pill">L3 cache</span><span class="pill">DRAM</span><span class="pill">locality</span></div>
@@ -95,7 +90,6 @@ for name, latency in hierarchy:
 </div></details><details class="lesson" data-lesson="mpr-05" >
 <summary><span class="num">05</span><span class="title">Architecture vs microarchitecture</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="1"><b>Introduction</b> · slides 58–78<br><small>01.Lecture_Introduction (2)(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Distinguish architecture from microarchitecture</li><li>Explain how two processors can share an ISA</li><li>Identify common microarchitectural features</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Architecture defines the programmer-visible contract, including instructions, registers, data types, and behavior. Microarchitecture is how a particular processor implements that contract. Two processors can execute the same instruction set while using different caches, pipelines, issue widths, or out-of-order machinery.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">ISA</span><span class="pill">architecture</span><span class="pill">microarchitecture</span><span class="pill">pipeline</span><span class="pill">cache</span><span class="pill">out-of-order execution</span></div>
@@ -106,7 +100,6 @@ print(instructions, pipeline_cycles)  # Output instruction count and cycle total
 </div></details><details class="lesson" data-lesson="mpr-06" >
 <summary><span class="num">06</span><span class="title">Processor performance: time, clock rate &amp; IPC</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="1"><b>Introduction</b> · slides 79–80<br><small>01.Lecture_Introduction (2)(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Use execution time as the primary performance measure</li><li>Relate IPC/CPI and clock rate to performance</li><li>Explain why deeper pipelines have trade-offs</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Processor performance is fundamentally about how long a workload takes. Clock frequency affects cycles per second, while IPC describes how much instruction work completes per cycle. Pipelining can raise frequency, dependencies and stalls reduce IPC, and superscalar or out-of-order execution can expose more parallel work.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">execution time</span><span class="pill">clock rate</span><span class="pill">IPC</span><span class="pill">CPI</span><span class="pill">pipeline</span><span class="pill">superscalar</span></div>
@@ -119,7 +112,6 @@ print(exec_time_sec)  # Output total duration in seconds</pre>
 </div></details><details class="lesson" data-lesson="mpr-07" >
 <summary><span class="num">07</span><span class="title">RISC principles &amp; ARM architecture</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="2"><b>ARM Architecture</b> · slides 6–21<br><small>02.Lecture_ARM_Architecture02 (3)(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Explain the classic RISC philosophy</li><li>Describe ARM&#39;s load-store organization</li><li>Connect ARM design choices to embedded systems</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Classic RISC uses regular instructions, many registers, and explicit loads/stores for memory access. ARM data-processing instructions mainly use registers, while LDR and STR move data between registers and memory. A modern processor may be internally complex while preserving this programmer-visible architecture.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">RISC</span><span class="pill">load-store</span><span class="pill">register file</span><span class="pill">fixed-length instruction</span><span class="pill">embedded systems</span></div>
@@ -133,7 +125,6 @@ stop    B stop ; Halt execution</pre>
 </div></details><details class="lesson" data-lesson="mpr-08" >
 <summary><span class="num">08</span><span class="title">ARM data sizes, instruction sets &amp; state</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="2"><b>ARM Architecture</b> · slides 22–22<br><small>02.Lecture_ARM_Architecture02 (3)(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Recall ARM data-size terminology</li><li>Distinguish ARM and Thumb instruction encodings</li><li>Explain why instruction-set state matters</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>In the 32-bit ARM material, a halfword is 16 bits, a word is 32 bits, and a doubleword is 64 bits. Classic ARM instructions are 32 bits wide, while Thumb/Thumb-2 use a mixture of compact 16-bit and 32-bit encodings. Execution state controls which encodings the processor interprets.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">word</span><span class="pill">halfword</span><span class="pill">doubleword</span><span class="pill">ARM state</span><span class="pill">Thumb</span><span class="pill">Thumb-2</span></div>
@@ -147,7 +138,6 @@ stop    B stop ; Halt execution</pre>
 </div></details><details class="lesson" data-lesson="mpr-09" >
 <summary><span class="num">09</span><span class="title">ARM programmer model &amp; registers</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="2"><b>ARM Architecture</b> · slides 23–29<br><small>02.Lecture_ARM_Architecture02 (3)(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Identify the main programmer-visible registers</li><li>Explain the roles of SP, LR, and PC</li><li>Explain why some modes use banked registers</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Classic ARM exposes general-purpose registers plus special roles for R13 as stack pointer, R14 as link register, and R15 as program counter. CPSR records current status/control information. Privileged exception modes can access an SPSR and selected banked registers so handlers can preserve state and use their own stack/link context.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">R0-R12</span><span class="pill">SP</span><span class="pill">LR</span><span class="pill">PC</span><span class="pill">CPSR</span><span class="pill">SPSR</span><span class="pill">banked registers</span></div>
@@ -161,7 +151,6 @@ stop    B stop ; Halt execution</pre>
 </div></details><details class="lesson" data-lesson="mpr-10" >
 <summary><span class="num">10</span><span class="title">Processor modes, CPSR, endianness &amp; exception overview</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<p class="muted" data-lecture-order="2"><b>ARM Architecture</b> · slides 30–45<br><small>02.Lecture_ARM_Architecture02 (3)(1).pdf</small></p>
 <h3>What you will learn</h3><ul><li>Name the major classic ARM modes</li><li>Interpret key CPSR fields</li><li>Distinguish little-endian and big-endian storage</li><li>Explain why exceptions change mode</li></ul>
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Classic ARM has User mode and privileged modes including System, Supervisor, IRQ, FIQ, Abort, and Undefined. CPSR holds condition flags, execution state, interrupt masks, and mode bits. Little-endian stores the least-significant byte at the lower address; big-endian reverses that order. Exceptions enter an appropriate privileged mode so handlers can use protected state.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">User mode</span><span class="pill">SVC</span><span class="pill">IRQ</span><span class="pill">FIQ</span><span class="pill">Abort</span><span class="pill">Undefined</span><span class="pill">CPSR</span><span class="pill">endianness</span></div>
@@ -173,30 +162,23 @@ print(big_endian)  # Output big-endian byte array</pre>
 <div class="note"><b>Common mistake:</b> Reading the ARM I and F CPSR bits as interrupt-enable bits; in classic ARM, a set mask bit masks/disables that interrupt.</div>
 </div></details></section>
 
-<section class="card eece340-lab-track" style="margin-top:16px;border-left:4px solid var(--accent)" id="eece340-labs">
+<section class="card Microprocessors &amp; ARM-lab-track" style="margin-top:16px;border-left:4px solid var(--accent)" id="Microprocessors &amp; ARM-labs">
 <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:12px">
 <div>
-<span class="pill" style="background:var(--accent);color:#fff;font-weight:900">EECE 340 SYLLABUS LAB TRACK</span>
+<span class="pill" style="background:var(--accent);color:#fff;font-weight:900">MICROPROCESSOR &amp; ARM LAB TRACK</span>
 <h2 style="margin:6px 0 4px">Microprocessor &amp; ARM Architecture Laboratory Track</h2>
-<p class="muted" style="margin:0">Complete 16-module university laboratory sequence aligned with the EECE 340 syllabus and lab exam.</p>
+<p class="muted" style="margin:0">Complete 16-module practical laboratory sequence covering microprocessor and ARM skills.</p>
 </div>
-<div style="display:flex;flex-wrap:wrap;gap:6px">
-<span class="pill">Homework: 10%</span>
-<span class="pill">Quizzes: 15%</span>
-<span class="pill">Midterm: 25%</span>
-<span class="pill">Lab Work: 10%</span>
-<span class="pill">Lab Exam: 15%</span>
-<span class="pill">Final Exam: 25%</span>
-</div>
+
 </div>
 <div class="labs-list" style="display:grid;gap:10px">
-<details class="lesson lab-card" data-lab="eece340-lab-01" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+<details class="lesson lab-card" data-lab="Microprocessors &amp; ARM-lab-01" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
 <summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
 <span><b>Lab 01:</b> C++ and ARM Calling Convention Lab</span>
 <span class="pill" style="font-size:.74rem">armasm</span>
 </summary>
 <div class="body" style="padding-top:12px">
-<p class="muted"><b>Syllabus topic:</b> C++ comparison and mixed C++/assembly programming; AAPCS calling standard · <b>Weight:</b> Lab Work (10%), Final Exam (25%)</p>
+<p class="muted"><b>Topic:</b> C++ comparison and mixed C++/assembly programming; AAPCS calling standard</p>
 <p><b>Objective:</b> Understand the ARM Architecture Procedure Call Standard (AAPCS): arguments passed in R0–R3, return value in R0, preserving callee-saved registers R4–R11 on the stack, and maintaining 8-byte stack alignment.</p>
 <p><b>Problem Statement:</b> Implement an AAPCS-compliant ARM assembly subroutine compute_polynomial that calculates a * x^2 + b * x + c, where a is in R0, b is in R1, c is in R2, and x is in R3. Preserve any non-volatile registers used and return the 32-bit integer result in R0.</p>
 <h3>Starter code</h3>
@@ -229,13 +211,13 @@ compute_polynomial ; Function entry point
         END ; End of assembly file</pre>
 </div>
 </details>
-</div></details><details class="lesson lab-card" data-lab="eece340-lab-02" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+</div></details><details class="lesson lab-card" data-lab="Microprocessors &amp; ARM-lab-02" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
 <summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
 <span><b>Lab 02:</b> Assembler Directives, Macros, Constants &amp; Literal Pool Lab</span>
 <span class="pill" style="font-size:.74rem">armasm</span>
 </summary>
 <div class="body" style="padding-top:12px">
-<p class="muted"><b>Syllabus topic:</b> Assembler directives, macros, constants, and literal pools · <b>Weight:</b> Homework (10%), Lab Work (10%)</p>
+<p class="muted"><b>Topic:</b> Assembler directives, macros, constants, and literal pools</p>
 <p><b>Objective:</b> Master assembler directives (AREA, ENTRY, END, ALIGN, SPACE, DCD, DCB), symbolic definitions (EQU, RN), macro definitions (MACRO, MEND), and literal pool placement (LTORG).</p>
 <p><b>Problem Statement:</b> Define symbolic bounds MIN_BOUND EQU 10 and MAX_BOUND EQU 100, register alias val RN 0, clamp val between bounds using conditional instructions, define an aligned lookup table with DCD, and place LTORG to dump literal constants.</p>
 <h3>Starter code</h3>
@@ -284,13 +266,13 @@ trap B trap ; Terminate in spin loop
         END ; End of assembly source</pre>
 </div>
 </details>
-</div></details><details class="lesson lab-card" data-lab="eece340-lab-03" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+</div></details><details class="lesson lab-card" data-lab="Microprocessors &amp; ARM-lab-03" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
 <summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
 <span><b>Lab 03:</b> ARM Arithmetic &amp; Data Movement Lab</span>
 <span class="pill" style="font-size:.74rem">armasm</span>
 </summary>
 <div class="body" style="padding-top:12px">
-<p class="muted"><b>Syllabus topic:</b> Data-processing instructions, 64-bit multiword arithmetic, barrel shifter · <b>Weight:</b> Midterm (25%), Quizzes (15%)</p>
+<p class="muted"><b>Topic:</b> Data-processing instructions, 64-bit multiword arithmetic, barrel shifter</p>
 <p><b>Objective:</b> Implement multi-word (64-bit) addition and subtraction using ADDS, ADC, SUBS, SBC, and apply flexible second operand barrel shifter transformations (LSL, LSR, ASR, ROR).</p>
 <p><b>Problem Statement:</b> Implement a 64-bit unsigned addition: operand 1 in (R1:R0, where R1 is MSW, R0 is LSW) and operand 2 in (R3:R2, where R3 is MSW, R2 is LSW). Add lower words with ADDS to set carry, add upper words with ADC, and multiply the sum by 8 using barrel shifting.</p>
 <h3>Starter code</h3>
@@ -328,13 +310,13 @@ halt B halt ; Loop forever
         END ; Source termination</pre>
 </div>
 </details>
-</div></details><details class="lesson lab-card" data-lab="eece340-lab-04" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+</div></details><details class="lesson lab-card" data-lab="Microprocessors &amp; ARM-lab-04" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
 <summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
 <span><b>Lab 04:</b> Load/Store &amp; Addressing Modes Lab</span>
 <span class="pill" style="font-size:.74rem">armasm</span>
 </summary>
 <div class="body" style="padding-top:12px">
-<p class="muted"><b>Syllabus topic:</b> Load/store instructions, pre/post indexed addressing modes, byte/halfword transfers · <b>Weight:</b> Midterm (25%), Lab Exam (15%)</p>
+<p class="muted"><b>Topic:</b> Load/store instructions, pre/post indexed addressing modes, byte/halfword transfers</p>
 <p><b>Objective:</b> Master ARM addressing modes: offset addressing [Rn, #k], pre-indexed writeback [Rn, #k]!, post-indexed [Rn], #k, scaled register offset, and byte/halfword transfers (LDRB, STRB, LDRH, STRH).</p>
 <p><b>Problem Statement:</b> Write an ARM assembly routine that reads a word from memory starting at 0x1000, doubles the value, and stores the updated word to destination memory 0x2000 using post-indexed reading and pre-indexed writeback storing.</p>
 <h3>Starter code</h3>
@@ -374,13 +356,13 @@ spin B spin ; Halt
         END ; File end</pre>
 </div>
 </details>
-</div></details><details class="lesson lab-card" data-lab="eece340-lab-05" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+</div></details><details class="lesson lab-card" data-lab="Microprocessors &amp; ARM-lab-05" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
 <summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
 <span><b>Lab 05:</b> Control Flow, Loops, Branches &amp; Jump Tables Lab</span>
 <span class="pill" style="font-size:.74rem">armasm</span>
 </summary>
 <div class="body" style="padding-top:12px">
-<p class="muted"><b>Syllabus topic:</b> Control flow, loops, branches, condition codes, jump tables · <b>Weight:</b> Homework (10%), Lab Exam (15%)</p>
+<p class="muted"><b>Topic:</b> Control flow, loops, branches, condition codes, jump tables</p>
 <p><b>Objective:</b> Construct structured loops (while/for/do-while), multi-way decision trees with condition codes, and efficient jump tables using PC modification for command dispatch.</p>
 <p><b>Problem Statement:</b> Implement a command dispatcher that takes an opcode (0, 1, or 2) in R0, checks bounds (range 0–2), uses branching to execute handle_add (opcode 0: R3 = R1 + R2), handle_sub (opcode 1: R3 = R1 - R2), or handle_and (opcode 2: R3 = R1 AND R2), returning 0xFFFFFFFF for invalid opcodes.</p>
 <h3>Starter code</h3>
@@ -441,13 +423,13 @@ exit B exit ; Halt
         END ; Source end</pre>
 </div>
 </details>
-</div></details><details class="lesson lab-card" data-lab="eece340-lab-06" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+</div></details><details class="lesson lab-card" data-lab="Microprocessors &amp; ARM-lab-06" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
 <summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
 <span><b>Lab 06:</b> Address Decoding &amp; Memory Interfacing Lab</span>
 <span class="pill" style="font-size:.74rem">python</span>
 </summary>
 <div class="body" style="padding-top:12px">
-<p class="muted"><b>Syllabus topic:</b> Address decoding, memory map partitioning, chip select logic, bus aliasing · <b>Weight:</b> Midterm (25%), Final Exam (25%)</p>
+<p class="muted"><b>Topic:</b> Address decoding, memory map partitioning, chip select logic, bus aliasing</p>
 <p><b>Objective:</b> Design and verify address decoding logic for a microprocessor memory system, partitioning 32-bit address space into Flash ROM, SRAM, and Memory-Mapped Peripherals while checking for aliasing.</p>
 <p><b>Problem Statement:</b> Model address decoding for a system with 64 KB ROM at 0x00000000-0x0000FFFF, 128 KB SRAM at 0x40000000-0x4001FFFF, and 4 KB MMIO at 0xE0000000-0xE0000FFF. Write a Python decoder model that verifies chip-select lines CS_ROM, CS_SRAM, CS_MMIO and flags unmapped access.</p>
 <h3>Starter code</h3>
@@ -489,13 +471,13 @@ def check_memory_space(addr):  # Function to inspect memory space
 print(check_memory_space(0x40001234))  # Test SRAM address</pre>
 </div>
 </details>
-</div></details><details class="lesson lab-card" data-lab="eece340-lab-07" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+</div></details><details class="lesson lab-card" data-lab="Microprocessors &amp; ARM-lab-07" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
 <summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
 <span><b>Lab 07:</b> Bus Transactions &amp; System Timing Lab</span>
 <span class="pill" style="font-size:.74rem">python</span>
 </summary>
 <div class="body" style="padding-top:12px">
-<p class="muted"><b>Syllabus topic:</b> System timing, bus transactions, setup/hold times, wait state calculations · <b>Weight:</b> Midterm (25%), Final Exam (25%)</p>
+<p class="muted"><b>Topic:</b> System timing, bus transactions, setup/hold times, wait state calculations</p>
 <p><b>Objective:</b> Analyze bus read and write cycles, compute required wait states based on clock period and memory access time (tACC), and verify setup and hold timing margins.</p>
 <p><b>Problem Statement:</b> A 50 MHz ARM processor has a clock cycle period T_cyc = 20 ns. External memory has an access time t_ACC = 75 ns. Write a timing model to calculate required wait states N_wait = ceil((t_ACC - T_cyc) / T_cyc) and simulate the bus cycle phases (Address, Wait States, Data Latch).</p>
 <h3>Starter code</h3>
@@ -535,13 +517,13 @@ wait_count, duration, log = simulate_bus_read(50, 75)  # Run simulation for 50MH
 print(f&quot;Wait count: {wait_count}, Duration: {duration} ns&quot;)  # Print timing results</pre>
 </div>
 </details>
-</div></details><details class="lesson lab-card" data-lab="eece340-lab-08" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+</div></details><details class="lesson lab-card" data-lab="Microprocessors &amp; ARM-lab-08" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
 <summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
 <span><b>Lab 08:</b> SRAM &amp; DRAM Interface Lab</span>
 <span class="pill" style="font-size:.74rem">python</span>
 </summary>
 <div class="body" style="padding-top:12px">
-<p class="muted"><b>Syllabus topic:</b> Static RAM and dynamic RAM interfacing, RAS/CAS timing, refresh cycles · <b>Weight:</b> Midterm (25%), Final Exam (25%)</p>
+<p class="muted"><b>Topic:</b> Static RAM and dynamic RAM interfacing, RAS/CAS timing, refresh cycles</p>
 <p><b>Objective:</b> Understand SRAM (static latch) vs DRAM (capacitor storage) interfacing, row/column address multiplexing (RAS/CAS), and periodic refresh scheduling within 64 ms retention limits.</p>
 <p><b>Problem Statement:</b> Model a DRAM memory controller that decodes a 32-bit physical address into Bank, Row, and Column addresses, and schedules refresh operations every 7.81 microseconds across 8192 rows (64 ms total retention).</p>
 <h3>Starter code</h3>
@@ -577,13 +559,13 @@ print(f&quot;Page hit latency: {process_dram_request(True)} cycles&quot;)  # Tes
 print(f&quot;Page miss latency: {process_dram_request(False)} cycles&quot;)  # Test page miss</pre>
 </div>
 </details>
-</div></details><details class="lesson lab-card" data-lab="eece340-lab-09" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+</div></details><details class="lesson lab-card" data-lab="Microprocessors &amp; ARM-lab-09" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
 <summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
 <span><b>Lab 09:</b> Parallel, Serial &amp; Analog I/O Lab</span>
 <span class="pill" style="font-size:.74rem">armasm</span>
 </summary>
 <div class="body" style="padding-top:12px">
-<p class="muted"><b>Syllabus topic:</b> Parallel I/O, UART serial I/O, ADC/DAC analog I/O quantization · <b>Weight:</b> Lab Work (10%), Final Exam (25%)</p>
+<p class="muted"><b>Topic:</b> Parallel I/O, UART serial I/O, ADC/DAC analog I/O quantization</p>
 <p><b>Objective:</b> Program GPIO parallel I/O ports, configure UART serial communication (transmitter holding register polling), and calculate ADC successive-approximation quantization.</p>
 <p><b>Problem Statement:</b> Write an ARM assembly polling routine for a UART peripheral (Base 0xE000C000): poll Line Status Register (LSR at offset 0x14) bit 5 (Transmitter Empty THRE), write character &#39;A&#39; (0x41) to Transmitter Holding Register (THR at offset 0x00).</p>
 <h3>Starter code</h3>
@@ -625,13 +607,13 @@ halt B halt ; Loop forever
         END ; End of assembly</pre>
 </div>
 </details>
-</div></details><details class="lesson lab-card" data-lab="eece340-lab-10" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+</div></details><details class="lesson lab-card" data-lab="Microprocessors &amp; ARM-lab-10" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
 <summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
 <span><b>Lab 10:</b> Memory-Mapped Peripherals Lab</span>
 <span class="pill" style="font-size:.74rem">armasm</span>
 </summary>
 <div class="body" style="padding-top:12px">
-<p class="muted"><b>Syllabus topic:</b> Memory-mapped peripherals, control/status registers, bit masking with BIC/ORR/TST · <b>Weight:</b> Lab Work (10%), Lab Exam (15%)</p>
+<p class="muted"><b>Topic:</b> Memory-mapped peripherals, control/status registers, bit masking with BIC/ORR/TST</p>
 <p><b>Objective:</b> Control hardware timer and GPIO peripherals through memory-mapped register offsets using bit manipulation (ORR to set bits, BIC to clear bits, TST to inspect bits) without corrupting reserved register fields.</p>
 <p><b>Problem Statement:</b> Configure an on-chip timer at base 0x40004000: enable timer and reset counter in Timer Control Register (TCR at offset 0x04), set Match Register 0 (MR0 at offset 0x18) to 10000, and configure Match Control Register (MCR at offset 0x14) to generate an interrupt and reset counter on match.</p>
 <h3>Starter code</h3>
@@ -673,13 +655,13 @@ trap B trap ; Spin loop
         END ; End of assembly</pre>
 </div>
 </details>
-</div></details><details class="lesson lab-card" data-lab="eece340-lab-11" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+</div></details><details class="lesson lab-card" data-lab="Microprocessors &amp; ARM-lab-11" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
 <summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
 <span><b>Lab 11:</b> Interrupts, Vector Table &amp; DMA Lab</span>
 <span class="pill" style="font-size:.74rem">armasm</span>
 </summary>
 <div class="body" style="padding-top:12px">
-<p class="muted"><b>Syllabus topic:</b> Hardware/software interrupts, interrupt controller, vector tables, DMA transfers · <b>Weight:</b> Lab Exam (15%), Final Exam (25%)</p>
+<p class="muted"><b>Topic:</b> Hardware/software interrupts, interrupt controller, vector tables, DMA transfers</p>
 <p><b>Objective:</b> Configure ARM exception vector tables (0x00000000–0x0000001C), implement an IRQ Interrupt Service Routine with register preservation, return using SUBS pc, lr, #4, and model DMA block transfers.</p>
 <p><b>Problem Statement:</b> Write an ARM assembly IRQ Interrupt Service Routine: preserve corrupted registers on the IRQ stack, increment an interrupt counter in SRAM at 0x40000000, clear the peripheral interrupt source, and return atomically using SUBS pc, lr, #4.</p>
 <h3>Starter code</h3>
@@ -723,13 +705,13 @@ FIQ_Handler ; FIQ handler label
         END ; End of vector table</pre>
 </div>
 </details>
-</div></details><details class="lesson lab-card" data-lab="eece340-lab-12" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+</div></details><details class="lesson lab-card" data-lab="Microprocessors &amp; ARM-lab-12" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
 <summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
 <span><b>Lab 12:</b> Subroutine Calling, Stacks &amp; Reentrancy Lab</span>
 <span class="pill" style="font-size:.74rem">armasm</span>
 </summary>
 <div class="body" style="padding-top:12px">
-<p class="muted"><b>Syllabus topic:</b> Subroutines and stacks, STMFD/LDMFD, nested calling frames, reentrancy · <b>Weight:</b> Midterm (25%), Lab Exam (15%)</p>
+<p class="muted"><b>Topic:</b> Subroutines and stacks, STMFD/LDMFD, nested calling frames, reentrancy</p>
 <p><b>Objective:</b> Implement subroutines using the ARM Full Descending (FD) stack, manage nested activation frames with STMFD / LDMFD, preserve link register LR and callee-saved registers (R4–R11), and implement recursion.</p>
 <p><b>Problem Statement:</b> Implement a recursive factorial function factorial(n) in ARM assembly: input n in R0, base case n &lt;= 1 returns 1, recursive step computes n * factorial(n - 1), managing the stack frame with STMFD sp!, {r4, lr} and LDMFD sp!, {r4, pc}.</p>
 <h3>Starter code</h3>
@@ -777,13 +759,13 @@ base_case ; Base case label
         END ; Source end</pre>
 </div>
 </details>
-</div></details><details class="lesson lab-card" data-lab="eece340-lab-13" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+</div></details><details class="lesson lab-card" data-lab="Microprocessors &amp; ARM-lab-13" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
 <summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
 <span><b>Lab 13:</b> Linked Lists &amp; Search Algorithms Lab</span>
 <span class="pill" style="font-size:.74rem">armasm</span>
 </summary>
 <div class="body" style="padding-top:12px">
-<p class="muted"><b>Syllabus topic:</b> Linked lists, dynamic pointer traversal in assembly, linear search, node manipulation · <b>Weight:</b> Lab Exam (15%), Final Exam (25%)</p>
+<p class="muted"><b>Topic:</b> Linked lists, dynamic pointer traversal in assembly, linear search, node manipulation</p>
 <p><b>Objective:</b> Implement dynamic linked list traversal in ARM assembly, where each node consists of a 32-bit integer value and a 32-bit pointer to the next node ([val, next_ptr]), performing linear search and NULL pointer checking.</p>
 <p><b>Problem Statement:</b> Write an ARM assembly function search_list that traverses a linked list starting at head address in R0, searches for target value in R1, returns the address of the matching node in R0 if found, or returns 0 (NULL) if not found.</p>
 <h3>Starter code</h3>
@@ -832,13 +814,13 @@ halt B halt ; Halt
         END ; End of assembly</pre>
 </div>
 </details>
-</div></details><details class="lesson lab-card" data-lab="eece340-lab-14" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+</div></details><details class="lesson lab-card" data-lab="Microprocessors &amp; ARM-lab-14" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
 <summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
 <span><b>Lab 14:</b> Mixed C++ &amp; Assembly Integration Lab</span>
 <span class="pill" style="font-size:.74rem">cpp</span>
 </summary>
 <div class="body" style="padding-top:12px">
-<p class="muted"><b>Syllabus topic:</b> Mixed C++/assembly programming, struct pointer passing, DSP filtering routines · <b>Weight:</b> Lab Work (10%), Final Exam (25%)</p>
+<p class="muted"><b>Topic:</b> Mixed C++/assembly programming, struct pointer passing, DSP filtering routines</p>
 <p><b>Objective:</b> Bridge high-level C++ application code with optimized ARM assembly subroutines using extern &#39;C&#39; linkage, pass pointers to C++ structs/arrays, and compute digital signal processing operations.</p>
 <p><b>Problem Statement:</b> Create a mixed C++/Assembly digital signal processing module: C++ defines an array of integer samples and threshold, calls an external assembly function count_peaks(const int* samples, int length, int threshold), which counts how many samples exceed the threshold.</p>
 <h3>Starter code</h3>
@@ -885,14 +867,14 @@ int main() { // Main entry point
 } // End of main</pre>
 </div>
 </details>
-</div></details><details class="lesson lab-card" data-lab="eece340-lab-15" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+</div></details><details class="lesson lab-card" data-lab="Microprocessors &amp; ARM-lab-15" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
 <summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
-<span><b>Lab 15:</b> ARM7/Keil &amp; University IoT/Cloud Guidance Lab</span>
+<span><b>Lab 15:</b> ARM7/Keil &amp; IoT/Cloud Guidance Lab</span>
 <span class="pill" style="font-size:.74rem">armasm</span>
 </summary>
 <div class="body" style="padding-top:12px">
-<p class="muted"><b>Syllabus topic:</b> ARM7/Keil board-oriented lab work, startup.s, scatter files, ARM University IoT/cloud telemetry · <b>Weight:</b> Homework (10%), Lab Work (10%)</p>
-<p><b>Objective:</b> Master the standard university embedded workflow: setting up a Keil uVision project for ARM7TDMI (LPC2148), configuring startup.s vector tables and stack spaces, memory scatter-loading files (.sct), and formatting UART telemetry for IoT cloud ingestion.</p>
+<p class="muted"><b>Topic:</b> ARM7/Keil board-oriented lab work, startup.s, scatter files, ARM University IoT/cloud telemetry</p>
+<p><b>Objective:</b> Master the standard embedded workflow: setting up a Keil uVision project for ARM7TDMI (LPC2148), configuring startup.s vector tables and stack spaces, memory scatter-loading files (.sct), and formatting UART telemetry for IoT cloud ingestion.</p>
 <p><b>Problem Statement:</b> Configure startup.s stack spaces for SVC and IRQ modes, set up Flash (0x00000000) and On-chip SRAM (0x40000000) scatter loading, and write a UART telemetry formatting routine that outputs a JSON payload for IoT cloud reporting.</p>
 <h3>Starter code</h3>
 <pre class="code" data-language="armasm" data-example-audit="reference" data-reference-only="true">; Keil uVision ARM7TDMI startup.s stack initialization
@@ -931,14 +913,14 @@ Reset ; Reset startup label
         END ; End of file</pre>
 </div>
 </details>
-</div></details><details class="lesson lab-card" data-lab="eece340-lab-16" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
+</div></details><details class="lesson lab-card" data-lab="Microprocessors &amp; ARM-lab-16" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px">
 <summary style="cursor:pointer;font-weight:800;display:flex;justify-content:space-between;align-items:center">
-<span><b>Lab 16:</b> Timed Final Lab Exam Rehearsal</span>
+<span><b>Lab 16:</b> Timed Comprehensive Lab Rehearsal</span>
 <span class="pill" style="font-size:.74rem">armasm</span>
 </summary>
 <div class="body" style="padding-top:12px">
-<p class="muted"><b>Syllabus topic:</b> Final lab-exam preparation, full 90-minute multi-part comprehensive practical exam · <b>Weight:</b> Lab Exam (15% Weight)</p>
-<p><b>Objective:</b> Rehearse a timed, comprehensive 90-minute university microprocessor lab exam problem combining address decoding, peripheral I/O control, interrupt service routine design, stack-safe subroutine calling, and error diagnostics.</p>
+<p class="muted"><b>Topic:</b> Final lab-exam preparation, full 90-minute multi-part comprehensive practical exam</p>
+<p><b>Objective:</b> Rehearse a timed, comprehensive 90-minute microprocessor lab problem combining address decoding, peripheral I/O control, interrupt service routine design, stack-safe subroutine calling, and error diagnostics.</p>
 <p><b>Problem Statement:</b> Complete the 3-part final lab exam problem: (Part A) Calculate the memory address range for a 32 KB SRAM starting at 0x40000000; (Part B) Write an ARM assembly ISR that reads sensor data at MMIO 0xE0004000, checks against limit 100, and sets alarm bit 0 at GPIO 0xE0028000; (Part C) Wrap the DSP routine in a stack-safe subroutine returning status in R0.</p>
 <h3>Starter code</h3>
 <pre class="code" data-language="armasm" data-example-audit="reference" data-reference-only="true">; Part B: ARM assembly final lab exam ISR
