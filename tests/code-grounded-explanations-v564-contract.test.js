@@ -8,7 +8,7 @@ const pages=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith('.htm
 assert.ok([62,65].includes(pages.length),'expected 62 committed or 65 generated course pages');
 for(const f of pages){
   const html=fs.readFileSync(path.join(root,'courses',f),'utf8');
-  assert.ok(html.includes('study-examples.js?v=20260824-v574'),`${f}: current study example layer missing`);
+  assert.ok(/study-examples\.js\?v=(?:20260824-v574|20261004-v586)/.test(html),`${f}: current study example layer missing`);
   assert.ok(/line-by-line-explanations\.js\?v=/.test(html),`${f}: versioned line explainer missing`);
   assert.ok(html.includes('progressive-lesson-layout.js?v=20260822-v567'),`${f}: current lesson explanation layer missing`);
 }
