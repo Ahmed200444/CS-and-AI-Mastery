@@ -1,7 +1,7 @@
 (function(){
 'use strict';
 
-var VERSION='20260919-v577-inline-editor-comments';
+var VERSION='20261004-v580-arm-lecture-style';
 var updateTimers=new WeakMap(),editorSeq=0;
 
 function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
@@ -1013,15 +1013,290 @@ function stripGeneratedComments(code){
    .replace(/\s{2,}<!-- Explanation: .* -->$/,'');
  }).join('\n');
 }
+function splitArmSourceComment(line){
+ var raw=text(line),quote='';
+ for(var i=0;i<raw.length;i++){
+  var ch=raw[i];
+  if(quote){if(ch===quote&&raw[i-1]!=='\\\\')quote='';continue;}
+  if(ch==='"'||ch==="'"){quote=ch;continue;}
+  if(ch===';')return{code:raw.slice(0,i),comment:clean(raw.slice(i+1))};
+ }
+ return{code:raw,comment:''};
+}
+function armLectureCode(code){
+ var out=text(code).replace(/\b(r(?:[0-9]|1[0-5])|sp|lr|pc)\b/gi,function(x){return x.toUpperCase();});
+ var known='AREA|ENTRY|END|ALIGN|SPACE|DCD|DCB|DCW|EQU|RN|EXPORT|IMPORT|GLOBAL|LTORG|MACRO|MEND|MEXIT|ADR|MOVS?|MVN|ADDS?|ADC|SUBS?|SBC|RSB|RSC|MUL|MLA|UMULL|UMLAL|SMULL|SMLAL|AND|ORR|EOR|BIC|CMP|CMN|TST|TEQ|LDR(?:B|H|SB|SH)?|STR(?:B|H)?|PUSH|POP|LDM(?:FD|IA|DB)?|STM(?:FD|IA|DB)?|SVC|SWI|MRS|MSR|NOP|B(?:EQ|NE|CS|HS|CC|LO|MI|PL|VS|VC|HI|LS|GE|LT|GT|LE|L|X|LX)?';
+ var re=new RegExp('^(\\s*)(?:([A-Za-z_]\\w*):?\\s+)?('+known+')\\b','i');
+ return out.replace(re,function(all,space,label,op){
+  return space+(label?label+' ':'')+op.toUpperCase();
+ });
+}
+function armShortComment(code,purpose){
+ var raw=clean(code),known='AREA|ENTRY|END|ALIGN|SPACE|DCD|DCB|DCW|EQU|RN|EXPORT|IMPORT|GLOBAL|LTORG|MACRO|MEND|MEXIT|ADR|MOVS?|MVN|ADDS?|ADC|SUBS?|SBC|RSB|RSC|MUL|MLA|UMULL|UMLAL|SMULL|SMLAL|AND|ORR|EOR|BIC|CMP|CMN|TST|TEQ|LDR(?:B|H|SB|SH)?|STR(?:B|H)?|PUSH|POP|LDM(?:FD|IA|DB)?|STM(?:FD|IA|DB)?|SVC|SWI|MRS|MSR|NOP|B(?:EQ|NE|CS|HS|CC|LO|MI|PL|VS|VC|HI|LS|GE|LT|GT|LE|L|X|LX)?';
+ var m=raw.match(new RegExp('^(?:([A-Za-z_]\\w*):?\\s+)?('+known+')\\b\\s*(.*)
+function glossaryTerms(code,lang){var c=text(code),terms=[];function add(term,meaning){if(!terms.some(function(x){return x.term===term;}))terms.push({term:term,meaning:meaning});}
+ if(lang==='python'){
+  if(/\bimport\b|\bfrom\s+\S+\s+import\b/.test(c))add('import','Loads reusable code from a Python module so this program can use it.');
+  if(/\bfrom\s+io\b|\bimport\s+io\b|\b(?:io\.)?StringIO\b|\bsys\.(?:stdin|stdout)\b/.test(c))add('I/O','Input/output streams are used explicitly in this code through the `io`/`sys` stream tools shown.');
+  if(/\bimport\s+io\b|\bfrom\s+io\b|\bio\.StringIO\b/.test(c))add('io module','Python’s standard module for working with input/output streams, including in-memory streams.');
+  if(/\bimport\s+sys\b|\bfrom\s+sys\b|\bsys\.[A-Za-z_]\w*/.test(c))add('sys module','Python’s standard module for runtime/system information and the specific `sys` feature used in this code.');
+  if(/\b(?:io\.)?StringIO\b/.test(c))add('StringIO','A text stream stored in memory. It acts like a text file, but no disk file is created.');
+  if(/\bsys\.stdout\b/.test(c))add('sys.stdout','Python’s standard output stream—the normal destination used by print().');
+  if(/\bsys\.stdin\b/.test(c))add('sys.stdin','Python’s standard input stream—the normal source used by input().');
+  if(/\bprint\s*\(/.test(c))add('print()','Displays a value or message so you can see the program result.');
+  if(/\binput\s*\(/.test(c))add('input()','Pauses for user text and returns what the user typed as a string.');
+  if(/\bexec\s*\(/.test(c))add('exec','Runs Python source code that is provided as text.');
+  if(/\bcompile\s*\(/.test(c))add('compile','Turns Python source text into a code object that Python can execute.');
+  if(/\bdef\s+[A-Za-z_]/.test(c))add('function','A reusable block of code, usually created with def and run by calling its name.');
+  if(/\bclass\s+[A-Za-z_]/.test(c))add('class','A blueprint for creating objects that group related data and behavior.');
+  if(/\bNone\b/.test(c))add('None','Python’s special value meaning “no value” or “nothing here yet.”');
+  if(/\b(?:True|False)\b/.test(c))add('Boolean','A logical value that is either True or False.');
+  if(/\blist\s*\(|\[[^\]\n]*,\s*[^\]\n]*\]|\[\s*\]/.test(c))add('list','An ordered, changeable collection of values.');
+  if(/\bdict\s*\(|\{[^{}]*:[^{}]*\}/.test(c))add('dictionary','A collection of key-value pairs used to look up values by key.');
+  if(/\bset\s*\(/.test(c))add('set','A collection that keeps unique values and supports fast membership checks.');
+  if(/\btuple\s*\(|=\s*\([^()\n]+,\s*[^()\n]+\)/.test(c))add('tuple','An ordered collection whose items are normally treated as fixed.');
+  if(/\brange\s*\(/.test(c))add('range','Produces a sequence of integer values, commonly used to control a loop.');
+  if(/\benumerate\s*\(/.test(c))add('enumerate','Loops over items while also giving each item’s index.');
+  if(/\bzip\s*\(/.test(c))add('zip','Pairs items from multiple iterables so they can be processed together.');
+  if(/\blen\s*\(/.test(c))add('len','Returns how many items are in a collection or characters are in a string.');
+  if(/\.append\s*\(/.test(c))add('append','Adds one item to the end of a list.');
+  if(/\.strip\s*\(/.test(c))add('strip()','Removes whitespace from the beginning and end of a string.');
+  if(/\.join\s*\(/.test(c))add('join()','Combines several strings into one string, using the string before `.join()` as the separator.');
+  if(/\.split\s*\(/.test(c))add('split()','Breaks one string into a list of smaller strings.');
+  if(/\.lower\s*\(/.test(c))add('lower()','Returns a lowercase version of the string.');
+  if(/\.upper\s*\(/.test(c))add('upper()','Returns an uppercase version of the string.');
+  if(/\.startswith\s*\(/.test(c))add('startswith()','Checks whether a string begins with the specified text.');
+  if(/\.endswith\s*\(/.test(c))add('endswith()','Checks whether a string ends with the specified text.');
+  if(/\.replace\s*\(/.test(c))add('replace()','Returns new text with the specified part replaced.');
+  if(/\.count\s*\(/.test(c))add('count()','Counts how many times the specified value appears.');
+  if(/\.get\s*\(/.test(c))add('get()','Looks up a dictionary key and can return a default value when the key is missing.');
+  if(/\.pop\s*\(/.test(c))add('pop()','Removes an item from a collection and returns the removed value.');
+  if(/\bsorted\s*\(/.test(c))add('sorted','Returns a new list containing the items in sorted order.');
+  if(/\bmap\s*\(/.test(c))add('map','Applies a function to each item from an iterable.');
+  if(/\bfilter\s*\(/.test(c))add('filter','Keeps only items for which a condition/function is true.');
+  if(/\blambda\b/.test(c))add('lambda','A short anonymous function written inline.');
+  if(/\btry\s*:|\bexcept\b/.test(c))add('try / except','Runs code that may fail and gives you a controlled way to handle an exception.');
+  if(/\bwith\s+/.test(c))add('with','Uses a resource for a block and automatically performs its cleanup afterward.');
+  if(/\byield\b/.test(c))add('yield','Produces one generator value and pauses the function so it can continue later.');
+  if(/\basync\s+def\b|\bawait\b/.test(c))add('async / await','Syntax for asynchronous work; await waits for an operation without blocking the whole program.');
+ }
+ if(lang==='javascript'||lang==='typescript'){
+  if(/\b(?:let|const|var)\b/.test(c))add('variable','A named place that stores a value; const prevents reassignment while let allows it.');
+  if(/\bfunction\b|=>/.test(c))add('function','A reusable block of JavaScript code that can receive inputs and return a result.');
+  if(/\bPromise\b|\bawait\b/.test(c))add('Promise / await','A Promise represents future asynchronous work; await waits for it inside an async function.');
+  if(/\bfetch\s*\(/.test(c))add('fetch','The browser API used to make an HTTP request.');
+  if(/addEventListener\s*\(/.test(c))add('event listener','A function registered to run when an event such as a click or input happens.');
+  if(/document\.|querySelector/.test(c))add('DOM','The browser’s object model for reading and changing elements on a web page.');
+ }
+ if(lang==='cpp'){
+  if(/\bstd::/.test(c))add('std::','The prefix for names from C++’s standard library namespace.');
+  if(/\bvector\s*</.test(c))add('vector','A resizable C++ array that stores elements in order.');
+  if(/\b(?:unordered_map|map)\s*</.test(c))add('map','A key-value container used to find values by key.');
+  if(/\bconst\b/.test(c))add('const','Marks a value or reference as not changeable through that name.');
+  if(/[A-Za-z_]\w*\s*\*/.test(c))add('pointer','A value that stores a memory address, usually the address of another object/value.');
+ }
+ if(lang==='sql'){
+  if(/\bSELECT\b/i.test(c))add('SELECT','Chooses the columns or calculated values a query should return.');
+  if(/\bWHERE\b/i.test(c))add('WHERE','Filters rows before they are returned or grouped.');
+  if(/\bJOIN\b/i.test(c))add('JOIN','Combines related rows from two data sources using a matching condition.');
+  if(/\bGROUP\s+BY\b/i.test(c))add('GROUP BY','Collects rows into groups so aggregate calculations can be performed per group.');
+  if(/\bHAVING\b/i.test(c))add('HAVING','Filters groups after GROUP BY and aggregate calculations.');
+  if(/\bORDER\s+BY\b/i.test(c))add('ORDER BY','Sorts the rows in the query result.');
+  if(/\bNULL\b/i.test(c))add('NULL','A database marker meaning a value is missing or unknown.');
+ }
+ if(lang==='html'){
+  if(/<[^>]+>/.test(c))add('HTML element','A piece of page structure written with a tag, such as <p> or <button>.');
+  if(/\bclass=/.test(c))add('class attribute','A reusable label used mainly by CSS and JavaScript to find/style elements.');
+  if(/\bid=/.test(c))add('id attribute','A page-wide identifier intended to uniquely name one element.');
+ }
+ if(lang==='css'){
+  if(/display\s*:\s*flex/i.test(c))add('Flexbox','A one-dimensional CSS layout system for arranging items in a row or column.');
+  if(/display\s*:\s*grid/i.test(c))add('Grid','A CSS layout system for arranging content in rows and columns.');
+  if(/@media/i.test(c))add('media query','A CSS rule that applies styles only when a condition such as screen width matches.');
+ }
+ return terms.slice(0,16);}
+function syntaxUsedEntries(code,lang){
+ var originalCode=text(code),c=lang==='python'?originalCode.split('\n').map(function(line){return syntaxTokens(line,lang);}).join('\n'):originalCode,entries=[];
+ function add(name,syntax,what,used,why){if(entries.some(function(x){return x.name===name;}))return;entries.push({name:name,syntax:syntax,what:what,used:used,why:why});}
+ if(lang==='armasm'){
+  if(/\b(?:r\d+|sp|lr|pc)\b/i.test(c))add('Registers','r0–r15 / SP / LR / PC','Names 32-bit CPU registers; SP tracks the stack, LR holds a return address, and PC controls instruction flow.','The instructions name their source and destination registers.','Registers hold the values that ARM data-processing instructions operate on.');
+  if(/#/.test(c))add('Immediate operand','#value','Supplies a number in the instruction rather than reading another register.','The operands beginning with # are constants.','It lets the example initialize values or use a fixed arithmetic operand.');
+  if(/\[/.test(c))add('Word addressing','[base, #offset] / [base], #offset','Selects memory using a base register and optional offset; ! requests pre-index write-back.','The LDR/STR operands show the address and any base update.','ARM loads data into registers before processing it and stores results back to memory.');
+  if(/\b(?:CMP|CMN|TST|TEQ|ADDS|SUBS|MOVS|B(?:EQ|NE|LT|GT|GE|LE))\b/i.test(c))add('Flags and conditions','NZCV / condition suffix / S suffix','NZCV record negative, zero, carry/no-borrow and signed overflow; conditions read them.','The test or S-suffixed instruction updates flags used by later conditional instructions.','The flags connect a calculation or comparison to a decision about the next instruction.');
+ }
+ if(lang==='matlab'){
+  if(/\w+\s*=\s*[^;\n]+:[^;\n]+/.test(c))add('Range','start:step:stop','Builds values in regular steps toward stop; the default step is 1.','The colon expression supplies the sample points or loop values.','It avoids typing every value in a regular numerical sequence.');
+  if(/\[/.test(c))add('Array construction','[a b; c d]','Spaces/commas separate columns, semicolons separate rows.','The brackets combine the displayed values or arrays.','The calculation needs vectors or matrices as a single numerical value.');
+  if(/\.\*|\.\/|\.\^/.test(c))add('Element-wise operators','.* / ./ / .^','Apply multiplication, division or powers to corresponding elements instead of matrix operations.','The dotted operators calculate one result for each numerical sample.','They evaluate a formula over a whole array without an explicit loop.');
+  if(/\b\w+\([^=\n]*\)\s*=/.test(c))add('Array indexing','array(index) = value','MATLAB uses parentheses for indexing and the first index is 1.','The assignment writes the computed value into the selected element.','The loop builds an output array one position at a time.');
+  if(/[\w\])}]'/.test(c))add('Transpose',"A' / A.'",'The apostrophe transposes and conjugates complex values; dot-apostrophe only transposes.','The example changes row/column orientation.','Vector orientation affects array dimensions and matrix multiplication.');
+  if(/;\s*$/m.test(c))add('Suppress display','statement;','A final semicolon hides the Command Window display without skipping the calculation.','The semicolon-ended assignments still create their values.','It keeps output focused on results the example deliberately displays.');
+ }
+ if(lang==='python'){
+  var m;
+  if((m=c.match(/\[[^\n\]]*\bfor\b[^\n\]]*\bin\b[^\n\]]*\]/)))add('List comprehension','[expression for item in iterable]','Builds a new list by evaluating an expression for each item, optionally with a filter.','This example uses '+m[0].trim()+'.','It is used here because the same transformation must be applied to several values and all results are needed as one list.');
+  if((m=c.match(/\([^()\n]*\bfor\b[^()\n]*\bin\b[^()\n]*\)/)))add('Generator expression','(expression for item in iterable)','Produces values one at a time instead of creating the whole result list immediately.','This example uses '+m[0].trim()+'.','It is used here when the values can be consumed one by one, avoiding an unnecessary full intermediate list.');
+  if(/\byield\b/.test(c))add('Generator function','def name(...): ... yield value','A function containing `yield` produces one value, pauses, and continues later when the next value is requested.','This example uses `yield` inside a function.','It is used here so the function can produce a sequence lazily instead of building every result before returning.');
+  if(/(^|\n)\s*for\s+.+\s+in\s+.+:/m.test(c))add('for loop','for item in iterable:','Repeats the indented block once for each item in an iterable.','This example loops through the shown collection or range.','It is used here because the same work needs to happen for each item.');
+  if(/(^|\n)\s*while\s+.+:/m.test(c))add('while loop','while condition:','Repeats the indented block while its condition stays true.','This example keeps repeating until the shown condition becomes false.','It is used here because the number of repetitions depends on a changing condition rather than a fixed collection.');
+  if(/(^|\n)\s*(?:async\s+)?def\s+\w+\s*\(/m.test(c))add('Function definition','def name(parameters):','Creates a reusable block of code that can receive inputs and return a result.','This example defines and later uses a function.','It is used here to give a repeated piece of behavior a name and make it reusable/testable.');
+  if(/(^|\n)\s*(?:if|elif)\s+.+:/m.test(c))add('Conditional','if condition:','Runs a block only when its condition is true; `elif`/`else` handle other cases.','This example checks the shown condition before choosing what code runs.','It is used here because the program needs different behavior for different values or states.');
+  if(/\.join\s*\(/.test(c))add('`join()`','"separator".join(iterable)','Combines multiple strings into one string, placing the separator between them.','This example calls `.join(...)` on the separator shown in the code.','It is used here because several string values need to become one formatted string.');
+  if(/\.strip\s*\(/.test(c))add('`strip()`','text.strip()','Removes whitespace from the beginning and end of a string.','This example calls `.strip()` on a string before using it further.','It is used here to clean surrounding spaces so later comparisons, parsing, or output use the intended text.');
+  if(/\bset\s*\(/.test(c))add('`set()`','set(iterable)','Creates a set, which keeps unique values and supports membership checks.','This example converts the shown iterable with `set(...)`.','It is used here when duplicates should be removed or membership should be checked efficiently.');
+  if(/\blen\s*\(/.test(c))add('`len()`','len(value)','Returns how many items are in a collection or characters are in a string.','This example calls `len(...)` on the shown value.','It is used here because the program needs the size/count rather than the individual items themselves.');
+  if(/\.append\s*\(/.test(c))add('`append()`','list.append(value)','Adds one value to the end of an existing list.','This example calls `.append(...)` on a list.','It is used here because the result list is being built one item at a time.');
+  if(/\.get\s*\(/.test(c))add('Dictionary `get()`','dictionary.get(key, default)','Reads a dictionary value safely and can return a default when the key is missing.','This example calls `.get(...)` on a dictionary.','It is used here to read a key without needing a separate existence check or risking a missing-key error.');
+  if(/\benumerate\s*\(/.test(c))add('`enumerate()`','for index, value in enumerate(iterable):','Produces both the index and value while looping over an iterable.','This example wraps an iterable with `enumerate(...)`.','It is used here because the code needs each item together with its position.');
+  if(/\brange\s*\(/.test(c))add('`range()`','range(start, stop, step)','Produces a sequence of integer values for looping.','This example uses `range(...)` to control loop values.','It is used here because the loop needs a predictable sequence of integer positions or counts.');
+  if(/\bsorted\s*\(/.test(c))add('`sorted()`','sorted(iterable)','Returns a new list containing the iterable items in sorted order.','This example passes the shown values to `sorted(...)`.','It is used here because the result needs a predictable order without changing the original collection in place.');
+  if(/\/\//.test(c))add('Floor division `//`','a // b','Divides and rounds the result down to the next lower integer.','This example uses `//` in its numeric calculation.','It is used here because the calculation needs a whole-number group/index rather than a decimal quotient.');
+  if(/(^|[^%])%([^=]|$)/.test(c))add('Modulo `%`','a % b','Returns the remainder after division.','This example uses `%` in its numeric calculation.','It is used here to wrap or map a value into a limited repeating range, or to test divisibility.');
+  if(/\bis\b/.test(c))add('Identity operator `is`','a is b','Checks whether two names refer to the exact same object, not merely equal values.','This example compares two references with `is`.','It is used here because the example cares about object identity rather than value equality.');
+  if(/\[[^\]\n]*:[^\]\n]*\]/.test(c))add('Slicing','sequence[start:stop:step]','Selects a portion of a sequence without manually looping through every selected position.','This example uses slice notation inside square brackets.','It is used here because only a specific range or pattern of sequence items is needed.');
+  if(/\bf["'][^\n]*\{[^}]+\}/.test(originalCode))add('f-string','f"text {expression}"','Builds a string and inserts evaluated Python expressions inside `{...}`.','This example uses an f-string to place values into text.','It is used here to create readable output without manually concatenating and converting each value.');
+  if(/(^|\n)\s*(?:from\s+\S+\s+import|import\s+)/m.test(c))add('Import','import module  /  from module import name','Makes code from another Python module available in the current file.','This example imports the module or names shown at the top of the code.','It is used here because the example needs functionality that is not defined locally.');
+  if(entries.length<2&&/(^|\n)\s*[A-Za-z_]\w*\s*=\s*[^=]/m.test(c))add('Assignment','name = value','Stores or binds the value on the right to the name on the left.','This example assigns values to variables before using them.','It is used here to keep intermediate data/results available for later lines.');
+  if(entries.length<2&&/\bprint\s*\(/.test(c))add('`print()`','print(value1, value2, ...)','Displays the supplied values in the program output.','This example calls `print(...)` to show its result.','It is used here so you can observe and verify what the program calculated.');
+ }
+ if(lang==='javascript'||lang==='typescript'){
+  if(/\b(?:const|let)\s+\w+/.test(c))add('Variable declaration','const name = value  /  let name = value','Declares a JavaScript/TypeScript variable. `const` prevents reassignment; `let` allows it.','This example declares values with `const` or `let`.','It is used here to name data that later expressions or functions need.');
+  if(/=>/.test(c))add('Arrow function','(parameters) => expression','Defines a compact function expression.','This example uses `=>` to define callback or reusable behavior.','It is used here because another operation needs a function to run for each value/event.');
+  if(/\.(map|filter|reduce)\s*\(/.test(c)){var mm=c.match(/\.(map|filter|reduce)\s*\(/),method=mm&&mm[1]||'map';var what={map:'creates a new array by transforming each item',filter:'creates a new array containing only items that pass a test',reduce:'combines many items into one accumulated result'}[method];add('Array `'+method+'()`','array.'+method+'(callback)',what.charAt(0).toUpperCase()+what.slice(1)+'.','This example calls `.'+method+'(...)` on an array.','It is used here because the code needs to '+what+'.');}
+  if(/\basync\b|\bawait\b/.test(c))add('`async` / `await`','async function name(){ const result = await operation(); }','Writes asynchronous code in a readable step-by-step style.','This example waits for an asynchronous operation with `await`.','It is used here because the result arrives later, such as from a request or other asynchronous task.');
+  if(/\bfetch\s*\(/.test(c))add('`fetch()`','fetch(url, options)','Starts an HTTP request from JavaScript.','This example calls `fetch(...)` with the shown URL/options.','It is used here because the program needs data or an action from another web endpoint.');
+  if(/addEventListener\s*\(/.test(c))add('Event listener','element.addEventListener("event", handler)','Runs a handler when a browser event happens.','This example registers a handler for the shown event.','It is used here because the code should react to user/browser activity instead of running only once at page load.');
+  if(entries.length<2&&/\bconsole\.log\s*\(/.test(c))add('`console.log()`','console.log(value)','Writes a value to the browser/developer console.','This example logs its result.','It is used here so the result can be inspected while learning or debugging.');
+ }
+ if(lang==='sql'){
+  if(/\bSELECT\b/i.test(c))add('`SELECT`','SELECT columns FROM table','Chooses which columns or expressions a query returns.','This query uses `SELECT` for the values shown after it.','It is used here because those are the fields/calculations the question wants in the result.');
+  if(/\bWHERE\b/i.test(c))add('`WHERE`','SELECT ... FROM ... WHERE condition','Filters individual rows before they are returned or grouped.','This query uses `WHERE` with the shown condition.','It is used here because only rows meeting that condition should participate.');
+  if(/\bJOIN\b/i.test(c))add('`JOIN`','FROM left JOIN right ON matching_condition','Combines related rows from two tables/data sources.','This query joins the shown sources using its `ON` condition.','It is used here because the requested result needs columns/data that live in separate related sources.');
+  if(/\bGROUP\s+BY\b/i.test(c))add('`GROUP BY`','GROUP BY column1, column2','Collects rows into groups so aggregates can be calculated for each group.','This query groups rows by the shown column(s).','It is used here because the result needs one summary per group rather than one row per original record.');
+  if(/\b(?:COUNT|SUM|AVG|MIN|MAX)\s*\(/i.test(c))add('Aggregate function','COUNT(...), SUM(...), AVG(...), ...','Combines values from multiple rows into a summary value.','This query uses the aggregate function shown in `SELECT`.','It is used here because the question asks for a count, total, average, minimum, or maximum across multiple rows.');
+  if(/\bOVER\s*\(/i.test(c))add('Window function','function(...) OVER (PARTITION BY ... ORDER BY ...)','Calculates across related rows while keeping the original rows in the result.','This query uses `OVER(...)` to define the calculation window.','It is used here because the calculation needs group/ordering context without collapsing rows like `GROUP BY` would.');
+  if(/\bWITH\s+\w+\s+AS\s*\(/i.test(c))add('CTE (`WITH`)','WITH name AS (query) SELECT ...','Names a temporary query result that a following query can read.','This query defines a CTE with `WITH ... AS (...)`.','It is used here to separate a multi-stage query into clearer reusable steps.');
+  if(/\bORDER\s+BY\b/i.test(c))add('`ORDER BY`','ORDER BY column ASC|DESC','Sorts the final result rows.','This query orders by the shown column/expression.','It is used here because the output needs a predictable ranking or order.');
+ }
+ if(lang==='cpp'||lang==='java'){
+  if(lang==='cpp'&&/\b(?:std::)?vector\s*</.test(c))add('`vector`','vector<Type> name;','Creates a resizable ordered C++ sequence.','This example declares a vector with the shown element type.','It is used here because the number of elements can vary while indexed/ordered access is still useful.');
+  if(/\bfor\s*\(/.test(c)||/\bfor\s*\([^;:]+:[^)]+\)/.test(c))add('`for` loop','for (initialization; condition; update) { ... }','Repeats a block using the loop rule in the header.','This example uses a `for` loop to process repeated values/steps.','It is used here because the same operation must run multiple times.');
+  if(/\bif\s*\(/.test(c))add('Conditional','if (condition) { ... }','Runs code only when its condition is true.','This example checks the shown condition before choosing behavior.','It is used here because different input/state cases require different actions.');
+  if(lang==='cpp'&&/\b(?:unordered_map|map)\s*</.test(c))add('Map container','unordered_map<Key, Value> / map<Key, Value>','Stores values by keys.','This example declares a map-like container with key and value types.','It is used here because values need to be found or updated by key rather than by numeric position.');
+  if(lang==='cpp'&&/\bcout\s*<</.test(c))add('Stream output','cout << value;','Sends values to standard output using the stream insertion operator `<<`.','This example writes its result with `cout`.','It is used here so you can see and verify the program result.');
+  if(/\bclass\s+\w+/.test(c))add('Class','class Name { ... };','Defines a custom type that groups related state and behavior.','This example defines the shown class.','It is used here because the example models data and operations that belong together.');
+ }
+ if(lang==='shell'){
+  if(/\|/.test(c))add('Pipe `|`','command1 | command2','Sends the output of one command directly into the next command.','This example connects commands with `|`.','It is used here because the next command should process the previous command’s output without an intermediate file.');
+  if(/(?:^|\s)-{1,2}[A-Za-z0-9]/m.test(c))add('Command option / flag','command --option  /  command -x','Changes how a command behaves.','This example passes the shown flag(s) after a command.','They are used here to request the specific behavior/output needed by the task.');
+  if(/>>?|<\s*\S+/.test(c))add('Redirection','command > file  /  command >> file','Sends command output to a file (or reads input from a file) instead of using the terminal normally.','This example uses a shell redirection operator.','It is used here because the command result/input needs to come from or go to a file.');
+  var cm=(c.trim().match(/^([A-Za-z][\w.-]*)\b/m)||[])[1];if(cm)add('Command','command arguments options','Runs a command-line program followed by the values/options it needs.','This example invokes `'+cm+'` with the shown arguments.','It is used here because `'+cm+'` performs the operation being demonstrated.');
+ }
+ if(lang==='html'){
+  if(/<\/?[A-Za-z][^>]*>/.test(c))add('HTML element','<tag>content</tag>','Creates a piece of document structure or content.','This example uses the shown HTML tags to build the page structure.','They are used here because each kind of content/control needs the appropriate semantic element.');
+  if(/\b(?:class|id)=/.test(c))add('HTML attributes','<tag class="name" id="unique">','Adds metadata/configuration to an element.','This example gives elements `class` and/or `id` attributes.','They are used here so CSS, JavaScript, links, labels, or accessibility logic can identify the element.');
+ }
+ if(lang==='css'){
+  if(/(^|\n)\s*[.#A-Za-z][^\n{]*\{/m.test(c))add('CSS selector','selector { property: value; }','Chooses which HTML elements a style rule applies to.','This example uses the selector written before `{`.','It is used here to target only the elements that should receive these styles.');
+  if(/\b[\w-]+\s*:\s*[^;{}]+;?/.test(c))add('CSS declaration','property: value;','Assigns a style value to a CSS property.','This example contains the shown property/value declarations.','They are used here to control the visual/layout behavior of the selected elements.');
+  if(/display\s*:\s*(?:flex|grid)/i.test(c))add('Layout mode','display: flex;  /  display: grid;','Turns an element into a Flexbox or Grid layout container.','This example sets `display` to the shown layout mode.','It is used here because the child elements need controlled alignment/rows/columns rather than normal document flow.');
+ }
+ if(lang==='dockerfile'){
+  if(/^FROM\s+/m.test(c))add('`FROM`','FROM image:tag','Chooses the base image the new container image starts from.','This Dockerfile starts with the shown base image.','It is used here because every image needs a starting filesystem/runtime environment.');
+  if(/^RUN\s+/m.test(c))add('`RUN`','RUN command','Executes a command while the image is being built.','This Dockerfile runs the shown build/install command.','It is used here because dependencies/filesystem setup must be baked into the image.');
+  if(/^COPY\s+/m.test(c))add('`COPY`','COPY source destination','Copies files from the build context into the image.','This Dockerfile copies the shown source into the image path.','It is used here because the application/configuration files must exist inside the built image.');
+  if(/^(?:CMD|ENTRYPOINT)\s+/m.test(c))add('Startup command','CMD [...]  /  ENTRYPOINT [...]','Defines what command runs when a container starts.','This Dockerfile supplies the shown startup command.','It is used here so the container automatically launches the intended application/process.');
+ }
+ if(lang==='json'){
+  if(/\{/.test(c))add('JSON object','{"key": value}','Stores named key-value fields.','This example uses `{...}` with quoted keys.','It is used here because the data has named properties rather than only positional values.');
+  if(/\[/.test(c))add('JSON array','[value1, value2, ...]','Stores an ordered list of JSON values.','This example uses `[...]` for multiple ordered values.','It is used here because several values belong together as a sequence.');
+ }
+ if(lang==='yaml'){
+  if(/(^|\n)\s*[\w.-]+\s*:/m.test(c))add('YAML key/value','key: value','Defines a named configuration field; indentation can nest fields beneath a parent.','This example uses the shown `key: value` fields.','They are used here to describe configuration in a readable hierarchical format.');
+  if(/(^|\n)\s*-\s+/.test(c))add('YAML sequence item','- value','Adds one item to a YAML list/sequence.','This example uses lines beginning with `-`.','It is used here because the configuration needs multiple ordered/repeated items under one field.');
+ }
+ return entries.slice(0,6);
+}
+function syntaxUsedHtml(code,lang){var entries=syntaxUsedEntries(code,lang);if(!entries.length)return'';return '<section class="csai-syntax-used"><b>Syntax used</b><p class="csai-syntax-used-intro">Only the important syntax that appears in this example.</p><div class="csai-syntax-used-list">'+entries.map(function(x){return'<article><strong>'+esc(x.name)+'</strong><p>'+esc(x.what)+'</p><p><b>Syntax:</b> <code>'+esc(x.syntax)+'</code></p><p><b>Used here:</b> '+esc(x.used)+'</p><p><b>Why here:</b> '+esc(x.why)+'</p></article>';}).join('')+'</div></section>';}
+function glossaryHtml(code,lang){var terms=glossaryTerms(code,lang);if(!terms.length)return'';return '<div class="csai-term-glossary"><b>What the unfamiliar terms mean</b><dl>'+terms.map(function(x){return'<div><dt><code>'+esc(x.term)+'</code></dt><dd>'+esc(x.meaning)+'</dd></div>';}).join('')+'</dl></div>';}
+function explanationHtml(code,lang){var lineCount=text(code).split(/\r?\n/).length;return '<details class="csai-line-explanation" data-csai-line-explanation><summary><span>Line-by-line explanation</span><span class="csai-line-count">'+lineCount+' lines</span></summary><div class="csai-line-lazy" data-csai-line-lazy>Open this section to build the explanation.</div><div data-csai-commented-code-host></div><div data-csai-syntax-used-host></div><div data-csai-term-host></div><ol data-csai-line-list></ol></details>';}
+
+
+function addStyle(){if(document.getElementById('csai-line-by-line-style'))return;var s=document.createElement('style');s.id='csai-line-by-line-style';s.textContent='\
+.csai-line-explanation{margin-top:14px;padding:12px 16px;border-top:1px solid var(--border);background:color-mix(in srgb,var(--panel) 96%,var(--bg));color:var(--text)}.csai-line-explanation>summary{display:flex;align-items:center;justify-content:space-between;gap:14px;cursor:pointer;font-weight:900;font-size:.96rem;list-style-position:inside}.csai-line-count{font-size:.72rem;font-weight:800;color:var(--muted);white-space:nowrap}.csai-line-explanation>ol{list-style:none;margin:10px 0 0;padding:0}.csai-line-lazy{margin:10px 0 0;color:var(--muted);font-size:.78rem}.csai-commented-code{margin:12px 0 4px;padding:12px;border:1px solid var(--border);border-radius:10px;background:var(--bg)}.csai-commented-code-title{font-weight:900}.csai-commented-code-note{margin:4px 0 9px;color:var(--muted);font-size:.76rem;line-height:1.45}.csai-commented-code pre{margin:0;padding:11px 12px;border:1px solid color-mix(in srgb,var(--border) 72%,transparent);border-radius:9px;background:color-mix(in srgb,var(--panel) 96%,var(--bg));overflow:auto}.csai-commented-code code{white-space:pre;font:650 12.5px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}.csai-syntax-used{margin:12px 0 4px;padding:12px;border:1px solid var(--border);border-radius:10px;background:var(--bg)}.csai-syntax-used>b{display:block}.csai-syntax-used-intro{margin:3px 0 10px;color:var(--muted);font-size:.76rem}.csai-syntax-used-list{display:grid;gap:9px}.csai-syntax-used-list article{padding:9px 10px;border:1px solid color-mix(in srgb,var(--border) 72%,transparent);border-radius:9px;background:color-mix(in srgb,var(--panel) 96%,var(--bg))}.csai-syntax-used-list strong{display:block;margin-bottom:4px}.csai-syntax-used-list p{margin:3px 0;line-height:1.45;font-size:.82rem}.csai-syntax-used-list code{font-size:.78rem}.csai-term-glossary{margin:12px 0 4px;padding:12px;border:1px solid var(--border);border-radius:10px;background:var(--bg)}.csai-term-glossary>b{display:block;margin-bottom:8px}.csai-term-glossary dl{display:grid;gap:8px;margin:0}.csai-term-glossary dl>div{display:grid;grid-template-columns:minmax(90px,150px) 1fr;gap:10px;align-items:start}.csai-term-glossary dt,.csai-term-glossary dd{margin:0}.csai-term-glossary dd{color:var(--muted);line-height:1.5}@media(max-width:620px){.csai-term-glossary dl>div{grid-template-columns:1fr}}.csai-line-item{margin:0;padding:12px 0 14px;border-bottom:1px solid color-mix(in srgb,var(--border) 72%,transparent);line-height:1.5}.csai-line-item:last-child{border-bottom:0}.csai-line-item.is-blank{padding:8px 0;opacity:.72}.csai-line-code{display:flex;align-items:flex-start;gap:9px;flex-wrap:wrap;margin-bottom:5px}.csai-line-number{display:inline-flex;flex:0 0 auto;padding:3px 7px;border-radius:999px;background:var(--pill);color:var(--pilltext);font-size:.68rem;font-weight:900}.csai-line-code code{white-space:pre-wrap;overflow-wrap:anywhere;font:650 12.5px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace}.csai-line-blank-note{color:var(--muted);font-size:.75rem}.csai-line-purpose{max-width:820px;margin:0;color:var(--text);line-height:1.5;font-size:.92rem}.csai-line-syntax{max-width:820px;margin-top:6px;color:var(--muted)}.csai-line-syntax>summary{cursor:pointer;width:max-content;font-size:.78rem;font-weight:850;color:var(--muted)}.csai-line-syntax>ul{margin:7px 0 0;padding-left:20px}.csai-line-syntax li{margin:5px 0;line-height:1.55}.csai-example-explain[data-csai-replaced-by-line],.evergreen-explain[data-csai-replaced-by-line],.csai-study-explain[data-csai-generic-hidden="1"],.adaptive-explain[data-csai-generic-hidden="1"]{display:none!important}\
+';document.head.appendChild(s);}
+
+function codeFrom(node){if(!node)return'';var value='value' in node?text(node.value):text(node.textContent);return stripGeneratedComments(value);}
+function languageLabel(node,container){var label='';if(node&&node.getAttribute){label=text(node.getAttribute('data-language')||node.getAttribute('data-lang'));if(label)return label;}if(container){var n=container.querySelector('.lesson-run-lang,.csai-study-kind,.evergreen-example-head span,[data-lang-variant],[data-project-lang],[data-file-label],.cx-pm-field-label,.wd-file-name');label=n?text((n.value||n.textContent)||(n.getAttribute&&n.getAttribute('data-lang-variant'))):'';}return label;}
+function isReference(node){return node&&node.getAttribute&&node.getAttribute('data-reference-only')==='true';}
+function isWrittenResponse(node){if(!node||!node.matches)return false;if(node.matches('.oa-answer,[aria-label*="reasoning" i],[aria-label*="answer notes" i],[aria-label*="interview answer" i],[placeholder*="own words" i],[placeholder*="write your answer" i]'))return true;var task=node.closest('.oa-task');return !!(task&&node.matches('[data-editor]')&&!node.matches('.oa-editor')&&!task.querySelector('[data-run],[data-csai-oa-python-run]'));}
+function isCodeWorkspace(node){if(!node||isWrittenResponse(node))return false;if(node.matches&&node.matches('pre.code,[data-csai-language-generated],.csai-language-code'))return true;if(!('value' in node))return false;if(node.matches('[data-project-editor],[data-dual-editor],.csai-code-editor,.csai-study-code,.evergreen-editor,.adaptive-code,.oa-editor,[data-evergreen-code]'))return true;if(node.matches('textarea[aria-label="Code editor" i],textarea[aria-label="SQL query editor" i],textarea[aria-label="HTML editor" i],textarea[aria-label="CSS editor" i],textarea[aria-label="JavaScript editor" i],textarea[aria-label="Git command" i]'))return true;if(node.matches('textarea.wd-edit,textarea.cx-pm-edit')){var a=text(node.getAttribute('aria-label')).toLowerCase();return /code editor|sql|html|css|javascript|git command|terminal/.test(a)||!!node.closest('[data-project-workspace],.project-card,.wd-project,.workspace');}if(node.matches('textarea.py[readonly]'))return true;if(node.matches('textarea.answer')){if(node.getAttribute('data-language'))return true;var v=codeFrom(node).trim();return !!v&&inferLanguage(v,'',node)!=='text';}if(node.matches('textarea.cx-projfb-edit')){var c=codeFrom(node).trim();return !!c&&inferLanguage(c,'',node)!=='text';}return false;}
+function containerFor(node){return node.closest('.csai-study-example,.lesson-run-card,.evergreen-example,.csai-lang-variant,.csai-example-card,.adaptive-panel,.oa-work,.oa-task,.project-card,[data-project-workspace],.wd-project,.wd-card,.cx-pm-card,.workspace,.editor-shell,.item[data-exercise],.item')||node.parentElement;}
+function editorId(node){if(!node)return'';if(!node.getAttribute('data-csai-line-editor-id'))node.setAttribute('data-csai-line-editor-id','line-editor-'+(++editorSeq));return node.getAttribute('data-csai-line-editor-id');}
+function ownedBlocks(container,id){if(!container||!id)return[];return Array.from(container.querySelectorAll('[data-csai-line-explanation][data-csai-line-owner="'+id+'"]'));}
+function suppressDuplicateExplanations(container){if(!container)return;container.querySelectorAll('.csai-example-explain').forEach(function(n){n.setAttribute('data-csai-replaced-by-line','1');});container.querySelectorAll('.evergreen-explain').forEach(function(n){n.setAttribute('data-csai-replaced-by-line','1');});container.querySelectorAll(':scope > .csai-study-explain,:scope > .adaptive-explain').forEach(function(n){n.setAttribute('data-csai-generic-hidden','1');});}
+function insertBlock(node,container,html,id){suppressDuplicateExplanations(container);var wrap=document.createElement('div');wrap.innerHTML=html;var block=wrap.firstElementChild;block.setAttribute('data-csai-line-owner',id);var anchor=node.closest('.csai-editor-shell,.wd-editor-shell,.cx-pm-editor-shell')||node;anchor.insertAdjacentElement('afterend',block);return block;}
+function dedupeOwned(container,id,keep){var blocks=ownedBlocks(container,id),chosen=keep&&keep.isConnected?keep:(blocks[0]||null);blocks.forEach(function(b){if(b!==chosen)b.remove();});return chosen;}
+function renderLazyBlock(block){if(!block||block.dataset.csaiLineRendered==='1')return;var code=block.__csaiCode||'',lang=block.__csaiLang||inferLanguage(code,'',null),list=block.querySelector('[data-csai-line-list]'),host=block.querySelector('[data-csai-term-host]'),syntaxHost=block.querySelector('[data-csai-syntax-used-host]'),commentHost=block.querySelector('[data-csai-commented-code-host]'),lazy=block.querySelector('[data-csai-line-lazy]');if(commentHost)commentHost.innerHTML=commentedCodeHtml(code,lang);if(syntaxHost)syntaxHost.innerHTML=syntaxUsedHtml(code,lang);if(host)host.innerHTML=glossaryHtml(code,lang);if(list)list.innerHTML=listHtml(code,lang);if(lazy)lazy.remove();block.dataset.csaiLineRendered='1';}
+function refreshNode(node){if(!node||!node.isConnected)return;var container=containerFor(node),existingId=node.getAttribute&&node.getAttribute('data-csai-line-editor-id');if(!container)return;if(!isCodeWorkspace(node)){if(existingId)ownedBlocks(container,existingId).forEach(function(b){b.remove();});if(node.removeAttribute){node.removeAttribute('data-csai-line-covered');node.removeAttribute('data-csai-line-language');}return;}var code=codeFrom(node),id=editorId(node);if(!code.trim()){ownedBlocks(container,id).forEach(function(b){b.remove();});return;}var lang=inferLanguage(code,languageLabel(node,container),node),current=ownedBlocks(container,id)[0],wasOpen=!!(current&&current.open),html=explanationHtml(code,lang);ownedBlocks(document,id).forEach(function(block){if(block!==current)block.remove();});suppressDuplicateExplanations(container);var rendered;if(current){var wrap=document.createElement('div');wrap.innerHTML=html;rendered=wrap.firstElementChild;rendered.setAttribute('data-csai-line-owner',id);current.replaceWith(rendered);}else rendered=insertBlock(node,container,html,id);rendered.__csaiCode=code;rendered.__csaiLang=lang;if(wasOpen){rendered.open=true;renderLazyBlock(rendered);}dedupeOwned(container,id,rendered);node.setAttribute('data-csai-line-covered','1');node.setAttribute('data-csai-line-language',lang);container.setAttribute('data-csai-line-covered','1');}
+function targetNodes(root){root=root||document;var selectors=[
+ '.lesson .csai-study-example textarea.csai-study-code','.lesson .csai-study-example pre','.lesson .csai-study-example textarea','.lesson .lesson-run-card pre.code','.lesson .evergreen-example textarea.evergreen-editor','.lesson .csai-lang-variant [data-csai-language-generated]','.lesson .csai-lang-variant .csai-language-code','.lesson pre.code','.lesson .adaptive-panel textarea.adaptive-code',
+ 'textarea[data-project-editor]','textarea[data-dual-editor]','textarea.csai-code-editor','textarea[data-evergreen-code]','textarea.oa-editor[data-editor]','textarea[aria-label="Code editor" i]','textarea[aria-label="SQL query editor" i]','textarea[aria-label="HTML editor" i]','textarea[aria-label="CSS editor" i]','textarea[aria-label="JavaScript editor" i]','textarea[aria-label="Git command" i]','textarea.answer','textarea.py[readonly]','textarea.wd-edit','textarea.cx-pm-edit','textarea.cx-projfb-edit'
+ ];var seen=new Set(),nodes=[];if(root.nodeType===1&&isCodeWorkspace(root))nodes.push(root);if(root.querySelectorAll)nodes=nodes.concat(Array.from(root.querySelectorAll(selectors.join(','))));return nodes.filter(function(n){if(seen.has(n)||!isCodeWorkspace(n))return false;seen.add(n);return true;});}
+function enhance(root){addStyle();targetNodes(root).forEach(refreshNode);}
+function schedule(node){if(!isCodeWorkspace(node)&&!(node&&node.getAttribute&&node.getAttribute('data-csai-line-editor-id')))return;clearTimeout(updateTimers.get(node));var t=setTimeout(function(){refreshNode(node);updateTimers.delete(node);},120);updateTimers.set(node,t);}
+
+window.CSAILineExplainer={version:VERSION,inferLanguage:inferLanguage,explain:explain,listHtml:listHtml,commentedCode:commentedCode,stripGeneratedComments:stripGeneratedComments,commentedCodeHtml:commentedCodeHtml,explanationHtml:explanationHtml,quickPurpose:quickPurposeFor,glossaryTerms:glossaryTerms,glossaryHtml:glossaryHtml,syntaxUsedEntries:syntaxUsedEntries,syntaxUsedHtml:syntaxUsedHtml,refresh:refreshNode,enhance:enhance,isCodeWorkspace:isCodeWorkspace,targetNodes:targetNodes};
+
+function initialEnhance(){addStyle();var lessons=Array.from(document.querySelectorAll('.lesson'));/* v5.60: scrolling past a closed lesson must not build explanation UI. */lessons.filter(function(x){return x.open;}).forEach(enhance);}
+function boot(){initialEnhance();document.addEventListener('focusin',function(e){if(e.target&&isCodeWorkspace(e.target))refreshNode(e.target);},true);document.addEventListener('click',function(e){var n=e.target&&e.target.closest&&e.target.closest('pre.code,[data-csai-language-generated],.csai-language-code');if(n&&isCodeWorkspace(n))refreshNode(n);},true);document.addEventListener('toggle',function(e){if(e.target&&e.target.matches&&e.target.matches('.lesson')&&e.target.open)enhance(e.target);var block=e.target&&e.target.matches&&e.target.matches('[data-csai-line-explanation]')?e.target:null;if(block&&block.open)renderLazyBlock(block);},true);document.addEventListener('input',function(e){if(e.target&&(isCodeWorkspace(e.target)||(e.target.getAttribute&&e.target.getAttribute('data-csai-line-editor-id'))))schedule(e.target);},true);var pending=new Set(),flushTimer=0;new MutationObserver(function(records){records.forEach(function(r){Array.from(r.addedNodes||[]).forEach(function(n){if(n&&n.nodeType===1&&!n.matches('[data-csai-line-explanation],.csai-line-item,.csai-term-glossary'))pending.add(n);});});if(!pending.size)return;clearTimeout(flushTimer);flushTimer=setTimeout(function(){var batch=Array.from(pending);pending.clear();batch.forEach(function(n){enhance(n);});},40);}).observe(document.documentElement,{childList:true,subtree:true});}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
+})();
+,'i'));
+ if(!m)return clean(purpose).replace(/[`]/g,'').replace(/[.]$/,'');
+ var op=m[2].toUpperCase(),rest=clean(m[3]),args=splitSimpleComma(rest);
+ if(op==='AREA')return'code area / section';
+ if(op==='ENTRY')return'program entry point';
+ if(op==='END')return'end of source file';
+ if(op==='RN')return'register alias';
+ if(op==='EQU')return'define constant';
+ if(op==='SPACE')return'reserve storage';
+ if(op==='DCD')return'define 32-bit word data';
+ if(op==='DCB')return'define byte data';
+ if(op==='DCW')return'define 16-bit data';
+ if(op==='ALIGN')return'align next data/instruction';
+ if(op==='ADR'&&args.length>=2)return'load address of '+args[1]+' into '+args[0];
+ if(/^MOV/.test(op)&&args.length>=2)return'load '+args[0]+' with '+args[1];
+ if(/^LDR/.test(op)&&args.length>=2)return'load '+args[0]+' from '+args.slice(1).join(', ');
+ if(/^STR/.test(op)&&args.length>=2)return'store '+args[0]+' to '+args.slice(1).join(', ');
+ if(/^ADD/.test(op)&&args.length>=3)return'add '+args[1]+' and '+args[2];
+ if(/^SUB/.test(op)&&args.length>=3)return'subtract '+args[2]+' from '+args[1];
+ if(/^CMP/.test(op)&&args.length>=2)return'compare '+args[0]+' with '+args[1];
+ if(/^PUSH/.test(op))return'push registers onto stack';
+ if(/^POP/.test(op))return'pop registers from stack';
+ if(/^B(?:L|X|LX)?$/.test(op)&&rest)return(op==='BL'?'call ':'branch to ')+rest;
+ if(/^B[A-Z]{2}$/.test(op)&&rest)return'branch to '+rest+' if condition is true';
+ if(op==='LTORG')return'place literal pool here';
+ if(op==='MACRO')return'begin macro';
+ if(op==='MEND')return'end macro';
+ var brief=clean(purpose).replace(/[`]/g,'').replace(/[.]$/,'');
+ return brief.split(/\s+/).slice(0,10).join(' ');
+}
+function armLectureLine(line,purpose){
+ var parts=splitArmSourceComment(line),code=armLectureCode(parts.code).replace(/\s+$/,'');
+ if(!code.trim())return parts.comment?'; '+parts.comment:'';
+ var note=parts.comment||armShortComment(code,purpose);
+ return note?code+'    ; '+note:code;
+}
 function inlineCommentFor(line,purpose,lang){
  var raw=text(line),note=clean(purpose);
  if(!raw.trim())return'';
  // Preserve syntax/behavior in the few constructs where a trailing comment would change the program.
  if(lang==='python'&&/\\\s*$/.test(raw))return raw;
+ if(lang==='armasm')return armLectureLine(raw,note);
  var suffix;
  if(lang==='python'||lang==='shell'||lang==='yaml')suffix='# Explanation: '+note;
  else if(lang==='matlab')suffix='% Explanation: '+note;
- else if(lang==='armasm')suffix='; Explanation: '+note;
  else if(lang==='sql')suffix='-- Explanation: '+note;
  else if(lang==='html')suffix='<!-- Explanation: '+note+' -->';
  else if(lang==='css')suffix='/* Explanation: '+note+' */';
@@ -1030,7 +1305,10 @@ function inlineCommentFor(line,purpose,lang){
  return raw.replace(/\s+$/,'')+'  '+suffix;
 }
 function commentedCode(code,lang){var cleanCode=stripGeneratedComments(code);return explain(cleanCode,lang).map(function(r){return inlineCommentFor(r.code,r.purpose,lang);}).join('\n');}
-function commentedCodeHtml(code,lang){return '<section class="csai-commented-code" data-csai-commented-code><div class="csai-commented-code-title">Code with comments</div><p class="csai-commented-code-note">Learning view: each source line includes its explanation as a comment. Keep using the clean code above to run or edit.</p><pre><code>'+esc(commentedCode(code,lang))+'</code></pre></section>';}
+function commentedCodeHtml(code,lang){
+ var arm=lang==='armasm';
+ return '<section class="csai-commented-code" data-csai-commented-code><div class="csai-commented-code-title">'+(arm?'Lecture-style ARM code':'Code with comments')+'</div><p class="csai-commented-code-note">'+(arm?'ARMASM view: uppercase registers/mnemonics and short semicolon comments, matching the lecture-note style. The clean code above remains runnable.':'Learning view: each source line includes its explanation as a comment. Keep using the clean code above to run or edit.')+'</p><pre><code>'+esc(commentedCode(code,lang))+'</code></pre></section>';
+}
 function glossaryTerms(code,lang){var c=text(code),terms=[];function add(term,meaning){if(!terms.some(function(x){return x.term===term;}))terms.push({term:term,meaning:meaning});}
  if(lang==='python'){
   if(/\bimport\b|\bfrom\s+\S+\s+import\b/.test(c))add('import','Loads reusable code from a Python module so this program can use it.');
