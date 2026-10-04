@@ -59,8 +59,15 @@ const expected=['arm-01','arm-02','arm-09','arm-05','arm-06','arm-07','arm-04','
 assert.deepEqual(arm.lessons.map(l=>l.id),expected);
 const page=fs.readFileSync('courses/arm-assembly.html','utf8');assert.deepEqual([...page.matchAll(/<details class="lesson" data-lesson="([^"]+)"/g)].map(m=>m[1]),expected);
 const matlab=JSON.parse(fs.readFileSync('assets/matlab-course-addition.json','utf8'));
-for(const c of [...courses,matlab]){
- let previous=0;for(const lesson of c.lessons){assert.ok(lesson.lecture.order>=previous);previous=lesson.lecture.order;assert.ok(lesson.lecture.file.endsWith('.pdf'));assert.ok(lesson.lecture.slides[0]<=lesson.lecture.slides[1]);}
- assert.ok(fs.readFileSync('courses/'+c.id+'.html','utf8').includes('Follow your lecture order'));
+const mpr=courses.find(c=>c.id==='microprocessors-arm');
+assert.deepEqual(mpr.lessons.map(l=>l.id),['mpr-01','mpr-02','mpr-03','mpr-04','mpr-05','mpr-06','mpr-07','mpr-08','mpr-09','mpr-10']);
+assert.deepEqual(matlab.lessons.map(l=>l.id),['mat-01','mat-02','mat-03','mat-04','mat-05','mat-06','mat-07','mat-08','mat-09','mat-10']);
+for(const course of [mpr,arm,matlab]){
+ for(const lesson of course.lessons)assert.ok(!lesson.lecture,'commercial course data must not expose private lecture-source metadata');
+ const html=fs.readFileSync('courses/'+course.id+'.html','utf8');
+ assert.ok(!html.includes('Follow your lecture order'),'commercial course UI must not expose private lecture ordering');
+ assert.ok(!/data-lecture-order|\.pdf\b/i.test(html),'commercial course UI must not expose source slide/file metadata');
+ const pageOrder=[...html.matchAll(/<details class="lesson" data-lesson="([^"]+)"/g)].map(m=>m[1]);
+ assert.deepEqual(pageOrder,course.lessons.map(l=>l.id),course.id+' page must preserve the authored lesson order');
 }
-console.log(`Explanation accuracy passed: ${pages.length} courses, ${examples} code/reference blocks, ${lines} source lines; ARM/MATLAB lecture order preserved.`);
+console.log(`Explanation accuracy passed: ${pages.length} courses, ${examples} code/reference blocks, ${lines} source lines; ARM/MATLAB lesson order preserved without private lecture metadata.`);
