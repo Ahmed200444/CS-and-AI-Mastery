@@ -135,29 +135,33 @@
     },
     {
       "id": "mat-06",
-      "title": "Function files & local variables",
+      "title": "Function files, main scripts & local variables",
       "concepts": [
         "function file",
+        "main script",
         "input variables",
         "output variables",
         "local variables",
-        "filename"
+        "filename",
+        "Command Window"
       ],
       "objectives": [
-        "Write a function declaration",
-        "Keep a function file separate from the main script",
-        "Call the function from a script",
-        "Run the script from the Command Window",
+        "Write a function declaration with clear inputs and outputs",
+        "Keep the function file separate from the main script",
+        "Call the function from a main script",
+        "Run the main script from the Command Window",
         "Match the function name and .m filename"
       ],
-      "explanation": "A MATLAB function belongs in its own .m function file, while the main script is a separate .m file that calls it. Both files are edited in the Editor. The Command Window is separate: it is where you run the script by name and see output, variables, and figures.",
+      "explanation": "A MATLAB function is saved in its own .m file, while the main script is a separate .m file that calls it. Both files belong in the Editor. The Command Window is where you run the main script by name and read the resulting output; function-local variables remain inside the function workspace.",
       "examples": [
-        "% file: calculate_average.m\nfunction average = calculate_average(numbers) % Define a reusable function with one input\ntotal = sum(numbers); % Add all values in the input array\ncount = length(numbers); % Count how many values are in the array\naverage = total / count; % Return the arithmetic mean\nend % End the function file\n\n% file: grades.m\nsam = [87 81 94 90 79]; % Store Sam's grades in the main script\nann = [80 91 88 92 93]; % Store Ann's grades in the main script\nsam_average = calculate_average(sam) % Call the function file from the script and display the result\nann_average = calculate_average(ann) % Call the same function with a second array"
+        "% file: calculate_average.m\nfunction average = calculate_average(numbers) % Define a reusable function with one input\ntotal = sum(numbers); % Add all values in the input array\ncount = length(numbers); % Count how many values are in the array\naverage = total / count; % Return the arithmetic mean\nend % End the function file\n\n% file: grades.m\nclc; close all; clear; % Clear Command Window, figures, and Workspace\nsam = [87 81 94 90 79]; % Store Sam's five exam grades\nann = [80 91 88 92 93]; % Store Ann's five exam grades\nmark = [74 79 76 89 83]; % Store Mark's five exam grades\nsue = [90 89 95 97 94]; % Store Sue's five exam grades\n\nsam_average = calculate_average(sam); % Calculate Sam's average\nann_average = calculate_average(ann); % Calculate Ann's average\nmark_average = calculate_average(mark); % Calculate Mark's average\nsue_average = calculate_average(sue); % Calculate Sue's average\n\nfprintf('Sam Average = %.2f\\n', sam_average); % Display Sam's average\nfprintf('Ann Average = %.2f\\n', ann_average); % Display Ann's average\nfprintf('Mark Average = %.2f\\n', mark_average); % Display Mark's average\nfprintf('Sue Average = %.2f\\n', sue_average); % Display Sue's average"
       ],
       "commonMistakes": [
-        "Putting the main script in the Command Window pane instead of keeping it as a separate .m file in the Editor.",
+        "Putting the main script in the Command Window instead of saving it as a separate .m file in the Editor.",
         "Saving the function under a filename that does not match the function name."
-      ]
+      ],
+      "example": "% file: calculate_average.m\nfunction average = calculate_average(numbers) % Define a reusable function with one input\ntotal = sum(numbers); % Add all values in the input array\ncount = length(numbers); % Count how many values are in the array\naverage = total / count; % Return the arithmetic mean\nend % End the function file\n\n% file: grades.m\nclc; close all; clear; % Clear Command Window, figures, and Workspace\nsam = [87 81 94 90 79]; % Store Sam's five exam grades\nann = [80 91 88 92 93]; % Store Ann's five exam grades\nmark = [74 79 76 89 83]; % Store Mark's five exam grades\nsue = [90 89 95 97 94]; % Store Sue's five exam grades\n\nsam_average = calculate_average(sam); % Calculate Sam's average\nann_average = calculate_average(ann); % Calculate Ann's average\nmark_average = calculate_average(mark); % Calculate Mark's average\nsue_average = calculate_average(sue); % Calculate Sue's average\n\nfprintf('Sam Average = %.2f\\n', sam_average); % Display Sam's average\nfprintf('Ann Average = %.2f\\n', ann_average); % Display Ann's average\nfprintf('Mark Average = %.2f\\n', mark_average); % Display Mark's average\nfprintf('Sue Average = %.2f\\n', sue_average); % Display Sue's average",
+      "explain": "A MATLAB function is saved in its own .m file, while the main script is a separate .m file that calls it. Both files belong in the Editor. The Command Window is where you run the main script by name and read the resulting output; function-local variables remain inside the function workspace."
     },
     {
       "id": "mat-07",
@@ -209,11 +213,12 @@
       ],
       "explanation": "MATLAB conditionals choose statements from logical expressions. The lecture covers relational operators, logical NOT/AND/OR/xor, and if/elseif/else for piecewise behavior.",
       "examples": [
-        "if x >= 5 % Check upper threshold\n    y = log(x); % Natural log for high values\nelseif x >= 0 % Check positive threshold\n    y = sqrt(x); % Square root for non-negative values\nelse % Negative values\n    y = exp(x) - 1; % Exponential for negative values\nend % End if structure"
+        "x = 9; % Set a test value\nif x >= 5 % Check upper threshold\n    y = log(x); % Natural log for high values\nelseif x >= 0 % Check non-negative threshold\n    y = sqrt(x); % Square root for non-negative values\nelse % Negative values\n    y = exp(x) - 1; % Exponential expression for negative values\nend % End if structure"
       ],
       "commonMistakes": [
         "Using = for equality testing instead of ==."
-      ]
+      ],
+      "example": "x = 9; % Set a test value\nif x >= 5 % Check upper threshold\n    y = log(x); % Natural log for high values\nelseif x >= 0 % Check non-negative threshold\n    y = sqrt(x); % Square root for non-negative values\nelse % Negative values\n    y = exp(x) - 1; % Exponential expression for negative values\nend % End if structure"
     },
     {
       "id": "mat-09",
@@ -256,11 +261,12 @@
       ],
       "explanation": "while is used when repetition stops after a condition changes rather than after a known number of passes. Its controlling value must be initialized and changed. switch provides a readable alternative for discrete cases.",
       "examples": [
-        "x = 5; % Initial condition\nwhile x < 25 % Loop while under limit\n    disp(x); % Output current value\n    x = 2*x - 1; % Update step\nend % End while loop\n\nswitch angle % Switch on angle variable\n    case 45 % Case 45 degrees\n        disp('Northeast'); % Display direction\n    otherwise % Default case\n        disp('Direction Unknown'); % Unknown direction\nend % End switch"
+        "x = 5; % Initial loop value\nwhile x < 25 % Loop while under the limit\n    disp(x); % Display current value\n    x = 2*x - 1; % Update the loop value\nend % End while loop\n\nangle = 45; % Set a switch input\nswitch angle % Select a direction from the angle\n    case 45 % Match 45 degrees\n        disp('Northeast'); % Display direction\n    otherwise % Default case\n        disp('Direction Unknown'); % Display fallback\nend % End switch"
       ],
       "commonMistakes": [
         "Writing a while loop whose controlling value never changes."
-      ]
+      ],
+      "example": "x = 5; % Initial loop value\nwhile x < 25 % Loop while under the limit\n    disp(x); % Display current value\n    x = 2*x - 1; % Update the loop value\nend % End while loop\n\nangle = 45; % Set a switch input\nswitch angle % Select a direction from the angle\n    case 45 % Match 45 degrees\n        disp('Northeast'); % Display direction\n    otherwise % Default case\n        disp('Direction Unknown'); % Display fallback\nend % End switch"
     }
   ],
   "exercises": [
