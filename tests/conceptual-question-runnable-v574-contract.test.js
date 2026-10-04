@@ -10,14 +10,14 @@ assert.ok([62,65].includes(pages.length),'expected 62 committed or 65 generated 
 for(const f of pages){
   const h=read('courses/'+f);
   for(const tag of [
-    '../assets/study-examples.js?v=20260824-v574',
+    '../assets/study-examples.js?v=20261004-v586',
     '../assets/conceptual-examples-v574.js?v=20260824-v574',
     '../assets/program-questions-v574.js?v=20260824-v574'
   ]) assert.ok(h.includes(tag),`${f}: missing v5.74 concept/question asset ${tag}`);
 }
 const home=read('index.html');
 for(const tag of [
-  'assets/study-examples.js?v=20260824-v574',
+  'assets/study-examples.js?v=20261004-v586',
   'assets/conceptual-examples-v574.js?v=20260824-v574',
   'assets/program-questions-v574.js?v=20260824-v574'
 ]) assert.ok(home.includes(tag),`homepage missing ${tag}`);
