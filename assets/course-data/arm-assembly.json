@@ -1,1 +1,788 @@
-{"id":"arm-assembly","title":"ARM Assembly Programming","icon":"⚙️","blurb":"ARM assembly syntax, data processing, barrel shifts, flags, condition codes, branches, memory addressing, stacks, functions, and exceptions.","description":"A university-aligned ARM assembly course built from the supplied instruction, function, and exception lecture material.","category":"computer-engineering","level":"intermediate","status":"available","available":true,"tier":"Computer Engineering & Systems","prerequisites":["microprocessors-arm"],"estimatedHours":12,"tags":["ARM","assembly","EECE340","low-level programming"],"schemaVersion":3,"roadmap":{"beginner":["Instructions Part 1: syntax, MOV/MVN, memory addressing, barrel shifter"],"intermediate":["Instructions Part 2: flags, comparisons, data processing, control flow, stacks","Functions: register saving and parameter passing","Exceptions: entry, vectors, priorities and SVC"]},"lessons":[{"id":"arm-01","title":"ARM assembly structure, syntax & directives","concepts":["AREA","ENTRY","END","RN","EQU","ALIGN","register operands"],"objectives":["Read destination/source operand order","Use common assembler directives","Distinguish directives from CPU instructions"],"explanation":"ARM assembly source combines processor instructions with assembler directives. Most data-processing instructions place the destination first, followed by source operands. AREA, ENTRY, RN, EQU, ALIGN, SPACE, and END help the assembler organize code/data or define names; they are not operations executed by the CPU.","examples":["        AREA Prog1, CODE, READONLY ; Declare code area\n        ENTRY ; Mark entry point\ncounter RN 0 ; Alias register r0 as counter\nlimit   EQU 5 ; Define symbolic constant limit\n        MOV counter, #0 ; Initialize counter to 0\nstop    B stop ; Loop forever\n        END ; End of assembly"],"commonMistakes":["Treating assembler directives such as AREA or EQU as instructions executed by the ARM core."],"explain":"ARM assembly source combines processor instructions with assembler directives. Most data-processing instructions place the destination first, followed by source operands. AREA, ENTRY, RN, EQU, ALIGN, SPACE, and END help the assembler organize code/data or define names; they are not operations executed by the CPU.","lecture":{"order":3,"title":"Instructions — Part 1","file":"03.Lecture_ARM_Instructions_part1 (1)(1).pdf","courseId":"arm-assembly","slides":[7,25]}},{"id":"arm-02","title":"Registers, immediates, MOV & MVN","concepts":["register","immediate","MOV","MVN","destination","source"],"objectives":["Move values between registers","Load simple immediate values","Explain MOV versus MVN"],"explanation":"Data-processing instructions work primarily on registers. MOV copies an operand into a destination register, while MVN writes the bitwise complement. Immediate operands use # in the lecture syntax. Remember the destination-first pattern when tracing instructions.","examples":["        MOV r0, #17 ; Load immediate value 17 into r0\n        MOV r1, r0 ; Copy r0 into r1\n        MVN r2, r1 ; Bitwise NOT of r1 into r2"],"commonMistakes":["Reading MOV r0, r1 as copying r0 into r1."],"explain":"Data-processing instructions work primarily on registers. MOV copies an operand into a destination register, while MVN writes the bitwise complement. Immediate operands use # in the lecture syntax. Remember the destination-first pattern when tracing instructions.","lecture":{"order":3,"title":"Instructions — Part 1","file":"03.Lecture_ARM_Instructions_part1 (1)(1).pdf","courseId":"arm-assembly","slides":[9,15]}},{"id":"arm-09","title":"LDR/STR & ARM addressing modes","concepts":["LDR","STR","LDRB","STRB","LDRH","STRH","pre-index","post-index"],"objectives":["Load and store words/bytes/halfwords","Calculate effective addresses","Distinguish pre-indexed and post-indexed write-back"],"explanation":"ARM is a load-store architecture, so memory values move into registers before most data processing. LDR/STR transfer words, with byte and halfword variants. Addressing modes combine a base register with an offset; pre-indexing forms the address before access, while post-indexing uses the base first and updates it afterward.","examples":["        MOV r2, #0x1000 ; Base pointer address\n        MOV r0, #17 ; Initial test value 17\n        STR r0, [r2] ; Store word to memory\n        MOV r0, #23 ; Second test value 23\n        STR r0, [r2, #4] ; Store word with offset 4\n        LDR r1, [r2] ; Load word from base\n        LDR r3, [r2, #4] ; Load word from offset 4\n        STR r3, [r2, #8] ; Store word to offset 8\n        LDR r4, [r2], #4 ; Post-indexed load and advance pointer"],"commonMistakes":["Confusing the address in the base register with the data loaded from memory."],"explain":"ARM is a load-store architecture, so memory values move into registers before most data processing. LDR/STR transfer words, with byte and halfword variants. Addressing modes combine a base register with an offset; pre-indexing forms the address before access, while post-indexing uses the base first and updates it afterward.","lecture":{"order":3,"title":"Instructions — Part 1","file":"03.Lecture_ARM_Instructions_part1 (1)(1).pdf","courseId":"arm-assembly","slides":[26,43]}},{"id":"arm-05","title":"Barrel shifter: LSL, LSR, ASR & ROR","concepts":["LSL","LSR","ASR","ROR","barrel shifter","Operand2"],"objectives":["Trace logical and arithmetic shifts","Explain rotate-right","Combine a shift with a data-processing instruction"],"explanation":"ARM can shift the second operand as part of many data-processing instructions. LSL shifts left, LSR shifts right with zero fill, ASR preserves the sign bit for signed values, and ROR rotates bits around. Combining ALU work with a shift is a characteristic ARM feature.","examples":["        MOV r0, #7 ; Load value 7\n        MOV r1, r0, LSL #1 ; Shift left by 1 (multiply by 2)\n        MOV r2, r1, LSR #2 ; Shift right by 2 (divide by 4)\n        ADD r3, r0, r0, LSL #4 ; Multiply by 16 and add r0"],"commonMistakes":["Assuming LSR and ASR are identical for values whose top bit is 1."],"explain":"ARM can shift the second operand as part of many data-processing instructions. LSL shifts left, LSR shifts right with zero fill, ASR preserves the sign bit for signed values, and ROR rotates bits around. Combining ALU work with a shift is a characteristic ARM feature.","lecture":{"order":3,"title":"Instructions — Part 1","file":"03.Lecture_ARM_Instructions_part1 (1)(1).pdf","courseId":"arm-assembly","slides":[44,48]}},{"id":"arm-06","title":"CPSR flags & the S suffix","concepts":["N flag","Z flag","C flag","V flag","CPSR","S suffix"],"objectives":["Explain N, Z, C, and V","Use the S suffix to update flags","Separate signed overflow from unsigned carry"],"explanation":"N reflects the result sign bit, Z indicates zero, C records carry/no-borrow information and shifted-out bits, and V reports signed arithmetic overflow. Many data-processing instructions update flags only when the S suffix is requested.","examples":["        MOV  r0, #5 ; Set initial value 5\n        SUBS r1, r0, #5 ; Subtract 5 and update flags (Z=1)\n        MOVS r2, #-1 ; Move -1 and update flags (N=1)"],"commonMistakes":["Treating C and V as the same condition."],"explain":"N reflects the result sign bit, Z indicates zero, C records carry/no-borrow information and shifted-out bits, and V reports signed arithmetic overflow. Many data-processing instructions update flags only when the S suffix is requested.","lecture":{"order":4,"title":"Instructions — Part 2","file":"03.Lecture_ARM_Instructions_part2 (2)(1).pdf","courseId":"arm-assembly","slides":[2,6]}},{"id":"arm-07","title":"CMP, CMN, TST, TEQ & conditional execution","concepts":["CMP","CMN","TST","TEQ","EQ","NE","LT","GT"],"objectives":["Use comparison instructions to set flags","Choose a condition code from flag results","Explain conditional instruction execution"],"explanation":"CMP behaves like subtraction for flag setting, CMN like addition, TST like bitwise AND, and TEQ like XOR. They update flags without keeping a normal destination result. Conditional suffixes such as EQ or NE make an instruction execute only when its flag condition is satisfied.","examples":["        MOV r0, #2 ; Load test value 2\n        CMP r0, #2 ; Compare r0 with 2 (sets Z=1)\n        MOVEQ r1, #1 ; Move 1 if equal (executed)\n        MOVNE r1, #0 ; Move 0 if not equal (skipped)\n        TST r0, #2 ; Bitwise test bit 1"],"commonMistakes":["Expecting CMP to store a normal subtraction result."],"explain":"CMP behaves like subtraction for flag setting, CMN like addition, TST like bitwise AND, and TEQ like XOR. They update flags without keeping a normal destination result. Conditional suffixes such as EQ or NE make an instruction execute only when its flag condition is satisfied.","lecture":{"order":4,"title":"Instructions — Part 2","file":"03.Lecture_ARM_Instructions_part2 (2)(1).pdf","courseId":"arm-assembly","slides":[7,10]}},{"id":"arm-04","title":"Logical operations & bit manipulation","concepts":["AND","ORR","EOR","BIC","MVN","bit mask"],"objectives":["Apply bitwise AND/OR/XOR","Clear selected bits with BIC","Build and reason about masks"],"explanation":"AND keeps bits selected by a mask, ORR sets selected bits, EOR performs XOR, and BIC clears bits selected by the second operand. These operations are central to packed flags and device/control registers.","examples":["        MOV r0, #0x0F ; Load bit mask 0x0F\n        MOV r1, #0x03 ; Load bit mask 0x03\n        AND r2, r0, r1 ; Bitwise AND: 0x03\n        ORR r3, r0, #0x10 ; Bitwise OR: 0x1F\n        EOR r4, r0, r1 ; Bitwise XOR: 0x0C\n        BIC r5, r0, #0x03 ; Bit clear lower 2 bits: 0x0C"],"commonMistakes":["Using arithmetic intuition for bit masks instead of tracing each bit position."],"explain":"AND keeps bits selected by a mask, ORR sets selected bits, EOR performs XOR, and BIC clears bits selected by the second operand. These operations are central to packed flags and device/control registers.","lecture":{"order":4,"title":"Instructions — Part 2","file":"03.Lecture_ARM_Instructions_part2 (2)(1).pdf","courseId":"arm-assembly","slides":[11,15]}},{"id":"arm-03","title":"Arithmetic instructions: ADD, ADC, SUB, SBC, RSB & RSC","concepts":["ADD","ADC","SUB","SBC","RSB","RSC","carry"],"objectives":["Trace three-operand arithmetic","Explain add/subtract with carry","Use reverse subtraction correctly"],"explanation":"ARM arithmetic instructions typically use a destination and two input operands. ADD and SUB perform basic arithmetic; ADC and SBC include carry state for multiword arithmetic. RSB reverses subtraction order, useful when the desired calculation is operand2 minus operand1.","examples":["        MOV r1, #9 ; Load operand 1\n        MOV r2, #4 ; Load operand 2\n        ADD r0, r1, r2 ; Add: 9 + 4 = 13\n        SUB r3, r1, r2 ; Subtract: 9 - 4 = 5\n        RSB r4, r1, r2 ; Reverse subtract: 4 - 9 = -5"],"commonMistakes":["Applying normal SUB operand order to RSB."],"explain":"ARM arithmetic instructions typically use a destination and two input operands. ADD and SUB perform basic arithmetic; ADC and SBC include carry state for multiword arithmetic. RSB reverses subtraction order, useful when the desired calculation is operand2 minus operand1.","lecture":{"order":4,"title":"Instructions — Part 2","file":"03.Lecture_ARM_Instructions_part2 (2)(1).pdf","courseId":"arm-assembly","slides":[16,18]}},{"id":"arm-08","title":"Branches, if/else & loops","concepts":["B","BL","BX","label","while loop","do-while"],"objectives":["Branch to labels","Translate decisions into branches","Trace while and do-while loops"],"explanation":"Branch instructions change control flow by loading a new PC value. Labels identify targets. Conditional branches combine flag tests with control flow, which implements if/else and loops. Testing before or after the body distinguishes pre-test and post-test loops.","examples":["j       RN 0 ; Alias register r0 as loop counter j\n        MOV j, #3 ; Initialize counter j to 3\nloop    CMP j, #0 ; Compare j with 0\n        BLT done ; Exit loop when j < 0\n        SUB j, j, #1 ; Decrement counter\n        B loop ; Repeat loop\ndone    B done ; Halt when loop finishes"],"commonMistakes":["Forgetting that a loop must modify the state used by its termination condition."],"explain":"Branch instructions change control flow by loading a new PC value. Labels identify targets. Conditional branches combine flag tests with control flow, which implements if/else and loops. Testing before or after the body distinguishes pre-test and post-test loops.","lecture":{"order":4,"title":"Instructions — Part 2","file":"03.Lecture_ARM_Instructions_part2 (2)(1).pdf","courseId":"arm-assembly","slides":[19,47]}},{"id":"arm-10","title":"LDM/STM, PUSH/POP & the runtime stack","concepts":["LDM","STM","PUSH","POP","SP","R13","IA","IB","DA","DB"],"objectives":["Transfer multiple registers","Explain multiple-addressing modes","Trace stack growth and PUSH/POP"],"explanation":"LDM and STM move multiple registers between registers and memory. Addressing-mode suffixes specify increment/decrement and before/after behavior. PUSH and POP are stack-oriented aliases using R13/SP; in the convention shown in the lectures, PUSH corresponds to STMDB and POP to LDMIA, so the stack grows toward lower addresses.","examples":["        LDR r3, =0x11111111 ; Load literal value 1\n        LDR r4, =0x22222222 ; Load literal value 2\n        PUSH {r3, r4} ; Push r3 and r4 onto stack\n        POP  {r5, r6} ; Pop from stack into r5 and r6"],"commonMistakes":["Assuming textual register-list order controls memory ordering."],"explain":"LDM and STM move multiple registers between registers and memory. Addressing-mode suffixes specify increment/decrement and before/after behavior. PUSH and POP are stack-oriented aliases using R13/SP; in the convention shown in the lectures, PUSH corresponds to STMDB and POP to LDMIA, so the stack grows toward lower addresses.","lecture":{"order":4,"title":"Instructions — Part 2","file":"03.Lecture_ARM_Instructions_part2 (2)(1).pdf","courseId":"arm-assembly","slides":[99,113]}},{"id":"arm-11","title":"Subroutines, BL/BX LR & parameter passing","concepts":["BL","BX LR","LR","callee state","parameters","stack"],"objectives":["Call and return from a subroutine","Preserve registers across calls","Compare register, memory-block, and stack parameter passing"],"explanation":"BL branches while saving a return address in LR/R14. A simple return can use BX LR. Subroutines preserve state according to the calling convention. Parameters can be passed in registers, through a referenced memory block, or on the stack; stack-based access must account for values pushed on entry.","examples":["main    MOV r0, #5 ; Main function argument\n        BL double ; Branch with link to subroutine\n        B stop ; Halt execution\n\ndouble  PUSH {r1} ; Save caller register r1\n        ADD r1, r0, r0 ; Double value in r0\n        MOV r0, r1 ; Store return value in r0\n        POP {r1} ; Restore caller register r1\n        BX lr ; Return to caller\nstop    B stop ; Spin loop"],"commonMistakes":["Calling another function without protecting LR when the current function still needs its own return address."],"explain":"BL branches while saving a return address in LR/R14. A simple return can use BX LR. Subroutines preserve state according to the calling convention. Parameters can be passed in registers, through a referenced memory block, or on the stack; stack-based access must account for values pushed on entry.","lecture":{"order":5,"title":"Functions","file":"04.Functions(1).pdf","courseId":"arm-assembly","slides":[2,22]}},{"id":"arm-12","title":"Exceptions, interrupts, vectors & SVC","concepts":["exception","SPSR","LR_mode","vector table","IRQ","FIQ","SVC"],"objectives":["List major classic ARM exception types","Trace automatic exception entry","Explain vector dispatch and return","Distinguish IRQ, FIQ, and SVC"],"explanation":"On a classic ARM exception, CPSR is copied to the relevant SPSR, the processor changes mode, a return address is stored in mode-specific LR, and PC goes to an exception vector. The vector dispatches to a handler, which returns using the exception-appropriate sequence. SVC deliberately requests a privileged OS service.","examples":["0x00  Reset ; Hardware reset entry point\n0x04  Undefined instruction ; Undefined instruction trap\n0x08  SVC ; Supervisor call software interrupt\n0x0C  Prefetch abort ; Instruction fetch memory fault\n0x10  Data abort ; Data access memory fault\n0x18  IRQ ; Standard priority hardware interrupt\n0x1C  FIQ ; Fast priority hardware interrupt"],"commonMistakes":["Using the same unadjusted LR return sequence for every exception type."],"explain":"On a classic ARM exception, CPSR is copied to the relevant SPSR, the processor changes mode, a return address is stored in mode-specific LR, and PC goes to an exception vector. The vector dispatches to a handler, which returns using the exception-appropriate sequence. SVC deliberately requests a privileged OS service.","lecture":{"order":6,"title":"Exceptions","file":"05.Exceptions(1).pdf","courseId":"arm-assembly","slides":[2,13]}}],"exercises":[{"id":"arm-ex-01","title":"Read an ARM source skeleton","prompt":"Identify assembler directives, labels, and executable instructions.","lessonId":"arm-01"},{"id":"arm-ex-02","title":"MOV/MVN register trace","prompt":"Trace MOV and MVN instructions and write final register values.","lessonId":"arm-02"},{"id":"arm-ex-03","title":"Arithmetic register trace","prompt":"Compute final values after ADD, SUB, carry-aware arithmetic, and RSB.","lessonId":"arm-03"},{"id":"arm-ex-04","title":"Bit-mask design","prompt":"Use AND/ORR/EOR/BIC to test, set, toggle, and clear specified bits.","lessonId":"arm-04"},{"id":"arm-ex-05","title":"Shift and rotate trace","prompt":"Trace LSL, LSR, ASR, and ROR on 32-bit patterns.","lessonId":"arm-05"},{"id":"arm-ex-06","title":"Flag prediction","prompt":"Predict N, Z, C, and V for ADDS/SUBS-style operations.","lessonId":"arm-06"},{"id":"arm-ex-07","title":"Condition-code choice","prompt":"Given CMP/TST results, choose a suitable condition code and explain why.","lessonId":"arm-07"},{"id":"arm-ex-08","title":"Translate a loop","prompt":"Translate while or do-while pseudocode into ARM compare/branch structure.","lessonId":"arm-08"},{"id":"arm-ex-09","title":"Effective-address trace","prompt":"Calculate addresses and base updates for pre/post-indexed LDR/STR.","lessonId":"arm-09"},{"id":"arm-ex-10","title":"Stack trace","prompt":"Trace SP/register values through PUSH/POP and equivalent LDM/STM.","lessonId":"arm-10"},{"id":"arm-ex-11","title":"Function-call trace","prompt":"Trace BL, LR, register preservation, parameters, and BX LR through nested calls.","lessonId":"arm-11"},{"id":"arm-ex-12","title":"Exception-entry trace","prompt":"Given IRQ, FIQ, or SVC, list state changes, vector target, and return information.","lessonId":"arm-12"}],"projects":[{"id":"arm-p1","title":"ARM instruction trace workbook","description":"Create documented ARM snippets covering arithmetic, masks, shifts, flags, and conditional execution. Predict state before checking it in the university simulator.","requirements":["At least eight ARM snippets","Register/flag trace for each","At least one edge case per instruction family","No unexplained final answers"],"language":"text"},{"id":"arm-p2","title":"Array & string routine pack","description":"Design ARM routines that traverse an integer array and a zero-terminated string using load/store addressing, loops, and clear calling conventions.","requirements":["At least three routines","Use pre/post-indexing where appropriate","Document register inputs/outputs","Preserve required registers and test boundary cases"],"language":"text"},{"id":"arm-p3","title":"Function & stack lab","description":"Design a multi-function ARM program that passes parameters in registers and on the stack, preserves state, and traces SP/LR across nested calls.","requirements":["At least three subroutines","One nested call","Register-save/restore plan","Complete SP/LR trace and return reasoning"],"language":"text"}],"capstone":{"id":"arm-capstone","title":"ARM assembly mini-runtime & interrupt design","description":"Design a cohesive ARM assembly program combining data processing, memory access, loops, subroutines, stack discipline, and a documented exception/interrupt handler path.","requirements":["Main routine plus reusable subroutines","Array or string memory processing","Explicit calling convention and stack trace","Flag-driven conditional control","Vector/handler design for at least one exception","Verification plan using the university ARM simulator"],"language":"text"},"careerApplications":"Useful for firmware, embedded systems, low-level debugging, reverse-engineering fundamentals, compiler/code-generation understanding, and computer engineering interviews.","quiz":[{"q":"AREA, ENTRY, EQU, and END are primarily:","options":["Assembler directives","ALU instructions","Cache policies","Interrupt types"],"correct":0,"type":"mcq","explanation":"AREA organizes a section, ENTRY marks an entry point, EQU defines a constant, and END ends the source. These direct the assembler rather than perform CPU calculations.","lessonId":"arm-01"},{"q":"For a typical three-operand ARM data-processing instruction, the first register is usually:","options":["The destination","Always the second source","Always SP","Always PC"],"correct":0,"type":"mcq","explanation":"In ADD r0, r1, r2, r0 receives the result while r1 and r2 supply values. Read the operands from destination to sources.","lessonId":"arm-01"},{"q":"MOV r0, r1 means:","options":["Copy r1 into r0","Copy r0 into r1","Add r0 and r1","Store r0 to memory"],"correct":0,"type":"mcq","explanation":"MOV r0, r1 reads r1 and writes its value into r0. r1 is unchanged.","lessonId":"arm-02"},{"q":"MVN writes:","options":["The bitwise complement of its operand","A memory address only","The stack pointer","The program counter only"],"correct":0,"type":"mcq","explanation":"MVN flips every bit of the source. In a 32-bit register, MVN applied to 0 gives 0xFFFFFFFF, not 1.","lessonId":"arm-02"},{"q":"RSB r0, r1, r2 computes:","options":["r2 - r1","r1 - r2","r1 + r2","r1 XOR r2"],"correct":0,"type":"mcq","explanation":"RSB reverses the usual SUB order: RSB r0, r1, r2 stores r2 minus r1 in r0.","lessonId":"arm-03"},{"q":"ADC is useful when:","options":["A carry from a previous arithmetic step must be included","No registers are available","Only memory-to-memory arithmetic is allowed","A branch must be unconditional"],"correct":0,"type":"mcq","explanation":"ADC computes operand1 + operand2 + C. This lets the carry from a low-word addition feed a high-word addition.","lessonId":"arm-03"},{"q":"BIC is commonly used to:","options":["Clear selected bits","Multiply values","Call a function","Load a word"],"correct":0,"type":"mcq","explanation":"BIC computes operand1 AND NOT operand2. A 1 in the mask therefore clears the corresponding destination bit.","lessonId":"arm-04"},{"q":"EOR performs:","options":["Bitwise XOR","Bitwise AND","Addition","A branch"],"correct":0,"type":"mcq","explanation":"EOR sets a result bit when the two corresponding input bits differ; equal bits produce 0.","lessonId":"arm-04"},{"q":"ASR differs from LSR because ASR:","options":["Preserves the sign bit when shifting right","Always shifts left","Rotates instead of shifts","Does not use registers"],"correct":0,"type":"mcq","explanation":"ASR replicates the top/sign bit while shifting right. LSR shifts zeros into the high positions.","lessonId":"arm-05"},{"q":"ARM's barrel shifter can often:","options":["Shift an operand as part of another data-processing instruction","Only run after a branch","Access disk directly","Replace CPSR"],"correct":0,"type":"mcq","explanation":"ADD r0, r1, r2, LSL #2 shifts r2 left by two before adding it to r1. The shifted value need not be stored in a separate register.","lessonId":"arm-05"},{"q":"The Z flag is set when the relevant result is:","options":["Zero","Negative only","Unsigned carry only","A memory address"],"correct":0,"type":"mcq","explanation":"Z is 1 when the flag-setting operation produces zero. A plain instruction without S usually leaves these flags unchanged.","lessonId":"arm-06"},{"q":"The V flag represents:","options":["Signed arithmetic overflow","A zero result","A cache miss","Vector-table enable"],"correct":0,"type":"mcq","explanation":"V indicates that the mathematical signed result cannot fit in a signed 32-bit value. It is different from unsigned carry C.","lessonId":"arm-06"},{"q":"CMP primarily:","options":["Updates condition flags based on a subtraction-like comparison","Stores a normal subtraction result","Pushes registers","Loads memory"],"correct":0,"type":"mcq","explanation":"CMP uses a subtraction to set NZCV but discards the arithmetic result. It does not overwrite either compared register.","lessonId":"arm-07"},{"q":"TST primarily uses which logical operation for flag testing?","options":["AND","OR","ADD","SUB"],"correct":0,"type":"mcq","explanation":"TST calculates a bitwise AND for the flags without saving that AND result in a destination register.","lessonId":"arm-07"},{"q":"A conditional branch uses:","options":["Condition flags and a condition code","Only the stack pointer","Only DRAM","Only assembler directives"],"correct":0,"type":"mcq","explanation":"The condition suffix reads flags set earlier. BEQ tests Z=1; BLT tests N different from V for a signed comparison.","lessonId":"arm-08"},{"q":"A do-while style loop differs from a while loop because its body:","options":["Executes before the termination test","Can never repeat","Cannot use branches","Must use FIQ"],"correct":0,"type":"mcq","explanation":"A do-while style loop places its test after the body, so the body runs at least once. A while style loop can skip the body when its first test fails.","lessonId":"arm-08"},{"q":"LDR is used to:","options":["Load data from memory into a register","Store a register to memory","Call a function","Clear CPSR"],"correct":0,"type":"mcq","explanation":"LDR reads the word at an effective memory address and places it in the destination register. STR transfers a register value in the opposite direction.","lessonId":"arm-09"},{"q":"Post-indexed addressing generally:","options":["Uses the current base address, then updates the base","Updates the base before the access only","Never changes the base","Always uses PC"],"correct":0,"type":"mcq","explanation":"LDR r0, [r1], #4 loads using the old address in r1, then increases r1 by four. The offset is outside the brackets.","lessonId":"arm-09"},{"q":"PUSH is associated with:","options":["Saving registers on the stack","Loading a branch target only","Changing endianness","Setting V only"],"correct":0,"type":"mcq","explanation":"PUSH preserves register values in memory on the stack and adjusts SP. It is useful before a subroutine changes values the caller needs.","lessonId":"arm-10"},{"q":"In the stack convention shown in the lectures, the stack grows toward:","options":["Lower addresses","Higher addresses only","The program counter","The vector table"],"correct":0,"type":"mcq","explanation":"In the full descending convention, reserving stack space decreases SP; releasing it increases SP. Lower memory addresses hold newer stack entries.","lessonId":"arm-10"},{"q":"BL does what in addition to branching?","options":["Saves a return address in LR","Clears all registers","Disables every exception","Stores to DRAM automatically"],"correct":0,"type":"mcq","explanation":"BL saves the address of the instruction after the call in LR before transferring control. A nested call must preserve a needed earlier LR.","lessonId":"arm-11"},{"q":"A simple subroutine commonly returns with:","options":["BX LR","LDR SP, SP","CMP PC, LR","SVC LR"],"correct":0,"type":"mcq","explanation":"BX LR branches to the saved return address. LR must still hold the intended return address for this to work.","lessonId":"arm-11"},{"q":"On classic ARM exception entry, CPSR is copied into:","options":["The exception mode's SPSR","R0","The cache","The vector table itself"],"correct":0,"type":"mcq","explanation":"Classic ARM exception entry saves the old CPSR in the target mode SPSR so the handler can later restore the interrupted status. The tracer does not model exception entry.","lessonId":"arm-12"},{"q":"SVC is used to:","options":["Request a privileged software service by raising a software exception","Perform a logical shift","Store multiple registers","Change byte order directly"],"correct":0,"type":"mcq","explanation":"SVC deliberately raises a software exception to request a supervisor service. It is not an ordinary BL subroutine call; handling depends on the execution environment.","lessonId":"arm-12"}],"lectureSequence":[{"order":1,"title":"Introduction","file":"01.Lecture_Introduction (2)(1).pdf","courseId":"microprocessors-arm"},{"order":2,"title":"ARM Architecture","file":"02.Lecture_ARM_Architecture02 (3)(1).pdf","courseId":"microprocessors-arm"},{"order":3,"title":"Instructions — Part 1","file":"03.Lecture_ARM_Instructions_part1 (1)(1).pdf","courseId":"arm-assembly"},{"order":4,"title":"Instructions — Part 2","file":"03.Lecture_ARM_Instructions_part2 (2)(1).pdf","courseId":"arm-assembly"},{"order":5,"title":"Functions","file":"04.Functions(1).pdf","courseId":"arm-assembly"},{"order":6,"title":"Exceptions","file":"05.Exceptions(1).pdf","courseId":"arm-assembly"}]}
+{
+  "id": "arm-assembly",
+  "title": "ARM Assembly Programming",
+  "icon": "⚙️",
+  "blurb": "ARM assembly syntax, data processing, barrel shifts, flags, condition codes, branches, memory addressing, stacks, functions, and exceptions.",
+  "description": "A engineering-focused ARM assembly course built from the supplied instruction, function, and exception lecture material.",
+  "category": "computer-engineering",
+  "level": "intermediate",
+  "status": "available",
+  "available": true,
+  "tier": "Computer Engineering & Systems",
+  "prerequisites": [
+    "microprocessors-arm"
+  ],
+  "estimatedHours": 12,
+  "tags": [
+    "ARM",
+    "assembly",
+    "Microprocessors & ARM",
+    "low-level programming"
+  ],
+  "schemaVersion": 3,
+  "roadmap": {
+    "beginner": [
+      "Instructions Part 1: syntax, MOV/MVN, memory addressing, barrel shifter"
+    ],
+    "intermediate": [
+      "Instructions Part 2: flags, comparisons, data processing, control flow, stacks",
+      "Functions: register saving and parameter passing",
+      "Exceptions: entry, vectors, priorities and SVC"
+    ]
+  },
+  "lessons": [
+    {
+      "id": "arm-01",
+      "title": "ARM assembly structure, syntax & directives",
+      "concepts": [
+        "AREA",
+        "ENTRY",
+        "END",
+        "RN",
+        "EQU",
+        "ALIGN",
+        "register operands"
+      ],
+      "objectives": [
+        "Read destination/source operand order",
+        "Use common assembler directives",
+        "Distinguish directives from CPU instructions"
+      ],
+      "explanation": "ARM assembly source combines processor instructions with assembler directives. Most data-processing instructions place the destination first, followed by source operands. AREA, ENTRY, RN, EQU, ALIGN, SPACE, and END help the assembler organize code/data or define names; they are not operations executed by the CPU.",
+      "examples": [
+        "        AREA RESET, CODE, READONLY ; Declare code area\n        ENTRY ; Mark entry point\ncounter RN 0 ; Alias register r0 as counter\nlimit   EQU 5 ; Define symbolic constant limit\n        MOV counter, #0 ; Initialize counter to 0\nstop    B stop ; Loop forever\n        END ; End of assembly"
+      ],
+      "commonMistakes": [
+        "Treating assembler directives such as AREA or EQU as instructions executed by the ARM core."
+      ],
+      "explain": "ARM assembly source combines processor instructions with assembler directives. Most data-processing instructions place the destination first, followed by source operands. AREA, ENTRY, RN, EQU, ALIGN, SPACE, and END help the assembler organize code/data or define names; they are not operations executed by the CPU."
+    },
+    {
+      "id": "arm-02",
+      "title": "Registers, immediates, MOV & MVN",
+      "concepts": [
+        "register",
+        "immediate",
+        "MOV",
+        "MVN",
+        "destination",
+        "source"
+      ],
+      "objectives": [
+        "Move values between registers",
+        "Load simple immediate values",
+        "Explain MOV versus MVN"
+      ],
+      "explanation": "Data-processing instructions work primarily on registers. MOV copies an operand into a destination register, while MVN writes the bitwise complement. Immediate operands use # in the lecture syntax. Remember the destination-first pattern when tracing instructions.",
+      "examples": [
+        "        MOV r0, #17 ; Load immediate value 17 into r0\n        MOV r1, r0 ; Copy r0 into r1\n        MVN r2, r1 ; Bitwise NOT of r1 into r2"
+      ],
+      "commonMistakes": [
+        "Reading MOV r0, r1 as copying r0 into r1."
+      ],
+      "explain": "Data-processing instructions work primarily on registers. MOV copies an operand into a destination register, while MVN writes the bitwise complement. Immediate operands use # in the lecture syntax. Remember the destination-first pattern when tracing instructions."
+    },
+    {
+      "id": "arm-09",
+      "title": "LDR/STR & ARM addressing modes",
+      "concepts": [
+        "LDR",
+        "STR",
+        "LDRB",
+        "STRB",
+        "LDRH",
+        "STRH",
+        "pre-index",
+        "post-index"
+      ],
+      "objectives": [
+        "Load and store words/bytes/halfwords",
+        "Calculate effective addresses",
+        "Distinguish pre-indexed and post-indexed write-back"
+      ],
+      "explanation": "ARM is a load-store architecture, so memory values move into registers before most data processing. LDR/STR transfer words, with byte and halfword variants. Addressing modes combine a base register with an offset; pre-indexing forms the address before access, while post-indexing uses the base first and updates it afterward.",
+      "examples": [
+        "        MOV r2, #0x1000 ; Base pointer address\n        MOV r0, #17 ; Initial test value 17\n        STR r0, [r2] ; Store word to memory\n        MOV r0, #23 ; Second test value 23\n        STR r0, [r2, #4] ; Store word with offset 4\n        LDR r1, [r2] ; Load word from base\n        LDR r3, [r2, #4] ; Load word from offset 4\n        STR r3, [r2, #8] ; Store word to offset 8\n        LDR r4, [r2], #4 ; Post-indexed load and advance pointer"
+      ],
+      "commonMistakes": [
+        "Confusing the address in the base register with the data loaded from memory."
+      ],
+      "explain": "ARM is a load-store architecture, so memory values move into registers before most data processing. LDR/STR transfer words, with byte and halfword variants. Addressing modes combine a base register with an offset; pre-indexing forms the address before access, while post-indexing uses the base first and updates it afterward."
+    },
+    {
+      "id": "arm-05",
+      "title": "Barrel shifter: LSL, LSR, ASR & ROR",
+      "concepts": [
+        "LSL",
+        "LSR",
+        "ASR",
+        "ROR",
+        "barrel shifter",
+        "Operand2"
+      ],
+      "objectives": [
+        "Trace logical and arithmetic shifts",
+        "Explain rotate-right",
+        "Combine a shift with a data-processing instruction"
+      ],
+      "explanation": "ARM can shift the second operand as part of many data-processing instructions. LSL shifts left, LSR shifts right with zero fill, ASR preserves the sign bit for signed values, and ROR rotates bits around. Combining ALU work with a shift is a characteristic ARM feature.",
+      "examples": [
+        "        MOV r0, #7 ; Load value 7\n        MOV r1, r0, LSL #1 ; Shift left by 1 (multiply by 2)\n        MOV r2, r1, LSR #2 ; Shift right by 2 (divide by 4)\n        ADD r3, r0, r0, LSL #4 ; Multiply by 16 and add r0"
+      ],
+      "commonMistakes": [
+        "Assuming LSR and ASR are identical for values whose top bit is 1."
+      ],
+      "explain": "ARM can shift the second operand as part of many data-processing instructions. LSL shifts left, LSR shifts right with zero fill, ASR preserves the sign bit for signed values, and ROR rotates bits around. Combining ALU work with a shift is a characteristic ARM feature."
+    },
+    {
+      "id": "arm-06",
+      "title": "CPSR flags & the S suffix",
+      "concepts": [
+        "N flag",
+        "Z flag",
+        "C flag",
+        "V flag",
+        "CPSR",
+        "S suffix"
+      ],
+      "objectives": [
+        "Explain N, Z, C, and V",
+        "Use the S suffix to update flags",
+        "Separate signed overflow from unsigned carry"
+      ],
+      "explanation": "N reflects the result sign bit, Z indicates zero, C records carry/no-borrow information and shifted-out bits, and V reports signed arithmetic overflow. Many data-processing instructions update flags only when the S suffix is requested.",
+      "examples": [
+        "        MOV  r0, #5 ; Set initial value 5\n        SUBS r1, r0, #5 ; Subtract 5 and update flags (Z=1)\n        MOVS r2, #-1 ; Move -1 and update flags (N=1)"
+      ],
+      "commonMistakes": [
+        "Treating C and V as the same condition."
+      ],
+      "explain": "N reflects the result sign bit, Z indicates zero, C records carry/no-borrow information and shifted-out bits, and V reports signed arithmetic overflow. Many data-processing instructions update flags only when the S suffix is requested."
+    },
+    {
+      "id": "arm-07",
+      "title": "CMP, CMN, TST, TEQ & conditional execution",
+      "concepts": [
+        "CMP",
+        "CMN",
+        "TST",
+        "TEQ",
+        "EQ",
+        "NE",
+        "LT",
+        "GT"
+      ],
+      "objectives": [
+        "Use comparison instructions to set flags",
+        "Choose a condition code from flag results",
+        "Explain conditional instruction execution"
+      ],
+      "explanation": "CMP behaves like subtraction for flag setting, CMN like addition, TST like bitwise AND, and TEQ like XOR. They update flags without keeping a normal destination result. Conditional suffixes such as EQ or NE make an instruction execute only when its flag condition is satisfied.",
+      "examples": [
+        "        MOV r0, #2 ; Load test value 2\n        CMP r0, #2 ; Compare r0 with 2 (sets Z=1)\n        MOVEQ r1, #1 ; Move 1 if equal (executed)\n        MOVNE r1, #0 ; Move 0 if not equal (skipped)\n        TST r0, #2 ; Bitwise test bit 1"
+      ],
+      "commonMistakes": [
+        "Expecting CMP to store a normal subtraction result."
+      ],
+      "explain": "CMP behaves like subtraction for flag setting, CMN like addition, TST like bitwise AND, and TEQ like XOR. They update flags without keeping a normal destination result. Conditional suffixes such as EQ or NE make an instruction execute only when its flag condition is satisfied."
+    },
+    {
+      "id": "arm-04",
+      "title": "Logical operations & bit manipulation",
+      "concepts": [
+        "AND",
+        "ORR",
+        "EOR",
+        "BIC",
+        "MVN",
+        "bit mask"
+      ],
+      "objectives": [
+        "Apply bitwise AND/OR/XOR",
+        "Clear selected bits with BIC",
+        "Build and reason about masks"
+      ],
+      "explanation": "AND keeps bits selected by a mask, ORR sets selected bits, EOR performs XOR, and BIC clears bits selected by the second operand. These operations are central to packed flags and device/control registers.",
+      "examples": [
+        "        MOV r0, #0x0F ; Load bit mask 0x0F\n        MOV r1, #0x03 ; Load bit mask 0x03\n        AND r2, r0, r1 ; Bitwise AND: 0x03\n        ORR r3, r0, #0x10 ; Bitwise OR: 0x1F\n        EOR r4, r0, r1 ; Bitwise XOR: 0x0C\n        BIC r5, r0, #0x03 ; Bit clear lower 2 bits: 0x0C"
+      ],
+      "commonMistakes": [
+        "Using arithmetic intuition for bit masks instead of tracing each bit position."
+      ],
+      "explain": "AND keeps bits selected by a mask, ORR sets selected bits, EOR performs XOR, and BIC clears bits selected by the second operand. These operations are central to packed flags and device/control registers."
+    },
+    {
+      "id": "arm-03",
+      "title": "Arithmetic instructions: ADD, ADC, SUB, SBC, RSB & RSC",
+      "concepts": [
+        "ADD",
+        "ADC",
+        "SUB",
+        "SBC",
+        "RSB",
+        "RSC",
+        "carry"
+      ],
+      "objectives": [
+        "Trace three-operand arithmetic",
+        "Explain add/subtract with carry",
+        "Use reverse subtraction correctly"
+      ],
+      "explanation": "ARM arithmetic instructions typically use a destination and two input operands. ADD and SUB perform basic arithmetic; ADC and SBC include carry state for multiword arithmetic. RSB reverses subtraction order, useful when the desired calculation is operand2 minus operand1.",
+      "examples": [
+        "        MOV r1, #9 ; Load operand 1\n        MOV r2, #4 ; Load operand 2\n        ADD r0, r1, r2 ; Add: 9 + 4 = 13\n        SUB r3, r1, r2 ; Subtract: 9 - 4 = 5\n        RSB r4, r1, r2 ; Reverse subtract: 4 - 9 = -5"
+      ],
+      "commonMistakes": [
+        "Applying normal SUB operand order to RSB."
+      ],
+      "explain": "ARM arithmetic instructions typically use a destination and two input operands. ADD and SUB perform basic arithmetic; ADC and SBC include carry state for multiword arithmetic. RSB reverses subtraction order, useful when the desired calculation is operand2 minus operand1."
+    },
+    {
+      "id": "arm-08",
+      "title": "Branches, if/else & loops",
+      "concepts": [
+        "B",
+        "BL",
+        "BX",
+        "label",
+        "while loop",
+        "do-while"
+      ],
+      "objectives": [
+        "Branch to labels",
+        "Translate decisions into branches",
+        "Trace while and do-while loops"
+      ],
+      "explanation": "Branch instructions change control flow by loading a new PC value. Labels identify targets. Conditional branches combine flag tests with control flow, which implements if/else and loops. Testing before or after the body distinguishes pre-test and post-test loops.",
+      "examples": [
+        "j       RN 0 ; Alias register r0 as loop counter j\n        MOV j, #3 ; Initialize counter j to 3\nloop    CMP j, #0 ; Compare j with 0\n        BLT done ; Exit loop when j < 0\n        SUB j, j, #1 ; Decrement counter\n        B loop ; Repeat loop\ndone    B done ; Halt when loop finishes"
+      ],
+      "commonMistakes": [
+        "Forgetting that a loop must modify the state used by its termination condition."
+      ],
+      "explain": "Branch instructions change control flow by loading a new PC value. Labels identify targets. Conditional branches combine flag tests with control flow, which implements if/else and loops. Testing before or after the body distinguishes pre-test and post-test loops."
+    },
+    {
+      "id": "arm-10",
+      "title": "LDM/STM, PUSH/POP & the runtime stack",
+      "concepts": [
+        "LDM",
+        "STM",
+        "PUSH",
+        "POP",
+        "SP",
+        "R13",
+        "IA",
+        "IB",
+        "DA",
+        "DB"
+      ],
+      "objectives": [
+        "Transfer multiple registers",
+        "Explain multiple-addressing modes",
+        "Trace stack growth and PUSH/POP"
+      ],
+      "explanation": "LDM and STM move multiple registers between registers and memory. Addressing-mode suffixes specify increment/decrement and before/after behavior. PUSH and POP are stack-oriented aliases using R13/SP; in the convention shown in the lectures, PUSH corresponds to STMDB and POP to LDMIA, so the stack grows toward lower addresses.",
+      "examples": [
+        "        LDR r3, =0x11111111 ; Load literal value 1\n        LDR r4, =0x22222222 ; Load literal value 2\n        PUSH {r3, r4} ; Push r3 and r4 onto stack\n        POP  {r5, r6} ; Pop from stack into r5 and r6"
+      ],
+      "commonMistakes": [
+        "Assuming textual register-list order controls memory ordering."
+      ],
+      "explain": "LDM and STM move multiple registers between registers and memory. Addressing-mode suffixes specify increment/decrement and before/after behavior. PUSH and POP are stack-oriented aliases using R13/SP; in the convention shown in the lectures, PUSH corresponds to STMDB and POP to LDMIA, so the stack grows toward lower addresses."
+    },
+    {
+      "id": "arm-11",
+      "title": "Subroutines, BL/BX LR & parameter passing",
+      "concepts": [
+        "BL",
+        "BX LR",
+        "LR",
+        "callee state",
+        "parameters",
+        "stack"
+      ],
+      "objectives": [
+        "Call and return from a subroutine",
+        "Preserve registers across calls",
+        "Compare register, memory-block, and stack parameter passing"
+      ],
+      "explanation": "BL branches while saving a return address in LR/R14. A simple return can use BX LR. Subroutines preserve state according to the calling convention. Parameters can be passed in registers, through a referenced memory block, or on the stack; stack-based access must account for values pushed on entry.",
+      "examples": [
+        "main    MOV r0, #5 ; Main function argument\n        BL double ; Branch with link to subroutine\n        B stop ; Halt execution\n\ndouble  PUSH {r1} ; Save caller register r1\n        ADD r1, r0, r0 ; Double value in r0\n        MOV r0, r1 ; Store return value in r0\n        POP {r1} ; Restore caller register r1\n        BX lr ; Return to caller\nstop    B stop ; Spin loop"
+      ],
+      "commonMistakes": [
+        "Calling another function without protecting LR when the current function still needs its own return address."
+      ],
+      "explain": "BL branches while saving a return address in LR/R14. A simple return can use BX LR. Subroutines preserve state according to the calling convention. Parameters can be passed in registers, through a referenced memory block, or on the stack; stack-based access must account for values pushed on entry."
+    },
+    {
+      "id": "arm-12",
+      "title": "Exceptions, interrupts, vectors & SVC",
+      "concepts": [
+        "exception",
+        "SPSR",
+        "LR_mode",
+        "vector table",
+        "IRQ",
+        "FIQ",
+        "SVC"
+      ],
+      "objectives": [
+        "List major classic ARM exception types",
+        "Trace automatic exception entry",
+        "Explain vector dispatch and return",
+        "Distinguish IRQ, FIQ, and SVC"
+      ],
+      "explanation": "On a classic ARM exception, CPSR is copied to the relevant SPSR, the processor changes mode, a return address is stored in mode-specific LR, and PC goes to an exception vector. The vector dispatches to a handler, which returns using the exception-appropriate sequence. SVC deliberately requests a privileged OS service.",
+      "examples": [
+        "0x00  Reset ; Hardware reset entry point\n0x04  Undefined instruction ; Undefined instruction trap\n0x08  SVC ; Supervisor call software interrupt\n0x0C  Prefetch abort ; Instruction fetch memory fault\n0x10  Data abort ; Data access memory fault\n0x18  IRQ ; Standard priority hardware interrupt\n0x1C  FIQ ; Fast priority hardware interrupt"
+      ],
+      "commonMistakes": [
+        "Using the same unadjusted LR return sequence for every exception type."
+      ],
+      "explain": "On a classic ARM exception, CPSR is copied to the relevant SPSR, the processor changes mode, a return address is stored in mode-specific LR, and PC goes to an exception vector. The vector dispatches to a handler, which returns using the exception-appropriate sequence. SVC deliberately requests a privileged OS service."
+    }
+  ],
+  "exercises": [
+    {
+      "id": "arm-ex-01",
+      "title": "Read an ARM source skeleton",
+      "prompt": "Identify assembler directives, labels, and executable instructions.",
+      "lessonId": "arm-01"
+    },
+    {
+      "id": "arm-ex-02",
+      "title": "MOV/MVN register trace",
+      "prompt": "Trace MOV and MVN instructions and write final register values.",
+      "lessonId": "arm-02"
+    },
+    {
+      "id": "arm-ex-03",
+      "title": "Arithmetic register trace",
+      "prompt": "Compute final values after ADD, SUB, carry-aware arithmetic, and RSB.",
+      "lessonId": "arm-03"
+    },
+    {
+      "id": "arm-ex-04",
+      "title": "Bit-mask design",
+      "prompt": "Use AND/ORR/EOR/BIC to test, set, toggle, and clear specified bits.",
+      "lessonId": "arm-04"
+    },
+    {
+      "id": "arm-ex-05",
+      "title": "Shift and rotate trace",
+      "prompt": "Trace LSL, LSR, ASR, and ROR on 32-bit patterns.",
+      "lessonId": "arm-05"
+    },
+    {
+      "id": "arm-ex-06",
+      "title": "Flag prediction",
+      "prompt": "Predict N, Z, C, and V for ADDS/SUBS-style operations.",
+      "lessonId": "arm-06"
+    },
+    {
+      "id": "arm-ex-07",
+      "title": "Condition-code choice",
+      "prompt": "Given CMP/TST results, choose a suitable condition code and explain why.",
+      "lessonId": "arm-07"
+    },
+    {
+      "id": "arm-ex-08",
+      "title": "Translate a loop",
+      "prompt": "Translate while or do-while pseudocode into ARM compare/branch structure.",
+      "lessonId": "arm-08"
+    },
+    {
+      "id": "arm-ex-09",
+      "title": "Effective-address trace",
+      "prompt": "Calculate addresses and base updates for pre/post-indexed LDR/STR.",
+      "lessonId": "arm-09"
+    },
+    {
+      "id": "arm-ex-10",
+      "title": "Stack trace",
+      "prompt": "Trace SP/register values through PUSH/POP and equivalent LDM/STM.",
+      "lessonId": "arm-10"
+    },
+    {
+      "id": "arm-ex-11",
+      "title": "Function-call trace",
+      "prompt": "Trace BL, LR, register preservation, parameters, and BX LR through nested calls.",
+      "lessonId": "arm-11"
+    },
+    {
+      "id": "arm-ex-12",
+      "title": "Exception-entry trace",
+      "prompt": "Given IRQ, FIQ, or SVC, list state changes, vector target, and return information.",
+      "lessonId": "arm-12"
+    }
+  ],
+  "projects": [
+    {
+      "id": "arm-p1",
+      "title": "ARM instruction trace workbook",
+      "description": "Create documented ARM snippets covering arithmetic, masks, shifts, flags, and conditional execution. Predict state before checking it in the university simulator.",
+      "requirements": [
+        "At least eight ARM snippets",
+        "Register/flag trace for each",
+        "At least one edge case per instruction family",
+        "No unexplained final answers"
+      ],
+      "language": "text"
+    },
+    {
+      "id": "arm-p2",
+      "title": "Array & string routine pack",
+      "description": "Design ARM routines that traverse an integer array and a zero-terminated string using load/store addressing, loops, and clear calling conventions.",
+      "requirements": [
+        "At least three routines",
+        "Use pre/post-indexing where appropriate",
+        "Document register inputs/outputs",
+        "Preserve required registers and test boundary cases"
+      ],
+      "language": "text"
+    },
+    {
+      "id": "arm-p3",
+      "title": "Function & stack lab",
+      "description": "Design a multi-function ARM program that passes parameters in registers and on the stack, preserves state, and traces SP/LR across nested calls.",
+      "requirements": [
+        "At least three subroutines",
+        "One nested call",
+        "Register-save/restore plan",
+        "Complete SP/LR trace and return reasoning"
+      ],
+      "language": "text"
+    }
+  ],
+  "capstone": {
+    "id": "arm-capstone",
+    "title": "ARM assembly mini-runtime & interrupt design",
+    "description": "Design a cohesive ARM assembly program combining data processing, memory access, loops, subroutines, stack discipline, and a documented exception/interrupt handler path.",
+    "requirements": [
+      "Main routine plus reusable subroutines",
+      "Array or string memory processing",
+      "Explicit calling convention and stack trace",
+      "Flag-driven conditional control",
+      "Vector/handler design for at least one exception",
+      "Verification plan using the university ARM simulator"
+    ],
+    "language": "text"
+  },
+  "careerApplications": "Useful for firmware, embedded systems, low-level debugging, reverse-engineering fundamentals, compiler/code-generation understanding, and computer engineering interviews.",
+  "quiz": [
+    {
+      "q": "AREA, ENTRY, EQU, and END are primarily:",
+      "options": [
+        "Assembler directives",
+        "ALU instructions",
+        "Cache policies",
+        "Interrupt types"
+      ],
+      "correct": 0,
+      "type": "mcq",
+      "explanation": "AREA organizes a section, ENTRY marks an entry point, EQU defines a constant, and END ends the source. These direct the assembler rather than perform CPU calculations.",
+      "lessonId": "arm-01"
+    },
+    {
+      "q": "For a typical three-operand ARM data-processing instruction, the first register is usually:",
+      "options": [
+        "The destination",
+        "Always the second source",
+        "Always SP",
+        "Always PC"
+      ],
+      "correct": 0,
+      "type": "mcq",
+      "explanation": "In ADD r0, r1, r2, r0 receives the result while r1 and r2 supply values. Read the operands from destination to sources.",
+      "lessonId": "arm-01"
+    },
+    {
+      "q": "MOV r0, r1 means:",
+      "options": [
+        "Copy r1 into r0",
+        "Copy r0 into r1",
+        "Add r0 and r1",
+        "Store r0 to memory"
+      ],
+      "correct": 0,
+      "type": "mcq",
+      "explanation": "MOV r0, r1 reads r1 and writes its value into r0. r1 is unchanged.",
+      "lessonId": "arm-02"
+    },
+    {
+      "q": "MVN writes:",
+      "options": [
+        "The bitwise complement of its operand",
+        "A memory address only",
+        "The stack pointer",
+        "The program counter only"
+      ],
+      "correct": 0,
+      "type": "mcq",
+      "explanation": "MVN flips every bit of the source. In a 32-bit register, MVN applied to 0 gives 0xFFFFFFFF, not 1.",
+      "lessonId": "arm-02"
+    },
+    {
+      "q": "RSB r0, r1, r2 computes:",
+      "options": [
+        "r2 - r1",
+        "r1 - r2",
+        "r1 + r2",
+        "r1 XOR r2"
+      ],
+      "correct": 0,
+      "type": "mcq",
+      "explanation": "RSB reverses the usual SUB order: RSB r0, r1, r2 stores r2 minus r1 in r0.",
+      "lessonId": "arm-03"
+    },
+    {
+      "q": "ADC is useful when:",
+      "options": [
+        "A carry from a previous arithmetic step must be included",
+        "No registers are available",
+        "Only memory-to-memory arithmetic is allowed",
+        "A branch must be unconditional"
+      ],
+      "correct": 0,
+      "type": "mcq",
+      "explanation": "ADC computes operand1 + operand2 + C. This lets the carry from a low-word addition feed a high-word addition.",
+      "lessonId": "arm-03"
+    },
+    {
+      "q": "BIC is commonly used to:",
+      "options": [
+        "Clear selected bits",
+        "Multiply values",
+        "Call a function",
+        "Load a word"
+      ],
+      "correct": 0,
+      "type": "mcq",
+      "explanation": "BIC computes operand1 AND NOT operand2. A 1 in the mask therefore clears the corresponding destination bit.",
+      "lessonId": "arm-04"
+    },
+    {
+      "q": "EOR performs:",
+      "options": [
+        "Bitwise XOR",
+        "Bitwise AND",
+        "Addition",
+        "A branch"
+      ],
+      "correct": 0,
+      "type": "mcq",
+      "explanation": "EOR sets a result bit when the two corresponding input bits differ; equal bits produce 0.",
+      "lessonId": "arm-04"
+    },
+    {
+      "q": "ASR differs from LSR because ASR:",
+      "options": [
+        "Preserves the sign bit when shifting right",
+        "Always shifts left",
+        "Rotates instead of shifts",
+        "Does not use registers"
+      ],
+      "correct": 0,
+      "type": "mcq",
+      "explanation": "ASR replicates the top/sign bit while shifting right. LSR shifts zeros into the high positions.",
+      "lessonId": "arm-05"
+    },
+    {
+      "q": "ARM's barrel shifter can often:",
+      "options": [
+        "Shift an operand as part of another data-processing instruction",
+        "Only run after a branch",
+        "Access disk directly",
+        "Replace CPSR"
+      ],
+      "correct": 0,
+      "type": "mcq",
+      "explanation": "ADD r0, r1, r2, LSL #2 shifts r2 left by two before adding it to r1. The shifted value need not be stored in a separate register.",
+      "lessonId": "arm-05"
+    },
+    {
+      "q": "The Z flag is set when the relevant result is:",
+      "options": [
+        "Zero",
+        "Negative only",
+        "Unsigned carry only",
+        "A memory address"
+      ],
+      "correct": 0,
+      "type": "mcq",
+      "explanation": "Z is 1 when the flag-setting operation produces zero. A plain instruction without S usually leaves these flags unchanged.",
+      "lessonId": "arm-06"
+    },
+    {
+      "q": "The V flag represents:",
+      "options": [
+        "Signed arithmetic overflow",
+        "A zero result",
+        "A cache miss",
+        "Vector-table enable"
+      ],
+      "correct": 0,
+      "type": "mcq",
+      "explanation": "V indicates that the mathematical signed result cannot fit in a signed 32-bit value. It is different from unsigned carry C.",
+      "lessonId": "arm-06"
+    },
+    {
+      "q": "CMP primarily:",
+      "options": [
+        "Updates condition flags based on a subtraction-like comparison",
+        "Stores a normal subtraction result",
+        "Pushes registers",
+        "Loads memory"
+      ],
+      "correct": 0,
+      "type": "mcq",
+      "explanation": "CMP uses a subtraction to set NZCV but discards the arithmetic result. It does not overwrite either compared register.",
+      "lessonId": "arm-07"
+    },
+    {
+      "q": "TST primarily uses which logical operation for flag testing?",
+      "options": [
+        "AND",
+        "OR",
+        "ADD",
+        "SUB"
+      ],
+      "correct": 0,
+      "type": "mcq",
+      "explanation": "TST calculates a bitwise AND for the flags without saving that AND result in a destination register.",
+      "lessonId": "arm-07"
+    },
+    {
+      "q": "A conditional branch uses:",
+      "options": [
+        "Condition flags and a condition code",
+        "Only the stack pointer",
+        "Only DRAM",
+        "Only assembler directives"
+      ],
+      "correct": 0,
+      "type": "mcq",
+      "explanation": "The condition suffix reads flags set earlier. BEQ tests Z=1; BLT tests N different from V for a signed comparison.",
+      "lessonId": "arm-08"
+    },
+    {
+      "q": "A do-while style loop differs from a while loop because its body:",
+      "options": [
+        "Executes before the termination test",
+        "Can never repeat",
+        "Cannot use branches",
+        "Must use FIQ"
+      ],
+      "correct": 0,
+      "type": "mcq",
+      "explanation": "A do-while style loop places its test after the body, so the body runs at least once. A while style loop can skip the body when its first test fails.",
+      "lessonId": "arm-08"
+    },
+    {
+      "q": "LDR is used to:",
+      "options": [
+        "Load data from memory into a register",
+        "Store a register to memory",
+        "Call a function",
+        "Clear CPSR"
+      ],
+      "correct": 0,
+      "type": "mcq",
+      "explanation": "LDR reads the word at an effective memory address and places it in the destination register. STR transfers a register value in the opposite direction.",
+      "lessonId": "arm-09"
+    },
+    {
+      "q": "Post-indexed addressing generally:",
+      "options": [
+        "Uses the current base address, then updates the base",
+        "Updates the base before the access only",
+        "Never changes the base",
+        "Always uses PC"
+      ],
+      "correct": 0,
+      "type": "mcq",
+      "explanation": "LDR r0, [r1], #4 loads using the old address in r1, then increases r1 by four. The offset is outside the brackets.",
+      "lessonId": "arm-09"
+    },
+    {
+      "q": "PUSH is associated with:",
+      "options": [
+        "Saving registers on the stack",
+        "Loading a branch target only",
+        "Changing endianness",
+        "Setting V only"
+      ],
+      "correct": 0,
+      "type": "mcq",
+      "explanation": "PUSH preserves register values in memory on the stack and adjusts SP. It is useful before a subroutine changes values the caller needs.",
+      "lessonId": "arm-10"
+    },
+    {
+      "q": "In the stack convention shown in the lectures, the stack grows toward:",
+      "options": [
+        "Lower addresses",
+        "Higher addresses only",
+        "The program counter",
+        "The vector table"
+      ],
+      "correct": 0,
+      "type": "mcq",
+      "explanation": "In the full descending convention, reserving stack space decreases SP; releasing it increases SP. Lower memory addresses hold newer stack entries.",
+      "lessonId": "arm-10"
+    },
+    {
+      "q": "BL does what in addition to branching?",
+      "options": [
+        "Saves a return address in LR",
+        "Clears all registers",
+        "Disables every exception",
+        "Stores to DRAM automatically"
+      ],
+      "correct": 0,
+      "type": "mcq",
+      "explanation": "BL saves the address of the instruction after the call in LR before transferring control. A nested call must preserve a needed earlier LR.",
+      "lessonId": "arm-11"
+    },
+    {
+      "q": "A simple subroutine commonly returns with:",
+      "options": [
+        "BX LR",
+        "LDR SP, SP",
+        "CMP PC, LR",
+        "SVC LR"
+      ],
+      "correct": 0,
+      "type": "mcq",
+      "explanation": "BX LR branches to the saved return address. LR must still hold the intended return address for this to work.",
+      "lessonId": "arm-11"
+    },
+    {
+      "q": "On classic ARM exception entry, CPSR is copied into:",
+      "options": [
+        "The exception mode's SPSR",
+        "R0",
+        "The cache",
+        "The vector table itself"
+      ],
+      "correct": 0,
+      "type": "mcq",
+      "explanation": "Classic ARM exception entry saves the old CPSR in the target mode SPSR so the handler can later restore the interrupted status. The tracer does not model exception entry.",
+      "lessonId": "arm-12"
+    },
+    {
+      "q": "SVC is used to:",
+      "options": [
+        "Request a privileged software service by raising a software exception",
+        "Perform a logical shift",
+        "Store multiple registers",
+        "Change byte order directly"
+      ],
+      "correct": 0,
+      "type": "mcq",
+      "explanation": "SVC deliberately raises a software exception to request a supervisor service. It is not an ordinary BL subroutine call; handling depends on the execution environment.",
+      "lessonId": "arm-12"
+    }
+  ]
+}
