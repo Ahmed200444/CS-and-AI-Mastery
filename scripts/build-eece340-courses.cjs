@@ -6,7 +6,7 @@ const root = process.cwd();
 const armPath = path.join(root, 'assets', 'arm-course-additions.json');
 const matlabPath = path.join(root, 'assets', 'matlab-course-addition.json');
 
-// 1. EECE 340 Lab Track definition (16 labs)
+// 1. Microprocessors & ARM Lab Track definition (16 labs)
 const eece340Labs = [
   {
     id: "eece340-lab-01",
@@ -248,12 +248,12 @@ const eece340Labs = [
   },
   {
     id: "eece340-lab-15",
-    title: "ARM7/Keil & University IoT/Cloud Guidance Lab",
-    syllabusTopic: "ARM7/Keil board-oriented lab work, startup.s, scatter files, ARM University IoT/cloud telemetry",
+    title: "ARM7/Keil & IoT/Cloud Guidance Lab",
+    syllabusTopic: "ARM7/Keil board-oriented lab work, startup.s, scatter files, ARM IoT/cloud telemetry",
     assessment: "Homework (10%), Lab Work (10%)",
     language: "armasm",
     supportingLanguage: "cpp",
-    objective: "Master the standard university embedded workflow: setting up a Keil uVision project for ARM7TDMI (LPC2148), configuring startup.s vector tables and stack spaces, memory scatter-loading files (.sct), and formatting UART telemetry for IoT cloud ingestion.",
+    objective: "Master the standard embedded workflow: setting up a Keil uVision project for ARM7TDMI (LPC2148), configuring startup.s vector tables and stack spaces, memory scatter-loading files (.sct), and formatting UART telemetry for IoT cloud ingestion.",
     problemStatement: "Configure startup.s stack spaces for SVC and IRQ modes, set up Flash (0x00000000) and On-chip SRAM (0x40000000) scatter loading, and write a UART telemetry formatting routine that outputs a JSON payload for IoT cloud reporting.",
     starterCode: "; Keil uVision ARM7TDMI startup.s stack initialization\nSVC_STACK_SIZE EQU 0x00000100 ; 256 bytes SVC supervisor mode stack\nIRQ_STACK_SIZE EQU 0x00000100 ; 256 bytes IRQ interrupt mode stack\nRAM_TOP EQU 0x40004000 ; Top of internal SRAM (16 KB)\n\n        AREA STACKS, NOINIT, READWRITE, ALIGN=3 ; Stack allocation area\nSVC_Stack SPACE SVC_STACK_SIZE ; Allocate SVC stack space\nIRQ_Stack SPACE IRQ_STACK_SIZE ; Allocate IRQ stack space\n\n        AREA InitCode, CODE, READONLY ; Startup initialization code\n        ENTRY ; Reset entry point\nReset_Start ; Reset entry label\n        LDR sp, =SVC_Stack + SVC_STACK_SIZE ; Initialize Supervisor Stack Pointer\n        MSR CPSR_c, #0xD2 ; Switch to IRQ mode with interrupts disabled\n        LDR sp, =IRQ_Stack + IRQ_STACK_SIZE ; Initialize IRQ Stack Pointer\n        MSR CPSR_c, #0xD3 ; Return to Supervisor mode\nstop B stop ; Spin until main application\n        END ; End of startup source",
     expectedState: "SP_svc points to 0x40000100; SP_irq points to 0x40000200; CPU returns to Supervisor mode ready to branch to __main.",
@@ -265,12 +265,12 @@ const eece340Labs = [
   },
   {
     id: "eece340-lab-16",
-    title: "Timed Final Lab Exam Rehearsal",
-    syllabusTopic: "Final lab-exam preparation, full 90-minute multi-part comprehensive practical exam",
+    title: "Timed Comprehensive Lab Rehearsal",
+    syllabusTopic: "Comprehensive lab preparation with a timed multi-part practical exercise",
     assessment: "Lab Exam (15% Weight)",
     language: "armasm",
     supportingLanguage: "cpp",
-    objective: "Rehearse a timed, comprehensive 90-minute university microprocessor lab exam problem combining address decoding, peripheral I/O control, interrupt service routine design, stack-safe subroutine calling, and error diagnostics.",
+    objective: "Rehearse a timed, comprehensive 90-minute microprocessor lab problem combining address decoding, peripheral I/O control, interrupt service routine design, stack-safe subroutine calling, and error diagnostics.",
     problemStatement: "Complete the 3-part final lab exam problem: (Part A) Calculate the memory address range for a 32 KB SRAM starting at 0x40000000; (Part B) Write an ARM assembly ISR that reads sensor data at MMIO 0xE0004000, checks against limit 100, and sets alarm bit 0 at GPIO 0xE0028000; (Part C) Wrap the DSP routine in a stack-safe subroutine returning status in R0.",
     starterCode: "; Part B: ARM assembly final lab exam ISR\nSENSOR_ADDR EQU 0xE0004000 ; Memory-mapped sensor address\nGPIO_ADDR EQU 0xE0028000 ; Memory-mapped GPIO output address\nALARM_LIMIT EQU 100 ; Sensor alarm threshold\n\n        AREA FinalExamLab, CODE, READONLY ; Declare code area\n        EXPORT Exam_ISR ; Export ISR symbol\nExam_ISR ; ISR entry point\n        SUB lr, lr, #4 ; Adjust link register for IRQ pipeline\n        STMFD sp!, {r0-r3, lr} ; Save working registers and return address\n        LDR r0, =SENSOR_ADDR ; Load sensor base address\n        LDR r1, [r0] ; Read current sensor reading\n        CMP r1, #ALARM_LIMIT ; Compare sensor reading with threshold (100)\n        BLE clear_alarm ; If sensor <= 100, clear alarm\n        LDR r2, =GPIO_ADDR ; Load GPIO base address\n        MOV r3, #0x01 ; Alarm bit mask (bit 0 = HIGH)\n        STR r3, [r2] ; Turn ON alarm LED on GPIO\n        B isr_done ; Finish ISR\nclear_alarm ; Clear alarm label\n        LDR r2, =GPIO_ADDR ; Load GPIO base address\n        MOV r3, #0x00 ; Clear alarm bit\n        STR r3, [r2] ; Turn OFF alarm LED\nisr_done ; ISR completion label\n        LDMFD sp!, {r0-r3, pc}^ ; Restore registers and return atomically\n        END ; End of exam assembly source",
     expectedState: "Sensor reading > 100 turns on GPIO bit 0; Sensor reading <= 100 turns off GPIO bit 0; Part A address range: 0x40000000 to 0x40007FFF (32 KB = 32768 bytes).",
@@ -427,7 +427,6 @@ function renderLesson(l, idx) {
   return `<details class="lesson" data-lesson="${esc(l.id)}" ${idx === 0 ? 'open' : ''}>
 <summary><span class="num">${String(idx + 1).padStart(2, '0')}</span><span class="title">${esc(l.title)}</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-${l.lecture ? `<p class="muted" data-lecture-order="${esc(l.lecture.order)}"><b>${esc(l.lecture.title)}</b> · slides ${esc(l.lecture.slides.join('–'))}<br><small>${esc(l.lecture.file)}</small></p>` : ''}
 ${objectives.length ? `<h3>What you will learn</h3><ul>${objectives.map(v => `<li>${esc(v)}</li>`).join('')}</ul>` : ''}
 <section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>${esc(l.explanation)}</p></section>
 ${concepts.length ? `<h3>Key concepts</h3><div class="meta">${concepts.map(v => `<span class="pill">${esc(v)}</span>`).join('')}</div>` : ''}
@@ -443,7 +442,7 @@ function renderLab(lab, idx) {
 <span class="pill" style="font-size:.74rem">${esc(lab.language)}</span>
 </summary>
 <div class="body" style="padding-top:12px">
-<p class="muted"><b>Syllabus topic:</b> ${esc(lab.syllabusTopic)} · <b>Weight:</b> ${esc(lab.assessment)}</p>
+<p class="muted"><b>Topic:</b> ${esc(lab.syllabusTopic)}</p>
 <p><b>Objective:</b> ${esc(lab.objective)}</p>
 <p><b>Problem Statement:</b> ${esc(lab.problemStatement)}</p>
 <h3>Starter code</h3>
@@ -512,25 +511,17 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <link rel="stylesheet" href="/assets/oa-assessment-upgrade.css?v=20260811-1">
 </head><body>
 <main class="wrap"><div class="top"><a class="btn" href="/#courses">← All courses</a><a class="btn primary" href="/#hub">Home</a></div>
-<section class="hero"><div class="kicker">COURSE</div><h1><span class="hero-icon">🖥️</span>Microprocessors &amp; ARM Architecture</h1><p class="muted">Microprocessor fundamentals, system components, memory hierarchy, performance, RISC, ARM architecture, registers, modes, CPSR, and endianness.</p><div class="meta"><span class="pill">10 lessons</span><span class="pill">16 syllabus labs</span><span class="pill">12 exercises</span><span class="pill">24 checkpoints</span><span class="pill">4 projects</span></div><div class="progress"><span data-progress-bar style="width:0%"></span></div><div class="muted" data-progress-status>0 of 10 lessons complete</div></section>
-<section class="card" style="margin-bottom:14px" aria-label="Lecture order"><h2>Follow your lecture order</h2><ol><li>Introduction</li><li>ARM Architecture</li><li><a href="arm-assembly.html">Instructions — Part 1</a></li><li><a href="arm-assembly.html">Instructions — Part 2</a></li><li><a href="arm-assembly.html">Functions</a></li><li><a href="arm-assembly.html">Exceptions</a></li></ol><p class="muted">Lessons show their source slide range. Repeated topics are grouped at their first substantial treatment.</p></section>
+<section class="hero"><div class="kicker">COURSE</div><h1><span class="hero-icon">🖥️</span>Microprocessors &amp; ARM Architecture</h1><p class="muted">Microprocessor fundamentals, system components, memory hierarchy, performance, RISC, ARM architecture, registers, modes, CPSR, and endianness.</p><div class="meta"><span class="pill">10 lessons</span><span class="pill">16 labs</span><span class="pill">12 exercises</span><span class="pill">24 checkpoints</span><span class="pill">4 projects</span></div><div class="progress"><span data-progress-bar style="width:0%"></span></div><div class="muted" data-progress-status>0 of 10 lessons complete</div></section>
 <section class="lessons">${mprCourse.lessons.map(renderLesson).join('')}</section>
 
 <section class="card eece340-lab-track" style="margin-top:16px;border-left:4px solid var(--accent)" id="eece340-labs">
 <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:12px">
 <div>
-<span class="pill" style="background:var(--accent);color:#fff;font-weight:900">EECE 340 SYLLABUS LAB TRACK</span>
+<span class="pill" style="background:var(--accent);color:#fff;font-weight:900">MICROPROCESSOR &amp; ARM LAB TRACK</span>
 <h2 style="margin:6px 0 4px">Microprocessor &amp; ARM Architecture Laboratory Track</h2>
-<p class="muted" style="margin:0">Complete 16-module university laboratory sequence aligned with the EECE 340 syllabus and lab exam.</p>
+<p class="muted" style="margin:0">Complete 16-module practical laboratory sequence covering microprocessor and ARM skills.</p>
 </div>
-<div style="display:flex;flex-wrap:wrap;gap:6px">
-<span class="pill">Homework: 10%</span>
-<span class="pill">Quizzes: 15%</span>
-<span class="pill">Midterm: 25%</span>
-<span class="pill">Lab Work: 10%</span>
-<span class="pill">Lab Exam: 15%</span>
-<span class="pill">Final Exam: 25%</span>
-</div>
+
 </div>
 <div class="labs-list" style="display:grid;gap:10px">
 ${mprCourse.labs.map(renderLab).join('')}
