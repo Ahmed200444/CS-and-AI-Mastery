@@ -17,15 +17,10 @@ function cleanVisible(s){
   .replace(/\bAptech\b/gi,'professional curriculum')
   .replace(/\bAptech Beginner\s*(\d+)\s*[—-]\s*/gi,'Python Foundations $1 — ')
   .replace(/\bAptech Beginner\s*(\d+)/gi,'Python Foundations $1')
-  .replace(/\bEECE340\b/g,'Microprocessors & ARM')
-  .replace(/\bEECE\s*340\b/g,'Microprocessors & ARM')
   .replace(/\buniversity-aligned\b/gi,'engineering-focused')
   .replace(/\buniversity laboratory\b/gi,'practical laboratory')
   .replace(/\buniversity embedded\b/gi,'embedded')
-  .replace(/\buniversity microprocessor\b/gi,'microprocessor')
   .replace(/\bthe lectures\b/gi,'this course')
-  .replace(/\bin the lecture syntax\b/gi,'in ARMASM syntax')
-  .replace(/\bthe lecture syntax\b/gi,'the ARMASM syntax')
   .replace(/\bThe lecture shows\b/g,'The example shows')
   .replace(/\bThe lecture gives\b/g,'The example uses')
   .replace(/\bThe lecture covers\b/g,'This lesson covers')
@@ -38,13 +33,19 @@ function cleanVisible(s){
   .replace(/\bfunction calling changes the behavior, result, or engineering decision in a concrete example\b/gi,'function calling changes how an application selects and executes external actions');
 }
 function lessonBounds(html,id){
+ // A lesson is the <details> element that carries data-lesson="id". Inner <section>
+ // blocks (explanation, practice, ...) and nested <details> belong to that lesson, so the
+ // end is found by balancing <details> tags, never by the first </section> after the marker.
  const marker='data-lesson="'+id+'"';
  const pos=html.indexOf(marker); if(pos<0)return null;
  const start=html.lastIndexOf('<details',pos); if(start<0)return null;
- const next=html.indexOf('<details class="lesson"',pos+marker.length);
- const sectionEnd=html.indexOf('</section>',pos+marker.length);
- const end=(next>=0&&sectionEnd>=0)?Math.min(next,sectionEnd):(next>=0?next:sectionEnd);
- return end>start?[start,end]:null;
+ const tag=/<(\/?)details\b/gi; tag.lastIndex=start;
+ let depth=0,m;
+ while((m=tag.exec(html))){
+  depth+=m[1]?-1:1;
+  if(depth===0){const close=html.indexOf('>',m.index); return close>=0?[start,close+1]:null;}
+ }
+ return null;
 }
 function syncLesson(html,lesson,courseId){
  const b=lessonBounds(html,lesson.id); if(!b)return html;
@@ -55,7 +56,7 @@ function syncLesson(html,lesson,courseId){
    if(/<h3>What you will learn<\/h3><ul>[\s\S]*?<\/ul>/.test(seg)) seg=seg.replace(/<h3>What you will learn<\/h3><ul>[\s\S]*?<\/ul>/,list);
  }
  if(lesson.explanation){
-   const heading=courseId==='arm-assembly'?'Practice focus':'Explanation';
+   const heading='Explanation';
    const section='<section class="lesson-main-explanation" data-main-explanation><h3>'+heading+'</h3><p>'+esc(lesson.explanation)+'</p></section>';
    seg=seg.replace(/<section class="lesson-main-explanation"[^>]*>[\s\S]*?<\/section>/,section);
  }
@@ -77,9 +78,6 @@ function sanitizePage(file){
  html=html.replace(/<section class="card" data-shared-study-checklist>[\s\S]*?<\/section>\s*/gi,'');
  html=html.replace(/<div style="display:flex;flex-wrap:wrap;gap:6px">\s*<span class="pill">Homework:[\s\S]*?<\/div>/gi,'');
  html=html.replace(/<p class="muted"><b>Syllabus topic:<\/b>\s*([\s\S]*?)\s*·\s*<b>Weight:<\/b>\s*([\s\S]*?)<\/p>/gi,'<p class="muted"><b>Topic:</b> $1</p>');
- html=html.replace(/EECE 340 SYLLABUS LAB TRACK/g,'MICROPROCESSOR &amp; ARM LAB TRACK');
- html=html.replace(/Complete 16-module university laboratory sequence aligned with the EECE 340 syllabus and lab exam\./g,'Complete 16-module practical laboratory sequence covering microprocessor and ARM skills.');
- html=html.replace(/16 syllabus labs/gi,'16 labs');
  // Keep responsive viewport metadata in the canonical order expected by quality checks.
  html=html.replace(/<meta\s+content="width=device-width,initial-scale=1"\s+name="viewport"\s*\/>/i,'<meta name="viewport" content="width=device-width,initial-scale=1"/>');
  html=cleanVisible(html);

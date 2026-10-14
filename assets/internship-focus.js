@@ -44,7 +44,7 @@
   }
 
   const refresh=()=>{render();markWebOptional();};
-  const start=()=>{refresh();new MutationObserver(()=>setTimeout(refresh,40)).observe(document.body,{childList:true,subtree:true});window.addEventListener('hashchange',()=>setTimeout(refresh,80));};
+  const start=()=>{refresh();let pending=0;new MutationObserver(()=>{if(pending)return;pending=setTimeout(()=>{pending=0;refresh();},150);}).observe(document.body,{childList:true,subtree:true});window.addEventListener('hashchange',()=>setTimeout(refresh,80));};
   document.readyState==='loading'?document.addEventListener('DOMContentLoaded',start):start();
 })();(()=>{'use strict';
 const K='csai-job-ready-v2',T=[['core','Core concepts interview map'],['apply','Applied problem solving'],['debug','Debugging and failure analysis'],['test','Testing and quality'],['scale','Performance and scale'],['safe','Security and reliability'],['design','Architecture and trade-offs'],['build','Portfolio project build'],['defend','Project defense'],['mock','Timed mock interview']];let D=null,Q=0;

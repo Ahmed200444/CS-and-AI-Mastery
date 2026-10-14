@@ -32,8 +32,6 @@ function tailoredQuestion(code,lang,title,label){var c=String(code||''),t=(title
   if(/\bGROUP\s+BY\b/i.test(c))return'Group the matching rows and calculate the summary shown below. What result should each group produce?';
   return'Run the SQL operation shown below on the lesson data. What rows or values should the query return or change?';
  }
- if(lang==='armasm')return'Trace the ARM instructions below. What register values, flags, memory changes, or branch decisions should result?';
- if(lang==='matlab')return'Evaluate the MATLAB statements below. What values, array dimensions, or plot should result?';
  if(lang==='cpp')return'Run the C++ program below and trace how the lesson concept changes the program state. What output or final value should prove it worked?';
  if(lang==='javascript')return'Run the JavaScript below with the shown data or page state. What value should be logged or what visible behavior should occur?';
  if(lang==='html')return'Build the HTML shown below. What structure or behavior should be visible in the page when it is correct?';

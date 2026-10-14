@@ -44,7 +44,7 @@ function closeAll(except){
 function sync(select,wrap){
   var opt=select.options[select.selectedIndex]||select.options[0];
   var label=wrap.querySelector('[data-filter-label]');
-  if(label)label.textContent=opt?opt.textContent:'';
+  var text=opt?opt.textContent:'';if(label&&label.textContent!==text)label.textContent=text;
   wrap.querySelectorAll('.csai-filter-option').forEach(function(btn){
     var selected=btn.getAttribute('data-value')===select.value;
     btn.classList.toggle('selected',selected);
@@ -114,12 +114,13 @@ document.addEventListener('click',function(e){
 });
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeAll()});
 
+var enhanceTimer=0;
 var observer=new MutationObserver(function(mutations){
   var relevant=false;
   for(var i=0;i<mutations.length;i++){
     if(mutations[i].addedNodes&&mutations[i].addedNodes.length){relevant=true;break}
   }
-  if(relevant)setTimeout(enhanceAll,0);
+  if(relevant&&!enhanceTimer)enhanceTimer=setTimeout(function(){enhanceTimer=0;enhanceAll();},60);
 });
 observer.observe(document.documentElement,{childList:true,subtree:true});
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',enhanceAll);else enhanceAll();

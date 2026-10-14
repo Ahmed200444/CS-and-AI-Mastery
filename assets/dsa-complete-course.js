@@ -37,7 +37,14 @@
   const storageKey = 'cs-ai-dsa-complete-lessons';
   const getDone = () => new Set(JSON.parse(localStorage.getItem(storageKey) || '[]'));
 
+  let activeKey = '', activeAt = 0, activeVal = false;
   function active(){
+    const key = location.hash + '|' + document.title, now = Date.now();
+    if (key === activeKey && now - activeAt < 600) return activeVal;
+    activeVal = computeActive(); activeKey = key; activeAt = now; return activeVal;
+  }
+
+  function computeActive(){
     if (window.CSAIMasteryPracticeFolder?.currentTrack?.() === 'dsa') return true;
     const text = `${location.hash} ${location.pathname} ${document.title} ${document.body?.innerText || ''}`.toLowerCase();
     return text.includes('dsa algorithm lab') ||
@@ -105,6 +112,6 @@
   const style=document.createElement('style');
   style.textContent=`#full-study-track[data-dsa-complete="true"]{margin:0 0 28px}.fst-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin:0 0 18px;padding:20px;border:1px solid #d8e1e8;border-radius:14px;background:#fff}.fst-kicker{font-size:.78rem;font-weight:800;letter-spacing:.09em;color:#087664}.fst-head h2{margin:5px 0 7px}.fst-head p{margin:0}.fst-progress{min-width:110px;text-align:center;padding:10px 12px;border-radius:12px;background:#eef8f6}.fst-progress strong{display:block;font-size:1.25rem;color:#087664}.fst-progress span{font-size:.8rem}.fst-lessons{display:grid;gap:10px}.fst-lesson{border:1px solid #d8e1e8;border-radius:12px;background:#fff;overflow:hidden}.fst-lesson summary{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;font-weight:700}.fst-lesson summary>span:nth-child(2){flex:1}.fst-lesson summary label{font-size:.85rem;font-weight:600}.fst-num{display:inline-grid;place-items:center;min-width:34px;height:28px;border-radius:8px;background:#eef8f6;color:#087664}.fst-body{padding:0 16px 16px}.fst-body h4{margin:14px 0 5px}.fst-body p{margin:0 0 10px}.fst-note{display:grid;grid-template-columns:130px 1fr;gap:10px;margin-top:10px;padding:11px 12px;border-radius:9px;background:#f6f8fa}.fst-mistake strong{color:#a3452e}.fst-career strong{color:#17649a}.fst-after{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}.fst-after>div{padding:16px;border:1px solid #d8e1e8;border-radius:12px;background:#fff}.fst-after h3{margin:0 0 7px}.dsa-sections{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}.dsa-sections button{border:1px solid #b8c7d4;background:transparent;color:inherit;border-radius:999px;padding:8px 12px;font:inherit;font-weight:700;cursor:pointer}.dsa-sections button.active{background:#17649a;color:#fff;border-color:#17649a}html[data-theme="dark"] .fst-head,html[data-theme="dark"] .fst-lesson,html[data-theme="dark"] .fst-after>div{background:#17212c!important;color:#edf3f8!important;border-color:#344352!important}html[data-theme="dark"] .fst-progress,html[data-theme="dark"] .fst-num,html[data-theme="dark"] .fst-note{background:#111b25!important}html[data-theme="dark"] .dsa-sections button{border-color:#536473}html[data-theme="dark"] .dsa-sections button.active{background:#2f85bd;border-color:#2f85bd}@media(max-width:800px){.fst-head{display:block}.fst-progress{margin-top:12px}.fst-after{grid-template-columns:1fr}.fst-note{grid-template-columns:1fr}.fst-lesson summary{align-items:flex-start;flex-wrap:wrap}}`;
   document.head.appendChild(style);
-  const start=()=>{render();new MutationObserver(()=>setTimeout(render,25)).observe(document.body,{childList:true,subtree:true});window.addEventListener('hashchange',()=>setTimeout(render,100));};
+  const start=()=>{render();let pending=0;new MutationObserver(()=>{if(pending)return;pending=setTimeout(()=>{pending=0;render();},150);}).observe(document.body,{childList:true,subtree:true});window.addEventListener('hashchange',()=>setTimeout(render,100));};
   document.readyState==='loading'?document.addEventListener('DOMContentLoaded',start):start();
 })();

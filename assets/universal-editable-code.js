@@ -3,7 +3,7 @@
 if(window.CSAIEditableCode)return;
 
 var originals=new WeakMap(), toolbars=new WeakMap(), indentGuard=new WeakSet();
-var COMMENTABLE_LANGS=new Set(['python','javascript','typescript','cpp','c','java','sql','html','css','shell','yaml','armasm','matlab']);
+var COMMENTABLE_LANGS=new Set(['python','javascript','typescript','cpp','c','java','sql','html','css','shell','yaml']);
 var INDENT_UNIT='    ';
 var PRE_FALLBACK=[
  '.lesson pre.code',
@@ -60,15 +60,6 @@ function languageFor(node){
 }
 function normalizeTeachingSource(raw,lang){
  var code=String(raw||'').replace(/\r/g,'');
- if(lang==='armasm'){
-  var hasArea=/^\s*AREA\s+RESET\s*,\s*CODE\s*,\s*READONLY\b/im.test(code);
-  var hasEntry=/^\s*ENTRY\b/im.test(code);
-  var hasEnd=/^\s*END\b/im.test(code);
-  if(!hasArea)code='AREA RESET, CODE, READONLY\n'+code.replace(/^\s+/, '');
-  if(!hasEntry)code=code.replace(/^(\s*AREA\s+RESET\s*,\s*CODE\s*,\s*READONLY[^\n]*\n)/im,'$1ENTRY\n');
-  if(!hasEnd)code=code.replace(/\s*$/,'')+'\nEND';
-  return code;
- }
  if(lang==='cpp'){
   if(!/^\s*#include\s*<iostream>/m.test(code))code='#include <iostream>\n'+code.replace(/^\s+/, '');
   if(!/^\s*using\s+namespace\s+std\s*;/m.test(code)){
@@ -83,10 +74,6 @@ function normalizeTeachingSource(raw,lang){
 }
 function normalizeCoursePreamble(raw,lang){
  raw=String(raw==null?'':raw).replace(/^\uFEFF/,'');
- if(lang==='armasm'){
-   raw=raw.replace(/^\s*AREA\s+[^\r\n]+\r?\n?/im,'').replace(/^\s+/,'');
-   return 'AREA RESET, CODE, READONLY\n'+raw;
- }
  if(lang==='cpp'){
    raw=raw.replace(/^\s*#include\s*<iostream>\s*\r?\n?/gmi,'').replace(/^\s*using\s+namespace\s+std\s*;\s*\r?\n?/gmi,'').replace(/^\s+/,'');
    return '#include <iostream>\nusing namespace std;\n'+raw;

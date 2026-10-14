@@ -6,7 +6,7 @@ const vm=require('node:vm');
 const root=path.resolve(__dirname,'..');
 
 const pages=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith('.html')).sort();
-assert.ok([62,65].includes(pages.length),'general audit expects 62 committed or 65 generated course pages');
+assert.ok(pages.length===62,'general audit expects 62 generated course pages');
 for(const f of pages){
   const h=fs.readFileSync(path.join(root,'courses',f),'utf8');
   assert.ok(/study-examples\.js\?v=(?:20260824-v574|20261004-v586)/.test(h),`${f}: stale study-example asset tag`);
@@ -15,7 +15,7 @@ for(const f of pages){
 }
 const canonical=JSON.parse(fs.readFileSync(path.join(root,'assets','coursedata-source.json'),'utf8'));
 const lessons=canonical.reduce((n,c)=>n+(c.lessons||[]).length,0);
-assert.ok([800,832].includes(lessons),'general audit expects 800 committed or 832 generated lessons in canonical course data');
+assert.ok(lessons===800,'general audit expects 800 generated lessons in canonical course data');
 
 const pkg=JSON.parse(fs.readFileSync(path.join(root,'package.json'),'utf8'));
 assert.equal(pkg.version,'5.74.0','package version must be current v5.74');
@@ -58,4 +58,4 @@ const readme=fs.readFileSync(path.join(root,'README.md'),'utf8');
 assert.ok(!/2\/3 checks passed/i.test(readme),'old partial-check README wording must stay removed');
 assert.ok(!/core implementation/i.test(readme),'old core-implementation README wording must stay removed');
 
-console.log('v5.73 general project audit contract PASS — 65 courses / 832 lessons, current install/versioning, focused teaching UI, Big-O correction, and stack-trace concept isolation verified.');
+console.log('v5.73 general project audit contract PASS — 62 courses / 800 lessons, current install/versioning, focused teaching UI, Big-O correction, and stack-trace concept isolation verified.');

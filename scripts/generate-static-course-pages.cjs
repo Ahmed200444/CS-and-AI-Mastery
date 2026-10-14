@@ -41,20 +41,18 @@ if (!fs.existsSync(catalogPath)) throw new Error('catalog-data.json is missing')
 if (!fs.existsSync(courseDataDir)) throw new Error('course-data directory is missing');
 
 const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
-if (!catalog || !Array.isArray(catalog.courses) || catalog.courses.length !==65) {
-  throw new Error(`Expected 65 catalog courses, found ${catalog && catalog.courses ? catalog.courses.length : 0}`);
+if (!catalog || !Array.isArray(catalog.courses) || catalog.courses.length !==62) {
+  throw new Error(`Expected 62 catalog courses, found ${catalog && catalog.courses ? catalog.courses.length : 0}`);
 }
 
 const THEME_HEAD = `<script>(function(){try{var t=localStorage.getItem('cs-ai-mastery-theme')||localStorage.getItem('theme')||'light';document.documentElement.dataset.theme=t==='dark'?'dark':'light'}catch(e){document.documentElement.dataset.theme='light'}})();</script>`;
 const CSS = `
 :root{color-scheme:light;--bg:#f4f7fb;--panel:#fff;--text:#172231;--muted:#5d6c7c;--border:#d8e1ea;--pill:#e8f1f8;--pilltext:#174b72;--accent:#17649a;--code:#101827;--note:#fff7e7}
 html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#edf3f8;--muted:#c6d1da;--border:#344352;--pill:#223446;--pilltext:#b9dcf5;--accent:#4da3df;--code:#0b111b;--note:#2b2417}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:1100px;margin:auto;padding:18px 20px 110px}.top{position:sticky;top:0;z-index:4;display:flex;justify-content:space-between;gap:10px;padding:10px 0;background:var(--bg)}.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid #b8c7d6;border-radius:9px;padding:9px 13px;background:var(--panel);color:var(--text);font:inherit;font-weight:800;cursor:pointer}.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.hero,.card,.lesson{background:var(--panel);border:1px solid var(--border);border-radius:15px;color:var(--text)}.hero{padding:22px;margin:8px 0 16px}.kicker{font-size:.74rem;letter-spacing:.1em;font-weight:900;color:var(--accent)}.hero h1{margin:5px 0 8px;font-size:clamp(2rem,4vw,3.2rem);line-height:1.08}.muted{color:var(--muted)}.meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.pill{padding:4px 8px;border-radius:999px;background:var(--pill);color:var(--pilltext);font-size:.78rem;font-weight:800}.progress{height:10px;border-radius:999px;background:var(--border);overflow:hidden;margin:14px 0 5px}.progress span{display:block;height:100%;background:#16805b}.lessons{display:grid;gap:11px}.lesson{overflow:hidden}.lesson summary{display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;font-weight:850}.num{display:grid;place-items:center;min-width:34px;height:28px;border-radius:8px;background:var(--pill);color:var(--pilltext)}.title{flex:1}.check{display:flex;gap:6px;align-items:center;font-size:.82rem;font-weight:700}.body{padding:0 16px 18px}.body h3{margin:17px 0 7px;font-size:1rem}.body p,.body li{line-height:1.68}.code{white-space:pre-wrap;overflow:auto;padding:13px;border-radius:10px;background:var(--code);color:#f4f7fb;font:500 .86rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}.note{margin-top:12px;padding:12px;border-left:4px solid #d28b23;border-radius:8px;background:var(--note)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}.card{padding:17px}.card h2{margin:0 0 10px}.item{padding:12px;margin:9px 0;border-radius:10px;background:var(--bg);border:1px solid var(--border)}.answer{width:100%;min-height:90px;margin-top:8px;padding:10px;border:1px solid #aebdca;border-radius:8px;background:transparent;color:inherit;font:inherit}.theme{position:fixed;right:22px;bottom:22px;z-index:20;border:1px solid #b8c7d6;border-radius:999px;padding:10px 16px;background:var(--panel);color:var(--text);font:800 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.16);cursor:pointer}.empty{padding:17px;border:1px dashed var(--border);border-radius:10px}.hero-icon{margin-right:.25em}@media(max-width:720px){.wrap{padding:10px 10px 100px}.grid{grid-template-columns:1fr}.top .btn{flex:1}.lesson summary{flex-wrap:wrap;align-items:flex-start}.check{width:100%;padding-left:44px}.theme{right:14px;bottom:14px;padding:10px 14px}}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:1100px;margin:auto;padding:18px 20px 110px}.top{position:sticky;top:0;z-index:4;display:flex;justify-content:space-between;gap:10px;padding:10px 0;background:var(--bg)}.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid #b8c7d6;border-radius:9px;padding:9px 13px;background:var(--panel);color:var(--text);font:inherit;font-weight:800;cursor:pointer}.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.hero,.card,.lesson{background:var(--panel);border:1px solid var(--border);border-radius:15px;color:var(--text)}.hero{padding:22px;margin:8px 0 16px}.kicker{font-size:.74rem;letter-spacing:.1em;font-weight:900;color:var(--accent)}.hero h1{margin:5px 0 8px;font-size:clamp(2rem,4vw,3.2rem);line-height:1.08}.muted{color:var(--muted)}.meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.pill{padding:4px 8px;border-radius:999px;background:var(--pill);color:var(--pilltext);font-size:.78rem;font-weight:800}.progress{height:10px;border-radius:999px;background:var(--border);overflow:hidden;margin:14px 0 5px}.progress span{display:block;height:100%;background:#16805b}.lessons{display:grid;grid-template-columns:minmax(0,1fr);gap:11px}.lesson{overflow:hidden}.lesson summary{display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;font-weight:850}.num{display:grid;place-items:center;min-width:34px;height:28px;border-radius:8px;background:var(--pill);color:var(--pilltext)}.title{flex:1}.check{display:flex;gap:6px;align-items:center;font-size:.82rem;font-weight:700}.body{padding:0 16px 18px}.body h3{margin:17px 0 7px;font-size:1rem}.body p,.body li{line-height:1.68}.code{white-space:pre-wrap;overflow:auto;padding:13px;border-radius:10px;background:var(--code);color:#f4f7fb;font:500 .86rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}.note{margin-top:12px;padding:12px;border-left:4px solid #d28b23;border-radius:8px;background:var(--note)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}.card{padding:17px}.card h2{margin:0 0 10px}.item{padding:12px;margin:9px 0;border-radius:10px;background:var(--bg);border:1px solid var(--border)}.answer{width:100%;min-height:90px;margin-top:8px;padding:10px;border:1px solid #aebdca;border-radius:8px;background:transparent;color:inherit;font:inherit}.theme{position:fixed;right:22px;bottom:22px;z-index:20;border:1px solid #b8c7d6;border-radius:999px;padding:10px 16px;background:var(--panel);color:var(--text);font:800 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.16);cursor:pointer}.empty{padding:17px;border:1px dashed var(--border);border-radius:10px}.hero-icon{margin-right:.25em}@media(max-width:720px){.wrap{padding:10px 10px 100px}.grid{grid-template-columns:1fr}.top .btn{flex:1}.lesson summary{flex-wrap:wrap;align-items:flex-start}.check{width:100%;padding-left:44px}.theme{right:14px;bottom:14px;padding:10px 14px}}
 `;
 
 function courseExampleLanguage(course) {
-  if (course && course.id === 'arm-assembly') return 'armasm';
-  if (course && course.id === 'matlab-engineering') return 'matlab';
   if (course && course.id === 'cpp-dsa') return 'cpp';
   return '';
 }
@@ -87,34 +85,17 @@ function quizHtml(item, index) {
 function projectHtml(item, index) {
   return `<div class="item"><b>${esc(item.title || item.name || `Project ${index + 1}`)}</b><p>${esc(item.description || item.desc || item.prompt || 'Build this project and document what you learned.')}</p></div>`;
 }
-function labHtml(item, index) {
-  const lang = item.language || 'text';
-  const fields = [
-    item.objective ? `<p><b>Objective:</b> ${esc(item.objective)}</p>` : '',
-    item.problemStatement ? `<p><b>Task:</b> ${esc(item.problemStatement)}</p>` : '',
-    item.expectedState ? `<p><b>Expected result:</b> ${esc(item.expectedState)}</p>` : '',
-    item.boundaryCase ? `<p><b>Boundary case:</b> ${esc(item.boundaryCase)}</p>` : '',
-    item.hardwareNote ? `<p class="muted"><b>Hardware note:</b> ${esc(item.hardwareNote)}</p>` : '',
-    item.checkpoint ? `<p><b>Checkpoint:</b> ${esc(item.checkpoint)}</p>` : ''
-  ].join('');
-  const starter = item.starterCode ? `<h4>Starter code</h4><pre class="code" data-language="${esc(lang)}">${esc(item.starterCode)}</pre>` : '';
-  const solution = item.solutionCode ? `<details><summary>Solution</summary><pre class="code" data-language="${esc(lang)}">${esc(item.solutionCode)}</pre>${item.solutionExplanation ? `<p>${esc(item.solutionExplanation)}</p>` : ''}</details>` : '';
-  return `<article class="item" data-lab="${esc(item.id || `lab-${index + 1}`)}"><h3>${esc(item.title || `Lab ${index + 1}`)}</h3>${item.syllabusTopic ? `<p class="muted"><b>Topic:</b> ${esc(item.syllabusTopic)}</p>` : ''}${fields}${starter}${solution}</article>`;
-}
-
 function pageFor(course) {
   const lessons = lessonOrder(course);
   const exercises = arr(course.exercises);
   const quiz = arr(course.quiz);
   let projects = arr(course.projects).slice();
   if (course.capstone) projects.push(course.capstone);
-  const labs = arr(course.labs);
   const safeCourseJson = JSON.stringify({ id: course.id, lessonIds: lessons.map((entry, i) => entry.lesson.id || `lesson-${i}`) }).replace(/<\//g, '<\\/');
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(course.title || course.id)} — CS & AI Mastery</title>${THEME_HEAD}<style>${CSS}</style></head><body>
 <main class="wrap"><div class="top"><a class="btn" href="/#courses">← All courses</a><a class="btn primary" href="/#hub">Home</a></div>
 <section class="hero"><div class="kicker">COURSE</div><h1><span class="hero-icon">${esc(course.icon || '📘')}</span>${esc(course.title || course.id)}</h1><p class="muted">${esc(course.blurb || course.description || 'Complete the lessons in order and practise each concept.')}</p><div class="meta"><span class="pill">${lessons.length} lessons</span><span class="pill">${exercises.length} exercises</span><span class="pill">${quiz.length} checkpoints</span><span class="pill">${projects.length} projects</span></div><div class="progress"><span data-progress-bar style="width:0%"></span></div><div class="muted" data-progress-status>0 of ${lessons.length} lessons complete</div></section>
 <section class="lessons">${lessons.length ? lessons.map((entry, i) => lessonHtml(course, entry, i)).join('') : '<div class="empty">No lesson content is listed for this course yet.</div>'}</section>
-${labs.length ? `<section class="card" id="microprocessor-arm-labs" style="margin-top:16px"><div class="kicker">PRACTICAL LABS</div><h2>Microprocessor &amp; ARM Laboratory Track</h2><p class="muted">Complete ${labs.length} practical modules covering processor, memory, I/O, ARM, and low-level programming skills.</p><div class="labs-list">${labs.map(labHtml).join('')}</div></section>` : ''}
 <div class="grid"><section class="card"><h2>Exercises</h2>${exercises.length ? exercises.map(exerciseHtml).join('') : '<p class="muted">No separate exercises are listed.</p>'}</section><section class="card"><h2>Knowledge checks</h2>${quiz.length ? quiz.map(quizHtml).join('') : '<p class="muted">No separate checkpoints are listed.</p>'}</section></div>
 <section class="card" style="margin-top:14px"><h2>Projects</h2>${projects.length ? projects.map(projectHtml).join('') : '<p class="muted">No separate projects are listed.</p>'}</section></main>
 <button class="theme" type="button" data-theme-toggle aria-label="Toggle light or dark theme"></button>
@@ -151,7 +132,7 @@ html = bodyEnd >= 0 ? html.slice(0, bodyEnd) + navTag + '\n' + html.slice(bodyEn
 fs.writeFileSync(indexPath, html, 'utf8');
 
 const generated = fs.readdirSync(outDir).filter(name => name.endsWith('.html'));
-if (generated.length !==65) throw new Error(`Expected 64 static course pages, generated ${generated.length}`);
+if (generated.length !==62) throw new Error(`Expected 62 static course pages, generated ${generated.length}`);
 const pythonPage = fs.readFileSync(path.join(outDir, 'python.html'), 'utf8');
 if (!pythonPage.includes('Python') || !pythonPage.includes('Variables &amp; types') && !pythonPage.includes('Variables & types')) throw new Error('Python static page validation failed');
 const finalIndex = fs.readFileSync(indexPath, 'utf8');
