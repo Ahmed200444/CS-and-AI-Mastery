@@ -94,6 +94,7 @@ function browserUnsupported(code){
   // runner cannot faithfully provide their server/native/runtime environment.
   return /\b(?:from|import)\s+(?:sklearn|tensorflow|torch|torchvision|transformers|sentence_transformers|datasets|huggingface_hub|evaluate|gradio|fastapi|requests|pandas|subprocess|multiprocessing)\b/m.test(code)
     || /\b(?:import\s+torch\.nn|from\s+torch\.)/m.test(code)
+    || /\b(?:ThreadPoolExecutor|ProcessPoolExecutor)\b|^\s*import\s+threading\b|\basyncio\.run\s*\(/m.test(code)
     || /\bpd\.read_csv\s*\(/.test(code)
     || /\b(?:document|window|localStorage|sessionStorage)\./.test(code);
 }
