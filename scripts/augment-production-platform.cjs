@@ -82,7 +82,7 @@ for(const c of extra){fs.writeFileSync(path.join(courseDataDir,c.id+'.json'),JSO
 if(fs.existsSync(pagePath)){augPreserved++;}else{fs.writeFileSync(pagePath,coursePage(c),'utf8');augWritten++;}}
 let index=fs.readFileSync(indexPath,'utf8');
 index=replaceJsonScript(index,'csai-inline-catalog-data',value=>{value=value&&typeof value==='object'?value:{};value.courses=catalog.courses;return value;});
-index=injectBeforeBody(index,'<script src="/assets/home-path-polish.js?v=20261014-1" defer></script>');fs.writeFileSync(indexPath,index,'utf8');
+index=injectBeforeBody(index,'<script src="/assets/home-path-polish.js?v=20261014-1" defer></script>\n<script src="/assets/floating-dock.js?v=20261016-1" defer></script>');fs.writeFileSync(indexPath,index,'utf8');
 // FIX #15 -- every course page gets the shared layers, the augmented ones included.
-for(const file of fs.readdirSync(coursesDir).filter(f=>f.endsWith('.html'))){const p=path.join(coursesDir,file);let html=fs.readFileSync(p,'utf8');const tags='<script src="../assets/adaptive-practice-layer.js?v=20260811-2" defer></script>\n<script src="../assets/project-readme-layer.js?v=20260811-2" defer></script>';html=injectBeforeBody(html,tags);fs.writeFileSync(p,html,'utf8');}
+for(const file of fs.readdirSync(coursesDir).filter(f=>f.endsWith('.html'))){const p=path.join(coursesDir,file);let html=fs.readFileSync(p,'utf8');const tags='<script src="../assets/adaptive-practice-layer.js?v=20260811-2" defer></script>\n<script src="../assets/project-readme-layer.js?v=20260811-2" defer></script>\n<script src="../assets/floating-dock.js?v=20261016-1" defer></script>\n<script src="../assets/course-sidebar.js?v=20261016-1" defer></script>';html=injectBeforeBody(html,tags);fs.writeFileSync(p,html,'utf8');}
 console.log(`Production augmentation complete: ${catalog.courses.length} courses, including ${extra.length} Python-focused Computer Engineering courses.`);
