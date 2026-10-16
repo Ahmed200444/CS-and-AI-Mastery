@@ -125,11 +125,11 @@ if (normalize(orderedSummaries[0]?.title) !== 'python') throw new Error('Interns
 
 catalog.courses = orderedSummaries;
 catalog.ordering = {
-  mode: 'bytedance-internship-prep',
-  description: 'ByteDance AI application development internship preparation order; prerequisites are respected automatically.'
+  mode: 'internship-prep',
+  description: 'AI application development internship preparation order; prerequisites are respected automatically.'
 };
 fs.writeFileSync(catalogPath, JSON.stringify(catalog), 'utf8');
 
-console.log('ByteDance internship catalog order:');
+console.log('Internship catalog order:');
 orderedSummaries.slice(0, 30).forEach((course, index) => console.log(`${index + 1}. ${course.title}`));
 console.log(`Preserved all ${orderedSummaries.length} courses.`);

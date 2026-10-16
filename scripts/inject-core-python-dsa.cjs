@@ -7,10 +7,10 @@ function esc(v){return String(v ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'
 function lesson(id,num,title,learn,explain,concepts,examples,pitfall,checklist=[]){return {id,num,title,learn,explain,concepts,examples,pitfall,checklist};}
 function card(l){
   const checklist = l.checklist.length ? `<h3>Syllabus checklist</h3><ul>${l.checklist.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>` : '';
-  return `<details class="lesson aptech-aligned" data-lesson="${esc(l.id)}">
+  return `<details class="lesson curriculum-aligned" data-lesson="${esc(l.id)}">
 <summary><span class="num">${String(l.num).padStart(2,'0')}</span><span class="title">${esc(l.title)}</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
 <div class="body">
-<div class="note"><b>Aptech-aligned module:</b> This is original study material covering the same curriculum topic, adapted to this platform. DSA implementations use Python rather than C/C++.</div>
+<div class="note"><b>Curriculum-aligned module:</b> This is original study material covering the same curriculum topic, adapted to this platform. DSA implementations use Python rather than C/C++.</div>
 <h3>What you will learn</h3><ul>${l.learn.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
 <h3>Explanation</h3><p>${esc(l.explain)}</p>
 <h3>Key concepts</h3><div class="meta">${l.concepts.map(x=>`<span class="pill">${esc(x)}</span>`).join('')}</div>
@@ -22,7 +22,7 @@ ${l.examples.map(([label,code])=>`<h4>${esc(label)}</h4><pre class="code" data-e
 }
 
 const py = [
-lesson('aptech-py-intro',13,'Aptech Beginner 1 — Python environment & foundations',
+lesson('core-py-intro',13,'Python Foundations 1 — Python environment & foundations',
  ['Understand how Python is installed, launched, edited, and inspected','Recognize dynamic typing, reserved words, and naming conventions'],
  'Python is an interpreted language with a strong focus on readability. A beginner should know how a Python file is executed, how an IDE or command line fits into the workflow, and how Python names are bound to objects at runtime. Help and inspection tools make unfamiliar code easier to explore.',
  ['Python versions','installation','environment variables','command line','IDLE / editor','help()','dynamic typing','keywords','naming'],
@@ -36,7 +36,7 @@ lesson('aptech-py-intro',13,'Aptech Beginner 1 — Python environment & foundati
  'Treating variable names as fixed-type boxes. In Python, names can be rebound to objects of different types.',
  ['Intro remarks, strengths/weaknesses, brief history, versions','Installing Python and environment variables','Command-line execution, IDLE/editor workflow, getting help','Dynamic types, reserved words, naming conventions']
 ),
-lesson('aptech-py-syntax',14,'Aptech Beginner 2 — Basic Python syntax & strings',
+lesson('core-py-syntax',14,'Python Foundations 2 — Basic Python syntax & strings',
  ['Write valid Python statements and comments','Manipulate, slice, format, and compare strings','Use numeric values, conversions, input/output, and print clearly'],
  'Python uses indentation and readable statements instead of braces. Strings are immutable sequences, so operations create new strings. Formatting, slicing, conversions, and clean input/output are core skills for nearly every Python program.',
  ['comments','strings','format()','slicing','operators','numbers','conversion','input / output','print'],
@@ -50,7 +50,7 @@ lesson('aptech-py-syntax',14,'Aptech Beginner 2 — Basic Python syntax & string
  'Forgetting that input() returns text; convert to int or float when arithmetic is required.',
  ['Basic syntax and comments','String values, operations, format, slices, operators','Numeric data types and conversions','Simple input/output and print']
 ),
-lesson('aptech-py-language',15,'Aptech Beginner 3 — Control flow, operators & loops',
+lesson('core-py-language',15,'Python Foundations 3 — Control flow, operators & loops',
  ['Use indentation and branches correctly','Apply relational, logical, boolean, and bitwise operators','Control while/for loops with break and continue'],
  'Control flow decides which statements run and how often. Conditions combine comparisons and boolean logic. Loops repeat work, while break exits early and continue skips to the next iteration. Bitwise operators work directly on integer bits and appear in flags and some interview problems.',
  ['indentation','if / elif / else','relational','logical','boolean','bitwise','while','break','continue','for'],
@@ -64,7 +64,7 @@ lesson('aptech-py-language',15,'Aptech Beginner 3 — Control flow, operators & 
  'Writing a while loop whose condition never changes, creating an infinite loop.',
  ['Control-flow syntax and indentation','if statement; relational/logical operators; True/False','Bitwise operators','while; break/continue; for']
 ),
-lesson('aptech-py-collections',16,'Aptech Beginner 4 — Collections, sorting & copying',
+lesson('core-py-collections',16,'Python Foundations 4 — Collections, sorting & copying',
  ['Choose between list, tuple, set, and dictionary','Sort dictionary data by key or value','Understand assignment, shallow copies, and deep copies'],
  'Python collections represent different data needs: lists are ordered and mutable, tuples are ordered and immutable, sets store unique values, and dictionaries map keys to values. Copying matters because nested mutable objects can still be shared after a shallow copy.',
  ['list','tuple','set','dict','sorting','shallow copy','deep copy'],
@@ -78,7 +78,7 @@ lesson('aptech-py-collections',16,'Aptech Beginner 4 — Collections, sorting & 
  'Assuming b = a makes a copy. It only makes another reference to the same mutable object.',
  ['Lists, tuples, sets, dictionaries','Sorting dictionaries','Copying collections and the difference between aliasing, shallow copy, and deep copy']
 ),
-lesson('aptech-py-functions',17,'Aptech Beginner 5 — Functions from basics to closures',
+lesson('core-py-functions',17,'Python Foundations 5 — Functions from basics to closures',
  ['Define and document reusable functions','Use positional, keyword, optional, collection, *args and **kwargs parameters','Understand scope, first-class functions, lambda, dispatch dictionaries, and closures'],
  'Functions package behavior behind a name. Python functions are first-class objects, so they can be passed around like data. Parameters define an API; scope controls name visibility; closures remember values from an enclosing function after that function returns.',
  ['def','parameters','docstrings','keyword arguments','*args / **kwargs','scope','first-class functions','lambda','closures'],
@@ -95,7 +95,7 @@ lesson('aptech-py-functions',17,'Aptech Beginner 5 — Functions from basics to 
 ];
 
 const dsa = [
-lesson('aptech-dsa-analysis',11,'Aptech DSA 1 — Algorithm analysis & Big-O',
+lesson('core-dsa-analysis',11,'Algorithm analysis & Big-O',
  ['Estimate time and space growth','Compare linear, logarithmic, quadratic, and n log n behavior'],
  'Algorithm analysis asks how running time and extra memory grow as input size grows. For internships, you should state the complexity and justify it from the code structure rather than memorizing labels.',
  ['Big-O','time complexity','space complexity','best / average / worst case'],
@@ -108,7 +108,7 @@ lesson('aptech-dsa-analysis',11,'Aptech DSA 1 — Algorithm analysis & Big-O',
  ],
  'Calling something O(n) only because it contains one loop; nested loops and repeated work change the growth rate.'
 ),
-lesson('aptech-dsa-memory',12,'Aptech DSA 2 — From C pointers to Python references',
+lesson('core-dsa-memory',12,'From C pointers to Python references',
  ['Translate pointer/referencing ideas into Python','Understand aliasing, identity, mutation, and automatic memory management'],
  'A traditional C DSA course discusses pointers, malloc/free, and dynamic allocation. In Python, variables hold references to objects and Python manages object lifetime automatically. The algorithmic idea of linking nodes remains the same, but you do not manually allocate or free memory.',
  ['references','identity','aliasing','mutation','automatic memory management'],
@@ -121,7 +121,7 @@ lesson('aptech-dsa-memory',12,'Aptech DSA 2 — From C pointers to Python refere
  ],
  'Trying to imitate malloc/free in Python. Focus on references and link updates; Python handles normal object memory management.'
 ),
-lesson('aptech-dsa-arrays',13,'Aptech DSA 3 — Arrays / Python lists',
+lesson('core-dsa-arrays',13,'Arrays / Python lists',
  ['Understand index access and insertion/deletion costs','Use traversal, slicing, and in-place patterns'],
  'Python lists fill the dynamic-array role for most interview problems. Index access is constant time, while inserting or deleting in the middle can shift later elements.',
  ['arrays','lists','indexing','traversal','insert/delete costs'],
@@ -134,7 +134,7 @@ lesson('aptech-dsa-arrays',13,'Aptech DSA 3 — Arrays / Python lists',
  ],
  'Assuming every list operation is O(1). Middle insertion/deletion usually requires shifting items.'
 ),
-lesson('aptech-dsa-linked',14,'Aptech DSA 4 — Linked lists in Python',
+lesson('core-dsa-linked',14,'Linked lists in Python',
  ['Build and traverse node chains','Insert, delete, reverse, and use fast/slow pointers'],
  'Linked lists store values inside nodes connected by references. Python replaces C pointer syntax with normal object references, but link-rewiring logic is the same.',
  ['Node','next reference','singly linked list','reverse','fast/slow pointers'],
@@ -147,7 +147,7 @@ lesson('aptech-dsa-linked',14,'Aptech DSA 4 — Linked lists in Python',
  ],
  'Changing current.next before saving the original next reference when reversing a list, which can lose the rest of the chain.'
 ),
-lesson('aptech-dsa-stackqueue',15,'Aptech DSA 5 — Stacks & queues',
+lesson('core-dsa-stackqueue',15,'Stacks & queues',
  ['Use LIFO and FIFO structures','Implement stacks with list and queues with deque'],
  'A stack removes the newest item first (LIFO). A queue removes the oldest item first (FIFO). In Python, list.append/pop works well for stacks and collections.deque supports efficient queue operations.',
  ['stack','queue','LIFO','FIFO','deque'],
@@ -160,7 +160,7 @@ lesson('aptech-dsa-stackqueue',15,'Aptech DSA 5 — Stacks & queues',
  ],
  'Using list.pop(0) repeatedly for a large queue; deque.popleft() is the usual efficient Python choice.'
 ),
-lesson('aptech-dsa-trees',16,'Aptech DSA 6 — Trees, binary trees & BSTs',
+lesson('core-dsa-trees',16,'Trees, binary trees & BSTs',
  ['Represent hierarchical structures with nodes','Traverse binary trees and search/insert in a BST'],
  'A tree models parent-child relationships. A binary tree gives each node at most two children. A binary search tree adds an ordering rule: smaller keys go left and larger keys go right.',
  ['tree','binary tree','BST','inorder traversal','search','insert'],
@@ -173,7 +173,7 @@ lesson('aptech-dsa-trees',16,'Aptech DSA 6 — Trees, binary trees & BSTs',
  ],
  'Assuming a BST is always balanced. A badly shaped BST can degrade from logarithmic search to linear search.'
 ),
-lesson('aptech-dsa-graphs',17,'Aptech DSA 7 — Graphs with BFS & DFS',
+lesson('core-dsa-graphs',17,'Graphs with BFS & DFS',
  ['Represent graphs with adjacency lists','Traverse safely using visited sets','Use BFS and DFS'],
  'Graphs model arbitrary relationships. An adjacency list is compact for sparse graphs. A visited set prevents repeated work in cycles. BFS explores layer by layer; DFS explores one path deeply before backtracking.',
  ['graph','adjacency list','visited set','BFS','DFS'],
@@ -186,7 +186,7 @@ lesson('aptech-dsa-graphs',17,'Aptech DSA 7 — Graphs with BFS & DFS',
  ],
  'Forgetting a visited set in a cyclic graph, which can repeat nodes forever.'
 ),
-lesson('aptech-dsa-search',18,'Aptech DSA 8 — Searching: linear & binary',
+lesson('core-dsa-search',18,'Searching: linear & binary',
  ['Implement linear search','Implement binary search and understand its sorted-input requirement'],
  'Linear search checks items one by one and works on unsorted data. Binary search repeatedly halves a sorted search range, giving logarithmic time when its ordering assumptions are satisfied.',
  ['linear search','binary search','sorted input','O(n)','O(log n)'],
@@ -199,7 +199,7 @@ lesson('aptech-dsa-search',18,'Aptech DSA 8 — Searching: linear & binary',
  ],
  'Applying binary search to unsorted data without another monotonic property.'
 ),
-lesson('aptech-dsa-sorting-basic',19,'Aptech DSA 9 — Bubble, selection & insertion sorting',
+lesson('core-dsa-sorting-basic',19,'Bubble, selection & insertion sorting',
  ['Implement the simple quadratic sorting algorithms','Understand swaps, comparisons, and stability'],
  'Bubble, selection, and insertion sort are not usually the fastest production choices, but they make the mechanics of sorting easy to see and analyze.',
  ['bubble sort','selection sort','insertion sort','O(n²)','stability'],
@@ -212,7 +212,7 @@ lesson('aptech-dsa-sorting-basic',19,'Aptech DSA 9 — Bubble, selection & inser
  ],
  'Memorizing the code without being able to explain why the nested work is O(n²).'
 ),
-lesson('aptech-dsa-sorting-fast',20,'Aptech DSA 10 — Merge sort & quicksort',
+lesson('core-dsa-sorting-fast',20,'Merge sort & quicksort',
  ['Implement merge sort','Implement quicksort and explain partition-based divide-and-conquer'],
  'Merge sort divides the input, recursively sorts each half, then merges sorted halves. Quicksort chooses a pivot and partitions values around it. Both are central examples of divide-and-conquer.',
  ['merge sort','quicksort','divide and conquer','O(n log n)'],
@@ -230,8 +230,8 @@ lesson('aptech-dsa-sorting-fast',20,'Aptech DSA 10 — Merge sort & quicksort',
 function injectCourse(file, lessons, heading, blurb){
   const p=path.join(courseDir,file); if(!fs.existsSync(p)) throw new Error(`${file} missing`);
   let html=fs.readFileSync(p,'utf8');
-  if(html.includes('data-aptech-curriculum="1"')) return;
-  const marker=`<section class="card" data-aptech-curriculum="1" style="margin:18px 0"><div class="kicker">APTECH-ALIGNED CURRICULUM</div><h2 style="margin:.3rem 0">${esc(heading)}</h2><p class="muted">${esc(blurb)}</p></section>`;
+  if(html.includes('data-structured-curriculum="1"')) return;
+  const marker=`<section class="card" data-structured-curriculum="1" style="margin:18px 0"><div class="kicker">CURRICULUM-ALIGNED CURRICULUM</div><h2 style="margin:.3rem 0">${esc(heading)}</h2><p class="muted">${esc(blurb)}</p></section>`;
   const lessonHtml=lessons.map(card).join('\n');
   const close='</section>\n<div class="grid">';
   if(!html.includes(close)) throw new Error(`${file}: lesson section boundary not found`);
@@ -248,6 +248,6 @@ function injectCourse(file, lessons, heading, blurb){
   fs.writeFileSync(p,html);
 }
 
-injectCourse('python.html',py,'Python for Beginners — complete Aptech syllabus coverage','All five published beginner chapters are covered explicitly with original explanations and runnable Python examples, while the existing platform lessons remain available.');
+injectCourse('python.html',py,'Python for Beginners — complete syllabus coverage','All five published beginner chapters are covered explicitly with original explanations and runnable Python examples, while the existing platform lessons remain available.');
 injectCourse('dsa.html',dsa,'Data Structures & Algorithms — classic syllabus implemented in Python','The classic C-style structures and algorithms are reimplemented with Python references, classes, lists, dictionaries, deque, and recursion. The existing internship-pattern lessons remain on top of this core.');
-console.log(`Injected ${py.length} Aptech-aligned Python beginner modules and ${dsa.length} DSA-in-Python modules.`);
+console.log(`Injected ${py.length} Curriculum-aligned Python beginner modules and ${dsa.length} DSA-in-Python modules.`);

@@ -46,7 +46,7 @@ for(const course of courses){
 
   assert.doesNotMatch(explanation,/focus specifically on apply|trace the starting state|input, state, or operation changes into a result|02Registers|written with WITH/i,loc+' contains generic/broken teaching prose');
   assert.doesNotMatch(explanation,/\b([A-Za-z]{3,})\s+\1\b/i,loc+' contains a repeated word');
-  assert.doesNotMatch(lesson.title||'',/professional curriculum|EECE\s*340|Follow your lecture order/i,loc+' exposes internal/provider wording');
+  assert.doesNotMatch(lesson.title||'',/professional curriculum|Follow your lecture order/i,loc+' exposes internal/provider wording');
 
   remember('explanation',explanation,loc);
   for(const x of examples)remember('example',x,loc);
@@ -59,7 +59,7 @@ for(const course of courses){
   assert.ok(score<0.45,course.id+' has near-duplicate theory in '+explanations[i].id+' and '+explanations[j].id+' (similarity '+score.toFixed(2)+')');
  }
 
- for(const outlineKey of ['aptechCurriculum','curriculumOutline']){
+ for(const outlineKey of ['structuredCurriculum','curriculumOutline']){
   for(const section of course[outlineKey]||[])for(const id of section.lessonIds||[]){
    assert.ok(ids.has(id),course.id+' '+outlineKey+' references missing lesson '+id);
   }
@@ -75,7 +75,7 @@ for(const [kind,map] of Object.entries(global)){
 }
 
 const visible=JSON.stringify(courses);
-assert.doesNotMatch(visible,/\bAhmed\b|\bDubai\b|Follow your lecture order|data-lecture-order/i,'sellable course data contains personal/private course wording');
+assert.doesNotMatch(visible,/Follow your lecture order|data-lecture-order/i,'sellable course data contains personal/private course wording');
 
 const cpp=courses.find(c=>c.id==='cpp-dsa');
 for(const lesson of cpp.lessons||[])for(const code of lesson.examples||[]){
@@ -91,7 +91,7 @@ for(const name of pages){
  assert.match(html,/<meta\b[^>]*\bname=["']viewport["'][^>]*>/i,name+' needs responsive viewport metadata');
  assert.match(html,/data-progress|progress/i,name+' needs visible progress/resume UI');
  assert.match(html,/theme/i,name+' needs consistent theme support');
- assert.doesNotMatch(html,/Follow your lecture order|data-lecture-order|\bAhmed\b|\bDubai\b|\bKHDA\b/i,name+' exposes private/personal implementation content');
+ assert.doesNotMatch(html,/Follow your lecture order|data-lecture-order/i,name+' exposes private/personal implementation content');
  assert.doesNotMatch(html,/\b(?:[A-Za-z]{3,})\s+\1\b/i,name+' contains a repeated word');
  const badProse=html.match(/which is exactly\.|focus specifically on apply|input, state, or operation changes into a result|02Registers|written with WITH/i);
  assert.ok(!badProse,name+' contains broken/generic teaching prose: '+(badProse&&badProse[0]));

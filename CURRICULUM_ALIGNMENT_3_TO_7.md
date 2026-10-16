@@ -2,7 +2,7 @@
 
 The added curriculum was structured against current public syllabi / official learning paths rather than invented from course names alone.
 
-- Software Engineering in Practice: Aptech ACCP Pro / ADSE-NCC themes (analysis, design, Agile/DevOps, testing, professional/project practice) plus existing platform prerequisites so Git/Testing/CI-CD are integrated rather than duplicated.
+- Software Engineering in Practice: professional software-engineering themes (analysis, design, Agile/DevOps, testing, professional/project practice) plus existing platform prerequisites so Git/Testing/CI-CD are integrated rather than duplicated.
 - Classical AI: NPTEL/IIT Artificial Intelligence search + knowledge representation/reasoning coverage: problem formulation, uninformed/informed search, CSP, games, logic, KR, planning, uncertainty and MDP bridge.
 - Reinforcement Learning & Modern LLM Post-Training: Hugging Face Deep RL course sequence plus current TRL trainer families (SFT, reward modeling, PPO/RLHF, DPO, GRPO, RLOO, KTO).
 - Large-Scale AI Training & Inference: NVIDIA Generative AI Teaching Kit / DLI distributed-training and scaling-inference coverage, plus PyTorch-style DDP/FSDP concepts.

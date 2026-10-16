@@ -2,12 +2,12 @@
 
 ## Resolved
 
-- **Standalone OOP course vs Python/Aptech OOP:** merged into Python → Aptech Beginner 9. The legacy OOP URL now redirects there and the old course is hidden from the catalog.
-- **Aptech Python duplicate beginner chapters:** strings, control flow, loops, collections, functions, exceptions, and file I/O now map to one canonical Python lesson set instead of appearing twice. Unique Aptech chapters (environment, modules, regex) remain explicit.
+- **Standalone OOP course vs Python/OOP:** merged into Python → curriculum Beginner 9. The legacy OOP URL now redirects there and the old course is hidden from the catalog.
+- **curriculum Python duplicate beginner chapters:** strings, control flow, loops, collections, functions, exceptions, and file I/O now map to one canonical Python lesson set instead of appearing twice. Unique chapters (environment, modules, regex) remain explicit.
 - **Web Development vs Frontend Development:** Frontend owns HTML/CSS/DOM/React fundamentals. Web Development is now Full-Stack Web Integration (browser/server lifecycle, responsibilities, APIs/data flow, deployment, architecture).
 - **Deployment vs CI/CD:** Deployment now focuses on production runtime concerns (health/readiness, artifacts, configuration, observability, scaling, shutdown, smoke validation). CI/CD remains the dedicated build/release automation course.
 - **System Design vs Distributed Systems CAP lesson:** Distributed Systems teaches CAP itself; System Design now applies consistency/availability requirements to architecture decisions.
-- **DSA core vs Aptech DSA:** merged repeated Big-O, arrays, linked lists, stacks/queues, trees, graphs, and searching into canonical DSA lessons. The unique Python-reference/memory bridge remains, and sorting stays as two genuinely distinct chapters (quadratic sorts vs merge/quicksort).
+- **DSA core vs curriculum DSA:** merged repeated Big-O, arrays, linked lists, stacks/queues, trees, graphs, and searching into canonical DSA lessons. The unique Python-reference/memory bridge remains, and sorting stays as two genuinely distinct chapters (quadratic sorts vs merge/quicksort).
 
 ## Intentionally retained overlaps
 

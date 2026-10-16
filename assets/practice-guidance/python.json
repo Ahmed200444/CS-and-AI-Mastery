@@ -62,8 +62,8 @@
     ]
   },
   "lessons": {
-    "aptech-py-intro": {
-      "title": "Aptech Beginner 1 — Python environment, execution & foundations",
+    "core-py-intro": {
+      "title": "Python Foundations 1 — Python environment, execution & foundations",
       "practice": {
         "title": "Lesson requirements — what you must be able to do",
         "intro": "Meet the requirements below for this lesson. Use the examples as evidence and practice, not as code to memorize or wording to copy.",
@@ -108,8 +108,8 @@
         "checkpoint": "You are ready to move on when you can satisfy the requirements using a fresh small example without copying the lesson example.",
         "question": "When would an engineer use the main idea from this lesson in real work, what problem does it solve, and what observable result would prove it was used correctly?",
         "why": "This lesson is here so you can recognize when its main idea is useful inside Python, explain the reason for each major step, and apply the behavior to a new case instead of memorizing finished syntax.",
-        "workScenario": "A teammate asks you to implement or repair Python behavior related to “Aptech Beginner 1 — Python environment, execution & foundations” while keeping the surrounding program understandable and correct.",
-        "workTask": "Before looking for a finished answer, decide how you would diagnose or approach a ticket involving Aptech Beginner 1 — Python environment, execution & foundations, what evidence you would inspect, and what “done” should mean.",
+        "workScenario": "A teammate asks you to implement or repair Python behavior related to “Python Foundations 1 — Python environment, execution & foundations” while keeping the surrounding program understandable and correct.",
+        "workTask": "Before looking for a finished answer, decide how you would diagnose or approach a ticket involving Python Foundations 1 — Python environment, execution & foundations, what evidence you would inspect, and what “done” should mean.",
         "engineerProcess": [
           "Restate the request in plain English and define what success means before touching the implementation.",
           "Run or trace a small representative case and identify what state/input/output the Python code must change.",
@@ -2782,8 +2782,8 @@
         }
       ]
     },
-    "aptech-py-modules": {
-      "title": "Aptech Beginner 6 — Modules & the standard library",
+    "core-py-modules": {
+      "title": "Python Foundations 6 — Modules & the standard library",
       "practice": {
         "title": "Lesson requirements — what you must be able to do",
         "intro": "Meet the requirements below for this lesson. Use the examples as evidence and practice, not as code to memorize or wording to copy.",
@@ -2822,8 +2822,8 @@
         "checkpoint": "You are ready to move on when you can satisfy the requirements using a fresh small example without copying the lesson example.",
         "question": "When would an engineer use the main idea from this lesson in real work, what problem does it solve, and what observable result would prove it was used correctly?",
         "why": "This lesson is here so you can recognize when its main idea is useful inside Python, explain the reason for each major step, and apply the behavior to a new case instead of memorizing finished syntax.",
-        "workScenario": "A teammate asks you to implement or repair Python behavior related to “Aptech Beginner 6 — Modules & the standard library” while keeping the surrounding program understandable and correct.",
-        "workTask": "Before looking for a finished answer, decide how you would diagnose or approach a ticket involving Aptech Beginner 6 — Modules & the standard library, what evidence you would inspect, and what “done” should mean.",
+        "workScenario": "A teammate asks you to implement or repair Python behavior related to “Python Foundations 6 — Modules & the standard library” while keeping the surrounding program understandable and correct.",
+        "workTask": "Before looking for a finished answer, decide how you would diagnose or approach a ticket involving Python Foundations 6 — Modules & the standard library, what evidence you would inspect, and what “done” should mean.",
         "engineerProcess": [
           "Restate the request in plain English and define what success means before touching the implementation.",
           "Run or trace a small representative case and identify what state/input/output the Python code must change.",
@@ -3789,8 +3789,8 @@
         }
       ]
     },
-    "aptech-oop-classes-objects": {
-      "title": "Aptech OOP 1 — Classes, objects & special methods",
+    "core-oop-classes-objects": {
+      "title": "Python OOP practice — Classes, objects & special methods",
       "practice": {
         "title": "Lesson requirements — what you must be able to do",
         "intro": "Meet the requirements below for this lesson. Use the examples as evidence and practice, not as code to memorize or wording to copy.",
@@ -3835,8 +3835,8 @@
         "checkpoint": "You are ready to move on when you can satisfy the requirements using a fresh small example without copying the lesson example.",
         "question": "When would an engineer use the main idea from this lesson in real work, what problem does it solve, and what observable result would prove it was used correctly?",
         "why": "This lesson is here so you can recognize when its main idea is useful inside Python, explain the reason for each major step, and apply the behavior to a new case instead of memorizing finished syntax.",
-        "workScenario": "A teammate asks you to implement or repair Python behavior related to “Aptech OOP 1 — Classes, objects & special methods” while keeping the surrounding program understandable and correct.",
-        "workTask": "Before looking for a finished answer, decide how you would diagnose or approach a ticket involving Aptech OOP 1 — Classes, objects & special methods, what evidence you would inspect, and what “done” should mean.",
+        "workScenario": "A teammate asks you to implement or repair Python behavior related to “Python OOP practice — Classes, objects & special methods” while keeping the surrounding program understandable and correct.",
+        "workTask": "Before looking for a finished answer, decide how you would diagnose or approach a ticket involving Python OOP practice — Classes, objects & special methods, what evidence you would inspect, and what “done” should mean.",
         "engineerProcess": [
           "Restate the request in plain English and define what success means before touching the implementation.",
           "Run or trace a small representative case and identify what state/input/output the Python code must change.",
@@ -4103,8 +4103,8 @@
         }
       ]
     },
-    "aptech-oop-encapsulation": {
-      "title": "Aptech OOP 2 — Encapsulation & valid state",
+    "core-oop-encapsulation": {
+      "title": "Python OOP practice — Encapsulation & valid state",
       "practice": {
         "title": "Lesson requirements — what you must be able to do",
         "intro": "Meet the requirements below for this lesson. Use the examples as evidence and practice, not as code to memorize or wording to copy.",
@@ -4150,8 +4150,8 @@
         "checkpoint": "You are ready to move on when you can satisfy the requirements using a fresh small example without copying the lesson example.",
         "question": "When would an engineer use the main idea from this lesson in real work, what problem does it solve, and what observable result would prove it was used correctly?",
         "why": "This lesson is here so you can recognize when its main idea is useful inside Python, explain the reason for each major step, and apply the behavior to a new case instead of memorizing finished syntax.",
-        "workScenario": "A teammate asks you to implement or repair Python behavior related to “Aptech OOP 2 — Encapsulation & valid state” while keeping the surrounding program understandable and correct.",
-        "workTask": "Before looking for a finished answer, decide how you would diagnose or approach a ticket involving Aptech OOP 2 — Encapsulation & valid state, what evidence you would inspect, and what “done” should mean.",
+        "workScenario": "A teammate asks you to implement or repair Python behavior related to “Python OOP practice — Encapsulation & valid state” while keeping the surrounding program understandable and correct.",
+        "workTask": "Before looking for a finished answer, decide how you would diagnose or approach a ticket involving Python OOP practice — Encapsulation & valid state, what evidence you would inspect, and what “done” should mean.",
         "engineerProcess": [
           "Restate the request in plain English and define what success means before touching the implementation.",
           "Run or trace a small representative case and identify what state/input/output the Python code must change.",
@@ -4218,8 +4218,8 @@
         }
       ]
     },
-    "aptech-oop-abstraction": {
-      "title": "Aptech OOP 3 — Abstraction",
+    "core-oop-abstraction": {
+      "title": "Python OOP practice — Abstraction",
       "practice": {
         "title": "Lesson requirements — what you must be able to do",
         "intro": "Meet the requirements below for this lesson. Use the examples as evidence and practice, not as code to memorize or wording to copy.",
@@ -4267,8 +4267,8 @@
         "checkpoint": "You are ready to move on when you can satisfy the requirements using a fresh small example without copying the lesson example.",
         "question": "When would an engineer use the main idea from this lesson in real work, what problem does it solve, and what observable result would prove it was used correctly?",
         "why": "This lesson is here so you can recognize when its main idea is useful inside Python, explain the reason for each major step, and apply the behavior to a new case instead of memorizing finished syntax.",
-        "workScenario": "A teammate asks you to implement or repair Python behavior related to “Aptech OOP 3 — Abstraction” while keeping the surrounding program understandable and correct.",
-        "workTask": "Before looking for a finished answer, decide how you would diagnose or approach a ticket involving Aptech OOP 3 — Abstraction, what evidence you would inspect, and what “done” should mean.",
+        "workScenario": "A teammate asks you to implement or repair Python behavior related to “Python OOP practice — Abstraction” while keeping the surrounding program understandable and correct.",
+        "workTask": "Before looking for a finished answer, decide how you would diagnose or approach a ticket involving Python OOP practice — Abstraction, what evidence you would inspect, and what “done” should mean.",
         "engineerProcess": [
           "Restate the request in plain English and define what success means before touching the implementation.",
           "Run or trace a small representative case and identify what state/input/output the Python code must change.",
@@ -4337,8 +4337,8 @@
         }
       ]
     },
-    "aptech-oop-inheritance": {
-      "title": "Aptech OOP 4 — Inheritance & super()",
+    "core-oop-inheritance": {
+      "title": "Python OOP practice — Inheritance & super()",
       "practice": {
         "title": "Lesson requirements — what you must be able to do",
         "intro": "Meet the requirements below for this lesson. Use the examples as evidence and practice, not as code to memorize or wording to copy.",
@@ -4383,8 +4383,8 @@
         "checkpoint": "You are ready to move on when you can satisfy the requirements using a fresh small example without copying the lesson example.",
         "question": "When would an engineer use the main idea from this lesson in real work, what problem does it solve, and what observable result would prove it was used correctly?",
         "why": "This lesson is here so you can recognize when its main idea is useful inside Python, explain the reason for each major step, and apply the behavior to a new case instead of memorizing finished syntax.",
-        "workScenario": "A teammate asks you to implement or repair Python behavior related to “Aptech OOP 4 — Inheritance & super()” while keeping the surrounding program understandable and correct.",
-        "workTask": "Before looking for a finished answer, decide how you would diagnose or approach a ticket involving Aptech OOP 4 — Inheritance & super(), what evidence you would inspect, and what “done” should mean.",
+        "workScenario": "A teammate asks you to implement or repair Python behavior related to “Python OOP practice — Inheritance & super()” while keeping the surrounding program understandable and correct.",
+        "workTask": "Before looking for a finished answer, decide how you would diagnose or approach a ticket involving Python OOP practice — Inheritance & super(), what evidence you would inspect, and what “done” should mean.",
         "engineerProcess": [
           "Restate the request in plain English and define what success means before touching the implementation.",
           "Run or trace a small representative case and identify what state/input/output the Python code must change.",
@@ -4451,8 +4451,8 @@
         }
       ]
     },
-    "aptech-oop-polymorphism": {
-      "title": "Aptech OOP 5 — Polymorphism & duck typing",
+    "core-oop-polymorphism": {
+      "title": "Python OOP practice — Polymorphism & duck typing",
       "practice": {
         "title": "Lesson requirements — what you must be able to do",
         "intro": "Meet the requirements below for this lesson. Use the examples as evidence and practice, not as code to memorize or wording to copy.",
@@ -4494,8 +4494,8 @@
         "checkpoint": "You are ready to move on when you can satisfy the requirements using a fresh small example without copying the lesson example.",
         "question": "When would an engineer use the main idea from this lesson in real work, what problem does it solve, and what observable result would prove it was used correctly?",
         "why": "This lesson is here so you can recognize when its main idea is useful inside Python, explain the reason for each major step, and apply the behavior to a new case instead of memorizing finished syntax.",
-        "workScenario": "A teammate asks you to implement or repair Python behavior related to “Aptech OOP 5 — Polymorphism & duck typing” while keeping the surrounding program understandable and correct.",
-        "workTask": "Before looking for a finished answer, decide how you would diagnose or approach a ticket involving Aptech OOP 5 — Polymorphism & duck typing, what evidence you would inspect, and what “done” should mean.",
+        "workScenario": "A teammate asks you to implement or repair Python behavior related to “Python OOP practice — Polymorphism & duck typing” while keeping the surrounding program understandable and correct.",
+        "workTask": "Before looking for a finished answer, decide how you would diagnose or approach a ticket involving Python OOP practice — Polymorphism & duck typing, what evidence you would inspect, and what “done” should mean.",
         "engineerProcess": [
           "Restate the request in plain English and define what success means before touching the implementation.",
           "Run or trace a small representative case and identify what state/input/output the Python code must change.",
@@ -4560,8 +4560,8 @@
         }
       ]
     },
-    "aptech-oop-composition": {
-      "title": "Aptech OOP 6 — Composition vs inheritance",
+    "core-oop-composition": {
+      "title": "Python OOP practice — Composition vs inheritance",
       "practice": {
         "title": "Lesson requirements — what you must be able to do",
         "intro": "Meet the requirements below for this lesson. Use the examples as evidence and practice, not as code to memorize or wording to copy.",
@@ -4609,8 +4609,8 @@
         "checkpoint": "You are ready to move on when you can satisfy the requirements using a fresh small example without copying the lesson example.",
         "question": "When would an engineer use the main idea from this lesson in real work, what problem does it solve, and what observable result would prove it was used correctly?",
         "why": "This lesson is here so you can recognize when its main idea is useful inside Python, explain the reason for each major step, and apply the behavior to a new case instead of memorizing finished syntax.",
-        "workScenario": "A teammate asks you to implement or repair Python behavior related to “Aptech OOP 6 — Composition vs inheritance” while keeping the surrounding program understandable and correct.",
-        "workTask": "Before looking for a finished answer, decide how you would diagnose or approach a ticket involving Aptech OOP 6 — Composition vs inheritance, what evidence you would inspect, and what “done” should mean.",
+        "workScenario": "A teammate asks you to implement or repair Python behavior related to “Python OOP practice — Composition vs inheritance” while keeping the surrounding program understandable and correct.",
+        "workTask": "Before looking for a finished answer, decide how you would diagnose or approach a ticket involving Python OOP practice — Composition vs inheritance, what evidence you would inspect, and what “done” should mean.",
         "engineerProcess": [
           "Restate the request in plain English and define what success means before touching the implementation.",
           "Run or trace a small representative case and identify what state/input/output the Python code must change.",
@@ -4677,8 +4677,8 @@
         }
       ]
     },
-    "aptech-oop-interfaces": {
-      "title": "Aptech OOP 7 — Interfaces & abstract base classes",
+    "core-oop-interfaces": {
+      "title": "Python OOP practice — Interfaces & abstract base classes",
       "practice": {
         "title": "Lesson requirements — what you must be able to do",
         "intro": "Meet the requirements below for this lesson. Use the examples as evidence and practice, not as code to memorize or wording to copy.",
@@ -4728,8 +4728,8 @@
         "checkpoint": "You are ready to move on when you can satisfy the requirements using a fresh small example without copying the lesson example.",
         "question": "When would an engineer use the main idea from this lesson in real work, what problem does it solve, and what observable result would prove it was used correctly?",
         "why": "This lesson is here so you can recognize when its main idea is useful inside Python, explain the reason for each major step, and apply the behavior to a new case instead of memorizing finished syntax.",
-        "workScenario": "A teammate asks you to implement or repair Python behavior related to “Aptech OOP 7 — Interfaces & abstract base classes” while keeping the surrounding program understandable and correct.",
-        "workTask": "Before looking for a finished answer, decide how you would diagnose or approach a ticket involving Aptech OOP 7 — Interfaces & abstract base classes, what evidence you would inspect, and what “done” should mean.",
+        "workScenario": "A teammate asks you to implement or repair Python behavior related to “Python OOP practice — Interfaces & abstract base classes” while keeping the surrounding program understandable and correct.",
+        "workTask": "Before looking for a finished answer, decide how you would diagnose or approach a ticket involving Python OOP practice — Interfaces & abstract base classes, what evidence you would inspect, and what “done” should mean.",
         "engineerProcess": [
           "Restate the request in plain English and define what success means before touching the implementation.",
           "Run or trace a small representative case and identify what state/input/output the Python code must change.",
@@ -4800,8 +4800,8 @@
         }
       ]
     },
-    "aptech-oop-solid": {
-      "title": "Aptech OOP 8 — SOLID principles",
+    "core-oop-solid": {
+      "title": "Python OOP practice — SOLID principles",
       "practice": {
         "title": "Lesson requirements — what you must be able to do",
         "intro": "Meet the requirements below for this lesson. Use the examples as evidence and practice, not as code to memorize or wording to copy.",
@@ -4849,8 +4849,8 @@
         "checkpoint": "You are ready to move on when you can satisfy the requirements using a fresh small example without copying the lesson example.",
         "question": "When would an engineer use the main idea from this lesson in real work, what problem does it solve, and what observable result would prove it was used correctly?",
         "why": "This lesson is here so you can recognize when its main idea is useful inside Python, explain the reason for each major step, and apply the behavior to a new case instead of memorizing finished syntax.",
-        "workScenario": "A teammate asks you to implement or repair Python behavior related to “Aptech OOP 8 — SOLID principles” while keeping the surrounding program understandable and correct.",
-        "workTask": "Before looking for a finished answer, decide how you would diagnose or approach a ticket involving Aptech OOP 8 — SOLID principles, what evidence you would inspect, and what “done” should mean.",
+        "workScenario": "A teammate asks you to implement or repair Python behavior related to “Python OOP practice — SOLID principles” while keeping the surrounding program understandable and correct.",
+        "workTask": "Before looking for a finished answer, decide how you would diagnose or approach a ticket involving Python OOP practice — SOLID principles, what evidence you would inspect, and what “done” should mean.",
         "engineerProcess": [
           "Restate the request in plain English and define what success means before touching the implementation.",
           "Run or trace a small representative case and identify what state/input/output the Python code must change.",
@@ -4917,8 +4917,8 @@
         }
       ]
     },
-    "aptech-oop-design-patterns": {
-      "title": "Aptech OOP 9 — Design patterns & design judgment",
+    "core-oop-design-patterns": {
+      "title": "Python OOP practice — Design patterns & design judgment",
       "practice": {
         "title": "Lesson requirements — what you must be able to do",
         "intro": "Meet the requirements below for this lesson. Use the examples as evidence and practice, not as code to memorize or wording to copy.",
@@ -4967,8 +4967,8 @@
         "checkpoint": "You are ready to move on when you can satisfy the requirements using a fresh small example without copying the lesson example.",
         "question": "When would an engineer use the main idea from this lesson in real work, what problem does it solve, and what observable result would prove it was used correctly?",
         "why": "This lesson is here so you can recognize when its main idea is useful inside Python, explain the reason for each major step, and apply the behavior to a new case instead of memorizing finished syntax.",
-        "workScenario": "A teammate asks you to implement or repair Python behavior related to “Aptech OOP 9 — Design patterns & design judgment” while keeping the surrounding program understandable and correct.",
-        "workTask": "Before looking for a finished answer, decide how you would diagnose or approach a ticket involving Aptech OOP 9 — Design patterns & design judgment, what evidence you would inspect, and what “done” should mean.",
+        "workScenario": "A teammate asks you to implement or repair Python behavior related to “Python OOP practice — Design patterns & design judgment” while keeping the surrounding program understandable and correct.",
+        "workTask": "Before looking for a finished answer, decide how you would diagnose or approach a ticket involving Python OOP practice — Design patterns & design judgment, what evidence you would inspect, and what “done” should mean.",
         "engineerProcess": [
           "Restate the request in plain English and define what success means before touching the implementation.",
           "Run or trace a small representative case and identify what state/input/output the Python code must change.",
@@ -5037,8 +5037,8 @@
         }
       ]
     },
-    "aptech-py-regex": {
-      "title": "Aptech Beginner 10 — Regular expressions",
+    "core-py-regex": {
+      "title": "Python Foundations 10 — Regular expressions",
       "practice": {
         "title": "Lesson requirements — what you must be able to do",
         "intro": "Meet the requirements below for this lesson. Use the examples as evidence and practice, not as code to memorize or wording to copy.",
@@ -5086,8 +5086,8 @@
         "checkpoint": "You are ready to move on when you can satisfy the requirements using a fresh small example without copying the lesson example.",
         "question": "When would an engineer use the main idea from this lesson in real work, what problem does it solve, and what observable result would prove it was used correctly?",
         "why": "This lesson is here so you can recognize when its main idea is useful inside Python, explain the reason for each major step, and apply the behavior to a new case instead of memorizing finished syntax.",
-        "workScenario": "A teammate asks you to implement or repair Python behavior related to “Aptech Beginner 10 — Regular expressions” while keeping the surrounding program understandable and correct.",
-        "workTask": "Before looking for a finished answer, decide how you would diagnose or approach a ticket involving Aptech Beginner 10 — Regular expressions, what evidence you would inspect, and what “done” should mean.",
+        "workScenario": "A teammate asks you to implement or repair Python behavior related to “Python Foundations 10 — Regular expressions” while keeping the surrounding program understandable and correct.",
+        "workTask": "Before looking for a finished answer, decide how you would diagnose or approach a ticket involving Python Foundations 10 — Regular expressions, what evidence you would inspect, and what “done” should mean.",
         "engineerProcess": [
           "Restate the request in plain English and define what success means before touching the implementation.",
           "Run or trace a small representative case and identify what state/input/output the Python code must change.",
@@ -6529,7 +6529,7 @@
       }
     },
     {
-      "id": "aptech-oop-ex-9",
+      "id": "core-oop-ex-9",
       "title": "Point class",
       "practice": {
         "title": "Exercise question — what your answer must do",
@@ -6588,7 +6588,7 @@
       }
     },
     {
-      "id": "aptech-oop-ex-10",
+      "id": "core-oop-ex-10",
       "title": "BankAccount",
       "practice": {
         "title": "Exercise question — what your answer must do",
@@ -6650,7 +6650,7 @@
       }
     },
     {
-      "id": "aptech-oop-ex-11",
+      "id": "core-oop-ex-11",
       "title": "Shape hierarchy",
       "practice": {
         "title": "Exercise question — what your answer must do",

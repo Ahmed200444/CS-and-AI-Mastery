@@ -7,31 +7,8 @@ const byId=new Map(source.map(c=>[c.id,c]));
 const dir=path.join(root,'courses');
 
 function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-// Replaces the provider name in visible text only. Identifiers such as ids, anchors, classes and
-// data-lesson values (aptech-py-intro, lesson-aptech-oop-solid, ...) are left untouched, because
-// rewriting them breaks in-page links and the progress keys saved in learners' browsers.
-function aptechClean(s){
- const start='(?<=^|[>.:!?]\\s*)';
- return String(s)
-  .replace(/APTECH-ALIGNED ((?:[A-Z]+ )+CURRICULUM)/g,'STRUCTURED $1')
-  .replace(/(?<![\w-])Aptech Beginner\s*(\d+)\s*[—-]\s*/g,'Python Foundations $1 — ')
-  .replace(/(?<![\w-])Aptech Beginner\s*(\d+)/g,'Python Foundations $1')
-  .replace(/(?<![\w-])Aptech OOP\s*\d+\s*[—-]\s*/g,'Python OOP practice — ')
-  .replace(/(?<![\w-])Aptech DSA\s*\d+\s*[—-]\s*/g,'')
-  .replace(/(?<![\w-])Aptech OOP(?![\w-])/g,'OOP')
-  .replace(new RegExp(start+'Aptech-aligned','g'),'Curriculum-aligned')
-  .replace(/(?<![\w-])Aptech-aligned/g,'curriculum-aligned')
-  .replace(/(?<![\w-])APTECH-ALIGNED/g,'CURRICULUM-ALIGNED')
-  .replace(/(?<![\w-])Aptech\s+(?=[a-z])/g,'')
-  .replace(/(?<![\w-])Aptech(?![\w-])/gi,'curriculum');
-}
 function cleanVisible(s){
- return aptechClean(s)
-  .replace(/ahmed@my-server\.example\.com/gi,'admin@my-server.example.com')
-  .replace(/Ahmed/gi,'Alex')
-  .replace(/\bDubai\b/g,'Toronto')
-  .replace(/\bKHDA-benchmarked\b/gi,'industry-focused')
-  .replace(/\bKHDA\b/gi,'professional training')
+ return String(s)
   .replace(/\buniversity-aligned\b/gi,'engineering-focused')
   .replace(/\buniversity laboratory\b/gi,'practical laboratory')
   .replace(/\buniversity embedded\b/gi,'embedded')
@@ -114,22 +91,7 @@ function sanitizePage(file){
 let files=fs.readdirSync(dir).filter(n=>n.endsWith('.html')),personal=0,lectureUi=0;
 for(const name of files){
  const html=sanitizePage(path.join(dir,name));
- personal+=(html.match(/\b(?:Ahmed|Dubai|KHDA)\b/gi)||[]).length;
  lectureUi+=(html.match(/Follow your lecture order|data-lecture-order|\.pdf\b/gi)||[]).length;
-}
-// Visible provider wording outside the course pages (home page copy, runtime strings, practice guidance).
-const sweep=[path.join(root,'index.html')];
-for(const d of ['assets/runtime-inline','assets/practice-guidance']){
- const full=path.join(root,d);
- if(fs.existsSync(full)) for(const n of fs.readdirSync(full)) if(/\.(js|json)$/.test(n)) sweep.push(path.join(full,n));
-}
-let swept=0;
-for(const f of sweep){
- if(!fs.existsSync(f)) continue;
- const before=fs.readFileSync(f,'utf8');
- if(!/aptech/i.test(before)) continue;
- const after=aptechClean(before);
- if(after!==before){ fs.writeFileSync(f,after,'utf8'); swept++; }
 }
 if(personal)throw new Error('Personal course content remained after sanitization: '+personal);
 if(lectureUi)throw new Error('Lecture/source metadata remained after sanitization: '+lectureUi);

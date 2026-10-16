@@ -1,4 +1,7 @@
 const fs = require('fs');
+
+// Tiny inline script (kept inline so it runs before any other script and passes the deferred-script contract).
+const coreIdMigrationTag='<script id="csai-core-id-migration">'+require('fs').readFileSync(require('path').join(process.cwd(),'assets','legacy-id-migration.js'),'utf8').replace(/\/\*[\s\S]*?\*\//g,'').split('\n').map(l=>l.trim()).join('')+'</script>';
 const path = require('path');
 
 const root = process.cwd();
@@ -92,7 +95,7 @@ function pageFor(course) {
   let projects = arr(course.projects).slice();
   if (course.capstone) projects.push(course.capstone);
   const safeCourseJson = JSON.stringify({ id: course.id, lessonIds: lessons.map((entry, i) => entry.lesson.id || `lesson-${i}`) }).replace(/<\//g, '<\\/');
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(course.title || course.id)} — CS & AI Mastery</title>${THEME_HEAD}<style>${CSS}</style></head><body>
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">${coreIdMigrationTag}<title>${esc(course.title || course.id)} — CS & AI Mastery</title>${THEME_HEAD}<style>${CSS}</style></head><body>
 <main class="wrap"><div class="top"><a class="btn" href="/#courses">← All courses</a><a class="btn primary" href="/#hub">Home</a></div>
 <section class="hero"><div class="kicker">COURSE</div><h1><span class="hero-icon">${esc(course.icon || '📘')}</span>${esc(course.title || course.id)}</h1><p class="muted">${esc(course.blurb || course.description || 'Complete the lessons in order and practise each concept.')}</p><div class="meta"><span class="pill">${lessons.length} lessons</span><span class="pill">${exercises.length} exercises</span><span class="pill">${quiz.length} checkpoints</span><span class="pill">${projects.length} projects</span></div><div class="progress"><span data-progress-bar style="width:0%"></span></div><div class="muted" data-progress-status>0 of ${lessons.length} lessons complete</div></section>
 <section class="lessons">${lessons.length ? lessons.map((entry, i) => lessonHtml(course, entry, i)).join('') : '<div class="empty">No lesson content is listed for this course yet.</div>'}</section>
