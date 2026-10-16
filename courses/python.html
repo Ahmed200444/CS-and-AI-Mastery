@@ -68,10 +68,10 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 </section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">Python versions</span><span class="pill">installation</span><span class="pill">environment variables</span><span class="pill">command line</span><span class="pill">IDLE / editor</span><span class="pill">help()</span><span class="pill">dynamic typing</span><span class="pill">keywords</span><span class="pill">naming</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="candidate">import sys, keyword
-name = "Ahmed"
+name = "Maria"
 print(sys.version_info.major)
 print(type(name))
-print(keyword.iskeyword("class"))</pre><pre class="code" data-example-audit="candidate">student_name = "Ahmed"
+print(keyword.iskeyword("class"))</pre><pre class="code" data-example-audit="candidate">student_name = "Maria"
 MAX_RETRIES = 3
 print(student_name, MAX_RETRIES)</pre><pre class="code" data-example-audit="candidate">text = "python"
 print([name for name in dir(text) if name.startswith("is")][:6])</pre><pre class="code" data-example-audit="candidate">import os
@@ -88,7 +88,7 @@ print(mode)</pre><pre class="code" data-example-audit="candidate">print(str.uppe
 </section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">dynamic typing</span><span class="pill">f-strings</span><span class="pill">assignment</span><span class="pill">identifiers</span><span class="pill">keywords</span><span class="pill">dynamic name binding</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="candidate">age = 21
-name = "Ahmed"
+name = "Maria"
 print(f"{name} is {age}")</pre><pre class="code" data-example-audit="candidate">count = 3
 price = 12.5
 is_ready = True
@@ -110,12 +110,12 @@ hours = 20
 print(course, hours)</pre><pre class="code" data-example-audit="candidate">text = "Python Programming"
 print(text.upper())
 print(text[:6])
-print(text[-11:])</pre><pre class="code" data-example-audit="candidate">name = "Ahmed"
+print(text[-11:])</pre><pre class="code" data-example-audit="candidate">name = "Maria"
 score = 92
 print("{} scored {}".format(name, score))</pre><pre class="code" data-example-audit="candidate">raw = "21"
 age = int(raw)
 print(age + 1)
-print(float(age))</pre><pre class="code" data-example-audit="candidate">name = "Ahmed"  # imagine this came from input()
+print(float(age))</pre><pre class="code" data-example-audit="candidate">name = "Maria"  # imagine this came from input()
 print("Welcome,", name)</pre><pre class="code" data-example-audit="candidate">name = 'Ada'
 print(f"{name} is great")     # Ada is great
 s = 'hello'
@@ -267,12 +267,12 @@ print(area.__doc__)</pre>
 </div></details>
 <details class="lesson" data-lesson="py-functions-args" id="lesson-py-functions-args">
 <summary><span class="num">10</span><span class="title">Function arguments in depth</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Design flexible function signatures</li><li>Use *args and **kwargs appropriately</li><li>Avoid mutable default argument bugs</li><li>Apply the KHDA-benchmarked professional additions in a realistic company workflow: recursion.</li></ul>
+<div class="body"><h3>What you will learn</h3><ul><li>Design flexible function signatures</li><li>Use *args and **kwargs appropriately</li><li>Avoid mutable default argument bugs</li><li>Apply the industry-benchmarked professional additions in a realistic company workflow: recursion.</li></ul>
 <section class="lesson-main-explanation" data-main-explanation>
 <h3>Explanation</h3>
 <p>Function signatures describe how callers provide data. Default arguments make parameters optional, keyword arguments improve readability, *args gathers extra positional arguments, **kwargs gathers extra named arguments, and docstrings document the contract.</p>
 </section>
-<div class="note khda-benchmark-note" data-khda-benchmark-note="true"><b>Professional benchmark addition: </b>These company-use concepts were kept after comparing the course with public syllabi from KHDA-listed Dubai training providers: recursion.</div><h3>Key concepts</h3><div class="meta"><span class="pill">default arguments</span><span class="pill">keyword arguments</span><span class="pill">*args</span><span class="pill">**kwargs</span><span class="pill">docstring</span><span class="pill">mutable default pitfall</span><span class="pill">recursion</span></div>
+<div class="note benchmark-note" data-benchmark-note="true"><b>Professional benchmark addition: </b>These company-use concepts were kept after comparing the course with public syllabi from professional training providers: recursion.</div><h3>Key concepts</h3><div class="meta"><span class="pill">default arguments</span><span class="pill">keyword arguments</span><span class="pill">*args</span><span class="pill">**kwargs</span><span class="pill">docstring</span><span class="pill">mutable default pitfall</span><span class="pill">recursion</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="candidate">def greet(name, greeting='Hello'):
     """Greets name with the given greeting."""
     return f'{greeting}, {name}!'
@@ -282,8 +282,8 @@ def total(*args, **kwargs):
     print(kwargs)  # dict of keyword args</pre><pre class="code" data-example-audit="candidate">def greet(name, greeting="Hello"):
     return f"{greeting}, {name}"
 
-print(greet("Ahmed"))
-print(greet(name="Ahmed", greeting="Welcome"))</pre><pre class="code" data-example-audit="candidate">def report(scores, *tags, **meta):
+print(greet("Maria"))
+print(greet(name="Maria", greeting="Welcome"))</pre><pre class="code" data-example-audit="candidate">def report(scores, *tags, **meta):
     print(sum(scores) / len(scores))
     print(tags)
     print(meta)
@@ -327,13 +327,13 @@ print(sorted(records, key=lambda item: item[1]))</pre>
 </div></details>
 <details class="lesson aptech-aligned" data-lesson="aptech-py-modules" id="lesson-aptech-py-modules">
 <summary><span class="num">13</span><span class="title">Aptech Beginner 6 — Modules &amp; the standard library</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Organize code into modules and use common standard-library modules confidently.</li><li>Apply the KHDA-benchmarked professional additions in a realistic company workflow: virtual environments (venv), dependency isolation.</li><li>Explain how modules changes the behavior, result, or engineering decision in a concrete example</li><li>Connect modules with import and predict what changes when one assumption changes</li></ul>
+<div class="body"><h3>What you will learn</h3><ul><li>Organize code into modules and use common standard-library modules confidently.</li><li>Apply the industry-benchmarked professional additions in a realistic company workflow: virtual environments (venv), dependency isolation.</li><li>Explain how modules changes the behavior, result, or engineering decision in a concrete example</li><li>Connect modules with import and predict what changes when one assumption changes</li></ul>
 <div class="note"><b>Aptech Beginner 6 aligned:</b> This is the canonical lesson for this curriculum topic; duplicate copies were removed.</div>
 <section class="lesson-main-explanation" data-main-explanation>
 <h3>Explanation</h3>
 <p>Modules organize reusable Python code. You can import your own files or standard-library modules, inspect available names with dir(), and choose clear import styles so dependencies stay readable.</p>
 </section>
-<div class="note khda-benchmark-note" data-khda-benchmark-note="true"><b>Professional benchmark addition: </b>These company-use concepts were kept after comparing the course with public syllabi from KHDA-listed Dubai training providers: virtual environments (venv), dependency isolation.</div><h3>Key concepts</h3><div class="meta"><span class="pill">modules</span><span class="pill">import</span><span class="pill">sys</span><span class="pill">math</span><span class="pill">time</span><span class="pill">dir()</span><span class="pill">virtual environments (venv)</span><span class="pill">dependency isolation</span></div>
+<div class="note benchmark-note" data-benchmark-note="true"><b>Professional benchmark addition: </b>These company-use concepts were kept after comparing the course with public syllabi from professional training providers: virtual environments (venv), dependency isolation.</div><h3>Key concepts</h3><div class="meta"><span class="pill">modules</span><span class="pill">import</span><span class="pill">sys</span><span class="pill">math</span><span class="pill">time</span><span class="pill">dir()</span><span class="pill">virtual environments (venv)</span><span class="pill">dependency isolation</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="candidate">import math
 print(math.sqrt(81))
 print(math.pi)</pre><pre class="code" data-example-audit="candidate">import sys
@@ -695,7 +695,7 @@ class Account:
 def can_withdraw(account: Account, cents: int) -&gt; bool:
     return 0 &lt;= cents &lt;= account.balance_cents
 
-a = Account("Ahmed", 2500)
+a = Account("Maria", 2500)
 print(can_withdraw(a, 700))</pre>
 <div class="note"><b>Common mistake:</b> Treating type hints as runtime validation.</div>
 </div></details>

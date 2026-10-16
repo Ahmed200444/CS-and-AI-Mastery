@@ -34,7 +34,7 @@ Version: 5.28.0
 For the five-line Python example:
 
 1. Imports `sys` and `keyword` modules.
-2. Stores `"Ahmed"` in `name`.
+2. Stores `"Maria"` in `name`.
 3. Prints `sys.version_info.major`.
 4. Prints `type(name)`.
 5. Prints `keyword.iskeyword("class")`.

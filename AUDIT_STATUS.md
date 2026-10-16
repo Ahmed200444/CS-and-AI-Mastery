@@ -12,7 +12,7 @@
 - 895 total rendered examples remain when the hidden OOP compatibility route is included.
 - 794 exercises, 271 project/capstone surfaces, and 1,585 knowledge checks.
 - Big-O has 11 distinct curated examples with direct key-idea mapping.
-- Practical UML, company-style problem solving, purpose-first guidance, KHDA benchmark material, and the main GitHub setup page remain preserved.
+- Practical UML, company-style problem solving, purpose-first guidance, industry benchmark material, and the main GitHub setup page remain preserved.
 
 ## Compatibility note
 

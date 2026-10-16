@@ -70,12 +70,12 @@ POST /users    -&gt; 201 Created</pre>
 <div class="note"><b>Common mistake:</b> Using GET for an operation that changes server state -- GET requests can be cached, prefetched, or retried automatically.</div>
 </div></details><details class="lesson" data-lesson="be-servers">
 <summary><span class="num">02</span><span class="title">Servers: what happens when a request arrives</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Trace a request from the network to your application code</li><li>Apply the KHDA-benchmarked professional additions in a realistic company workflow: middleware, environment-based configuration, structured logging.</li><li>Explain how server process changes the behavior, result, or engineering decision in a concrete example</li><li>Connect server process with port and predict what changes when one assumption changes</li></ul>
+<div class="body"><h3>What you will learn</h3><ul><li>Trace a request from the network to your application code</li><li>Apply the industry-benchmarked professional additions in a realistic company workflow: middleware, environment-based configuration, structured logging.</li><li>Explain how server process changes the behavior, result, or engineering decision in a concrete example</li><li>Connect server process with port and predict what changes when one assumption changes</li></ul>
 <section class="lesson-main-explanation" data-main-explanation>
 <h3>Explanation</h3>
 <p>A server is a process listening on a port for incoming connections. When a request arrives, the OS hands it to your server process, which parses the HTTP request, routes it to the right handler function based on method+path, runs your code, and sends a response back down the same connection.</p>
 </section>
-<div class="note khda-benchmark-note" data-khda-benchmark-note="true"><b>Professional benchmark addition: </b>These company-use concepts were kept after comparing the course with public syllabi from KHDA-listed Dubai training providers: middleware, environment-based configuration, structured logging.</div><h3>Key concepts</h3><div class="meta"><span class="pill">server process</span><span class="pill">port</span><span class="pill">request routing</span><span class="pill">socket (concept)</span><span class="pill">middleware</span><span class="pill">environment-based configuration</span><span class="pill">structured logging</span></div>
+<div class="note benchmark-note" data-benchmark-note="true"><b>Professional benchmark addition: </b>These company-use concepts were kept after comparing the course with public syllabi from professional training providers: middleware, environment-based configuration, structured logging.</div><h3>Key concepts</h3><div class="meta"><span class="pill">server process</span><span class="pill">port</span><span class="pill">request routing</span><span class="pill">socket (concept)</span><span class="pill">middleware</span><span class="pill">environment-based configuration</span><span class="pill">structured logging</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># conceptually, before any framework:
 # 1. socket accepts a connection
 # 2. read raw bytes, parse method+path+headers
@@ -105,7 +105,7 @@ user = User.objects.get(id=user_id)</pre>
 <p>REST models your app as resources (nouns) accessed via URLs and HTTP verbs. JSON is the standard data format — key/value pairs, arrays, nested objects.</p>
 </section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">REST</span><span class="pill">resources</span><span class="pill">JSON</span><span class="pill">statelessness</span><span class="pill">creates a resource</span></div>
-<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">{ "id": 5, "name": "Ahmed", "active": true }</pre>
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">{ "id": 5, "name": "Maria", "active": true }</pre>
 <div class="note"><b>Common mistake:</b> Designing endpoints around actions/verbs (e.g.</div>
 </div></details><details class="lesson" data-lesson="be-auth">
 <summary><span class="num">05</span><span class="title">Authentication: sessions vs tokens</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
@@ -136,12 +136,12 @@ def hello(name: str):
 <div class="note"><b>Common mistake:</b> Skipping type hints on path operation parameters -- FastAPI's automatic validation and docs generation depend on them.</div>
 </div></details><details class="lesson" data-lesson="be-security">
 <summary><span class="num">07</span><span class="title">Security &amp; input validation</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Identify and prevent the most common backend vulnerabilities</li><li>Apply the KHDA-benchmarked professional additions in a realistic company workflow: CORS, password hashing, safe file upload/download.</li><li>Explain how SQL injection changes the behavior, result, or engineering decision in a concrete example</li><li>Connect SQL injection with input validation and predict what changes when one assumption changes</li></ul>
+<div class="body"><h3>What you will learn</h3><ul><li>Identify and prevent the most common backend vulnerabilities</li><li>Apply the industry-benchmarked professional additions in a realistic company workflow: CORS, password hashing, safe file upload/download.</li><li>Explain how SQL injection changes the behavior, result, or engineering decision in a concrete example</li><li>Connect SQL injection with input validation and predict what changes when one assumption changes</li></ul>
 <section class="lesson-main-explanation" data-main-explanation>
 <h3>Explanation</h3>
 <p>Never trust client input. SQL injection happens when user input is concatenated directly into a query instead of using parameterized queries.</p>
 </section>
-<div class="note khda-benchmark-note" data-khda-benchmark-note="true"><b>Professional benchmark addition: </b>These company-use concepts were kept after comparing the course with public syllabi from KHDA-listed Dubai training providers: CORS, password hashing, safe file upload/download.</div><h3>Key concepts</h3><div class="meta"><span class="pill">SQL injection</span><span class="pill">input validation</span><span class="pill">parameterized queries</span><span class="pill">rate limiting</span><span class="pill">CORS</span><span class="pill">password hashing</span><span class="pill">safe file upload/download</span></div>
+<div class="note benchmark-note" data-benchmark-note="true"><b>Professional benchmark addition: </b>These company-use concepts were kept after comparing the course with public syllabi from professional training providers: CORS, password hashing, safe file upload/download.</div><h3>Key concepts</h3><div class="meta"><span class="pill">SQL injection</span><span class="pill">input validation</span><span class="pill">parameterized queries</span><span class="pill">rate limiting</span><span class="pill">CORS</span><span class="pill">password hashing</span><span class="pill">safe file upload/download</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># VULNERABLE:
 query = f"SELECT * FROM users WHERE name = '{user_input}'"
 

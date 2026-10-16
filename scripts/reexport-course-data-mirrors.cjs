@@ -2,7 +2,7 @@
 // FIX #18 -- inject-course-loader.cjs (step 9) exports assets/course-data/<id>.json from the
 // index.html coursedata island. Several LATER steps then rewrite that island's lesson/exercise
 // text (the concise v5.64+ wording), so the mirrors written at step 9 keep the older copy.
-// tests/aud-eece355-uml-contract.test.js compares the software-engineering-practice mirror
+// the UML contract test compares the software-engineering-practice mirror
 // against the island with deepStrictEqual and reports "course-data mirror drift".
 //
 // Re-export the mirrors from the FINAL island so they always match what the page ships.

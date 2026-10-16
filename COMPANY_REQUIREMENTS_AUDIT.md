@@ -116,4 +116,4 @@ The audit did **not** add separate “ByteDance DSA”, “Revolut Python”, �
 
 ## Source basis
 
-The requirement map was built from current official ByteDance internship/job material (Dubai backend, foundation software, network automation and BytePlus GenAI roles) and Revolut's current 2027 Software Engineer (Python) internship listing. Candidate reports were used only as secondary evidence for practical interview emphasis; they were not treated as guaranteed interview formats.
+The requirement map was built from current official ByteDance internship/job material (Toronto backend, foundation software, network automation and BytePlus GenAI roles) and Revolut's current 2027 Software Engineer (Python) internship listing. Candidate reports were used only as secondary evidence for practical interview emphasis; they were not treated as guaranteed interview formats.

@@ -12,7 +12,7 @@ function prewarmPython(){var r=sharedPythonRunner();return r&&typeof r.prewarm==
 async function runPython(code){var r=sharedPythonRunner();if(!r||typeof r.runSource!=='function')throw new Error('Python runner is still preparing. Try again in a moment.');return r.runSource(code);}
 
 function pyProgram(topic,seed){var t=norm(topic),n=(seed||0)+3;
- if(/variable|type|assignment/.test(t))return 'age = '+(18+n)+'\nname = "Ahmed"\nprint(f"{name} is {age}")';
+ if(/variable|type|assignment/.test(t))return 'age = '+(18+n)+'\nname = "Maria"\nprint(f"{name} is {age}")';
  if(/string|slice/.test(t))return 'text = "computer engineering"\nprint(text.upper())\nprint(text[:8])\nprint(f"length={len(text)}")';
  if(/loop|iteration|enumerate/.test(t))return 'nums = [2, 4, 6, 8]\nfor i, value in enumerate(nums):\n    print(i, value * 2)';
  if(/function|parameter|argument|lambda/.test(t))return 'def transform(value, factor=2):\n    return value * factor\n\nprint(transform('+n+'))';

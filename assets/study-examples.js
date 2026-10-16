@@ -932,7 +932,7 @@ function generatedForPlan(b,course,p,index,used){
  return{type:'scenario'};
 }
 
-/* v5.47 KHDA-benchmarked company-use professional-readiness override.
+/* v5.47 industry-benchmarked company-use professional-readiness override.
    Coverage alone is not enough: every key idea must have a concrete, course-appropriate example.
    Runnable code is used only when the generator can represent the idea faithfully; otherwise the
    learner gets a realistic professional scenario with an observable success check. */

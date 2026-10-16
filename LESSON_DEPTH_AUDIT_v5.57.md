@@ -40,4 +40,4 @@ Advanced Computer Organization, Systems Programming, and Embedded Systems receiv
 - Static-page key ideas are verified against source course data.
 - Every key idea retains a professional example and success check.
 - Active native/static examples retain the no-exact-duplicate and no-literal-only-duplicate guarantees.
-- Existing company-use, KHDA, AUD UML, purpose-first, problem-solving, progress, runner, launcher, and GitHub contracts remain enabled.
+- Existing company-use, professional-training, AUD UML, purpose-first, problem-solving, progress, runner, launcher, and GitHub contracts remain enabled.

@@ -149,8 +149,8 @@ cleaned = cleaned.replace(&quot;&#39;&quot;, &quot;&quot;)
 </section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">sentiment analysis</span><span class="pill">named entity recognition</span><span class="pill">entity-level evaluation</span><span class="pill">NER</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># sentiment: &#39;This product is amazing!&#39; -&gt; positive
-# NER: &#39;Ahmed works at ByteDance in Dubai&#39; -&gt;
-#   [Ahmed: PERSON, ByteDance: ORG, Dubai: LOCATION]</pre>
+# NER: &#39;Maria works at ByteDance in Toronto&#39; -&gt;
+#   [Maria: PERSON, ByteDance: ORG, Toronto: LOCATION]</pre>
 <div class="note"><b>Common mistake:</b> Evaluating NER with simple accuracy instead of entity-level precision/recall — partial or boundary-off entity matches need their own careful scoring, not a naive right/wrong count.</div>
 </div></details><details class="lesson" data-lesson="nlp-eval-bias" >
 <summary><span class="num">09</span><span class="title">Evaluation, bias &amp; multilingual issues</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>

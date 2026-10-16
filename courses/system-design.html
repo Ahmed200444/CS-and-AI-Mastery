@@ -131,7 +131,7 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <p>A CDN caches and serves static content (images, videos, JS/CSS files) from servers geographically distributed close to actual users, rather than all requests traveling back to one origin server. This reduces latency (physical distance directly affects network round-trip time) and reduces load on the origin server itself.</p>
 </section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">CDN</span><span class="pill">edge server</span><span class="pill">latency</span></div>
-<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># without a CDN: a user in Dubai fetches an image from a server in the US --
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># without a CDN: a user in Toronto fetches an image from a server in the US --
 # long round trip every time
 # with a CDN: that image is cached at a nearby edge server,
 # served with much lower latency</pre>

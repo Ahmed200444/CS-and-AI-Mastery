@@ -35,7 +35,7 @@ for(const id of ['embedded-systems','systems-programming','advanced-computer-org
   assert(page.includes('assessment-practice.js'),`${id}: static course page does not load knowledge-check renderer`);
   assert(page.includes('24 checkpoints'),`${id}: static course page checkpoint count is stale`);
 }
-const htmlFiles=[path.join(root,'index.html'),path.join(root,'bytedance-2027-prep.html'),...fs.readdirSync(path.join(root,'courses')).filter(x=>x.endsWith('.html')).map(x=>path.join(root,'courses',x))];
+const htmlFiles=[path.join(root,'index.html'),...fs.readdirSync(path.join(root,'courses')).filter(x=>x.endsWith('.html')).map(x=>path.join(root,'courses',x))];
 for(const file of htmlFiles){
   const html=fs.readFileSync(file,'utf8');
   for(const m of html.matchAll(/<button\b[^>]*data-theme-toggle[^>]*>/gi)) assert(/aria-label\s*=|aria-labelledby\s*=/i.test(m[0]),`${path.basename(file)}: theme button missing accessible name`);

@@ -19,7 +19,7 @@ for(const f of courses){
   const h=fs.readFileSync(path.join(root,'courses',f),'utf8');
   assert(h.includes('../assets/try-it-yourself-v568.js?v=20260822-v568'),`${f}: missing v5.68 Try it yourself layer`);
 }
-for(const f of ['index.html','bytedance-2027-prep.html','github-setup.html']){
+for(const f of ['index.html','github-setup.html']){
   const h=fs.readFileSync(path.join(root,f),'utf8');
   assert(h.includes('assets/try-it-yourself-v568.js?v=20260822-v568'),`${f}: missing v5.68 Try it yourself layer`);
 }

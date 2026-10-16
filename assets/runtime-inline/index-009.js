@@ -56,7 +56,7 @@
   }
 
   window.roadRender = function(){
-    var coreNote = 'Steps 1&ndash;11 are the internship-core track &mdash; this is what actually gets you hired as a Dubai SWE intern. Git (3), Debugging (8), and Problem Solving (10) aren\'t really "phases" &mdash; treat them as continuous skills you build alongside everything else, starting now.';
+    var coreNote = 'Steps 1&ndash;11 are the internship-core track &mdash; this is what actually gets you hired as a software engineering intern. Git (3), Debugging (8), and Problem Solving (10) aren\'t really "phases" &mdash; treat them as continuous skills you build alongside everything else, starting now.';
     var aiNote = 'Steps 12&ndash;20 are the after-hired track &mdash; what turns you from "a software engineer" into "a top AI/ML engineer." Don\'t block on finishing these before applying for internships; the core above is enough to get in the door.';
     var html = tierBlock('core','Steps 1–11','Internship Core', coreNote)
              + tierBlock('ai','Steps 12–20','AI / ML Track', aiNote);

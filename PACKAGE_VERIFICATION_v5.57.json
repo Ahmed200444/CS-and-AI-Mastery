@@ -33,7 +33,7 @@
     "productionIntegrity": "PASS",
     "purposeFirstAudit": "PASS",
     "companyProblemSolvingAudit": "PASS",
-    "khdaPostUpdateAudit": "PASS",
+    "benchmarkPostUpdateAudit": "PASS",
     "serverRelease": "5.57",
     "serverFiles": 749,
     "localGitHubBackend": true,

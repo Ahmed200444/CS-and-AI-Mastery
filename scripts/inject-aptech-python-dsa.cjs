@@ -27,8 +27,8 @@ lesson('aptech-py-intro',13,'Aptech Beginner 1 — Python environment & foundati
  'Python is an interpreted language with a strong focus on readability. A beginner should know how a Python file is executed, how an IDE or command line fits into the workflow, and how Python names are bound to objects at runtime. Help and inspection tools make unfamiliar code easier to explore.',
  ['Python versions','installation','environment variables','command line','IDLE / editor','help()','dynamic typing','keywords','naming'],
  [
-  ['Inspect runtime values',`import sys, keyword\nname = "Ahmed"\nprint(sys.version_info.major)\nprint(type(name))\nprint(keyword.iskeyword("class"))`],
-  ['Valid naming style',`student_name = "Ahmed"\nMAX_RETRIES = 3\nprint(student_name, MAX_RETRIES)`],
+  ['Inspect runtime values',`import sys, keyword\nname = "Maria"\nprint(sys.version_info.major)\nprint(type(name))\nprint(keyword.iskeyword("class"))`],
+  ['Valid naming style',`student_name = "Maria"\nMAX_RETRIES = 3\nprint(student_name, MAX_RETRIES)`],
   ['Explore an object',`text = "python"\nprint([name for name in dir(text) if name.startswith("is")][:6])`],
   ['Read an environment variable safely',`import os\nmode = os.environ.get("APP_MODE", "development")\nprint(mode)`],
   ['Use built-in help metadata',`print(str.upper.__doc__.splitlines()[0])`]
@@ -43,9 +43,9 @@ lesson('aptech-py-syntax',14,'Aptech Beginner 2 — Basic Python syntax & string
  [
   ['Comments and basic syntax',`# A comment explains intent\ncourse = "Python"\nhours = 20\nprint(course, hours)`],
   ['String operations and slices',`text = "Python Programming"\nprint(text.upper())\nprint(text[:6])\nprint(text[-11:])`],
-  ['The format method',`name = "Ahmed"\nscore = 92\nprint("{} scored {}".format(name, score))`],
+  ['The format method',`name = "Maria"\nscore = 92\nprint("{} scored {}".format(name, score))`],
   ['Numeric conversion',`raw = "21"\nage = int(raw)\nprint(age + 1)\nprint(float(age))`],
-  ['Simple input/output model',`name = "Ahmed"  # imagine this came from input()\nprint("Welcome,", name)`]
+  ['Simple input/output model',`name = "Maria"  # imagine this came from input()\nprint("Welcome,", name)`]
  ],
  'Forgetting that input() returns text; convert to int or float when arithmetic is required.',
  ['Basic syntax and comments','String values, operations, format, slices, operators','Numeric data types and conversions','Simple input/output and print']
@@ -71,7 +71,7 @@ lesson('aptech-py-collections',16,'Aptech Beginner 4 — Collections, sorting & 
  [
   ['Lists and tuples',`items = ["A", "B"]\nitems.append("C")\npoint = (3, 4)\nprint(items, point)`],
   ['Sets',`values = [1, 1, 2, 3, 3]\nunique = set(values)\nprint(unique)\nprint(2 in unique)`],
-  ['Dictionaries',`student = {"name":"Ahmed", "score":92}\nstudent["passed"] = True\nprint(student)`],
+  ['Dictionaries',`student = {"name":"Maria", "score":92}\nstudent["passed"] = True\nprint(student)`],
   ['Sort dictionary items',`scores = {"B":88, "A":95, "C":88}\nprint(sorted(scores.items()))\nprint(sorted(scores.items(), key=lambda item: (-item[1], item[0])))`],
   ['Shallow vs deep copy',`import copy\noriginal = [[1], [2]]\nshallow = original.copy()\ndeep = copy.deepcopy(original)\nshallow[0].append(9)\ndeep[1].append(8)\nprint(original)\nprint(deep)`]
  ],
@@ -84,7 +84,7 @@ lesson('aptech-py-functions',17,'Aptech Beginner 5 — Functions from basics to 
  ['def','parameters','docstrings','keyword arguments','*args / **kwargs','scope','first-class functions','lambda','closures'],
  [
   ['Define and document',`def area(width, height):\n    """Return rectangle area."""\n    return width * height\n\nprint(area(4, 3))\nprint(area.__doc__)`],
-  ['Keyword and optional parameters',`def greet(name, greeting="Hello"):\n    return f"{greeting}, {name}"\n\nprint(greet("Ahmed"))\nprint(greet(name="Ahmed", greeting="Welcome"))`],
+  ['Keyword and optional parameters',`def greet(name, greeting="Hello"):\n    return f"{greeting}, {name}"\n\nprint(greet("Maria"))\nprint(greet(name="Maria", greeting="Welcome"))`],
   ['Collections and variable arguments',`def report(scores, *tags, **meta):\n    print(sum(scores) / len(scores))\n    print(tags)\n    print(meta)\n\nreport([80,90,100], "DSA", level="beginner")`],
   ['First-class functions and dispatch',`def add(a,b): return a+b\ndef multiply(a,b): return a*b\nops = {"+": add, "*": multiply}\nprint(ops["*"](6, 7))`],
   ['Lambda and closure',`square = lambda n: n*n\ndef multiplier(factor):\n    return lambda value: value * factor\n\ndouble = multiplier(2)\nprint(square(5), double(7))`]

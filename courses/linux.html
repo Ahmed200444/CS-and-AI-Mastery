@@ -202,9 +202,9 @@ brew install nginx                           # macOS</pre>
 <p>SSH (Secure Shell) lets you log into and run commands on a remote machine over an encrypted connection -- `ssh user@host` opens a remote shell session, and SSH keys (a public/private key pair) let you authenticate without typing a password every time, which is both more convenient and more secure than password auth.</p>
 </section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">SSH</span><span class="pill">ssh key</span><span class="pill">public/private key pair</span><span class="pill">scp</span><span class="pill">curl</span><span class="pill">remote server</span><span class="pill">encrypted connection</span></div>
-<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">ssh ahmed@my-server.example.com          # open a remote shell session
-scp local-file.txt ahmed@my-server:/home/ahmed/   # copy a file TO the server
-scp ahmed@my-server:/var/log/app.log .            # copy a file FROM the server
+<h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">ssh student@my-server.example.com          # open a remote shell session
+scp local-file.txt student@my-server:/home/student/   # copy a file TO the server
+scp student@my-server:/var/log/app.log .            # copy a file FROM the server
 
 curl https://api.example.com/health      # quick check: is this endpoint responding?
 curl -X POST -d '{"key":"value"}' https://api.example.com/data</pre>

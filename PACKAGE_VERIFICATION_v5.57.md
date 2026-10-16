@@ -52,7 +52,7 @@ From a completely fresh extraction of the final ZIP:
 - Production integrity audit: **PASS**.
 - Purpose-first audit: **PASS**.
 - Company problem-solving audit: **PASS**.
-- KHDA curriculum benchmark regression: **PASS**.
+- professional-training curriculum benchmark regression: **PASS**.
 - Live local server: **PASS** — release 5.57, 749 local files preloaded, local GitHub backend enabled.
 - Homepage: **HTTP 200**.
 - GitHub setup page: **HTTP 200**.

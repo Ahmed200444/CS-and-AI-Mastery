@@ -90,7 +90,7 @@ int main() {
     int age = 21;
     double gpa = 3.75;
     bool active = true;
-    auto name = string("Ahmed");
+    auto name = string("Maria");
     cout &lt;&lt; name &lt;&lt; " " &lt;&lt; age &lt;&lt; " " &lt;&lt; gpa &lt;&lt; " " &lt;&lt; active &lt;&lt; "\n";
 }</pre><div class="note"><b>Common mistake:</b> A common mistake in Fundamental types, variables &amp; type inference is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-04"><summary><span class="num">04</span><span class="title">Constants, literals &amp; numeric limits</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Use `const` and `constexpr` correctly and reason about numeric ranges.</li><li>Explain how const changes the behavior, result, or engineering decision in a concrete example</li><li>Connect const with constexpr and predict what changes when one assumption changes</li></ul>
 <section class="lesson-main-explanation" data-main-explanation>
@@ -237,7 +237,7 @@ void show(const string&amp; text) {
     cout &lt;&lt; text &lt;&lt; "\n";
 }
 int main() {
-    string name = "Ahmed";
+    string name = "Maria";
     addBang(name);
     show(name);
 }</pre><div class="note"><b>Common mistake:</b> A common mistake in References, const references &amp; parameter passing is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-13"><summary><span class="num">13</span><span class="title">Recursion &amp; the call stack</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Trace recursive calls, identify base cases, and relate recursion to stack frames.</li><li>Explain how recursion changes the behavior, result, or engineering decision in a concrete example</li><li>Connect recursion with base case and predict what changes when one assumption changes</li></ul>
@@ -400,7 +400,7 @@ class User {
     }
 };
 int main() {
-    User u("Ahmed");
+    User u("Maria");
     cout &lt;&lt; u.name() &lt;&lt; "\n";
 }</pre><div class="note"><b>Common mistake:</b> A common mistake in Constructors, destructors &amp; initializer lists is copying syntax without tracing ownership, boundaries, state changes, or complexity.</div></div></details><details class="lesson" data-lesson="cpp-22"><summary><span class="num">22</span><span class="title">const methods, static members &amp; friend declarations</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary><div class="body"><h3>What you will learn</h3><ul><li>Use const-correct member functions and understand class-level static state and controlled friendship.</li><li>Explain how const method changes the behavior, result, or engineering decision in a concrete example</li><li>Connect const method with static member and predict what changes when one assumption changes</li></ul>
 <section class="lesson-main-explanation" data-main-explanation>
@@ -532,7 +532,7 @@ using namespace std;
 
 int main() {
     ofstream out("scores.txt");
-    out &lt;&lt; "Ahmed 95\n";
+    out &lt;&lt; "Maria 95\n";
     out.close();
     ifstream in("scores.txt");
     string name;

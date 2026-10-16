@@ -73,12 +73,12 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <div class="note"><b>Common mistake:</b> Thinking a container IS a lightweight VM — it isn't; it shares the host kernel, which is exactly why it's fast but also why it isn't as isolated as a real VM.</div>
 </div></details><details class="lesson" data-lesson="dk-image-container">
 <summary><span class="num">02</span><span class="title">Images vs containers</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Define image and container precisely</li><li>Explain the relationship between them</li><li>Apply the KHDA-benchmarked professional additions in a realistic company workflow: container registry.</li></ul>
+<div class="body"><h3>What you will learn</h3><ul><li>Define image and container precisely</li><li>Explain the relationship between them</li><li>Apply the industry-benchmarked professional additions in a realistic company workflow: container registry.</li></ul>
 <section class="lesson-main-explanation" data-main-explanation>
 <h3>Explanation</h3>
 <p>An image is a read-only template — your app plus its dependencies, frozen as a set of layered files. A container is a running instance of that image, with its own writable layer on top.</p>
 </section>
-<div class="note khda-benchmark-note" data-khda-benchmark-note="true"><b>Professional benchmark addition: </b>These company-use concepts were kept after comparing the course with public syllabi from KHDA-listed Dubai training providers: container registry.</div><h3>Key concepts</h3><div class="meta"><span class="pill">image</span><span class="pill">container</span><span class="pill">layers</span><span class="pill">container registry</span></div>
+<div class="note benchmark-note" data-benchmark-note="true"><b>Professional benchmark addition: </b>These company-use concepts were kept after comparing the course with public syllabi from professional training providers: container registry.</div><h3>Key concepts</h3><div class="meta"><span class="pill">image</span><span class="pill">container</span><span class="pill">layers</span><span class="pill">container registry</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">docker images        # list images (the templates)
 docker ps             # list running containers (instances)
 docker run python:3.11  # spins up a NEW container from the python:3.11 image</pre>
@@ -98,12 +98,12 @@ docker stop myapp</pre>
 <div class="note"><b>Common mistake:</b> Forgetting `-p` (port mapping) and then wondering why the app 'isn't responding' — the container is running, but nothing outside it can reach the port.</div>
 </div></details><details class="lesson" data-lesson="dk-dockerfile">
 <summary><span class="num">04</span><span class="title">Writing a Dockerfile</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Write a Dockerfile that builds a working image</li><li>Explain each common instruction</li><li>Apply the KHDA-benchmarked professional additions in a realistic company workflow: HEALTHCHECK.</li></ul>
+<div class="body"><h3>What you will learn</h3><ul><li>Write a Dockerfile that builds a working image</li><li>Explain each common instruction</li><li>Apply the industry-benchmarked professional additions in a realistic company workflow: HEALTHCHECK.</li></ul>
 <section class="lesson-main-explanation" data-main-explanation>
 <h3>Explanation</h3>
 <p>A Dockerfile is a recipe for building an image: FROM picks a base image, COPY brings in your code, RUN executes setup commands (like installing dependencies) at build time, and CMD specifies what runs when the container starts.</p>
 </section>
-<div class="note khda-benchmark-note" data-khda-benchmark-note="true"><b>Professional benchmark addition: </b>These company-use concepts were kept after comparing the course with public syllabi from KHDA-listed Dubai training providers: HEALTHCHECK.</div><h3>Key concepts</h3><div class="meta"><span class="pill">FROM</span><span class="pill">COPY</span><span class="pill">RUN</span><span class="pill">CMD</span><span class="pill">WORKDIR</span><span class="pill">HEALTHCHECK</span></div>
+<div class="note benchmark-note" data-benchmark-note="true"><b>Professional benchmark addition: </b>These company-use concepts were kept after comparing the course with public syllabi from professional training providers: HEALTHCHECK.</div><h3>Key concepts</h3><div class="meta"><span class="pill">FROM</span><span class="pill">COPY</span><span class="pill">RUN</span><span class="pill">CMD</span><span class="pill">WORKDIR</span><span class="pill">HEALTHCHECK</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="candidate">FROM python:3.11-slim
 WORKDIR /app
 COPY requirements.txt .
