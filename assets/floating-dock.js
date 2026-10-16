@@ -42,7 +42,8 @@ function adopt(){
     document.documentElement.classList.add('csai-has-dock');
     if(window.ResizeObserver)new ResizeObserver(function(){document.documentElement.style.setProperty('--csai-dock-h',dock.offsetHeight+'px');sideOffset(dock);}).observe(dock);
   }
-  list.forEach(function(el){if(el.parentNode!==dock)dock.appendChild(el);});
+  var inOrder=list.every(function(el,i){return dock.children[i]===el;});
+  if(!inOrder)list.forEach(function(el){dock.appendChild(el);});
   sideOffset(dock);
 }
 function schedule(){if(queued)return;queued=true;(window.requestAnimationFrame||setTimeout)(adopt);}
