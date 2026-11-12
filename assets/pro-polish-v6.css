@@ -215,3 +215,100 @@ html[data-theme="dark"] .cp1-status[data-cp1-state="published"]{color:#6fcf97}
 .cp1-open::after{content:' +'}
 details.csai-lazy-item.cp1-row[open] > summary{border-bottom:1px solid var(--border)}
 details.csai-lazy-item.cp1-row[open] .cp1-open::after{content:' −'}
+
+/* ══ v5.91 unified study style ═════════════════════════════════════════════
+   One visual language for the home page and every course page, taken from AI Engineer Study:
+   neutral surfaces, a single blue accent, flat cards, no decorative gradients or glows.
+   Only colour tokens and surface treatments change; layout, spacing and structure are untouched. */
+html[data-theme="light"],html[data-theme="light"] body,html:not([data-theme="dark"]) body[data-theme="light"]{
+  --st-bg:#f7f7f5;--st-surface:#ffffff;--st-surface-2:#f1f1ee;--st-text:#1c1d1f;--st-muted:#5d6068;--st-border:#e2e2dd;
+  --st-accent:#3b5bdb;--st-accent-soft:#e8edff;--st-accent-text:#2f4ac0;--st-on-accent:#ffffff;--st-good:#2d784c;
+}
+html[data-theme="dark"],html[data-theme="dark"] body,body[data-theme="dark"]{
+  --st-bg:#121316;--st-surface:#1a1b1f;--st-surface-2:#22242a;--st-text:#e8e8ea;--st-muted:#a3a6ae;--st-border:#2e3038;
+  --st-accent:#8ea2ff;--st-accent-soft:#252c4a;--st-accent-text:#b3c0ff;--st-on-accent:#121316;--st-good:#6fcf97;
+}
+html[data-theme],html[data-theme] body,body[data-theme]{
+  --bg:var(--st-bg)!important;--panel:var(--st-surface)!important;--text:var(--st-text)!important;--muted:var(--st-muted)!important;
+  --border:var(--st-border)!important;--pill:var(--st-accent-soft)!important;--pilltext:var(--st-accent-text)!important;--accent:var(--st-accent)!important;
+  --av4-bg:var(--st-bg)!important;--av4-bg2:var(--st-surface-2)!important;--av4-ink:var(--st-text)!important;--av4-sub:var(--st-muted)!important;
+  --av4-line:var(--st-border)!important;--av4-panel:var(--st-surface)!important;--av4-panel2:var(--st-surface-2)!important;--av4-panel3:var(--st-surface-2)!important;
+  --av4-side:var(--st-surface)!important;--av4-purple:var(--st-accent)!important;--av4-blue:var(--st-accent)!important;--av4-teal:var(--st-accent-text)!important;
+  --ulv2-bg:var(--st-bg)!important;--ulv2-ink:var(--st-text)!important;--ulv2-sub:var(--st-muted)!important;--ulv2-line:var(--st-border)!important;
+  --ulv2-line-strong:var(--st-accent)!important;--ulv2-nav:var(--st-surface)!important;--ulv2-panel:var(--st-surface)!important;--ulv2-panel-2:var(--st-surface-2)!important;
+  --ulv2-panel-3:var(--st-surface-2)!important;--ulv2-purple:var(--st-accent)!important;--ulv2-teal:var(--st-accent-text)!important;--ulv2-blue:var(--st-accent)!important;
+  --ul-accent:var(--st-accent)!important;--ul-accent-2:var(--st-accent-text)!important;--ul-accent-3:var(--st-accent)!important;
+  --ul-border:var(--st-border)!important;--ul-border-strong:var(--st-accent)!important;--ul-surface:var(--st-surface-2)!important;--ul-surface-strong:var(--st-surface-2)!important;
+  --p6-a:var(--st-accent)!important;--p6-b:var(--st-accent)!important;--p6-c:var(--st-accent)!important;
+  --p6-grad:linear-gradient(var(--st-accent),var(--st-accent))!important;--p6-track:linear-gradient(var(--st-accent),var(--st-accent))!important;
+  --p6-lift:0 1px 2px rgba(0,0,0,.05),0 2px 8px rgba(0,0,0,.05)!important;
+}
+/* Page and shell surfaces: flat, no background art */
+html.csai-unified-design body,html.adaptive-v4-live body{background:var(--st-bg)!important;background-image:none!important;color:var(--st-text)}
+html.adaptive-v4-live body::before,html.adaptive-v4-live body::after,html.csai-unified-design body::before,html.csai-unified-design body::after{background:none!important;background-image:none!important}
+html.adaptive-v4-live .av4-side{background:var(--st-surface)!important;background-image:none!important;border-right:1px solid var(--st-border)!important;box-shadow:none!important}
+html.adaptive-v4-live .av4-topbar,html.adaptive-v4-live body[data-theme="light"] .av4-topbar{background:var(--st-bg)!important;box-shadow:none!important;border-bottom:1px solid var(--st-border)!important;backdrop-filter:none!important}
+html.adaptive-v4-live .av4-nav{background:transparent!important}
+html.adaptive-v4-live .av4-nav button{background:transparent!important;color:var(--st-text)!important;box-shadow:none!important;border-color:transparent!important}
+html.adaptive-v4-live .av4-nav button:hover{background:var(--st-surface-2)!important}
+html.adaptive-v4-live .av4-nav button.on{background:var(--st-accent-soft)!important;color:var(--st-accent-text)!important}
+html.adaptive-v4-live .av4-brand-mark{background:var(--st-accent)!important;background-image:none!important;color:var(--st-on-accent)!important;box-shadow:none!important}
+/* Cards and heroes */
+html.adaptive-v4-live .av4-hero,html.adaptive-v4-live .av4-stat,html.adaptive-v4-live .av4-path-card,html.adaptive-v4-live .av4-mini-course,html.adaptive-v4-live .av4-side-card,html.adaptive-v4-live .av4-side-foot,
+html.adaptive-v4-live #hub .hub-card,html.adaptive-v4-live #hub .hub-career-section,html.csai-unified-design body.av4-course-page .hero,html.csai-unified-design body.av4-course-page .card,
+html.csai-unified-design body.av4-course-page details.lesson,html.csai-unified-design body.av4-course-page .csai-cn{
+  background:var(--st-surface)!important;background-image:none!important;border-color:var(--st-border)!important;box-shadow:0 1px 2px rgba(0,0,0,.04),0 2px 8px rgba(0,0,0,.04)!important}
+html[data-theme="dark"].adaptive-v4-live .av4-hero,html[data-theme="dark"].adaptive-v4-live .av4-stat,html[data-theme="dark"].adaptive-v4-live .av4-path-card,html[data-theme="dark"].adaptive-v4-live .av4-mini-course,
+html[data-theme="dark"].adaptive-v4-live #hub .hub-card,html[data-theme="dark"].csai-unified-design body.av4-course-page .hero,html[data-theme="dark"].csai-unified-design body.av4-course-page .card,
+html[data-theme="dark"].csai-unified-design body.av4-course-page details.lesson,html[data-theme="dark"].csai-unified-design body.av4-course-page .csai-cn{box-shadow:none!important}
+html.adaptive-v4-live .av4-hero::before,html.adaptive-v4-live .av4-hero::after,html.adaptive-v4-live .av4-path-card::before,html.adaptive-v4-live .av4-stat::before,html.adaptive-v4-live .av4-stat::after,
+html.adaptive-v4-live .av4-spotlight,html.csai-unified-design body.av4-course-page .hero::before,html.csai-unified-design body.av4-course-page .hero::after{display:none!important}
+html.adaptive-v4-live .av4-path-card:hover,html.adaptive-v4-live .av4-mini-course:hover{transform:none!important;border-color:var(--st-accent)!important}
+html.adaptive-v4-live .av4-hero h1,html.csai-unified-design body.av4-course-page .hero h1{letter-spacing:-.02em!important;color:var(--st-text)!important;background:none!important;-webkit-text-fill-color:currentColor!important}
+html.adaptive-v4-live .av4-stat strong{color:var(--st-text)!important;background:none!important;-webkit-text-fill-color:currentColor!important}
+html.adaptive-v4-live .av4-kicker,html.csai-unified-design body.av4-course-page .kicker{color:var(--st-accent-text)!important}
+html.adaptive-v4-live .av4-path-card .emoji,html.adaptive-v4-live .av4-mini-course .icon{background:var(--st-surface-2)!important;background-image:none!important;box-shadow:none!important}
+/* Buttons: one filled accent style, one outline style */
+html.adaptive-v4-live .av4-btn.primary,html.adaptive-v4-live #hub .hub-cta,html.csai-unified-design body.av4-course-page .csai-course-continue-btn,html.csai-unified-design body.av4-course-page .top a.home,
+html.csai-unified-design body.av4-course-page .top a:last-child{background:var(--st-accent)!important;background-image:none!important;color:var(--st-on-accent)!important;border-color:var(--st-accent)!important;box-shadow:none!important}
+html.adaptive-v4-live .av4-btn.ghost{background:var(--st-surface)!important;color:var(--st-text)!important;border-color:var(--st-border)!important;box-shadow:none!important}
+html.adaptive-v4-live .av4-btn.ghost:hover{border-color:var(--st-accent)!important}
+html.adaptive-v4-live .av4-side-bar i,html.csai-unified-design .csai-cn-bar i{background:var(--st-accent)!important;background-image:none!important}
+html.csai-unified-design .csai-cn a.done .n{background:var(--st-good)!important;color:var(--st-on-accent)!important}
+/* v5.91 second pass: remaining off-palette surfaces */
+html[data-theme][data-theme] body[class][class]{background:var(--st-bg)!important;background-image:none!important}
+html[data-theme] #csai-dock{background:var(--st-surface)!important;border-top:1px solid var(--st-border)!important;box-shadow:none!important;backdrop-filter:none!important}
+html[data-theme] .csai-course-continue,html[data-theme] .csai-learning-question,html[data-theme] .csai-study-brief.csai-concept-brief{background:var(--st-surface-2)!important;background-image:none!important;border-color:var(--st-border)!important;color:var(--st-text)!important}
+html[data-theme] .csai-learning-question{border-left:3px solid var(--st-accent)!important;border-radius:0 8px 8px 0}
+html[data-theme] .csai-course-continue-label,html[data-theme] .csai-resume-kicker{color:var(--st-accent-text)!important}
+html[data-theme] body.av4-course-page details.lesson > summary{background:transparent!important;background-image:none!important}
+html[data-theme] a.lv-thumb.lv-noimg{background:var(--st-accent)!important;background-image:none!important}
+html[data-theme] button.csai-next-btn,html[data-theme] .lesson-run-btn,html[data-theme] .csai-resume-btn,html[data-theme] .lv-play,html[data-theme] .project-btn.run{background:var(--st-accent)!important;background-image:none!important;color:var(--st-on-accent)!important;border-color:var(--st-accent)!important;box-shadow:none!important}
+html[data-theme] .csai-resume-card{background:var(--st-surface-2)!important;background-image:none!important;border-color:var(--st-border)!important;box-shadow:none!important}
+html[data-theme] .csai-resume-card p,html[data-theme] .csai-resume-stats{color:var(--st-muted)!important}
+html.adaptive-v4-live .av4-hero-art{background:#16171a!important;background-image:none!important;border-color:var(--st-border)!important;box-shadow:none!important}
+html.adaptive-v4-live .av4-hero-art::after{display:none!important}
+/* v5.91 catalog view and remaining buttons */
+html[data-theme] #csai-catalog-recovery[id],html[data-theme] #csai-catalog-recovery .scr-wrap,html[data-theme] #csai-catalog-recovery .scr-top{background:var(--st-bg)!important;background-image:none!important;color:var(--st-text)!important}
+html[data-theme] #csai-catalog-recovery .scr-card,html[data-theme] #csai-catalog-recovery .scr-hero,html[data-theme] #csai-catalog-recovery .scr-head,html[data-theme] #csai-catalog-recovery .scr-empty{background:var(--st-surface)!important;background-image:none!important;border-color:var(--st-border)!important;color:var(--st-text)!important;box-shadow:0 1px 2px rgba(0,0,0,.04)!important}
+html[data-theme] #csai-catalog-recovery .scr-hero::before,html[data-theme] #csai-catalog-recovery .scr-hero::after,html[data-theme] #csai-catalog-recovery .scr-head::before,html[data-theme] #csai-catalog-recovery .scr-head::after{display:none!important}
+html[data-theme] #csai-catalog-recovery .scr-card:hover{border-color:var(--st-accent)!important;transform:none!important}
+html[data-theme] #csai-catalog-recovery h1,html[data-theme] #csai-catalog-recovery h2,html[data-theme] #csai-catalog-recovery h3,html[data-theme] #csai-catalog-recovery b,html[data-theme] #csai-catalog-recovery strong{color:var(--st-text)!important;background:none!important;-webkit-text-fill-color:currentColor!important}
+html[data-theme] #csai-catalog-recovery p,html[data-theme] #csai-catalog-recovery .scr-muted,html[data-theme] #csai-catalog-recovery .scr-desc{color:var(--st-muted)!important}
+html[data-theme] #csai-catalog-recovery .scr-btn,html[data-theme] #csai-catalog-recovery .scr-select,html[data-theme] #csai-catalog-recovery input{background:var(--st-surface)!important;background-image:none!important;color:var(--st-text)!important;border-color:var(--st-border)!important;box-shadow:none!important}
+html[data-theme] #csai-catalog-recovery .scr-btn.scr-primary{background:var(--st-accent)!important;background-image:none!important;color:var(--st-on-accent)!important;border-color:var(--st-accent)!important}
+html[data-theme] #csai-catalog-recovery .scr-tag,html[data-theme] #csai-catalog-recovery .scr-num{background:var(--st-accent-soft)!important;color:var(--st-accent-text)!important}
+html[data-theme] #csai-catalog-recovery .scr-progress{background:var(--st-border)!important}
+html[data-theme] #csai-catalog-recovery .scr-kicker{color:var(--st-accent-text)!important}
+html[data-theme] .lv-btn.lv-primary,html[data-theme] .lv-go,html[data-theme] button.lv-play-here{background:var(--st-accent)!important;background-image:none!important;color:var(--st-on-accent)!important;border-color:var(--st-accent)!important}
+/* v5.91 path pages */
+html[data-theme] .cx-hero,html[data-theme] .ai-path-continue,html[data-theme] .ai-path-step{background:var(--st-surface)!important;background-image:none!important;border-color:var(--st-border)!important;box-shadow:none!important}
+html[data-theme] .ai-path-continue{background:var(--st-accent-soft)!important}
+html[data-theme] .cx-hero::before,html[data-theme] .cx-hero::after{display:none!important}
+html[data-theme] .ai-path-kicker{color:var(--st-accent-text)!important}
+html[data-theme] .ai-path-meta,html[data-theme] .ai-path-phase-count,html[data-theme] .ai-path-caret,html[data-theme] .ai-path-phase-note,html[data-theme] .ai-path-reason,html[data-theme] .fsp-stage-pct,html[data-theme] .fsp-milestone{color:var(--st-muted)!important}
+html[data-theme] .ai-path-lesson-line{background:var(--st-surface-2)!important;border-color:var(--st-accent)!important}
+html[data-theme] .ai-path-priority,html[data-theme] .cx-flag{background:var(--st-accent-soft)!important;color:var(--st-accent-text)!important}
+html[data-theme] .ai-path-priority.ai-path-priority-supporting{background:var(--st-surface-2)!important;color:var(--st-muted)!important}
+html[data-theme] button.wd-btn,html[data-theme] button.fsp-stage-btn{background:var(--st-accent)!important;background-image:none!important;color:var(--st-on-accent)!important;border-color:var(--st-accent)!important;box-shadow:none!important}
+html[data-theme] button.cx-open-btn{color:var(--st-accent-text)!important}
