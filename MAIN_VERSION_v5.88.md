@@ -11,6 +11,8 @@ Baseline: v5.87.0. Still 62 course routes; no course, lesson, id or stored progr
 - `assets/progress-resume.js`, `assets/adaptive-v4-live.js`: lessons completed in removed courses are no longer counted in "lessons complete", "Your progress" or "courses started". The saved data itself is left in the browser untouched.
 - `assets/adaptive-v4-live.js`: the home course tiles show the catalog's real lesson and exercise counts instead of fixed numbers.
 
+- `assets/optional-services.js`, `netlify/functions/tutor.mjs`: the Tutor button is hidden when the site has no AI provider key, because it could only answer with a "not configured" notice. It returns by itself once a key is set in Netlify.
+
 ### Changed (home page only)
 - `assets/pro-polish-v6.css`: course and feature card buttons line up along the bottom edge; path cards lose their empty space; the three feature cards sit in one row on wide screens; the top bar is opaque so scrolled content no longer shows through it.
 - `assets/adaptive-v4-live.js`: an eighth "Browse all courses" tile completes the course grid and opens the catalog.
