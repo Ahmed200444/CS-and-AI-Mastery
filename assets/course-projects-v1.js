@@ -9,7 +9,7 @@ try{meta=JSON.parse((document.getElementById('course-page-meta')||{}).textConten
 if(!meta||!meta.id)return;
 var CID=String(meta.id),DRAFT='csai-project-draft-v1:'+CID+':',ACTIVITY='csai_activity_v1';
 var LEVELS={1:'Starter',2:'Intermediate',3:'Advanced',4:'Capstone'};
-var levels=null,levelsAsked=false;
+var levels=null,levelsAsked=false,capstone='';
 
 function read(key){try{return JSON.parse(localStorage.getItem(key)||'{}')||{}}catch(e){return{}}}
 function has(key){try{return localStorage.getItem(key)!==null}catch(e){return false}}
@@ -53,6 +53,7 @@ function loadLevels(){
   fetch('../assets/course-data/'+encodeURIComponent(CID)+'.json').then(function(r){return r.ok?r.json():null}).then(function(d){
     if(!d||!Array.isArray(d.projects))return;
     levels={};d.projects.forEach(function(p){if(p&&p.id&&LEVELS[p.level])levels[p.id]=LEVELS[p.level]});
+    capstone=d.capstone&&d.capstone.title?clean(d.capstone.title).toLowerCase():'';
     paint();
   }).catch(function(){});
 }
@@ -76,7 +77,8 @@ function decorate(row,index){
     sum.appendChild(chips);
     sum.appendChild(el('span','cp1-open','Open project'));
   }
-  var eyebrow=sum.querySelector('.cp1-eyebrow'),level=levels&&levels[pid];
+  var eyebrow=sum.querySelector('.cp1-eyebrow'),level=levels&&levels[pid],shown=sum.querySelector('.cp1-title');
+  if(!level&&capstone&&shown&&clean(shown.textContent).toLowerCase()===capstone)level='Capstone';
   if(eyebrow)eyebrow.textContent='Project '+pad(index+1)+(level?' · '+level:'');
   var st=statusOf(pid),badge=sum.querySelector('.cp1-status');
   if(badge){badge.textContent=st.text;badge.setAttribute('data-cp1-state',st.key)}
