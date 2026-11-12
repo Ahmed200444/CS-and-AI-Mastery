@@ -46,7 +46,8 @@ function guided(mode,c){
  return'The lesson-aware tutor is available in guided mode, but open-ended AI responses need one configured free-provider key in Netlify.';
 }
 export default async function(req){
- if(req.method!=='POST')return out(405,{error:'Method not allowed.'});
+ /* GET is the availability probe: `configured` tells the page whether an AI provider key exists, so the Tutor button can be hidden when it does not. */
+ if(req.method!=='POST')return out(405,{error:'Method not allowed.',configured:!!(env('GROQ_API_KEY')||env('GOOGLE_GENERATIVE_AI_API_KEY')||env('OPENROUTER_API_KEY'))});
  if(!sameOrigin(req))return out(403,{error:'Cross-site tutor requests are blocked.'});
  var len=Number(req.headers.get('content-length')||0);if(len>MAX)return out(413,{error:'Tutor request is too large.'});
  var p;try{p=await req.json();}catch(e){return out(400,{error:'Invalid JSON.'});}

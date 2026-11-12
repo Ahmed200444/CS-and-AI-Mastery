@@ -24,6 +24,7 @@
   }
   /* GitHub is usable when the status endpoint answers and a GitHub App (or the local gh login) is configured. */
   probe('/api/github/status',{credentials:'same-origin'},function(r,d){return r.ok&&d&&typeof d==='object'&&(d.connected===true||!!d.installUrl||d.local===true);},'github');
-  /* The tutor function answers 405 to GET when it exists; static hosts answer 404 or HTML. */
-  probe('/api/tutor',{method:'GET'},function(r){return r.status===405;},'tutor');
+  /* The tutor function answers 405 to GET when it exists; static hosts answer 404 or HTML.
+     It also reports `configured:false` when no AI provider key is set; the button is hidden then, because it could not answer questions. */
+  probe('/api/tutor',{method:'GET'},function(r,d){return r.status===405&&!(d&&d.configured===false);},'tutor');
 })();

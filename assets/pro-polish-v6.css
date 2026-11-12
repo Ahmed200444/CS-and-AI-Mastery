@@ -147,3 +147,35 @@ html.csai-unified-design[data-theme="dark"] .av4-stat strong{background:linear-g
   html.csai-unified-design *{transition-duration:.01ms!important}
   .p6-rv{opacity:1;transform:none}
 }
+
+/* ── v5.88 home polish ─────────────────────────────────────────────────────
+   Home page only (#hub). Aligns card actions, removes dead space, completes the
+   course grid and keeps scrolled content from showing through the top bar. */
+html.adaptive-v4-live #hub .av4-mini-course{display:flex;flex-direction:column;min-width:0}
+html.adaptive-v4-live #hub .av4-mini-course p{min-height:0;flex:1 1 auto}
+html.adaptive-v4-live #hub .av4-mini-course .av4-pills{margin-top:auto}
+html.adaptive-v4-live #hub .av4-path-card{min-height:0}
+html.adaptive-v4-live #hub .av4-path-card p{margin-bottom:20px}
+html.adaptive-v4-live #hub .av4-mini-all{appearance:none;font:inherit;text-align:left;cursor:pointer;color:inherit;border-style:dashed;justify-content:center}
+html.adaptive-v4-live #hub .av4-mini-all p{flex:0 0 auto}
+html.adaptive-v4-live #hub .av4-mini-all .icon{display:grid}
+html.adaptive-v4-live #hub .av4-mini-all-go{margin-top:6px;font-weight:800;font-size:.86rem;color:var(--av4-purple,#8b7cff)}
+html.adaptive-v4-live #hub .av4-mini-all:focus-visible{outline:2px solid var(--av4-purple,#8b7cff);outline-offset:2px}
+html.adaptive-v4-live #hub .av4-hero-row #csai-resume-card{margin:18px 0 0;max-width:780px}
+html.adaptive-v4-live .av4-topbar{background:#070b12}
+html.adaptive-v4-live body[data-theme="light"] .av4-topbar{background:#f8fafd}
+html.adaptive-v4-live #hub .hub-cards > .hub-card{display:flex;flex-direction:column}
+html.adaptive-v4-live #hub .hub-cards > .hub-card > .hub-cta{margin-top:auto}
+@media (min-width:1280px){
+  html.adaptive-v4-live #hub .hub-cards{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  html.adaptive-v4-live #hub .hub-cards > *{min-width:0}
+}
+
+/* v5.88 tutor panel: it opened underneath the home sidebar and top bar (their layers are higher), so most of it was cut off. */
+html.adaptive-v4-live #csai-tutor{z-index:10060}
+@media (min-width:881px){
+  html.adaptive-v4-live body.av4-shell #csai-tutor{left:272px}
+}
+@media (min-width:1181px){
+  html.adaptive-v4-live body.av4-shell #csai-tutor{left:304px}
+}
