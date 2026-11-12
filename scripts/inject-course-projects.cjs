@@ -4,7 +4,7 @@ const path=require('path');
 const dir=path.join(process.cwd(),'courses');
 if(!fs.existsSync(dir))throw new Error('courses directory is missing');
 if(!fs.existsSync(path.join(process.cwd(),'assets','course-projects-v1.js')))throw new Error('assets/course-projects-v1.js is missing');
-const tag='<script defer src="../assets/course-projects-v1.js?v=20261112-v590"></script>';
+const tag='<script defer src="../assets/course-projects-v1.js?v=20260822-v567"></script>';
 let count=0;
 for(const file of fs.readdirSync(dir).filter(x=>x.endsWith('.html'))){
   const full=path.join(dir,file);
