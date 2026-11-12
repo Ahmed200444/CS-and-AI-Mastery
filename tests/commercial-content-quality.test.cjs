@@ -5,7 +5,7 @@ const path=require('node:path');
 const root=path.join(__dirname,'..');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const courses=JSON.parse(read('assets/coursedata-source.json'));
-assert.equal(courses.length,65,'all 65 courses must remain in the source of truth');
+assert.equal(courses.length,62,'all 62 courses must remain in the source of truth');
 
 const source=JSON.stringify(courses);
 const visibleStrings=[];
@@ -19,11 +19,7 @@ const visibleStrings=[];
 })(courses,'');
 const visible=visibleStrings.join('\n');
 for(const [label,re] of [
- ['personal first name',/\bAhmed\b/i],
- ['personal location',/\bDubai\b/i],
- ['institution-specific visible label',/\bEECE\s*340\b/i],
  ['private lecture-source metadata',/\.pdf\b|Follow your lecture order/i],
- ['provider-specific wording',/\bKHDA\b/i],
  ['known grammar regression',/Python versions changes|Connect with with|\bA engineering-focused\b|\b02Registers\b|written with WITH|\ba extremely\b|Ingress\.\.|reviewer\.\./i]
 ]) assert.doesNotMatch(visible,re,'commercial course source still contains '+label);
 assert.doesNotMatch(source,/"lectureSequence"|"lecture"\s*:/,'private lecture metadata keys must not remain in commercial course data');
@@ -51,28 +47,7 @@ for(const course of courses){
  }
 }
 
-const arm=courses.find(c=>c.id==='arm-assembly');
-assert(arm,'ARM Assembly course missing');
-assert.match(arm.description,/practical|writing|tracing|debugging/i,'ARM Assembly must remain practice-focused');
-for(const lesson of arm.lessons||[]){
- if(lesson.id==='arm-12')continue;
- for(const example of lesson.examples||[]){
-  assert.ok(example.startsWith('AREA RESET, CODE, READONLY\nENTRY\n'),lesson.id+' ARM code must start with AREA RESET, CODE, READONLY then ENTRY');
-  assert.ok(example.trimEnd().endsWith('END'),lesson.id+' ARM code must end with END');
- }
-}
-const cpu=courses.find(c=>c.id==='microprocessors-arm');
-assert(cpu,'Microprocessors & ARM Architecture course missing');
-for(const lab of cpu.labs||[]){
- if(lab.language!=='armasm')continue;
- for(const [kind,code] of [['starterCode',lab.starterCode],['solutionCode',lab.solutionCode]]){
-  if(!code)continue;
-  assert.ok(code.startsWith('AREA RESET, CODE, READONLY\nENTRY\n'),lab.id+' '+kind+' must start with the standard RESET skeleton');
-  assert.ok(code.trimEnd().endsWith('END'),lab.id+' '+kind+' must end with END');
- }
-}
-assert.match((cpu.lessons||[]).map(l=>l.explanation||'').join(' '),/register|CPSR|RISC|exception|vector/i,'CPU course must retain the ARM architecture theory moved out of ARM Assembly');
-assert.ok(!cpu.syllabus||!cpu.syllabus.weighting,'commercial course data must not expose institution-specific assessment weighting');
+for(const removed of ['microprocessors-arm','arm-assembly','matlab-engineering'])assert.ok(!courses.some(c=>c.id===removed),removed+' was removed from the platform and must not return to the source of truth');
 
 const cpp=courses.find(c=>c.id==='cpp-dsa');
 assert(cpp,'C++ course missing');
@@ -84,6 +59,6 @@ for(const lesson of cpp.lessons||[])for(const example of lesson.examples||[]){
 
 for(const name of fs.readdirSync(path.join(root,'courses')).filter(n=>n.endsWith('.html'))){
  const html=read('courses/'+name);
- assert.doesNotMatch(html,/Follow your lecture order|data-lecture-order|\bAhmed\b|\bDubai\b|\bKHDA\b/i,name+' contains private/personal course UI');
+ assert.doesNotMatch(html,/Follow your lecture order|data-lecture-order/i,name+' contains private/personal course UI');
 }
-console.log('Commercial content quality PASS — personal/source metadata removed, exact theory repetition blocked, ARM practice split retained, and teaching syntax standardized.');
+console.log('Commercial content quality PASS — personal/source metadata removed, exact theory repetition blocked, removed courses stay removed, and teaching syntax standardized.');

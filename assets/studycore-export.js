@@ -66,7 +66,7 @@ function buildStudyCoreMarkdown(courseData,lessonIds,target,meta){
     '## Export metadata',
     '',
     '- Source: CS & AI Mastery',
-    '- Repository: Ahmed200444/CS-and-AI-Mastery',
+    '- Repository: CS-and-AI-Mastery',
     '- Course ID: '+courseData.id,
     '- Course: '+title,
     '- Selected lesson IDs: '+orderedIds.join(', '),

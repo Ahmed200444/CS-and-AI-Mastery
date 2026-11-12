@@ -2685,7 +2685,7 @@
           "tool definition"
         ],
         "requirements": [
-          "Given a weather tool definition and a user asking about weather in Dubai, write out the model's tool-call request and what your code would return.",
+          "Given a weather tool definition and a user asking about weather in Toronto, write out the model's tool-call request and what your code would return.",
           "Your response must directly answer the question or decision requested by the exercise rather than only define the topic.",
           "Choose the course idea that matches the required behavior, but decide the exact syntax, command, query form, or implementation yourself.",
           "Your explanation must connect the course concept to the specific facts, inputs, constraints, or scenario in the exercise.",
@@ -2693,7 +2693,7 @@
           "If a reasonable counterexample, trade-off, invalid case, or edge case applies, your answer must address it."
         ],
         "steps": [
-          "Given a weather tool definition and a user asking about weather in Dubai, write out the model's tool-call request and what your code would return.",
+          "Given a weather tool definition and a user asking about weather in Toronto, write out the model's tool-call request and what your code would return.",
           "Your response must directly answer the question or decision requested by the exercise rather than only define the topic.",
           "Choose the course idea that matches the required behavior, but decide the exact syntax, command, query form, or implementation yourself.",
           "Your explanation must connect the course concept to the specific facts, inputs, constraints, or scenario in the exercise.",
@@ -2701,7 +2701,7 @@
           "If a reasonable counterexample, trade-off, invalid case, or edge case applies, your answer must address it."
         ],
         "checkpoint": "You are finished when the requested behavior can be demonstrated and you can explain why your own answer is correct.",
-        "question": "Given a weather tool definition and a user asking about weather in Dubai, write out the model's tool-call request and what your code would return. Before writing the answer, identify the input or starting information, the exact result you must produce, any stated constraint, and one case that could make a careless solution fail.",
+        "question": "Given a weather tool definition and a user asking about weather in Toronto, write out the model's tool-call request and what your code would return. Before writing the answer, identify the input or starting information, the exact result you must produce, any stated constraint, and one case that could make a careless solution fail.",
         "why": "This exercise exists to make you turn a written requirement into your own correct solution and justify why it works. That requirement-to-solution reasoning is what you use in real engineering work, not just the final syntax.",
         "workScenario": "An AI/ML feature or data/model pipeline has a requirement or quality problem related to “Trace a function call”. The team needs a measurable result, not just code that runs.",
         "workTask": "Treat “Trace a function call” like a ticket assigned to you. Produce your own solution, then show the evidence that it meets the requested behavior and does not fail on the important edge case.",

@@ -423,7 +423,7 @@
         }
       ]
     },
-    "aptech-dsa-memory": {
+    "core-dsa-memory": {
       "title": "Python references, memory & pointer intuition",
       "practice": {
         "title": "Lesson requirements — what you must be able to do",
@@ -3081,7 +3081,7 @@
         }
       ]
     },
-    "aptech-dsa-sorting-basic": {
+    "core-dsa-sorting-basic": {
       "title": "Sorting I — Bubble, selection & insertion",
       "practice": {
         "title": "Lesson requirements — what you must be able to do",
@@ -3407,7 +3407,7 @@
         }
       ]
     },
-    "aptech-dsa-sorting-fast": {
+    "core-dsa-sorting-fast": {
       "title": "Sorting II — Merge sort & quicksort",
       "practice": {
         "title": "Lesson requirements — what you must be able to do",

@@ -11,7 +11,7 @@
       solution:'import re\n\ndef is_safe_username(username):\n    return bool(re.match(r"^[a-zA-Z0-9_]{3,20}$", username))',
       hints:['re.match checks from the start of the string -- anchor the end too with $ so nothing extra sneaks in.','A character class like [a-zA-Z0-9_] plus a {3,20} length range covers this exactly.','return bool(re.match(r"^[a-zA-Z0-9_]{3,20}$", username))'],
       tests:[
-        {argsRepr:'"ahmed_dev"', expectedRepr:'True'},
+        {argsRepr:'"maria_dev"', expectedRepr:'True'},
         {argsRepr:'"\\\'; DROP TABLE users;--"', expectedRepr:'False'}
       ]},
     { id:'sec-sqli-recognition', mode:'test', title:'Recognizing SQL injection patterns', funcName:'looks_like_sql_injection',
@@ -21,7 +21,7 @@
       hints:['Lowercase the input first so the check isn\'t case-sensitive.','Check each suspicious substring with the "in" operator, and combine results with any().','lower = input_str.lower(); return any(s in lower for s in suspicious)'],
       tests:[
         {argsRepr:'"admin\\\' or \\\'1\\\'=\\\'1"', expectedRepr:'True'},
-        {argsRepr:'"ahmed"', expectedRepr:'False'}
+        {argsRepr:'"maria"', expectedRepr:'False'}
       ]},
     { id:'sec-password-strength', mode:'test', title:'Scoring password strength', funcName:'password_strength',
       explain:'A simple, real scoring rubric: award a point for each independent strength signal (length, uppercase, digit, symbol) rather than one all-or-nothing check.',

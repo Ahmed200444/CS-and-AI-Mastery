@@ -1,0 +1,149 @@
+/* Pro polish v6 — one brand language for the dashboard, catalog and every course page.
+   Visual layer only: no layout structure, routes, ids or stored data are changed.
+   Brand: indigo -> blue with a teal highlight (taken from the dashboard), green kept for "done". */
+
+html.csai-unified-design{
+  --p6-a:#6253e8; --p6-b:#3d6fe2; --p6-c:#1fae9e;
+  --p6-grad:linear-gradient(135deg,#6253e8,#3d6fe2);
+  --p6-track:linear-gradient(90deg,#1fae9e,#5b63e8);
+  --p6-ring:0 0 0 3px rgba(98,83,232,.28);
+  --p6-lift:0 14px 34px rgba(49,56,110,.14);
+  --p6-ease:cubic-bezier(.2,.7,.2,1);
+}
+
+/* ---------- Course pages: brand tokens ---------- */
+html.csai-unified-design body.av4-course-page{--accent:#5850e0;--pill:#eceefe;--pilltext:#34399a}
+html.csai-unified-design[data-theme="dark"] body.av4-course-page{--accent:#9aa2ff;--pill:#252a4d;--pilltext:#d0d4ff}
+
+/* Reading progress (inserted by pro-polish-v6.js) */
+#p6-read{position:fixed;top:0;left:0;right:0;height:3px;z-index:9999;pointer-events:none;background:transparent}
+#p6-read i{display:block;height:100%;width:0;background:var(--p6-track);border-radius:0 3px 3px 0;transition:width .12s linear}
+
+/* Top buttons and primary actions */
+html.csai-unified-design body.av4-course-page main.wrap .btn,
+html.csai-unified-design body.av4-course-page .csai-course-continue-btn{transition:transform .18s var(--p6-ease),box-shadow .18s var(--p6-ease),border-color .18s,background-color .18s}
+html.csai-unified-design body.av4-course-page main.wrap .btn:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(49,56,110,.12)}
+html.csai-unified-design body.av4-course-page main.wrap .btn:active{transform:translateY(0)}
+html.csai-unified-design body.av4-course-page main.wrap .top .btn.primary,
+html.csai-unified-design body.av4-course-page .csai-course-continue-btn{background:var(--p6-grad)!important;border-color:transparent!important;color:#fff!important;box-shadow:0 10px 22px rgba(88,80,224,.26)}
+html.csai-unified-design body.av4-course-page .csai-course-continue-btn:hover{transform:translateY(-1px);box-shadow:0 14px 28px rgba(88,80,224,.34)}
+
+/* Hero */
+html.csai-unified-design body.av4-course-page main.wrap .hero{position:relative;overflow:hidden;
+  background-image:radial-gradient(620px 260px at 100% 0,rgba(98,83,232,.11),transparent 62%),radial-gradient(520px 240px at 0 0,rgba(31,174,158,.09),transparent 62%);
+  box-shadow:0 18px 44px rgba(49,56,110,.08)}
+html.csai-unified-design body.av4-course-page main.wrap .hero::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--p6-track)}
+html.csai-unified-design body.av4-course-page main.wrap .hero h1{letter-spacing:-.025em}
+html.csai-unified-design body.av4-course-page main.wrap .hero .progress{height:10px;overflow:hidden}
+html.csai-unified-design body.av4-course-page main.wrap .progress > span,
+html.csai-unified-design body.av4-course-page .csai-cn-bar i{background:var(--p6-track)!important;transition:width .6s var(--p6-ease)}
+html.csai-unified-design body.av4-course-page .csai-course-continue{border-color:rgba(98,83,232,.22)}
+
+/* Lesson cards */
+html.csai-unified-design body.av4-course-page details.lesson{transition:border-color .2s,box-shadow .2s var(--p6-ease)}
+html.csai-unified-design body.av4-course-page details.lesson:not([open]):hover{border-color:rgba(98,83,232,.45);box-shadow:var(--p6-lift)}
+html.csai-unified-design body.av4-course-page details.lesson > summary{cursor:pointer;border-radius:inherit;transition:background-color .2s}
+html.csai-unified-design body.av4-course-page details.lesson[open] > summary{background-image:linear-gradient(90deg,rgba(98,83,232,.09),rgba(98,83,232,0) 70%)}
+html.csai-unified-design body.av4-course-page details.lesson[open] > summary .num{background:var(--p6-grad);color:#fff}
+html.csai-unified-design body.av4-course-page details.lesson > summary .num{transition:background-color .2s,color .2s}
+
+/* "Complete" becomes a clear toggle with a proper touch target */
+html.csai-unified-design body.av4-course-page details.lesson > summary label.check{display:inline-flex;align-items:center;gap:7px;min-height:36px;padding:5px 12px;border:1px solid var(--border);border-radius:999px;font-size:.84rem;font-weight:750;cursor:pointer;background:var(--panel);transition:background-color .2s,border-color .2s,color .2s}
+html.csai-unified-design body.av4-course-page details.lesson > summary label.check input{width:18px;height:18px;margin:0;accent-color:#16805b;cursor:pointer}
+html.csai-unified-design body.av4-course-page details.lesson > summary label.check:hover{border-color:#16805b}
+html.csai-unified-design body.av4-course-page details.lesson > summary label.check:has(input:checked){background:#e5f6ee;border-color:#16805b;color:#0c5a40}
+html.csai-unified-design[data-theme="dark"] body.av4-course-page details.lesson > summary label.check:has(input:checked){background:#123a2d;border-color:#2fae82;color:#bff0dc}
+
+/* Code never widens the page */
+html.csai-unified-design body.av4-course-page .csai-cm{min-width:0}
+html.csai-unified-design body.av4-course-page .csai-cm pre{max-width:100%;overflow-x:auto}
+
+/* Course contents navigation */
+html.csai-unified-design body.av4-course-page .csai-cn{box-shadow:0 14px 36px rgba(49,56,110,.07)}
+html.csai-unified-design body.av4-course-page .csai-cn a{transition:background-color .16s,border-color .16s,transform .16s var(--p6-ease)}
+html.csai-unified-design body.av4-course-page .csai-cn a:hover{transform:translateX(2px)}
+html.csai-unified-design body.av4-course-page .csai-cn a.active{background:linear-gradient(90deg,rgba(98,83,232,.14),rgba(98,83,232,.04))}
+html.csai-unified-design body.av4-course-page .csai-cn a.active .n{background:var(--p6-grad);color:#fff}
+html.csai-unified-design body.av4-course-page .csai-cn a.done .n{background:#16805b;color:#fff}
+.p6-filter{padding:0 12px 6px}
+.p6-filter input{width:100%;box-sizing:border-box;min-height:38px;padding:7px 11px;border:1px solid var(--border,#d8e1ea);border-radius:10px;background:var(--bg,#f4f7fb);color:var(--text,#172231);font:inherit;font-size:.86rem}
+.p6-filter input::placeholder{color:var(--muted,#5d6c7c)}
+.p6-filter input:focus{outline:none;border-color:#6253e8;box-shadow:0 0 0 3px rgba(98,83,232,.22)}
+.p6-filter-empty{display:none;padding:6px 16px 12px;font-size:.8rem;color:var(--muted,#5d6c7c)}
+.p6-filter-empty.on{display:block}
+.csai-cn li.p6-hide{display:none}
+
+/* Focus visibility everywhere */
+html.csai-unified-design a:focus-visible,
+html.csai-unified-design button:focus-visible,
+html.csai-unified-design summary:focus-visible,
+html.csai-unified-design select:focus-visible{outline:none;box-shadow:var(--p6-ring)}
+
+/* Completion toast (inserted by pro-polish-v6.js) */
+#p6-toast{position:fixed;left:50%;bottom:calc(74px + env(safe-area-inset-bottom,0px));z-index:9999;max-width:min(92vw,420px);transform:translate(-50%,16px);opacity:0;pointer-events:none;
+  display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:14px;background:#141a2e;color:#fff;box-shadow:0 18px 44px rgba(10,14,35,.35);font-size:.9rem;line-height:1.35;transition:transform .28s var(--p6-ease),opacity .28s}
+#p6-toast.on{transform:translate(-50%,0);opacity:1}
+#p6-toast .p6-tick{flex:0 0 auto;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#1fae9e,#16805b);font-weight:900}
+#p6-toast b{display:block;font-weight:800}
+#p6-toast span{opacity:.82;font-size:.82rem}
+#p6-toast .p6-tbar{position:absolute;left:14px;right:14px;bottom:5px;height:3px;border-radius:9px;background:rgba(255,255,255,.16);overflow:hidden}
+#p6-toast .p6-tbar i{display:block;height:100%;background:linear-gradient(90deg,#1fae9e,#8f8bff);transition:width .7s var(--p6-ease)}
+html[data-theme="dark"] #p6-toast{background:#eef1ff;color:#141a2e}
+html[data-theme="dark"] #p6-toast .p6-tick{color:#fff}
+html[data-theme="dark"] #p6-toast .p6-tbar{background:rgba(20,26,46,.14)}
+
+/* ---------- Catalog ---------- */
+#csai-catalog-recovery .scr-btn{transition:transform .18s var(--p6-ease),box-shadow .18s var(--p6-ease)}
+#csai-catalog-recovery .scr-btn.scr-primary{background:var(--p6-grad)!important;border-color:transparent!important;color:#fff!important;box-shadow:0 8px 18px rgba(88,80,224,.22)}
+#csai-catalog-recovery .scr-btn:hover{transform:translateY(-1px)}
+#csai-catalog-recovery .scr-card{transition:transform .2s var(--p6-ease),box-shadow .2s var(--p6-ease),border-color .2s}
+#csai-catalog-recovery .scr-card:hover{transform:translateY(-3px);box-shadow:var(--p6-lift);border-color:rgba(98,83,232,.5)!important}
+#csai-catalog-recovery .scr-hero{position:relative;overflow:hidden;background-image:radial-gradient(620px 260px at 100% 0,rgba(98,83,232,.11),transparent 62%),radial-gradient(520px 240px at 0 0,rgba(31,174,158,.09),transparent 62%)!important}
+#csai-catalog-recovery .scr-hero::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--p6-track)}
+#csai-catalog-recovery .scr-kicker{color:#5850e0}
+html[data-theme="dark"] #csai-catalog-recovery .scr-kicker{color:#9aa2ff}
+#csai-catalog-recovery .scr-input:focus,#csai-catalog-recovery .scr-select:focus{outline:none;border-color:#6253e8;box-shadow:0 0 0 3px rgba(98,83,232,.22)}
+
+/* ---------- Dashboard ---------- */
+html.csai-unified-design .av4-stat,
+html.csai-unified-design .av4-path-card,
+html.csai-unified-design .av4-mini-course,
+html.csai-unified-design .hub-card{transition:transform .22s var(--p6-ease),box-shadow .22s var(--p6-ease),border-color .22s}
+html.csai-unified-design .av4-stat:hover,
+html.csai-unified-design .av4-path-card:hover,
+html.csai-unified-design .av4-mini-course:hover,
+html.csai-unified-design .hub-card:hover{transform:translateY(-3px);box-shadow:var(--p6-lift)}
+html.csai-unified-design .av4-stat strong{background:linear-gradient(135deg,#4a3fd6,#2f62d6);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#4a3fd6;font-variant-numeric:tabular-nums}
+html.csai-unified-design[data-theme="dark"] .av4-stat strong{background:linear-gradient(135deg,#b3adff,#8fb4ff);-webkit-background-clip:text;background-clip:text;color:#b3adff}
+
+/* Reveal on scroll — only active once the script has opted an element in */
+.p6-rv{opacity:0;transform:translateY(14px)}
+.p6-rv.p6-in{opacity:1;transform:none;transition:opacity .5s var(--p6-ease),transform .5s var(--p6-ease)}
+
+/* ---------- Phone ---------- */
+@media (max-width:1023px){
+  html.csai-unified-design body.av4-course-page .csai-cn a{min-height:44px;align-items:center}
+  html.csai-unified-design body.av4-course-page .csai-cn a:hover{transform:none}
+}
+@media (max-width:600px){
+  /* Home track cards: one readable column instead of two clipped ones */
+  html.csai-unified-design .hub-cards{grid-template-columns:minmax(0,1fr)!important}
+  html.csai-unified-design .hub-cards > *{min-width:0}
+  /* Run toolbars wrap so the last button is never cut off */
+  html.csai-unified-design body.av4-course-page .lesson-run-toolbar{flex-wrap:wrap;row-gap:8px}
+}
+@media (max-width:560px){
+  html.csai-unified-design body.av4-course-page details.lesson > summary label.check{padding:5px 9px;font-size:.78rem}
+  html.csai-unified-design body.av4-course-page details.lesson > summary .title{min-width:0;overflow-wrap:break-word}
+  #p6-toast{bottom:calc(68px + env(safe-area-inset-bottom,0px))}
+}
+
+@media (max-width:380px){
+  /* Very narrow phones: the toggle keeps its tick box and touch target, the word is visually dropped */
+  html.csai-unified-design body.av4-course-page details.lesson > summary label.check{font-size:0;gap:0;padding:8px;min-width:36px;justify-content:center}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html.csai-unified-design *{transition-duration:.01ms!important}
+  .p6-rv{opacity:1;transform:none}
+}

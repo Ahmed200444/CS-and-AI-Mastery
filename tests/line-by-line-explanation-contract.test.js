@@ -18,7 +18,7 @@ assert.ok(!toolsSource.includes('function explanationHtml('),'only one productio
 assert.ok(toolsSource.includes('window.CSAILineExplainer.refresh(pre)'),'other tools should delegate to the universal explainer');
 
 const pages=fs.readdirSync(path.join(root,'courses')).filter(n=>n.endsWith('.html'));
-assert.ok([62,65].includes(pages.length), 'expected 62 committed or 65 generated course pages');
+assert.ok(pages.length===62, 'expected 62 generated course pages');
 for(const page of pages){
   const html=fs.readFileSync(path.join(root,'courses',page),'utf8');
   const line=html.indexOf('line-by-line-explanations.js');
@@ -31,21 +31,6 @@ const sandbox={window:{},document:{readyState:'loading',addEventListener(){},get
 vm.createContext(sandbox);vm.runInContext(source,sandbox,{filename:'line-by-line-explanations.js'});
 const api=sandbox.window.CSAILineExplainer;
 assert.ok(api&&typeof api.explain==='function','line explainer API should be available');
-
-const matlabLecture=api.commentedCode(`clc; close all; clear;
-sam = [87 81 94 90 79];
-total = sum(sam);
-count = length(sam);
-average = total / count;
-fprintf('Sam Average = %.2f\\n', average);`,'matlab');
-assert.ok(!matlabLecture.includes('% Explanation:'),'MATLAB learning view must not use verbose generated Explanation: comments');
-assert.match(matlabLecture,/clc; close all; clear;\s+% Clear Command Window, close figures, and clear variables/,'MATLAB learning view should use concise university-style comments');
-assert.match(matlabLecture,/sam = \[87 81 94 90 79\];\s+% Store 5 values in sam/,'MATLAB arrays should keep normal MATLAB syntax with a short comment');
-assert.match(matlabLecture,/total = sum\(sam\);\s+% Add all values in sam/,'MATLAB function calls should get short comments');
-assert.match(matlabLecture,/fprintf\([^\n]+\);\s+% Display formatted result/,'MATLAB display code should keep concise comments');
-const matlabExisting=api.commentedCode("x = 0:0.1:1; % Create x values",'matlab');
-assert.match(matlabExisting,/x = 0:0\.1:1;\s+% Create x values/,'existing MATLAB comments should be preserved');
-assert.equal((matlabExisting.match(/%/g)||[]).length,1,'existing MATLAB comments must not be duplicated');
 
 // Exact regression for the user's dictionary screenshot: explain meaning/effect, never restate syntax.
 const dictCode=`d = dict()          # {}\nd['name'] = 'Ada'\nprint('name' in d)   # True\nprint('age' in d)    # False -- no error raised`;

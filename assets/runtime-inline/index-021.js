@@ -28,7 +28,7 @@
         var auth = (req.headers||{}).Authorization || (req.headers||{}).authorization;
         if(!auth) return {status:401, body:{error:'Missing Authorization header'}};
         if(auth !== 'Bearer secrettoken123') return {status:401, body:{error:'Invalid token'}};
-        return {status:200, body:{username:'ahmed_dev', plan:'pro'}};
+        return {status:200, body:{username:'maria_dev', plan:'pro'}};
       },
       hints:['This endpoint checks for a header literally named "Authorization".','The expected format is "Bearer <token>" -- a space between the word Bearer and the token.','Try: Authorization: Bearer secrettoken123'],
       solution:'Add a header line exactly as: Authorization: Bearer secrettoken123 -- without it, or with the wrong token, the server correctly returns 401 Unauthorized.' },

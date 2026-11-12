@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // FIX #22 -- tests/try-it-yourself-v568-contract.test.js requires the v5.68 "Try it yourself"
-// layer on all 62 course pages AND on index.html, bytedance-2027-prep.html and github-setup.html.
+// layer on all 62 course pages AND on index.html and github-setup.html.
 // The shipped release carries it on the 62 course pages and the two static pages, but not on the
 // homepage, so that one contract assertion could never pass on the pristine tree. Inject it.
 //

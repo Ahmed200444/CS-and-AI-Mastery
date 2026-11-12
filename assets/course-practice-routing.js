@@ -5,7 +5,13 @@
     ['software-engineering-practice',['software engineering in practice','software-engineering-practice','engineering practice']],['classical-ai',['classical ai','classical-ai','search reasoning planning']],['reinforcement-learning-post-training',['reinforcement learning post training','reinforcement-learning-post-training','rl post training','llm post training']],['large-scale-ai',['large scale ai','large-scale-ai','distributed ai training','ai inference scaling']],['machine-learning',['machine learning','machine-learning','machinelearning','ml']],['deep-learning',['deep learning','deep-learning','deeplearning']],['generative-ai',['generative ai','generative-ai','generativeai','genai']],['ai-agents',['ai agents','ai-agents','aiagents','agents']],['model-deployment',['model deployment','model-deployment','modeldeployment']],['system-design',['system design','system-design','systemdesign']],['computer-networks',['computer networks','networking','networks']],['backend-development',['backend development','backend']],['web-development',['web development','web dev','frontend']],['problem-solving',['problem solving']],['software-engineering',['software engineering','swe fundamentals','swe']],['hugging-face',['hugging face','huggingface']],['transformers',['transformers','transformer']],['databases',['databases','database']],['debugging',['debugging']],['testing',['testing']],['docker',['docker']],['cloud',['cloud']],['llms',['llms','large language models','llm']],['rag',['retrieval augmented generation','rag']],['apis',['apis','api request lab','api development','rest api']],['linux',['linux']],['oop',['object oriented programming','oop']],['dsa',['data structures and algorithms','dsa']],['git-github',['git and github','git & github','github']],['sql',['sql']],['python',['python']]
   ];
   const clean=v=>String(v||'').toLowerCase().replace(/[_/]+/g,' ').replace(/[^a-z0-9+#& -]+/g,' ').replace(/\s+/g,' ').trim();
+  let trackKey='',trackAt=0,trackVal=null;
   function detectTrack(){
+    const key=location.hash+'|'+document.title,now=Date.now();
+    if(key===trackKey&&now-trackAt<200)return trackVal;
+    trackVal=detectTrackUncached();trackKey=key;trackAt=now;return trackVal;
+  }
+  function detectTrackUncached(){
     const values=[location.hash,document.title];
     ['[data-course-id].active','[data-course].active','[data-track].active','[aria-current="page"]','.course-card.active','.track-card.active','.lesson-sidebar .active','.course-title','main h1','main h2','aside h2','aside h3'].forEach(s=>document.querySelectorAll(s).forEach(n=>values.push(n.dataset.courseId,n.dataset.course,n.dataset.track,n.textContent)));
     const c=values.filter(Boolean).map(clean);
