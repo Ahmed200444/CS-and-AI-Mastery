@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "coursePages": 62,
-  "evergreenPages": 62,
-  "studyExamplePages": 62,
-  "lessons": 800,
+  "coursePages": 63,
+  "evergreenPages": 63,
+  "studyExamplePages": 63,
+  "lessons": 808,
   "expandedLessons": 0,
-  "sourceExamples": 935,
-  "studyExamplesPlannedMinimum": 4000,
-  "studyExamplesPlannedMaximum": 6400,
+  "sourceExamples": 943,
+  "studyExamplesPlannedMinimum": 4040,
+  "studyExamplesPlannedMaximum": 6464,
   "promise": "Every generated lesson loads the current Study Examples system, which provides a distinct example for every key concept plus integration and edge-case practice.",
   "courses": [
     {
@@ -404,6 +404,15 @@
       "sourceExamples": 9,
       "studyExamplesPlannedMinimum": 45,
       "studyExamplesPlannedMaximum": 72,
+      "evergreenLayer": true
+    },
+    {
+      "id": "practical-math-ml",
+      "lessons": 8,
+      "expandedLessons": 0,
+      "sourceExamples": 8,
+      "studyExamplesPlannedMinimum": 40,
+      "studyExamplesPlannedMaximum": 64,
       "evergreenLayer": true
     },
     {

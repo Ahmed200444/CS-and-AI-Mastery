@@ -44,8 +44,8 @@ if (!fs.existsSync(catalogPath)) throw new Error('catalog-data.json is missing')
 if (!fs.existsSync(courseDataDir)) throw new Error('course-data directory is missing');
 
 const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
-if (!catalog || !Array.isArray(catalog.courses) || catalog.courses.length !==62) {
-  throw new Error(`Expected 62 catalog courses, found ${catalog && catalog.courses ? catalog.courses.length : 0}`);
+if (!catalog || !Array.isArray(catalog.courses) || catalog.courses.length !==63) {
+  throw new Error(`Expected 63 catalog courses, found ${catalog && catalog.courses ? catalog.courses.length : 0}`);
 }
 
 const THEME_HEAD = `<script>(function(){try{var t=localStorage.getItem('cs-ai-mastery-theme')||localStorage.getItem('theme')||'light';document.documentElement.dataset.theme=t==='dark'?'dark':'light'}catch(e){document.documentElement.dataset.theme='light'}})();</script>`;
@@ -135,7 +135,7 @@ html = bodyEnd >= 0 ? html.slice(0, bodyEnd) + navTag + '\n' + html.slice(bodyEn
 fs.writeFileSync(indexPath, html, 'utf8');
 
 const generated = fs.readdirSync(outDir).filter(name => name.endsWith('.html'));
-if (generated.length !==62) throw new Error(`Expected 62 static course pages, generated ${generated.length}`);
+if (generated.length !==63) throw new Error(`Expected 63 static course pages, generated ${generated.length}`);
 const pythonPage = fs.readFileSync(path.join(outDir, 'python.html'), 'utf8');
 if (!pythonPage.includes('Python') || !pythonPage.includes('Variables &amp; types') && !pythonPage.includes('Variables & types')) throw new Error('Python static page validation failed');
 const finalIndex = fs.readFileSync(indexPath, 'utf8');

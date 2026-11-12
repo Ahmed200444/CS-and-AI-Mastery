@@ -5,7 +5,7 @@ const vm=require('node:vm');
 const root=path.resolve(__dirname,'..');
 const dataDir=path.join(root,'assets','course-data');
 const files=fs.readdirSync(dataDir).filter(f=>f.endsWith('.json')).sort();
-assert.equal(files.length,62,'expected all 62 courses');
+assert.equal(files.length,63,'expected all 63 courses');
 function norm(v){var raw=String(v||'').toLowerCase().trim();var words=raw.replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim();return words||raw.replace(/\s+/g,' ');}
 const study=fs.readFileSync(path.join(root,'assets','study-examples.js'),'utf8');
 assert.ok(study.includes('v5.47 industry-benchmarked company-use professional-readiness override'),'professional audit layer missing');
@@ -53,7 +53,7 @@ representative('ai-agents','Tool use & function calling','tool definition',['str
 representative('software-engineering-practice','Design docs, ADRs & practical UML','sequence diagram',['checkout','time order','failure'],['domain types']);
 representative('software-engineering-practice','Design docs, ADRs & practical UML','state diagram',['order','invalid transition','lifecycle'],[]);
 
-assert.equal(lessons,800,'lesson count drift');
+assert.equal(lessons,808,'lesson count drift');
 assert.equal(concepts,3427,'concept count drift including symbol-only concepts');
 assert.equal(genericFallbacks,0,`generic course fallback reached ${genericFallbacks} concepts\n${bad.slice(0,20).join('\n')}`);
 assert.equal(tooShort,0,`professional examples/checks too short\n${bad.slice(0,20).join('\n')}`);

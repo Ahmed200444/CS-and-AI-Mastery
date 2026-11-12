@@ -3483,6 +3483,81 @@
       }
     },
     {
+      "id": "practical-math-ml",
+      "title": "Practical Math for ML",
+      "icon": "📐",
+      "blurb": "Just enough math to read results and understand how models learn, all through code.",
+      "description": "Just enough math to read results and understand how models learn, all through code.",
+      "category": "data-ai-foundations",
+      "level": "mixed",
+      "status": "available",
+      "counts": {
+        "lessons": 8,
+        "exercises": 13,
+        "quiz": 25,
+        "projects": 3
+      },
+      "progressIds": {
+        "lessons": [
+          "pmm-model-function",
+          "pmm-vectors-similarity",
+          "pmm-probability-simulation",
+          "pmm-distributions-skew",
+          "pmm-bayes",
+          "pmm-sampling-uncertainty",
+          "pmm-loss-gradients",
+          "pmm-gradient-descent"
+        ],
+        "exercises": [
+          "pmm-ex-1",
+          "pmm-ex-2",
+          "pmm-ex-3",
+          "pmm-ex-4",
+          "pmm-ex-5",
+          "pmm-ex-6",
+          "pmm-ex-7",
+          "pmm-ex-8",
+          "pmm-ex-9",
+          "pmm-ex-10",
+          "pmm-ex-11",
+          "pmm-ex-12",
+          "pmm-ex-13"
+        ],
+        "quiz": [
+          "quiz-0",
+          "quiz-1",
+          "quiz-2",
+          "quiz-3",
+          "quiz-4",
+          "quiz-5",
+          "quiz-6",
+          "quiz-7",
+          "quiz-8",
+          "quiz-9",
+          "quiz-10",
+          "quiz-11",
+          "quiz-12",
+          "quiz-13",
+          "quiz-14",
+          "quiz-15",
+          "quiz-16",
+          "quiz-17",
+          "quiz-18",
+          "quiz-19",
+          "quiz-20",
+          "quiz-21",
+          "quiz-22",
+          "quiz-23",
+          "quiz-24"
+        ],
+        "projects": [
+          "practical-math-ml-proj-1",
+          "practical-math-ml-proj-2",
+          "practical-math-ml-proj-3"
+        ]
+      }
+    },
+    {
       "id": "computer-vision",
       "title": "Computer Vision",
       "icon": "👁️",

@@ -2,8 +2,8 @@
 const fs=require('fs'), path=require('path'), assert=require('assert');
 const root=path.resolve(__dirname,'..');
 const courses=JSON.parse(fs.readFileSync(path.join(root,'assets','coursedata-source.json'),'utf8'));
-assert.equal(courses.length,62,'expected 62 courses');
-assert.equal(courses.reduce((n,c)=>n+(c.lessons||[]).length,0),800,'expected 800 lessons');
+assert.equal(courses.length,63,'expected 63 courses');
+assert.equal(courses.reduce((n,c)=>n+(c.lessons||[]).length,0),808,'expected 808 lessons');
 const catalog=JSON.parse(fs.readFileSync(path.join(root,'assets','catalog-data.json'),'utf8'));
 const normalize=s=>String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim();
 for(const course of courses){

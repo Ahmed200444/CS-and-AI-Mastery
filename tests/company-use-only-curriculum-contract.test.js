@@ -1,7 +1,7 @@
 const fs=require('fs'),path=require('path'),assert=require('assert');
 const root=path.resolve(__dirname,'..');
 const data=JSON.parse(fs.readFileSync(path.join(root,'assets','coursedata-source.json'),'utf8'));
-assert.strictEqual(data.length,62,'expected all 62 courses');
+assert.strictEqual(data.length,63,'expected all 63 courses');
 for(const c of data){
   assert.ok(c.careerApplications || (Array.isArray(c.industryUsage)&&c.industryUsage.length),`course ${c.id} needs explicit company/career-use justification`);
 }
@@ -25,4 +25,4 @@ for(const [cid,lid] of [['ai-ml','ml-regression'],['ai-ml','ml-metrics'],['ai-ml
 }
 const study=fs.readFileSync(path.join(root,'assets','study-examples.js'),'utf8');
 for(const marker of ['feature vector|weighted sum|dot product','standard deviation|variance|sampling variability','gradient intuition|partial derivative intuition|chain rule intuition']) assert.ok(study.includes(marker),`study examples missing practical math guide: ${marker}`);
-console.log('PASS: company-use-only curriculum gate, practical ML math scope, 62-course explicit relevance');
+console.log('PASS: company-use-only curriculum gate, practical ML math scope, 63-course explicit relevance');

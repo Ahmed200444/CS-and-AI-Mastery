@@ -5,7 +5,7 @@ const vm=require('node:vm');
 const root=path.resolve(__dirname,'..');
 const dataDir=path.join(root,'assets','course-data');
 const files=fs.readdirSync(dataDir).filter(f=>f.endsWith('.json')).sort();
-assert.ok(files.length===62,'expected 62 generated course-data files');
+assert.ok(files.length===63,'expected 63 generated course-data files');
 function norm(v){var raw=String(v||'').toLowerCase().trim();var words=raw.replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim();return words||raw.replace(/\s+/g,' ');}
 let lessons=0,concepts=0,planned=0,maxConcepts=0;
 for(const file of files){
@@ -18,9 +18,9 @@ for(const file of files){
     concepts+=cs.length;maxConcepts=Math.max(maxConcepts,cs.length);planned+=Math.max(5,cs.length+2);
   }
 }
-assert.ok(lessons===800,'expected 800 generated lessons');
-assert.ok(concepts===3427,'key-concept coverage drift including university-course additions');
-assert.ok([5040,5258].includes(planned),'base concept-example plan drift including university-course additions');
+assert.ok(lessons===808,'expected 808 generated lessons');
+assert.ok(concepts===3471,'key-concept coverage drift including university-course additions');
+assert.ok([5100,5318].includes(planned),'base concept-example plan drift including university-course additions');
 assert.equal(maxConcepts,14,'max concept count drift');
 
 const study=fs.readFileSync(path.join(root,'assets','study-examples.js'),'utf8');

@@ -21,13 +21,13 @@ for(const phrase of [
 assert(asset.includes("if(/integrated application/.test(t))return'Use this when one task requires several ideas from '"),'integrated application must have a real use explanation');
 assert(asset.includes("if(/edge case.*debug|debug.*edge case/.test(t))return'Use this when checking '"),'edge/debug must have a real use explanation');
 const courses=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith('.html'));
-assert.ok(courses.length===62,'expected 62 generated course pages');
+assert.ok(courses.length===63,'expected 63 generated course pages');
 let lessons=0;
 for(const f of courses){
   const h=read('courses/'+f);
   assert(/\.\.\/assets\/study-examples\.js\?v=(?:20260824-v574|20261004-v586)/.test(h),`${f}: must load v5.71 definition layer`);
   lessons+=(h.match(/data-lesson="[^"]+"/g)||[]).length;
 }
-assert.strictEqual(lessons,800,'expected 800 generated lessons');
+assert.strictEqual(lessons,808,'expected 808 generated lessons');
 assert.strictEqual(JSON.parse(read('package.json')).version,'5.74.0');
 console.log(`Concept-definition depth v5.71: PASS across ${courses.length} courses / ${lessons} lessons.`);

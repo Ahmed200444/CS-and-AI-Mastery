@@ -50,7 +50,7 @@ report={
  'description_repairs':13,
  'checks':{
    'every_course_lesson_native_example_exercise_project_has_question_and_why':not any('question' in x or 'why' in x for x in problems),
-   'every_course_page_loads_generated_example_question_layer':counts['course_pages_with_prompt_layer']==62,
+   'every_course_page_loads_generated_example_question_layer':counts['course_pages_with_prompt_layer']==63,
    'problem_solving_examples_require_reasoning_before_finished_example':not any(x.startswith('problem-solving/') for x in problems),
    'generated_key_idea_examples_still_use_professional_scenarios_and_success_checks':all(x in study for x in ['professionalScenario','Success check:'])
  },

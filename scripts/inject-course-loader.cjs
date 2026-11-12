@@ -102,7 +102,7 @@ function catalogSummary(course) {
     // FIX #24/#25 -- the shipped catalog carries visibility/integration fields for courses
     // folded into another course (OOP is integrated into Python and marked hidden). This
     // whitelist dropped them, which made a hidden course visible again and the catalog
-    // reported 62 visible courses where the contract requires 61.
+    // reported 63 visible courses where the contract requires 61.
     ...(course.hidden !== undefined ? { hidden: course.hidden } : {}),
     ...(course.integratedInto !== undefined ? { integratedInto: course.integratedInto } : {}),
     ...(course.redirectTo !== undefined ? { redirectTo: course.redirectTo } : {}),

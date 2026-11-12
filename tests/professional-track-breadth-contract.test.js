@@ -26,8 +26,8 @@ for(const [id,c] of courses){
     assert.ok(html.includes(asset),`${id}: missing learning asset ${asset}`);
   }
 }
-assert.equal(courses.size,62,'course count drift');
-assert.equal(lessons,800,'lesson count drift');
+assert.equal(courses.size,63,'course count drift');
+assert.equal(lessons,808,'lesson count drift');
 function corpus(id){const c=courses.get(id);return JSON.stringify(c).toLowerCase();}
 function needs(id,terms){const t=corpus(id);for(const term of terms)assert.ok(t.includes(term.toLowerCase()),`${id}: professional topic missing ${term}`);}
 needs('dsa',['big-o','binary search','graphs','dynamic programming']);
@@ -44,4 +44,4 @@ needs('ai-agents',['function calling','memory','planning','verification']);
 needs('mlops',['model registry','reproducibility','evaluation gate','monitoring']);
 needs('llm-evaluation-testing',['evaluation','regression','safety']);
 needs('reinforcement-learning-post-training',['reward','mdp','value','policy']);
-console.log(`Professional track breadth PASS — 62 courses / ${lessons} lessons include core SWE, production systems, security, and modern AI/ML engineering coverage.`);
+console.log(`Professional track breadth PASS — 63 courses / ${lessons} lessons include core SWE, production systems, security, and modern AI/ML engineering coverage.`);

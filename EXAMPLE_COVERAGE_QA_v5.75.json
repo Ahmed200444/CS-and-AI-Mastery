@@ -1,10 +1,10 @@
 {
   "release": "5.75-example-depth",
   "status": "PASS",
-  "coursesAudited": 62,
-  "lessonsAudited": 800,
-  "staticExamplesBefore": 935,
-  "staticExamplesAfter": 935,
+  "coursesAudited": 63,
+  "lessonsAudited": 808,
+  "staticExamplesBefore": 943,
+  "staticExamplesAfter": 943,
   "staticExamplesAdded": 0,
   "universalStudyLayer": {
     "policy": "one example per key concept plus integration/debug examples, minimum five per lesson",
@@ -242,6 +242,11 @@
       "course": "oop",
       "lessons": 9,
       "staticExamples": 9
+    },
+    {
+      "course": "practical-math-ml",
+      "lessons": 8,
+      "staticExamples": 8
     },
     {
       "course": "problem-solving",

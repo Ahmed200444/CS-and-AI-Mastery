@@ -6,7 +6,7 @@ const root = path.resolve(__dirname, '..');
 const dataDir = path.join(root, 'assets', 'course-data');
 const pagesDir = path.join(root, 'courses');
 const files = fs.readdirSync(dataDir).filter(f => f.endsWith('.json')).sort();
-assert.equal(files.length, 62, 'expected 62 course-data files');
+assert.equal(files.length, 63, 'expected 63 course-data files');
 const courseById = new Map(files.map(file => {
   const c = JSON.parse(fs.readFileSync(path.join(dataDir, file), 'utf8'));
   return [c.id, c];
@@ -40,13 +40,13 @@ for (const file of files) {
   }
   courseStats.push({id:course.id,min,avg:total/course.lessons.length});
 }
-assert.equal(lessons, 800, 'lesson count drift');
+assert.equal(lessons, 808, 'lesson count drift');
 assert.equal(concepts, 3427, 'key-idea count drift after company-use depth additions');
 assert.equal(problems.length, 0, `equal-depth data audit found ${problems.length} issue(s):\n${problems.slice(0,50).join('\n')}`);
 assert.ok(courseStats.every(x => x.min >= 90), 'every course must have no shallow explanation outlier');
 
 const pages = fs.readdirSync(pagesDir).filter(f => f.endsWith('.html')).sort();
-assert.equal(pages.length, 62, 'expected 62 static course pages');
+assert.equal(pages.length, 63, 'expected 63 static course pages');
 let staticLessons = 0;
 for (const file of pages) {
   const html = fs.readFileSync(path.join(pagesDir, file), 'utf8');
@@ -81,7 +81,7 @@ for (const file of pages) {
     assert.ok(wc(plain) >= 350, `${file}: rendered teaching block is too shallow (${wc(plain)} words)`);
   }
 }
-assert.equal(staticLessons, 800, 'rendered lesson count drift');
+assert.equal(staticLessons, 808, 'rendered lesson count drift');
 
 // Practical gap checks identified in the v5.56 audit.
 const required = {

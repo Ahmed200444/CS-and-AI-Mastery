@@ -5,7 +5,7 @@ const path=require('node:path');
 const root=path.join(__dirname,'..');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const courses=JSON.parse(read('assets/coursedata-source.json'));
-assert.equal(courses.length,62,'all 62 courses must remain in the source of truth');
+assert.equal(courses.length,63,'all 63 courses must remain in the source of truth');
 
 const source=JSON.stringify(courses);
 const visibleStrings=[];
