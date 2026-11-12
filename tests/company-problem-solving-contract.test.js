@@ -3,7 +3,7 @@ const ROOT=path.resolve(__dirname,'..');
 function assert(cond,msg){if(!cond)throw new Error(msg)}
 const guideDir=path.join(ROOT,'assets','practice-guidance');
 const files=fs.readdirSync(guideDir).filter(x=>x.endsWith('.json')).sort();
-assert(files.length===62,`expected 62 guidance files, got ${files.length}`);
+assert(files.length===63,`expected 62 guidance files, got ${files.length}`);
 let counts={courses:0,lessons:0,examples:0,exercises:0,projects:0};
 const weak=[];
 function check(g,where){
@@ -28,11 +28,11 @@ for(const f of files){
   for(let i=0;i<(d.exercises||[]).length;i++){check((d.exercises[i]||{}).practice,`${f} exercise ${i+1}`);counts.exercises++;}
   for(let i=0;i<(d.projects||[]).length;i++){check((d.projects[i]||{}).practice,`${f} project ${i+1}`);counts.projects++;}
 }
-assert(counts.courses===62,`course count drift ${counts.courses}`);
-assert(counts.lessons===800,`lesson count drift ${counts.lessons}`);
+assert(counts.courses===63,`course count drift ${counts.courses}`);
+assert(counts.lessons===808,`lesson count drift ${counts.lessons}`);
 assert(counts.examples===895,`native example count drift ${counts.examples}`);
-assert(counts.exercises===794,`exercise count drift ${counts.exercises}`);
-assert(counts.projects===271,`project count drift ${counts.projects}`);
+assert(counts.exercises===807,`exercise count drift ${counts.exercises}`);
+assert(counts.projects===274,`project count drift ${counts.projects}`);
 assert(weak.length===0,'weak company-problem guidance:\n'+weak.slice(0,30).join('\n'));
 
 const renderer=fs.readFileSync(path.join(ROOT,'assets','practice-guidance.js'),'utf8');

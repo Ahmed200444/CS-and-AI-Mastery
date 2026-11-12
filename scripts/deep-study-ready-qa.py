@@ -20,7 +20,7 @@ try: catalog=json.loads((ROOT/'assets/catalog-data.json').read_text())
 except Exception as e: bad('catalog-data.json: '+str(e)); catalog={'courses':[]}
 cat={c.get('id'):c for c in catalog.get('courses',[]) if c.get('id')}
 pageids={p.stem for p in course_pages}; jsonids={p.stem for p in course_json}; catids=set(cat)
-if not(len(course_pages)==len(course_json)==len(catids)==62):bad(f'62-course bijection failed: pages={len(course_pages)} json={len(course_json)} catalog={len(catids)}')
+if not(len(course_pages)==len(course_json)==len(catids)==63):bad(f'63-course bijection failed: pages={len(course_pages)} json={len(course_json)} catalog={len(catids)}')
 for name,a,b in [('catalog-vs-pages',catids,pageids),('catalog-vs-json',catids,jsonids)]:
     if a!=b:bad(name+f' mismatch missing={sorted(a-b)} extra={sorted(b-a)}')
 

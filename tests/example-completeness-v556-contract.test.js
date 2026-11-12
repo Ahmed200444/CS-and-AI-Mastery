@@ -9,7 +9,7 @@ const dataDir = path.join(root, 'assets', 'course-data');
 const catalog = JSON.parse(fs.readFileSync(path.join(root, 'assets', 'catalog-data.json'), 'utf8'));
 const meta = new Map(catalog.courses.map(c => [c.id, c]));
 const files = fs.readdirSync(dataDir).filter(f => f.endsWith('.json')).sort();
-assert.equal(files.length, 62, 'expected all 62 course-data files');
+assert.equal(files.length, 63, 'expected all 63 course-data files');
 
 function conceptKey(value) {
   const raw = String(value == null ? '' : value).trim().toLowerCase();
@@ -131,7 +131,7 @@ for (const file of files) {
   }
 }
 
-assert.equal(lessonCount, 800, 'lesson count drift');
+assert.equal(lessonCount, 808, 'lesson count drift');
 assert.equal(keyIdeaCount, 3427, 'full key-idea count must include symbol-only concepts');
 assert.equal(codeEligible, 432, 'generated-code eligibility drift');
 
@@ -172,7 +172,7 @@ if (runtimeErrors.length) problems.push(...runtimeErrors.slice(0,30).map(x => `$
 
 // All static course pages must still load the per-key-idea example engine, and every active static example must be distinct.
 const coursePages = fs.readdirSync(path.join(root, 'courses')).filter(f => f.endsWith('.html'));
-assert.equal(coursePages.length, 62, 'expected 62 generated course pages');
+assert.equal(coursePages.length, 63, 'expected 63 generated course pages');
 const staticExact = new Map(), staticShapes = new Map();
 let staticExamples = 0, activeStaticExamples = 0, hiddenStaticExamples = 0;
 function decodeHtml(v){return String(v||'').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'\"').replace(/&#39;/g,"'").replace(/&amp;/g,'&');}

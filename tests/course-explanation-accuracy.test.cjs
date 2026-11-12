@@ -27,7 +27,7 @@ assert.ok(api.syntaxUsedEntries('print("a % b; yield; lambda")','python').every(
 function decode(s){return s.replace(/&quot;/g,'"').replace(/&#39;|&apos;/g,"'").replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&').replace(/&#x([0-9a-f]+);/gi,(_,n)=>String.fromCodePoint(parseInt(n,16))).replace(/&#(\d+);/g,(_,n)=>String.fromCodePoint(Number(n)));}
 let examples=0,lines=0;
 const pages=fs.readdirSync('courses').filter(n=>n.endsWith('.html'));
-assert.equal(pages.length,62);
+assert.equal(pages.length,63);
 for(const name of pages){
  const html=fs.readFileSync('courses/'+name,'utf8');assert.match(html,/line-by-line-explanations\.js\?[^"']+learning=20261003-v584/);
  let local=0;

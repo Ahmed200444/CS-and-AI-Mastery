@@ -22,6 +22,8 @@
       ['networking','Understand HTTP, DNS, TCP/IP, ports, proxies, and the network beneath AI services.']
     ]},
     { title:'Phase 3 — Core AI & machine learning', note:'Build the modeling foundation before specializing in LLM applications.', courses:[
+      ['data-science','Load, clean and explore data with NumPy and pandas before any model sees it.'],
+      ['practical-math-ml','Learn just enough vectors, probability and gradient descent to read results and understand how models learn.'],
       ['classical-ai','Master search, constraint solving, logic, reasoning, planning, and decision-making before relying on learned models.'],
       ['ai-ml','Learn the core machine-learning workflow, evaluation concepts, and model families.'],
       ['deep-learning','Move from classical ML into neural networks and representation learning.'],
@@ -32,12 +34,12 @@
       ['transformers','Understand the architecture underlying modern language models.'],
       ['huggingface','Work practically with pretrained models, datasets, fine-tuning, PEFT, and inference.'],
       ['llms','Learn how large language models behave and how to build with them responsibly.'],
-      ['reinforcement-learning-post-training','Learn reinforcement learning fundamentals and modern LLM post-training with SFT, preference optimization, reward modeling, PPO, DPO, and GRPO-style methods.'],
       ['prompt-engineering','Develop systematic prompting and structured interaction techniques.'],
       ['rag','Ground model responses in external knowledge with retrieval.'],
       ['ai-agents','Build tool-using and multi-step agentic workflows after mastering LLM fundamentals.'],
       ['llm-evaluation-testing','Measure AI quality, regressions, slices, and failure modes instead of relying on demos.'],
-      ['secure-ai-applications','Add AI-specific security thinking before treating an application as production-ready.']
+      ['secure-ai-applications','Add AI-specific security thinking before treating an application as production-ready.'],
+      ['reinforcement-learning-post-training','Learn reinforcement learning fundamentals and modern LLM post-training with SFT, preference optimization, reward modeling, PPO, DPO, and GRPO-style methods.']
     ]},
     { title:'Phase 5 — Production AI', note:'Learn to package, deploy, operate, monitor, and design reliable AI systems.', courses:[
       ['docker','Package applications and model services reproducibly.'],
@@ -62,7 +64,7 @@
   var AI_PATH_PRIORITY = {
     'python':'Core','problem-solving':'Core','dsa':'Core','cpp-dsa':'Supporting','git':'Important','linux':'Important','debugging':'Important','testing':'Important','software-engineering-practice':'Core',
     'sql':'Core','databases':'Important','apis':'Important','backend':'Important','networking':'Important',
-    'classical-ai':'Core','ai-ml':'Core','deep-learning':'Core','pytorch':'Core','data-engineering':'Core',
+    'data-science':'Core','practical-math-ml':'Core','classical-ai':'Core','ai-ml':'Core','deep-learning':'Core','pytorch':'Core','data-engineering':'Core',
     'transformers':'Core','huggingface':'Core','llms':'Core','reinforcement-learning-post-training':'Core','prompt-engineering':'Important','rag':'Core','ai-agents':'Core','llm-evaluation-testing':'Core','secure-ai-applications':'Important',
     'docker':'Important','cloud-computing':'Important','deployment':'Important','cicd':'Important','mlops':'Core','large-scale-ai':'Core','observability':'Important','ai-system-design':'Core',
     'system-design':'Important','software-architecture':'Important','distributed-systems':'Important','kubernetes':'Supporting','cybersecurity':'Supporting','comparch-os':'Supporting'

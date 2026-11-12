@@ -6,7 +6,7 @@ const root=path.join(__dirname,'..');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const courses=JSON.parse(read('assets/coursedata-source.json'));
 
-assert.equal(courses.length,62,'platform must preserve all 62 courses');
+assert.equal(courses.length,63,'platform must preserve all 63 courses');
 
 let lessonCount=0,exerciseCount=0,quizCount=0,projectCount=0;
 const global={explanation:new Map(),example:new Map(),objective:new Map(),mistake:new Map()};
@@ -65,7 +65,7 @@ for(const course of courses){
   }
  }
 }
-assert.equal(lessonCount,800,'all 800 authored lessons must remain present');
+assert.equal(lessonCount,808,'all 808 authored lessons must remain present');
 assert.ok(exerciseCount>=764,'platform needs broad exercise coverage');
 assert.ok(quizCount>=1528,'platform needs broad knowledge-check coverage');
 assert.ok(projectCount>=268,'platform needs broad project/capstone coverage');
@@ -85,7 +85,7 @@ for(const lesson of cpp.lessons||[])for(const code of lesson.examples||[]){
 }
 
 const pages=fs.readdirSync(path.join(root,'courses')).filter(n=>n.endsWith('.html'));
-assert.equal(pages.length,62,'all 62 course pages must exist');
+assert.equal(pages.length,63,'all 63 course pages must exist');
 for(const name of pages){
  const html=read('courses/'+name);
  assert.match(html,/<meta\b[^>]*\bname=["']viewport["'][^>]*>/i,name+' needs responsive viewport metadata');
@@ -98,4 +98,4 @@ for(const name of pages){
  assert.doesNotMatch(html,/data-shared-study-checklist/i,name+' still contains the old duplicated generic study checklist');
 }
 
-console.log('Platform professional audit PASS — 62 courses / 800 lessons have substantive teaching, no exact repeated authored theory/examples, standardized C++ syntax, and product-safe course UI.');
+console.log('Platform professional audit PASS — 63 courses / 808 lessons have substantive teaching, no exact repeated authored theory/examples, standardized C++ syntax, and product-safe course UI.');
