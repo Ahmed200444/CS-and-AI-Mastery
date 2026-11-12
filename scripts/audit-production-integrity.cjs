@@ -30,7 +30,7 @@ let inlineChecked=0,localAssetsChecked=0;
 for(const file of htmlFiles){
  const html=fs.readFileSync(file,'utf8'),name=rel(file),visible=stripVisible(html);
  for(const [label,re] of leakPatterns){const m=re.exec(visible);if(m){const start=Math.max(0,m.index-90),end=Math.min(visible.length,m.index+190);failures.push(`${name}: possible visible ${label}: ${visible.slice(start,end)}`);break;}}
- if(name!=='courses/cpp-dsa.html'&&name!=='courses/microprocessors-arm.html'&&name!=='courses/arm-assembly.html'&&/C\+\+|Python\s*(?:&|\+|\/)\s*C\+\+|\bDual\s+(?:mode|language|practice)/i.test(visible))failures.push(`${name}: unexpected legacy C++/dual language text is visible`);
+ if(name!=='courses/cpp-dsa.html'&&/C\+\+|Python\s*(?:&|\+|\/)\s*C\+\+|\bDual\s+(?:mode|language|practice)/i.test(visible))failures.push(`${name}: unexpected legacy C++/dual language text is visible`);
  if(name!=='index.html'&&/cpp-runner-ui-worker|primary-language-mode|dual-single-editor-publish|course-language-mode-controller|lesson-language-variants/.test(html))failures.push(`${name}: removed language asset reference remains`);
  const scriptRe=/<script\b([^>]*)>([\s\S]*?)<\/script\s*>/gi;let sm;
  while((sm=scriptRe.exec(html))){
@@ -52,7 +52,7 @@ for(const file of htmlFiles){
    if(!fs.existsSync(p))failures.push(`${name}: missing local asset ${ref}`);else localAssetsChecked++;
  }
 }
-if(htmlFiles.length!==66)failures.push(`expected index + 65 course pages = 66 HTML files, found ${htmlFiles.length}`);
+if(htmlFiles.length!==63)failures.push(`expected index + 62 course pages = 63 HTML files, found ${htmlFiles.length}`);
 const expectedAssets=['assets/adaptive-practice-layer.js','assets/project-readme-layer.js','assets/runner-performance-guard.js','assets/python-only-ui.js'];
 for(const a of expectedAssets)if(!fs.existsSync(path.join(root,a)))failures.push(`missing critical runtime ${a}`);
 const removedAssets=['assets/cpp-runner-ui-worker.js','assets/dual-single-editor-publish.js','assets/primary-language-mode.js','assets/course-language-mode-controller.js','assets/lesson-language-variants.js'];

@@ -1,7 +1,7 @@
-<!doctype html><html lang="en"><head><meta data-csai-head-preload="calmfast2"><link rel="preload" href="/runtime/pyodide/pyodide.js" as="script"><link rel="prefetch" href="/runtime/pyodide/pyodide.asm.wasm" as="fetch" crossorigin="anonymous"><link rel="prefetch" href="/runtime/pyodide/python_stdlib.zip" as="fetch" crossorigin="anonymous"><link rel="preload" href="../assets/python-terminal-worker.js?v=20260822-v567" as="script"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LLM Evaluation &amp; Testing — CS & AI Mastery</title><script src="../assets/runtime-inline/courses-llm-evaluation-testing-001.js?v=20260822-v567"></script><style>
+<!doctype html><html lang="en"><head><script id="csai-core-id-migration">(function(){try{var FLAG='csai-core-id-migration-v1',OLD='apt'+'ech-',NEW='core-';if(localStorage.getItem(FLAG))return;var keys=[],i;for(i=0;i<localStorage.length;i++)keys.push(localStorage.key(i));keys.forEach(function(k){var v=localStorage.getItem(k);if(v===null)return;var nv=v.indexOf(OLD)>-1?v.split(OLD).join(NEW):v;if(k.indexOf(OLD)>-1){var nk=k.split(OLD).join(NEW);if(localStorage.getItem(nk)===null)localStorage.setItem(nk,nv);localStorage.removeItem(k);}else if(nv!==v){localStorage.setItem(k,nv);}});localStorage.setItem(FLAG,'1');}catch(e){}})();</script><meta data-csai-head-preload="calmfast2"><link rel="preload" href="/runtime/pyodide/pyodide.js" as="script"><link rel="prefetch" href="/runtime/pyodide/pyodide.asm.wasm" as="fetch" crossorigin="anonymous"><link rel="prefetch" href="/runtime/pyodide/python_stdlib.zip" as="fetch" crossorigin="anonymous"><link rel="preload" href="../assets/python-terminal-worker.js?v=20260822-v567" as="script"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LLM Evaluation &amp; Testing — CS & AI Mastery</title><script src="../assets/runtime-inline/courses-llm-evaluation-testing-001.js?v=20260822-v567"></script><style>
 :root{color-scheme:light;--bg:#f4f7fb;--panel:#fff;--text:#172231;--muted:#5d6c7c;--border:#d8e1ea;--pill:#e8f1f8;--pilltext:#174b72;--accent:#17649a;--code:#101827;--note:#fff7e7}
 html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#edf3f8;--muted:#c6d1da;--border:#344352;--pill:#223446;--pilltext:#b9dcf5;--accent:#4da3df;--code:#0b111b;--note:#2b2417}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:1100px;margin:auto;padding:18px 20px 110px}.top{position:sticky;top:0;z-index:4;display:flex;justify-content:space-between;gap:10px;padding:10px 0;background:var(--bg)}.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid #b8c7d6;border-radius:9px;padding:9px 13px;background:var(--panel);color:var(--text);font:inherit;font-weight:800;cursor:pointer}.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.hero,.card,.lesson{background:var(--panel);border:1px solid var(--border);border-radius:15px;color:var(--text)}.hero{padding:22px;margin:8px 0 16px}.kicker{font-size:.74rem;letter-spacing:.1em;font-weight:900;color:var(--accent)}.hero h1{margin:5px 0 8px;font-size:clamp(2rem,4vw,3.2rem);line-height:1.08}.muted{color:var(--muted)}.meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.pill{padding:4px 8px;border-radius:999px;background:var(--pill);color:var(--pilltext);font-size:.78rem;font-weight:800}.progress{height:10px;border-radius:999px;background:var(--border);overflow:hidden;margin:14px 0 5px}.progress span{display:block;height:100%;background:#16805b}.lessons{display:grid;gap:11px}.lesson{overflow:hidden}.lesson summary{display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;font-weight:850}.num{display:grid;place-items:center;min-width:34px;height:28px;border-radius:8px;background:var(--pill);color:var(--pilltext)}.title{flex:1}.check{display:flex;gap:6px;align-items:center;font-size:.82rem;font-weight:700}.body{padding:0 16px 18px}.body h3{margin:17px 0 7px;font-size:1rem}.body p,.body li{line-height:1.68}.code{white-space:pre-wrap;overflow:auto;padding:13px;border-radius:10px;background:var(--code);color:#f4f7fb;font:500 .86rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}.note{margin-top:12px;padding:12px;border-left:4px solid #d28b23;border-radius:8px;background:var(--note)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}.card{padding:17px}.card h2{margin:0 0 10px}.item{padding:12px;margin:9px 0;border-radius:10px;background:var(--bg);border:1px solid var(--border)}.answer{width:100%;min-height:90px;margin-top:8px;padding:10px;border:1px solid #aebdca;border-radius:8px;background:transparent;color:inherit;font:inherit}.theme{position:fixed;right:22px;bottom:22px;z-index:20;border:1px solid #b8c7d6;border-radius:999px;padding:10px 16px;background:var(--panel);color:var(--text);font:800 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.16);cursor:pointer}.empty{padding:17px;border:1px dashed var(--border);border-radius:10px}.hero-icon{margin-right:.25em}@media(max-width:720px){.wrap{padding:10px 10px 100px}.grid{grid-template-columns:1fr}.top .btn{flex:1}.lesson summary{flex-wrap:wrap;align-items:flex-start}.check{width:100%;padding-left:44px}.theme{right:14px;bottom:14px;padding:10px 14px}}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:1100px;margin:auto;padding:18px 20px 110px}.top{position:sticky;top:0;z-index:4;display:flex;justify-content:space-between;gap:10px;padding:10px 0;background:var(--bg)}.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid #b8c7d6;border-radius:9px;padding:9px 13px;background:var(--panel);color:var(--text);font:inherit;font-weight:800;cursor:pointer}.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.hero,.card,.lesson{background:var(--panel);border:1px solid var(--border);border-radius:15px;color:var(--text)}.hero{padding:22px;margin:8px 0 16px}.kicker{font-size:.74rem;letter-spacing:.1em;font-weight:900;color:var(--accent)}.hero h1{margin:5px 0 8px;font-size:clamp(2rem,4vw,3.2rem);line-height:1.08}.muted{color:var(--muted)}.meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.pill{padding:4px 8px;border-radius:999px;background:var(--pill);color:var(--pilltext);font-size:.78rem;font-weight:800}.progress{height:10px;border-radius:999px;background:var(--border);overflow:hidden;margin:14px 0 5px}.progress span{display:block;height:100%;background:#16805b}.lessons{display:grid;grid-template-columns:minmax(0,1fr);gap:11px}.lesson{overflow:hidden}.lesson summary{display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;font-weight:850}.num{display:grid;place-items:center;min-width:34px;height:28px;border-radius:8px;background:var(--pill);color:var(--pilltext)}.title{flex:1}.check{display:flex;gap:6px;align-items:center;font-size:.82rem;font-weight:700}.body{padding:0 16px 18px}.body h3{margin:17px 0 7px;font-size:1rem}.body p,.body li{line-height:1.68}.code{white-space:pre-wrap;overflow:auto;padding:13px;border-radius:10px;background:var(--code);color:#f4f7fb;font:500 .86rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}.note{margin-top:12px;padding:12px;border-left:4px solid #d28b23;border-radius:8px;background:var(--note)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}.card{padding:17px}.card h2{margin:0 0 10px}.item{padding:12px;margin:9px 0;border-radius:10px;background:var(--bg);border:1px solid var(--border)}.answer{width:100%;min-height:90px;margin-top:8px;padding:10px;border:1px solid #aebdca;border-radius:8px;background:transparent;color:inherit;font:inherit}.theme{position:fixed;right:22px;bottom:22px;z-index:20;border:1px solid #b8c7d6;border-radius:999px;padding:10px 16px;background:var(--panel);color:var(--text);font:800 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.16);cursor:pointer}.empty{padding:17px;border:1px dashed var(--border);border-radius:10px}.hero-icon{margin-right:.25em}@media(max-width:720px){.wrap{padding:10px 10px 100px}.grid{grid-template-columns:1fr}.top .btn{flex:1}.lesson summary{flex-wrap:wrap;align-items:flex-start}.check{width:100%;padding-left:44px}.theme{right:14px;bottom:14px;padding:10px 14px}}
 </style>
 
 <link rel="stylesheet" href="../assets/oa-assessment-fallback.css?v=20260822-v567">
@@ -49,20 +49,19 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <script src="../assets/product-redesign-v2.js?v=20260822-v567&learning=20261003-v584" defer></script>
 <script src="../assets/adaptive-v4-live.js?v=20260822-v567&learning=20261003-v584" defer></script>
 <script src="../assets/hero-polish.js?v=20260822-v567" defer></script>
+<link rel="stylesheet" href="../assets/pro-polish-v6.css?v=20260822-v567">
+<script src="../assets/pro-polish-v6.js?v=20260822-v567" defer></script>
+<script src="../assets/lesson-videos-v1.js?v=20260822-v567" defer></script>
 <!-- csai-unified-design:end -->
 <link rel="stylesheet" href="/assets/oa-assessment-fallback.css?v=20260811-1">
 <link rel="stylesheet" href="/assets/oa-assessment-upgrade.css?v=20260811-1">
 </head><body>
 <main class="wrap"><div class="top"><a class="btn" href="../index.html#courses">← All courses</a><a class="btn primary" href="../index.html#hub">Home</a></div>
 <section class="hero"><div class="kicker">COURSE</div><h1><span class="hero-icon">📐</span>LLM Evaluation &amp; Testing</h1><p class="muted">Evaluation as its own engineering discipline -- golden datasets, metric selection, LLM-as-judge auditing, human/pairwise evaluation, RAG/agent evaluation, and continuous regression testing.</p><div class="meta"><span class="pill">15 lessons</span><span class="pill">18 exercises</span><span class="pill">20 checkpoints</span><span class="pill">6 projects</span></div><div class="progress"><span data-progress-bar style="width:0%"></span></div><div class="muted" data-progress-status>0 of 15 lessons complete</div></section>
-<section class="card" data-shared-study-checklist><h2>Course study checklist</h2><ul><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul></section>
 <section class="lessons"><details class="lesson" data-lesson="lleval-engineering-discipline" open>
 <summary><span class="num">01</span><span class="title">Evaluation Is an Engineering Discipline</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Explain why evaluation is evidence for a specific claim, not a demo of selected examples</li><li>Explain how evaluation as evidence changes the behavior, result, or engineering decision in a concrete example</li><li>Connect evaluation as evidence with system vs. model quality and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>A handful of impressive demo examples proves the system can work, not that it does work reliably.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain why evaluation is evidence for a specific claim, not a demo of selected examples</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>A handful of impressive demo examples proves the system can work, not that it does work reliably.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">evaluation as evidence</span><span class="pill">system vs. model quality</span><span class="pill">evaluation units</span><span class="pill">testing only successes</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># system quality vs. model quality -- genuinely different claims:
 # model quality: &#39;this LLM scores well on a general public benchmark&#39;
@@ -72,11 +71,8 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <div class="note"><b>Common mistake:</b> Showing a handful of impressive demo examples as if that constitutes evaluation -- a demo proves the system CAN work in that case; it says nothing about how often it works across the real.</div>
 </div></details><details class="lesson" data-lesson="lleval-goals-criteria" >
 <summary><span class="num">02</span><span class="title">Defining Goals and Success Criteria</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Convert a vague goal into testable acceptance criteria and identify failure categories</li><li>Explain how testable success criteria changes the behavior, result, or engineering decision in a concrete example</li><li>Connect testable success criteria with hard constraints vs. optimization goals and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>A goal like 'make the assistant better' or 'more accurate' isn't yet testable -- it must be converted into specific, checkable criteria: what does 'better' mean for THIS feature, what's the primary objective versus secondary ones, what are the hard constraints (must never do X) versus optimization goals (should generally do more of Y).</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Convert a vague goal into testable acceptance criteria and identify failure categories</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>A goal like &#39;make the assistant better&#39; or &#39;more accurate&#39; isn&#39;t yet testable -- it must be converted into specific, checkable criteria: what does &#39;better&#39; mean for THIS feature, what&#39;s the primary objective versus secondary ones, what are the hard constraints (must never do X) versus optimization goals (should generally do more of Y).</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">testable success criteria</span><span class="pill">hard constraints vs. optimization goals</span><span class="pill">failure categories</span><span class="pill">unit of evaluation</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># converting a vague goal into testable criteria:
 # vague: &#39;make the assistant more accurate&#39;
@@ -87,11 +83,8 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <div class="note"><b>Common mistake:</b> Leaving a goal vague (&#39;more accurate,&#39; &#39;more helpful&#39;) without converting it into specific, checkable criteria -- an untestable goal can&#39;t actually be evaluated, only vaguely gestured at.</div>
 </div></details><details class="lesson" data-lesson="lleval-offline-online" >
 <summary><span class="num">03</span><span class="title">Offline and Online Evaluation</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Distinguish offline from online evaluation and explain why their results can genuinely differ</li><li>Explain how offline evaluation changes the behavior, result, or engineering decision in a concrete example</li><li>Connect offline evaluation with online evaluation and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>Offline evaluation runs against a fixed dataset before deployment -- controlled and repeatable, but it can't fully capture real user behavior. Online evaluation observes real production traffic -- user feedback, A/B testing, and canary evaluation conceptually compare real outcomes, but labels may be immediate, delayed, or sometimes never available at all.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Distinguish offline from online evaluation and explain why their results can genuinely differ</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Offline evaluation runs against a fixed dataset before deployment -- controlled and repeatable, but it can&#39;t fully capture real user behavior. Online evaluation observes real production traffic -- user feedback, A/B testing, and canary evaluation conceptually compare real outcomes, but labels may be immediate, delayed, or sometimes never available at all.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">offline evaluation</span><span class="pill">online evaluation</span><span class="pill">delayed/unavailable labels</span><span class="pill">offline-online gap</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># why offline success does not guarantee online success:
 # offline: &#39;candidate scores 92% on our fixed golden dataset&#39; -- controlled,
@@ -101,11 +94,8 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <div class="note"><b>Common mistake:</b> Treating a strong offline evaluation result as proof the system will perform well in production -- offline and online evaluation answer different questions, and real user behavior can.</div>
 </div></details><details class="lesson" data-lesson="lleval-golden-datasets" >
 <summary><span class="num">04</span><span class="title">Golden Datasets and Representative Test Cases</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Build a golden dataset that genuinely represents real usage, correctly versioned and separated from development data</li><li>Explain how golden datasets changes the behavior, result, or engineering decision in a concrete example</li><li>Connect golden datasets with representative sampling and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>A golden (reference) dataset is a curated, documented set of cases with either an expected output or clear acceptable-output criteria -- built from a representative mix of real and synthetic cases, not just whatever was convenient to collect.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Build a golden dataset that genuinely represents real usage, correctly versioned and separated from development data</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>A golden (reference) dataset is a curated, documented set of cases with either an expected output or clear acceptable-output criteria -- built from a representative mix of real and synthetic cases, not just whatever was convenient to collect.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">golden datasets</span><span class="pill">representative sampling</span><span class="pill">dataset versioning</span><span class="pill">train/evaluation separation</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># a real, subtle risk: accidental reuse of development examples
 # during prompt iteration, a developer repeatedly checks the system against
@@ -115,11 +105,8 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <div class="note"><b>Common mistake:</b> Accidentally using the same examples for both prompt/system iteration and final evaluation -- this inflates apparent performance without measuring genuine generalization to new, unseen.</div>
 </div></details><details class="lesson" data-lesson="lleval-adversarial-slices" >
 <summary><span class="num">05</span><span class="title">Adversarial, Edge-Case and Slice-Based Evaluation</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Explain why aggregate scores can hide important regressions, and how slice-based evaluation surfaces them</li><li>Explain how aggregate-score masking changes the behavior, result, or engineering decision in a concrete example</li><li>Connect aggregate-score masking with slice-based evaluation and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>A strong aggregate score can hide a real, important failure -- if 95% of your evaluation set is easy, routine cases, a system that fails badly on the remaining 5% (which might be your highest-stakes cases) can still show an impressive-looking overall number.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain why aggregate scores can hide important regressions, and how slice-based evaluation surfaces them</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>A strong aggregate score can hide a real, important failure -- if 95% of your evaluation set is easy, routine cases, a system that fails badly on the remaining 5% (which might be your highest-stakes cases) can still show an impressive-looking overall number.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">aggregate-score masking</span><span class="pill">slice-based evaluation</span><span class="pill">adversarial cases</span><span class="pill">edge cases</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># how an aggregate score can hide a real regression:
 # 95% easy cases pass perfectly, 5% hard/critical cases fail completely
@@ -129,11 +116,8 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <div class="note"><b>Common mistake:</b> Reporting only an aggregate score without breaking results down by slice -- a strong overall number can hide a complete failure in a smaller, possibly higher-stakes subset of cases.</div>
 </div></details><details class="lesson" data-lesson="lleval-deterministic-metrics" >
 <summary><span class="num">06</span><span class="title">Deterministic and Rule-Based Metrics</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Apply deterministic metrics appropriately, and recognize their limits for open-ended output</li><li>Explain how exact match changes the behavior, result, or engineering decision in a concrete example</li><li>Connect exact match with schema/rule-based validation and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>Deterministic metrics give a clear, reproducible pass/fail: exact match, normalized exact match (ignoring case/whitespace differences), regex or rule-based checks, JSON/schema validity, required-field presence, and action/tool-call validity against an allowlist.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Apply deterministic metrics appropriately, and recognize their limits for open-ended output</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Deterministic metrics give a clear, reproducible pass/fail: exact match, normalized exact match (ignoring case/whitespace differences), regex or rule-based checks, JSON/schema validity, required-field presence, and action/tool-call validity against an allowlist.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">exact match</span><span class="pill">schema/rule-based validation</span><span class="pill">precision/recall/F1 (task-appropriate)</span><span class="pill">limits for open-ended output</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># where deterministic metrics genuinely work, and where they don&#39;t:
 # &#39;is this valid JSON matching our schema?&#39; -&gt; deterministic check works perfectly
@@ -142,11 +126,8 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <div class="note"><b>Common mistake:</b> Applying an exact-match check to open-ended, free-form output -- a correct paraphrase or equally valid alternative phrasing will fail this check despite being a genuinely good answer.</div>
 </div></details><details class="lesson" data-lesson="lleval-semantic-metrics" >
 <summary><span class="num">07</span><span class="title">Semantic and Model-Based Similarity Metrics</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Explain why semantic similarity to a reference answer does not guarantee factual correctness</li><li>Explain how semantic/embedding-based similarity changes the behavior, result, or engineering decision in a concrete example</li><li>Connect semantic/embedding-based similarity with reference-answer dependence and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>Semantic similarity (often computed via embedding-based comparison) measures how close a response is in MEANING to a reference answer, capturing valid paraphrases that exact match would incorrectly reject.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain why semantic similarity to a reference answer does not guarantee factual correctness</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Semantic similarity (often computed via embedding-based comparison) measures how close a response is in MEANING to a reference answer, capturing valid paraphrases that exact match would incorrectly reject.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">semantic/embedding-based similarity</span><span class="pill">reference-answer dependence</span><span class="pill">false similarity</span><span class="pill">similarity vs. factual correctness</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># why HIGH semantic similarity does not prove factual correctness:
 # reference: &#39;the return window is 30 days&#39;
@@ -156,11 +137,8 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <div class="note"><b>Common mistake:</b> Treating a high semantic-similarity score as proof of factual correctness -- a response can be very close in overall meaning to a reference while still stating a specific wrong fact.</div>
 </div></details><details class="lesson" data-lesson="lleval-judge-failure-modes" >
 <summary><span class="num">08</span><span class="title">LLM-as-a-Judge and Its Failure Modes</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Name specific, documented failure modes of automated LLM judging, and explain why judges must be audited, not trusted by default</li><li>Explain how LLM-as-a-judge changes the behavior, result, or engineering decision in a concrete example</li><li>Connect LLM-as-a-judge with answer-order sensitivity and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>LLM-as-a-judge uses a model to grade another model's output against a rubric -- reference-based (comparing to a known-good answer) or reference-free, pointwise (scoring one response) or pairwise (comparing two).</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Name specific, documented failure modes of automated LLM judging, and explain why judges must be audited, not trusted by default</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>LLM-as-a-judge uses a model to grade another model&#39;s output against a rubric -- reference-based (comparing to a known-good answer) or reference-free, pointwise (scoring one response) or pairwise (comparing two).</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">LLM-as-a-judge</span><span class="pill">answer-order sensitivity</span><span class="pill">verbosity preference</span><span class="pill">rubric ambiguity</span><span class="pill">auditing judges</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># a judge&#39;s number is not automatically ground truth -- it&#39;s a measurement
 # subject to its own design flaws:
@@ -168,14 +146,11 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 # preference can flip, even though nothing about the ANSWERS changed
 # verbosity preference: a longer, padded, factually worse answer can be
 # preferred over a shorter, correct one -- length itself biasing the grade</pre>
-<div class="note"><b>Common mistake:</b> Treating an automated judge&#39;s score as objective ground truth simply because it&#39;s produced by a model and expressed as a number -- judges have documented, real biases (order, verbosity, rubric ambiguity) and must be calibrated against human review, not trusted by default.</div>
+<div class="note"><b>Common mistake:</b> Treating an automated judge&#39;s score as objective ground truth simply because it&#39;s produced by a model and expressed as a number -- judges have documented, real biases (order, verbosity.</div>
 </div></details><details class="lesson" data-lesson="lleval-pairwise-ranking" >
 <summary><span class="num">09</span><span class="title">Pairwise Comparison and Ranking</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Design a counterbalanced pairwise comparison protocol and interpret win rates with appropriate uncertainty</li><li>Explain how pairwise comparison changes the behavior, result, or engineering decision in a concrete example</li><li>Connect pairwise comparison with counterbalanced ordering and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>Pairwise comparison (is response A or response B better, for the same input) is often genuinely easier and more reliable than absolute scoring, since humans and judges are typically better at relative comparison than assigning a stable absolute number.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Design a counterbalanced pairwise comparison protocol and interpret win rates with appropriate uncertainty</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Pairwise comparison (is response A or response B better, for the same input) is often genuinely easier and more reliable than absolute scoring, since humans and judges are typically better at relative comparison than assigning a stable absolute number.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">pairwise comparison</span><span class="pill">counterbalanced ordering</span><span class="pill">ties</span><span class="pill">win-rate uncertainty</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># why counterbalancing order matters for pairwise comparison:
 # without counterbalancing: A is ALWAYS shown first -- if there&#39;s any position
@@ -185,25 +160,19 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <div class="note"><b>Common mistake:</b> Running pairwise comparisons without counterbalancing presentation order -- any position bias present becomes indistinguishable from a genuine quality difference between A and B.</div>
 </div></details><details class="lesson" data-lesson="lleval-human-eval-rubrics" >
 <summary><span class="num">10</span><span class="title">Human Evaluation and Rubrics</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Design an effective human-evaluation rubric, including how disagreement is handled</li><li>Explain how rubric design changes the behavior, result, or engineering decision in a concrete example</li><li>Connect rubric design with scoring anchors and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>Human evaluation remains essential for genuinely subjective qualities automated metrics can't fully capture. A good rubric has clear scoring anchors (concrete examples of what a 3 vs.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Design an effective human-evaluation rubric, including how disagreement is handled</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Human evaluation remains essential for genuinely subjective qualities automated metrics can&#39;t fully capture. A good rubric has clear scoring anchors (concrete examples of what a 3 vs.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">rubric design</span><span class="pill">scoring anchors</span><span class="pill">blind review</span><span class="pill">inter-rater agreement</span><span class="pill">adjudication</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># what makes a rubric ANCHOR concrete, not just a numeric scale:
 # vague: &#39;rate helpfulness from 1 to 5&#39;
 # anchored: &#39;5 = fully resolves the question with accurate, complete detail;
 # 3 = partially helpful but missing key information; 1 = unhelpful or
 # actively misleading&#39; -- with a WORKED EXAMPLE for each anchor point</pre>
-<div class="note"><b>Common mistake:</b> Using a numeric rating scale with no concrete anchors or examples -- different reviewers will interpret &#39;3 out of 5&#39; completely differently without shared, concrete reference points for what each score actually means.</div>
+<div class="note"><b>Common mistake:</b> Using a numeric rating scale with no concrete anchors or examples -- different reviewers will interpret &#39;3 out of 5&#39; completely differently without shared, concrete reference points for what.</div>
 </div></details><details class="lesson" data-lesson="lleval-factuality-groundedness" >
 <summary><span class="num">11</span><span class="title">Factuality, Hallucination and Groundedness Evaluation</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Precisely distinguish factual correctness, faithfulness, groundedness, and citation correctness</li><li>Explain how factual correctness changes the behavior, result, or engineering decision in a concrete example</li><li>Connect factual correctness with faithfulness and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>These related-sounding terms mean genuinely different things: factual correctness asks whether a claim is true in the world; faithfulness to provided context asks whether the response accurately reflects what was actually given to the model (even if that source material itself were wrong).</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Precisely distinguish factual correctness, faithfulness, groundedness, and citation correctness</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>These related-sounding terms mean genuinely different things: factual correctness asks whether a claim is true in the world; faithfulness to provided context asks whether the response accurately reflects what was actually given to the model (even if that source material itself were wrong).</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">factual correctness</span><span class="pill">faithfulness</span><span class="pill">groundedness</span><span class="pill">citation correctness</span><span class="pill">answer completeness</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># distinct failure modes, easy to conflate:
 # faithful to context but factually wrong: the source document itself was
@@ -211,14 +180,11 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 # groundedness failure: the response states something the context never said
 # at all -- fluent, plausible-sounding, but simply invented
 # citation failure: cites a real source, but that source doesn&#39;t actually say what&#39;s claimed</pre>
-<div class="note"><b>Common mistake:</b> Treating a fluent, confident, relevant-sounding response as evidence it&#39;s factually correct -- fluency and relevance are properties of the TEXT; factual support is a separate question requiring its own explicit check.</div>
+<div class="note"><b>Common mistake:</b> Treating a fluent, confident, relevant-sounding response as evidence it&#39;s factually correct -- fluency and relevance are properties of the TEXT; factual support is a separate question.</div>
 </div></details><details class="lesson" data-lesson="lleval-rag-evaluation" >
 <summary><span class="num">12</span><span class="title">Evaluating RAG Systems</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Separate retrieval evaluation from generation evaluation to correctly attribute a RAG failure</li><li>Explain how retrieval vs. generation failure changes the behavior, result, or engineering decision in a concrete example</li><li>Connect retrieval vs. generation failure with recall-oriented retrieval checks and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>A bad RAG answer can fail for two genuinely different reasons: retrieval failure (the system didn't find the relevant document at all) or generation failure (it found the right document but the model still produced a wrong or ungrounded answer from it) -- and the fix for each is completely different.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Separate retrieval evaluation from generation evaluation to correctly attribute a RAG failure</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>A bad RAG answer can fail for two genuinely different reasons: retrieval failure (the system didn&#39;t find the relevant document at all) or generation failure (it found the right document but the model still produced a wrong or ungrounded answer from it) -- and the fix for each is completely different.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">retrieval vs. generation failure</span><span class="pill">recall-oriented retrieval checks</span><span class="pill">answer groundedness</span><span class="pill">end-to-end RAG evaluation</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># why attribution matters -- the SAME bad answer, two different real causes:
 # cause 1 (retrieval failure): the relevant document was never retrieved at all
@@ -229,11 +195,8 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <div class="note"><b>Common mistake:</b> Treating every bad RAG answer as a generation problem (or every one as a retrieval problem) without checking which stage actually failed -- misattributing the failure means fixing the wrong.</div>
 </div></details><details class="lesson" data-lesson="lleval-agent-safety-evaluation" >
 <summary><span class="num">13</span><span class="title">Evaluating Agents, Tools and Safety-Critical Behavior</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Evaluate an agent&#x27;s actions and tool effects, not merely its final natural-language answer</li><li>Explain how tool selection/argument evaluation changes the behavior, result, or engineering decision in a concrete example</li><li>Connect tool selection/argument evaluation with sequence correctness and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>An agent can produce a perfectly reasonable-sounding final answer while having taken genuinely wrong or dangerous actions along the way -- evaluating only the final text misses this entirely.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Evaluate an agent&#39;s actions and tool effects, not merely its final natural-language answer</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>An agent can produce a perfectly reasonable-sounding final answer while having taken genuinely wrong or dangerous actions along the way -- evaluating only the final text misses this entirely.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">tool selection/argument evaluation</span><span class="pill">sequence correctness</span><span class="pill">side-effect evaluation</span><span class="pill">escalation correctness</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># why evaluating only the final answer misses real agent failures:
 # final answer: &#39;I&#39;ve updated your shipping address as requested&#39; -- sounds
@@ -244,25 +207,19 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <div class="note"><b>Common mistake:</b> Evaluating an agent only by reading its final natural-language answer -- this misses tool-selection errors, wrong arguments, unauthorized side effects, and failed recovery, all of which can.</div>
 </div></details><details class="lesson" data-lesson="lleval-regression-testing" >
 <summary><span class="num">14</span><span class="title">Prompt, Model and Pipeline Regression Testing</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Design a regression test comparing baseline vs. candidate that cannot hide a critical-slice regression behind an improved aggregate score</li><li>Explain how baseline vs. candidate changes the behavior, result, or engineering decision in a concrete example</li><li>Connect baseline vs. candidate with per-slice regression and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>Any change -- a new prompt version, a new model version, a retrieval index update -- needs regression testing against a versioned evaluation dataset: comparing a baseline's results to a candidate's, per overall score AND per slice, since (as covered earlier) an aggregate improvement can hide a critical-slice regression that would otherwise go unnoticed.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Design a regression test comparing baseline vs. candidate that cannot hide a critical-slice regression behind an improved aggregate score</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Any change -- a new prompt version, a new model version, a retrieval index update -- needs regression testing against a versioned evaluation dataset: comparing a baseline&#39;s results to a candidate&#39;s, per overall score AND per slice, since (as covered earlier) an aggregate improvement can hide a critical-slice regression that would otherwise go unnoticed.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">baseline vs. candidate</span><span class="pill">per-slice regression</span><span class="pill">threshold design</span><span class="pill">contamination risk</span><span class="pill">reproducibility</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># why per-slice regression testing matters, restated concretely here:
 # baseline overall: 80% | candidate overall: 83% -- looks like a clear improvement
 # baseline security slice: 85% | candidate security slice: 60% -- a SEVERE
 # regression, completely hidden by the improved aggregate number -- exactly
 # the kind of result a regression test must be designed to catch, not miss</pre>
-<div class="note"><b>Common mistake:</b> Approving a candidate based only on an improved aggregate score, without checking per-slice results for a hidden regression -- an aggregate improvement can mask a serious regression in a.</div>
+<div class="note"><b>Common mistake:</b> Approving a candidate based only on an improved aggregate score, without checking per-slice results for a hidden regression.</div>
 </div></details><details class="lesson" data-lesson="lleval-continuous-production" >
 <summary><span class="num">15</span><span class="title">Continuous Evaluation in Production</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Design a continuous evaluation practice that closes the loop without treating noisy signals as ground truth</li><li>Explain how continuous evaluation changes the behavior, result, or engineering decision in a concrete example</li><li>Connect continuous evaluation with delayed/unavailable labels and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>Continuous evaluation means scheduled evaluation runs against the current system, safely sampling real production cases (with privacy considerations), human review queues for cases needing judgment, and dashboards tracking quality, latency, cost, and safety together over time.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Design a continuous evaluation practice that closes the loop without treating noisy signals as ground truth</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Continuous evaluation means scheduled evaluation runs against the current system, safely sampling real production cases (with privacy considerations), human review queues for cases needing judgment, and dashboards tracking quality, latency, cost, and safety together over time.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">continuous evaluation</span><span class="pill">delayed/unavailable labels</span><span class="pill">quality/latency/cost/safety dashboards</span><span class="pill">noisy signals vs. ground truth</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># why user feedback alone is a limited, noisy signal for continuous evaluation:
 # most users who had a fine experience never leave feedback at all
@@ -291,7 +248,7 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <script src="../assets/exercise-direct-publish.js?v=20260822-v567" defer></script>
 <script src="../assets/universal-run-output.js?v=20260822-v567&learning=20261003-v584" defer></script>
 <script src="../assets/final-exercise-toolbar.js?v=20260822-v567&learning=20261003-v584" defer></script>
-<script src="../assets/course-project-workspace.js?v=20260822-v571" defer></script><script src="../assets/line-by-line-explanations.js?v=20260919-v577&learning=20261003-v584" defer></script><script src="../assets/example-learning-tools.js?v=20260822-v567" defer></script>
+<script src="../assets/course-project-workspace.js?v=20260822-v571" defer></script><script src="../assets/line-by-line-explanations.js?v=20261004-v587&learning=20261003-v584" defer></script><script src="../assets/example-learning-tools.js?v=20260822-v567" defer></script>
 <script src="../assets/practice-publish-completer.js?v=20260823-v573&learning=20261003-v584" defer></script>
 
 
@@ -342,13 +299,16 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <!-- csai-production-augmentation -->
 <script src="../assets/adaptive-practice-layer.js?v=20260822-v567&learning=20261003-v584" defer></script>
 <script src="../assets/project-readme-layer.js?v=20260822-v567" defer></script>
+<script src="../assets/optional-services.js?v=20260822-v567" defer></script>
+<script src="../assets/floating-dock.js?v=20260822-v567" defer></script>
+<script src="../assets/course-sidebar.js?v=20260822-v567" defer></script>
 <!-- /csai-production-augmentation -->
 <script src="/assets/oa-assessment-fallback.js?v=20260811-1" defer></script>
 <script src="/assets/oa-assessment-upgrade.js?v=20260811-1" defer></script>
 
 <script src="/assets/python-only-ui.js?v=20260811-2" defer></script>
 
-<script defer src="../assets/study-examples.js?v=20260824-v574&learning=20261003-v584"></script>
+<script defer src="../assets/study-examples.js?v=20261004-v586&learning=20261003-v584"></script>
 
 <script defer src="../assets/brilliant-tutor-v1.js?v=20260822-v567"></script>
 <script defer src="../assets/lesson-recall.js?v=20261003-v578"></script>

@@ -36,8 +36,8 @@ function pyExample(lesson){
  return '# '+cleanText(title)+'\nvalues = [1, 2, 3, 4]\nresult = [value * 2 for value in values]\nprint("'+String(concept).replace(/["\\]/g,'')+'", result)';
 }
 function convertValue(value,ctx){
- // FIX #3 -- the dedicated C++ and university architecture/MATLAB courses keep their native code, lessons, examples, editors and metadata.
- if(value&&typeof value==='object'&&!Array.isArray(value)&&(value.id==='cpp-dsa'||value.id==='microprocessors-arm'||value.id==='arm-assembly'||value.id==='matlab-engineering'))return value;
+ // FIX #3 -- the dedicated C++ course keeps its native code, lessons, examples, editors and metadata.
+ if(value&&typeof value==='object'&&!Array.isArray(value)&&value.id==='cpp-dsa')return value;
  if(Array.isArray(value))return value.map(v=>convertValue(v,ctx));
  if(!value||typeof value!=='object')return typeof value==='string'?cleanText(value):value;
  const out={};
@@ -84,7 +84,7 @@ function cleanHtml(html,preserveCpp){
 let dataFiles=0,pageFiles=0,cppPreserved=0;
 if(fs.existsSync(dataDir))for(const name of fs.readdirSync(dataDir).filter(x=>x.endsWith('.json'))){const p=path.join(dataDir,name);const data=JSON.parse(fs.readFileSync(p,'utf8'));fs.writeFileSync(p,JSON.stringify(convertValue(data),null,2)+'\n');dataFiles++;}
 if(fs.existsSync(catalogPath)){const data=JSON.parse(fs.readFileSync(catalogPath,'utf8'));fs.writeFileSync(catalogPath,JSON.stringify(convertValue(data),null,2)+'\n');}
-if(fs.existsSync(coursesDir))for(const name of fs.readdirSync(coursesDir).filter(x=>x.endsWith('.html'))){const p=path.join(coursesDir,name);const preserveCpp=name==='cpp-dsa.html'||name==='microprocessors-arm.html'||name==='arm-assembly.html'||name==='matlab-engineering.html';if(name==='cpp-dsa.html')cppPreserved++;fs.writeFileSync(p,cleanHtml(fs.readFileSync(p,'utf8'),preserveCpp),'utf8');pageFiles++;}
+if(fs.existsSync(coursesDir))for(const name of fs.readdirSync(coursesDir).filter(x=>x.endsWith('.html'))){const p=path.join(coursesDir,name);const preserveCpp=name==='cpp-dsa.html';if(name==='cpp-dsa.html')cppPreserved++;fs.writeFileSync(p,cleanHtml(fs.readFileSync(p,'utf8'),preserveCpp),'utf8');pageFiles++;}
 if(fs.existsSync(indexPath)){
  let html=fs.readFileSync(indexPath,'utf8');
  html=replaceJsonScript(html,'coursedata',convertValue);
@@ -93,5 +93,5 @@ if(fs.existsSync(indexPath)){
  fs.writeFileSync(indexPath,html,'utf8');
 }
 if(cppPreserved!==1)throw new Error(`Dedicated C++ course page was not preserved (found ${cppPreserved})`);
-if(pageFiles!==65)throw new Error(`Python-only cleanup expected 65 course pages, found ${pageFiles}`);
+if(pageFiles!==62)throw new Error(`Python-only cleanup expected 62 course pages, found ${pageFiles}`);
 console.log(`Python-only platform cleanup complete: ${pageFiles} course pages and ${dataFiles} course-data files normalized.`);

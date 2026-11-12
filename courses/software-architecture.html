@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Software Architecture &amp; Design Patterns — CS &amp; AI Mastery</title><script src="../assets/runtime-inline/courses-software-architecture-001.js?v=20260822-v567"></script><style>
+<html lang="en"><head><script id="csai-core-id-migration">(function(){try{var FLAG='csai-core-id-migration-v1',OLD='apt'+'ech-',NEW='core-';if(localStorage.getItem(FLAG))return;var keys=[],i;for(i=0;i<localStorage.length;i++)keys.push(localStorage.key(i));keys.forEach(function(k){var v=localStorage.getItem(k);if(v===null)return;var nv=v.indexOf(OLD)>-1?v.split(OLD).join(NEW):v;if(k.indexOf(OLD)>-1){var nk=k.split(OLD).join(NEW);if(localStorage.getItem(nk)===null)localStorage.setItem(nk,nv);localStorage.removeItem(k);}else if(nv!==v){localStorage.setItem(k,nv);}});localStorage.setItem(FLAG,'1');}catch(e){}})();</script><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Software Architecture &amp; Design Patterns — CS &amp; AI Mastery</title><script src="../assets/runtime-inline/courses-software-architecture-001.js?v=20260822-v567"></script><style>
 :root{color-scheme:light;--bg:#f4f7fb;--panel:#fff;--text:#172231;--muted:#5d6c7c;--border:#d8e1ea;--pill:#e8f1f8;--pilltext:#174b72;--accent:#17649a;--code:#101827;--note:#fff7e7}
 html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#edf3f8;--muted:#c6d1da;--border:#344352;--pill:#223446;--pilltext:#b9dcf5;--accent:#4da3df;--code:#0b111b;--note:#2b2417}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:1100px;margin:auto;padding:18px 20px 110px}.top{position:sticky;top:0;z-index:4;display:flex;justify-content:space-between;gap:10px;padding:10px 0;background:var(--bg)}.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid #b8c7d6;border-radius:9px;padding:9px 13px;background:var(--panel);color:var(--text);font:inherit;font-weight:800;cursor:pointer}.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.hero,.card,.lesson{background:var(--panel);border:1px solid var(--border);border-radius:15px;color:var(--text)}.hero{padding:22px;margin:8px 0 16px}.kicker{font-size:.74rem;letter-spacing:.1em;font-weight:900;color:var(--accent)}.hero h1{margin:5px 0 8px;font-size:clamp(2rem,4vw,3.2rem);line-height:1.08}.muted{color:var(--muted)}.meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.pill{padding:4px 8px;border-radius:999px;background:var(--pill);color:var(--pilltext);font-size:.78rem;font-weight:800}.progress{height:10px;border-radius:999px;background:var(--border);overflow:hidden;margin:14px 0 5px}.progress span{display:block;height:100%;background:#16805b}.lessons{display:grid;gap:11px}.lesson{overflow:hidden}.lesson summary{display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;font-weight:850}.num{display:grid;place-items:center;min-width:34px;height:28px;border-radius:8px;background:var(--pill);color:var(--pilltext)}.title{flex:1}.check{display:flex;gap:6px;align-items:center;font-size:.82rem;font-weight:700}.body{padding:0 16px 18px}.body h3{margin:17px 0 7px;font-size:1rem}.body p,.body li{line-height:1.68}.code{white-space:pre-wrap;overflow:auto;padding:13px;border-radius:10px;background:var(--code);color:#f4f7fb;font:500 .86rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}.note{margin-top:12px;padding:12px;border-left:4px solid #d28b23;border-radius:8px;background:var(--note)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}.card{padding:17px}.card h2{margin:0 0 10px}.item{padding:12px;margin:9px 0;border-radius:10px;background:var(--bg);border:1px solid var(--border)}.answer{width:100%;min-height:90px;margin-top:8px;padding:10px;border:1px solid #aebdca;border-radius:8px;background:transparent;color:inherit;font:inherit}.theme{position:fixed;right:22px;bottom:22px;z-index:20;border:1px solid #b8c7d6;border-radius:999px;padding:10px 16px;background:var(--panel);color:var(--text);font:800 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.16);cursor:pointer}.empty{padding:17px;border:1px dashed var(--border);border-radius:10px}.hero-icon{margin-right:.25em}@media(max-width:720px){.wrap{padding:10px 10px 100px}.grid{grid-template-columns:1fr}.top .btn{flex:1}.lesson summary{flex-wrap:wrap;align-items:flex-start}.check{width:100%;padding-left:44px}.theme{right:14px;bottom:14px;padding:10px 14px}}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:1100px;margin:auto;padding:18px 20px 110px}.top{position:sticky;top:0;z-index:4;display:flex;justify-content:space-between;gap:10px;padding:10px 0;background:var(--bg)}.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid #b8c7d6;border-radius:9px;padding:9px 13px;background:var(--panel);color:var(--text);font:inherit;font-weight:800;cursor:pointer}.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.hero,.card,.lesson{background:var(--panel);border:1px solid var(--border);border-radius:15px;color:var(--text)}.hero{padding:22px;margin:8px 0 16px}.kicker{font-size:.74rem;letter-spacing:.1em;font-weight:900;color:var(--accent)}.hero h1{margin:5px 0 8px;font-size:clamp(2rem,4vw,3.2rem);line-height:1.08}.muted{color:var(--muted)}.meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.pill{padding:4px 8px;border-radius:999px;background:var(--pill);color:var(--pilltext);font-size:.78rem;font-weight:800}.progress{height:10px;border-radius:999px;background:var(--border);overflow:hidden;margin:14px 0 5px}.progress span{display:block;height:100%;background:#16805b}.lessons{display:grid;grid-template-columns:minmax(0,1fr);gap:11px}.lesson{overflow:hidden}.lesson summary{display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;font-weight:850}.num{display:grid;place-items:center;min-width:34px;height:28px;border-radius:8px;background:var(--pill);color:var(--pilltext)}.title{flex:1}.check{display:flex;gap:6px;align-items:center;font-size:.82rem;font-weight:700}.body{padding:0 16px 18px}.body h3{margin:17px 0 7px;font-size:1rem}.body p,.body li{line-height:1.68}.code{white-space:pre-wrap;overflow:auto;padding:13px;border-radius:10px;background:var(--code);color:#f4f7fb;font:500 .86rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}.note{margin-top:12px;padding:12px;border-left:4px solid #d28b23;border-radius:8px;background:var(--note)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}.card{padding:17px}.card h2{margin:0 0 10px}.item{padding:12px;margin:9px 0;border-radius:10px;background:var(--bg);border:1px solid var(--border)}.answer{width:100%;min-height:90px;margin-top:8px;padding:10px;border:1px solid #aebdca;border-radius:8px;background:transparent;color:inherit;font:inherit}.theme{position:fixed;right:22px;bottom:22px;z-index:20;border:1px solid #b8c7d6;border-radius:999px;padding:10px 16px;background:var(--panel);color:var(--text);font:800 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.16);cursor:pointer}.empty{padding:17px;border:1px dashed var(--border);border-radius:10px}.hero-icon{margin-right:.25em}@media(max-width:720px){.wrap{padding:10px 10px 100px}.grid{grid-template-columns:1fr}.top .btn{flex:1}.lesson summary{flex-wrap:wrap;align-items:flex-start}.check{width:100%;padding-left:44px}.theme{right:14px;bottom:14px;padding:10px 14px}}
 </style>
 <link href="../assets/oa-assessment-fallback.css?v=20260822-v567" rel="stylesheet"/>
 <link href="../assets/oa-assessment-upgrade.css?v=20260822-v567" rel="stylesheet"/>
@@ -50,59 +50,49 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <script src="../assets/product-redesign-v2.js?v=20260822-v567&learning=20261003-v584" defer></script>
 <script src="../assets/adaptive-v4-live.js?v=20260822-v567&learning=20261003-v584" defer></script>
 <script src="../assets/hero-polish.js?v=20260822-v567" defer></script>
+<link rel="stylesheet" href="../assets/pro-polish-v6.css?v=20260822-v567">
+<script src="../assets/pro-polish-v6.js?v=20260822-v567" defer></script>
+<script src="../assets/lesson-videos-v1.js?v=20260822-v567" defer></script>
 <!-- csai-unified-design:end -->
 <link rel="stylesheet" href="/assets/oa-assessment-fallback.css?v=20260811-1">
 <link rel="stylesheet" href="/assets/oa-assessment-upgrade.css?v=20260811-1">
 </head><body>
 <main class="wrap"><div class="top"><a class="btn" href="../index.html#courses">← All courses</a><a class="btn primary" href="../index.html#hub">Home</a></div>
 <section class="hero"><div class="kicker">COURSE</div><h1><span class="hero-icon">🏗️</span>Software Architecture &amp; Design Patterns</h1><p class="muted">SOLID principles, the design patterns that actually show up in real codebases, and the judgment to know when NOT to use them.</p><div class="meta"><span class="pill">16 lessons</span><span class="pill">18 exercises</span><span class="pill">20 checkpoints</span><span class="pill">6 projects</span></div><div class="progress"><span data-progress-bar="" style="width:0%"></span></div><div class="muted" data-progress-status="">0 of 15 lessons complete</div></section>
-<section class="card" data-shared-study-checklist><h2>Course study checklist</h2><ul><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul></section>
 <section class="lessons"><details class="lesson" data-lesson="sa-why-architecture" open="">
 <summary><span class="num">01</span><span class="title">Why architecture matters</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Explain what &#x27;good architecture&#x27; actually buys a team, in concrete terms</li><li>Explain how software architecture changes the behavior, result, or engineering decision in a concrete example</li><li>Connect software architecture with cost of change and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>Architecture isn't about following rules for their own sake -- it's about making a codebase cheaper to CHANGE over time. A poorly structured system might work fine on day one, but every new feature gets slower to add, every bug fix risks breaking something unrelated, and onboarding a new engineer takes weeks instead of days.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain what &#39;good architecture&#39; actually buys a team, in concrete terms</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Architecture isn&#39;t about following rules for their own sake -- it&#39;s about making a codebase cheaper to CHANGE over time. A poorly structured system might work fine on day one, but every new feature gets slower to add, every bug fix risks breaking something unrelated, and onboarding a new engineer takes weeks instead of days.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">software architecture</span><span class="pill">cost of change</span><span class="pill">maintainability</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># the real question architecture answers:
 # NOT: 'does this code work right now?'
 # BUT: 'when the requirements change next month (they will), how much of
 # this code has to change, and how confident can we be that we didn't break something else?'</pre>
-<div class="note"><b>Common mistake:</b> Judging architecture purely by 'does it work today' -- the real test is how the codebase behaves when requirements inevitably shift, not its state at initial launch.</div>
+<div class="note"><b>Common mistake:</b> Judging architecture purely by &#39;does it work today&#39; -- the real test is how the codebase behaves when requirements inevitably shift, not its state at initial launch.</div>
 </div></details><details class="lesson" data-lesson="sa-coupling-cohesion">
 <summary><span class="num">02</span><span class="title">Coupling &amp; cohesion</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Explain coupling and cohesion, and why you want LOW coupling but HIGH cohesion</li><li>Explain how coupling changes the behavior, result, or engineering decision in a concrete example</li><li>Connect coupling with cohesion and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>Coupling measures how much one piece of code depends on the internal details of another -- high coupling means changing one module frequently breaks or requires changing another. Cohesion measures how closely related the responsibilities WITHIN a single module are -- high cohesion means a module does one clear job, not several unrelated ones.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain coupling and cohesion, and why you want LOW coupling but HIGH cohesion</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Coupling measures how much one piece of code depends on the internal details of another -- high coupling means changing one module frequently breaks or requires changing another. Cohesion measures how closely related the responsibilities WITHIN a single module are -- high cohesion means a module does one clear job, not several unrelated ones.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">coupling</span><span class="pill">cohesion</span><span class="pill">module independence</span><span class="pill">separation of concerns</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># recognizing the two independently:
 # HIGH coupling: changing the database schema also requires editing the UI code directly
 # LOW cohesion: a single 'Utils' class handles date formatting, network calls, AND email sending
 # the goal: modules with ONE clear job (high cohesion), that don't reach into each other's internals (low coupling)</pre>
-<div class="note"><b>Common mistake:</b> Assuming coupling and cohesion are the same idea -- they're independent properties; a module CAN be low-coupled but still low-cohesion (unrelated responsibilities that just happen not to.</div>
+<div class="note"><b>Common mistake:</b> Assuming coupling and cohesion are the same idea.</div>
 </div></details><details class="lesson" data-lesson="sa-srp">
 <summary><span class="num">03</span><span class="title">The Single Responsibility Principle</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>State the Single Responsibility Principle precisely, and distinguish it from &#x27;a class should be small&#x27;</li><li>Explain how Single Responsibility Principle changes the behavior, result, or engineering decision in a concrete example</li><li>Connect Single Responsibility Principle with reason to change and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>The Single Responsibility Principle states that a class should have only ONE reason to change -- not that it should be short, and not that it should do only one literal action.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>State the Single Responsibility Principle precisely, and distinguish it from &#39;a class should be small&#39;</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>The Single Responsibility Principle states that a class should have only ONE reason to change -- not that it should be short, and not that it should do only one literal action.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">Single Responsibility Principle</span><span class="pill">reason to change</span><span class="pill">cohesion in practice</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># NOT about size -- about REASONS TO CHANGE:
 # UserRepository: reason to change = how users are stored (database schema, ORM version)
 # UserEmailFormatter: reason to change = how emails are worded/templated
 # these are genuinely DIFFERENT reasons -- which is exactly why they belong in separate classes</pre>
-<div class="note"><b>Common mistake:</b> Treating SRP as 'keep classes small' -- a class can be small and still violate SRP (if its few lines serve two unrelated purposes), and a class can be somewhat large while still honoring SRP.</div>
+<div class="note"><b>Common mistake:</b> Treating SRP as &#39;keep classes small&#39; -- a class can be small and still violate SRP (if its few lines serve two unrelated purposes), and a class can be somewhat large while still honoring SRP.</div>
 </div></details><details class="lesson" data-lesson="sa-ocp">
 <summary><span class="num">04</span><span class="title">The Open/Closed Principle</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Explain what &#x27;open for extension, closed for modification&#x27; means with a concrete before/after example</li><li>Explain how Open/Closed Principle changes the behavior, result, or engineering decision in a concrete example</li><li>Connect Open/Closed Principle with polymorphism over conditionals and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>The Open/Closed Principle states that code should be open for EXTENSION (you can add new behavior) but closed for MODIFICATION (you shouldn't need to edit existing, already-tested code to do it).</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain what &#39;open for extension, closed for modification&#39; means with a concrete before/after example</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>The Open/Closed Principle states that code should be open for EXTENSION (you can add new behavior) but closed for MODIFICATION (you shouldn&#39;t need to edit existing, already-tested code to do it).</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">Open/Closed Principle</span><span class="pill">polymorphism over conditionals</span><span class="pill">extension without modification</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># violation: a growing if/elif chain
 # def calculate_discount(customer_type, price):
@@ -112,27 +102,21 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 #
 # fix: each customer type is its own class implementing discount() --
 # adding 'Employee' means writing a NEW class, touching nothing existing</pre>
-<div class="note"><b>Common mistake:</b> Assuming OCP means 'never change any code ever' -- it specifically means new BEHAVIOR shouldn't require editing existing, working logic; genuine bug fixes to that existing logic are a.</div>
+<div class="note"><b>Common mistake:</b> Assuming OCP means &#39;never change any code ever&#39;.</div>
 </div></details><details class="lesson" data-lesson="sa-lsp-isp">
 <summary><span class="num">05</span><span class="title">Liskov Substitution &amp; Interface Segregation</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Explain both principles with the classic Square/Rectangle example and a &#x27;fat interface&#x27; example</li><li>Explain how Liskov Substitution Principle changes the behavior, result, or engineering decision in a concrete example</li><li>Connect Liskov Substitution Principle with Interface Segregation Principle and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>The Liskov Substitution Principle says a subclass should be usable anywhere its parent is expected, without breaking correctness -- the classic violation is a Square inheriting from Rectangle but breaking any code that sets width and height independently (since a square can't honor that).</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain both principles with the classic Square/Rectangle example and a &#39;fat interface&#39; example</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>The Liskov Substitution Principle says a subclass should be usable anywhere its parent is expected, without breaking correctness -- the classic violation is a Square inheriting from Rectangle but breaking any code that sets width and height independently (since a square can&#39;t honor that).</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">Liskov Substitution Principle</span><span class="pill">Interface Segregation Principle</span><span class="pill">fat interface</span><span class="pill">is-a vs has-a</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># LSP violation: Square(Rectangle) breaks code that expects independent width/height setting
 # ISP violation: a 'Worker' interface with work(), eat(), sleep() forces a Robot
 # implementation to awkwardly implement eat() and sleep(), which make no sense for it
 # fix (ISP): split into separate, focused interfaces -- Workable, Eatable, Sleepable</pre>
-<div class="note"><b>Common mistake:</b> Forcing an inheritance relationship because it 'seems similar' (like Square/Rectangle) -- similarity isn't the same as a genuine is-a relationship that holds for EVERY operation the parent.</div>
+<div class="note"><b>Common mistake:</b> Forcing an inheritance relationship because it &#39;seems similar&#39; (like Square/Rectangle) -- similarity isn&#39;t the same as a genuine is-a relationship that holds for EVERY operation the parent.</div>
 </div></details><details class="lesson" data-lesson="sa-dip-di">
 <summary><span class="num">06</span><span class="title">Dependency Inversion &amp; dependency injection</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Distinguish the Dependency Inversion Principle (a design idea) from dependency injection (a specific technique that implements it)</li><li>Explain how Dependency Inversion Principle changes the behavior, result, or engineering decision in a concrete example</li><li>Connect Dependency Inversion Principle with dependency injection and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>The Dependency Inversion Principle says high-level code (business logic) shouldn't depend directly on low-level details (a specific database, a specific email provider) -- both should depend on an abstraction (an interface) instead.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Distinguish the Dependency Inversion Principle (a design idea) from dependency injection (a specific technique that implements it)</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>The Dependency Inversion Principle says high-level code (business logic) shouldn&#39;t depend directly on low-level details (a specific database, a specific email provider) -- both should depend on an abstraction (an interface) instead.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">Dependency Inversion Principle</span><span class="pill">dependency injection</span><span class="pill">testability</span><span class="pill">abstraction over concretion</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># without DI: class OrderService: def __init__(self): self.db = PostgresDB()  # hard-coded, can't swap
 # with DI:    class OrderService: def __init__(self, db): self.db = db  # injected
@@ -140,11 +124,8 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <div class="note"><b>Common mistake:</b> Confusing dependency INVERSION (the design principle: depend on abstractions) with dependency INJECTION (the technique: pass dependencies in from outside) -- injection is how you typically.</div>
 </div></details><details class="lesson" data-lesson="sa-strategy-factory">
 <summary><span class="num">07</span><span class="title">Strategy &amp; Factory patterns</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Recognize when Strategy or Factory is the right fit, using a real scenario for each</li><li>Explain how Strategy pattern changes the behavior, result, or engineering decision in a concrete example</li><li>Connect Strategy pattern with Factory pattern and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>The Strategy pattern lets you swap an ALGORITHM at runtime by wrapping each variant in its own class implementing a shared interface -- e.g. different discount calculations, different sorting approaches, different payment-processing rules, selected based on context.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Recognize when Strategy or Factory is the right fit, using a real scenario for each</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>The Strategy pattern lets you swap an ALGORITHM at runtime by wrapping each variant in its own class implementing a shared interface -- e.g. different discount calculations, different sorting approaches, different payment-processing rules, selected based on context.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">Strategy pattern</span><span class="pill">Factory pattern</span><span class="pill">runtime behavior swapping</span><span class="pill">centralized object creation</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># Strategy: swap the ALGORITHM
 # cart.strategy = PercentOff(20)  # or NoDiscount(), or BuyOneGetOne()
@@ -155,11 +136,8 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <div class="note"><b>Common mistake:</b> Reaching for Strategy or Factory when a simple if/else with 2 stable cases would do -- patterns solve GROWTH and CHANGE problems; applying one to something that will never grow just adds.</div>
 </div></details><details class="lesson" data-lesson="sa-observer-decorator">
 <summary><span class="num">08</span><span class="title">Observer &amp; Decorator patterns</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Recognize when Observer or Decorator is the right fit, using a real scenario for each</li><li>Explain how Observer pattern changes the behavior, result, or engineering decision in a concrete example</li><li>Connect Observer pattern with Decorator pattern and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>The Observer pattern lets one object (the subject) notify multiple interested objects (observers) when something happens, without the subject needing to know anything about who's listening -- e.g. a UI element notifying multiple parts of an app when clicked, or a system triggering an event other services react to.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Recognize when Observer or Decorator is the right fit, using a real scenario for each</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>The Observer pattern lets one object (the subject) notify multiple interested objects (observers) when something happens, without the subject needing to know anything about who&#39;s listening -- e.g. a UI element notifying multiple parts of an app when clicked, or a system triggering an event other services react to.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">Observer pattern</span><span class="pill">Decorator pattern</span><span class="pill">event notification</span><span class="pill">behavior wrapping</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># Observer: one event, many independent listeners, subject doesn't know who's listening
 # subject.notify('order_placed')  # email service, analytics, and inventory ALL react independently
@@ -170,11 +148,8 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <div class="note"><b>Common mistake:</b> Building a deep subclass hierarchy to cover every combination of optional behavior (e.g.</div>
 </div></details><details class="lesson" data-lesson="sa-adapter-facade">
 <summary><span class="num">09</span><span class="title">Adapter &amp; Facade patterns</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Distinguish Adapter (make incompatible interfaces work together) from Facade (simplify a complex interface)</li><li>Explain how Adapter pattern changes the behavior, result, or engineering decision in a concrete example</li><li>Connect Adapter pattern with Facade pattern and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>The Adapter pattern lets two pieces of code with INCOMPATIBLE interfaces work together, by wrapping one so it exposes the interface the other expects -- e.g. a third-party payment library with its own method names, wrapped so your code can call it through your OWN standard payment interface.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Distinguish Adapter (make incompatible interfaces work together) from Facade (simplify a complex interface)</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>The Adapter pattern lets two pieces of code with INCOMPATIBLE interfaces work together, by wrapping one so it exposes the interface the other expects -- e.g. a third-party payment library with its own method names, wrapped so your code can call it through your OWN standard payment interface.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">Adapter pattern</span><span class="pill">Facade pattern</span><span class="pill">interface compatibility</span><span class="pill">subsystem simplification</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># Adapter: bridge an INCOMPATIBLE interface
 # ThirdPartyPayment has charge_customer(amount, token) -- your code expects pay(amount)
@@ -183,14 +158,11 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 # Facade: SIMPLIFY a complex subsystem
 # checkout.complete(cart)  # internally coordinates inventory, payment, shipping, notification --
 # calling code only ever sees this one simple method</pre>
-<div class="note"><b>Common mistake:</b> Confusing Adapter with Facade because both 'wrap' something -- Adapter exists because two interfaces are INCOMPATIBLE and need bridging; Facade exists because an interface is too COMPLEX and.</div>
+<div class="note"><b>Common mistake:</b> Confusing Adapter with Facade because both &#39;wrap&#39; something.</div>
 </div></details><details class="lesson" data-lesson="sa-singleton">
-<summary><span class="num">10</span><span class="title">Singleton -- and why it's controversial</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Explain what Singleton guarantees, and articulate the real, specific reasons it&#x27;s often considered an anti-pattern</li><li>Explain how Singleton pattern changes the behavior, result, or engineering decision in a concrete example</li><li>Connect Singleton pattern with hidden global state and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>The Singleton pattern guarantees a class has exactly ONE instance, globally accessible from anywhere in the code. It's genuinely useful for things like a single shared configuration object or a single connection pool.</p>
-</section>
+<summary><span class="num">10</span><span class="title">Singleton -- and why it&#39;s controversial</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain what Singleton guarantees, and articulate the real, specific reasons it&#39;s often considered an anti-pattern</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>The Singleton pattern guarantees a class has exactly ONE instance, globally accessible from anywhere in the code. It&#39;s genuinely useful for things like a single shared configuration object or a single connection pool.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">Singleton pattern</span><span class="pill">hidden global state</span><span class="pill">testability cost</span><span class="pill">DI as an alternative</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># Singleton: guarantees exactly one instance, globally reachable
 # config = AppConfig.get_instance()  # same instance everywhere, anywhere in the codebase
@@ -198,81 +170,63 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 # the real critique: this is genuinely hard to unit-test, since a test can't easily
 # substitute a fake AppConfig -- code reaches for the SAME global instance no matter what.
 # often, passing the config explicitly (dependency injection) solves the same problem more testably.</pre>
-<div class="note"><b>Common mistake:</b> Reaching for Singleton by default whenever 'there should only be one of something' -- often, achieving the SAME practical guarantee via dependency injection (create one instance, pass it.</div>
+<div class="note"><b>Common mistake:</b> Reaching for Singleton by default whenever &#39;there should only be one of something&#39; -- often, achieving the SAME practical guarantee via dependency injection (create one instance, pass it.</div>
 </div></details><details class="lesson" data-lesson="sa-clean-architecture">
 <summary><span class="num">11</span><span class="title">Clean architecture &amp; layering</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Explain the core idea behind clean/layered architecture: dependencies point inward, toward business logic</li><li>Explain how clean architecture changes the behavior, result, or engineering decision in a concrete example</li><li>Connect clean architecture with layered architecture and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>Clean (or layered, or hexagonal) architecture organizes code so business logic sits at the CENTER, with no dependency on outer layers like the database, the web framework, or the UI -- those outer layers depend ON the business logic, never the reverse.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain the core idea behind clean/layered architecture: dependencies point inward, toward business logic</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Clean (or layered, or hexagonal) architecture organizes code so business logic sits at the CENTER, with no dependency on outer layers like the database, the web framework, or the UI -- those outer layers depend ON the business logic, never the reverse.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">clean architecture</span><span class="pill">layered architecture</span><span class="pill">hexagonal architecture</span><span class="pill">dependency direction</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># dependency direction is the whole idea:
 # Web framework -&gt; Business logic -&gt; Database interface &lt;- Database implementation
 # (arrows point TOWARD business logic, never away from it)
 # business logic never imports or knows about Flask, Postgres, or React specifically --
 # it just knows about its OWN interfaces, which outer layers implement</pre>
-<div class="note"><b>Common mistake:</b> Assuming clean architecture means 'more files and more folders' -- the actual test is the DIRECTION dependencies point; adding layers without enforcing that direction doesn't achieve any of.</div>
+<div class="note"><b>Common mistake:</b> Assuming clean architecture means &#39;more files and more folders&#39;.</div>
 </div></details><details class="lesson" data-lesson="sa-refactoring-smells">
 <summary><span class="num">12</span><span class="title">Refactoring &amp; code smells</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Recognize the most common named code smells and the refactoring each typically calls for</li><li>Explain how code smell changes the behavior, result, or engineering decision in a concrete example</li><li>Connect code smell with long method and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>A code smell is a surface-level sign that a design problem likely exists underneath -- not a bug, but a pattern that USUALLY indicates one.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Recognize the most common named code smells and the refactoring each typically calls for</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>A code smell is a surface-level sign that a design problem likely exists underneath -- not a bug, but a pattern that USUALLY indicates one.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">code smell</span><span class="pill">long method</span><span class="pill">duplicated code</span><span class="pill">feature envy</span><span class="pill">refactoring</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># recognizing smells by their SYMPTOM, then applying the matching refactor:
 # 'this method is 200 lines and does five different things' -&gt; extract smaller methods
 # 'this exact block appears in four places' -&gt; extract shared function/class
 # 'this method mostly reads and writes ANOTHER class's fields' -&gt; move it to that class (feature envy)</pre>
-<div class="note"><b>Common mistake:</b> Refactoring without any tests in place first -- refactoring is specifically supposed to preserve behavior; without tests confirming that, you can't actually verify the refactor didn't.</div>
+<div class="note"><b>Common mistake:</b> Refactoring without any tests in place first -- refactoring is specifically supposed to preserve behavior; without tests confirming that, you can&#39;t actually verify the refactor didn&#39;t.</div>
 </div></details><details class="lesson" data-lesson="sa-architectural-styles">
 <summary><span class="num">13</span><span class="title">Architectural styles: monolith, layered, microservices</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Compare monolith and microservices honestly, including microservices&#x27; real costs, not just its benefits</li><li>Apply the KHDA-benchmarked professional additions in a realistic company workflow: event-driven architecture, message broker (Kafka/RabbitMQ awareness).</li><li>Explain how monolith changes the behavior, result, or engineering decision in a concrete example</li><li>Connect monolith with microservices and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>A monolith is a single deployable unit containing all of an application's functionality -- simpler to develop, test, and deploy initially, but can become harder to scale specific parts independently as it grows.</p>
-</section>
-<div class="note khda-benchmark-note" data-khda-benchmark-note="true"><b>Professional benchmark addition: </b>These company-use concepts were kept after comparing the course with public syllabi from KHDA-listed Dubai training providers: event-driven architecture, message broker (Kafka/RabbitMQ awareness).</div><h3>Key concepts</h3><div class="meta"><span class="pill">monolith</span><span class="pill">microservices</span><span class="pill">service boundaries</span><span class="pill">operational complexity</span><span class="pill">event-driven architecture</span><span class="pill">message broker (Kafka/RabbitMQ awareness)</span></div>
+<div class="body"><h3>What you will learn</h3><ul><li>Compare monolith and microservices honestly, including microservices&#39; real costs, not just its benefits</li><li>Apply the industry-focused professional additions in a realistic company workflow: event-driven architecture, message broker (Kafka/RabbitMQ awareness).</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>A monolith is a single deployable unit containing all of an application&#39;s functionality -- simpler to develop, test, and deploy initially, but can become harder to scale specific parts independently as it grows.</p></section>
+<div class="note benchmark-note" data-benchmark-note="true"><b>Professional benchmark addition: </b>These company-use concepts were kept after comparing the course with public syllabi from professional training providers: event-driven architecture, message broker (Kafka/RabbitMQ awareness).</div><h3>Key concepts</h3><div class="meta"><span class="pill">monolith</span><span class="pill">microservices</span><span class="pill">service boundaries</span><span class="pill">operational complexity</span><span class="pill">event-driven architecture</span><span class="pill">message broker (Kafka/RabbitMQ awareness)</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># the honest trade-off, not a one-sided pitch:
 # monolith: simpler ops, easier local development, harder to scale ONE piece independently
 # microservices: independent scaling and deployment, but now every function call that used to
 # be free might be a network call -- with everything from the Distributed Systems course now in play</pre>
-<div class="note"><b>Common mistake:</b> Assuming microservices are automatically the 'more modern, better' choice -- they solve specific scaling and organizational problems at a real operational cost; many well-run systems are.</div>
+<div class="note"><b>Common mistake:</b> Assuming microservices are automatically the &#39;more modern, better&#39; choice -- they solve specific scaling and organizational problems at a real operational cost; many well-run systems are.</div>
 </div></details><details class="lesson" data-lesson="sa-reading-reviewing">
 <summary><span class="num">14</span><span class="title">Reading and reviewing real code for design</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Practice the specific questions a design-focused code review actually asks</li><li>Apply the KHDA-benchmarked professional additions in a realistic company workflow: load testing, bottleneck analysis.</li><li>Explain how design-focused code review changes the behavior, result, or engineering decision in a concrete example</li><li>Connect design-focused code review with review checklist and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>Reviewing code for DESIGN (not just correctness) means asking a specific, repeatable set of questions: does this class have one clear reason to change (SRP)? Would adding a new case require editing this existing logic (OCP)?</p>
-</section>
-<div class="note khda-benchmark-note" data-khda-benchmark-note="true"><b>Professional benchmark addition: </b>These company-use concepts were kept after comparing the course with public syllabi from KHDA-listed Dubai training providers: load testing, bottleneck analysis.</div><h3>Key concepts</h3><div class="meta"><span class="pill">design-focused code review</span><span class="pill">review checklist</span><span class="pill">pattern recognition in practice</span><span class="pill">load testing</span><span class="pill">bottleneck analysis</span></div>
+<div class="body"><h3>What you will learn</h3><ul><li>Practice the specific questions a design-focused code review actually asks</li><li>Apply the industry-focused professional additions in a realistic company workflow: load testing, bottleneck analysis.</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Reviewing code for DESIGN (not just correctness) means asking a specific, repeatable set of questions: does this class have one clear reason to change (SRP)? Would adding a new case require editing this existing logic (OCP)?</p></section>
+<div class="note benchmark-note" data-benchmark-note="true"><b>Professional benchmark addition: </b>These company-use concepts were kept after comparing the course with public syllabi from professional training providers: load testing, bottleneck analysis.</div><h3>Key concepts</h3><div class="meta"><span class="pill">design-focused code review</span><span class="pill">review checklist</span><span class="pill">pattern recognition in practice</span><span class="pill">load testing</span><span class="pill">bottleneck analysis</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># a genuinely useful design-review checklist, applied while reading real code:
 # 1. does this class have ONE clear reason to change?
 # 2. would a new case require editing existing, working logic?
 # 3. does this depend on a concrete implementation it could depend on an interface instead?
 # 4. is there duplicated logic anywhere nearby that should be extracted?</pre>
-<div class="note"><b>Common mistake:</b> Reviewing only for correctness ('does this work') and skipping design entirely -- design issues compound over time in ways correctness bugs usually don't; a working-but-poorly-structured.</div>
+<div class="note"><b>Common mistake:</b> Reviewing only for correctness (&#39;does this work&#39;) and skipping design entirely -- design issues compound over time in ways correctness bugs usually don&#39;t; a working-but-poorly-structured.</div>
 </div></details><details class="lesson" data-lesson="sa-when-not-to">
 <summary><span class="num">15</span><span class="title">When NOT to apply a pattern</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Explain the real cost of unnecessary abstraction, and articulate a rule of thumb for when a pattern is premature</li><li>Explain how over-engineering changes the behavior, result, or engineering decision in a concrete example</li><li>Connect over-engineering with premature abstraction and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>Every pattern in this course adds a layer of indirection -- worthwhile when it genuinely reduces future cost, but a real cost (more files, more abstraction to trace through, more to understand) when applied somewhere that will never actually need the flexibility it provides.</p>
-</section>
-<h3>Key concepts</h3><div class="meta"><span class="pill">over-engineering</span><span class="pill">premature abstraction</span><span class="pill">YAGNI (you aren&#x27;t gonna need it)</span><span class="pill">cost of indirection</span></div>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain the real cost of unnecessary abstraction, and articulate a rule of thumb for when a pattern is premature</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Every pattern in this course adds a layer of indirection -- worthwhile when it genuinely reduces future cost, but a real cost (more files, more abstraction to trace through, more to understand) when applied somewhere that will never actually need the flexibility it provides.</p></section>
+<h3>Key concepts</h3><div class="meta"><span class="pill">over-engineering</span><span class="pill">premature abstraction</span><span class="pill">YAGNI (you aren&#39;t gonna need it)</span><span class="pill">cost of indirection</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># the honest cost/benefit check before adding a pattern:
 # 'I'm adding a Strategy interface for discount calculation' --
 # do we have (or clearly will have) MULTIPLE discount strategies? if yes, worth it.
 # if there's genuinely only ever going to be one, a plain function is simpler and just as correct.</pre>
-<div class="note"><b>Common mistake:</b> Adding a pattern 'in case we need it later' with no concrete evidence that need is coming -- this is precisely the over-engineering this lesson warns against; patterns should follow real.</div>
+<div class="note"><b>Common mistake:</b> Adding a pattern &#39;in case we need it later&#39; with no concrete evidence that need is coming -- this is precisely the over-engineering this lesson warns against; patterns should follow real.</div>
 </div></details><details class="lesson" data-lesson="arch-cqrs-ddd">
 <summary><span class="num">16</span><span class="title">CQRS &amp; DDD fundamentals</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Explain when separating command/query models or using domain-driven boundaries can clarify a complex system</li><li>Explain how CQRS changes the behavior, result, or engineering decision in a concrete example</li><li>Connect CQRS with DDD and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>Domain-Driven Design models software around business concepts and explicit boundaries rather than around database tables alone. CQRS separates write commands from read queries when those models have genuinely different needs.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain when separating command/query models or using domain-driven boundaries can clarify a complex system</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Domain-Driven Design models software around business concepts and explicit boundaries rather than around database tables alone. CQRS separates write commands from read queries when those models have genuinely different needs.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">CQRS</span><span class="pill">DDD</span><span class="pill">bounded context</span><span class="pill">aggregate</span><span class="pill">command/query separation</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="candidate">A payments bounded context might own Account, Transfer, and settlement rules. A command changes transfer state after enforcing invariants; a query model can separately serve a read-optimized transaction-history view.</pre>
 <div class="note"><b>Common mistake:</b> Using CQRS or DDD because they sound advanced.</div>
@@ -297,7 +251,7 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <script defer="" src="../assets/exercise-direct-publish.js?v=20260822-v567"></script>
 <script defer="" src="../assets/universal-run-output.js?v=20260822-v567&learning=20261003-v584"></script>
 <script defer="" src="../assets/final-exercise-toolbar.js?v=20260822-v567&learning=20261003-v584"></script>
-<script defer="" src="../assets/course-project-workspace.js?v=20260822-v571"></script><script defer="" src="../assets/line-by-line-explanations.js?v=20260919-v577&learning=20261003-v584"></script><script defer="" src="../assets/example-learning-tools.js?v=20260822-v567"></script>
+<script defer="" src="../assets/course-project-workspace.js?v=20260822-v571"></script><script defer="" src="../assets/line-by-line-explanations.js?v=20261004-v587&learning=20261003-v584"></script><script defer="" src="../assets/example-learning-tools.js?v=20260822-v567"></script>
 <script defer="" src="../assets/practice-publish-completer.js?v=20260823-v573&learning=20261003-v584"></script>
 <script defer="" src="../assets/oa-assessment-fallback.js?v=20260822-v567"></script>
 <script defer="" src="../assets/oa-assessment-upgrade.js?v=20260822-v567"></script>
@@ -345,13 +299,16 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <!-- csai-production-augmentation -->
 <script src="../assets/adaptive-practice-layer.js?v=20260822-v567&learning=20261003-v584" defer></script>
 <script src="../assets/project-readme-layer.js?v=20260822-v567" defer></script>
+<script src="../assets/optional-services.js?v=20260822-v567" defer></script>
+<script src="../assets/floating-dock.js?v=20260822-v567" defer></script>
+<script src="../assets/course-sidebar.js?v=20260822-v567" defer></script>
 <!-- /csai-production-augmentation -->
 <script src="/assets/oa-assessment-fallback.js?v=20260811-1" defer></script>
 <script src="/assets/oa-assessment-upgrade.js?v=20260811-1" defer></script>
 
 <script src="/assets/python-only-ui.js?v=20260811-2" defer></script>
 
-<script defer src="../assets/study-examples.js?v=20260824-v574&learning=20261003-v584"></script>
+<script defer src="../assets/study-examples.js?v=20261004-v586&learning=20261003-v584"></script>
 
 <script defer src="../assets/brilliant-tutor-v1.js?v=20260822-v567"></script>
 <script defer src="../assets/lesson-recall.js?v=20261003-v578"></script>

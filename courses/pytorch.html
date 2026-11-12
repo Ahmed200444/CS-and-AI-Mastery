@@ -1,7 +1,7 @@
-<!doctype html><html lang="en"><head><meta data-csai-head-preload="calmfast2"><link rel="preload" href="/runtime/pyodide/pyodide.js" as="script"><link rel="prefetch" href="/runtime/pyodide/pyodide.asm.wasm" as="fetch" crossorigin="anonymous"><link rel="prefetch" href="/runtime/pyodide/python_stdlib.zip" as="fetch" crossorigin="anonymous"><link rel="preload" href="../assets/python-terminal-worker.js?v=20260822-v567" as="script"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PyTorch — CS & AI Mastery</title><script src="../assets/runtime-inline/courses-pytorch-001.js?v=20260822-v567"></script><style>
+<!doctype html><html lang="en"><head><script id="csai-core-id-migration">(function(){try{var FLAG='csai-core-id-migration-v1',OLD='apt'+'ech-',NEW='core-';if(localStorage.getItem(FLAG))return;var keys=[],i;for(i=0;i<localStorage.length;i++)keys.push(localStorage.key(i));keys.forEach(function(k){var v=localStorage.getItem(k);if(v===null)return;var nv=v.indexOf(OLD)>-1?v.split(OLD).join(NEW):v;if(k.indexOf(OLD)>-1){var nk=k.split(OLD).join(NEW);if(localStorage.getItem(nk)===null)localStorage.setItem(nk,nv);localStorage.removeItem(k);}else if(nv!==v){localStorage.setItem(k,nv);}});localStorage.setItem(FLAG,'1');}catch(e){}})();</script><meta data-csai-head-preload="calmfast2"><link rel="preload" href="/runtime/pyodide/pyodide.js" as="script"><link rel="prefetch" href="/runtime/pyodide/pyodide.asm.wasm" as="fetch" crossorigin="anonymous"><link rel="prefetch" href="/runtime/pyodide/python_stdlib.zip" as="fetch" crossorigin="anonymous"><link rel="preload" href="../assets/python-terminal-worker.js?v=20260822-v567" as="script"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PyTorch — CS & AI Mastery</title><script src="../assets/runtime-inline/courses-pytorch-001.js?v=20260822-v567"></script><style>
 :root{color-scheme:light;--bg:#f4f7fb;--panel:#fff;--text:#172231;--muted:#5d6c7c;--border:#d8e1ea;--pill:#e8f1f8;--pilltext:#174b72;--accent:#17649a;--code:#101827;--note:#fff7e7}
 html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#edf3f8;--muted:#c6d1da;--border:#344352;--pill:#223446;--pilltext:#b9dcf5;--accent:#4da3df;--code:#0b111b;--note:#2b2417}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:1100px;margin:auto;padding:18px 20px 110px}.top{position:sticky;top:0;z-index:4;display:flex;justify-content:space-between;gap:10px;padding:10px 0;background:var(--bg)}.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid #b8c7d6;border-radius:9px;padding:9px 13px;background:var(--panel);color:var(--text);font:inherit;font-weight:800;cursor:pointer}.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.hero,.card,.lesson{background:var(--panel);border:1px solid var(--border);border-radius:15px;color:var(--text)}.hero{padding:22px;margin:8px 0 16px}.kicker{font-size:.74rem;letter-spacing:.1em;font-weight:900;color:var(--accent)}.hero h1{margin:5px 0 8px;font-size:clamp(2rem,4vw,3.2rem);line-height:1.08}.muted{color:var(--muted)}.meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.pill{padding:4px 8px;border-radius:999px;background:var(--pill);color:var(--pilltext);font-size:.78rem;font-weight:800}.progress{height:10px;border-radius:999px;background:var(--border);overflow:hidden;margin:14px 0 5px}.progress span{display:block;height:100%;background:#16805b}.lessons{display:grid;gap:11px}.lesson{overflow:hidden}.lesson summary{display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;font-weight:850}.num{display:grid;place-items:center;min-width:34px;height:28px;border-radius:8px;background:var(--pill);color:var(--pilltext)}.title{flex:1}.check{display:flex;gap:6px;align-items:center;font-size:.82rem;font-weight:700}.body{padding:0 16px 18px}.body h3{margin:17px 0 7px;font-size:1rem}.body p,.body li{line-height:1.68}.code{white-space:pre-wrap;overflow:auto;padding:13px;border-radius:10px;background:var(--code);color:#f4f7fb;font:500 .86rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}.note{margin-top:12px;padding:12px;border-left:4px solid #d28b23;border-radius:8px;background:var(--note)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}.card{padding:17px}.card h2{margin:0 0 10px}.item{padding:12px;margin:9px 0;border-radius:10px;background:var(--bg);border:1px solid var(--border)}.answer{width:100%;min-height:90px;margin-top:8px;padding:10px;border:1px solid #aebdca;border-radius:8px;background:transparent;color:inherit;font:inherit}.theme{position:fixed;right:22px;bottom:22px;z-index:20;border:1px solid #b8c7d6;border-radius:999px;padding:10px 16px;background:var(--panel);color:var(--text);font:800 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.16);cursor:pointer}.empty{padding:17px;border:1px dashed var(--border);border-radius:10px}.hero-icon{margin-right:.25em}@media(max-width:720px){.wrap{padding:10px 10px 100px}.grid{grid-template-columns:1fr}.top .btn{flex:1}.lesson summary{flex-wrap:wrap;align-items:flex-start}.check{width:100%;padding-left:44px}.theme{right:14px;bottom:14px;padding:10px 14px}}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:1100px;margin:auto;padding:18px 20px 110px}.top{position:sticky;top:0;z-index:4;display:flex;justify-content:space-between;gap:10px;padding:10px 0;background:var(--bg)}.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid #b8c7d6;border-radius:9px;padding:9px 13px;background:var(--panel);color:var(--text);font:inherit;font-weight:800;cursor:pointer}.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.hero,.card,.lesson{background:var(--panel);border:1px solid var(--border);border-radius:15px;color:var(--text)}.hero{padding:22px;margin:8px 0 16px}.kicker{font-size:.74rem;letter-spacing:.1em;font-weight:900;color:var(--accent)}.hero h1{margin:5px 0 8px;font-size:clamp(2rem,4vw,3.2rem);line-height:1.08}.muted{color:var(--muted)}.meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.pill{padding:4px 8px;border-radius:999px;background:var(--pill);color:var(--pilltext);font-size:.78rem;font-weight:800}.progress{height:10px;border-radius:999px;background:var(--border);overflow:hidden;margin:14px 0 5px}.progress span{display:block;height:100%;background:#16805b}.lessons{display:grid;grid-template-columns:minmax(0,1fr);gap:11px}.lesson{overflow:hidden}.lesson summary{display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;font-weight:850}.num{display:grid;place-items:center;min-width:34px;height:28px;border-radius:8px;background:var(--pill);color:var(--pilltext)}.title{flex:1}.check{display:flex;gap:6px;align-items:center;font-size:.82rem;font-weight:700}.body{padding:0 16px 18px}.body h3{margin:17px 0 7px;font-size:1rem}.body p,.body li{line-height:1.68}.code{white-space:pre-wrap;overflow:auto;padding:13px;border-radius:10px;background:var(--code);color:#f4f7fb;font:500 .86rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}.note{margin-top:12px;padding:12px;border-left:4px solid #d28b23;border-radius:8px;background:var(--note)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}.card{padding:17px}.card h2{margin:0 0 10px}.item{padding:12px;margin:9px 0;border-radius:10px;background:var(--bg);border:1px solid var(--border)}.answer{width:100%;min-height:90px;margin-top:8px;padding:10px;border:1px solid #aebdca;border-radius:8px;background:transparent;color:inherit;font:inherit}.theme{position:fixed;right:22px;bottom:22px;z-index:20;border:1px solid #b8c7d6;border-radius:999px;padding:10px 16px;background:var(--panel);color:var(--text);font:800 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.16);cursor:pointer}.empty{padding:17px;border:1px dashed var(--border);border-radius:10px}.hero-icon{margin-right:.25em}@media(max-width:720px){.wrap{padding:10px 10px 100px}.grid{grid-template-columns:1fr}.top .btn{flex:1}.lesson summary{flex-wrap:wrap;align-items:flex-start}.check{width:100%;padding-left:44px}.theme{right:14px;bottom:14px;padding:10px 14px}}
 </style>
 
 <link rel="stylesheet" href="../assets/oa-assessment-fallback.css?v=20260822-v567">
@@ -49,20 +49,19 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <script src="../assets/product-redesign-v2.js?v=20260822-v567&learning=20261003-v584" defer></script>
 <script src="../assets/adaptive-v4-live.js?v=20260822-v567&learning=20261003-v584" defer></script>
 <script src="../assets/hero-polish.js?v=20260822-v567" defer></script>
+<link rel="stylesheet" href="../assets/pro-polish-v6.css?v=20260822-v567">
+<script src="../assets/pro-polish-v6.js?v=20260822-v567" defer></script>
+<script src="../assets/lesson-videos-v1.js?v=20260822-v567" defer></script>
 <!-- csai-unified-design:end -->
 <link rel="stylesheet" href="/assets/oa-assessment-fallback.css?v=20260811-1">
 <link rel="stylesheet" href="/assets/oa-assessment-upgrade.css?v=20260811-1">
 </head><body>
 <main class="wrap"><div class="top"><a class="btn" href="../index.html#courses">← All courses</a><a class="btn primary" href="../index.html#hub">Home</a></div>
 <section class="hero"><div class="kicker">COURSE</div><h1><span class="hero-icon">🔥</span>PyTorch</h1><p class="muted">Tensors, autograd, and building/training real models in PyTorch.</p><div class="meta"><span class="pill">9 lessons</span><span class="pill">10 exercises</span><span class="pill">30 checkpoints</span><span class="pill">3 projects</span></div><div class="progress"><span data-progress-bar style="width:0%"></span></div><div class="muted" data-progress-status>0 of 9 lessons complete</div></section>
-<section class="card" data-shared-study-checklist><h2>Course study checklist</h2><ul><li>Verify the idea with a normal case and an important edge, failure, or scale case</li></ul></section>
 <section class="lessons"><details class="lesson" data-lesson="pt-tensors" open>
 <summary><span class="num">01</span><span class="title">Tensors: creation, shapes &amp; operations</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Create PyTorch tensors and reason about their shapes</li><li>Explain how tensor changes the behavior, result, or engineering decision in a concrete example</li><li>Connect tensor with shape and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>A PyTorch tensor is like a NumPy array (as covered in the Data Science track) with two extras: it can live on a GPU, and it tracks operations for automatic differentiation. Getting shapes right is the single most common source of PyTorch bugs — most errors are a mismatched dimension somewhere in a chain of operations.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Create PyTorch tensors and reason about their shapes</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>A PyTorch tensor is like a NumPy array (as covered in the Data Science track) with two extras: it can live on a GPU, and it tracks operations for automatic differentiation. Getting shapes right is the single most common source of PyTorch bugs — most errors are a mismatched dimension somewhere in a chain of operations.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">tensor</span><span class="pill">shape</span><span class="pill">dtype</span><span class="pill">matrix multiplication</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">import torch
 x = torch.tensor([[1., 2.], [3., 4.]])
@@ -72,11 +71,8 @@ print(x.dtype)           # torch.float32 -- most model math expects float, not i
 <div class="note"><b>Common mistake:</b> Mixing float and integer tensors, or mismatched shapes, and being surprised by a cryptic runtime error — always print `.shape` and `.dtype` when debugging, before anything else.</div>
 </div></details><details class="lesson" data-lesson="pt-autograd" >
 <summary><span class="num">02</span><span class="title">Autograd: automatic differentiation</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Explain how PyTorch computes gradients automatically via autograd</li><li>Explain how autograd changes the behavior, result, or engineering decision in a concrete example</li><li>Connect autograd with requires_grad and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>Every tensor operation with `requires_grad=True` is recorded in a computation graph; calling `.backward()` on a final scalar (usually the loss) walks this graph backward, computing the gradient of that scalar with respect to every tracked tensor automatically — this IS the backpropagation covered conceptually in the Deep Learning track, made concrete.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain how PyTorch computes gradients automatically via autograd</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Every tensor operation with `requires_grad=True` is recorded in a computation graph; calling `.backward()` on a final scalar (usually the loss) walks this graph backward, computing the gradient of that scalar with respect to every tracked tensor automatically — this IS the backpropagation covered conceptually in the Deep Learning track, made concrete.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">autograd</span><span class="pill">requires_grad</span><span class="pill">computation graph</span><span class="pill">.backward()</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">w = torch.tensor(2.0, requires_grad=True)
 y = w ** 2 + 3 * w
@@ -85,11 +81,8 @@ print(w.grad)            # 7.0  (since dy/dw = 2w + 3 = 2*2+3 = 7)</pre>
 <div class="note"><b>Common mistake:</b> Forgetting `optimizer.zero_grad()` between training steps — gradients ACCUMULATE by default in PyTorch, silently corrupting the update direction on the next step.</div>
 </div></details><details class="lesson" data-lesson="pt-nnmodule" >
 <summary><span class="num">03</span><span class="title">Building a model with nn.Module</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Define a custom model by subclassing nn.Module</li><li>Explain how nn.Module changes the behavior, result, or engineering decision in a concrete example</li><li>Connect nn.Module with __init__ vs forward and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>A PyTorch model is a Python class inheriting from `nn.Module`: `__init__` defines the layers as attributes, and `forward` defines how data flows through them. This is deliberately just Python — you can use any control flow, print statements, or debugging tools you'd use in normal Python code, unlike more declarative frameworks.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Define a custom model by subclassing nn.Module</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>A PyTorch model is a Python class inheriting from `nn.Module`: `__init__` defines the layers as attributes, and `forward` defines how data flows through them. This is deliberately just Python — you can use any control flow, print statements, or debugging tools you&#39;d use in normal Python code, unlike more declarative frameworks.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">nn.Module</span><span class="pill">__init__ vs forward</span><span class="pill">layers as attributes</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">import torch.nn as nn
 class SimpleNet(nn.Module):
@@ -104,11 +97,8 @@ model = SimpleNet()</pre>
 <div class="note"><b>Common mistake:</b> Forgetting to call `super().__init__()` in a custom module&#39;s `__init__` — PyTorch&#39;s internal parameter-tracking machinery silently doesn&#39;t work correctly without it.</div>
 </div></details><details class="lesson" data-lesson="pt-datasets-dataloaders" >
 <summary><span class="num">04</span><span class="title">Datasets &amp; DataLoaders</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Wrap real data in a Dataset and load it efficiently with a DataLoader</li><li>Explain how Dataset changes the behavior, result, or engineering decision in a concrete example</li><li>Connect Dataset with DataLoader and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>A `Dataset` defines how to get one item (`__getitem__`) and how many items exist (`__len__`) — your data can come from anywhere (files, a database, a folder of images). A `DataLoader` wraps a Dataset to handle batching, shuffling, and parallel loading automatically, so your training loop just asks for the next batch without knowing any of these details.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Wrap real data in a Dataset and load it efficiently with a DataLoader</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>A `Dataset` defines how to get one item (`__getitem__`) and how many items exist (`__len__`) — your data can come from anywhere (files, a database, a folder of images). A `DataLoader` wraps a Dataset to handle batching, shuffling, and parallel loading automatically, so your training loop just asks for the next batch without knowing any of these details.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">Dataset</span><span class="pill">DataLoader</span><span class="pill">batching</span><span class="pill">shuffling</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">class MyDataset(torch.utils.data.Dataset):
     def __init__(self, data, labels): self.data, self.labels = data, labels
@@ -120,11 +110,8 @@ for batch_x, batch_y in loader: ...</pre>
 <div class="note"><b>Common mistake:</b> Loading an entire large dataset into memory in `__init__` instead of loading each item lazily in `__getitem__` — this defeats the purpose of a Dataset for data too large to fit in memory at.</div>
 </div></details><details class="lesson" data-lesson="pt-trainingloop" >
 <summary><span class="num">05</span><span class="title">The training loop in practice</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Write a complete, correct PyTorch training loop</li><li>Explain how training loop changes the behavior, result, or engineering decision in a concrete example</li><li>Connect training loop with model.train() vs model.eval() and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>This assembles the Deep Learning track's training-loop concept into real, runnable code: for each batch, compute the model's prediction (forward pass), compute the loss, zero old gradients, call `.backward()` to compute new ones, and step the optimizer to update weights.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Write a complete, correct PyTorch training loop</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>This assembles the Deep Learning track&#39;s training-loop concept into real, runnable code: for each batch, compute the model&#39;s prediction (forward pass), compute the loss, zero old gradients, call `.backward()` to compute new ones, and step the optimizer to update weights.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">training loop</span><span class="pill">model.train() vs model.eval()</span><span class="pill">torch.no_grad()</span><span class="pill">model.train()</span><span class="pill">model.eval()</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">for epoch in range(num_epochs):
     model.train()
@@ -138,11 +125,8 @@ for batch_x, batch_y in loader: ...</pre>
 <div class="note"><b>Common mistake:</b> Forgetting `model.eval()` and `torch.no_grad()` during validation — this leaves dropout/batch-norm in training mode and needlessly tracks gradients, wasting memory and giving inconsistent.</div>
 </div></details><details class="lesson" data-lesson="pt-debugging" >
 <summary><span class="num">06</span><span class="title">Debugging PyTorch models</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Apply a systematic checklist when a PyTorch model isn&#x27;t training correctly</li><li>Explain how shape debugging changes the behavior, result, or engineering decision in a concrete example</li><li>Connect shape debugging with the overfit-10-examples test and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>When a model won't learn, work through a checklist rather than guessing: are shapes actually what you expect at each step (print them)? Is the loss actually decreasing at all, even slightly, on a tiny subset of data (if it can't overfit 10 examples, something is fundamentally broken)?</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Apply a systematic checklist when a PyTorch model isn&#39;t training correctly</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>When a model won&#39;t learn, work through a checklist rather than guessing: are shapes actually what you expect at each step (print them)? Is the loss actually decreasing at all, even slightly, on a tiny subset of data (if it can&#39;t overfit 10 examples, something is fundamentally broken)?</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">shape debugging</span><span class="pill">the overfit-10-examples test</span><span class="pill">gradient inspection</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># the single most useful debugging step: try to overfit a TINY subset (e.g. 10 examples)
 # if the model can&#39;t drive loss near zero on just 10 examples, the bug is in your code,
@@ -150,11 +134,8 @@ for batch_x, batch_y in loader: ...</pre>
 <div class="note"><b>Common mistake:</b> Assuming a bug is due to &#39;the model needing more data/epochs&#39; before ruling out an actual code bug — the tiny-subset overfit test is a fast, decisive way to separate the two.</div>
 </div></details><details class="lesson" data-lesson="pt-device" >
 <summary><span class="num">07</span><span class="title">GPU/device management</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Move models and data to a GPU correctly and avoid device-mismatch errors</li><li>Explain how device management changes the behavior, result, or engineering decision in a concrete example</li><li>Connect device management with CPU vs GPU and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>PyTorch tensors and models must be explicitly moved to a device (CPU or GPU) with `.to(device)`, and a model and the data it processes must be on the SAME device, or you'll get an explicit error. Writing device-agnostic code (checking `torch.cuda.is_available()`) lets the same code run correctly whether or not a GPU is present.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Move models and data to a GPU correctly and avoid device-mismatch errors</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>PyTorch tensors and models must be explicitly moved to a device (CPU or GPU) with `.to(device)`, and a model and the data it processes must be on the SAME device, or you&#39;ll get an explicit error. Writing device-agnostic code (checking `torch.cuda.is_available()`) lets the same code run correctly whether or not a GPU is present.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">device management</span><span class="pill">CPU vs GPU</span><span class="pill">device-agnostic code</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">device = torch.device(&#39;cuda&#39; if torch.cuda.is_available() else &#39;cpu&#39;)
 model = model.to(device)
@@ -164,11 +145,8 @@ for batch_x, batch_y in loader:
 <div class="note"><b>Common mistake:</b> Moving the model to a GPU but forgetting to move each batch of data too — this throws an explicit &#39;expected all tensors on same device&#39; error, one of the most common early PyTorch mistakes.</div>
 </div></details><details class="lesson" data-lesson="pt-save-deploy" >
 <summary><span class="num">08</span><span class="title">Saving, loading &amp; deploying a trained model</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Save and reload a trained model&#x27;s weights, and describe the path to deployment</li><li>Explain how state_dict changes the behavior, result, or engineering decision in a concrete example</li><li>Connect state_dict with weights vs architecture and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>PyTorch typically saves just the model's learned weights (`state_dict`), not the whole Python object, since code can change between saving and loading — you recreate the model architecture in code, then load the saved weights into it.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Save and reload a trained model&#39;s weights, and describe the path to deployment</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>PyTorch typically saves just the model&#39;s learned weights (`state_dict`), not the whole Python object, since code can change between saving and loading — you recreate the model architecture in code, then load the saved weights into it.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">state_dict</span><span class="pill">weights vs architecture</span><span class="pill">model.eval() before inference</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">torch.save(model.state_dict(), &#39;model_weights.pth&#39;)
 
@@ -179,11 +157,8 @@ model.eval()                              # ready for inference</pre>
 <div class="note"><b>Common mistake:</b> Saving the entire model object with `torch.save(model, ...)` instead of just its `state_dict` — this can break if your class definition changes even slightly later, unlike loading weights.</div>
 </div></details><details class="lesson" data-lesson="pytorch-common-pitfalls" >
 <summary><span class="num">09</span><span class="title">Common PyTorch pitfalls</span><label class="check"><input type="checkbox" data-complete> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Recognize frequent, specific PyTorch mistakes</li><li>Explain how zero_grad changes the behavior, result, or engineering decision in a concrete example</li><li>Connect zero_grad with gradient accumulation bug and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>Forgetting optimizer.zero_grad() before backward() causes gradients to accumulate incorrectly across batches. Forgetting model.eval() during inference leaves dropout/batchnorm in training mode, giving inconsistent results.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Recognize frequent, specific PyTorch mistakes</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Forgetting optimizer.zero_grad() before backward() causes gradients to accumulate incorrectly across batches. Forgetting model.eval() during inference leaves dropout/batchnorm in training mode, giving inconsistent results.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">zero_grad</span><span class="pill">gradient accumulation bug</span><span class="pill">shape mismatch</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">for batch in dataloader:
     optimizer.zero_grad()   # forgetting this accumulates gradients across batches -- a real, common bug
@@ -213,7 +188,7 @@ model.eval()                              # ready for inference</pre>
 <script src="../assets/exercise-direct-publish.js?v=20260822-v567" defer></script>
 <script src="../assets/universal-run-output.js?v=20260822-v567&learning=20261003-v584" defer></script>
 <script src="../assets/final-exercise-toolbar.js?v=20260822-v567&learning=20261003-v584" defer></script>
-<script src="../assets/course-project-workspace.js?v=20260822-v571" defer></script><script src="../assets/line-by-line-explanations.js?v=20260919-v577&learning=20261003-v584" defer></script><script src="../assets/example-learning-tools.js?v=20260822-v567" defer></script>
+<script src="../assets/course-project-workspace.js?v=20260822-v571" defer></script><script src="../assets/line-by-line-explanations.js?v=20261004-v587&learning=20261003-v584" defer></script><script src="../assets/example-learning-tools.js?v=20260822-v567" defer></script>
 <script src="../assets/practice-publish-completer.js?v=20260823-v573&learning=20261003-v584" defer></script>
 
 
@@ -264,13 +239,16 @@ model.eval()                              # ready for inference</pre>
 <!-- csai-production-augmentation -->
 <script src="../assets/adaptive-practice-layer.js?v=20260822-v567&learning=20261003-v584" defer></script>
 <script src="../assets/project-readme-layer.js?v=20260822-v567" defer></script>
+<script src="../assets/optional-services.js?v=20260822-v567" defer></script>
+<script src="../assets/floating-dock.js?v=20260822-v567" defer></script>
+<script src="../assets/course-sidebar.js?v=20260822-v567" defer></script>
 <!-- /csai-production-augmentation -->
 <script src="/assets/oa-assessment-fallback.js?v=20260811-1" defer></script>
 <script src="/assets/oa-assessment-upgrade.js?v=20260811-1" defer></script>
 
 <script src="/assets/python-only-ui.js?v=20260811-2" defer></script>
 
-<script defer src="../assets/study-examples.js?v=20260824-v574&learning=20261003-v584"></script>
+<script defer src="../assets/study-examples.js?v=20261004-v586&learning=20261003-v584"></script>
 
 <script defer src="../assets/brilliant-tutor-v1.js?v=20260822-v567"></script>
 <script defer src="../assets/lesson-recall.js?v=20261003-v578"></script>

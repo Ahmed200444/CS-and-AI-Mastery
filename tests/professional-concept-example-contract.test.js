@@ -8,7 +8,7 @@ const files=fs.readdirSync(dataDir).filter(f=>f.endsWith('.json')).sort();
 assert.equal(files.length,62,'expected all 62 courses');
 function norm(v){var raw=String(v||'').toLowerCase().trim();var words=raw.replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim();return words||raw.replace(/\s+/g,' ');}
 const study=fs.readFileSync(path.join(root,'assets','study-examples.js'),'utf8');
-assert.ok(study.includes('v5.47 KHDA-benchmarked company-use professional-readiness override'),'professional audit layer missing');
+assert.ok(study.includes('v5.47 industry-benchmarked company-use professional-readiness override'),'professional audit layer missing');
 assert.ok(study.includes('data-concept-example="true"'),'concept examples need an explicit runtime marker');
 assert.ok(study.includes('What the program does'),'professional examples must use the concise visible description');
 let runnable=study.replace(/\}\)\(\);\s*$/,"globalThis.__professionalAudit={professionalScenario,professionalBehavior,shouldGenerateConceptCode};})();");

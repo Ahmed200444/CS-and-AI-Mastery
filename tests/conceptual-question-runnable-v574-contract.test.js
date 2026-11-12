@@ -6,7 +6,7 @@ const root=path.resolve(__dirname,'..');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 
 const pages=fs.readdirSync(path.join(root,'courses')).filter(f=>f.endsWith('.html')).sort();
-assert.ok([62,65].includes(pages.length),'expected 62 committed or 65 generated course pages');
+assert.ok(pages.length===62,'expected 62 generated course pages');
 for(const f of pages){
   const h=read('courses/'+f);
   assert.ok(/\.\.\/assets\/study-examples\.js\?v=(?:20260824-v574|20261004-v586)/.test(h),`${f}: missing current study-example asset`);
@@ -69,5 +69,5 @@ assert.ok(linked[0].includes('print(head.value, head.next.value, head.next.next.
 assert.equal(JSON.parse(read('package.json')).version,'5.74.0','package version must be v5.74.0');
 assert.ok(read('local-server.js').includes("RELEASE='5.74'"),'local server must identify v5.74');
 assert.ok(read('desktop-launcher.js').includes("RELEASE = '5.74'"),'desktop launcher must identify v5.74');
-assert.ok(read('sw.js').includes('csai-v5-74-concepts-questions-runners'),'service worker cache must identify the v5.74 learning layer');
+assert.ok(read('sw.js').includes('csai-v5-76-courses-removed'),'service worker cache must identify the v5.74 learning layer');
 console.log('v5.74 concept/question/runnable contract PASS — conceptual examples restored, questions sit above programs, and valid linked-list code is runnable across the current 62-course build.');

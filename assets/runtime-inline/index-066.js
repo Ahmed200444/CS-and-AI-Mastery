@@ -4,7 +4,7 @@
   var phaseOpenState = {};
   var AI_PATH_PHASES = [
     { title:'Phase 1 — Programming & engineering foundations', note:'Build the coding, problem-solving, tooling, and quality habits everything else depends on.', courses:[
-      ['python','Start with Python fundamentals, then complete the integrated Aptech OOP module before moving on.'],
+      ['python','Start with Python fundamentals, then complete the integrated OOP module before moving on.'],
       ['problem-solving','Develop a repeatable approach to breaking down unfamiliar engineering problems.'],
       ['dsa','Build algorithmic thinking for interviews and efficient real-world code.'],
       ['cpp-dsa','Build lower-level C++ fluency and implement the same DSA ideas with explicit memory, STL, and performance reasoning.'],

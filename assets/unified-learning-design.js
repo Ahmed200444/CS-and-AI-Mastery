@@ -14,10 +14,13 @@
   function norm(s){ return String(s || '').toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]+/g,''); }
   function slug(s){ return String(s || '').toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''); }
 
+  var coursesCache = null;
   function getCourses(){
+    if(coursesCache) return coursesCache;
     try{
       var el = document.getElementById('coursedata');
-      return el ? JSON.parse(el.textContent || '[]') : [];
+      coursesCache = el ? JSON.parse(el.textContent || '[]') : [];
+      return coursesCache;
     }catch(e){ return []; }
   }
 

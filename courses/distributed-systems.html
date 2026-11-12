@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Distributed Systems &amp; Concurrency — CS &amp; AI Mastery</title><script src="../assets/runtime-inline/courses-distributed-systems-001.js?v=20260822-v567"></script><style>
+<html lang="en"><head><script id="csai-core-id-migration">(function(){try{var FLAG='csai-core-id-migration-v1',OLD='apt'+'ech-',NEW='core-';if(localStorage.getItem(FLAG))return;var keys=[],i;for(i=0;i<localStorage.length;i++)keys.push(localStorage.key(i));keys.forEach(function(k){var v=localStorage.getItem(k);if(v===null)return;var nv=v.indexOf(OLD)>-1?v.split(OLD).join(NEW):v;if(k.indexOf(OLD)>-1){var nk=k.split(OLD).join(NEW);if(localStorage.getItem(nk)===null)localStorage.setItem(nk,nv);localStorage.removeItem(k);}else if(nv!==v){localStorage.setItem(k,nv);}});localStorage.setItem(FLAG,'1');}catch(e){}})();</script><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Distributed Systems &amp; Concurrency — CS &amp; AI Mastery</title><script src="../assets/runtime-inline/courses-distributed-systems-001.js?v=20260822-v567"></script><style>
 :root{color-scheme:light;--bg:#f4f7fb;--panel:#fff;--text:#172231;--muted:#5d6c7c;--border:#d8e1ea;--pill:#e8f1f8;--pilltext:#174b72;--accent:#17649a;--code:#101827;--note:#fff7e7}
 html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#edf3f8;--muted:#c6d1da;--border:#344352;--pill:#223446;--pilltext:#b9dcf5;--accent:#4da3df;--code:#0b111b;--note:#2b2417}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:1100px;margin:auto;padding:18px 20px 110px}.top{position:sticky;top:0;z-index:4;display:flex;justify-content:space-between;gap:10px;padding:10px 0;background:var(--bg)}.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid #b8c7d6;border-radius:9px;padding:9px 13px;background:var(--panel);color:var(--text);font:inherit;font-weight:800;cursor:pointer}.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.hero,.card,.lesson{background:var(--panel);border:1px solid var(--border);border-radius:15px;color:var(--text)}.hero{padding:22px;margin:8px 0 16px}.kicker{font-size:.74rem;letter-spacing:.1em;font-weight:900;color:var(--accent)}.hero h1{margin:5px 0 8px;font-size:clamp(2rem,4vw,3.2rem);line-height:1.08}.muted{color:var(--muted)}.meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.pill{padding:4px 8px;border-radius:999px;background:var(--pill);color:var(--pilltext);font-size:.78rem;font-weight:800}.progress{height:10px;border-radius:999px;background:var(--border);overflow:hidden;margin:14px 0 5px}.progress span{display:block;height:100%;background:#16805b}.lessons{display:grid;gap:11px}.lesson{overflow:hidden}.lesson summary{display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;font-weight:850}.num{display:grid;place-items:center;min-width:34px;height:28px;border-radius:8px;background:var(--pill);color:var(--pilltext)}.title{flex:1}.check{display:flex;gap:6px;align-items:center;font-size:.82rem;font-weight:700}.body{padding:0 16px 18px}.body h3{margin:17px 0 7px;font-size:1rem}.body p,.body li{line-height:1.68}.code{white-space:pre-wrap;overflow:auto;padding:13px;border-radius:10px;background:var(--code);color:#f4f7fb;font:500 .86rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}.note{margin-top:12px;padding:12px;border-left:4px solid #d28b23;border-radius:8px;background:var(--note)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}.card{padding:17px}.card h2{margin:0 0 10px}.item{padding:12px;margin:9px 0;border-radius:10px;background:var(--bg);border:1px solid var(--border)}.answer{width:100%;min-height:90px;margin-top:8px;padding:10px;border:1px solid #aebdca;border-radius:8px;background:transparent;color:inherit;font:inherit}.theme{position:fixed;right:22px;bottom:22px;z-index:20;border:1px solid #b8c7d6;border-radius:999px;padding:10px 16px;background:var(--panel);color:var(--text);font:800 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.16);cursor:pointer}.empty{padding:17px;border:1px dashed var(--border);border-radius:10px}.hero-icon{margin-right:.25em}@media(max-width:720px){.wrap{padding:10px 10px 100px}.grid{grid-template-columns:1fr}.top .btn{flex:1}.lesson summary{flex-wrap:wrap;align-items:flex-start}.check{width:100%;padding-left:44px}.theme{right:14px;bottom:14px;padding:10px 14px}}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:1100px;margin:auto;padding:18px 20px 110px}.top{position:sticky;top:0;z-index:4;display:flex;justify-content:space-between;gap:10px;padding:10px 0;background:var(--bg)}.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid #b8c7d6;border-radius:9px;padding:9px 13px;background:var(--panel);color:var(--text);font:inherit;font-weight:800;cursor:pointer}.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.hero,.card,.lesson{background:var(--panel);border:1px solid var(--border);border-radius:15px;color:var(--text)}.hero{padding:22px;margin:8px 0 16px}.kicker{font-size:.74rem;letter-spacing:.1em;font-weight:900;color:var(--accent)}.hero h1{margin:5px 0 8px;font-size:clamp(2rem,4vw,3.2rem);line-height:1.08}.muted{color:var(--muted)}.meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.pill{padding:4px 8px;border-radius:999px;background:var(--pill);color:var(--pilltext);font-size:.78rem;font-weight:800}.progress{height:10px;border-radius:999px;background:var(--border);overflow:hidden;margin:14px 0 5px}.progress span{display:block;height:100%;background:#16805b}.lessons{display:grid;grid-template-columns:minmax(0,1fr);gap:11px}.lesson{overflow:hidden}.lesson summary{display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;font-weight:850}.num{display:grid;place-items:center;min-width:34px;height:28px;border-radius:8px;background:var(--pill);color:var(--pilltext)}.title{flex:1}.check{display:flex;gap:6px;align-items:center;font-size:.82rem;font-weight:700}.body{padding:0 16px 18px}.body h3{margin:17px 0 7px;font-size:1rem}.body p,.body li{line-height:1.68}.code{white-space:pre-wrap;overflow:auto;padding:13px;border-radius:10px;background:var(--code);color:#f4f7fb;font:500 .86rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}.note{margin-top:12px;padding:12px;border-left:4px solid #d28b23;border-radius:8px;background:var(--note)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}.card{padding:17px}.card h2{margin:0 0 10px}.item{padding:12px;margin:9px 0;border-radius:10px;background:var(--bg);border:1px solid var(--border)}.answer{width:100%;min-height:90px;margin-top:8px;padding:10px;border:1px solid #aebdca;border-radius:8px;background:transparent;color:inherit;font:inherit}.theme{position:fixed;right:22px;bottom:22px;z-index:20;border:1px solid #b8c7d6;border-radius:999px;padding:10px 16px;background:var(--panel);color:var(--text);font:800 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.16);cursor:pointer}.empty{padding:17px;border:1px dashed var(--border);border-radius:10px}.hero-icon{margin-right:.25em}@media(max-width:720px){.wrap{padding:10px 10px 100px}.grid{grid-template-columns:1fr}.top .btn{flex:1}.lesson summary{flex-wrap:wrap;align-items:flex-start}.check{width:100%;padding-left:44px}.theme{right:14px;bottom:14px;padding:10px 14px}}
 </style>
 <link href="../assets/oa-assessment-fallback.css?v=20260822-v567" rel="stylesheet"/>
 <link href="../assets/oa-assessment-upgrade.css?v=20260822-v567" rel="stylesheet"/>
@@ -49,113 +49,91 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <script src="../assets/product-redesign-v2.js?v=20260822-v567&learning=20261003-v584" defer></script>
 <script src="../assets/adaptive-v4-live.js?v=20260822-v567&learning=20261003-v584" defer></script>
 <script src="../assets/hero-polish.js?v=20260822-v567" defer></script>
+<link rel="stylesheet" href="../assets/pro-polish-v6.css?v=20260822-v567">
+<script src="../assets/pro-polish-v6.js?v=20260822-v567" defer></script>
+<script src="../assets/lesson-videos-v1.js?v=20260822-v567" defer></script>
 <!-- csai-unified-design:end -->
 <link rel="stylesheet" href="/assets/oa-assessment-fallback.css?v=20260811-1">
 <link rel="stylesheet" href="/assets/oa-assessment-upgrade.css?v=20260811-1">
 </head><body>
 <main class="wrap"><div class="top"><a class="btn" href="../index.html#courses">← All courses</a><a class="btn primary" href="../index.html#hub">Home</a></div>
 <section class="hero"><div class="kicker">COURSE</div><h1><span class="hero-icon">🕸️</span>Distributed Systems &amp; Concurrency</h1><p class="muted">How real systems stay correct and available when spread across many machines that fail independently.</p><div class="meta"><span class="pill">17 lessons</span><span class="pill">18 exercises</span><span class="pill">21 checkpoints</span><span class="pill">6 projects</span></div><div class="progress"><span data-progress-bar="" style="width:0%"></span></div><div class="muted" data-progress-status="">0 of 15 lessons complete</div></section>
-<section class="card" data-shared-study-checklist><h2>Course study checklist</h2><ul><li>Verify the idea with a normal case and an important edge, failure, or scale case</li><li>Explain how replication changes the behavior, result, or engineering decision in a concrete example</li></ul></section>
 <section class="lessons"><details class="lesson" data-lesson="ds-why-distributed" open="">
 <summary><span class="num">01</span><span class="title">Why distributed systems exist</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Explain the real-world pressures that force a system to become distributed</li><li>Explain how scalability changes the behavior, result, or engineering decision in a concrete example</li><li>Connect scalability with fault tolerance and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>A single machine has hard limits: it can only hold so much data, handle so many requests, and it's a single point of failure -- if it goes down, everything stops.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain the real-world pressures that force a system to become distributed</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>A single machine has hard limits: it can only hold so much data, handle so many requests, and it&#39;s a single point of failure -- if it goes down, everything stops.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">scalability</span><span class="pill">fault tolerance</span><span class="pill">single point of failure</span><span class="pill">partial failure</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># the core trade-off, stated plainly:
 # one machine: simple to reason about, but a single point of failure and a hard capacity ceiling
 # many machines: can scale and survive failures, but now you must handle partial failure,
 # network delays, and machines disagreeing about the current state -- for real</pre>
-<div class="note"><b>Common mistake:</b> Assuming distributed systems are 'better' by default -- they solve real problems, but at a real complexity cost; a single well-provisioned machine is often the RIGHT choice until you.</div>
+<div class="note"><b>Common mistake:</b> Assuming distributed systems are &#39;better&#39; by default -- they solve real problems, but at a real complexity cost; a single well-provisioned machine is often the RIGHT choice until you.</div>
 </div></details><details class="lesson" data-lesson="ds-replication">
 <summary><span class="num">02</span><span class="title">Replication</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Explain why systems replicate data and the trade-off between replication strategies</li><li>Connect replication with leader-based replication and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>Replication means keeping copies of the same data on multiple machines -- for two reasons: durability (if one machine's disk dies, the data survives elsewhere) and availability (if one machine is down, another can still serve requests).</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain why systems replicate data and the trade-off between replication strategies</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Replication means keeping copies of the same data on multiple machines -- for two reasons: durability (if one machine&#39;s disk dies, the data survives elsewhere) and availability (if one machine is down, another can still serve requests).</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">replication</span><span class="pill">leader-based replication</span><span class="pill">leaderless replication</span><span class="pill">synchronous replication</span><span class="pill">asynchronous replication</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># the practical trade-off:
 # synchronous replication: write returns only after replica confirms -- can't lose data,
 #   but a slow/down replica slows down or blocks every write
 # asynchronous replication: write returns immediately -- fast, but a leader crash
 #   right after can lose the most recent writes that hadn't replicated yet</pre>
-<div class="note"><b>Common mistake:</b> Assuming replication alone guarantees no data loss -- asynchronous replication specifically trades a small window of potential data loss for speed; that's a deliberate, named trade-off, not.</div>
+<div class="note"><b>Common mistake:</b> Assuming replication alone guarantees no data loss -- asynchronous replication specifically trades a small window of potential data loss for speed; that&#39;s a deliberate, named trade-off, not.</div>
 </div></details><details class="lesson" data-lesson="ds-partitioning">
 <summary><span class="num">03</span><span class="title">Partitioning &amp; consistent hashing</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Explain why systems partition data and how consistent hashing minimizes reshuffling when nodes change</li><li>Explain how partitioning changes the behavior, result, or engineering decision in a concrete example</li><li>Connect partitioning with sharding and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>Partitioning (sharding) splits data across multiple machines so no single machine has to hold or serve all of it -- each partition typically also gets replicated for durability.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain why systems partition data and how consistent hashing minimizes reshuffling when nodes change</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Partitioning (sharding) splits data across multiple machines so no single machine has to hold or serve all of it -- each partition typically also gets replicated for durability.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">partitioning</span><span class="pill">sharding</span><span class="pill">consistent hashing</span><span class="pill">hash ring</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># naive hashing's problem: hash(key) % 3 vs hash(key) % 4
 # changes almost EVERY key's target node when the node count changes
 #
 # consistent hashing's fix: keys only move if they fall between
 # the changed node's ring position and its neighbor -- a MINORITY of keys, not all</pre>
-<div class="note"><b>Common mistake:</b> Assuming naive modulo hashing is 'good enough' for a system that will ever add or remove nodes -- the reshuffling cost is exactly why consistent hashing exists as a named, widely-used.</div>
+<div class="note"><b>Common mistake:</b> Assuming naive modulo hashing is &#39;good enough&#39; for a system that will ever add or remove nodes -- the reshuffling cost is exactly why consistent hashing exists as a named, widely-used.</div>
 </div></details><details class="lesson" data-lesson="ds-cap-theorem">
 <summary><span class="num">04</span><span class="title">The CAP theorem</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Explain what CAP actually claims, and correct the most common misreading of it</li><li>Explain how CAP theorem changes the behavior, result, or engineering decision in a concrete example</li><li>Connect CAP theorem with consistency and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>The CAP theorem states that during a network partition (when some machines can't reach others), a distributed system must choose between Consistency (every read sees the latest write) and Availability (every request gets a response, even if it might be stale) -- it cannot guarantee both at the same time during that partition.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain what CAP actually claims, and correct the most common misreading of it</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>The CAP theorem states that during a network partition (when some machines can&#39;t reach others), a distributed system must choose between Consistency (every read sees the latest write) and Availability (every request gets a response, even if it might be stale) -- it cannot guarantee both at the same time during that partition.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">CAP theorem</span><span class="pill">consistency</span><span class="pill">availability</span><span class="pill">network partition</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># during a network partition specifically:
 # choose Consistency (CP): reject requests you can't verify are up-to-date -- correctness over uptime
 # choose Availability (AP): answer anyway, possibly with stale data -- uptime over perfect correctness
 # NOT during a partition: a good system can be both consistent AND available</pre>
-<div class="note"><b>Common mistake:</b> Treating CAP as 'pick 2 of 3, always' -- it's specifically about partition behavior; conflating it with a permanent, constant trade-off is the single most common misreading of this theorem.</div>
+<div class="note"><b>Common mistake:</b> Treating CAP as &#39;pick 2 of 3, always&#39; -- it&#39;s specifically about partition behavior; conflating it with a permanent, constant trade-off is the single most common misreading of this theorem.</div>
 </div></details><details class="lesson" data-lesson="ds-consistency-models">
 <summary><span class="num">05</span><span class="title">Consistency models</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Distinguish strong, eventual, and causal consistency by what guarantee each actually makes</li><li>Explain how strong consistency changes the behavior, result, or engineering decision in a concrete example</li><li>Connect strong consistency with eventual consistency and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>Strong consistency guarantees every read sees the most recent write, as if there were only one copy of the data -- simplest to reason about, but requires coordination that costs latency.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Distinguish strong, eventual, and causal consistency by what guarantee each actually makes</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Strong consistency guarantees every read sees the most recent write, as if there were only one copy of the data -- simplest to reason about, but requires coordination that costs latency.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">strong consistency</span><span class="pill">eventual consistency</span><span class="pill">causal consistency</span><span class="pill">convergence</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># picking a consistency model by what actually breaks if it's wrong:
 # bank balance -&gt; needs strong consistency (a stale read could let you overdraw)
 # view/like counter -&gt; eventual consistency is fine (briefly stale count doesn't matter)
 # comment thread replies -&gt; causal consistency (a reply must appear AFTER the post it replies to)</pre>
-<div class="note"><b>Common mistake:</b> Assuming eventual consistency means 'eventually correct, so it's basically fine everywhere' -- for financial or safety-critical data, the WINDOW of staleness before convergence can cause.</div>
+<div class="note"><b>Common mistake:</b> Assuming eventual consistency means &#39;eventually correct, so it&#39;s basically fine everywhere&#39; -- for financial or safety-critical data, the WINDOW of staleness before convergence can cause.</div>
 </div></details><details class="lesson" data-lesson="ds-availability-failure">
 <summary><span class="num">06</span><span class="title">Availability &amp; failure handling</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Explain the difference between failing fast, failing gracefully, and failing silently -- and why the choice matters</li><li>Explain how fail fast changes the behavior, result, or engineering decision in a concrete example</li><li>Connect fail fast with graceful degradation and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>In a distributed system, failure isn't an edge case -- it's a certainty that happens regularly (a machine dies, a network link drops, a disk fills up). Failing FAST means detecting a problem quickly and reporting it clearly, so the caller can react.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain the difference between failing fast, failing gracefully, and failing silently -- and why the choice matters</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>In a distributed system, failure isn&#39;t an edge case -- it&#39;s a certainty that happens regularly (a machine dies, a network link drops, a disk fills up). Failing FAST means detecting a problem quickly and reporting it clearly, so the caller can react.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">fail fast</span><span class="pill">graceful degradation</span><span class="pill">silent failure</span><span class="pill">fault isolation</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># graceful degradation example:
 # recommendation service is down -&gt; instead of erroring the whole page,
 # show the page WITHOUT recommendations (a lesser experience, but the page still works)
 # this beats both: crashing the whole request, AND silently showing an empty section
 # with no logged error anywhere</pre>
-<div class="note"><b>Common mistake:</b> Silently catching and ignoring an exception 'to keep things running' -- this is one of the most common REAL causes of mysterious, hard-to-diagnose production bugs weeks later.</div>
+<div class="note"><b>Common mistake:</b> Silently catching and ignoring an exception &#39;to keep things running&#39; -- this is one of the most common REAL causes of mysterious, hard-to-diagnose production bugs weeks later.</div>
 </div></details><details class="lesson" data-lesson="ds-idempotency">
 <summary><span class="num">07</span><span class="title">Idempotency</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Explain why idempotency matters specifically because networks are unreliable</li><li>Explain how idempotency changes the behavior, result, or engineering decision in a concrete example</li><li>Connect idempotency with idempotency key and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>An operation is idempotent if performing it multiple times has the exact same effect as performing it once. This matters enormously in distributed systems because networks are unreliable: a client might send a request, the server processes it successfully, but the RESPONSE gets lost -- the client, seeing no response, retries the exact same request.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain why idempotency matters specifically because networks are unreliable</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>An operation is idempotent if performing it multiple times has the exact same effect as performing it once. This matters enormously in distributed systems because networks are unreliable: a client might send a request, the server processes it successfully, but the RESPONSE gets lost -- the client, seeing no response, retries the exact same request.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">idempotency</span><span class="pill">idempotency key</span><span class="pill">retry safety</span><span class="pill">duplicate request</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># without an idempotency key: retry after a lost response -&gt; customer charged TWICE
 # with an idempotency key: server remembers request ID 'req-abc' was already processed -&gt;
 # a retry with the SAME ID returns the ORIGINAL result instead of charging again</pre>
-<div class="note"><b>Common mistake:</b> Assuming retries are automatically safe because 'the client will just get an error and stop' -- a LOST RESPONSE (not a lost request) is exactly the scenario where the server already.</div>
+<div class="note"><b>Common mistake:</b> Assuming retries are automatically safe because &#39;the client will just get an error and stop&#39; -- a LOST RESPONSE (not a lost request) is exactly the scenario where the server already.</div>
 </div></details><details class="lesson" data-lesson="ds-retries-circuitbreakers">
 <summary><span class="num">08</span><span class="title">Retries, timeouts &amp; circuit breakers</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Explain why naive retries can make an outage worse, and how backoff and circuit breakers prevent that</li><li>Explain how exponential backoff changes the behavior, result, or engineering decision in a concrete example</li><li>Connect exponential backoff with circuit breaker and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>Retrying a failed request seems obviously helpful, but retrying IMMEDIATELY and REPEATEDLY can make a struggling service's situation worse -- exactly when it's already overloaded, a flood of instant retries from every caller adds MORE load, not less.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain why naive retries can make an outage worse, and how backoff and circuit breakers prevent that</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Retrying a failed request seems obviously helpful, but retrying IMMEDIATELY and REPEATEDLY can make a struggling service&#39;s situation worse -- exactly when it&#39;s already overloaded, a flood of instant retries from every caller adds MORE load, not less.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">exponential backoff</span><span class="pill">circuit breaker</span><span class="pill">CLOSED/OPEN/HALF-OPEN</span><span class="pill">cascading failure</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># circuit breaker states:
 # CLOSED (normal) -- failures accumulate -- threshold reached -&gt; OPEN (reject immediately, no load added)
@@ -164,11 +142,8 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <div class="note"><b>Common mistake:</b> Retrying immediately in a tight loop with no backoff -- this is one of the most common REAL causes of a small outage turning into a much larger cascading failure across an entire system.</div>
 </div></details><details class="lesson" data-lesson="ds-leader-election">
 <summary><span class="num">09</span><span class="title">Leader election</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Explain why some distributed operations need exactly one coordinator, and how nodes agree on who that is</li><li>Explain how leader election changes the behavior, result, or engineering decision in a concrete example</li><li>Connect leader election with split brain and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>Some operations need exactly ONE node acting as the coordinator at any moment (e.g. deciding write order for a replicated log) -- having two nodes both believe they're the leader (a 'split brain') can cause serious inconsistency.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain why some distributed operations need exactly one coordinator, and how nodes agree on who that is</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Some operations need exactly ONE node acting as the coordinator at any moment (e.g. deciding write order for a replicated log) -- having two nodes both believe they&#39;re the leader (a &#39;split brain&#39;) can cause serious inconsistency.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">leader election</span><span class="pill">split brain</span><span class="pill">bully algorithm</span><span class="pill">consensus</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># simplified bully algorithm:
 # node 2 notices the leader is down, and asks: is anyone with HIGHER priority still alive?
@@ -178,11 +153,8 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <div class="note"><b>Common mistake:</b> Assuming leader election, once done, is permanent -- real systems must continuously detect leader failure and RE-elect, since the whole point is surviving the CURRENT leader eventually.</div>
 </div></details><details class="lesson" data-lesson="ds-distributed-locks">
 <summary><span class="num">10</span><span class="title">Distributed locks</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Explain what a distributed lock actually guards against, and why implementing one correctly is harder than it looks</li><li>Explain how distributed lock changes the behavior, result, or engineering decision in a concrete example</li><li>Connect distributed lock with lock expiry and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>A distributed lock ensures only one node (or process) can perform a specific action at a time, even across machine boundaries -- e.g. preventing two servers from both processing the same scheduled job simultaneously.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain what a distributed lock actually guards against, and why implementing one correctly is harder than it looks</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>A distributed lock ensures only one node (or process) can perform a specific action at a time, even across machine boundaries -- e.g. preventing two servers from both processing the same scheduled job simultaneously.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">distributed lock</span><span class="pill">lock expiry</span><span class="pill">clock skew</span><span class="pill">mutual exclusion</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># why a naive distributed lock can fail:
 # node A acquires the lock, then pauses (garbage collection, slow disk, network delay)
@@ -192,12 +164,9 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <div class="note"><b>Common mistake:</b> Assuming a distributed lock behaves like an in-process lock (e.g.</div>
 </div></details><details class="lesson" data-lesson="ds-messaging-eventdriven">
 <summary><span class="num">11</span><span class="title">Messaging &amp; event-driven systems</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Explain why decoupling services with a message queue changes failure behavior, not just architecture style</li><li>Apply the KHDA-benchmarked professional additions in a realistic company workflow: at-least-once delivery, at-most-once delivery, exactly-once semantics caveat, backpressure.</li><li>Explain how message queue changes the behavior, result, or engineering decision in a concrete example</li><li>Connect message queue with producer/consumer and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>In a direct request/response call, if the receiving service is down, the request simply fails immediately. A message queue decouples this: the sender publishes a message and moves on; the queue holds it until a consumer is ready to process it -- meaning a temporarily-down consumer doesn't cause the sender to fail at all.</p>
-</section>
-<div class="note khda-benchmark-note" data-khda-benchmark-note="true"><b>Professional benchmark addition: </b>These company-use concepts were kept after comparing the course with public syllabi from KHDA-listed Dubai training providers: at-least-once delivery, at-most-once delivery, exactly-once semantics caveat, backpressure.</div><h3>Key concepts</h3><div class="meta"><span class="pill">message queue</span><span class="pill">producer/consumer</span><span class="pill">event-driven architecture</span><span class="pill">decoupling</span><span class="pill">at-least-once delivery</span><span class="pill">at-most-once delivery</span><span class="pill">exactly-once semantics caveat</span><span class="pill">backpressure</span></div>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain why decoupling services with a message queue changes failure behavior, not just architecture style</li><li>Apply the industry-focused professional additions in a realistic company workflow: at-least-once delivery, at-most-once delivery, exactly-once semantics caveat, backpressure.</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>In a direct request/response call, if the receiving service is down, the request simply fails immediately. A message queue decouples this: the sender publishes a message and moves on; the queue holds it until a consumer is ready to process it -- meaning a temporarily-down consumer doesn&#39;t cause the sender to fail at all.</p></section>
+<div class="note benchmark-note" data-benchmark-note="true"><b>Professional benchmark addition: </b>These company-use concepts were kept after comparing the course with public syllabi from professional training providers: at-least-once delivery, at-most-once delivery, exactly-once semantics caveat, backpressure.</div><h3>Key concepts</h3><div class="meta"><span class="pill">message queue</span><span class="pill">producer/consumer</span><span class="pill">event-driven architecture</span><span class="pill">decoupling</span><span class="pill">at-least-once delivery</span><span class="pill">at-most-once delivery</span><span class="pill">exactly-once semantics caveat</span><span class="pill">backpressure</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># direct call vs queue-based, when the downstream service is temporarily down:
 # direct call: request fails immediately, caller must handle the error right now
 # queue-based: message waits in the queue; once the consumer recovers, it processes
@@ -205,24 +174,18 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <div class="note"><b>Common mistake:</b> Assuming a message queue guarantees messages are processed in the exact order they were sent -- many real queue systems (for scalability reasons) only guarantee this per-partition/per-key.</div>
 </div></details><details class="lesson" data-lesson="ds-concurrency-async">
 <summary><span class="num">12</span><span class="title">Concurrency models &amp; async programming</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Distinguish concurrency at the distributed-systems level from single-machine threading, and explain why async I/O matters at scale</li><li>Explain how blocking I/O changes the behavior, result, or engineering decision in a concrete example</li><li>Connect blocking I/O with async/non-blocking I/O and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>Within ONE machine handling MANY simultaneous distributed requests, blocking I/O (waiting synchronously for a network call or disk read to finish) wastes a thread that could otherwise be doing other work -- at scale, this severely limits how many concurrent connections a single machine can handle.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Distinguish concurrency at the distributed-systems level from single-machine threading, and explain why async I/O matters at scale</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Within ONE machine handling MANY simultaneous distributed requests, blocking I/O (waiting synchronously for a network call or disk read to finish) wastes a thread that could otherwise be doing other work -- at scale, this severely limits how many concurrent connections a single machine can handle.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">blocking I/O</span><span class="pill">async/non-blocking I/O</span><span class="pill">concurrency at scale</span><span class="pill">event loop</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># blocking vs async, serving 10,000 concurrent slow network calls:
 # blocking: needs (roughly) 10,000 threads, each stuck waiting -- huge memory/context-switch overhead
 # async: a small pool of threads, each juggling many in-flight calls,
 # resuming exactly when a result becomes ready -- vastly less overhead for the same load</pre>
-<div class="note"><b>Common mistake:</b> Assuming 'more threads' is the answer to handling more concurrent connections -- past a point, thread overhead itself becomes the bottleneck, which is exactly the problem async I/O is.</div>
+<div class="note"><b>Common mistake:</b> Assuming &#39;more threads&#39; is the answer to handling more concurrent connections -- past a point, thread overhead itself becomes the bottleneck, which is exactly the problem async I/O is.</div>
 </div></details><details class="lesson" data-lesson="ds-coordination">
 <summary><span class="num">13</span><span class="title">Coordination</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Explain what a coordination service actually provides, and why services build on it instead of solving these problems themselves</li><li>Explain how coordination service changes the behavior, result, or engineering decision in a concrete example</li><li>Connect coordination service with consensus protocol and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>Distributed locks, leader election, and configuration management all require the SAME underlying capability: a small amount of data that many nodes can reliably agree on, even during failures.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain what a coordination service actually provides, and why services build on it instead of solving these problems themselves</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Distributed locks, leader election, and configuration management all require the SAME underlying capability: a small amount of data that many nodes can reliably agree on, even during failures.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">coordination service</span><span class="pill">consensus protocol</span><span class="pill">ZooKeeper</span><span class="pill">etcd</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># what teams build ON TOP of a coordination service, instead of reinventing:
 # leader election -- 'who is currently the leader for this job?'
@@ -232,48 +195,36 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <div class="note"><b>Common mistake:</b> Assuming every service should implement its own leader election or locking logic from scratch -- these are genuinely hard, easy-to-get-subtly-wrong problems, which is exactly why dedicated.</div>
 </div></details><details class="lesson" data-lesson="ds-tracing-basics">
 <summary><span class="num">14</span><span class="title">Distributed tracing basics</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Explain why a single request spanning multiple services needs a shared trace ID to be debuggable at all</li><li>Explain how distributed tracing changes the behavior, result, or engineering decision in a concrete example</li><li>Connect distributed tracing with trace ID and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>A single user request in a microservices architecture might touch five, ten, or more services before a response is returned. Without any shared context, a slow or failing request is nearly impossible to debug -- each service's logs are separate, with no way to connect them into the story of ONE request's journey.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain why a single request spanning multiple services needs a shared trace ID to be debuggable at all</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>A single user request in a microservices architecture might touch five, ten, or more services before a response is returned. Without any shared context, a slow or failing request is nearly impossible to debug -- each service&#39;s logs are separate, with no way to connect them into the story of ONE request&#39;s journey.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">distributed tracing</span><span class="pill">trace ID</span><span class="pill">span</span><span class="pill">request timeline</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># without a trace ID: five separate services' logs, no way to connect them for one request
 # with a trace ID: every service logs the SAME trace_id alongside its own work,
 # letting you reconstruct: 'this exact request took 40ms in auth, then 300ms
 # waiting on the database service, then 15ms formatting the response'</pre>
-<div class="note"><b>Common mistake:</b> Assuming individual service logs are enough to debug a slow multi-service request -- without a shared trace ID connecting them, there's no way to reconstruct which service's slowness.</div>
+<div class="note"><b>Common mistake:</b> Assuming individual service logs are enough to debug a slow multi-service request -- without a shared trace ID connecting them, there&#39;s no way to reconstruct which service&#39;s slowness.</div>
 </div></details><details class="lesson" data-lesson="ds-designing-for-failure">
 <summary><span class="num">15</span><span class="title">Designing for failure</span><label class="check"><input data-complete="" type="checkbox"/> Complete</label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Synthesize the course&#x27;s ideas into a single design mindset: assume failure will happen, and design for it explicitly</li><li>Explain how fault tolerance mindset changes the behavior, result, or engineering decision in a concrete example</li><li>Connect fault tolerance mindset with failure modes and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>Every idea in this course shares one underlying principle: in a distributed system, failure isn't a rare edge case to patch around later -- it's a certainty that must be designed for from the start. Replication assumes a machine WILL die.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Synthesize the course&#39;s ideas into a single design mindset: assume failure will happen, and design for it explicitly</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Every idea in this course shares one underlying principle: in a distributed system, failure isn&#39;t a rare edge case to patch around later -- it&#39;s a certainty that must be designed for from the start. Replication assumes a machine WILL die.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">fault tolerance mindset</span><span class="pill">failure modes</span><span class="pill">resilience</span><span class="pill">designing for failure</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true"># the reframe this whole course is building toward:
 # NOT: 'how do I make this system work?'
 # BUT: 'how do I make this system work correctly WHEN (not if) something fails?'
 # every technique in this course -- replication, retries, circuit breakers, idempotency --
 # is a specific answer to a specific way something fails</pre>
-<div class="note"><b>Common mistake:</b> Treating failure-handling as something to add 'later, if there's time' -- retrofitting resilience into a system designed only for the happy path is far harder than designing for failure from.</div>
+<div class="note"><b>Common mistake:</b> Treating failure-handling as something to add &#39;later, if there&#39;s time&#39; -- retrofitting resilience into a system designed only for the happy path is far harder than designing for failure from.</div>
 </div></details><details class="lesson" data-lesson="dist-consensus-raft-paxos">
 <summary><span class="num">16</span><span class="title">Consensus fundamentals: Raft &amp; Paxos</span><label class="check"><input data-complete="" type="checkbox"> Complete</input></label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Explain why distributed systems need consensus and the high-level roles of leader election, log replication, and quorums</li><li>Explain how consensus changes the behavior, result, or engineering decision in a concrete example</li><li>Connect consensus with Raft and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>Consensus lets a group of machines agree on ordered state changes even when some machines or messages fail. Raft presents the problem through leader election, replicated logs, and majority commitment; Paxos is a foundational family of consensus algorithms with a different formulation.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Explain why distributed systems need consensus and the high-level roles of leader election, log replication, and quorums</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Consensus lets a group of machines agree on ordered state changes even when some machines or messages fail. Raft presents the problem through leader election, replicated logs, and majority commitment; Paxos is a foundational family of consensus algorithms with a different formulation.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">consensus</span><span class="pill">Raft</span><span class="pill">Paxos</span><span class="pill">quorum</span><span class="pill">leader election</span><span class="pill">log replication</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">Raft intuition: a leader appends a command to its log, replicates it to followers, and considers it committed after a majority acknowledges it. If the leader fails, a later election chooses a new leader that must preserve committed history.</pre>
 <div class="note"><b>Common mistake:</b> Equating replication with consensus.</div>
 </div></details><details class="lesson" data-lesson="dist-storage-replication-erasure">
 <summary><span class="num">17</span><span class="title">Distributed storage: replication &amp; erasure coding</span><label class="check"><input data-complete="" type="checkbox"> Complete</input></label></summary>
-<div class="body"><h3>What you will learn</h3><ul><li>Compare full replication with erasure coding for durability, storage cost, and recovery</li><li>Connect replication with erasure coding and predict what changes when one assumption changes</li></ul>
-<section class="lesson-main-explanation" data-main-explanation>
-<h3>Explanation</h3>
-<p>Replication stores full copies on multiple nodes, making reads and recovery straightforward but multiplying storage cost. Erasure coding splits data into fragments plus parity so the original can be reconstructed after some fragment loss with lower storage overhead, at the cost of more CPU/network work and more complex recovery.</p>
-</section>
+<div class="body"><h3>What you will learn</h3><ul><li>Compare full replication with erasure coding for durability, storage cost, and recovery</li></ul>
+<section class="lesson-main-explanation" data-main-explanation><h3>Explanation</h3><p>Replication stores full copies on multiple nodes, making reads and recovery straightforward but multiplying storage cost. Erasure coding splits data into fragments plus parity so the original can be reconstructed after some fragment loss with lower storage overhead, at the cost of more CPU/network work and more complex recovery.</p></section>
 <h3>Key concepts</h3><div class="meta"><span class="pill">replication</span><span class="pill">erasure coding</span><span class="pill">durability</span><span class="pill">recovery</span><span class="pill">storage overhead</span></div>
 <h3>Example</h3><pre class="code" data-example-audit="reference" data-reference-only="true">Three-way replication stores roughly three full copies. An erasure-coded scheme can tolerate failures with less than 3x raw storage, but rebuilding a lost fragment may require reading several surviving fragments and computing reconstruction data.</pre>
 <div class="note"><b>Common mistake:</b> Comparing only storage cost.</div>
@@ -298,7 +249,7 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <script defer="" src="../assets/exercise-direct-publish.js?v=20260822-v567"></script>
 <script defer="" src="../assets/universal-run-output.js?v=20260822-v567&learning=20261003-v584"></script>
 <script defer="" src="../assets/final-exercise-toolbar.js?v=20260822-v567&learning=20261003-v584"></script>
-<script defer="" src="../assets/course-project-workspace.js?v=20260822-v571"></script><script defer="" src="../assets/line-by-line-explanations.js?v=20260919-v577&learning=20261003-v584"></script><script defer="" src="../assets/example-learning-tools.js?v=20260822-v567"></script>
+<script defer="" src="../assets/course-project-workspace.js?v=20260822-v571"></script><script defer="" src="../assets/line-by-line-explanations.js?v=20261004-v587&learning=20261003-v584"></script><script defer="" src="../assets/example-learning-tools.js?v=20260822-v567"></script>
 <script defer="" src="../assets/practice-publish-completer.js?v=20260823-v573&learning=20261003-v584"></script>
 <script defer="" src="../assets/oa-assessment-fallback.js?v=20260822-v567"></script>
 <script defer="" src="../assets/oa-assessment-upgrade.js?v=20260822-v567"></script>
@@ -346,13 +297,16 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#0f1720;--panel:#17212c;--text:#e
 <!-- csai-production-augmentation -->
 <script src="../assets/adaptive-practice-layer.js?v=20260822-v567&learning=20261003-v584" defer></script>
 <script src="../assets/project-readme-layer.js?v=20260822-v567" defer></script>
+<script src="../assets/optional-services.js?v=20260822-v567" defer></script>
+<script src="../assets/floating-dock.js?v=20260822-v567" defer></script>
+<script src="../assets/course-sidebar.js?v=20260822-v567" defer></script>
 <!-- /csai-production-augmentation -->
 <script src="/assets/oa-assessment-fallback.js?v=20260811-1" defer></script>
 <script src="/assets/oa-assessment-upgrade.js?v=20260811-1" defer></script>
 
 <script src="/assets/python-only-ui.js?v=20260811-2" defer></script>
 
-<script defer src="../assets/study-examples.js?v=20260824-v574&learning=20261003-v584"></script>
+<script defer src="../assets/study-examples.js?v=20261004-v586&learning=20261003-v584"></script>
 
 <script defer src="../assets/brilliant-tutor-v1.js?v=20260822-v567"></script>
 <script defer src="../assets/lesson-recall.js?v=20261003-v578"></script>

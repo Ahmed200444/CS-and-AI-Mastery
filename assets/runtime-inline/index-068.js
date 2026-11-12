@@ -153,7 +153,7 @@ function ensureWebTrackMobileToggle(containerId){
 }
 
 function showTrack(name){
-  if(name==='oop'){ try{ location.href='courses/python.html#aptech-oop-module'; }catch(e){} return; }
+  if(name==='oop'){ try{ location.href='courses/python.html#core-oop-module'; }catch(e){} return; }
   var entry = TRACK_REGISTRY[name];
   if(!entry){
     console.warn('showTrack: unknown route "'+name+'", falling back to hub');

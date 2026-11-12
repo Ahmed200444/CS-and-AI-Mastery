@@ -6,7 +6,7 @@ const root=path.join(__dirname,'..');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const courses=JSON.parse(read('assets/coursedata-source.json'));
 
-assert.equal(courses.length,65,'platform must preserve all 65 courses');
+assert.equal(courses.length,62,'platform must preserve all 62 courses');
 
 let lessonCount=0,exerciseCount=0,quizCount=0,projectCount=0;
 const global={explanation:new Map(),example:new Map(),objective:new Map(),mistake:new Map()};
@@ -46,7 +46,7 @@ for(const course of courses){
 
   assert.doesNotMatch(explanation,/focus specifically on apply|trace the starting state|input, state, or operation changes into a result|02Registers|written with WITH/i,loc+' contains generic/broken teaching prose');
   assert.doesNotMatch(explanation,/\b([A-Za-z]{3,})\s+\1\b/i,loc+' contains a repeated word');
-  assert.doesNotMatch(lesson.title||'',/professional curriculum|EECE\s*340|Follow your lecture order/i,loc+' exposes internal/provider wording');
+  assert.doesNotMatch(lesson.title||'',/professional curriculum|Follow your lecture order/i,loc+' exposes internal/provider wording');
 
   remember('explanation',explanation,loc);
   for(const x of examples)remember('example',x,loc);
@@ -59,41 +59,23 @@ for(const course of courses){
   assert.ok(score<0.45,course.id+' has near-duplicate theory in '+explanations[i].id+' and '+explanations[j].id+' (similarity '+score.toFixed(2)+')');
  }
 
- for(const outlineKey of ['aptechCurriculum','curriculumOutline']){
+ for(const outlineKey of ['structuredCurriculum','curriculumOutline']){
   for(const section of course[outlineKey]||[])for(const id of section.lessonIds||[]){
    assert.ok(ids.has(id),course.id+' '+outlineKey+' references missing lesson '+id);
   }
  }
 }
-assert.equal(lessonCount,832,'all 832 authored lessons must remain present');
-assert.ok(exerciseCount>=800,'platform needs broad exercise coverage');
-assert.ok(quizCount>=1600,'platform needs broad knowledge-check coverage');
-assert.ok(projectCount>=280,'platform needs broad project/capstone coverage');
+assert.equal(lessonCount,800,'all 800 authored lessons must remain present');
+assert.ok(exerciseCount>=764,'platform needs broad exercise coverage');
+assert.ok(quizCount>=1528,'platform needs broad knowledge-check coverage');
+assert.ok(projectCount>=268,'platform needs broad project/capstone coverage');
 
 for(const [kind,map] of Object.entries(global)){
  for(const [text,locs] of map)assert.equal(locs.length,1,'exact duplicate '+kind+' appears in '+locs.join(', ')+' :: '+text.slice(0,120));
 }
 
 const visible=JSON.stringify(courses);
-assert.doesNotMatch(visible,/\bAhmed\b|\bDubai\b|Follow your lecture order|data-lecture-order/i,'sellable course data contains personal/private course wording');
-
-const arm=courses.find(c=>c.id==='arm-assembly');
-const cpu=courses.find(c=>c.id==='microprocessors-arm');
-assert.match(arm.description,/practical|writing|tracing|debugging/i);
-assert.match((cpu.lessons||[]).map(l=>l.explanation||'').join(' '),/RISC|register|CPSR|exception|vector/i);
-for(const lesson of arm.lessons||[]){
- if(lesson.id==='arm-12')continue;
- for(const code of lesson.examples||[]){
-  assert.ok(code.startsWith('AREA RESET, CODE, READONLY\nENTRY\n'),lesson.id+' must use the standard ARMASM program header');
-  assert.ok(code.trimEnd().endsWith('END'),lesson.id+' must end with END');
- }
-}
-for(const lab of cpu.labs||[])if(lab.language==='armasm'){
- for(const code of [lab.starterCode,lab.solutionCode].filter(Boolean)){
-  assert.ok(code.startsWith('AREA RESET, CODE, READONLY\nENTRY\n'),lab.id+' ARM code must use the standard header');
-  assert.ok(code.trimEnd().endsWith('END'),lab.id+' ARM code must end with END');
- }
-}
+assert.doesNotMatch(visible,/Follow your lecture order|data-lecture-order/i,'sellable course data contains personal/private course wording');
 
 const cpp=courses.find(c=>c.id==='cpp-dsa');
 for(const lesson of cpp.lessons||[])for(const code of lesson.examples||[]){
@@ -102,35 +84,18 @@ for(const lesson of cpp.lessons||[])for(const code of lesson.examples||[]){
  assert.doesNotMatch(code,/\bstd::/,lesson.id+' C++ example mixes namespace styles');
 }
 
-const matlab=courses.find(c=>c.id==='matlab-engineering');
-assert.equal((matlab.lessons||[]).length,10,'MATLAB must keep all 10 lessons');
-const matlabAsset=read('assets/matlab-visualizer.js');
-for(const marker of ['matlab-workbench','grid-template-columns:minmax(0,1.05fr) minmax(420px,1fr)','viewBox="0 0 ','xlabel','ylabel','legend','matlab-result-table','matlab-plot-card']){
- assert.ok(matlabAsset.includes(marker),'MATLAB visualizer missing '+marker);
-}
-
-const syllabus=JSON.parse(read('EECE340_SYLLABUS_COVERAGE_AUDIT.json'));
-assert.equal(syllabus.syllabusTopicsCount,27,'internal syllabus map must keep 27 requirements');
-assert.equal(syllabus.requiredLabsCount,16,'internal syllabus map must keep 16 labs');
-assert.equal((cpu.labs||[]).length,16,'CPU course must keep the 16-lab practice track');
-
 const pages=fs.readdirSync(path.join(root,'courses')).filter(n=>n.endsWith('.html'));
-assert.equal(pages.length,65,'all 65 course pages must exist');
+assert.equal(pages.length,62,'all 62 course pages must exist');
 for(const name of pages){
  const html=read('courses/'+name);
  assert.match(html,/<meta\b[^>]*\bname=["']viewport["'][^>]*>/i,name+' needs responsive viewport metadata');
  assert.match(html,/data-progress|progress/i,name+' needs visible progress/resume UI');
  assert.match(html,/theme/i,name+' needs consistent theme support');
- assert.doesNotMatch(html,/Follow your lecture order|data-lecture-order|\bAhmed\b|\bDubai\b|\bKHDA\b/i,name+' exposes private/personal implementation content');
+ assert.doesNotMatch(html,/Follow your lecture order|data-lecture-order/i,name+' exposes private/personal implementation content');
  assert.doesNotMatch(html,/\b(?:[A-Za-z]{3,})\s+\1\b/i,name+' contains a repeated word');
  const badProse=html.match(/which is exactly\.|focus specifically on apply|input, state, or operation changes into a result|02Registers|written with WITH/i);
  assert.ok(!badProse,name+' contains broken/generic teaching prose: '+(badProse&&badProse[0]));
  assert.doesNotMatch(html,/data-shared-study-checklist/i,name+' still contains the old duplicated generic study checklist');
 }
 
-const armUi=read('assets/arm-trace-ui.js');
-assert.match(armUi,/arm-code-table-layout/);
-assert.match(armUi,/grid-template-columns:minmax\(0,1\.05fr\) minmax\(460px,1fr\)/);
-assert.match(armUi,/@media\(max-width:980px\).*grid-template-columns:1fr/);
-
-console.log('Platform professional audit PASS — 65 courses / 832 lessons have substantive teaching, no exact repeated authored theory/examples, standardized ARM/C++ syntax, syllabus coverage, responsive ARM/MATLAB workbenches, and product-safe course UI.');
+console.log('Platform professional audit PASS — 62 courses / 800 lessons have substantive teaching, no exact repeated authored theory/examples, standardized C++ syntax, and product-safe course UI.');

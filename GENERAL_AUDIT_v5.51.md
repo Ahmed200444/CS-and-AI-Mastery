@@ -27,6 +27,6 @@ This audit started from the personal/original v5.49 build and checked curriculum
 
 ## Verification
 
-The package is checked for JSON parsing, Python syntax, JavaScript syntax, local asset integrity, examples, deep-study readiness, purpose-first explanations, company-style problem solving, KHDA-benchmark survival, course-data mirrors, catalog counts, accessibility, secrets, launcher/installer contracts, GitHub integration contracts, Python/C++ runners, progress/resume behavior, and local-server health/routes.
+The package is checked for JSON parsing, Python syntax, JavaScript syntax, local asset integrity, examples, deep-study readiness, purpose-first explanations, company-style problem solving, professional-training-benchmark survival, course-data mirrors, catalog counts, accessibility, secrets, launcher/installer contracts, GitHub integration contracts, Python/C++ runners, progress/resume behavior, and local-server health/routes.
 
 No GitHub commit, push, merge, or repository modification is performed by this audit.

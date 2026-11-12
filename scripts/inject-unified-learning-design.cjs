@@ -23,6 +23,8 @@ const heroJsCourse = '../assets/hero-polish.js';
 const START = '<!-- csai-unified-design:start -->';
 const END = '<!-- csai-unified-design:end -->';
 const V4 = '20260811-hero-polish-2';
+// Pro polish v6: shared brand + interaction layer, loaded last so it sits on top of the earlier layers.
+const P6 = '20261111-v585';
 
 [indexPath, path.join(root, cssRelRoot), path.join(root, jsRelRoot), path.join(root, productCssRoot), path.join(root, productJsRoot), path.join(root, liveCssRoot), path.join(root, liveJsRoot), path.join(root, heroCssRoot), path.join(root, heroJsRoot)].forEach(p => {
   if (!fs.existsSync(p)) throw new Error(`${path.relative(root,p)} missing`);
@@ -36,6 +38,9 @@ function stripExisting(html){
     .replace(/\n?<link\b[^>]*product-redesign-v2\.css[^>]*>\n?/g, '\n')
     .replace(/\n?<link\b[^>]*adaptive-v4-live\.css[^>]*>\n?/g, '\n')
     .replace(/\n?<link\b[^>]*hero-polish\.css[^>]*>\n?/g, '\n')
+    .replace(/\n?<link\b[^>]*pro-polish-v6\.css[^>]*>\n?/g, '\n')
+    .replace(/\n?<script\b[^>]*pro-polish-v6\.js[^>]*><\/script>\n?/g, '\n')
+    .replace(/\n?<script\b[^>]*lesson-videos-v1\.js[^>]*><\/script>\n?/g, '\n')
     .replace(/\n?<script>document\.documentElement\.classList\.add\('csai-unified-design'\)<\/script>\n?/g, '\n')
     .replace(/\n?<script\b[^>]*unified-learning-design\.js[^>]*><\/script>\n?/g, '\n')
     .replace(/\n?<script\b[^>]*product-redesign-v2\.js[^>]*><\/script>\n?/g, '\n')
@@ -45,7 +50,7 @@ function stripExisting(html){
 
 function inject(html, cssHref, jsSrc, productCss, productJs, liveCss, liveJs, heroCss, heroJs){
   html = stripExisting(html);
-  const tags = `${START}\n<link rel="stylesheet" href="${cssHref}">\n<link rel="stylesheet" href="${productCss}">\n<link rel="stylesheet" href="${liveCss}?v=${V4}">\n<link rel="stylesheet" href="${heroCss}?v=${V4}">\n<script>document.documentElement.classList.add('csai-unified-design')</script>\n<script src="${jsSrc}" defer></script>\n<script src="${productJs}" defer></script>\n<script src="${liveJs}?v=${V4}" defer></script>\n<script src="${heroJs}?v=${V4}" defer></script>\n${END}`;
+  const tags = `${START}\n<link rel="stylesheet" href="${cssHref}">\n<link rel="stylesheet" href="${productCss}">\n<link rel="stylesheet" href="${liveCss}?v=${V4}">\n<link rel="stylesheet" href="${heroCss}?v=${V4}">\n<script>document.documentElement.classList.add('csai-unified-design')</script>\n<script src="${jsSrc}" defer></script>\n<script src="${productJs}" defer></script>\n<script src="${liveJs}?v=${V4}" defer></script>\n<script src="${heroJs}?v=${V4}" defer></script>\n<link rel="stylesheet" href="${heroCss.replace('hero-polish.css','pro-polish-v6.css')}?v=${P6}">\n<script src="${heroJs.replace('hero-polish.js','pro-polish-v6.js')}?v=${P6}" defer></script>\n<script src="${heroJs.replace('hero-polish.js','lesson-videos-v1.js')}?v=${P6}" defer></script>\n${END}`;
   if (html.includes('</head>')) return html.replace(/\s*<\/head>/, `\n\n${tags}\n</head>`);
   return tags + '\n' + html;
 }
