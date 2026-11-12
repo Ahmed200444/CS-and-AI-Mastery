@@ -184,3 +184,34 @@ html.adaptive-v4-live #csai-tutor{z-index:10060}
    which made the whole page scroll sideways. They now fit their column like the Full-Stack view. */
 html.adaptive-v4-live body.av4-shell #aiPathView,
 html.adaptive-v4-live body.av4-shell #ceView{width:auto!important;max-width:100%!important;min-width:0;box-sizing:border-box}
+
+/* ── v5.90 course projects ─────────────────────────────────────────────────
+   Overview cards for the Projects section of every course and the Practice group in "Course contents". */
+.cp1-nav{padding:6px 8px 12px;border-top:1px solid var(--border);margin-top:2px}
+.cp1-nav .cp1-nav-kicker{padding:10px 9px 4px;margin:0}
+.cp1-nav .cp1-nav-link{display:flex;gap:9px;align-items:flex-start;padding:8px 9px;border-radius:10px;color:var(--text);text-decoration:none;font-size:.86rem;line-height:1.35;font-weight:700}
+.cp1-nav .cp1-nav-link:hover{background:var(--pill)}
+.cp1-nav .cp1-nav-link:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.cp1-nav .cp1-nav-link .n{flex:0 0 auto;min-width:24px;text-align:center;font-size:.72rem;font-weight:800;border-radius:7px;background:var(--pill);color:var(--pilltext);padding:2px 4px}
+.cp1-nav .cp1-nav-link .t{min-width:0;overflow-wrap:anywhere}
+.cp1-fold-count{margin-left:8px;margin-right:auto;font-size:.72rem;font-weight:800;border-radius:99px;background:var(--pill);color:var(--pilltext);padding:2px 8px}
+.cp1-count{margin:2px 0 12px;font-size:.86rem;color:var(--muted)}
+details.csai-lazy-item.cp1-row{margin:12px 0;border-radius:14px}
+details.csai-lazy-item.cp1-row > summary{display:flex;flex-direction:column;gap:7px;padding:16px 18px;font-weight:400;min-width:0}
+details.csai-lazy-item.cp1-row > summary::after{content:none}
+details.csai-lazy-item.cp1-row > summary:hover{background:var(--pill)}
+details.csai-lazy-item.cp1-row > summary:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.cp1-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.cp1-eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}
+.cp1-status{font-size:.76rem;font-weight:700;color:var(--muted);white-space:nowrap}
+.cp1-status[data-cp1-state="draft"]{color:var(--accent)}
+.cp1-status[data-cp1-state="published"]{color:#16805b}
+html[data-theme="dark"] .cp1-status[data-cp1-state="published"]{color:#6fcf97}
+.cp1-title{font-size:1.04rem;font-weight:850;line-height:1.3;color:var(--text);overflow-wrap:anywhere}
+.cp1-desc{font-size:.9rem;line-height:1.55;color:var(--muted);overflow-wrap:anywhere}
+.cp1-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.cp1-chip{font-size:.74rem;line-height:1.4;padding:3px 9px;border:1px solid var(--border);border-radius:99px;color:var(--muted);background:var(--panel)}
+.cp1-open{font-size:.8rem;font-weight:800;color:var(--accent)}
+.cp1-open::after{content:' +'}
+details.csai-lazy-item.cp1-row[open] > summary{border-bottom:1px solid var(--border)}
+details.csai-lazy-item.cp1-row[open] .cp1-open::after{content:' −'}
