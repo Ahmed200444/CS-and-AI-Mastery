@@ -1,7 +1,32 @@
 # CS & AI Mastery
 
-> **Windows installable build:** Extract the ZIP and run `INSTALL_ON_MY_COMPUTER.bat` once. It creates a permanent copy under `%LOCALAPPDATA%\CS-and-AI-Mastery` plus a desktop shortcut, avoiding OneDrive/Documents sync issues. After installation, ChatGPT is not required.
+An interactive learning platform for computer science, software engineering and AI. It is a working web application, not a collection of notes: lessons, a browser code runner, quizzes, exercises and projects, with progress saved in the browser.
 
+**Live site:** https://cs-ai-mastery.netlify.app
+
+## At a glance
+| | |
+|---|---|
+| Courses | 63 (62 listed in the catalog; Object-Oriented Programming is taught inside Python) |
+| Lessons | 808, each with an explanation, a runnable example and a check |
+| Practice | 807 exercises, 1,610 knowledge checks and 232 projects (plus course capstones), with four-level project checks |
+| Learning paths | AI Engineer, Computer Engineer and Full-Stack, with phases in dependency order |
+| Code execution | Python, SQL, JavaScript and C++ in the browser; infrastructure topics use safe simulations |
+| Stack | HTML, CSS and JavaScript (no framework), Node.js build scripts, Netlify Functions |
+
+## What to look at
+- **The product:** open the live site, pick a course, run a lesson example, then open its Projects section.
+- **The code that matters:** `assets/` (browser UI and runners), `netlify/functions/` (GitHub sign-in and publishing), `scripts/` (course build and verification) and `tests/` (more than 50 contract tests).
+- **Quality evidence:** every change runs the full production build and `npm test` in GitHub Actions (see the Actions tab); the test results describe the commits they ran against.
+- **Learner work:** `student-code/` holds exercises and projects published from the platform, each with a README generated from the code.
+
+## Honest scope
+- Course content was written with AI assistance and checked with automated contract tests; it has not been reviewed line by line by an instructor.
+- Progress is stored in the learner's browser. There are no accounts, and the platform does not verify GitHub links or deployments.
+- The in-browser tutor needs an AI provider key on the server and is hidden without one.
+
+## Installing on a computer
+> **Windows installable build:** Extract the ZIP and run `INSTALL_ON_MY_COMPUTER.bat` once. It creates a permanent copy under `%LOCALAPPDATA%\CS-and-AI-Mastery` plus a desktop shortcut, avoiding OneDrive/Documents sync issues. After installation, ChatGPT is not required.
 
 CS & AI Mastery is an interactive learning platform for building practical computer science, software engineering, and AI skills. It is designed around learning a concept, seeing it work, practicing it, reviewing it later, and turning completed work into a clean GitHub portfolio.
 
