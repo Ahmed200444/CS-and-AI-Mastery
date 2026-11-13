@@ -183,7 +183,8 @@ html.adaptive-v4-live #csai-tutor{z-index:10060}
 /* v5.89 path pages: the AI Engineer and Computer Engineer views were sized wider than the space beside the sidebar,
    which made the whole page scroll sideways. They now fit their column like the Full-Stack view. */
 html.adaptive-v4-live body.av4-shell #aiPathView,
-html.adaptive-v4-live body.av4-shell #ceView{width:auto!important;max-width:100%!important;min-width:0;box-sizing:border-box}
+html.adaptive-v4-live body.av4-shell #ceView,
+html.adaptive-v4-live body.av4-shell #cpView{width:auto!important;max-width:100%!important;min-width:0;box-sizing:border-box}
 
 /* ── v5.90 course projects ─────────────────────────────────────────────────
    Overview cards for the Projects section of every course and the Practice group in "Course contents". */
@@ -312,3 +313,34 @@ html[data-theme] .ai-path-priority,html[data-theme] .cx-flag{background:var(--st
 html[data-theme] .ai-path-priority.ai-path-priority-supporting{background:var(--st-surface-2)!important;color:var(--st-muted)!important}
 html[data-theme] button.wd-btn,html[data-theme] button.fsp-stage-btn{background:var(--st-accent)!important;background-image:none!important;color:var(--st-on-accent)!important;border-color:var(--st-accent)!important;box-shadow:none!important}
 html[data-theme] button.cx-open-btn{color:var(--st-accent-text)!important}
+
+/* ── v5.92 every home-page view sits beside the sidebar ────────────────────
+   Only six views (dashboard, catalog and four paths) were offset from the fixed left sidebar. Portfolio, My learning,
+   Roadmap, the SQL and Python tracks and the other views started at the screen edge, so their left side was hidden
+   under the sidebar. All views now share the same offset and the same breakpoints as the sidebar itself. */
+body.av4-shell > .app,
+body.av4-shell > .cx-app{margin-left:258px!important;width:calc(100% - 258px)!important;max-width:none!important;box-sizing:border-box;padding-top:72px!important;min-width:0}
+@media (max-width:1180px){
+  body.av4-shell > .app,
+  body.av4-shell > .cx-app{margin-left:226px!important;width:calc(100% - 226px)!important}
+}
+@media (max-width:880px){
+  body.av4-shell > .app,
+  body.av4-shell > .cx-app{margin-left:0!important;width:100%!important;padding-top:0!important}
+}
+/* The sidebar is declared 258px (226px on narrower screens) with 16px padding and a 1px border, but it used the browser's default
+   content-box sizing, so it was really 291px wide and 33px of every view sat underneath it. Border-box makes it the declared width,
+   which is the width the top bar, the views and the Tutor panel are offset by. */
+html.adaptive-v4-live .av4-side{box-sizing:border-box}
+/* Portfolio buttons used an accent variable that no longer exists, which left dark text on a dark page. */
+html[data-theme] .pf-new-btn,html[data-theme] .pf-empty-cta{background:var(--st-accent)!important;color:var(--st-on-accent)!important;border:none!important}
+/* Older in-page tracks (SQL, Python, DSA, APIs): readable text on the accent colour and on dark panels. */
+html[data-theme] .sql-app .run,html[data-theme] .py-app .b-run,html[data-theme] .py-app .b-vis,html[data-theme] .py-app .chip.top,html[data-theme] .web-app .primary{background:var(--st-accent)!important;color:var(--st-on-accent)!important}
+html[data-theme="dark"] .single-track-panel-btn{color:var(--st-text)!important}
+.cp1-hint{margin:-6px 0 12px;font-size:.84rem;line-height:1.5;color:var(--muted)}
+/* Older in-page tracks on phones: let the lesson column shrink and scroll wide code or tables inside itself instead of widening the page. */
+@media (max-width:880px){
+  body.av4-shell > .app .main,body.av4-shell > .app .layout,body.av4-shell > .app .wrap,body.av4-shell > .app section{min-width:0;max-width:100%}
+  body.av4-shell > .app pre,body.av4-shell > .app .tbl,body.av4-shell > .app table{max-width:100%;overflow-x:auto}
+  body.av4-shell > .app .layout,body.av4-shell > .app .content,body.av4-shell > .app .shell{grid-template-columns:minmax(0,1fr)!important}
+}
