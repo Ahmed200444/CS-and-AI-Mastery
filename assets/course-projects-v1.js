@@ -96,6 +96,10 @@ function summaryLine(fold,counts,total){
   var text=counts.published+' of '+total+' project'+(total===1?'':'s')+' published';
   if(counts.draft)text+=' · '+counts.draft+' draft'+(counts.draft===1?'':'s')+' saved';
   line.textContent=text+'.';
+  var hint=host.querySelector(':scope > .cp1-hint'),svc=window.CSAI_SERVICES;
+  if(svc&&svc.github===false){if(hint)hint.remove();return}
+  if(!hint){hint=el('p','cp1-hint');line.insertAdjacentElement('afterend',hint)}
+  hint.textContent='Open a project, then use Publish to GitHub to put your work in your own repository so recruiters can open it. Connect your GitHub account first with the GitHub button at the bottom of the page.';
 }
 function paint(){
   var f=folds();if(!f.projects)return;
